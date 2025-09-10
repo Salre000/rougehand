@@ -25,7 +25,6 @@ public class Card
         queen, 
         king,
         ace = 1
-
     }
 
     /// <summary>
@@ -49,8 +48,14 @@ public class Card
     {
         None = -1
     }
+    /// <summary>
+    /// ジョーカーのみにバフが可能なtype
+    /// </summary>
+    public enum JokerBuff
+    {
+        None = -1,
 
-
+    }
     /// <summary>
     /// 一枚のカードの情報
     /// </summary>
@@ -61,7 +66,6 @@ public class Card
         sealBuff _sealBuff;
         cardBuff _cardBuff;
         deckBuff _deckBuff;
-
     }
 
 
