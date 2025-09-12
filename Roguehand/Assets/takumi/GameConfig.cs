@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class GameConfig
 {
+
+
     /// <summary>
     /// ƒQ[ƒ€‚Ì‘¬“x‚ğŠÇ—‚·‚é•Ï”
     /// </summary>
