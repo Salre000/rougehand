@@ -13,8 +13,8 @@ public class Card
 
     public enum number
     {
-        None=-1,
-        two = 2, 
+        None = -1,
+        two = 2,
         three,
         four,
         five,
@@ -24,7 +24,7 @@ public class Card
         nine,
         ten,
         jack,
-        queen, 
+        queen,
         king,
         ace = 1
     }
@@ -63,11 +63,11 @@ public class Card
     /// </summary>
     public struct Trump
     {
-        suit _suit;
-        number _number;
-        sealBuff _sealBuff;
-        cardBuff _cardBuff;
-        deckBuff _deckBuff;
+        public suit suit;
+        public number number;
+        public sealBuff sealBuff;
+        public cardBuff cardBuff;
+        public deckBuff deckBuff;
     }
 
 
