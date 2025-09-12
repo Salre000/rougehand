@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Over
+    uniqueID: 656389813
+    locked: 0
+  - name: Camera
+    uniqueID: 1917600593
+    locked: 0
