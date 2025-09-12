@@ -1,5 +1,6 @@
 public class Card
 {
+
     public enum suit
     {
         None = -1,
