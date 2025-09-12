@@ -6,7 +6,8 @@ public class Card
         Spade,
         heart,
         diamond,
-        club
+        club,
+        max
     }
 
     public enum number
