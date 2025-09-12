@@ -40,6 +40,11 @@ public class CardObjectManager : MonoBehaviour
     [SerializeField] private Vector3 _handPositionRight = Vector3.zero;
 
     /// <summary>
+    /// ラウンド中使われない破棄されるカードの座標
+    /// </summary>
+    [SerializeField] private Vector3 _handTrash = Vector3.zero;
+
+    /// <summary>
     /// 手札のカードの座標の一番左側から右側までの距離
     /// </summary>
     private float _handPositionRange = 0;
@@ -119,6 +124,17 @@ public class CardObjectManager : MonoBehaviour
     }
 
     /// <summary>
+    /// プレイ準備状態と手札にある状態を切り替える関数
+    /// </summary>
+    /// <param name="id"></param>
+    public void ChengeStandby(int id) 
+    {
+
+        _cardObjectHands[id].SetStatus(_cardObjectHands[id].GetStatus() == CardObject.status.hand ? CardObject.status.playWait : CardObject.status.hand);
+        _cardObjectHands[id].ResetMoveTime();
+    }
+
+    /// <summary>
     /// ハンドカードオブジェクトの座標を移動させて定位置に移動させる関数
     /// </summary>
     private void HandCardSetPosition()
@@ -129,23 +145,114 @@ public class CardObjectManager : MonoBehaviour
         //カードとカードの間
         float handCardRange = _handPositionRange / (float)(handCardCount + 1f);
 
+        //プレイ準備のカウンター
+        int playCounter = 0;
+
         for (int i = 0; i < _cardObjectHands.Count; i++)
         {
             //移動可能かどうかを確認
             if (!_cardObjectHands[i].IsMovable()) continue;
-            if (_cardObjectHands[i].GetStatus() != CardObject.status.hand) continue;    
-
             _cardObjectHands[i].CountDown();
 
-            //移動目標地点を確認
-            Vector3 goalPos= _handPositionLeft+new Vector3(handCardRange*(i+1),0,0);
 
-            //移動量と座標を合計を算出
-            Vector3 moveVec=Vector3.Lerp(_cardObjectHands[i].GetBeforePosition(), goalPos, _cardObjectHands[i].GetMoveTimeRata());
+            //カードの状態ごとの移動処理
+            switch (_cardObjectHands[i].GetStatus())
+            {
+                case CardObject.status.none:
+                    break;
+                case CardObject.status.deck:
+                    break;
 
-            //移動
-            _cardObjectHands[i].transform.position = moveVec;
+                //カードが手札への移動の時の処理
+                case CardObject.status.hand:
+                    CardMoveHand(_cardObjectHands[i], handCardRange * (i + 1));
+                    break;
+                case CardObject.status.playWait:
+                    CardMovePlayWait(_cardObjectHands[i], handCardRange * (i + 1));
+                    break;
+                case CardObject.status.play:
+                    CardMovePlay(_cardObjectHands[i], _handPositionRange, playCounter);
+                    playCounter++;
+                    break;
+                case CardObject.status.trash:
+                    CardMoveDiscard(_cardObjectHands[i]);
+                    break;
+                case CardObject.status.discard:
+                    CardMoveDiscard(_cardObjectHands[i]);
+                    break;
+            }
+
+
         }
+    }
+
+
+    /// <summary>
+    /// デッキから手札への移動
+    /// </summary>
+    /// <param name="cardObjectHand"></param>
+    /// <param name="handCardRange"></param>
+    private void CardMoveHand(CardObject cardObjectHand, float handCardRange) 
+    {
+        //移動目標地点を確認
+        Vector3 goalPos = _handPositionLeft + new Vector3(handCardRange, 0, 0);
+
+        //移動量と座標を合計を算出
+        Vector3 moveVec = Vector3.Lerp(cardObjectHand.GetBeforePosition(), goalPos, cardObjectHand.GetMoveTimeRata());
+
+        //移動
+        cardObjectHand.transform.position = moveVec;
+
+    }
+    /// <summary>
+    /// 手札からプレイ準備状態への移動
+    /// </summary>
+    /// <param name="cardObjectHand"></param>
+    /// <param name="handCardRange"></param>
+    private void CardMovePlayWait(CardObject cardObjectHand, float handCardRange)
+    {
+        //移動目標地点を確認
+        Vector3 goalPos = _handPositionLeft + new Vector3(handCardRange, 10, 0);
+
+        //移動量と座標を合計を算出
+        Vector3 moveVec = Vector3.Lerp(cardObjectHand.GetBeforePosition(), goalPos, cardObjectHand.GetMoveTimeRata());
+
+        //移動
+        cardObjectHand.transform.position = moveVec;
+
+    }
+    /// <summary>
+    /// 手札からプレイ準備状態への移動
+    /// </summary>
+    /// <param name="cardObjectHand"></param>
+    /// <param name="handCardRange"></param>
+    private void CardMovePlay(CardObject cardObjectHand, float handRange, int counter)
+    {
+
+        float handCardRange = (handRange / GetPlayCardCount()) * counter;
+
+        //移動目標地点を確認
+        Vector3 goalPos = _handPositionLeft + new Vector3(handCardRange, 0, 10);
+
+        //移動量と座標を合計を算出
+        Vector3 moveVec = Vector3.Lerp(cardObjectHand.GetBeforePosition(), goalPos, cardObjectHand.GetMoveTimeRata());
+
+        //移動
+        cardObjectHand.transform.position = moveVec;
+
+    }
+    private void CardMoveDiscard(CardObject cardObjectHand)
+    {
+
+        //移動目標地点を確認
+        Vector3 goalPos = _handTrash;
+
+        //移動量と座標を合計を算出
+        Vector3 moveVec = Vector3.Lerp(cardObjectHand.GetBeforePosition(), goalPos, cardObjectHand.GetMoveTimeRata());
+
+        //移動
+        cardObjectHand.transform.position = moveVec;
+
     }
 
     /// <summary>
@@ -197,7 +304,62 @@ public class CardObjectManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// プレイ状態のカードの数をカウントする関数
+    /// </summary>
+    /// <returns></returns>
+    private int GetPlayCardCount() 
+    {
+        int count = 0;
+        for(int i = 0; i < _cardObjectHands.Count; i++) 
+        {
+            if (_cardObjectHands[i].GetStatus() != CardObject.status.play) continue;
+            count++;
 
+        }
+        return count;
+    }
+
+    /// <summary>
+    /// プレイ準備状態からプレイに移行する関数
+    /// </summary>
+    /// <returns></returns>
+    public void Play() 
+    {
+        for(int i = 0; i < _cardObjectHands.Count; i++) 
+        {
+            if (_cardObjectHands[i].GetStatus() != CardObject.status.playWait) continue;
+            _cardObjectHands[i].SetStatus(CardObject.status.play);
+            _cardObjectHands[i].ResetMoveTime();
+        }
+    }
+
+    /// <summary>
+    /// プレイ準備状態から破棄状態に移行する関数
+    /// </summary>
+    public void Discard() 
+    {
+        for (int i = 0; i < _cardObjectHands.Count; i++)
+        {
+            if (_cardObjectHands[i].GetStatus() != CardObject.status.playWait) continue;
+            _cardObjectHands[i].SetStatus(CardObject.status.discard);
+            _cardObjectHands[i].ResetMoveTime();
+        }
+
+    }
+
+    /// <summary>
+    /// プレイが終わって手札とプレイカードを破棄状態にする関数
+    /// </summary>
+    public void End() 
+    {
+        for (int i = 0; i < _cardObjectHands.Count; i++)
+        {
+            _cardObjectHands[i].SetStatus(CardObject.status.discard);
+            _cardObjectHands[i].ResetMoveTime();
+        }
+
+    }
 
 
 }

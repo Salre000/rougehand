@@ -19,4 +19,13 @@ public class CardObjectManagerDebug : MonoBehaviour
         CardObjectUtility.StartHandMove();
     }
 
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P)) CardObjectUtility.Play();
+        if (Input.GetKeyDown(KeyCode.D)) CardObjectUtility.Discard();
+        if (Input.GetKeyDown(KeyCode.E)) CardObjectUtility.End();
+        if (Input.GetKeyDown(KeyCode.L)) CardObjectUtility.ChengeStandby(1);
+    }
+
 }

@@ -19,10 +19,12 @@ public class CardObject : MonoBehaviour
         deck,
         hand,
         play,
+        playWait,
+        discard,
         trash
     }
 
-    private status _status = status.none;
+   [SerializeField]private status _status = status.none;
 
     private float _moveTime = 0;
 
