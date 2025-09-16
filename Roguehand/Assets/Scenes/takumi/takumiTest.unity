@@ -443,6 +443,7 @@ MonoBehaviour:
   _cardBase: {fileID: 7377083430819524754, guid: 8a02a798801bf9840904f657f8204762, type: 3}
   _handPositionLeft: {x: -20, y: 1, z: 0}
   _handPositionRight: {x: 20, y: 1, z: 0}
+  _handTrash: {x: -30, y: 0, z: 0}
   _cardObjectHands: []
 --- !u!4 &1673819591
 Transform:

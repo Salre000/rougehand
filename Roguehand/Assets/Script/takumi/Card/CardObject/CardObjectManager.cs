@@ -253,6 +253,8 @@ public class CardObjectManager : MonoBehaviour
         //ˆÚ“®
         cardObjectHand.transform.position = moveVec;
 
+
+
     }
 
     /// <summary>

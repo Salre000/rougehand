@@ -8,7 +8,7 @@ public class CardObject : MonoBehaviour
     /// <summary>
     /// 一度の移動に掛かる時間の定数
     /// </summary>
-    private const float MOVE_TIME = 3f;
+    private const float MOVE_TIME = 1f;
 
     /// <summary>
     /// このカードの状態
@@ -62,7 +62,7 @@ public class CardObject : MonoBehaviour
         _moveTime = MOVE_TIME;
     }
 
-    public void CountDown() { _moveTime -= Time.deltaTime; }
+    public void CountDown() { _moveTime -= Time.deltaTime* GameConfig.GetGameSpeed(); }
 
     public bool IsMovable() { return _moveTime > 0; }
 
