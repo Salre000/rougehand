@@ -15,11 +15,6 @@ public static class CardObjectUtility
     public static void Discard() { CardObjectManager.Discard(); }
     public static void End() { CardObjectManager.End(); }
 
-    /// <summary>
-    /// 既に表になっているカードに変更を加える関数
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="trump"></param>
     public static void SetChengeCard(int id, Card.Trump trump) { CardObjectManager.SetChengeCard(id, trump);}
 
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CardObjectManagerDebug : MonoBehaviour
 {
+
+    Card.Trump trump1=new Card.Trump();
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +19,7 @@ public class CardObjectManagerDebug : MonoBehaviour
         CardObjectUtility.HandToCard(ss);
 
         CardObjectUtility.StartHandMove();
+        
     }
 
 
@@ -26,6 +29,7 @@ public class CardObjectManagerDebug : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D)) CardObjectUtility.Discard();
         if (Input.GetKeyDown(KeyCode.E)) CardObjectUtility.End();
         if (Input.GetKeyDown(KeyCode.L)) CardObjectUtility.ChengeStandby(1);
+        if (Input.GetKeyDown(KeyCode.C)) CardObjectUtility.SetChengeCard(1, trump1);
     }
 
 }

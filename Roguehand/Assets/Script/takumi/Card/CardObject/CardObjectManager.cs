@@ -80,7 +80,7 @@ public class CardObjectManager : MonoBehaviour
 
     private Material[][] _cardMaterials = new Material[(int)Card.suit.max][];
 
-    private List<int> _chengeCardID = new List<int>();
+    [SerializeField] private List<int> _chengeCardID = new List<int>();
     private List<Card.Trump> _chengeCardTrump = new List<Card.Trump>();
 
 
@@ -166,6 +166,8 @@ public class CardObjectManager : MonoBehaviour
     /// <param name="trump"></param>
     public void SetChengeCard(int id, Card.Trump trump)
     {
+
+        if (_chengeCardID.Contains(id)) return;
         //変換をさせる内容を記録
         _chengeCardID.Add(id);
         _chengeCardTrump.Add(trump);
@@ -222,7 +224,7 @@ public class CardObjectManager : MonoBehaviour
                     break;
                 //既に表になっているカードに変更を加える状態
                 case CardObject.status.change:
-                    HandCardChengeTrump(_cardObjectHands[i],i);
+                    HandCardChengeTrump(_cardObjectHands[i], i);
                     break;
             }
 
@@ -246,6 +248,10 @@ public class CardObjectManager : MonoBehaviour
 
         //移動
         cardObjectHand.transform.position = moveVec;
+
+        if (cardObjectHand.IsMovable()) return;
+
+        cardObjectHand.GravityStart();
 
     }
     /// <summary>
@@ -314,33 +320,36 @@ public class CardObjectManager : MonoBehaviour
     /// <summary>
     /// 既に表になっているカードに変更を加える
     /// </summary>
-    private void HandCardChengeTrump(CardObject cardObjectHand,int id)
+    private void HandCardChengeTrump(CardObject cardObjectHand, int id)
     {
 
         //目標角度を設定
         Vector3 goal = _chengeCardID.Contains(id) ? _BACK_SIDE : _NORMALl_ANGLE;
 
         //初期角度を設定
-        Vector3 start = _chengeCardID.Contains(id) ? _BACK_SIDE : _NORMALl_ANGLE;
+        Vector3 start = _chengeCardID.Contains(id) ? _NORMALl_ANGLE : _BACK_SIDE;
 
 
-        cardObjectHand.transform.eulerAngles = Vector3.Lerp(start, goal, 
+        cardObjectHand.transform.eulerAngles = Vector3.Lerp(start, goal,
             (cardObjectHand.GetMoveTimeRata() * _ANGLE_CHANGE_SPEED) > 1 ? 1 : cardObjectHand.GetMoveTimeRata() * _ANGLE_CHANGE_SPEED);
 
-        if (!cardObjectHand.IsMovable() && _chengeCardID.Contains(id)) cardObjectHand.SetStatus(CardObject.status.hand);
 
         //現在動ける状態かを確認
         if (cardObjectHand.IsMovable()) return;
 
+        //もう一度動けるように変更
+        cardObjectHand.ResetMoveTime();
+
+        if (!_chengeCardID.Contains(id)) cardObjectHand.SetStatus(CardObject.status.hand);
+
         //変更をしているカードが配列の何番かを確認
-        int targetID = _chengeCardID.Find(n => n == id);
+        int targetID = _chengeCardID.FindIndex(n => n == id);
+
+        if (targetID < 0) return;
 
         //確認した番号の配列を除外
         _chengeCardID.RemoveAt(targetID);
         _chengeCardTrump.RemoveAt(targetID);
-
-        //もう一度動けるように変更
-        cardObjectHand.ResetMoveTime();
 
     }
 
