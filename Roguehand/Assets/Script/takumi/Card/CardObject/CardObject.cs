@@ -32,20 +32,37 @@ public class CardObject : MonoBehaviour
     //移動を開始する前の座標
     private Vector3 _beforePosition = Vector3.zero;
 
+    private Rigidbody rigidbody;
+
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag != "Finish") return;
 
-        GetComponent<Rigidbody>().useGravity=false;
-        GetComponent<Rigidbody>().isKinematic=true;
+        rigidbody.useGravity=false;
+        rigidbody.isKinematic=true;
 
         tag = collision.transform.tag;
 
     }
+    public void Awake()
+    {
+        initialize();
+    }
 
     public void initialize()
     {
+        rigidbody=GetComponent<Rigidbody>();
 
+    }
+
+    /// <summary>
+    /// 重力を操作可能状態に変更
+    /// </summary>
+    public void GravityStart() 
+    {
+        tag = "Untagged";
+        rigidbody.useGravity = true;
+        rigidbody.isKinematic = false;
 
     }
 
@@ -65,6 +82,10 @@ public class CardObject : MonoBehaviour
 
     public void CountDown() { _moveTime -= Time.deltaTime* GameConfig.GetGameSpeed(); }
 
+    /// <summary>
+    /// 移動可能かどうかの判定
+    /// </summary>
+    /// <returns></returns>
     public bool IsMovable() { return _moveTime > 0; }
 
     public float GetMoveTime() { return _moveTime; }
