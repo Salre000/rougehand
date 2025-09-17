@@ -17,6 +17,7 @@ public class CardObject : MonoBehaviour
     {
         none = -1,
         deck,
+        change,
         hand,
         play,
         playWait,

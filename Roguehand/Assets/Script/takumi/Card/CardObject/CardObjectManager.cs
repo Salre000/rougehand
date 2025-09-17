@@ -45,9 +45,27 @@ public class CardObjectManager : MonoBehaviour
     [SerializeField] private Vector3 _handTrash = Vector3.zero;
 
     /// <summary>
+    /// トラッシュに移動中のカードの角度の定数
+    /// </summary>
+    private readonly Vector3 _TRASH_ANGLE = new Vector3(91, 90, 90);
+
+    /// <summary>
+    /// カードの基本状態の角度
+    /// </summary>
+    private readonly Vector3 _NORMALl_ANGLE = new Vector3(91, 90, 90);
+
+    /// <summary>
+    /// カードの裏面状態の角度
+    /// </summary>
+    private readonly Vector3 _BACK_SIDE = new Vector3(-91, 90, 90);
+
+
+    /// <summary>
     /// 手札のカードの座標の一番左側から右側までの距離
     /// </summary>
     private float _handPositionRange = 0;
+
+    private readonly int _ANGLE_CHANGE_SPEED = 2 * GameConfig.GetGameSpeed();
 
 
     /// <summary>
@@ -55,9 +73,16 @@ public class CardObjectManager : MonoBehaviour
     /// </summary>
     private List<CardObject> _cardObjects = new List<CardObject>((int)Card.suit.max * (int)Card.number.king);
 
-   [SerializeField] private List<CardObject> _cardObjectHands = new List<CardObject>();
+    /// <summary>
+    /// その時の手札のカード
+    /// </summary>
+    [SerializeField] private List<CardObject> _cardObjectHands = new List<CardObject>();
 
     private Material[][] _cardMaterials = new Material[(int)Card.suit.max][];
+
+    private List<int> _chengeCardID = new List<int>();
+    private List<Card.Trump> _chengeCardTrump = new List<Card.Trump>();
+
 
 
 
@@ -116,9 +141,9 @@ public class CardObjectManager : MonoBehaviour
     /// <summary>
     /// ハンドの移動を開始する関数
     /// </summary>
-    public void StartHandMove() 
+    public void StartHandMove()
     {
-        for(int i = 0; i < _cardObjectHands.Count; i++)
+        for (int i = 0; i < _cardObjectHands.Count; i++)
             _cardObjectHands[i].ResetMoveTime();
 
     }
@@ -127,10 +152,25 @@ public class CardObjectManager : MonoBehaviour
     /// プレイ準備状態と手札にある状態を切り替える関数
     /// </summary>
     /// <param name="id"></param>
-    public void ChengeStandby(int id) 
+    public void ChengeStandby(int id)
     {
 
         _cardObjectHands[id].SetStatus(_cardObjectHands[id].GetStatus() == CardObject.status.hand ? CardObject.status.playWait : CardObject.status.hand);
+        _cardObjectHands[id].ResetMoveTime();
+    }
+
+    /// <summary>
+    /// 既に表になっているカードに変更を加える関数
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="trump"></param>
+    public void SetChengeCard(int id, Card.Trump trump)
+    {
+        //変換をさせる内容を記録
+        _chengeCardID.Add(id);
+        _chengeCardTrump.Add(trump);
+
+        _cardObjectHands[id].SetStatus(CardObject.status.change);
         _cardObjectHands[id].ResetMoveTime();
     }
 
@@ -180,6 +220,10 @@ public class CardObjectManager : MonoBehaviour
                 case CardObject.status.discard:
                     CardMoveDiscard(_cardObjectHands[i]);
                     break;
+                //既に表になっているカードに変更を加える状態
+                case CardObject.status.change:
+                    HandCardChengeTrump(_cardObjectHands[i],i);
+                    break;
             }
 
 
@@ -192,7 +236,7 @@ public class CardObjectManager : MonoBehaviour
     /// </summary>
     /// <param name="cardObjectHand"></param>
     /// <param name="handCardRange"></param>
-    private void CardMoveHand(CardObject cardObjectHand, float handCardRange) 
+    private void CardMoveHand(CardObject cardObjectHand, float handCardRange)
     {
         //移動目標地点を確認
         Vector3 goalPos = _handPositionLeft + new Vector3(handCardRange, 0, 0);
@@ -241,6 +285,10 @@ public class CardObjectManager : MonoBehaviour
         cardObjectHand.transform.position = moveVec;
 
     }
+    /// <summary>
+    /// カードをトラッシュに移動させる関数
+    /// </summary>
+    /// <param name="cardObjectHand"></param>
     private void CardMoveDiscard(CardObject cardObjectHand)
     {
 
@@ -253,9 +301,49 @@ public class CardObjectManager : MonoBehaviour
         //移動
         cardObjectHand.transform.position = moveVec;
 
+        //角度の変更
+        cardObjectHand.transform.eulerAngles = Vector3.Lerp(_NORMALl_ANGLE, _TRASH_ANGLE,
+            (cardObjectHand.GetMoveTimeRata() * _ANGLE_CHANGE_SPEED) > 1 ? 1 : cardObjectHand.GetMoveTimeRata() * _ANGLE_CHANGE_SPEED);
+
+
+
+
 
 
     }
+    /// <summary>
+    /// 既に表になっているカードに変更を加える
+    /// </summary>
+    private void HandCardChengeTrump(CardObject cardObjectHand,int id)
+    {
+
+        //目標角度を設定
+        Vector3 goal = _chengeCardID.Contains(id) ? _BACK_SIDE : _NORMALl_ANGLE;
+
+        //初期角度を設定
+        Vector3 start = _chengeCardID.Contains(id) ? _BACK_SIDE : _NORMALl_ANGLE;
+
+
+        cardObjectHand.transform.eulerAngles = Vector3.Lerp(start, goal, 
+            (cardObjectHand.GetMoveTimeRata() * _ANGLE_CHANGE_SPEED) > 1 ? 1 : cardObjectHand.GetMoveTimeRata() * _ANGLE_CHANGE_SPEED);
+
+        if (!cardObjectHand.IsMovable() && _chengeCardID.Contains(id)) cardObjectHand.SetStatus(CardObject.status.hand);
+
+        //現在動ける状態かを確認
+        if (cardObjectHand.IsMovable()) return;
+
+        //変更をしているカードが配列の何番かを確認
+        int targetID = _chengeCardID.Find(n => n == id);
+
+        //確認した番号の配列を除外
+        _chengeCardID.RemoveAt(targetID);
+        _chengeCardTrump.RemoveAt(targetID);
+
+        //もう一度動けるように変更
+        cardObjectHand.ResetMoveTime();
+
+    }
+
 
     /// <summary>
     /// カードの情報を元にカードのマテリアルをセットする関数
@@ -310,10 +398,10 @@ public class CardObjectManager : MonoBehaviour
     /// プレイ状態のカードの数をカウントする関数
     /// </summary>
     /// <returns></returns>
-    private int GetPlayCardCount() 
+    private int GetPlayCardCount()
     {
         int count = 0;
-        for(int i = 0; i < _cardObjectHands.Count; i++) 
+        for (int i = 0; i < _cardObjectHands.Count; i++)
         {
             if (_cardObjectHands[i].GetStatus() != CardObject.status.play) continue;
             count++;
@@ -326,9 +414,9 @@ public class CardObjectManager : MonoBehaviour
     /// プレイ準備状態からプレイに移行する関数
     /// </summary>
     /// <returns></returns>
-    public void Play() 
+    public void Play()
     {
-        for(int i = 0; i < _cardObjectHands.Count; i++) 
+        for (int i = 0; i < _cardObjectHands.Count; i++)
         {
             if (_cardObjectHands[i].GetStatus() != CardObject.status.playWait) continue;
             _cardObjectHands[i].SetStatus(CardObject.status.play);
@@ -339,7 +427,7 @@ public class CardObjectManager : MonoBehaviour
     /// <summary>
     /// プレイ準備状態から破棄状態に移行する関数
     /// </summary>
-    public void Discard() 
+    public void Discard()
     {
         for (int i = 0; i < _cardObjectHands.Count; i++)
         {
@@ -353,7 +441,7 @@ public class CardObjectManager : MonoBehaviour
     /// <summary>
     /// プレイが終わって手札とプレイカードを破棄状態にする関数
     /// </summary>
-    public void End() 
+    public void End()
     {
         for (int i = 0; i < _cardObjectHands.Count; i++)
         {
