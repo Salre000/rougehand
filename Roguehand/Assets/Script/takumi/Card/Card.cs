@@ -58,6 +58,13 @@ public class Card
         None = -1,
 
     }
+    public enum trumpMaterial
+    {
+        None = -1,
+        main,
+        beck,
+        buff,
+    }
     /// <summary>
     /// ˆê–‡‚ÌƒJ[ƒh‚Ìî•ñ
     /// </summary>

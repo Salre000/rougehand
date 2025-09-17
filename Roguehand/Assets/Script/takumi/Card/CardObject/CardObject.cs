@@ -29,17 +29,26 @@ public class CardObject : MonoBehaviour
 
     private float _moveTime = 0;
 
-    //移動を開始する前の座標
+    /// <summary>
+    /// 移動を開始する前の座標
+    /// </summary>
     private Vector3 _beforePosition = Vector3.zero;
+    /// <summary>
+    /// 移動を開始する前の角度
+    /// </summary>
+    private Vector3 _beforeAngle = Vector3.zero;
 
-    private Rigidbody rigidbody;
+    /// <summary>
+    /// このオブジェクトのリギッドボディ
+    /// </summary>
+    private Rigidbody _rigidbody;
 
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag != "Finish") return;
 
-        rigidbody.useGravity=false;
-        rigidbody.isKinematic=true;
+        _rigidbody.useGravity=false;
+        _rigidbody.isKinematic=true;
 
         tag = collision.transform.tag;
 
@@ -51,7 +60,7 @@ public class CardObject : MonoBehaviour
 
     public void initialize()
     {
-        rigidbody=GetComponent<Rigidbody>();
+        _rigidbody=GetComponent<Rigidbody>();
 
     }
 
@@ -61,8 +70,8 @@ public class CardObject : MonoBehaviour
     public void GravityStart() 
     {
         tag = "Untagged";
-        rigidbody.useGravity = true;
-        rigidbody.isKinematic = false;
+        _rigidbody.useGravity = true;
+        _rigidbody.isKinematic = false;
 
     }
 
@@ -77,6 +86,7 @@ public class CardObject : MonoBehaviour
     public void ResetMoveTime()
     {
         _beforePosition = transform.position;
+        _beforeAngle = transform.eulerAngles;
         _moveTime = MOVE_TIME;
     }
 
@@ -92,6 +102,7 @@ public class CardObject : MonoBehaviour
     public float GetMoveTimeRata() { return 1f - (_moveTime / MOVE_TIME); }
 
     public Vector3 GetBeforePosition() { return _beforePosition; }
+    public Vector3 GetBeforeAngle() { return _beforeAngle; }
 
 
 
