@@ -1,5 +1,5 @@
 using UnityEngine;
-public static class test : JokerBase
+public class test : JokerBase
 {
     public override int Trun() { return 16; }
     public override void RoundStart()
