@@ -1,5 +1,5 @@
 using UnityEngine;
-public class Test1: JokerBase{
+public class ProbabilityDestruction: JokerBase{
     public override JokerActionUseEnum.JokerRarity GetRarity() { return JokerActionUseEnum.JokerRarity.Common;}
 public override float Trun(){return 16;}
 public override void RoundStart(){

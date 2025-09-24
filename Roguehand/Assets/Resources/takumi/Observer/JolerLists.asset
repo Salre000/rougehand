@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: JolerLists
   m_EditorClassIdentifier: 
   _className:
-  - Test1
-  - Test2
+  - ItemUseNeverUp
