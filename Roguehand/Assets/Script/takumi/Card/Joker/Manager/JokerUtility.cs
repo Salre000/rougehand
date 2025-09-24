@@ -9,4 +9,8 @@ public static class JokerUtility
 
     public static void Remove(JokerBase joker) { instance.Remove(joker); }
 
+    public static JokerActionUseEnum.JokerActionTarget GetTarget() { return instance.GetTarget(); }
+
+    public static void AddMagnification(float magnification) {instance.JokerAddMagnification(magnification);}
+
 }

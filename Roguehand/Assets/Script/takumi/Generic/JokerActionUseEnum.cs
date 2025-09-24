@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,12 @@ using UnityEngine;
 /// <summary>
 /// ジョーカーのアクションに使う列挙体をまとめたクラス
 /// </summary>
-public static class JokerActionUseEnum 
+public static class JokerActionUseEnum
 {
     //何かをした時の何かの列挙体
     public enum JokerActionTarget
     {
+        None = 0,
         /// <summary>
         /// 星座カードの使用時
         /// </summary>
@@ -33,18 +35,20 @@ public static class JokerActionUseEnum
 
     public static readonly string[] JokerActionTargetExplanation = new string[(int)JokerActionTarget.max+1]
     {
+        "仮の値",
         "星座カードの使用時",
         "アイテムの使用時",
         "売却の使用時",
         "役の使用時",
-        "未定"
+        "未定",
+        
 
     };
 
     /// <summary>
     /// 倍率をどのように追加するか
     /// </summary>
-    public enum AddType 
+    public enum AddType
     {
         /// <summary>
         /// 加算
@@ -62,7 +66,7 @@ public static class JokerActionUseEnum
     /// <summary>
     /// どのタイミングで加算が入るか
     /// </summary>
-    public enum Timing 
+    public enum Timing
     {
         /// <summary>
         /// ジョーカーのターンに加算
@@ -91,6 +95,16 @@ public static class JokerActionUseEnum
 
 };
 
+    /// <summary>
+    /// ジョーカーのレアリティをまとめた列挙体
+    /// </summary>
+    public enum JokerRarity
+    {
+        Common,
+        Uncommon,
+        Rare,
+        Legendary,
+    }
 
 
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.PackageManager.UI;
 using UnityEngine;
@@ -19,16 +20,16 @@ public class CreateJoker : EditorWindow
     [MenuItem("Assets/CreateJoker")]
     static void Open()
     {
-        
+
         This = ScriptableObject.CreateInstance<CreateJoker>();
-        jolerListObject = Resources.Load<JolerListObject>("takumi/Observer/JolerLists");
+        jolerListObject = Resources.Load<JokerListObject>("takumi/Observer/JolerLists");
 
         stringList = Resources.Load<StringList>(ObserverJokerBase.filePath2);
         This.Show();
 
     }
 
-    private static JolerListObject jolerListObject;
+    private static JokerListObject jolerListObject;
 
     static CreateJoker This;
     static JokerBaseEnum.JokerEnum jokerEnum = JokerBaseEnum.JokerEnum.MAX;
@@ -44,7 +45,7 @@ public class CreateJoker : EditorWindow
     static JokerActionUseEnum.JokerActionTarget target = JokerActionUseEnum.JokerActionTarget.max;
     static JokerActionUseEnum.Timing timing = JokerActionUseEnum.Timing.max;
     static JokerActionUseEnum.AddType addType = JokerActionUseEnum.AddType.addition;
-
+    static JokerActionUseEnum.JokerRarity rarity = JokerActionUseEnum.JokerRarity.Common;
 
     /// <Summary>
     /// ウィンドウのパーツを表示します。
@@ -55,8 +56,13 @@ public class CreateJoker : EditorWindow
 
         if (GUILayout.Button("生成する"))
         {
-            //　ここにボタンを押した時の処理を書きます
+            // 同名スプリクトの生成を妨害
+            if (jolerListObject._className.Contains(className)) return;
+
+            // ここにボタンを押した時の処理を書きます
             CreateCS();
+
+            CreateAddClass();
         }
 
 
@@ -76,6 +82,10 @@ public class CreateJoker : EditorWindow
         //EditorGUILayout.LabelField(jokerEX);
 
         EditorGUILayout.Space();
+
+        rarity = (JokerActionUseEnum.JokerRarity)EditorGUILayout.EnumPopup((JokerActionUseEnum.JokerRarity)rarity);
+        EditorGUILayout.LabelField("ジョーカーのレアリティ");
+
 
         SwitchJoker(jokerEnum);
         EditorGUILayout.EndVertical();
@@ -151,7 +161,6 @@ public class CreateJoker : EditorWindow
     static void CreateCS()
     {
 
-        if (jolerListObject._className.Contains(className)) return;
 
         StringBuilder builder = new StringBuilder();
         builder.Clear();
@@ -174,12 +183,22 @@ public class CreateJoker : EditorWindow
         builder.Append("{");
         builder.AppendLine();
 
+
+        builder.Append("    public override JokerActionUseEnum.JokerRarity GetRarity() { ");
+        builder.AppendFormat("return JokerActionUseEnum.JokerRarity.{0};", rarity.ToString());
+        builder.Append("}");
+        builder.AppendLine();
+
+
+
         switch (jokerEnum)
         {
             case JokerBaseEnum.JokerEnum._ProbabilityDestruction:
                 CreateProbabilityDestruction(ref builder);
                 break;
             case JokerBaseEnum.JokerEnum._AnyDoneWhen:
+                CreateAnyDoneWhen(ref builder);
+
                 break;
             case JokerBaseEnum.JokerEnum.MAX:
                 break;
@@ -195,10 +214,80 @@ public class CreateJoker : EditorWindow
         sw.Close();
 
     }
+    static void CreateAnyDoneWhen(ref StringBuilder builder)
+    {
+
+        switch (timing)
+        {
+            case JokerActionUseEnum.Timing.trun:
+                builder.Append("float _magnification=0;");
+                builder.AppendLine();
+
+
+
+                builder.Append("public override void UpData(){");
+                builder.AppendFormat("if(JokerUtility.GetTarget()!=JokerActionUseEnum.JokerActionTarget.{0})return;", target.ToString());
+                builder.AppendLine();
+
+                builder.AppendFormat("_magnification+={0};", float1.ToString());
+                builder.Append("}");
+                builder.AppendLine();
+
+                builder.Append("public override float Trun(){");
+                builder.Append("return _magnification;");
+                builder.AppendLine();
+
+                builder.Append("}");
+                builder.AppendLine();
+                builder.Append("public override void TrunReset(){");
+                builder.Append(" _magnification=0;");
+                builder.AppendLine();
+
+                builder.Append("}");
+
+
+
+                break;
+            case JokerActionUseEnum.Timing.now:
+
+                builder.Append("public override void UpData(){");
+                builder.AppendFormat("if(JokerUtility.GetTarget()!=JokerActionUseEnum.JokerActionTarget.{0})return;", target.ToString());
+                builder.AppendLine();
+
+                builder.AppendFormat("JokerUtility.{0}({1});", addType == JokerActionUseEnum.AddType.addition ? "AddMagnification" : "", float1.ToString());
+                builder.Append("}");
+
+
+                break;
+            case JokerActionUseEnum.Timing.never:
+                builder.Append("float _magnification=0;");
+                builder.AppendLine();
+
+
+
+                builder.Append("public override void UpData(){");
+                builder.AppendFormat("if(JokerUtility.GetTarget()!=JokerActionUseEnum.JokerActionTarget.{0})return;", target.ToString());
+                builder.AppendLine();
+
+                builder.AppendFormat("_magnification+={0};", float1.ToString());
+                builder.Append("}");
+                builder.AppendLine();
+
+                builder.Append("public override float Trun(){");
+                builder.Append("return _magnification;");
+                builder.AppendLine();
+
+                builder.Append("}");
+
+
+                break;
+        }
+
+    }
     static void CreateProbabilityDestruction(ref StringBuilder builder)
     {
 
-        builder.Append("public override int Trun(){");
+        builder.Append("public override float Trun(){");
         builder.AppendFormat("return {0};", num3);
         builder.Append("}");
         builder.AppendLine();
@@ -206,7 +295,7 @@ public class CreateJoker : EditorWindow
         builder.Append("public override void RoundStart(){");
         builder.AppendLine();
 
-        builder.AppendFormat("if((Random.Range(0,10000)%{0})<{1})",num1,num2);
+        builder.AppendFormat("if((Random.Range(0,10000)%{0})<{1})", num1, num2);
         builder.AppendLine();
 
         builder.Append("{");
@@ -222,54 +311,91 @@ public class CreateJoker : EditorWindow
 
     }
 
-    static void CreateAddClass() 
+    static void CreateAddClass()
     {
+
+        jolerListObject._className.Add(className);
+
         StringBuilder builder = new StringBuilder();
+
+
+        builder.Clear();
+        builder.Append(Application.dataPath);
+        builder.Append("/Editor/takumi/");
+        builder.Append("ALLJoker");
+        builder.Append(".cs");
+        StreamWriter sw;
+        string filePass = builder.ToString();
+
+        Debug.Log(filePass);
+
+        sw = new StreamWriter(filePass, false);
+
+
         builder.Clear();
 
-
-        builder.Append("private static readonly string filePath = \"/Assets/Script/takumi/Card/Joker/JokerBody\";");
+        builder.Append("using System.IO;");
         builder.AppendLine();
-        builder.Append("    public static string FILR_EXTENSION = \".asset\";");
+        builder.Append("using System.Text;");
         builder.AppendLine();
-        builder.AppendFormat("    public static readonly string filePath2 = \"{0} \"", className);
+        builder.Append("using UnityEditor;");
         builder.AppendLine();
-        builder.Append("static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths){");
-        builder.AppendLine();
-        builder.Append("        string filename = filePath + filePath2 + FILR_EXTENSION;");
-        builder.AppendLine();
-        builder.AppendFormat("    public static readonly string filePath2 = \"{0} \"", className);
-        builder.AppendLine();
-        builder.AppendFormat("    public static readonly string filePath2 = \"{0} \"", className);
-        builder.AppendLine();
-        builder.AppendFormat("    public static readonly string filePath2 = \"{0} \"", className);
-        builder.AppendLine();
-        builder.AppendFormat("    public static readonly string filePath2 = \"{0} \"", className);
-        builder.AppendLine();
-        builder.AppendFormat("    public static readonly string filePath2 = \"{0} \"", className);
+        builder.Append("using UnityEngine;");
         builder.AppendLine();
 
 
+        builder.AppendFormat("public static class ALLJoker");
+        builder.AppendLine();
+        builder.Append("{");
 
+        builder.Append("static JokerBase[] _allJoker = new JokerBase[]{");
+
+        for(int i=0;i< jolerListObject._className.Count; i++) 
+        {
+        builder.AppendLine();
+        builder.AppendFormat("new {0}(),", jolerListObject._className[i]);
+
+        }
+
+
+        builder.AppendLine();
+        builder.Append("};");
+        builder.AppendLine();
+
+        builder.Append("public enum _allJokerEnum{");
+
+        for (int i = 0; i < jolerListObject._className.Count; i++)
+        {
+            builder.AppendLine();
+            builder.AppendFormat("_{0},", jolerListObject._className[i]);
+
+        }
+
+
+        builder.AppendLine();
+        builder.Append("}");
+
+        builder.AppendLine();
+
+        builder.Append("public static JokerBase GetJoker(int id){ return _allJoker[id];");
+        builder.Append("}");
+        builder.AppendLine();
+
+        builder.AppendLine();
+
+        builder.Append("public static JokerBase[] GetJokerALL(){ return _allJoker;");
+        builder.Append("}");
+        builder.AppendLine();
+
+
+        builder.Append("}");
+
+        sw.Write(builder.ToString());
+
+        sw.Close();
 
 
 
     }
-
-
-    //static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
-    //{
-    //    string filename = filePath + filePath2 + FILR_EXTENSION;
-    //    foreach (string asset in importedAssets)
-    //    {
-    //        if (!filename.Equals(asset))
-    //            continue;
-    //        Debug.Log("ジョーカーの列挙体の生成開始");
-
-
-    //    }
-    //}
-
-
 
 }

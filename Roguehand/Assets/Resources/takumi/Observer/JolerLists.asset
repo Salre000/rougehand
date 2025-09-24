@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e420eccdf6e5d740803868001938e3b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1729996045d65b042a7ca2d1a1df6953, type: 3}
   m_Name: JolerLists
   m_EditorClassIdentifier: 
+  _className:
+  - Test1
+  - Test2

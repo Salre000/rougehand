@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class JokerBase
 {
+
     /// <summary>
     /// ラウンドの開始時のジョーカーの挙動
     /// </summary>
@@ -18,12 +19,22 @@ public class JokerBase
     /// ジョーカーのターンが回って来た時に動く挙動
     /// </summary>
     /// <returns><基本ゼロだけどこれが倍率増加量/returns>
-    public virtual int Trun() {  return 0; }
+    public virtual float Trun() {  return 0; }
 
     /// <summary>
     /// ラウンドの終了時のジョーカーの挙動
     /// </summary>
     public virtual void RoundEnd() { }
 
+    /// <summary>
+    /// ターン事の処理をするために挟むリセットの処理
+    /// </summary>
+    public virtual void TrunReset() { }
+
+    /// <summary>
+    /// ジョーカーのレアリティを返す関数
+    /// </summary>
+    /// <returns></returns>
+    public virtual JokerActionUseEnum.JokerRarity GetRarity() { return JokerActionUseEnum.JokerRarity.Common; }
 
 }
