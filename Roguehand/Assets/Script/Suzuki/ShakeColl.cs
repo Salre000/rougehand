@@ -6,7 +6,7 @@ public class ShakeColl : MonoBehaviour
 {
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)&&Input.GetKeyDown(KeyCode.S))
         {
             ShakeCamera.Instance.Shake(5, 0.2f);
         }

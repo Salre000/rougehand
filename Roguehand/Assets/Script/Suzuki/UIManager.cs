@@ -49,7 +49,7 @@ public static class UIManager
         texts.hand = "5";
         texts.discard = "5";
         texts.money = "$0";
-        texts.ante = "0/8";
+        texts.ante = "1";
         texts.round = "0";
 
         #region テキストの取得
@@ -82,6 +82,34 @@ public static class UIManager
         SetMoneyText(texts.money);
         SetAnteText(texts.ante);
         SetRoundText(texts.round);
+        #endregion
+    }
+
+    /// <summary>
+    /// ラン中のテキストの初期化、取得抜き
+    /// </summary>
+    public static void InitializeText()
+    {
+        UITexts texts = new UITexts();
+        texts.roundname = "";
+        texts.lowestscore = "";
+        texts.rewardCount = "";
+        texts.roundscore = "0";
+        texts.role = "";
+        texts.basicscore = "0";
+        texts.magnification = "0";
+        texts.hand = "5";
+        texts.discard = "5";
+        #region テキストの初期化
+        SetRoundNameText(texts.roundname);
+        SetLowestScoreText(texts.lowestscore);
+        SetRewardCountText(texts.rewardCount);
+        SetRoundScereText(texts.roundscore);
+        SetRoleText(texts.role);
+        SetBasicScoreText(texts.basicscore);
+        SetMagnificationText(texts.magnification);
+        SetHandText(texts.hand);
+        SetDiscardText(texts.discard);
         #endregion
     }
 
