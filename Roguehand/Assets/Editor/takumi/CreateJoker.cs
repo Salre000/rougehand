@@ -348,20 +348,6 @@ public class CreateJoker : EditorWindow
         builder.AppendLine();
         builder.Append("{");
 
-        builder.Append("static JokerBase[] _allJoker = new JokerBase[]{");
-
-        for(int i=0;i< jolerListObject._className.Count; i++) 
-        {
-        builder.AppendLine();
-        builder.AppendFormat("new {0}(),", jolerListObject._className[i]);
-
-        }
-
-
-        builder.AppendLine();
-        builder.Append("};");
-        builder.AppendLine();
-
         builder.Append("public enum _allJokerEnum{");
 
         for (int i = 0; i < jolerListObject._className.Count; i++)
@@ -377,14 +363,24 @@ public class CreateJoker : EditorWindow
 
         builder.AppendLine();
 
-        builder.Append("public static JokerBase GetJoker(int id){ return _allJoker[id];");
+        builder.Append("public static JokerBase GetJoker(_allJokerEnum joker){");
+        builder.AppendLine();
+        builder.Append("        switch (joker){");
+        builder.AppendLine();
+        for (int i = 0; i < jolerListObject._className.Count; i++)
+        {
+            builder.AppendLine();
+            builder.AppendFormat("            case _allJokerEnum._{0}:return new {0}();", jolerListObject._className[i]);
+
+        }
+        builder.AppendLine();
+        builder.Append("}");
+        builder.Append("return null;");
         builder.Append("}");
         builder.AppendLine();
 
         builder.AppendLine();
 
-        builder.Append("public static JokerBase[] GetJokerALL(){ return _allJoker;");
-        builder.Append("}");
         builder.AppendLine();
 
 
