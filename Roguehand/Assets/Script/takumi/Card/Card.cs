@@ -75,6 +75,18 @@ public class Card
         public sealBuff sealBuff;
         public cardBuff cardBuff;
         public deckBuff deckBuff;
+        public bool isFeice;
+
+        public void Initialize(suit suit,number number,sealBuff sealBuff=sealBuff.None,cardBuff cardBuff=cardBuff.None,deckBuff deckBuff=deckBuff.None,bool isFeice=false)
+        {
+            this.suit = suit;
+            this.number = number;
+            this.sealBuff = sealBuff;
+            this.cardBuff = cardBuff;
+            this.deckBuff = deckBuff;
+            this.isFeice=isFeice;
+            return;
+        }
     }
 
 
