@@ -33,16 +33,20 @@ public class CardObjectManager : MonoBehaviour
     /// <summary>
     /// 手札のカードの座標の一番左側
     /// </summary>
-    [SerializeField] private Vector3 _handPositionLeft = Vector3.zero;
+    [SerializeField, Header("手札のカードの座標の一番左側")] private Transform _handPositionLeft;
     /// <summary>
     /// 手札のカードの座標の一番右側
     /// </summary>
-    [SerializeField] private Vector3 _handPositionRight = Vector3.zero;
+    [SerializeField, Header("手札のカードの座標の一番右側")] private Transform _handPositionRight;
 
     /// <summary>
     /// ラウンド中使われない破棄されるカードの座標
     /// </summary>
-    [SerializeField] private Vector3 _handTrash = Vector3.zero;
+    [SerializeField, Header("ラウンド中使われない破棄されるカードの座標")] private Transform _handTrash;
+    /// <summary>
+    /// カードオブジェクトを置いていくデッキの基準座標
+    /// </summary>
+    [SerializeField, Header("デッキの基準座標")] private Transform _cardDeck;
 
     /// <summary>
     /// トラッシュに移動中のカードの角度の定数
@@ -52,7 +56,7 @@ public class CardObjectManager : MonoBehaviour
     /// <summary>
     /// カードの基本状態の角度
     /// </summary>
-    private readonly Vector3 _NORMALl_ANGLE = new Vector3(91, 90, 90);
+    private readonly Vector3 _NORMALl_ANGLE = new Vector3(0, 0, 0);
 
     /// <summary>
     /// カードの裏面状態の角度
@@ -122,7 +126,7 @@ public class CardObjectManager : MonoBehaviour
         CreateCard();
 
         // 手札の幅を計算
-        _handPositionRange = Vector3.Distance(_handPositionLeft, _handPositionRight);
+        _handPositionRange = Vector3.Distance(_handPositionLeft.position, _handPositionRight.position);
 
     }
 
@@ -338,6 +342,7 @@ public class CardObjectManager : MonoBehaviour
     }
 
 
+
     /// <summary>
     /// デッキから手札への移動
     /// </summary>
@@ -346,7 +351,7 @@ public class CardObjectManager : MonoBehaviour
     private void CardMoveHand(CardObject cardObjectHand, float handCardRange)
     {
         // 移動目標地点を確認
-        Vector3 goalPos = _handPositionLeft + new Vector3(handCardRange, 0, 0);
+        Vector3 goalPos = _handPositionLeft.position + new Vector3(handCardRange, 0, 0);
 
         // 移動量と座標を合計を算出
         Vector3 moveVec = Vector3.Lerp(cardObjectHand.GetBeforePosition(), goalPos, cardObjectHand.GetMoveTimeRata());
@@ -374,7 +379,7 @@ public class CardObjectManager : MonoBehaviour
     private void CardMovePlayWait(CardObject cardObjectHand, float handCardRange)
     {
         // 移動目標地点を確認
-        Vector3 goalPos = _handPositionLeft + new Vector3(handCardRange, 10, 0);
+        Vector3 goalPos = _handPositionLeft.position + new Vector3(handCardRange, 10, 0);
 
         // 移動量と座標を合計を算出
         Vector3 moveVec = Vector3.Lerp(cardObjectHand.GetBeforePosition(), goalPos, cardObjectHand.GetMoveTimeRata());
@@ -394,7 +399,7 @@ public class CardObjectManager : MonoBehaviour
         float handCardRange = (handRange / GetPlayCardCount()) * counter;
 
         // 移動目標地点を確認
-        Vector3 goalPos = _handPositionLeft + new Vector3(handCardRange, 0, 10);
+        Vector3 goalPos = _handPositionLeft.position + new Vector3(handCardRange, 0, 10);
 
         // 移動量と座標を合計を算出
         Vector3 moveVec = Vector3.Lerp(cardObjectHand.GetBeforePosition(), goalPos, cardObjectHand.GetMoveTimeRata());
@@ -411,7 +416,7 @@ public class CardObjectManager : MonoBehaviour
     {
 
         // 移動目標地点を確認
-        Vector3 goalPos = _handTrash;
+        Vector3 goalPos = _handTrash.position;
 
         // 移動量と座標を合計を算出
         Vector3 moveVec = Vector3.Lerp(cardObjectHand.GetBeforePosition(), goalPos, cardObjectHand.GetMoveTimeRata());
@@ -508,9 +513,9 @@ public class CardObjectManager : MonoBehaviour
     {
         for (int i = 0; i < (int)Card.suit.max * (int)Card.number.king; i++)
         {
-            _cardObjects.Add(Instantiate(_cardBase, transform).AddComponent<CardObject>());
+            _cardObjects.Add(Instantiate(_cardBase, _cardDeck.position, Quaternion.identity).AddComponent<CardObject>());
             _cardObjects[i].SetStatus(CardObject.status.deck);
-
+            _cardObjects[i].transform.eulerAngles = _NORMALl_ANGLE;
         }
     }
 
