@@ -38,6 +38,14 @@ public class CardObjectManager : MonoBehaviour
     /// 手札のカードの座標の一番右側
     /// </summary>
     [SerializeField, Header("手札のカードの座標の一番右側")] private Transform _handPositionRight;
+    /// <summary>
+    /// プレイの座標の一番左側
+    /// </summary>
+    [SerializeField, Header("プレイの座標の一番左側")] private Transform _playPositionLeft;
+    /// <summary>
+    /// プレイの座標の一番右側
+    /// </summary>
+    [SerializeField, Header("プレイの座標の一番右側")] private Transform _playPositionRight;
 
     /// <summary>
     /// ラウンド中使われない破棄されるカードの座標
@@ -51,7 +59,7 @@ public class CardObjectManager : MonoBehaviour
     /// <summary>
     /// トラッシュに移動中のカードの角度の定数
     /// </summary>
-    private readonly Vector3 _TRASH_ANGLE = new Vector3(91, 90, 90);
+    private readonly Vector3 _TRASH_ANGLE = new Vector3(-90, 90, 90);
 
     /// <summary>
     /// カードの基本状態の角度
@@ -61,7 +69,12 @@ public class CardObjectManager : MonoBehaviour
     /// <summary>
     /// カードの裏面状態の角度
     /// </summary>
-    private readonly Vector3 _BACK_SIDE = new Vector3(-91, 90, 90);
+    private readonly Vector3 _BACK_SIDE = new Vector3(180, 0, 0);
+
+    /// <summary>
+    /// プレイ待機状態のときに移動する相対移動量
+    /// </summary>
+    private readonly Vector3 _PLAY_WAIT = new Vector3(0, 50, -50);
 
 
     /// <summary>
@@ -228,7 +241,10 @@ public class CardObjectManager : MonoBehaviour
             if (_cardObjectHands[i].GetStatus() != CardObject.status.playWait) continue;
             _cardObjectHands[i].SetStatus(CardObject.status.discard);
             _cardObjectHands[i].ResetMoveTime();
+
         }
+
+
 
     }
 
@@ -379,7 +395,7 @@ public class CardObjectManager : MonoBehaviour
     private void CardMovePlayWait(CardObject cardObjectHand, float handCardRange)
     {
         // 移動目標地点を確認
-        Vector3 goalPos = _handPositionLeft.position + new Vector3(handCardRange, 10, 0);
+        Vector3 goalPos = _handPositionLeft.position + new Vector3(handCardRange, 0, 0) + _PLAY_WAIT;
 
         // 移動量と座標を合計を算出
         Vector3 moveVec = Vector3.Lerp(cardObjectHand.GetBeforePosition(), goalPos, cardObjectHand.GetMoveTimeRata());
@@ -389,17 +405,20 @@ public class CardObjectManager : MonoBehaviour
 
     }
     /// <summary>
-    /// 手札からプレイ準備状態への移動
+    /// 手札からプレイ状態への移動
     /// </summary>
     /// <param name="cardObjectHand"></param>
     /// <param name="handCardRange"></param>
     private void CardMovePlay(CardObject cardObjectHand, float handRange, int counter)
     {
 
-        float handCardRange = (handRange / GetPlayCardCount()) * counter;
+        float vec = (Vector3.Distance(_playPositionLeft.position, _playPositionRight.position) / (GetPlayCardCount()+1))*(counter+1);
+
 
         // 移動目標地点を確認
-        Vector3 goalPos = _handPositionLeft.position + new Vector3(handCardRange, 0, 10);
+        Vector3 goalPos = _playPositionLeft.position+new Vector3(vec,0,0);
+
+        Debug.Log("座標:" + vec);
 
         // 移動量と座標を合計を算出
         Vector3 moveVec = Vector3.Lerp(cardObjectHand.GetBeforePosition(), goalPos, cardObjectHand.GetMoveTimeRata());
@@ -429,6 +448,9 @@ public class CardObjectManager : MonoBehaviour
             (cardObjectHand.GetMoveTimeRata() * _ANGLE_CHANGE_SPEED) > 1 ? 1 : cardObjectHand.GetMoveTimeRata() * _ANGLE_CHANGE_SPEED);
 
 
+        if (cardObjectHand.GetMoveTimeRata() < 1) return;
+
+        _cardObjectHands.Remove(cardObjectHand);
 
 
 
@@ -493,7 +515,7 @@ public class CardObjectManager : MonoBehaviour
     /// <returns></returns>
     private CardObject GetUseCardObject()
     {
-        for (int i = 0; i < _cardObjects.Count; i++)
+        for (int i = _cardObjects.Count-1; i >0; i--)
         {
             // カードがdeckになかったらもう一度
             if (_cardObjects[i].GetStatus() != CardObject.status.deck) continue;
@@ -515,7 +537,7 @@ public class CardObjectManager : MonoBehaviour
         {
             _cardObjects.Add(Instantiate(_cardBase, _cardDeck.position, Quaternion.identity).AddComponent<CardObject>());
             _cardObjects[i].SetStatus(CardObject.status.deck);
-            _cardObjects[i].transform.eulerAngles = _NORMALl_ANGLE;
+            _cardObjects[i].transform.eulerAngles = _BACK_SIDE;
         }
     }
 

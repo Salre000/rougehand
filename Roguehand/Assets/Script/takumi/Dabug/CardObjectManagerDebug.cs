@@ -5,21 +5,17 @@ using UnityEngine;
 public class CardObjectManagerDebug : MonoBehaviour
 {
 
-    Card.Trump trump1=new Card.Trump();
+    Card.Trump trump1 = new Card.Trump();
+    List<Card.Trump> ss = new List<Card.Trump>();
+
+    Card.Trump trump = new Card.Trump();
+
     // Start is called before the first frame update
     void Start()
     {
 
-        List<Card.Trump> ss = new List<Card.Trump>();
-
-        Card.Trump trump = new Card.Trump();
 
         for (int i = 0; i < 8; i++) ss.Add(trump);
-
-        CardObjectUtility.HandToCard(ss);
-
-        CardObjectUtility.StartHandMove();
-        
     }
 
 
@@ -30,6 +26,13 @@ public class CardObjectManagerDebug : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E)) CardObjectUtility.End();
         if (Input.GetKeyDown(KeyCode.L)) CardObjectUtility.ChengeStandby(1);
         if (Input.GetKeyDown(KeyCode.C)) CardObjectUtility.SetChengeCard(1, trump1);
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            CardObjectUtility.HandToCard(ss);
+
+            CardObjectUtility.StartHandMove();
+
+        }
 
         if (Input.GetKeyDown(KeyCode.Alpha0)) CardObjectUtility.ChengeStandby(0);
         if (Input.GetKeyDown(KeyCode.Alpha1)) CardObjectUtility.ChengeStandby(1);
@@ -39,7 +42,7 @@ public class CardObjectManagerDebug : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha5)) CardObjectUtility.ChengeStandby(5);
         if (Input.GetKeyDown(KeyCode.Alpha6)) CardObjectUtility.ChengeStandby(6);
         if (Input.GetKeyDown(KeyCode.Alpha7)) CardObjectUtility.ChengeStandby(7);
-        
+
     }
 
 }
