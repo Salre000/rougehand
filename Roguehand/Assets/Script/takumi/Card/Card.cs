@@ -26,7 +26,17 @@ public class Card
         jack,
         queen,
         king,
-        ace = 1
+        ace = 1,
+    }
+    /// <summary>
+    /// ÉJÅ[ÉhÇÃèÛë‘Çé¶Ç∑
+    /// </summary>
+    public enum State
+    {
+        None=-1,
+        deck,
+        hand,
+        trash,
     }
 
     /// <summary>
@@ -75,12 +85,15 @@ public class Card
         public sealBuff sealBuff;
         public cardBuff cardBuff;
         public deckBuff deckBuff;
+        public State state;
         public bool isFeice;
 
-        public void Initialize(suit suit,number number,sealBuff sealBuff=sealBuff.None,cardBuff cardBuff=cardBuff.None,deckBuff deckBuff=deckBuff.None,bool isFeice=false)
+        public Trump(suit suit,number number, State state, bool isFeice = false, sealBuff sealBuff=sealBuff.None,
+            cardBuff cardBuff=cardBuff.None,deckBuff deckBuff=deckBuff.None)
         {
             this.suit = suit;
             this.number = number;
+            this.state = state;
             this.sealBuff = sealBuff;
             this.cardBuff = cardBuff;
             this.deckBuff = deckBuff;
