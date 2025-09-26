@@ -69,7 +69,7 @@ public class CardObjectManager : MonoBehaviour
     /// <summary>
     /// カードの裏面状態の角度
     /// </summary>
-    private readonly Vector3 _BACK_SIDE = new Vector3(180, 0, 0);
+    private readonly Vector3 _BACK_SIDE = new Vector3(0, 180, 0);
 
     /// <summary>
     /// プレイ待機状態のときに移動する相対移動量
