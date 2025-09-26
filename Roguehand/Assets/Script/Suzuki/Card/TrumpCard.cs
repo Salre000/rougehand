@@ -35,7 +35,8 @@ public class TrumpCard
                 _index++;
             }
         }
-
+        CardObjectUtility.HandToCard(deck);
+        CardObjectUtility.StartHandMove();
         CardManager.instance.SetDeck(deck);
     }
 }
