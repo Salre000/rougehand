@@ -6,15 +6,17 @@ using System.Collections.Generic;
 /// </summary>
 public class TrumpCard 
 {
-    //private const int _NUMBER = 13;
-    //private const int _SUIT = 4;
+
     private Card.suit _suit;
     private Card.number _number;
     private List<Card.Trump> deck = new List<Card.Trump>(52);
     private bool _isFeice = false;
     private int _index = 0;
 
-    public void Test()
+    /// <summary>
+    /// デッキの作成実行
+    /// </summary>
+    public void CreateDeck()
     {
         
         // 4種類の

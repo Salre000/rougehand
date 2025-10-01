@@ -14,21 +14,28 @@ public class CardManager : MonoBehaviour
     /// </summary>
     public List<Card.Trump> deck = new List<Card.Trump>();
 
+    // 現在のハンドの大きさ
+    private int handSize = 8;
 
     private void Awake()
     {
         if (instance == null)
             instance = this;
-        trumpCard=new TrumpCard();
+        trumpCard = new TrumpCard();
         // デッキを生成、および代入
         //trumpCard.Test();
 
     }
     private void Start()
     {
-        trumpCard.Test();
+        trumpCard.CreateDeck();
 
     }
 
     public void SetDeck(List<Card.Trump> deck) { this.deck = deck; }
+    public List<Card.Trump> GetDeck() { return deck; }
+
+    public void SetHand(int hand) {  this.handSize = hand; }
+    public int GetHand() { return handSize; }
+
 }
