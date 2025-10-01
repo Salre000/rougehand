@@ -42,7 +42,6 @@ public class CardObjectManagerDebug : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha5)) CardObjectUtility.ChengeStandby(5);
         if (Input.GetKeyDown(KeyCode.Alpha6)) CardObjectUtility.ChengeStandby(6);
         if (Input.GetKeyDown(KeyCode.Alpha7)) CardObjectUtility.ChengeStandby(7);
-
     }
 
 }

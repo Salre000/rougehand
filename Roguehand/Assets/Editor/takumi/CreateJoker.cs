@@ -321,7 +321,7 @@ public class CreateJoker : EditorWindow
 
         builder.Clear();
         builder.Append(Application.dataPath);
-        builder.Append("/Editor/takumi/");
+        builder.Append("/Script/takumi/Generic/");
         builder.Append("ALLJoker");
         builder.Append(".cs");
         StreamWriter sw;

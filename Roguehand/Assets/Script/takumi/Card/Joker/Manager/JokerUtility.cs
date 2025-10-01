@@ -13,4 +13,8 @@ public static class JokerUtility
 
     public static void AddMagnification(float magnification) {instance.JokerAddMagnification(magnification);}
 
+    public static void Addjoker(int ID) { instance.AddJoker(ID); }
+
+    public static void JokerPlayStart() { JokerObjectUtility.StartJokerPlay(); }
+
 }

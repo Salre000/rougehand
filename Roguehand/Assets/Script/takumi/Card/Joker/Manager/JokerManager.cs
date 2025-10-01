@@ -7,7 +7,7 @@ public class JokerManager : MonoBehaviour
     /// <summary>
     /// ジョーカーをまとめたリスト
     /// </summary>
-    private List<JokerBase> _jokers;
+    private List<JokerBase> _jokers=new List<JokerBase>(5);
 
     /// <summary>
     /// ジョーカーのターゲットになり得る物をキャッシュする
@@ -16,10 +16,9 @@ public class JokerManager : MonoBehaviour
 
 
 
-
     public void Awake()
     {
-        
+        JokerUtility.instance = this;
     }
 
     private void Update()
@@ -37,7 +36,13 @@ public class JokerManager : MonoBehaviour
 
         bool flag=_jokers.Contains(joker);
 
+        int index = _jokers.FindIndex(jokerBase => joker == jokerBase);
+
         _jokers.Remove(joker);
+        
+        //ジョーカーのオブジェクトの削除処理
+        JokerObjectUtility.RemoveJoker(index);
+
         return flag;
     }
     /// <summary>
@@ -46,6 +51,9 @@ public class JokerManager : MonoBehaviour
     /// <param name="ID"></param>
     public void AddJoker(int ID) 
     {
+        JokerBase joker = ALLJoker.GetJoker((ALLJoker._allJokerEnum)ID);
+        _jokers.Add(joker);
+        JokerObjectUtility.AddJoker(joker);
 
     }
 

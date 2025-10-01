@@ -116,6 +116,11 @@ public class CardObjectManager : MonoBehaviour
     /// </summary>
     private TrumpMaterialManager _materialManager;
 
+    /// <summary>
+    /// カードオブジェクトを纏めるプール
+    /// </summary>
+    private GameObject _cardPool;
+
 
     public void Awake()
     {
@@ -515,7 +520,7 @@ public class CardObjectManager : MonoBehaviour
     /// <returns></returns>
     private CardObject GetUseCardObject()
     {
-        for (int i = _cardObjects.Count-1; i >0; i--)
+        for (int i = _cardObjects.Count-1; i >=0; i--)
         {
             // カードがdeckになかったらもう一度
             if (_cardObjects[i].GetStatus() != CardObject.status.deck) continue;
@@ -533,11 +538,13 @@ public class CardObjectManager : MonoBehaviour
     /// </summary>
     private void CreateCard()
     {
+        _cardPool = new GameObject("CardPool");
         for (int i = 0; i < (int)Card.suit.max * (int)Card.number.king; i++)
         {
             _cardObjects.Add(Instantiate(_cardBase, _cardDeck.position, Quaternion.identity).AddComponent<CardObject>());
             _cardObjects[i].SetStatus(CardObject.status.deck);
             _cardObjects[i].transform.eulerAngles = _BACK_SIDE;
+            _cardObjects[i].transform.parent = _cardPool.transform;
         }
     }
 

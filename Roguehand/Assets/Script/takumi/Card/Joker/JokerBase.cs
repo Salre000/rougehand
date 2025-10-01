@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class JokerBase
 {
+    /// <summary>
+    /// ジョーカーのオブジェクトの動き方
+    /// </summary>
+    protected int jokerObjecttype = 0;
 
+    /// <summary>
+    /// ジョーカーのオブジェクトの動き方を返す関数
+    /// </summary>
+    /// <returns></returns>
+    public int GetJokerObjectType() {  return jokerObjecttype; }    
     /// <summary>
     /// ラウンドの開始時のジョーカーの挙動
     /// </summary>
