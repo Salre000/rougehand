@@ -10,6 +10,10 @@ public class CardObjectManager : MonoBehaviour
     private enum cardMaterialType
     {
         /// <summary>
+        /// トランプのスートとナンバーで決まる
+        /// </summary>
+        main,
+        /// <summary>
         /// トランプの裏面
         /// </summary>
         back,
@@ -17,10 +21,6 @@ public class CardObjectManager : MonoBehaviour
         /// トランプのバフ内容で決まる
         /// </summary>
         effect,
-        /// <summary>
-        /// トランプのスートとナンバーで決まる
-        /// </summary>
-        main
 
     }
 
@@ -141,10 +141,15 @@ public class CardObjectManager : MonoBehaviour
         // Utilityに登録
         CardObjectUtility.CardObjectManager = this;
 
+        _materialManager = GetComponent<TrumpMaterialManager>();
+        _materialManager.Initializ();
+
+
         CreateCard();
 
         // 手札の幅を計算
         _handPositionRange = Vector3.Distance(_handPositionLeft.position, _handPositionRight.position);
+
 
     }
 
@@ -509,7 +514,7 @@ public class CardObjectManager : MonoBehaviour
         // トランプのエフェクトマテリアルをセット（いまはない）
 
         // トランプのソーツとナンバーを含んだマテリアルをセット
-        // materials[(int)cardMaterialType.main] = _cardMaterials[(int)cardData.suit][(int)cardData.number];
+         materials[(int)cardMaterialType.main] = _materialManager.GetMaterial((int)cardData.suit,(int)cardData.number);
 
         meshRenderer.materials = materials;
     }

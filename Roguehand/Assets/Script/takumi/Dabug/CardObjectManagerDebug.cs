@@ -13,7 +13,8 @@ public class CardObjectManagerDebug : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        trump.suit = Card.suit.club;
+        trump.number = Card.number.ace;
 
         for (int i = 0; i < 8; i++) ss.Add(trump);
     }
