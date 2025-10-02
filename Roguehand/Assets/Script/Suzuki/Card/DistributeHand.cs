@@ -51,7 +51,7 @@ public class DistributeHand : MonoBehaviour
 
             hand.Add(deck[dammyDeckArray[index]]);
             // 一度出た場所の数値は出ないようにする
-            dammyDeckArray.Remove(index);
+            dammyDeckArray.RemoveAt(index);
 
         }
 
