@@ -11,6 +11,7 @@ public class DistributeHand : MonoBehaviour
     // 手札リスト
     private List<Card.Trump> deck = new List<Card.Trump>();
     private List<Card.Trump> hand = new List<Card.Trump>();
+    private bool test = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,31 +20,45 @@ public class DistributeHand : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-
+        if(test)return;
+        Distribute();
+        test = true;
     }
 
     // ランダムで配ります
     private void Distribute()
     {
+        deck = CardManager.instance.GetDeck();
+        hand.Capacity = CardManager.instance.GetHand();
         int index = deck.Count;
         // デッキ分のキャパを獲得
-        List<int> deckArray = new List<int>(index);
+        List<int> dammyDeckArray = new List<int>(index);
         for (int i = 0; i < index; i++)
-            deckArray.Add(i);
+            dammyDeckArray.Add(i);
         // 現在のハンド分のキャパを獲得
         int count = CardManager.instance.GetHand();
         // ハンド分繰り返す
         for (int i = 0; i < count; i++)
         {
             // 一回繰り返すごとにランダムで出た数値を取り除いて手札に渡す
-            index = Random.Range(0, deckArray.Count);
-            deckArray.Remove(index);
-            // デッキのindex番にある情報を手札も追加
-            deck[index] = new(deck[index].suit, deck[index].number, Card.State.hand, deck[index].isFeice);
-            hand.Add(deck[index]);
-            Debug.Log(index);
+            index = Random.Range(0, dammyDeckArray.Count);
+            // デッキのダミーデッキの場所にある情報を手札追加
+            Card.Trump trump = deck[dammyDeckArray[index]];
+            trump.state = State.hand;
+            deck[dammyDeckArray[index]] = trump;
+
+            hand.Add(deck[dammyDeckArray[index]]);
+            Debug.Log("スート : "+hand[i].suit+"ナンバー : "+ hand[i].number);
+            // 一度出た場所の数値は出ないようにする
+            dammyDeckArray.Remove(index);
+
         }
+
+
+        CardObjectUtility.HandToCard(hand);
+        CardObjectUtility.StartHandMove();
+
     }
 }

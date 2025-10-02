@@ -2498,6 +2498,7 @@ GameObject:
   m_Component:
   - component: {fileID: 594862445}
   - component: {fileID: 594862446}
+  - component: {fileID: 594862447}
   m_Layer: 0
   m_Name: CardManager
   m_TagString: Untagged
@@ -2530,6 +2531,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d102aa75a87ad34a87aa34c9d29b280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &594862447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594862444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48f5707a02cdc304a96011d0ba585819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &603622076
@@ -3831,7 +3844,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 805109970}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ccf563304f5e22142a9d99c6ecc848e8, type: 3}
   m_Name: 
