@@ -100,6 +100,11 @@ public class Card
             this.isFeice=isFeice;
             return;
         }
+
+        public State SetState(State state)
+        {
+            return state;
+        }
     }
 
 
