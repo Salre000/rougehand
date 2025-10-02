@@ -42,7 +42,7 @@ public class TrumpMaterialManager : MonoBehaviour
     }
 
 
-    public Material GetMaterial(int suit,int number) { Debug.Log(suit + ":" + number); return _cardMaterial[suit][number-1];}
+    public Material GetMaterial(int suit,int number) { return _cardMaterial[suit][number-1];}
 
     
     

@@ -56,7 +56,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: ee2c366b69938924c9c6e99064cfd5de, type: 3}
   _materialC:
   - {fileID: 2800000, guid: bbcbc7aaad10c3a42af82c1c8f95d27f, type: 3}
-  - {fileID: 2800000, guid: 71a4c9fb6576e524d91aa18d35503e68, type: 3}
+  - {fileID: 2800000, guid: 30e03121e254da7428b03e743d2ccdf4, type: 3}
   - {fileID: 2800000, guid: c4185b6dde13b76459e654e0e9761e84, type: 3}
   - {fileID: 2800000, guid: 0937f3f27fed4fc4b88440da728438d0, type: 3}
   - {fileID: 2800000, guid: 09359c9239a9c9d4da437c0ca3d33612, type: 3}

@@ -64,12 +64,12 @@ public class CardObjectManager : MonoBehaviour
     /// <summary>
     /// カードの基本状態の角度
     /// </summary>
-    private readonly Vector3 _NORMALl_ANGLE = new Vector3(0, 0, 0);
+    private readonly Vector3 _NORMALl_ANGLE = new Vector3(0, -3, 0);
 
     /// <summary>
     /// カードの裏面状態の角度
     /// </summary>
-    private readonly Vector3 _BACK_SIDE = new Vector3(0, 180, 0);
+    private readonly Vector3 _BACK_SIDE = new Vector3(0, 183, 0);
 
     /// <summary>
     /// プレイ待機状態のときに移動する相対移動量
@@ -509,7 +509,7 @@ public class CardObjectManager : MonoBehaviour
     private void CardPaint(Card.Trump cardData, int id)
     {
 
-        MeshRenderer meshRenderer = _cardObjectHands[id].GetComponent<MeshRenderer>();
+        MeshRenderer meshRenderer = _cardObjectHands[id].transform.GetChild(0).GetComponent<MeshRenderer>();
         Material[] materials = meshRenderer.materials;
         // トランプのエフェクトマテリアルをセット（いまはない）
 
