@@ -26,7 +26,7 @@ public class Card
         jack,
         queen,
         king,
-        ace = 1,
+        ace=1,
     }
     /// <summary>
     /// ƒJ[ƒh‚Ìó‘Ô‚ğ¦‚·

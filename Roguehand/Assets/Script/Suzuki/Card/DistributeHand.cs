@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static Card;
 
@@ -22,7 +23,7 @@ public class DistributeHand : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if(test)return;
+        if (test) return;
         Distribute();
         test = true;
     }
@@ -55,9 +56,29 @@ public class DistributeHand : MonoBehaviour
 
         }
 
-        hand.Sort((x,y)=>y.number-x.number);
-        for(int i=0;i < hand.Count; i++)
+         /////// 最終的に関数化します ////////
+
+        // 降順、スートは昇順
+        List<Card.Trump> value = hand.OrderByDescending(x => x.number).ThenBy(x =>x.suit).ToList();
+        List<Card.Trump> _value = new(value);
+        
+        int topIndex = 0;
+        // Aceを先頭に移動させる
+        foreach (Card.Trump card in _value)
+        {
+            if(card.number!=Card.number.ace) continue;
+            Card.Trump aceCard = card;
+            value.Remove(card);
+            // 先頭に移す
+            value.Insert(topIndex, aceCard);
+
+            topIndex++;
+        }
+        hand = value;
+        for (int i = 0; i < hand.Count; i++)
             Debug.Log("スート : " + hand[i].suit + "ナンバー : " + hand[i].number);
+
+        ////////////////////////////////////////////////////
 
         CardObjectUtility.HandToCard(hand);
         CardObjectUtility.StartHandMove();
