@@ -49,7 +49,6 @@ public class JokerObjectManager : MonoBehaviour
         TrunEnd();
         _status = JokerStatus.wait;
 
-
     }
 
     /// <summary>
@@ -141,10 +140,14 @@ public class JokerObjectManager : MonoBehaviour
     /// <param name="ID"></param>
     public void RemoveJoker(int ID)
     {
+        //オブジェクトの削除時のアニメーション
+        BreakUtility.StartBreak(_jokerObjects[ID].gameObject);
+
+        GameObject destroy = _jokerObjects[ID].gameObject;
 
         _jokerObjects.RemoveAt(ID);
 
-        //オブジェクトの削除時のアニメーション
+        Destroy(destroy);
 
 
     }

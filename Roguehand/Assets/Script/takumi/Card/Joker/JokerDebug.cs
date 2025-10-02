@@ -14,6 +14,7 @@ public class JokerDebug : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.J)) JokerUtility.Addjoker(2);
+        if (Input.GetKeyDown(KeyCode.S)) JokerUtility.RoundStartJoker();
         if (Input.GetKeyDown(KeyCode.M)) JokerUtility.JokerPlayStart();
 
     }

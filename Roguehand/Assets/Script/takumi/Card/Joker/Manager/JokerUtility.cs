@@ -17,4 +17,7 @@ public static class JokerUtility
 
     public static void JokerPlayStart() { JokerObjectUtility.StartJokerPlay(); }
 
+    public static void RoundStartJoker() { instance.RoundStart(); }
+    public static void RoundEndJoker() { instance.RoundEnd(); }
+
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 public class JokerManager : MonoBehaviour
 {
@@ -39,12 +40,31 @@ public class JokerManager : MonoBehaviour
         int index = _jokers.FindIndex(jokerBase => joker == jokerBase);
 
         _jokers.Remove(joker);
+
         
         //ジョーカーのオブジェクトの削除処理
         JokerObjectUtility.RemoveJoker(index);
 
         return flag;
     }
+
+    /// <summary>
+    /// ラウンドの開始時のジョーカーの処理
+    /// </summary>
+    public void RoundStart() 
+    {
+       for(int i=0;i< _jokers.Count;i++) _jokers[i].RoundStart();
+    }
+    /// <summary>
+    /// ラウンドの終了時のジョーカーの処理
+    /// </summary>
+    public void RoundEnd() 
+    {
+
+       for(int i=0;i< _jokers.Count;i++) _jokers[i].RoundEnd();
+    }
+
+
     /// <summary>
     /// ジョーカーを追加する関数
     /// </summary>
