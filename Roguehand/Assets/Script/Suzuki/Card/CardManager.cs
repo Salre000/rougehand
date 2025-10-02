@@ -13,6 +13,7 @@ public class CardManager : MonoBehaviour
     /// 作られたデッキはマネージャーが持つ
     /// </summary>
     public List<Card.Trump> deck = new List<Card.Trump>();
+    public List<Card.Trump> hand = new List<Card.Trump>();
 
     // 現在のハンドの大きさ
     private int handSize = 8;
@@ -32,10 +33,12 @@ public class CardManager : MonoBehaviour
 
     }
 
-    public void SetDeck(List<Card.Trump> deck) { this.deck = deck; }
+    public void SetDeck(List<Card.Trump> _deck) { this.deck = _deck; }
     public List<Card.Trump> GetDeck() { return deck; }
 
-    public void SetHand(int hand) {  this.handSize = hand; }
-    public int GetHand() { return handSize; }
+    public void SetHandSize(int _hand) {  this.handSize = _hand; }
+    public int GetHandSize() { return handSize; }
 
+    public void SetHand(List<Card.Trump> _hand) { hand = _hand; }
+    public List<Card.Trump> GetHand() { return hand;}
 }

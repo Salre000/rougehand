@@ -16,7 +16,7 @@ public class DistributeHand : MonoBehaviour
     void Start()
     {
         deck = CardManager.instance.GetDeck();
-        hand.Capacity = CardManager.instance.GetHand();
+        hand.Capacity = CardManager.instance.GetHandSize();
     }
 
     // Update is called once per frame
@@ -31,14 +31,14 @@ public class DistributeHand : MonoBehaviour
     private void Distribute()
     {
         deck = CardManager.instance.GetDeck();
-        hand.Capacity = CardManager.instance.GetHand();
+        hand.Capacity = CardManager.instance.GetHandSize();
         int index = deck.Count;
         // デッキ分のキャパを獲得
         List<int> dammyDeckArray = new List<int>(index);
         for (int i = 0; i < index; i++)
             dammyDeckArray.Add(i);
         // 現在のハンド分のキャパを獲得
-        int count = CardManager.instance.GetHand();
+        int count = CardManager.instance.GetHandSize();
         // ハンド分繰り返す
         for (int i = 0; i < count; i++)
         {
@@ -50,12 +50,14 @@ public class DistributeHand : MonoBehaviour
             deck[dammyDeckArray[index]] = trump;
 
             hand.Add(deck[dammyDeckArray[index]]);
-            Debug.Log("スート : "+hand[i].suit+"ナンバー : "+ hand[i].number);
             // 一度出た場所の数値は出ないようにする
             dammyDeckArray.Remove(index);
 
         }
 
+        hand.Sort((x,y)=>y.number-x.number);
+        for(int i=0;i < hand.Count; i++)
+            Debug.Log("スート : " + hand[i].suit + "ナンバー : " + hand[i].number);
 
         CardObjectUtility.HandToCard(hand);
         CardObjectUtility.StartHandMove();
