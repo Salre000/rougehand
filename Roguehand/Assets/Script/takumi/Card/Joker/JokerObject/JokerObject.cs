@@ -89,8 +89,8 @@ public class JokerObject : MonoBehaviour
     /// </summary>
     public void MovePos(Vector3 nextpos)
     {
-        //掴む移動中は移動させない
-        if (_isGrab) return;
+        //掴む移動中は特殊な移動に変更
+        if (_isGrab) { GrabMove(); return; }
 
         if (Vector3.Distance(transform.position, nextpos) < EPSILON) { _time = 0; _lostpos = nextpos; _lostAngle = Vector3.zero; return; }
 
@@ -128,6 +128,17 @@ public class JokerObject : MonoBehaviour
     /// </summary>
     /// <param name="status"></param>
     public void SetStatus(JokerStatus status) { _status = status; }
+
+    /// <summary>
+    /// 掴み状態の切り替え関数
+    /// </summary>
+    /// <param name="flag"></param>
+    public void SetGrab(bool flag)
+    {
+        _isGrab=flag;
+
+        _lostpos=transform.position;
+    }
 
     private void SetAction()
     {
@@ -178,6 +189,22 @@ public class JokerObject : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 掴んでいるジョーカーの移動関数
+    /// </summary>
+    private void GrabMove() 
+    {
+        //マウスポイント依存で座標を決定する
+        Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z);
+        transform.position = Camera.main.ScreenToWorldPoint(mousePos);
+    
+
+
+
+
+
+    
+    }
 
 
 }

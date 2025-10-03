@@ -13,4 +13,10 @@ public static class JokerObjectUtility
 
     public static void AddJoker(JokerBase jokerBase) { instance.AddJoker(jokerBase); }
     public static void RemoveJoker(int ID) { instance.RemoveJoker(ID); }
+
+    public static int GetJokerIndex(JokerObject jokerObject) {return instance.GetJokerIndex(jokerObject); }
+
+    public static void GrabChange(int ID ,bool flag) {  instance.GrabChange(ID ,flag); }
+
+    public static void ChengeOrder(int lostID,int nextID) {instance.ChengeOrder(lostID,nextID);}
 }

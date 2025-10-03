@@ -293,6 +293,9 @@ public class CardObjectManager : MonoBehaviour
         _cardObjectHands[_movingCard].ResetMoveTime();
     }
 
+    public int GetCardIndex(CardObject cardObject) { return _cardObjectHands.FindIndex(card => card == cardObject); }
+
+    public void GrabChenge(int ID,bool flag) { _cardObjectHands[ID].SetGrab(flag); }
 
     /// <summary>
     /// ‚Â‚Ü‚ñ‚Å‚¢‚éƒJ[ƒh‚ÌˆÚ“®‚ğ‚·‚éŠÖ”
@@ -571,5 +574,7 @@ public class CardObjectManager : MonoBehaviour
         }
         return count;
     }
+
+   
 
 }

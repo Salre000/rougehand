@@ -43,6 +43,11 @@ public class CardObject : MonoBehaviour
     /// </summary>
     private Rigidbody _rigidbody;
 
+    /// <summary>
+    /// åªç›Ç¬Ç©Ç‹ÇÍÇƒÇ¢ÇÈÇ©Ç«Ç§Ç©
+    /// </summary>
+    private bool _isGrab = false;
+
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag != "Finish") return;
@@ -90,6 +95,9 @@ public class CardObject : MonoBehaviour
         _moveTime = MOVE_TIME;
     }
 
+    /// <summary>
+    /// éûä‘åoâﬂÇÃä÷êî
+    /// </summary>
     public void CountDown() { _moveTime -= Time.deltaTime* GameConfig.GetGameSpeed(); }
 
     /// <summary>
@@ -105,5 +113,6 @@ public class CardObject : MonoBehaviour
     public Vector3 GetBeforeAngle() { return _beforeAngle; }
 
 
+    public void SetGrab(bool flag) {_isGrab = flag;}
 
 }

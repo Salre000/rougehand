@@ -20,4 +20,6 @@ public static class JokerUtility
     public static void RoundStartJoker() { instance.RoundStart(); }
     public static void RoundEndJoker() { instance.RoundEnd(); }
 
+    public static void ChengeOrder(int lostID,int nextID) { instance.ChengeOrder(lostID, nextID); }
+
 }

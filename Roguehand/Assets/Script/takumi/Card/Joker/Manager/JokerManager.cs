@@ -8,7 +8,7 @@ public class JokerManager : MonoBehaviour
     /// <summary>
     /// ジョーカーをまとめたリスト
     /// </summary>
-    private List<JokerBase> _jokers=new List<JokerBase>(5);
+    private List<JokerBase> _jokers = new List<JokerBase>(5);
 
     /// <summary>
     /// ジョーカーのターゲットになり得る物をキャッシュする
@@ -32,16 +32,16 @@ public class JokerManager : MonoBehaviour
     /// </summary>
     /// <param name="joker"></param>
     /// <returns></returns>
-    public bool Remove(JokerBase joker) 
+    public bool Remove(JokerBase joker)
     {
 
-        bool flag=_jokers.Contains(joker);
+        bool flag = _jokers.Contains(joker);
 
         int index = _jokers.FindIndex(jokerBase => joker == jokerBase);
 
         _jokers.Remove(joker);
 
-        
+
         //ジョーカーのオブジェクトの削除処理
         JokerObjectUtility.RemoveJoker(index);
 
@@ -51,17 +51,17 @@ public class JokerManager : MonoBehaviour
     /// <summary>
     /// ラウンドの開始時のジョーカーの処理
     /// </summary>
-    public void RoundStart() 
+    public void RoundStart()
     {
-       for(int i=0;i< _jokers.Count;i++) _jokers[i].RoundStart();
+        for (int i = 0; i < _jokers.Count; i++) _jokers[i].RoundStart();
     }
     /// <summary>
     /// ラウンドの終了時のジョーカーの処理
     /// </summary>
-    public void RoundEnd() 
+    public void RoundEnd()
     {
 
-       for(int i=0;i< _jokers.Count;i++) _jokers[i].RoundEnd();
+        for (int i = 0; i < _jokers.Count; i++) _jokers[i].RoundEnd();
     }
 
 
@@ -69,7 +69,7 @@ public class JokerManager : MonoBehaviour
     /// ジョーカーを追加する関数
     /// </summary>
     /// <param name="ID"></param>
-    public void AddJoker(int ID) 
+    public void AddJoker(int ID)
     {
         JokerBase joker = ALLJoker.GetJoker((ALLJoker._allJokerEnum)ID);
         _jokers.Add(joker);
@@ -81,13 +81,26 @@ public class JokerManager : MonoBehaviour
     /// 今のフレームないで行われたターゲットの動き
     /// </summary>
     /// <returns></returns>
-    public JokerActionUseEnum.JokerActionTarget GetTarget() {return _target;}
+    public JokerActionUseEnum.JokerActionTarget GetTarget() { return _target; }
+
+    /// <summary>
+    /// 順番を入れ替える関数
+    /// </summary>
+    /// <param name="lostID"></param>
+    /// <param name="nextID"></param>
+    public void ChengeOrder(int lostID, int nextID)
+    {
+        _jokers = EX.ChengeOrder(_jokers, lostID, nextID);
+
+        JokerObjectUtility.ChengeOrder(lostID, nextID);
+
+    }
 
     /// <summary>
     /// ジョーカーによって倍率が上昇する関数
     /// </summary>
     /// <param name="magnification"></param>
-    public void JokerAddMagnification(float magnification) 
+    public void JokerAddMagnification(float magnification)
     {
 
     }
@@ -95,7 +108,7 @@ public class JokerManager : MonoBehaviour
     /// ジョーカーによって基礎値が上昇する関数
     /// </summary>
     /// <param name="baseValue"></param>
-    public void JokerAddBaseValue(float baseValue) 
+    public void JokerAddBaseValue(float baseValue)
     {
 
     }
