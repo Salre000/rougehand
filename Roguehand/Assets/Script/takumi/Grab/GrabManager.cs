@@ -101,7 +101,7 @@ public class GrabManager : MonoBehaviour
                 CardObjectUtility.GrabChenge(_grabID, false);
                 if (_time > 1) break;
 
-
+                CardManager.instance.SetIsSelect(_grabID);
 
                 break;
             case status.Joker:
@@ -110,6 +110,8 @@ public class GrabManager : MonoBehaviour
             case status.Item:
                 break;
         }
+
+        _time = 0;
 
         _status = status.None;
         _grabID = -1;

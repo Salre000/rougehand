@@ -88,10 +88,10 @@ public class Card
         public deckBuff deckBuff;
         public State state;
         public bool isFeice;
-        public bool select;
+        public bool isSelect;
 
         public Trump(suit suit,number number, State state, bool isFeice = false, sealBuff sealBuff=sealBuff.None,
-            cardBuff cardBuff=cardBuff.None,deckBuff deckBuff=deckBuff.None, bool select=false)
+            cardBuff cardBuff=cardBuff.None,deckBuff deckBuff=deckBuff.None, bool isSelect=false)
         {
             this.suit = suit;
             this.number = number;
@@ -100,7 +100,7 @@ public class Card
             this.cardBuff = cardBuff;
             this.deckBuff = deckBuff;
             this.isFeice=isFeice;
-            this.select=select;
+            this.isSelect=isSelect;
             return;
         }
 

@@ -98,6 +98,26 @@ public class CardManager : MonoBehaviour
         }
         return value;
     }
+    /// <summary>
+    /// 手札のIDのカードを選択状態と切り替える
+    /// </summary>
+    /// <param name="ID"></param>
+    public void SetIsSelect(int ID)
+    {
+
+        List<Card.Trump> hand=this.hand;
+
+        Card.Trump dummyHand = hand[ID];
+        dummyHand.isSelect = !dummyHand.isSelect;
+        hand[ID] = dummyHand;
+
+        this.hand = hand;
+
+        CardObjectUtility.ChengeStandby(ID);
+
+        Debug.Log("SSS");
+
+    }
 
 
 
@@ -110,6 +130,5 @@ public class CardManager : MonoBehaviour
     public void SetHand(List<Card.Trump> _hand) { hand = _hand; }
     public List<Card.Trump> GetHand() { return hand;}
 
-    //public void 
 
 }
