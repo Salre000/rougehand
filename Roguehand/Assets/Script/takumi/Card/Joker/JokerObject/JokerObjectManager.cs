@@ -114,7 +114,7 @@ public class JokerObjectManager : MonoBehaviour
 
 
         //‰¡•ûŒü‚Ö‚ÌˆÚ“®‹——£‚ª¬‚³‚©‚Á‚½‚ç‡”Ô‚Ì•ÏX‚ğ‰Á‚¦‚È‚¢
-        if (Mathf.Abs(Cardrenge) < renge) return;
+        if (Mathf.Abs(Cardrenge)+30 < renge) return;
 
         //ˆÚ“®•ûŒü‚ğ’²®
         int count=1;
