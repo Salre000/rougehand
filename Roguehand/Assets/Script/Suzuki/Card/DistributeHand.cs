@@ -24,12 +24,14 @@ public class DistributeHand : MonoBehaviour
     void LateUpdate()
     {
         if (test) return;
-        Distribute();
+
+        int addHandSize = CardManager.instance.GetHandSize() - hand.Count;
+        Distribute(addHandSize);
         test = true;
     }
 
     // ランダムで配ります
-    private void Distribute()
+    private void Distribute(int drawCount)
     {
         deck = CardManager.instance.GetDeck();
         hand.Capacity = CardManager.instance.GetHandSize();
@@ -38,10 +40,9 @@ public class DistributeHand : MonoBehaviour
         List<int> dammyDeckArray = new List<int>(index);
         for (int i = 0; i < index; i++)
             dammyDeckArray.Add(i);
-        // 現在のハンド分のキャパを獲得
-        int count = CardManager.instance.GetHandSize();
+
         // ハンド分繰り返す
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < drawCount; i++)
         {
             // 一回繰り返すごとにランダムで出た数値を取り除いて手札に渡す
             index = Random.Range(0, dammyDeckArray.Count);
@@ -79,7 +80,7 @@ public class DistributeHand : MonoBehaviour
             Debug.Log("スート : " + hand[i].suit + "ナンバー : " + hand[i].number);
 
         ////////////////////////////////////////////////////
-
+        CardManager.instance.SetHand(hand);
         CardObjectUtility.HandToCard(hand);
         CardObjectUtility.StartHandMove();
 
