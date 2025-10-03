@@ -379,12 +379,15 @@ public class CardObjectManager : MonoBehaviour
     /// <param name="handCardRange"></param>
     private void CardMoveHand(CardObject cardObjectHand, float handCardRange)
     {
+
+
         // 移動目標地点を確認
         Vector3 goalPos = _handPositionLeft.position + new Vector3(handCardRange, 0, 0);
 
         // 移動量と座標を合計を算出
         Vector3 moveVec = Vector3.Lerp(cardObjectHand.GetBeforePosition(), goalPos, cardObjectHand.GetMoveTimeRata());
 
+        if (cardObjectHand.IsGrab())
         // 移動
         cardObjectHand.transform.position = moveVec;
 

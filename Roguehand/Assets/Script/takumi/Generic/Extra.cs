@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Šg’£ƒNƒ‰ƒX
 /// </summary>
-public static class EX
+public static class Extra
 {
 
     /// <summary>
@@ -31,7 +31,7 @@ public static class EX
         else
         {
 
-            dummyList.RemoveAt(dummyList.Count - 1);
+            dummyList.RemoveAt(lostID);
             dummyList.Add(list[lostID+1]);
             dummyList.Add(list[lostID]);
             startPos = nextID + 1;

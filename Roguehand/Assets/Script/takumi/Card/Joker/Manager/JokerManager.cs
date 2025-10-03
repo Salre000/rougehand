@@ -90,7 +90,7 @@ public class JokerManager : MonoBehaviour
     /// <param name="nextID"></param>
     public void ChengeOrder(int lostID, int nextID)
     {
-        _jokers = EX.ChengeOrder(_jokers, lostID, nextID);
+        _jokers = Extra.ChengeOrder(_jokers, lostID, nextID);
 
         JokerObjectUtility.ChengeOrder(lostID, nextID);
 

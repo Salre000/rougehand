@@ -98,7 +98,12 @@ public class CardObject : MonoBehaviour
     /// <summary>
     /// 時間経過の関数
     /// </summary>
-    public void CountDown() { _moveTime -= Time.deltaTime* GameConfig.GetGameSpeed(); }
+    public void CountDown()
+    {
+        //つかまれている間カウントしない
+        if (_isGrab) return;    
+        _moveTime -= Time.deltaTime* GameConfig.GetGameSpeed();
+    }
 
     /// <summary>
     /// 移動可能かどうかの判定
@@ -114,5 +119,7 @@ public class CardObject : MonoBehaviour
 
 
     public void SetGrab(bool flag) {_isGrab = flag;}
+
+    public bool IsGrab() { return _isGrab; }
 
 }
