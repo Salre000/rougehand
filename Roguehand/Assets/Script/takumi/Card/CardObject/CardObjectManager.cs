@@ -290,6 +290,9 @@ public class CardObjectManager : MonoBehaviour
 
         for (int i = 0; i < _cardObjectHands.Count; i++) _cardObjectHands[i].ResetMoveTime();
 
+        CardManager.instance.SetHand( Extra.ChengeOrder(CardManager.instance.GetHand(),lostID,nextID));
+        
+
     }
 
     /// <summary>
@@ -409,7 +412,7 @@ public class CardObjectManager : MonoBehaviour
 
         if (cardObjectHand.IsGrab())
         {
-            Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(cardObjectHand.transform.position).z);
+            Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(_handPositionLeft.transform.position).z-30);
             moveVec = Camera.main.ScreenToWorldPoint(mousePos);
 
             angle = _NORMALl_ANGLE;

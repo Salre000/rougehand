@@ -31,6 +31,11 @@ public class GrabManager : MonoBehaviour
     /// </summary>
     private status _status = status.None;
 
+    /// <summary>
+    /// ŠÔŒv‘ª‚ğ‚·‚é•Ï”
+    /// </summary>
+    private float _time = 0;
+
 
     private void Awake()
     {
@@ -40,6 +45,9 @@ public class GrabManager : MonoBehaviour
 
     private void Update()
     {
+
+        _time += Time.deltaTime;
+
         Grab();
         Separate();
 
@@ -91,6 +99,10 @@ public class GrabManager : MonoBehaviour
         {
             case status.Card:
                 CardObjectUtility.GrabChenge(_grabID, false);
+                if (_time > 1) break;
+
+
+
                 break;
             case status.Joker:
                 JokerObjectUtility.GrabChange(_grabID, false);
