@@ -57,29 +57,13 @@ public class DistributeHand : MonoBehaviour
 
         }
 
-         /////// 最終的に関数化します ////////
-
-        // 降順、スートは昇順
-        List<Card.Trump> value = hand.OrderByDescending(x => x.number).ThenBy(x =>x.suit).ToList();
-        List<Card.Trump> _value = new(value);
-        
-        int topIndex = 0;
-        // Aceを先頭に移動させる
-        foreach (Card.Trump card in _value)
-        {
-            if(card.number!=Card.number.ace) continue;
-            Card.Trump aceCard = card;
-            value.Remove(card);
-            // 先頭に移す
-            value.Insert(topIndex, aceCard);
-
-            topIndex++;
-        }
-        hand = value;
+        // ソート
+        //hand=CardManager.instance.NumberSort(hand);
+        hand=CardManager.instance.SuitSort(hand);
         for (int i = 0; i < hand.Count; i++)
             Debug.Log("スート : " + hand[i].suit + "ナンバー : " + hand[i].number);
 
-        ////////////////////////////////////////////////////
+
         CardManager.instance.SetHand(hand);
         CardObjectUtility.HandToCard(hand);
         CardObjectUtility.StartHandMove();
