@@ -73,18 +73,18 @@ public class CardManager : MonoBehaviour
     public List<Card.Trump> SuitSort(List<Card.Trump> cards)
     {
         // 並び変えたものをvalueに代入
-        List<Card.Trump> value = cards.OrderByDescending(x => x.number).ThenBy(x => x.suit).ToList();
-        // 一度aceを前に持ってくる
-        value=NumberSort(value);
+        List<Card.Trump> value = new();
+        // 一度Number順でソートし、aceを前に持ってくる
+        value=NumberSort(cards);
         // コピーリストの作成
         // ※foreachでvalueの中身をいじるため、エラー回避
-        List<Card.Trump> _value = new(value);
+        List<Card.Trump> copy = new(value);
 
         int topIndex = 0;
         // ♠ → ♥ → ♦ → ♣
         for(int i=0; i < 4; i++)
         {
-            foreach (Card.Trump card in _value)
+            foreach (Card.Trump card in copy)
             {
                 if (card.suit != (Card.suit)i) continue;
                 Card.Trump aceCard = card;

@@ -60,9 +60,6 @@ public class DistributeHand : MonoBehaviour
         // ソート
         //hand=CardManager.instance.NumberSort(hand);
         hand=CardManager.instance.SuitSort(hand);
-        for (int i = 0; i < hand.Count; i++)
-            Debug.Log("スート : " + hand[i].suit + "ナンバー : " + hand[i].number);
-
 
         CardManager.instance.SetHand(hand);
         CardObjectUtility.HandToCard(hand);
