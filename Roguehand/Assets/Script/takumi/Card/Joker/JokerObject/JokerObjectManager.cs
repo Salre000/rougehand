@@ -228,9 +228,8 @@ public class JokerObjectManager : MonoBehaviour
     {
 
 
-        _jokerObjects= Extra.ChengeOrder(_jokerObjects,lostID, nextID);
+        _jokerObjects = Extra.ChengeOrder(_jokerObjects, lostID, nextID);
 
-        Debug.Log("TEST");
 
 
 

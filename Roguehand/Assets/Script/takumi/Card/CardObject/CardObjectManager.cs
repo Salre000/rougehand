@@ -95,8 +95,6 @@ public class CardObjectManager : MonoBehaviour
     /// </summary>
     [SerializeField] private List<CardObject> _cardObjectHands = new List<CardObject>();
 
-    private Material[][] _cardMaterials = new Material[(int)Card.suit.max][];
-
     /// <summary>
     /// カードの内容を変化する時に使用するIDの入ったリスト
     /// </summary>
@@ -107,11 +105,6 @@ public class CardObjectManager : MonoBehaviour
     private List<Card.Trump> _chengeCardTrump = new List<Card.Trump>();
 
     /// <summary>
-    /// カードを移動させる時に使用するキャッシュ先
-    /// </summary>
-    private int _movingCard = -1;
-
-    /// <summary>
     /// トランプのマテリアルをまとめたクラス
     /// </summary>
     private TrumpMaterialManager _materialManager;
@@ -120,6 +113,9 @@ public class CardObjectManager : MonoBehaviour
     /// カードオブジェクトを纏めるプール
     /// </summary>
     private GameObject _cardPool;
+
+    private bool _isGrab = false;
+    private int _isGrabID = -1;
 
 
     public void Awake()
@@ -271,47 +267,65 @@ public class CardObjectManager : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// カードをつまんで移動させる開始時の関数
-    /// </summary>
-    /// <param name="id"></param>
-    public void StartMovingCard(int id)
-    {
-        if (_movingCard != -1) return;
-
-        // オブジェクトのIDをキャッシュ
-        _movingCard = id;
-
-    }
-
-    /// <summary>
-    /// カードをつまんで移動させる終了時の関数
-    /// </summary>
-    public void EndMovingCard()
-    {
-        _cardObjectHands[_movingCard].SetStatus(CardObject.status.hand);
-        _cardObjectHands[_movingCard].ResetMoveTime();
-    }
 
     public int GetCardIndex(CardObject cardObject) { return _cardObjectHands.FindIndex(card => card == cardObject); }
 
-    public void GrabChenge(int ID,bool flag) { _cardObjectHands[ID].SetGrab(flag); }
+    public void GrabChenge(int ID,bool flag)
+    {
+        _cardObjectHands[ID].SetGrab(flag);
+        _isGrab = flag;
+        _isGrabID = ID;
+
+        _cardObjectHands[ID].ResetMoveTime();
+        _cardObjectHands[ID].SetStatus(CardObject.status.hand);
+
+        Debug.Log(ID + "*" + flag);
+    }
+
+    public void ChengeOrder(int lostID,int nextID)
+    {
+        _cardObjectHands = Extra.ChengeOrder(_cardObjectHands, lostID, nextID);
+
+        //ソートの影響で移動するオブジェクトを移動させる
+
+        for (int i = 0; i < _cardObjectHands.Count; i++) _cardObjectHands[i].ResetMoveTime();
+
+    }
 
     /// <summary>
     /// つまんでいるカードの移動をする関数
     /// </summary>
     private void MovingCard()
     {
-        //何もつまんでいなかったら何もしない
-        if (_movingCard == -1) return;
+        if (!_isGrab) return;
 
-        //　TODO
-        // マウスの移動量を参照して
-        // _cardObjectHands[_movingCard]の座標を移動させる
 
-        // もしもIDが入れ替わることがあるならば次に進む
+        //ジョーカー同士の距離
+        float renge = Vector3.Distance(_handPositionLeft.transform.position, _handPositionRight.transform.position) / (_cardObjectHands.Count + 1);
 
-        // 入れ替わったIDを正しく入れなおす
+
+        float Cardrenge = (_handPositionLeft.transform.position.x + renge * (_isGrabID + 1)) - _cardObjectHands[_isGrabID].transform.position.x;
+
+
+        //横方向への移動距離が小さかったら順番の変更を加えない
+        if (Mathf.Abs(Cardrenge) + 30 < renge) return;
+
+        //移動方向を調整
+        int count = 1;
+        if (Cardrenge > 1) count = -1;
+
+        if (_isGrabID + count >= _cardObjectHands.Count || _isGrabID + count < 0) return;
+
+        //ジョーカーの順番を入れ替える関数を呼ぶ
+        CardObjectUtility.ChengeOrder(_isGrabID, _isGrabID + count);
+
+
+
+        _isGrabID = _isGrabID + count;
+
+
+
+
     }
 
     /// <summary>
@@ -327,6 +341,9 @@ public class CardObjectManager : MonoBehaviour
 
         //プレイ準備のカウンター
         int playCounter = 0;
+
+        MovingCard();
+
 
         for (int i = 0; i < _cardObjectHands.Count; i++)
         {
@@ -368,6 +385,7 @@ public class CardObjectManager : MonoBehaviour
 
 
         }
+
     }
 
 
@@ -386,20 +404,28 @@ public class CardObjectManager : MonoBehaviour
 
         // 移動量と座標を合計を算出
         Vector3 moveVec = Vector3.Lerp(cardObjectHand.GetBeforePosition(), goalPos, cardObjectHand.GetMoveTimeRata());
-
-        if (cardObjectHand.IsGrab())
-        // 移動
-        cardObjectHand.transform.position = moveVec;
-
         // 角度の算出
         Vector3 angle = Vector3.Lerp(cardObjectHand.GetBeforeAngle(), _NORMALl_ANGLE, cardObjectHand.GetMoveTimeRata());
 
-        // 角度の代入
-        cardObjectHand.transform.eulerAngles = angle;
+        if (cardObjectHand.IsGrab())
+        {
+            Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(cardObjectHand.transform.position).z);
+            moveVec = Camera.main.ScreenToWorldPoint(mousePos);
+
+            angle = _NORMALl_ANGLE;
+        }
+
+
+        // 移動
+        cardObjectHand.transform.position = moveVec;
+        // デッキから出たときだけ角度の代入
+        if(cardObjectHand.GetLostStatus()==CardObject.status.deck)cardObjectHand.transform.eulerAngles = angle;
 
 
         if (cardObjectHand.IsMovable()) return;
 
+        //その後の仕掛けの為に必要
+        cardObjectHand.SetStatus(CardObject.status.hand);
         cardObjectHand.GravityStart();
 
     }

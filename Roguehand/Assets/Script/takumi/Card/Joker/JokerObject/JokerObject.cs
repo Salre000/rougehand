@@ -94,7 +94,7 @@ public class JokerObject : MonoBehaviour
 
         if (Vector3.Distance(transform.position, nextpos) < EPSILON) { _time = 0; _lostpos = nextpos; _lostAngle = Vector3.zero; return; }
 
-        _time += Time.deltaTime * GameConfig.GetGameSpeed();
+        _time += Time.deltaTime * GameConfig.GetGameSpeed()*2.5f;
 
 
         transform.position = Vector3.Lerp(_lostpos, nextpos, _time);

@@ -8,7 +8,7 @@ public class CardObject : MonoBehaviour
     /// <summary>
     /// 一度の移動に掛かる時間の定数
     /// </summary>
-    private const float MOVE_TIME = 1f;
+    private const float MOVE_TIME = 0.2f;
 
     /// <summary>
     /// このカードの状態
@@ -25,7 +25,15 @@ public class CardObject : MonoBehaviour
         trash
     }
 
+    /// <summary>
+    /// 現在の状態
+    /// </summary>
    [SerializeField]private status _status = status.none;
+   
+    /// <summary>
+    /// ひとつ前の状態
+    /// </summary>
+    [SerializeField]private status _lostStatus = status.none;
 
     private float _moveTime = 0;
 
@@ -46,7 +54,7 @@ public class CardObject : MonoBehaviour
     /// <summary>
     /// 現在つかまれているかどうか
     /// </summary>
-    private bool _isGrab = false;
+    [SerializeField]private bool _isGrab = false;
 
     public void OnCollisionEnter(Collision collision)
     {
@@ -80,9 +88,11 @@ public class CardObject : MonoBehaviour
 
     }
 
-    public void SetStatus(status status) { _status = status; }
+    public void SetStatus(status status) { _lostStatus = _status; _status = status; }
 
     public status GetStatus() { return _status; }
+
+    public status GetLostStatus() { return _lostStatus; }
 
     /// <summary>
     /// 移動可能時間をリセット

@@ -15,7 +15,7 @@ public class GrabManager : MonoBehaviour
     /// <summary>
     /// 掴んでいるオブジェクトのID
     /// </summary>
-    private int _grabID = -1;
+    [SerializeField]private int _grabID = -1;
 
     private enum status
     {
@@ -42,6 +42,8 @@ public class GrabManager : MonoBehaviour
     {
         Grab();
         Separate();
+
+
     }
 
     /// <summary>
@@ -50,7 +52,6 @@ public class GrabManager : MonoBehaviour
     private void Grab()
     {
         if (_status != status.None) return;
-
         //クリックしていないと返す
         if (!Input.GetMouseButton(0)) return;
 
@@ -73,6 +74,7 @@ public class GrabManager : MonoBehaviour
 
         if (Input.GetMouseButton(0)) return;
 
+        if (_status == status.None) return;
 
         //マウスの位置にrayを飛ばす
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -83,6 +85,8 @@ public class GrabManager : MonoBehaviour
 
 
         }
+
+
         switch (_status)
         {
             case status.Card:
@@ -123,7 +127,6 @@ public class GrabManager : MonoBehaviour
             case status.Item:
                 break;
         }
-
 
     }
 
