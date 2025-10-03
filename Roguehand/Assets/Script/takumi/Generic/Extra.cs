@@ -10,10 +10,10 @@ public static class Extra
     /// <summary>
     /// 拡張関数
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="list"></param>
-    /// <param name="lostID"></param>
-    /// <param name="nextID"></param>
+    /// <typeparam name="T"><リストの一要素/typeparam>
+    /// <param name="list"><リストの本体このリスト自体に変更を入れるわけではない/param>
+    /// <param name="lostID"><移動元の要素番号/param>
+    /// <param name="nextID"><移動先の要素番号/param>
     public static List<T> ChengeOrder<T>(List<T> list,int lostID,int nextID) 
     {
         List<T> dummyList= new List<T>();   

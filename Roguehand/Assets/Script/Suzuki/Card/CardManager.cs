@@ -109,4 +109,7 @@ public class CardManager : MonoBehaviour
 
     public void SetHand(List<Card.Trump> _hand) { hand = _hand; }
     public List<Card.Trump> GetHand() { return hand;}
+
+    //public void 
+
 }
