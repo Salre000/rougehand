@@ -68,6 +68,11 @@ public class JokerObject : MonoBehaviour
     private float AddNum = 0;
 
     /// <summary>
+    /// このオブジェクトを破壊するかどうかのフラグ
+    /// </summary>
+    private bool _isEnd=false;
+
+    /// <summary>
     /// ジョーカーの生成時に動く初期化処理
     /// </summary>
     /// <param name="jokerBase"></param>
@@ -178,6 +183,9 @@ public class JokerObject : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     public bool GetAction() {return AddNum !=0;}
+
+    public void THEEnd() { _isEnd = true;}
+    public bool IsEnd() { return _isEnd;}
 
     private void SetAction()
     {

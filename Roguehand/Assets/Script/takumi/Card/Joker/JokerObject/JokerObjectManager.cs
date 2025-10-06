@@ -223,14 +223,14 @@ public class JokerObjectManager : MonoBehaviour
     {
         Debug.Log("ジョーカーの破壊"+ID);
 
-        //オブジェクトの削除時のアニメーション
-        BreakUtility.StartBreak(_jokerObjects[ID].gameObject);
+        //ザ・エンドってね
+        _jokerObjects[ID].THEEnd();
 
-        GameObject destroy = _jokerObjects[ID].gameObject;
 
         _jokerObjects.RemoveAt(ID);
 
-        Destroy(destroy);
+
+
 
 
     }
