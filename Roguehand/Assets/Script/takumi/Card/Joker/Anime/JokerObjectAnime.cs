@@ -7,6 +7,7 @@ public class JokerObjectAnime : MonoBehaviour
     private Animator animator;
     private JokerObject jokerObject;
 
+    private bool isFlag = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,9 +17,10 @@ public class JokerObjectAnime : MonoBehaviour
 
     private void Update()
     {
-        if (!jokerObject.IsEnd()) return;
+        if (!jokerObject.IsEnd()|| isFlag) return;
 
-
+        isFlag = true;
+        animator.SetTrigger("out");
 
     }
 
