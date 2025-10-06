@@ -113,9 +113,8 @@ public class CardManager : MonoBehaviour
 
         this.hand = hand;
 
+        CardObjectUtility.StopCardObject(ID);
         CardObjectUtility.ChengeStandby(ID);
-
-        Debug.Log("SSS");
 
     }
 

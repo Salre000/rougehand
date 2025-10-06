@@ -124,6 +124,8 @@ public class CardObject : MonoBehaviour
     public float GetMoveTime() { return _moveTime; }
     public float GetMoveTimeRata() { return 1f - (_moveTime / MOVE_TIME); }
 
+    public void StopMove() {  _moveTime = 0f; }
+
     public Vector3 GetBeforePosition() { return _beforePosition; }
     public Vector3 GetBeforeAngle() { return _beforeAngle; }
 

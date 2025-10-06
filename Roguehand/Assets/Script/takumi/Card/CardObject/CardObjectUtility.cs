@@ -22,4 +22,6 @@ public static class CardObjectUtility
 
     public static void ChengeOrder(int lostID,int nextID) { CardObjectManager.ChengeOrder(lostID, nextID); }
 
+    public static void StopCardObject(int ID) { CardObjectManager.StopMoveCardObject(ID); }
+
 }

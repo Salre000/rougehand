@@ -293,6 +293,12 @@ public class CardObjectManager : MonoBehaviour
     }
 
     /// <summary>
+    /// カードの移動時間をゼロにする
+    /// </summary>
+    /// <param name="ID"></param>
+    public void StopMoveCardObject(int ID) { _cardObjectHands[ID].StopMove();}
+
+    /// <summary>
     /// つまんでいるカードの移動をする関数
     /// </summary>
     private void MovingCard()
