@@ -276,6 +276,8 @@ public class CreateJoker : EditorWindow
                 builder.Append("public override void UpData(){");
                 builder.AppendFormat("if(JokerUtility.GetTarget()!=JokerActionUseEnum.JokerActionTarget.{0})return;", target.ToString());
                 builder.AppendLine();
+                builder.AppendFormat("        JokerObjectUtility.CardAddAction(JokerUtility.GetIndex(),{0});", float1.ToString());
+                builder.AppendLine();
 
                 builder.AppendFormat("_magnification+={0};", float1.ToString());
                 builder.Append("}");

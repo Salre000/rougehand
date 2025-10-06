@@ -31,6 +31,11 @@ public class JokerObjectManager : MonoBehaviour
     private JokerStatus _status = JokerStatus.wait;
 
     /// <summary>
+    /// ひとつ前の状態
+    /// </summary>
+    private JokerStatus _lostStatus = JokerStatus.wait;
+
+    /// <summary>
     /// ジョーカーの倍率などを描画する座標
     /// </summary>
     private Vector2 _numPos = Vector2.zero;
@@ -65,6 +70,7 @@ public class JokerObjectManager : MonoBehaviour
         //ジョーカーの処理が終わったかどうか
         if (_status != JokerStatus.end) return;
         TrunEnd();
+        _lostStatus = _status;
         _status = JokerStatus.wait;
 
     }
@@ -167,7 +173,8 @@ public class JokerObjectManager : MonoBehaviour
         count++;
 
         //次のジョーカーが存在しないとき
-        if (_jokerObjects.Count <= count) { _status = JokerStatus.end; return; }
+        
+        if (_jokerObjects.Count <= count) { _lostStatus = _status; _status = JokerStatus.end; return; }
 
         //ジョーカーをプレイ状態に変更する
         _jokerObjects[count].SetStatus(JokerStatus.play);
@@ -185,6 +192,7 @@ public class JokerObjectManager : MonoBehaviour
 
         //最初のジョーカーをプレイ状態に変更する
         _jokerObjects[0].SetStatus(JokerStatus.play);
+        _lostStatus = _status;
         _status = JokerStatus.play;
 
     }
@@ -213,6 +221,8 @@ public class JokerObjectManager : MonoBehaviour
     /// <param name="ID"></param>
     public void RemoveJoker(int ID)
     {
+        Debug.Log("ジョーカーの破壊"+ID);
+
         //オブジェクトの削除時のアニメーション
         BreakUtility.StartBreak(_jokerObjects[ID].gameObject);
 
@@ -255,6 +265,7 @@ public class JokerObjectManager : MonoBehaviour
 
     public void CardAddPlay(int ID, int AddNum)
     {
+        _lostStatus = _status;
         _status = JokerStatus.action;
 
         _jokerObjects[ID].CardAddPlay(AddNum);
@@ -289,7 +300,7 @@ public class JokerObjectManager : MonoBehaviour
         count++;
 
         //次のジョーカーが存在しないとき
-        if (_jokerObjects.Count <= count) { _status = JokerStatus.wait; return; }
+        if (_jokerObjects.Count <= count) { _status = _lostStatus; return; }
 
 
         for(int i = count; i < _jokerObjects.Count; i++) 
@@ -303,9 +314,8 @@ public class JokerObjectManager : MonoBehaviour
             return;
 
         }
-
         //ひとつもないとき
-        _status = JokerStatus.wait; return;
+        _status = _lostStatus; return;
     }
 
 

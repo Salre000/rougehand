@@ -21,7 +21,7 @@ public static class JokerObjectUtility
 
     public static void ChengeOrder(int lostID,int nextID) {instance.ChengeOrder(lostID,nextID);}
 
-    public static void CardAddPlay(int ID,int AddNum) { instance.CardAddPlay(ID, AddNum);}
+    public static void CardAddAction(int ID,int AddNum) { instance.CardAddPlay(ID, AddNum);}
 
     public static void SetNumPos(Vector2 vector) { instance.SetNumPos(vector); }
     public static Vector2 GetNumPos() {return instance.GetNumPos(); }
