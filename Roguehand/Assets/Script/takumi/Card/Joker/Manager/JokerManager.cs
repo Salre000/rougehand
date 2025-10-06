@@ -15,7 +15,10 @@ public class JokerManager : MonoBehaviour
     /// </summary>
     private JokerActionUseEnum.JokerActionTarget _target;
 
-
+    /// <summary>
+    /// 現在のループ中のインデックス番号
+    /// </summary>
+    private int useIndex=-1;
 
     public void Awake()
     {
@@ -24,8 +27,15 @@ public class JokerManager : MonoBehaviour
 
     private void Update()
     {
+        JokerUpData();
     }
 
+    /// <summary>
+    /// アップデートの後ろにつくアップデート
+    /// </summary>
+    private void LateUpdate()
+    {
+    }
 
     /// <summary>
     /// ジョーカーを破棄する関数
@@ -47,6 +57,8 @@ public class JokerManager : MonoBehaviour
 
         return flag;
     }
+
+
 
     /// <summary>
     /// ラウンドの開始時のジョーカーの処理
@@ -112,5 +124,39 @@ public class JokerManager : MonoBehaviour
     {
 
     }
+
+    /// <summary>
+    /// 条件が満たされた瞬間にターゲットの中に代入する関数
+    /// </summary>
+    public void SetTarget(JokerActionUseEnum.JokerActionTarget target) 
+    {
+
+        _target=target;
+
+        //JokerObjectUtility.SetNumPos();
+
+    }
+
+    public int GetIndex() {  return useIndex; }
+
+    /// <summary>
+    /// ジョーカーのアップデート処理を回す関数
+    /// </summary>
+    private void JokerUpData() 
+    {
+
+        for(int i=0;i< _jokers.Count; i++) 
+        {
+            useIndex = i;
+            _jokers[i].UpData();
+        }
+
+        //ターゲットの初期化
+        _target = JokerActionUseEnum.JokerActionTarget.None;
+
+        useIndex = -1;
+    }
+
+
 
 }

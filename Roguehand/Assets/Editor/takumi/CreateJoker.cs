@@ -189,7 +189,15 @@ public class CreateJoker : EditorWindow
         builder.Append("}");
         builder.AppendLine();
 
+        if (addType == JokerActionUseEnum.AddType.Multiplication)
+        {
 
+            builder.Append("    public override bool GetAddType() {return false; ");
+            builder.Append("}");
+            builder.AppendLine();
+
+
+        }
 
         switch (jokerEnum)
         {

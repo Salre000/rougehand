@@ -13,10 +13,14 @@ public class JokerDebug : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J)) JokerUtility.Addjoker(2);
+        if (Input.GetKeyDown(KeyCode.J)) JokerUtility.Addjoker(0);
         if (Input.GetKeyDown(KeyCode.S)) JokerUtility.RoundStartJoker();
         if (Input.GetKeyDown(KeyCode.M)) JokerUtility.JokerPlayStart();
         if (Input.GetKeyDown(KeyCode.C)) JokerUtility.ChengeOrder(0,1);
+        if (Input.GetKeyDown(KeyCode.Alpha1)) JokerObjectUtility.CardAddPlay(1,2);
+        if (Input.GetKeyDown(KeyCode.Alpha0)) JokerUtility.SetTraget(JokerActionUseEnum.JokerActionTarget.item);
+
+
 
     }
 }

@@ -46,4 +46,10 @@ public class JokerBase
     /// <returns></returns>
     public virtual JokerActionUseEnum.JokerRarity GetRarity() { return JokerActionUseEnum.JokerRarity.Common; }
 
+    /// <summary>
+    /// ジョーカーの倍率の上昇方法が加算なのか乗算なのかを表す関数
+    /// </summary>
+    /// <returns></returns>
+    public virtual bool GetAddType() {  return true; }
+
 }

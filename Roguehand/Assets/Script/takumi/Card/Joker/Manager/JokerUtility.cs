@@ -22,4 +22,8 @@ public static class JokerUtility
 
     public static void ChengeOrder(int lostID,int nextID) { instance.ChengeOrder(lostID, nextID); }
 
+    public static int GetIndex() {  return instance.GetIndex(); }   
+
+    public static void SetTraget(JokerActionUseEnum.JokerActionTarget target) { instance.SetTarget(target); }
+
 }

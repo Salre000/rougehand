@@ -38,6 +38,11 @@ public class JokerObject : MonoBehaviour
     private System.Action _jokerPlayAction;
 
     /// <summary>
+    /// ジョーカープレイ時の中身
+    /// </summary>
+    private System.Action _jokerActionProcess;
+
+    /// <summary>
     /// ジョーカーの経過時間
     /// </summary>
     private float _time;
@@ -58,6 +63,11 @@ public class JokerObject : MonoBehaviour
     private readonly float EPSILON = 0.1f;
 
     /// <summary>
+    /// ゲーム中に上昇する倍率の値
+    /// </summary>
+    private float AddNum = 0;
+
+    /// <summary>
     /// ジョーカーの生成時に動く初期化処理
     /// </summary>
     /// <param name="jokerBase"></param>
@@ -65,7 +75,7 @@ public class JokerObject : MonoBehaviour
     {
         _base = jokerBase;
         _status = JokerStatus.wait;
-
+        _jokerActionProcess=NormalJokerActionProcess;
         SetAction();
     }
 
@@ -80,9 +90,18 @@ public class JokerObject : MonoBehaviour
         //ジョーカーが何もできない時
         if (_base.Trun() < 1) { _status = JokerStatus.wait; JokerObjectUtility.NestJokerPlay(this); return; }
 
-
         _jokerPlayAction();
     }
+
+    public void Action() 
+    {
+        if (_status != JokerStatus.action) return;
+
+        _jokerPlayAction();
+
+
+    }
+
 
     /// <summary>
     /// このジョーカーのオブジェクトをID依存の位置に移動させる
@@ -91,6 +110,8 @@ public class JokerObject : MonoBehaviour
     {
         //掴む移動中は特殊な移動に変更
         if (_isGrab) { GrabMove(); return; }
+
+        if (_status != JokerStatus.wait) return;
 
         if (Vector3.Distance(transform.position, nextpos) < EPSILON) { _time = 0; _lostpos = nextpos; _lostAngle = Vector3.zero; return; }
 
@@ -140,6 +161,24 @@ public class JokerObject : MonoBehaviour
         _lostpos=transform.position;
     }
 
+    /// <summary>
+    /// ジョーカーが自分のターン以外に起こす挙動の開始時
+    /// </summary>
+    public void CardAddPlay(float AddNum) 
+    {
+        this.AddNum = AddNum;
+        _jokerActionProcess = NeverAddJokerActionProcess;
+
+        if (JokerObjectUtility.GetActionCount()>=2) return;
+        _status = JokerStatus.action;
+    }
+
+    /// <summary>
+    /// アクションの待機が存在するのかどうか
+    /// </summary>
+    /// <returns></returns>
+    public bool GetAction() {return AddNum !=0;}
+
     private void SetAction()
     {
 
@@ -161,11 +200,25 @@ public class JokerObject : MonoBehaviour
     /// </summary>
     private void JokerCardAction()
     {
+
+        if(!JokerAction())return;
+
+        _jokerActionProcess();
+
+
+    }
+
+    /// <summary>
+    /// ジョーカーの動き
+    /// </summary>
+    private bool JokerAction() 
+    {
+
         _time += Time.deltaTime * GameConfig.GetGameSpeed() * 10;
 
         transform.eulerAngles = Vector3.Lerp(_lostAngle, new Vector3(0, 0, 45 * reta), _time);
 
-        if (_time < 1) return;
+        if (_time < 1) return false;
 
         _time = 0;
         if (reta == 0) reta = -1;
@@ -173,11 +226,22 @@ public class JokerObject : MonoBehaviour
         _lostAngle = transform.eulerAngles;
 
         //一ターンに一度に制限
-        if (!_isPlay || reta != -1) return;
+        if (!_isPlay || reta != -1) return false;
+
+        _status = JokerStatus.wait;
+
+
+        return true;
+
+    }
+
+
+    private void NormalJokerActionProcess() 
+    {
+
         reta = 1;
         _isPlay = false;
 
-        _status = JokerStatus.wait;
         JokerObjectUtility.NestJokerPlay(this);
 
         //プレイの瞬間のアクション
@@ -185,6 +249,23 @@ public class JokerObject : MonoBehaviour
         //倍率に追加
         JokerUtility.AddMagnification(_base.Trun());
         Debug.Log("倍率に追加");
+
+
+
+    }
+    private void NeverAddJokerActionProcess() 
+    {
+
+        reta = 1;
+        AddNum = 0;
+
+        _status = JokerStatus.wait;
+
+        _jokerActionProcess = NormalJokerActionProcess;
+
+        JokerObjectUtility.NextAction(this);
+
+        //カードの倍率の上昇したっていうアニメーションを入れる
 
 
     }
@@ -197,12 +278,6 @@ public class JokerObject : MonoBehaviour
         //マウスポイント依存で座標を決定する
         Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z);
         transform.position = Camera.main.ScreenToWorldPoint(mousePos);
-    
-
-
-
-
-
     
     }
 
