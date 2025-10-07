@@ -162,7 +162,7 @@ public class PlayManager : MonoBehaviour
     /// <param name="cards">チェックしたいカードリスト</param>
     /// <param name="jastSuitCount">何枚揃っていれば良いか</param>
     /// <returns>どこの要素数に揃っているスートがあるかをLsit　intで返します。</returns>
-    private List<int> JastSuitCheck(List<Card.Trump> cards, int jastSuitCount)
+    private List<int> JastSuitCheck(List<Card.Trump> cards, int jastSuitCount=5)
     {
         int jastIndex = 0;
         List<int> jastNum = new List<int>();

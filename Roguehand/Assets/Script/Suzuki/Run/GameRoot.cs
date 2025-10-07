@@ -20,6 +20,7 @@ public class GameRoot:MonoBehaviour
     }
     void RoundClearCheck()
     {
+        return;
         int left=0, right=0;
         left = IntTryParse(GetLowestScoreText());
         right = IntTryParse(GetRoundScoreText());

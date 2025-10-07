@@ -18,15 +18,11 @@ public class DebugComand : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ScoreCountUP();
-    }
-
-    void ScoreCountUP()
-    {
-        if(!Input.GetKeyDown(KeyCode.Alpha1)) return;
-        _score += 100;
-        SetRoundScereText(_score.ToString());
-        Debug.Log(_score.ToString());
+        ScoreUp();
+        //
+        MagUp();
+        RoundResult();
+        ScoreReset();
     }
 
     void OnePear()
@@ -55,4 +51,34 @@ public class DebugComand : MonoBehaviour
         disCount--;
         SetDiscardText(disCount.ToString());
     }
+
+    #region ÉXÉRÉAån
+    private void ScoreUp()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ScoreManager.instance.BasicPlus(125);
+        }
+    }
+
+    private void MagUp()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ScoreManager.instance.MagnificationPlus(12.2f);
+        }
+    }
+    private void RoundResult()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            ScoreManager.instance.RoundScoreResult();
+    }
+    private void ScoreReset()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ScoreManager.instance.ScoreReset();
+        }
+    }
+    #endregion
 }
