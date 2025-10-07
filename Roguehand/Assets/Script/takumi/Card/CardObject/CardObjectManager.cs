@@ -272,6 +272,7 @@ public class CardObjectManager : MonoBehaviour
 
     public void GrabChenge(int ID,bool flag)
     {
+
         _cardObjectHands[ID].SetGrab(flag);
         _isGrab = flag;
         _isGrabID = ID;

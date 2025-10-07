@@ -31,13 +31,6 @@ public class JokerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// アップデートの後ろにつくアップデート
-    /// </summary>
-    private void LateUpdate()
-    {
-    }
-
-    /// <summary>
     /// ジョーカーを破棄する関数
     /// </summary>
     /// <param name="joker"></param>
@@ -138,6 +131,25 @@ public class JokerManager : MonoBehaviour
     }
 
     public int GetIndex() {  return useIndex; }
+
+    public void GrabChange(int id,bool flag) 
+    {
+        JokerObjectUtility.GrabChange(id, flag);
+
+    }
+
+    public void SetSale(int ID) 
+    {
+        GameObject joker = JokerObjectUtility.GetIDObject(ID);
+
+
+
+        SaleUtility.SetSale(_jokers[ID], joker, _jokers[ID].GetSaleValue());
+
+
+
+    }
+
 
     /// <summary>
     /// ジョーカーのアップデート処理を回す関数

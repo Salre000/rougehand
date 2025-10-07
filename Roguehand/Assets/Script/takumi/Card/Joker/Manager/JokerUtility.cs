@@ -26,4 +26,8 @@ public static class JokerUtility
 
     public static void SetTraget(JokerActionUseEnum.JokerActionTarget target) { instance.SetTarget(target); }
 
+    public static void GrabChange(int ID,bool flag) { instance.GrabChange(ID,flag); }
+
+    public static void SetSale(int ID) { instance.SetSale(ID);}
+
 }
