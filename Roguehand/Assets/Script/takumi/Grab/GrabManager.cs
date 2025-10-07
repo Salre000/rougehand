@@ -15,7 +15,7 @@ public class GrabManager : MonoBehaviour
     /// <summary>
     /// 掴んでいるオブジェクトのID
     /// </summary>
-    [SerializeField]private int _grabID = -1;
+    [SerializeField] private int _grabID = -1;
 
     private enum status
     {
@@ -108,6 +108,7 @@ public class GrabManager : MonoBehaviour
                 JokerObjectUtility.GrabChange(_grabID, false);
                 break;
             case status.Item:
+                ItemUtility.GrabChange(_grabID, false);
                 break;
         }
 
@@ -139,6 +140,7 @@ public class GrabManager : MonoBehaviour
                 JokerObjectUtility.GrabChange(_grabID, true);
                 break;
             case status.Item:
+                ItemUtility.GrabChange(_grabID, true);
                 break;
         }
 
@@ -156,11 +158,10 @@ public class GrabManager : MonoBehaviour
 
         if (jokerObject != null) _status = status.Joker;
 
-        //同じようにアイテムの可能性を判別
-        //////////////////////////////////////////////
-        ///
+        ItemObject itemObject = gameObject.GetComponent<ItemObject>();
 
-        /////////////////////////////////////////////
+        if (itemObject != null) _status = status.Item;
+
 
         //掴んだオブジェクトのIDを取得
         switch (_status)
@@ -172,6 +173,7 @@ public class GrabManager : MonoBehaviour
                 _grabID = JokerObjectUtility.GetJokerIndex(jokerObject);
                 break;
             case status.Item:
+                _grabID = ItemUtility.GetItemIndex(itemObject);
                 break;
         }
 
