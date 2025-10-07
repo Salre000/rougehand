@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 /// <summary>
@@ -53,6 +54,33 @@ public class ItemManager : MonoBehaviour
     {
         _itemList.Add(ALLItem.GetItem((ALLItem.ALLItemEnum)ID));
         _itemObjectList.Add(Instantiate(_prefab, transform).AddComponent<ItemObject>());
+    }
+    public void Remove(ItemBase itemBase) 
+    {
+        //エラーをはくことがないようにsaleの描画を停止する
+        SaleUtility.Claer();
+
+        bool flag = _itemList.Contains(itemBase);
+
+        int index = _itemList.FindIndex(item => item == itemBase);
+
+        _itemList.Remove(itemBase);
+
+        // オブジェクトを配列から消去
+        _itemObjectList.RemoveAt(index);
+
+    }
+    public void Remove(int itemBase) 
+    {
+        //エラーをはくことがないようにsaleの描画を停止する
+        SaleUtility.Claer();
+
+
+        _itemList.RemoveAt(itemBase);
+
+        // オブジェクトを配列から消去
+        _itemObjectList.RemoveAt(itemBase);
+
     }
 
 

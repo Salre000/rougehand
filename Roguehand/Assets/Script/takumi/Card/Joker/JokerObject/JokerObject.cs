@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Unity.VisualScripting;
 using UnityEngine;
 using static JokerObjectManager;
 public class JokerObject : MonoBehaviour
@@ -82,6 +83,9 @@ public class JokerObject : MonoBehaviour
         _status = JokerStatus.wait;
         _jokerActionProcess=NormalJokerActionProcess;
         SetAction();
+
+        transform.GetChild(0).AddComponent<JokerObjectAnime>();
+
     }
 
     /// <summary>

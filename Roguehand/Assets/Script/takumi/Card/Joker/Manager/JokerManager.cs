@@ -37,6 +37,8 @@ public class JokerManager : MonoBehaviour
     /// <returns></returns>
     public bool Remove(JokerBase joker)
     {
+        //エラーをはくことがないようにsaleの描画を停止する
+        SaleUtility.Claer();
 
         bool flag = _jokers.Contains(joker);
 
@@ -49,6 +51,21 @@ public class JokerManager : MonoBehaviour
         JokerObjectUtility.RemoveJoker(index);
 
         return flag;
+    }
+    public bool Remove(int ID)
+    {
+        //エラーをはくことがないようにsaleの描画を停止する
+        SaleUtility.Claer();
+
+        int index = ID;
+
+        _jokers.RemoveAt(index);
+
+
+        //ジョーカーのオブジェクトの削除処理
+        JokerObjectUtility.RemoveJoker(index);
+
+        return true;
     }
 
 
@@ -107,6 +124,7 @@ public class JokerManager : MonoBehaviour
     /// <param name="magnification"></param>
     public void JokerAddMagnification(float magnification)
     {
+        ScoreManager.instance.MagnificationPlus(magnification);
 
     }
     /// <summary>
@@ -116,6 +134,7 @@ public class JokerManager : MonoBehaviour
     public void JokerAddBaseValue(float baseValue)
     {
 
+        ScoreManager.instance.BasicPlus(baseValue);
     }
 
     /// <summary>

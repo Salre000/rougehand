@@ -11,20 +11,33 @@ public class JokerObjectAnime : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator=GetComponent<Animator>();
-        jokerObject=transform.parent.GetComponent<JokerObject>();
+        animator = GetComponent<Animator>();
+        jokerObject = transform.parent.GetComponent<JokerObject>();
     }
 
     private void Update()
     {
-        if (!jokerObject.IsEnd()|| isFlag) return;
+        if (!jokerObject.IsEnd() || isFlag) return;
+
+        //アニメーションの必要のない物の場合は直ぐに削除
+        if (animator == null)
+        {
+            BreakUtility.StartBreak(gameObject);
+            Destroy(transform.parent.gameObject);
+
+            Destroy(GetComponent<JokerObjectAnime>());
+
+            isFlag = true;
+            return;
+
+        }
 
         isFlag = true;
         animator.SetTrigger("out");
 
     }
 
-    public void End() 
+    public void End()
     {
         //オブジェクトの削除時のアニメーション
         BreakUtility.StartBreak(transform.parent.gameObject);

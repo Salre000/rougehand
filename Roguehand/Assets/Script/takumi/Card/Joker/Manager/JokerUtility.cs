@@ -8,6 +8,7 @@ public static class JokerUtility
     public static JokerManager instance { private get; set; }
 
     public static void Remove(JokerBase joker) { instance.Remove(joker); }
+    public static void Remove(int ID) { instance.Remove(ID); }
 
     public static JokerActionUseEnum.JokerActionTarget GetTarget() { return instance.GetTarget(); }
 

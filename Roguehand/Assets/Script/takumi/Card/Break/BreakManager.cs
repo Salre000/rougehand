@@ -20,7 +20,12 @@ public class BreakManager : MonoBehaviour
     public void Awake()
     {
         BreakUtility.instance = this;
-        for(int i=0;i<10;i++)_gameObjects.Add(Instantiate(_breakCardPrefab,transform));
+        for (int i = 0; i < 10; i++)
+        { 
+            _gameObjects.Add(Instantiate(_breakCardPrefab, transform));
+
+            _gameObjects[_gameObjects.Count-1].SetActive(false);
+        }
     }
 
 

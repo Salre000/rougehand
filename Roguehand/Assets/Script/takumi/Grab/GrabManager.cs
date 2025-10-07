@@ -17,7 +17,7 @@ public class GrabManager : MonoBehaviour
     /// </summary>
     [SerializeField] private int _grabID = -1;
 
-    private enum status
+    public enum status
     {
         None,
         //‚±‚±‚©‚ç‰º‚Í‚Â‚©‚Ü‚ê‚Ä‚¢‚é‘ÎÛ

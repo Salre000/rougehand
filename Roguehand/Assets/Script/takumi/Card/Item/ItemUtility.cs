@@ -18,4 +18,7 @@ public static class ItemUtility
 
     public static void SetSale(int ID) {  instance.SetSale(ID); }
 
+    public static void Remove(int ID) { instance.Remove(ID); }
+    public static void Remove(ItemBase itemBase) {  instance.Remove(itemBase); }
+
 }
