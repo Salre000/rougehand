@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -66,8 +67,16 @@ public class ItemManager : MonoBehaviour
 
         _itemList.Remove(itemBase);
 
+        //　オブジェクトをキャッシュ
+        GameObject gameObject = _itemObjectList[index].gameObject;
+
         // オブジェクトを配列から消去
         _itemObjectList.RemoveAt(index);
+
+        BreakUtility.StartBreak(gameObject);
+        Destroy(gameObject);
+
+        
 
     }
     public void Remove(int itemBase) 
@@ -78,8 +87,14 @@ public class ItemManager : MonoBehaviour
 
         _itemList.RemoveAt(itemBase);
 
+        //　オブジェクトをキャッシュ
+        GameObject gameObject = _itemObjectList[itemBase].gameObject;
+
         // オブジェクトを配列から消去
         _itemObjectList.RemoveAt(itemBase);
+
+        BreakUtility.StartBreak(gameObject);
+        Destroy(gameObject);
 
     }
 
