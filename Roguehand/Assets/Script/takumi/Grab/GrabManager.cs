@@ -62,7 +62,6 @@ public class GrabManager : MonoBehaviour
         if (_status != status.None) return;
         //クリックしていないと返す
         if (!Input.GetMouseButton(0)) return;
-        SaleUtility.Claer();
         //マウスの位置にrayを飛ばす
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -84,7 +83,7 @@ public class GrabManager : MonoBehaviour
 
         if (_status == status.None) return;
 
-        //SaleUtility.Claer();
+        SaleUtility.Claer();
 
         //マウスの位置にrayを飛ばす
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

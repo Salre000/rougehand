@@ -10,7 +10,9 @@ public interface SaleInterface
     /// </summary>
     public void SaleShow(Vector3 pos,int saleValue)
     {
-        if (GUI.Button(new Rect(10, 10, 100, 50), "Click Me"))
+        Vector2 ButtonPos=Camera.main.WorldToScreenPoint(pos);
+
+        if (GUI.Button(new Rect(ButtonPos.x+50,Screen.height-ButtonPos.y-30, 100, 100), "Click Me"))
         {
             Debug.Log("Button Clicked!");
         }
