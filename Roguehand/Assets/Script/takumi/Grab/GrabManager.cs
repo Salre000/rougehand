@@ -62,7 +62,7 @@ public class GrabManager : MonoBehaviour
         if (_status != status.None) return;
         //クリックしていないと返す
         if (!Input.GetMouseButton(0)) return;
-
+        SaleUtility.Claer();
         //マウスの位置にrayを飛ばす
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -83,6 +83,8 @@ public class GrabManager : MonoBehaviour
         if (Input.GetMouseButton(0)) return;
 
         if (_status == status.None) return;
+
+        //SaleUtility.Claer();
 
         //マウスの位置にrayを飛ばす
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -112,11 +114,17 @@ public class GrabManager : MonoBehaviour
                 break;
         }
 
+
+        if (_status != status.Card&&_time<1) 
+        {
+            if(_status==status.Item)ItemUtility.SetSale(_grabID);
+            if(_status==status.Joker)JokerUtility.SetSale(_grabID);
+
+        }
         _time = 0;
-
         _status = status.None;
-        _grabID = -1;
 
+        _grabID = -1;
 
     }
     /// <summary>
@@ -125,11 +133,11 @@ public class GrabManager : MonoBehaviour
     /// <param name="gameObject"></param>
     private void GetObjectType(GameObject gameObject)
     {
-
+        
         SetGrabID(gameObject);
 
         //何かしらの可能性でIDを取得出来なかった時にリセット
-        if (_grabID == -1) _status = status.None;
+        if (_grabID == -1) { _status = status.None; }
 
         switch (_status)
         {
@@ -142,12 +150,14 @@ public class GrabManager : MonoBehaviour
             case status.Item:
                 ItemUtility.GrabChange(_grabID, true);
                 break;
+            case status.None:break;
         }
 
     }
 
     private void SetGrabID(GameObject gameObject)
     {
+        _time = 0;
         //カードの可能性を判別
         CardObject cardObject = gameObject.GetComponent<CardObject>();
 
@@ -176,6 +186,6 @@ public class GrabManager : MonoBehaviour
                 _grabID = ItemUtility.GetItemIndex(itemObject);
                 break;
         }
-
     }
+
 }

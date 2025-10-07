@@ -27,4 +27,6 @@ public static class JokerObjectUtility
     public static Vector2 GetNumPos() {return instance.GetNumPos(); }
 
     public static int GetActionCount() { return instance.ActionCount(); }
+
+    public static GameObject GetIDObject(int id) { return instance.GetIDObject(id); }
 }

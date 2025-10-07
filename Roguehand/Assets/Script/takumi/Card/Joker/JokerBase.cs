@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JokerBase
+public class JokerBase : SaleInterface
 {
     /// <summary>
     /// ジョーカーのオブジェクトの動き方
     /// </summary>
     protected int jokerObjecttype = 0;
+
+    protected int _saleValue = 0;
 
     /// <summary>
     /// ジョーカーのオブジェクトの動き方を返す関数
@@ -45,6 +47,12 @@ public class JokerBase
     /// </summary>
     /// <returns></returns>
     public virtual JokerActionUseEnum.JokerRarity GetRarity() { return JokerActionUseEnum.JokerRarity.Common; }
+
+    /// <summary>
+    /// 売却額を返す関数
+    /// </summary>
+    /// <returns></returns>
+    public int GetSaleValue() {  return _saleValue+(int)GetRarity(); }
 
     /// <summary>
     /// ジョーカーの倍率の上昇方法が加算なのか乗算なのかを表す関数

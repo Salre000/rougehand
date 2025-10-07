@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// アイテムの抽象クラス
 /// </summary>
-public abstract class ItemBase
+public abstract class ItemBase:SaleInterface
 {
 
 

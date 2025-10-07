@@ -16,4 +16,6 @@ public static class ItemUtility
 
     public static int GetItemIndex(ItemObject item) {  return instance.GetItemIndex(item);}
 
+    public static void SetSale(int ID) {  instance.SetSale(ID); }
+
 }

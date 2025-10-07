@@ -235,6 +235,8 @@ public class JokerObjectManager : MonoBehaviour
 
     }
 
+    public GameObject GetIDObject(int ID) { return _jokerObjects[ID].gameObject; }
+
     /// <summary>
     /// ジョーカーオブジェクトからIDを取得
     /// </summary>
