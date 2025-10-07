@@ -12,7 +12,7 @@ public interface SaleInterface
     {
         Vector2 ButtonPos=Camera.main.WorldToScreenPoint(pos);
 
-        if (GUI.Button(new Rect(ButtonPos.x+50,Screen.height-ButtonPos.y-30, 100, 100), "Click Me"))
+        if (GUI.Button(new Rect(ButtonPos.x+50,Screen.height-ButtonPos.y-30, 100, 100), "BAIKYAKU(TEST)"+ saleValue.ToString()))
         {
 
             action();
@@ -20,6 +20,7 @@ public interface SaleInterface
         }
     }
 
+    //çwì¸éûÇÃï`âÊÇÇ∑ÇÈä÷êî
     public void BuyShow(Vector3 pos, int saleValue) 
     {
         if (GUI.Button(new Rect(10, 10, 100, 50), "Click Me"))
