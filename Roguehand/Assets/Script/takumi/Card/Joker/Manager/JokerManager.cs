@@ -37,8 +37,6 @@ public class JokerManager : MonoBehaviour
     /// <returns></returns>
     public bool Remove(JokerBase joker)
     {
-        //ƒGƒ‰[‚ğ‚Í‚­‚±‚Æ‚ª‚È‚¢‚æ‚¤‚Ésale‚Ì•`‰æ‚ğ’â~‚·‚é
-        SaleUtility.Claer();
 
         bool flag = _jokers.Contains(joker);
 
@@ -54,8 +52,6 @@ public class JokerManager : MonoBehaviour
     }
     public bool Remove(int ID)
     {
-        //ƒGƒ‰[‚ğ‚Í‚­‚±‚Æ‚ª‚È‚¢‚æ‚¤‚Ésale‚Ì•`‰æ‚ğ’â~‚·‚é
-        SaleUtility.Claer();
 
         int index = ID;
 

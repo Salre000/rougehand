@@ -13,21 +13,43 @@ public class SaleManager : MonoBehaviour
     /// <summary>
     /// 売買の対象のオブジェクト
     /// </summary>
-    private List<GameObject> _saleObject= new List<GameObject>();   
+    private List<GameObject> _saleObject = new List<GameObject>();
 
     /// <summary>
     /// 売買の値段
     /// </summary>
-    private List<int> _saleValue=new List<int>();
+    private List<int> _saleValue = new List<int>();
+
+    /// <summary>
+    /// 購入なのか売却なのか
+    /// </summary>
+    private List<bool> _saletype = new List<bool>();
+
+    GUIStyle style;
 
     public void Awake()
     {
         SaleUtility.instance = this;
 
+
+
+
+
     }
+
+
 
     public void OnGUI()
     {
+
+        if (style == null)
+        {
+            style = new GUIStyle(GUI.skin.button);
+
+            style.richText = true;
+
+        }
+
         for (int i = 0; i < _saleInterfaces.Count; i++)
         {
             if (_saleInterfaces[i] == null) continue;
@@ -35,17 +57,47 @@ public class SaleManager : MonoBehaviour
             //このキャッシュは必須
             //この時点でnumの中身を決定する必要あり
             int num = i;
+            GameObject cashObject = _saleObject[num];
 
-            Debug.Log("描画する");
-            _saleInterfaces[i].SaleShow(_saleObject[i].transform.position, _saleValue[i],()=> 
+
+            if (_saletype[i])
+            {
+                _saleInterfaces[i].SaleShow(_saleObject[i].transform.position, _saleValue[i], () =>
+                    {
+                        if (_saleObject.Count < num || _saleObject[num] == null) return;
+
+                        int index = _saleObject.IndexOf(cashObject);
+                        GetType(_saleObject[num]);
+                        Remove(index);
+
+
+
+                    });
+
+            }
+            else
+            {
+                _saleInterfaces[i].BuyShow(_saleObject[i].transform.position, _saleValue[i], () =>
                 {
                     if (_saleObject.Count < num || _saleObject[num] == null) return;
+                    int index = _saleObject.IndexOf(cashObject);
 
-                    GetType(_saleObject[num]);
+                    //購入できない０はダミーで置いている
+                    if (0 < _saleValue[num]) return;
+
+
+
+                    //購入時に_saleValue[num]の分だけ現金をマイナスする
+
+                    //購入処理を書く
+
+
+                    Remove(index);
+
                 });
 
+            }
         }
-
     }
 
 
@@ -55,17 +107,20 @@ public class SaleManager : MonoBehaviour
     /// <param name="saleInterface"></param>
     /// <param name="saleObject"></param>
     /// <param name="saleValue"></param>
-    public void SetSale(SaleInterface saleInterface,GameObject saleObject,int saleValue) 
+    public void SetSale(SaleInterface saleInterface, GameObject saleObject, int saleValue, bool type)
     {
         _saleInterfaces.Add(saleInterface);
         _saleObject.Add(saleObject);
         _saleValue.Add(saleValue);
+        _saletype.Add(type);
 
     }
+
+    public GUIStyle GetStyle() { return style; }
     /// <summary>
     /// リストの全消去
     /// </summary>
-    public void Clear() { _saleInterfaces.Clear(); _saleObject.Clear();_saleValue.Clear(); }
+    public void Clear() { _saleInterfaces.Clear(); _saleObject.Clear(); _saleValue.Clear();_saletype.Clear(); }
 
 
 
@@ -74,7 +129,7 @@ public class SaleManager : MonoBehaviour
     /// </summary>
     /// <param name="gameObject"></param>
     /// <returns></returns>
-    private GrabManager.status GetType(GameObject gameObject) 
+    private GrabManager.status GetType(GameObject gameObject)
     {
         GrabManager.status _status = GrabManager.status.None;
 
@@ -117,19 +172,21 @@ public class SaleManager : MonoBehaviour
 
     }
 
-    private void TypeSale(GrabManager.status status,GameObject gameObject) 
+   /// <summary>
+   /// 購入した時の処理
+   /// </summary>
+   /// <param name="gameObject"></param>
+    private void Buy(GameObject gameObject)
     {
 
-        switch (status)
-        {
-            case GrabManager.status.Joker:
+    }
 
-                break;
-            case GrabManager.status.Item:
-
-                break;
-        }
-
+    private void Remove(int index)
+    {
+        _saleInterfaces.RemoveAt(index);
+        _saleObject.RemoveAt(index);
+        _saleValue.RemoveAt(index);
+        _saletype.RemoveAt(index);
 
     }
 

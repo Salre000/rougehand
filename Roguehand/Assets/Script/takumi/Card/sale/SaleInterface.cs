@@ -11,8 +11,8 @@ public interface SaleInterface
     public void SaleShow(Vector3 pos,int saleValue,System.Action action)
     {
         Vector2 ButtonPos=Camera.main.WorldToScreenPoint(pos);
-
-        if (GUI.Button(new Rect(ButtonPos.x+50,Screen.height-ButtonPos.y-30, 100, 100), "BAIKYAKU(TEST)"+ saleValue.ToString()))
+        if (GUI.Button(new Rect(ButtonPos.x+75,Screen.height-ButtonPos.y-30, 70, 90), 
+            ("<size=25><color=#ffffff>îÑãp\n$" + saleValue.ToString()+ "</color></size>"), SaleUtility.GetStyle()))
         {
 
             action();
@@ -21,7 +21,7 @@ public interface SaleInterface
     }
 
     //çwì¸éûÇÃï`âÊÇÇ∑ÇÈä÷êî
-    public void BuyShow(Vector3 pos, int saleValue) 
+    public void BuyShow(Vector3 pos, int saleValue, System.Action action) 
     {
         if (GUI.Button(new Rect(10, 10, 100, 50), "Click Me"))
         {

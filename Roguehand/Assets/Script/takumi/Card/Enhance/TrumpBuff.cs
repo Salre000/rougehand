@@ -14,7 +14,22 @@ public class TrumpBuff
         //対応したバフを記述
         switch (deckBuff)
         {
-            case Card.deckBuff.None:
+            case Card.deckBuff.Bonus:
+                ScoreManager.instance.BasicPlus(30);
+                break;
+            case Card.deckBuff.Magnification:
+                ScoreManager.instance.MagnificationPlus(10);
+                break;
+            case Card.deckBuff.Wild:
+                break;
+            case Card.deckBuff.Glass:
+
+                //　十分の一で発動
+                if (Random.Range(0, 10) != 0) return;
+
+
+                break;
+            case Card.deckBuff.Lucky:
                 break;
         }
     }
@@ -28,8 +43,6 @@ public class TrumpBuff
         //対応したバフを記述
         switch (deckBuff)
         {
-            case Card.deckBuff.None:
-                break;
         }
     }
 
@@ -42,7 +55,8 @@ public class TrumpBuff
         //対応したバフを記述
         switch (deckBuff)
         {
-            case Card.deckBuff.None:
+            case Card.deckBuff.Steel:
+                //倍率に１．５倍
                 break;
         }
     }
@@ -56,7 +70,8 @@ public class TrumpBuff
         //対応したバフを記述
         switch (deckBuff)
         {
-            case Card.deckBuff.None:
+            case Card.deckBuff.Gold:
+                //固定値のお金を上昇
                 break;
         }
     }

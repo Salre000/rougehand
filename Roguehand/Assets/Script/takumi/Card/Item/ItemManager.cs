@@ -58,8 +58,6 @@ public class ItemManager : MonoBehaviour
     }
     public void Remove(ItemBase itemBase) 
     {
-        //ƒGƒ‰[‚ğ‚Í‚­‚±‚Æ‚ª‚È‚¢‚æ‚¤‚Ésale‚Ì•`‰æ‚ğ’â~‚·‚é
-        SaleUtility.Claer();
 
         bool flag = _itemList.Contains(itemBase);
 
@@ -81,9 +79,6 @@ public class ItemManager : MonoBehaviour
     }
     public void Remove(int itemBase) 
     {
-        //ƒGƒ‰[‚ğ‚Í‚­‚±‚Æ‚ª‚È‚¢‚æ‚¤‚Ésale‚Ì•`‰æ‚ğ’â~‚·‚é
-        SaleUtility.Claer();
-
 
         _itemList.RemoveAt(itemBase);
 
