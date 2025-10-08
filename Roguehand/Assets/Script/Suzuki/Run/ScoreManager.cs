@@ -71,13 +71,7 @@ public class ScoreManager : MonoBehaviour
     public void MagnificationPlus(float value)
     {
         _magnification += value;
-
-        Console.Clear();
-        Debug.Log("倍率");
-        Debug.Log("前 : "+ _magnification);
         _magnification = Rounding(_magnification,2f);
-        Debug.Log("後 : "+_magnification);
-
 
         builder.Clear();
         builder.Append(_magnification);
@@ -91,11 +85,8 @@ public class ScoreManager : MonoBehaviour
     public void RoundScoreResult()
     {
         _roundScore=_basicScore*_magnification;
-
-        Debug.Log("ラウンドスコア");
-        Debug.Log("前 : "+ _roundScore);
         _roundScore = Rounding(_roundScore,1f);
-        Debug.Log("後 : "+ _roundScore);
+
         builder.Clear();
         builder.AppendFormat("{0:#}", _roundScore.ToString("N0"));
         
