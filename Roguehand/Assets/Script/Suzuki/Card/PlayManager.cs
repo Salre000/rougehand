@@ -79,8 +79,7 @@ public class PlayManager : MonoBehaviour
     // ロイヤルフラッシュ
     private Role RoyalFlush(List<Card.Trump> cards)
     {
-        int jastIndex = 0;
-        List<int> jastNum = new();
+        List<int> jastNums = new();
         List<Card.Trump> jastList = new();
         List<bool> jastNumberBool = new();
         bool ace = false;
@@ -88,61 +87,49 @@ public class PlayManager : MonoBehaviour
         bool queen = false;
         bool jack = false;
         bool ten = false;
-        for (int i = 0; i < 4; i++)
+
+        // スートが揃っているかチェック
+        jastNums = JastSuitCheck(cards);
+        // 揃っていなければ役は不成立となる
+        if (jastNums == null) return Role.None;
+
+        // そろっている五つのスートが1~10になっているか
+        for (int j = 0; j < jastNums.Count; j++)
         {
-            jastIndex = 0;
-            jastNum.Clear();
-            // 同じスートを探す
-            foreach (Card.Trump card in cards)
+            // 同スートカード情報がjastListの中に入る
+            jastList.Add(cards[jastNums[j]]);
+        }
+        // 中に入れたカード情報はスートが揃っていることが分かっているので
+        // 数字の照らし合わせを行い見事五つ揃えばロイヤルフラッシュが認められる
+        for (int j = 0; j < jastList.Count; j++)
+        {
+            if (ace != true && Card.number.ace == jastList[j].number)
             {
-                jastIndex++;
-                if (card.suit != (Card.suit)i) continue;
-                // 同じスートが見つかったらindex番号を入れていく
-                jastNum.Add(jastIndex);
+                ace = true;
+                jastNumberBool.Add(true);
             }
-            // 同じスートが五枚そろっていることを確認
-            // 四枚以下なら別のスートで探すために一番上に戻る
-            if (jastNum.Count <= 4) continue;
-
-            // そろっている五つのスートが1~10になっているか
-            for (int j = 0; j < jastNum.Count; j++)
+            else if (king != true && Card.number.king == jastList[j].number)
             {
-                // 同スートカード情報がjastListの中に入る
-                jastList.Add(cards[jastNum[j]]);
+                king = true;
+                jastNumberBool.Add(true);
             }
-            // 中に入れたカード情報はスートが揃っていることが分かっているので
-            // 数字の照らし合わせを行い見事五つ揃えばロイヤルフラッシュが認められる
-            for (int j = 0; j < jastList.Count; j++)
+            else if (queen != true && Card.number.queen == jastList[j].number)
             {
-                if (ace != true && Card.number.ace == jastList[j].number)
-                {
-                    ace = true;
-                    jastNumberBool.Add(true);
-                }
-                else if (king != true && Card.number.king == jastList[j].number)
-                {
-                    king = true;
-                    jastNumberBool.Add(true);
-                }
-                else if (queen != true && Card.number.queen == jastList[j].number)
-                {
-                    queen = true;
-                    jastNumberBool.Add(true);
-                }
-                else if (jack != true && Card.number.jack == jastList[j].number)
-                {
-                    jack = true;
-                    jastNumberBool.Add(true);
-                }
-                else if (ten != true && Card.number.ten == jastList[j].number)
-                {
-                    ten = true;
-                    jastNumberBool.Add(true);
-                }
-                // .Countが5になることで揃っていることが証明される
-                if (jastNumberBool.Count >= 5) return Role.royalFlush;
+                queen = true;
+                jastNumberBool.Add(true);
             }
-
+            else if (jack != true && Card.number.jack == jastList[j].number)
+            {
+                jack = true;
+                jastNumberBool.Add(true);
+            }
+            else if (ten != true && Card.number.ten == jastList[j].number)
+            {
+                ten = true;
+                jastNumberBool.Add(true);
+            }
+            // .Countが5になることで揃っていることが証明される
+            if (jastNumberBool.Count >= 5) return Role.royalFlush;
         }
         return Role.None;
     }
@@ -150,6 +137,13 @@ public class PlayManager : MonoBehaviour
     // ストレートフラッシュ
     private Role StraightFlash(List<Card.Trump> cards)
     {
+        List<int> jastNums = new();
+
+        // スートが揃っているかチェック
+        jastNums = JastSuitCheck(cards);
+        // 揃っていなければ役は不成立となる
+        if (jastNums == null) return Role.None;
+
 
         return Role.None;
     }
@@ -162,7 +156,7 @@ public class PlayManager : MonoBehaviour
     /// <param name="cards">チェックしたいカードリスト</param>
     /// <param name="jastSuitCount">何枚揃っていれば良いか デフォルト:5</param>
     /// <param name="suit">指定したいスート デフォルト:None</param>
-    /// <returns>どこの要素数に揃っているスートがあるかをLsit　intで返します。</returns>
+    /// <returns>どこの要素数に揃っているスートがあるかをLsit　intで返します。揃ってなかったらnullを返します。</returns>
     private List<int> JastSuitCheck(List<Card.Trump> cards, int jastSuitCount = 5, Card.suit suit = Card.suit.None)
     {
         int jastIndex = 0;
@@ -194,22 +188,37 @@ public class PlayManager : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// 数字が連続的に並んでいるか判定します。
+    /// </summary>
+    /// <param name="cards">チェックしたいカードリスト</param>
+    /// <param name="jastSuitCount">何枚連続していればいいか</param>
+    /// <param name="suit"></param>
+    /// <returns></returns>
+    private List<int> StraightCheck(List<Card.Trump> cards, int jastSuitCount = 5, Card.suit suit = Card.suit.None)
+    {
+
+
+        return null;
+    }
+
+
     // 役の強さ順
     // ※隠し役
 
     // ※革命                       同じスート２の数字のカードを５枚プレイする
     //                                ↑ ラウンド中役の倍率を強いのと弱いのを入れ替える
     // 　ロイヤルフラッシュ         同じスートの１～１０をプレイする
-    // 　ストレートフラッシュ       同じくスートの連番の５枚をプレイする
-    // ※フェイスファイブカード     同じくフェイスカードを５枚プレイする
+    // 　ストレートフラッシュ       同じスートの連番の５枚をプレイする
+    // ※フェイスファイブカード     同じフェイスカードを５枚プレイする
     // ※ファイブカード             同じ数字のカードを５枚プレイする
-    // ※フェイスフォーカード       同じくフェイスカードを４枚プレイする
+    // ※フェイスフォーカード       同じフェイスカードを４枚プレイする
     //　 フォーカード               同じ数字のカードを４枚プレイする
     // ※フラッシュフルハウス       フラッシュとフルハウスの条件を同時に揃えてプレイする
     //　 フルハウス                 同じ数字を２枚と３枚でプレイする
     //　 フラッシュ                 同じスートを５枚でプレイする
     //　 ストレート                 連続した数字５枚でプレイする
-    // ※フェイススリーカード       同じくフェイスカードを３枚プレイする
+    // ※フェイススリーカード       同じフェイスカードを３枚プレイする
     //　 スリーカード               同じ数字のカードを３枚でプレイする
     //　 ツーペア                   同じ数字のカードを２枚とずつプレイする
     //　 ワンペア                   同じ数字のカードを２枚でプレイする
