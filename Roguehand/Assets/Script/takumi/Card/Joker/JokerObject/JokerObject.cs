@@ -99,6 +99,8 @@ public class JokerObject : MonoBehaviour
         //ジョーカーが何もできない時
         if (_base.Trun() < 1) { _status = JokerStatus.wait; JokerObjectUtility.NestJokerPlay(this); return; }
 
+
+
         _jokerPlayAction();
     }
 
@@ -241,7 +243,7 @@ public class JokerObject : MonoBehaviour
         if (!_isPlay || reta != -1) return false;
 
         _status = JokerStatus.wait;
-
+       
 
         return true;
 

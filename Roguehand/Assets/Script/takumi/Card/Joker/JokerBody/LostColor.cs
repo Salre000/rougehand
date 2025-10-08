@@ -26,6 +26,11 @@ public class LostColor : JokerBase
 
     }
 
+    public override float Trun()
+    {
+        return 10f;
+    }
+
 
     public override void SaleAction()
     {

@@ -14,6 +14,15 @@ public class JokerBase : SaleInterface
     protected string _jokerName =string.Empty;
 
     /// <summary>
+    /// ジョーカーのバフ内容
+    /// </summary>
+    Card.JokerBuff _jokerBuff;
+
+    public void SetJokerBuff(Card.JokerBuff buff) {  _jokerBuff = buff; }
+
+    public Card.JokerBuff GetJokerBuff() { return _jokerBuff; }
+
+    /// <summary>
     /// ジョーカーの名前を返す関数
     /// </summary>
     /// <returns></returns>
@@ -61,6 +70,9 @@ public class JokerBase : SaleInterface
     /// </summary>
     /// <returns></returns>
     public int GetSaleValue() {  return _saleValue+(int)GetRarity(); }
+
+    public void AddSaleValue(int add) {  _saleValue += add; }
+
 
     /// <summary>
     /// ジョーカーの倍率の上昇方法が加算なのか乗算なのかを表す関数
