@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -70,6 +71,14 @@ public class ScoreManager : MonoBehaviour
     public void MagnificationPlus(float value)
     {
         _magnification += value;
+
+        Console.Clear();
+        Debug.Log("倍率");
+        Debug.Log("前 : "+ _magnification);
+        _magnification = Rounding(_magnification,2f);
+        Debug.Log("後 : "+_magnification);
+
+
         builder.Clear();
         builder.Append(_magnification);
         _magnificationText.text = builder.ToString();
@@ -82,6 +91,11 @@ public class ScoreManager : MonoBehaviour
     public void RoundScoreResult()
     {
         _roundScore=_basicScore*_magnification;
+
+        Debug.Log("ラウンドスコア");
+        Debug.Log("前 : "+ _roundScore);
+        _roundScore = Rounding(_roundScore,1f);
+        Debug.Log("後 : "+ _roundScore);
         builder.Clear();
         builder.AppendFormat("{0:#}", _roundScore.ToString("N0"));
         
@@ -109,18 +123,27 @@ public class ScoreManager : MonoBehaviour
         _roundScoreText.text= builder.ToString();
     }
 
-    public void Mag(float value)
+    /// <summary>
+    /// 倍率を乗算
+    /// </summary>
+    /// <param name="value"></param>
+    public void Multiplication(float value)
     {
         _magnification*=value;
     }
 
-    private float Rounding(float value)
+    /// <summary>
+    /// 四捨五入
+    /// </summary>
+    /// <param name="value">したい値</param>
+    /// <param name="decPoint">小数第〇を指定</param>
+    /// <returns>四捨五入した値</returns>
+    private float Rounding(float value,float decPoint)
     {
-        float decPoint = 3;
         // 小数部分の取り出し
         float num1=value-Mathf.FloorToInt(value);
         // 四捨五入したい位を一の位に持ってくる
-        int num2 = Mathf.FloorToInt(num1 * Mathf.Pow(1000, decPoint));
+        int num2 = Mathf.FloorToInt(num1 * Mathf.Pow(10, decPoint));
         // 十以上の位をなくす
         int num3 = num2 - Mathf.FloorToInt(num2 / 10) * 10;
         if( num3 >= 5 )
