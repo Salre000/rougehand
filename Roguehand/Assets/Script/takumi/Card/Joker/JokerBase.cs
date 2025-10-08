@@ -11,6 +11,14 @@ public class JokerBase : SaleInterface
 
     protected int _saleValue = 0;
 
+    protected string _jokerName =string.Empty;
+
+    /// <summary>
+    /// ジョーカーの名前を返す関数
+    /// </summary>
+    /// <returns></returns>
+    public string GetName() {  return _jokerName; }
+
     /// <summary>
     /// ジョーカーのオブジェクトの動き方を返す関数
     /// </summary>
@@ -59,5 +67,11 @@ public class JokerBase : SaleInterface
     /// </summary>
     /// <returns></returns>
     public virtual bool GetAddType() {  return true; }
+
+ 
+    /// <summary>
+    /// 売却されたときの挙動
+    /// </summary>
+    public virtual void SaleAction() { }
 
 }

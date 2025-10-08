@@ -64,6 +64,12 @@ public class CreateJoker : EditorWindow
 
             CreateAddClass();
         }
+        if (GUILayout.Button("ÉäÉçÅ[Éh"))
+        {
+            className = string.Empty;
+
+            CreateAddClass();
+        }
 
 
         EditorGUILayout.Space();
@@ -324,7 +330,7 @@ public class CreateJoker : EditorWindow
     static void CreateAddClass()
     {
 
-        jolerListObject._className.Add(className);
+        if(className!=string.Empty)jolerListObject._className.Add(className);
 
         StringBuilder builder = new StringBuilder();
 

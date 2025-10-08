@@ -44,7 +44,9 @@ public class Card
     /// </summary>
     public enum sealBuff
     {
-        None = -1
+        None = -1,//バフ無し
+        
+
     }
     /// <summary>
     /// あらゆるカードにバフが可能なtype
@@ -58,7 +60,14 @@ public class Card
     /// </summary>
     public enum deckBuff
     {
-        None = -1
+        None = -1,
+        Bonus,//基本スコアに追加２０
+        Magnification,//倍率に追加２０
+        Wild,//スートを無視
+        Glass,//確率破壊
+        Steel,//手札にあると倍率に×1.5
+        Gold,//手札にあるとお金＋３
+        Lucky//確立でお金か倍率追加
     }
     /// <summary>
     /// ジョーカーのみにバフが可能なtype
@@ -66,6 +75,11 @@ public class Card
     public enum JokerBuff
     {
         None = -1,
+        Foil,//基本スコアに追加５０
+        Hologram,//倍率に追加１０
+        Polychrome,//倍率に×1.5
+        Negative,//ジョーカーの枠を追加１
+        Sepia,//基本スコアと倍率を入れ替える　セピアー＞コウイカー＞イカサマー＞入れ替え
 
     }
     public enum trumpMaterial

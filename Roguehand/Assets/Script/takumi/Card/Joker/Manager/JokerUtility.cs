@@ -31,4 +31,8 @@ public static class JokerUtility
 
     public static void SetSale(int ID) { instance.SetSale(ID);}
 
+    public static void JokerALLAction(System.Action<JokerBase> action) { instance.JokerALLAction(action); }
+
+    public static void SaleAction(int ID) { instance.SaleAction(ID);}
+
 }

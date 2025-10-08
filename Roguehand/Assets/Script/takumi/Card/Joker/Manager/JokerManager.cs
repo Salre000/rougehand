@@ -100,6 +100,15 @@ public class JokerManager : MonoBehaviour
     }
 
     /// <summary>
+    /// ID指定の売られたときの挙動
+    /// </summary>
+    /// <param name="ID"></param>
+    public void SaleAction(int ID) 
+    {
+        _jokers[ID].SaleAction();
+    }
+
+    /// <summary>
     /// 今のフレームないで行われたターゲットの動き
     /// </summary>
     /// <returns></returns>
@@ -161,12 +170,16 @@ public class JokerManager : MonoBehaviour
     {
         GameObject joker = JokerObjectUtility.GetIDObject(ID);
 
-
-
         SaleUtility.SetSale(_jokers[ID], joker, _jokers[ID].GetSaleValue());
-
-
-
+           
+    }
+    /// <summary>
+    /// 全てのジョーカーに何かする関数
+    /// </summary>
+    public void JokerALLAction(System.Action<JokerBase> action)
+    {
+        for (int i = 0; i < _jokers.Count; i++)
+            action(_jokers[i]);
     }
 
 

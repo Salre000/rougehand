@@ -97,7 +97,13 @@ public class SaleManager : MonoBehaviour
         switch (_status)
         {
             case GrabManager.status.Joker:
+
+
+                JokerUtility.SaleAction(JokerObjectUtility.GetJokerIndex(jokerObject));
+
                 JokerUtility.Remove(JokerObjectUtility.GetJokerIndex(jokerObject));
+
+
 
                 break;
             case GrabManager.status.Item:
