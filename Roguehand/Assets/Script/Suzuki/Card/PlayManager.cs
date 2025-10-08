@@ -150,8 +150,8 @@ public class PlayManager : MonoBehaviour
     // ストレートフラッシュ
     private Role StraightFlash(List<Card.Trump> cards)
     {
-        
-            return Role.None;
+
+        return Role.None;
     }
 
 
@@ -160,16 +160,23 @@ public class PlayManager : MonoBehaviour
     /// 引数2数分のスートが揃っているか確認する
     /// </summary>
     /// <param name="cards">チェックしたいカードリスト</param>
-    /// <param name="jastSuitCount">何枚揃っていれば良いか</param>
+    /// <param name="jastSuitCount">何枚揃っていれば良いか デフォルト:5</param>
+    /// <param name="suit">指定したいスート デフォルト:None</param>
     /// <returns>どこの要素数に揃っているスートがあるかをLsit　intで返します。</returns>
-    private List<int> JastSuitCheck(List<Card.Trump> cards, int jastSuitCount=5)
+    private List<int> JastSuitCheck(List<Card.Trump> cards, int jastSuitCount = 5, Card.suit suit = Card.suit.None)
     {
         int jastIndex = 0;
+        // 受け取ったcardsの何番に条件を満たすものがあるかがintListされる
         List<int> jastNum = new List<int>();
         for (int i = 0; i < 4; i++)
         {
+            // 指定スートがある時は、指定されたスートのみを検索する
+            if (suit != Card.suit.None)
+                if (suit != (Card.suit)i) continue;
+
             jastIndex = 0;
             jastNum.Clear();
+
             // 同じスートを探す
             foreach (Card.Trump card in cards)
             {
@@ -180,32 +187,33 @@ public class PlayManager : MonoBehaviour
             }
             // 欲しい数分揃っていなければなら別のスートで探すために一番上に戻る
             if (jastNum.Count <= jastSuitCount) continue;
-
+            // 揃っていれば返す
+            return jastNum;
 
         }
-        return jastNum;
+        return null;
     }
 
     // 役の強さ順
     // ※隠し役
 
-        // ※革命                       同じスート２の数字のカードを５枚プレイする
-        //                                ↑ ラウンド中役の倍率を強いのと弱いのを入れ替える
-        // 　ロイヤルフラッシュ         同じスートの１～１０をプレイする
-        // 　ストレートフラッシュ       同じくスートの連番の５枚をプレイする
-        // ※フェイスファイブカード     同じくフェイスカードを５枚プレイする
-        // ※ファイブカード             同じ数字のカードを５枚プレイする
-        // ※フェイスフォーカード       同じくフェイスカードを４枚プレイする
-        //　 フォーカード               同じ数字のカードを４枚プレイする
-        // ※フラッシュフルハウス       フラッシュとフルハウスの条件を同時に揃えてプレイする
-        //　 フルハウス                 同じ数字を２枚と３枚でプレイする
-        //　 フラッシュ                 同じスートを５枚でプレイする
-        //　 ストレート                 連続した数字５枚でプレイする
-        // ※フェイススリーカード       同じくフェイスカードを３枚プレイする
-        //　 スリーカード               同じ数字のカードを３枚でプレイする
-        //　 ツーペア                   同じ数字のカードを２枚とずつプレイする
-        //　 ワンペア                   同じ数字のカードを２枚でプレイする
-        //　 ハイカード                 以上の役が一つも成立しないとき
+    // ※革命                       同じスート２の数字のカードを５枚プレイする
+    //                                ↑ ラウンド中役の倍率を強いのと弱いのを入れ替える
+    // 　ロイヤルフラッシュ         同じスートの１～１０をプレイする
+    // 　ストレートフラッシュ       同じくスートの連番の５枚をプレイする
+    // ※フェイスファイブカード     同じくフェイスカードを５枚プレイする
+    // ※ファイブカード             同じ数字のカードを５枚プレイする
+    // ※フェイスフォーカード       同じくフェイスカードを４枚プレイする
+    //　 フォーカード               同じ数字のカードを４枚プレイする
+    // ※フラッシュフルハウス       フラッシュとフルハウスの条件を同時に揃えてプレイする
+    //　 フルハウス                 同じ数字を２枚と３枚でプレイする
+    //　 フラッシュ                 同じスートを５枚でプレイする
+    //　 ストレート                 連続した数字５枚でプレイする
+    // ※フェイススリーカード       同じくフェイスカードを３枚プレイする
+    //　 スリーカード               同じ数字のカードを３枚でプレイする
+    //　 ツーペア                   同じ数字のカードを２枚とずつプレイする
+    //　 ワンペア                   同じ数字のカードを２枚でプレイする
+    //　 ハイカード                 以上の役が一つも成立しないとき
 
 
 
