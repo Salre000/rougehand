@@ -18,9 +18,17 @@ public class JokerBase : SaleInterface
     /// </summary>
     Card.JokerBuff _jokerBuff;
 
+    /// <summary>
+    /// ジョーカー以外にも着く可能性のあるバフの内容
+    /// </summary>
+    Card.cardBuff _cardBuff;
+
     public void SetJokerBuff(Card.JokerBuff buff) {  _jokerBuff = buff; }
 
     public Card.JokerBuff GetJokerBuff() { return _jokerBuff; }
+    public void SetCardBuff(Card.cardBuff buff) { _cardBuff = buff; }
+
+    public Card.cardBuff GetCardBuff() { return _cardBuff; }
 
     /// <summary>
     /// ジョーカーの名前を返す関数

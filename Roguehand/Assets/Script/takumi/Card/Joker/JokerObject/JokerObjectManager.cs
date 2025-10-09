@@ -102,6 +102,8 @@ public class JokerObjectManager : MonoBehaviour
 
         for (int i = 0; i < _jokerObjects.Count; i++) _jokerObjects[i].Action();
 
+        if(_jokerObjects.Find(joker=> joker.CheckAction())==null)_status = JokerStatus.wait;
+
     }
 
     /// <summary>
@@ -275,6 +277,7 @@ public class JokerObjectManager : MonoBehaviour
     }
 
     public GameObject GetIDObject(int ID) { return _jokerObjects[ID].gameObject; }
+    public JokerObject GetIDJokerObject(int ID) { return _jokerObjects[ID]; }
 
     /// <summary>
     /// ジョーカーオブジェクトからIDを取得
@@ -308,6 +311,9 @@ public class JokerObjectManager : MonoBehaviour
     {
         _lostStatus = _status;
         _status = JokerStatus.action;
+
+        //決められたコマンド
+        if (AddNum == -2) return;
 
         _jokerObjects[ID].CardAddPlay(AddNum);
     }

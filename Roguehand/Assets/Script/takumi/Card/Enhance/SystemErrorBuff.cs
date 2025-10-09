@@ -68,6 +68,9 @@ public class SystemErrorBuff
     }
 
 
+    /// <summary>
+    /// マウスジャマーのインナークラス
+    /// </summary>
     private class MouseJammer : Errorbuff 
     {
         private float _renge = 0;
@@ -155,6 +158,8 @@ public class SystemErrorBuff
 
 
     }
+
+
 
 
 }

@@ -31,4 +31,5 @@ public static class JokerObjectUtility
     public static int GetActionCount() { return instance.ActionCount(); }
 
     public static GameObject GetIDObject(int id) { return instance.GetIDObject(id); }
+    public static JokerObject GetIDJokerObject(int id) { return instance.GetIDJokerObject(id); }
 }

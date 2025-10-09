@@ -101,6 +101,35 @@ public class JokerManager : MonoBehaviour
 
     }
 
+    public void JokerChenge(int ID) 
+    {
+        JokerObjectUtility.GetIDJokerObject(ID).StartChenge();
+
+    }
+
+    public void SetMaterial(int ID) 
+    {
+        JokerBase jokerBase=_jokers[ID];
+
+        MeshRenderer meshRenderer=JokerObjectUtility.GetIDObject(ID).transform.GetChild(0).GetComponent<MeshRenderer>();
+
+        //一度キャッシュする必要あり
+        Material[] materials = meshRenderer.materials;
+
+        materials[0]=BuffUtility.GetJokerMaterial((int)jokerBase.GetJokerBuff());
+
+        if(jokerBase.GetCardBuff()!=Card.cardBuff.None)materials[0]=BuffUtility.GetCardMaterial((int)jokerBase.GetCardBuff());
+
+
+        meshRenderer.materials = materials;
+
+
+
+
+
+    }
+
+
     /// <summary>
     /// ジョーカーを選択できる状態にする関数
     /// ランダム
@@ -186,6 +215,7 @@ public class JokerManager : MonoBehaviour
     }
 
     public int GetIndex() {  return useIndex; }
+    public int GetIndex(JokerBase jokerBase) { return _jokers.IndexOf(jokerBase); }
 
     public void GrabChange(int id,bool flag) 
     {

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 using static JokerObjectManager;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 public class JokerObject : MonoBehaviour
 {
 
@@ -190,8 +191,45 @@ public class JokerObject : MonoBehaviour
     /// <returns></returns>
     public bool GetAction() {return AddNum !=0;}
 
+    public bool CheckAction() { return _status==JokerStatus.action;}
+
     public void THEEnd() { _isEnd = true;}
     public bool IsEnd() { return _isEnd;}
+
+    public void StartChenge() 
+    {
+        _status = JokerStatus.action;
+
+
+        _jokerPlayAction = ChengeAction;
+        reta = 1;
+        _time = 0;
+    }
+
+    private void ChengeAction() 
+    {
+        _time += Time.deltaTime * GameConfig.GetGameSpeed()*reta;
+
+        transform.eulerAngles = Vector3.Lerp(Vector3.zero, new Vector3(0, 180,0), _time);
+
+        if (_time > 1 && reta == 1) 
+        {
+
+            //マテリアルを変更
+            JokerUtility.SetMaterial(JokerObjectUtility.GetJokerIndex(this));
+
+            reta = -1;
+        }
+
+        if (_time >0f) return ;
+
+
+
+
+        _status = JokerStatus.wait;
+        reta = 1;
+        SetAction();
+    }
 
     private void SetAction()
     {
