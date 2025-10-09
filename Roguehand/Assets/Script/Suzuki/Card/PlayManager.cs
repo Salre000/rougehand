@@ -141,6 +141,10 @@ public class PlayManager : MonoBehaviour
 
         // スートが揃っているかチェック
         jastNums = JastSuitCheck(cards);
+        for(int i = 0; i < jastNums.Count; i++)
+        {
+            
+        }
         // 揃っていなければ役は不成立となる
         if (jastNums == null) return Role.None;
 
@@ -192,12 +196,41 @@ public class PlayManager : MonoBehaviour
     /// 数字が連続的に並んでいるか判定します。
     /// </summary>
     /// <param name="cards">チェックしたいカードリスト</param>
-    /// <param name="jastSuitCount">何枚連続していればいいか</param>
-    /// <param name="suit"></param>
-    /// <returns></returns>
-    private List<int> StraightCheck(List<Card.Trump> cards, int jastSuitCount = 5, Card.suit suit = Card.suit.None)
+    /// <param name="straightCount">何枚連続していればいいか デフォルト:5</param>
+    /// <param name="oneSkipFlag">ストレートの条件が一つ飛ばしでも良い状態か デフォルト:false</param>
+    /// <returns>どこの要素に連続した値があるかを返します。欲しい数揃っていなければnullを返します。</returns>
+    private List<int> StraightCheck(List<Card.Trump> cards, int straightCount = 5, bool oneSkipFlag = false)
     {
+        // 受け取ったcardsの何番に条件を満たすものがあるかがintListされる
+        List<int> jastNum = new List<int>();
+        List<Card.Trump> jastCards = new(cards);
 
+        // Number順(13～1)に並べなおす
+        cards = CardManager.instance.NumberSort(cards);
+
+        for (int i = 0; i < cards.Count; i++)
+        {
+            if (cards.Count == i) break;
+ 
+            // 一個上が連続した数値かどうか
+            if (oneSkipFlag ? cards[i].number == cards[i + 1].number + 1|| cards[i].number == cards[i + 1].number + 2 : cards[i].number == cards[i + 1].number + 1)
+            {
+                // 元のカードリストと同じものを見つける
+                for (int j = 0; j < jastCards.Count; j++)
+                {
+                    if (CardManager.instance.JastCardCheck(jastCards[j], cards[i]))
+                    {
+                        // 要素のある値を追加
+                        jastNum.Add(j);
+                    }
+                }
+            }
+            else
+                jastNum.Clear();
+
+            // 連続したカードが5枚以上見つかっているならreturn
+            if (jastNum.Count >= straightCount) return jastNum;
+        }
 
         return null;
     }

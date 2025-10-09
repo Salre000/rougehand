@@ -37,8 +37,8 @@ public class CardManager : MonoBehaviour
     /// <summary>
     /// 受け取ったカードリストを数字は降順、次にスートを昇順で並べなおします
     /// </summary>
-    /// <param name="cards"></param>
-    /// <returns></returns>
+    /// <param name="cards">並べなおしたいカードリスト</param>
+    /// <returns>整頓済みカードリスト</returns>
     public List<Card.Trump> NumberSort(List<Card.Trump> cards)
     {
         // 並び変えたものをvalueに代入
@@ -68,21 +68,21 @@ public class CardManager : MonoBehaviour
     /// <summary>
     /// 受け取ったカードリストをスートは昇順、次にスートを降順で並べなおします
     /// </summary>
-    /// <param name="cards"></param>
-    /// <returns></returns>
+    /// <param name="cards">並べなおしたいカードリスト</param>
+    /// <returns>整頓済みカードリスト</returns>
     public List<Card.Trump> SuitSort(List<Card.Trump> cards)
     {
         // 並び変えたものをvalueに代入
         List<Card.Trump> value = new();
         // 一度Number順でソートし、aceを前に持ってくる
-        value=NumberSort(cards);
+        value = NumberSort(cards);
         // コピーリストの作成
         // ※foreachでvalueの中身をいじるため、エラー回避
         List<Card.Trump> copy = new(value);
 
         int topIndex = 0;
         // ♠ → ♥ → ♦ → ♣
-        for(int i=0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
         {
             foreach (Card.Trump card in copy)
             {
@@ -105,7 +105,7 @@ public class CardManager : MonoBehaviour
     public void SetIsSelect(int ID)
     {
 
-        List<Card.Trump> hand=this.hand;
+        List<Card.Trump> hand = this.hand;
 
         Card.Trump dummyHand = hand[ID];
         dummyHand.isSelect = !dummyHand.isSelect;
@@ -118,16 +118,35 @@ public class CardManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 一枚に含まれるカードの情報の全てを比べて全く一緒のカードか判定します。
+    /// </summary>
+    /// <param name="card1">比べたいカードその1</param>
+    /// <param name="card2">比べたいカードその2</param>
+    /// <returns>全て合致していればtrue</returns>
+    public bool JastCardCheck(Card.Trump card1, Card.Trump card2)
+    {
+        if (card1.suit != card2.suit)           return false;
+        if (card1.number != card2.number)       return false;
+        if (card1.sealBuff != card2.sealBuff)   return false;
+        if (card1.cardBuff != card2.cardBuff)   return false;
+        if (card1.deckBuff != card2.deckBuff)   return false;
+        if (card1.state != card2.state)         return false;
+        if (card1.isFeice != card2.isFeice)     return false;
+        if (card1.isSelect != card2.isSelect)   return false;
+
+        return true;
+    }
 
 
     public void SetDeck(List<Card.Trump> _deck) { this.deck = _deck; }
     public List<Card.Trump> GetDeck() { return deck; }
 
-    public void SetHandSize(int _hand) {  this.handSize = _hand; }
+    public void SetHandSize(int _hand) { this.handSize = _hand; }
     public int GetHandSize() { return handSize; }
 
     public void SetHand(List<Card.Trump> _hand) { hand = _hand; }
-    public List<Card.Trump> GetHand() { return hand;}
+    public List<Card.Trump> GetHand() { return hand; }
 
 
 }
