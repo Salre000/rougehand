@@ -11,6 +11,11 @@ public class JokerManager : MonoBehaviour
     private List<JokerBase> _jokers = new List<JokerBase>(5);
 
     /// <summary>
+    /// 一時的にもっているジョーカー
+    /// </summary>
+    private List<JokerBase> _dommyJoker = new List<JokerBase>(5);
+
+    /// <summary>
     /// ジョーカーのターゲットになり得る物をキャッシュする
     /// </summary>
     private JokerActionUseEnum.JokerActionTarget _target;
@@ -23,6 +28,7 @@ public class JokerManager : MonoBehaviour
     public void Awake()
     {
         JokerUtility.instance = this;
+
     }
 
     private void Update()
@@ -94,6 +100,31 @@ public class JokerManager : MonoBehaviour
         JokerObjectUtility.AddJoker(joker);
 
     }
+
+    /// <summary>
+    /// ジョーカーを選択できる状態にする関数
+    /// ランダム
+    /// </summary>
+    /// <param name="count"><ジョーカーの数/param>
+    public void ShopJokerAdd(int count=3) 
+    {
+
+        for(int i = 0; i < count; i++) 
+        {
+            JokerBase jokerBase = ALLJoker.GetJoker((ALLJoker._allJokerEnum)Random.Range(0,(int)ALLJoker._allJokerEnum.MAX));
+
+            _dommyJoker.Add(jokerBase);
+
+            JokerObjectUtility.AddDomyyJoker(jokerBase);
+
+
+
+        }
+
+
+
+    }
+
 
     /// <summary>
     /// ID指定の売られたときの挙動

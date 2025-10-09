@@ -11,6 +11,7 @@ _SixMinutesOne,
 _ThousandMinutesOne,
 _LostColor,
 _IncreaseTheSellingPrice,
+MAX
 }
 public static JokerBase GetJoker(_allJokerEnum joker){
         switch (joker){

@@ -373,6 +373,8 @@ public class CreateJoker : EditorWindow
 
         }
 
+        builder.AppendLine();
+        builder.Append("MAX");
 
         builder.AppendLine();
         builder.Append("}");

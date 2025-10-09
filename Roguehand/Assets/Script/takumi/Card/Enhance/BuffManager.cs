@@ -23,19 +23,30 @@ public class BuffManager : MonoBehaviour
     /// </summary>
     private TrumpBuff _trumpBuff;
 
-
+    /// <summary>
+    /// システムに干渉する可能性のあるバフのクラス
+    /// </summary>
+    private SystemErrorBuff _errorBuff;
 
     public void Awake()
     {
         Initializ();
     }
+    public void Update()
+    {
+        _errorBuff.UpData();
 
+
+
+
+    }
     private void Initializ() 
     {
         // クラスの生成
         _sealBuff = new SealBuff();
         _cardBuff = new CardBuff();
         _trumpBuff = new TrumpBuff();
+        _errorBuff=new SystemErrorBuff();
 
     }
 
