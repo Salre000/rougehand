@@ -220,6 +220,7 @@ public class JokerObjectManager : MonoBehaviour
         _jokerObjects[_jokerObjects.Count - 1].Initializ(jokerBase);
 
         _jokerObjects[_jokerObjects.Count - 1].name = "JokerID" + (_jokerObjects.Count - 1).ToString();
+        _jokerObjects[_jokerObjects.Count - 1].transform.eulerAngles = Vector3.zero;
 
     }
     public void AddDommyJoker(JokerBase jokerBase)
