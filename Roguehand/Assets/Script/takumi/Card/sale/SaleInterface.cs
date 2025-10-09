@@ -23,16 +23,13 @@ public interface SaleInterface
     //çwì¸éûÇÃï`âÊÇÇ∑ÇÈä÷êî
     public void BuyShow(Vector3 pos, int saleValue, System.Action action) 
     {
-        if (GUI.Button(new Rect(10, 10, 100, 50), "Click Me"))
+        Vector2 ButtonPos = Camera.main.WorldToScreenPoint(pos);
+
+        if (GUI.Button(new Rect(ButtonPos.x, Screen.height - ButtonPos.y + 100, 200, 60),
+            ("<size=25><color=#ffffff>$" + saleValue.ToString() + "</color></size>"), SaleUtility.GetStyle()))
         {
-            Debug.Log("Button Clicked!");
+
+            action();
         }
-
-
-
     }
-
-
-
-
 } 

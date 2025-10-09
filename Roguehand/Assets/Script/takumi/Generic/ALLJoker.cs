@@ -11,6 +11,8 @@ _SixMinutesOne,
 _ThousandMinutesOne,
 _LostColor,
 _IncreaseTheSellingPrice,
+_BuffJoker,
+MAX
 }
 public static JokerBase GetJoker(_allJokerEnum joker){
         switch (joker){
@@ -22,6 +24,7 @@ public static JokerBase GetJoker(_allJokerEnum joker){
             case _allJokerEnum._ThousandMinutesOne:return new ThousandMinutesOne();
             case _allJokerEnum._LostColor:return new LostColor();
             case _allJokerEnum._IncreaseTheSellingPrice:return new IncreaseTheSellingPrice();
+            case _allJokerEnum._BuffJoker:return new BuffJoker();
 }return null;}
 
 

@@ -24,6 +24,7 @@ public static class JokerUtility
     public static void ChengeOrder(int lostID,int nextID) { instance.ChengeOrder(lostID, nextID); }
 
     public static int GetIndex() {  return instance.GetIndex(); }   
+    public static int GetIndex(JokerBase jokerBase) {  return instance.GetIndex(jokerBase); }   
 
     public static void SetTraget(JokerActionUseEnum.JokerActionTarget target) { instance.SetTarget(target); }
 
@@ -34,5 +35,9 @@ public static class JokerUtility
     public static void JokerALLAction(System.Action<JokerBase> action) { instance.JokerALLAction(action); }
 
     public static void SaleAction(int ID) { instance.SaleAction(ID);}
+
+    public static void JokerChenge(int ID) {instance.JokerChenge(ID);}
+
+    public static void SetMaterial(int ID) { instance.SetMaterial(ID); }
 
 }

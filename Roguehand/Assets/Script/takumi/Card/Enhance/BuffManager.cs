@@ -12,31 +12,48 @@ public class BuffManager : MonoBehaviour
     /// シール属性のバフ内容
     /// </summary>
     private SealBuff _sealBuff;
+    [SerializeField] List<Material> sealMaterial=new List<Material>();
 
     /// <summary>
     /// カード属性のバフ内容
     /// </summary>
     private CardBuff _cardBuff;
+    [SerializeField] List<Material> cardMaterial=new List<Material>();
 
     /// <summary>
     /// トランプ属性のバフ内容
     /// </summary>
     private TrumpBuff _trumpBuff;
+    [SerializeField] List<Material> trumpMaterial=new List<Material>();
 
 
+    [SerializeField] List<Material> jokerMaterial=new List<Material>();
+    /// <summary>
+    /// システムに干渉する可能性のあるバフのクラス
+    /// </summary>
+    private SystemErrorBuff _errorBuff;
 
     public void Awake()
     {
         Initializ();
     }
+    public void Update()
+    {
+        _errorBuff.UpData();
 
+
+
+
+    }
     private void Initializ() 
     {
         // クラスの生成
         _sealBuff = new SealBuff();
         _cardBuff = new CardBuff();
         _trumpBuff = new TrumpBuff();
+        _errorBuff=new SystemErrorBuff();
 
+        BuffUtility.BuffManager = this;
     }
 
     /// <summary>
@@ -106,6 +123,11 @@ public class BuffManager : MonoBehaviour
         _trumpBuff.RoundEnd(trump.deckBuff);
 
     }
+
+    public Material GetCardMaterial(int ID) {return cardMaterial[ID]; }
+    public Material GetTrumpMaterial(int ID) {return trumpMaterial[ID]; }
+    public Material GetJokerMaterial(int ID) {return jokerMaterial[ID]; }
+    public Material GetSealMaterial(int ID) {return sealMaterial[ID]; }
 
 
 }

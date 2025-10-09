@@ -45,15 +45,24 @@ public class Card
     public enum sealBuff
     {
         None = -1,//バフ無し
-        
-
+        Red,   // 再発動
+        Bule,　//ラウンドの終了時に手札にあると
+        Purple,//ディスカードした時に発動する
+        Green, //プレイした時に発動する　手札からランダムに破壊
+        Orange,//プレイした時に発動する　ジョーカーの売値を＋２
+        Black,//文字化け　永続　倍率×　段階×２（段階５）
     }
     /// <summary>
     /// あらゆるカードにバフが可能なtype
     /// </summary>
     public enum cardBuff
     {
-        None = -1
+        None = -1,
+        Foil,//基本スコアに追加５０
+        Hologram,//倍率に追加１０
+        Polychrome,//倍率に×1.5
+        MouseJammer,// マウスの干渉　マウスが一定の距離を移動するとマウスの座標がずれる　　永続　倍率　５＋全ての段階を足した値　（段階５）　
+
     }
     /// <summary>
     /// デッキのカードにバフが可能なtype
@@ -67,7 +76,10 @@ public class Card
         Glass,//確率破壊
         Steel,//手札にあると倍率に×1.5
         Gold,//手札にあるとお金＋３
-        Lucky//確立でお金か倍率追加
+        Lucky,//確立でお金か倍率追加
+        Random,//　手札に来た時にスートとナンバーが確定する　手札に来た時に　残り２つのばふがランダムにつく
+        BlindScore,//獲得から破壊までの間　画面左の数字が妨害で見にくい ジョーカーの前に発動 倍率×段階 (段階５)
+
     }
     /// <summary>
     /// ジョーカーのみにバフが可能なtype
@@ -75,12 +87,9 @@ public class Card
     public enum JokerBuff
     {
         None = -1,
-        Foil,//基本スコアに追加５０
-        Hologram,//倍率に追加１０
-        Polychrome,//倍率に×1.5
         Negative,//ジョーカーの枠を追加１
         Sepia,//基本スコアと倍率を入れ替える　セピアー＞コウイカー＞イカサマー＞入れ替え
-
+        ObjectMove　//オブジェクトの位置が変わる　　倍率×段階　（段階５）
     }
     public enum trumpMaterial
     {

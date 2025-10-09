@@ -46,6 +46,12 @@ public class JokerObjectManager : MonoBehaviour
     [SerializeField] private List<JokerObject> _jokerObjects = new List<JokerObject>();
 
     /// <summary>
+    /// ダミージョーカーのオブジェクトリスト
+    /// </summary>
+    [SerializeField] private List<JokerObject> _domyyJokerObjects = new List<JokerObject>();
+
+
+    /// <summary>
     /// 現在つかまれているかどうか
     /// </summary>
     private bool _isGrab = false;
@@ -95,6 +101,8 @@ public class JokerObjectManager : MonoBehaviour
 
 
         for (int i = 0; i < _jokerObjects.Count; i++) _jokerObjects[i].Action();
+
+        if(_jokerObjects.Find(joker=> joker.CheckAction())==null)_status = JokerStatus.wait;
 
     }
 
@@ -214,6 +222,39 @@ public class JokerObjectManager : MonoBehaviour
         _jokerObjects[_jokerObjects.Count - 1].name = "JokerID" + (_jokerObjects.Count - 1).ToString();
 
     }
+    public void AddDommyJoker(JokerBase jokerBase)
+    {
+        //オブジェクトの生成
+        _domyyJokerObjects.Add(GameObject.Instantiate(_prefab, transform).AddComponent<JokerObject>());
+
+        //オブジェクトの物理演算を停止
+        _domyyJokerObjects[_jokerObjects.Count - 1].GetComponent<Rigidbody>().isKinematic = true;
+
+        //オブジェクトの初期化処理
+        _domyyJokerObjects[_jokerObjects.Count - 1].Initializ(jokerBase);
+
+        _domyyJokerObjects[_jokerObjects.Count - 1].name = "DomyyJokerID" + (_jokerObjects.Count - 1).ToString();
+
+    }
+
+    public void DommyDestroy() 
+    {
+
+        for(int i = 0; i < _domyyJokerObjects.Count; i++) 
+        {
+
+            //ザ・エンドってね
+            _domyyJokerObjects[i].THEEnd();
+
+
+            _domyyJokerObjects.RemoveAt(i);
+
+
+
+
+        }
+
+    }
 
     /// <summary>
     /// ID指定のジョーカーのオブジェクトの削除
@@ -236,6 +277,7 @@ public class JokerObjectManager : MonoBehaviour
     }
 
     public GameObject GetIDObject(int ID) { return _jokerObjects[ID].gameObject; }
+    public JokerObject GetIDJokerObject(int ID) { return _jokerObjects[ID]; }
 
     /// <summary>
     /// ジョーカーオブジェクトからIDを取得
@@ -269,6 +311,9 @@ public class JokerObjectManager : MonoBehaviour
     {
         _lostStatus = _status;
         _status = JokerStatus.action;
+
+        //決められたコマンド
+        if (AddNum == -2) return;
 
         _jokerObjects[ID].CardAddPlay(AddNum);
     }

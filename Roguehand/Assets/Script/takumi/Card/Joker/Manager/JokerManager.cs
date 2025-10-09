@@ -11,6 +11,11 @@ public class JokerManager : MonoBehaviour
     private List<JokerBase> _jokers = new List<JokerBase>(5);
 
     /// <summary>
+    /// 一時的にもっているジョーカー
+    /// </summary>
+    private List<JokerBase> _dommyJoker = new List<JokerBase>(5);
+
+    /// <summary>
     /// ジョーカーのターゲットになり得る物をキャッシュする
     /// </summary>
     private JokerActionUseEnum.JokerActionTarget _target;
@@ -23,6 +28,7 @@ public class JokerManager : MonoBehaviour
     public void Awake()
     {
         JokerUtility.instance = this;
+
     }
 
     private void Update()
@@ -95,6 +101,60 @@ public class JokerManager : MonoBehaviour
 
     }
 
+    public void JokerChenge(int ID) 
+    {
+        JokerObjectUtility.GetIDJokerObject(ID).StartChenge();
+
+    }
+
+    public void SetMaterial(int ID) 
+    {
+        JokerBase jokerBase=_jokers[ID];
+
+        MeshRenderer meshRenderer=JokerObjectUtility.GetIDObject(ID).transform.GetChild(0).GetComponent<MeshRenderer>();
+
+        //一度キャッシュする必要あり
+        Material[] materials = meshRenderer.materials;
+
+        materials[0]=BuffUtility.GetJokerMaterial((int)jokerBase.GetJokerBuff());
+
+        if(jokerBase.GetCardBuff()!=Card.cardBuff.None)materials[0]=BuffUtility.GetCardMaterial((int)jokerBase.GetCardBuff());
+
+
+        meshRenderer.materials = materials;
+
+
+
+
+
+    }
+
+
+    /// <summary>
+    /// ジョーカーを選択できる状態にする関数
+    /// ランダム
+    /// </summary>
+    /// <param name="count"><ジョーカーの数/param>
+    public void ShopJokerAdd(int count=3) 
+    {
+
+        for(int i = 0; i < count; i++) 
+        {
+            JokerBase jokerBase = ALLJoker.GetJoker((ALLJoker._allJokerEnum)Random.Range(0,(int)ALLJoker._allJokerEnum.MAX));
+
+            _dommyJoker.Add(jokerBase);
+
+            JokerObjectUtility.AddDomyyJoker(jokerBase);
+
+
+
+        }
+
+
+
+    }
+
+
     /// <summary>
     /// ID指定の売られたときの挙動
     /// </summary>
@@ -155,6 +215,7 @@ public class JokerManager : MonoBehaviour
     }
 
     public int GetIndex() {  return useIndex; }
+    public int GetIndex(JokerBase jokerBase) { return _jokers.IndexOf(jokerBase); }
 
     public void GrabChange(int id,bool flag) 
     {

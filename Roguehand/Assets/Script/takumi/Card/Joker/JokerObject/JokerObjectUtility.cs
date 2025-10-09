@@ -13,7 +13,9 @@ public static class JokerObjectUtility
     public static void StartJokerPlay() {  instance.StartJokerPlay(); }
 
     public static void AddJoker(JokerBase jokerBase) { instance.AddJoker(jokerBase); }
+    public static void AddDomyyJoker(JokerBase jokerBase) { instance.AddDommyJoker(jokerBase); }
     public static void RemoveJoker(int ID) { instance.RemoveJoker(ID); }
+    public static void RemoveDomyyJoker() { instance.DommyDestroy(); }
 
     public static int GetJokerIndex(JokerObject jokerObject) {return instance.GetJokerIndex(jokerObject); }
 
@@ -29,4 +31,5 @@ public static class JokerObjectUtility
     public static int GetActionCount() { return instance.ActionCount(); }
 
     public static GameObject GetIDObject(int id) { return instance.GetIDObject(id); }
+    public static JokerObject GetIDJokerObject(int id) { return instance.GetIDJokerObject(id); }
 }

@@ -10,17 +10,18 @@ public class CardObjectManager : MonoBehaviour
     private enum cardMaterialType
     {
         /// <summary>
-        /// トランプのスートとナンバーで決まる
+        /// トランプのバフ内容で決まる
         /// </summary>
-        main,
+        effect,
+
         /// <summary>
         /// トランプの裏面
         /// </summary>
         back,
         /// <summary>
-        /// トランプのバフ内容で決まる
+        /// トランプのスートとナンバーで決まる
         /// </summary>
-        effect,
+        main,
 
     }
 
@@ -270,7 +271,7 @@ public class CardObjectManager : MonoBehaviour
 
     public int GetCardIndex(CardObject cardObject) { return _cardObjectHands.FindIndex(card => card == cardObject); }
 
-    public void GrabChenge(int ID,bool flag)
+    public void GrabChenge(int ID, bool flag)
     {
 
         _cardObjectHands[ID].SetGrab(flag);
@@ -280,7 +281,7 @@ public class CardObjectManager : MonoBehaviour
         _cardObjectHands[ID].ResetMoveTime();
     }
 
-    public void ChengeOrder(int lostID,int nextID)
+    public void ChengeOrder(int lostID, int nextID)
     {
         _cardObjectHands = Extra.ChengeOrder(_cardObjectHands, lostID, nextID);
 
@@ -288,8 +289,8 @@ public class CardObjectManager : MonoBehaviour
 
         for (int i = 0; i < _cardObjectHands.Count; i++) _cardObjectHands[i].ResetMoveTime();
 
-        CardManager.instance.SetHand( Extra.ChengeOrder(CardManager.instance.GetHand(),lostID,nextID));
-        
+        CardManager.instance.SetHand(Extra.ChengeOrder(CardManager.instance.GetHand(), lostID, nextID));
+
 
     }
 
@@ -297,7 +298,7 @@ public class CardObjectManager : MonoBehaviour
     /// カードの移動時間をゼロにする
     /// </summary>
     /// <param name="ID"></param>
-    public void StopMoveCardObject(int ID) { _cardObjectHands[ID].StopMove();}
+    public void StopMoveCardObject(int ID) { _cardObjectHands[ID].StopMove(); }
 
     /// <summary>
     /// つまんでいるカードの移動をする関数
@@ -416,7 +417,7 @@ public class CardObjectManager : MonoBehaviour
 
         if (cardObjectHand.IsGrab())
         {
-            Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(_handPositionLeft.transform.position).z-30);
+            Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(_handPositionLeft.transform.position).z - 30);
             moveVec = Camera.main.ScreenToWorldPoint(mousePos);
 
             angle = _NORMALl_ANGLE;
@@ -426,7 +427,7 @@ public class CardObjectManager : MonoBehaviour
         // 移動
         cardObjectHand.transform.position = moveVec;
         // デッキから出たときだけ角度の代入
-        if(cardObjectHand.GetLostStatus()==CardObject.status.deck)cardObjectHand.transform.eulerAngles = angle;
+        if (cardObjectHand.GetLostStatus() == CardObject.status.deck) cardObjectHand.transform.eulerAngles = angle;
 
 
         if (cardObjectHand.IsMovable()) return;
@@ -461,11 +462,11 @@ public class CardObjectManager : MonoBehaviour
     private void CardMovePlay(CardObject cardObjectHand, float handRange, int counter)
     {
 
-        float vec = (Vector3.Distance(_playPositionLeft.position, _playPositionRight.position) / (GetPlayCardCount()+1))*(counter+1);
+        float vec = (Vector3.Distance(_playPositionLeft.position, _playPositionRight.position) / (GetPlayCardCount() + 1)) * (counter + 1);
 
 
         // 移動目標地点を確認
-        Vector3 goalPos = _playPositionLeft.position+new Vector3(vec,0,0);
+        Vector3 goalPos = _playPositionLeft.position + new Vector3(vec, 0, 0);
 
         Debug.Log("座標:" + vec);
 
@@ -528,10 +529,16 @@ public class CardObjectManager : MonoBehaviour
         // もう一度動けるように変更
         cardObjectHand.ResetMoveTime();
 
-        if (!_chengeCardID.Contains(id)) cardObjectHand.SetStatus(CardObject.status.hand);
-
         // 変更をしているカードが配列の何番かを確認
         int targetID = _chengeCardID.FindIndex(n => n == id);
+
+        if (!_chengeCardID.Contains(id) && cardObjectHand.GetStatus() != CardObject.status.hand)
+        {
+            cardObjectHand.SetStatus(CardObject.status.hand);
+
+            CardPaint(_chengeCardTrump[targetID], id);
+
+        }
 
         if (targetID < 0) return;
 
@@ -552,8 +559,12 @@ public class CardObjectManager : MonoBehaviour
         Material[] materials = meshRenderer.materials;
         // トランプのエフェクトマテリアルをセット（いまはない）
 
+        if (Card.deckBuff.None != cardData.deckBuff ) materials[(int)cardMaterialType.effect]= BuffUtility.GetTrumpMaterial((int)cardData.deckBuff);
+        if(Card.cardBuff.None!= cardData.cardBuff) materials[(int)cardMaterialType.effect]= BuffUtility.GetCardMaterial((int)cardData.cardBuff);
+
+
         // トランプのソーツとナンバーを含んだマテリアルをセット
-         materials[(int)cardMaterialType.main] = _materialManager.GetMaterial((int)cardData.suit,(int)cardData.number);
+        materials[(int)cardMaterialType.main] = _materialManager.GetMaterial((int)cardData.suit, (int)cardData.number);
 
         meshRenderer.materials = materials;
     }
@@ -564,7 +575,7 @@ public class CardObjectManager : MonoBehaviour
     /// <returns></returns>
     private CardObject GetUseCardObject()
     {
-        for (int i = _cardObjects.Count-1; i >=0; i--)
+        for (int i = _cardObjects.Count - 1; i >= 0; i--)
         {
             // カードがdeckになかったらもう一度
             if (_cardObjects[i].GetStatus() != CardObject.status.deck) continue;
@@ -611,6 +622,6 @@ public class CardObjectManager : MonoBehaviour
         return count;
     }
 
-   
+
 
 }
