@@ -15,6 +15,14 @@ public class CardBuff
         {
             case Card.cardBuff.None:
                 break;
+            case Card.cardBuff.Foil:
+                break;
+            case Card.cardBuff.Hologram:
+                break;
+            case Card.cardBuff.Polychrome:
+                break;
+            case Card.cardBuff.MouseJammer:
+                break;
             default:
                 break;
         }

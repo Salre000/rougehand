@@ -51,6 +51,7 @@ public class Card
         Green, //プレイした時に発動する　手札からランダムに破壊
         Orange,//プレイした時に発動する　ジョーカーの売値を＋２
         Black,//文字化け　永続　倍率×　段階×２（段階５）
+        MAX
     }
     /// <summary>
     /// あらゆるカードにバフが可能なtype
@@ -62,7 +63,7 @@ public class Card
         Hologram,//倍率に追加１０
         Polychrome,//倍率に×1.5
         MouseJammer,// マウスの干渉　マウスが一定の距離を移動するとマウスの座標がずれる　　永続　倍率　５＋全ての段階を足した値　（段階５）　
-
+        MAX
     }
     /// <summary>
     /// デッキのカードにバフが可能なtype
@@ -79,7 +80,7 @@ public class Card
         Lucky,//確立でお金か倍率追加
         Random,//　手札に来た時にスートとナンバーが確定する　手札に来た時に　残り２つのばふがランダムにつく
         BlindScore,//獲得から破壊までの間　画面左の数字が妨害で見にくい ジョーカーの前に発動 倍率×段階 (段階５)
-
+        MAX
     }
     /// <summary>
     /// ジョーカーのみにバフが可能なtype
@@ -89,7 +90,8 @@ public class Card
         None = -1,
         Negative,//ジョーカーの枠を追加１
         Sepia,//基本スコアと倍率を入れ替える　セピアー＞コウイカー＞イカサマー＞入れ替え
-        ObjectMove　//オブジェクトの位置が変わる　　倍率×段階　（段階５）
+        ObjectMove,　//オブジェクトの位置が変わる　　倍率×段階　（段階５）
+            MAX
     }
     public enum trumpMaterial
     {

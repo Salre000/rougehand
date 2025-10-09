@@ -10,8 +10,8 @@ public class BuffJoker : JokerBase
 
         JokerUtility.JokerALLAction(joker =>
         {
-            joker.SetCardBuff((Card.cardBuff)Random.Range(0, (int)Card.cardBuff.MouseJammer));
-            joker.SetJokerBuff((Card.JokerBuff)Random.Range(0, (int)Card.JokerBuff.ObjectMove));
+            joker.SetCardBuff((Card.cardBuff)Random.Range(0, (int)Card.cardBuff.MAX));
+            joker.SetJokerBuff((Card.JokerBuff)Random.Range(0, (int)Card.JokerBuff.MAX));
 
             JokerUtility.JokerChenge(JokerUtility.GetIndex(joker));
 
