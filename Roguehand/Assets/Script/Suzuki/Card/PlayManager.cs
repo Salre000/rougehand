@@ -139,16 +139,16 @@ public class PlayManager : MonoBehaviour
     // ストレートフラッシュ
     private Role StraightFlash(List<Card.Trump> cards)
     {
-        List<Card.Trump> jastList = new();
+        List<Card.Trump> checkList = new();
 
         // スートが揃っているかチェック
         indexList = JastSuitCheck(cards);
         // 揃っていなければ役は不成立となる
         if (indexList == null) return Role.None;
         for (int i = 0; i < indexList.Count; i++)
-            jastList.Add(cards[indexList[i]]);
+            checkList.Add(cards[indexList[i]]);
         // ストレートかをチェック
-        indexList = StraightCheck(jastList);
+        indexList = StraightCheck(checkList);
         if (indexList == null) return Role.None;
 
         return Role.straightFlush;
@@ -157,7 +157,18 @@ public class PlayManager : MonoBehaviour
     // ※フェイスファイブカード
     private Role FiveFeiceCard(List<Card.Trump> cards)
     {
-        indexList=FaceCheck(cards);
+        List<Card.Trump> checkList = new();
+
+        // フェイスカードが揃っているかを確認
+        indexList = FaceCheck(cards);
+        if(indexList == null) return Role.None;
+        // 揃っていなければ役は不成立となる
+        if (indexList == null) return Role.None;
+        // 確認できたフェイスカードを確認用リストに入れる
+        for (int i = 0; i < indexList.Count; i++)
+            checkList.Add(cards[indexList[i]]);
+        // フェイスでそろっていたカードがナンバーもそろっているか確認する
+        indexList=JastNumberCheck(checkList);
         if(indexList == null) return Role.None;
 
         return Role.faceFiveCard;
