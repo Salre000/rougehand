@@ -39,6 +39,8 @@ public class BuffJoker : JokerBase
             Card.Trump card = trumps[i];
 
             card.sealBuff = (Card.sealBuff)Random.Range(0, (int)Card.sealBuff.MAX);
+            card.deckBuff = (Card.deckBuff)Random.Range(0, (int)Card.deckBuff.MAX);
+            card.cardBuff = (Card.cardBuff)Random.Range(0, (int)Card.cardBuff.MAX);
 
             trumps[i] = card;
 

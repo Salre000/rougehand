@@ -103,11 +103,21 @@ public class SystemErrorBuff
                     if (trumps[i].cardBuff != Card.cardBuff.MouseJammer) continue;
                     count++;
                 }
-                //ジョーカーの分もかくけど後回し
+
+
+                //ジョーカーの分もカウント
+                JokerUtility.JokerALLAction(joker =>
+                {
+
+                    if (joker.GetCardBuff() != Card.cardBuff.MouseJammer) return;
+                    count++;
+
+                });
+
 
                 //デバックの為に個数を３で固定する
 
-                count = 3;
+                //count = 3;
 
 
                 return count;
@@ -120,6 +130,10 @@ public class SystemErrorBuff
 
         public override void UpData()
         {
+
+            if (errorCount() == 0) return;
+
+
             POINT pOINT = new POINT();
             GetCursorPos(out pOINT);
 

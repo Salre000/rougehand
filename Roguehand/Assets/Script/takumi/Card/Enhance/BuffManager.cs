@@ -54,6 +54,9 @@ public class BuffManager : MonoBehaviour
         _errorBuff=new SystemErrorBuff();
 
         BuffUtility.BuffManager = this;
+        _errorBuff.CreateErrorBuff();
+
+
     }
 
     /// <summary>

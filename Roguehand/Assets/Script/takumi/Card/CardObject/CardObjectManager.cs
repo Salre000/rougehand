@@ -564,17 +564,38 @@ public class CardObjectManager : MonoBehaviour
 
         MeshRenderer meshRenderer = _cardObjectHands[id].transform.GetChild(0).GetComponent<MeshRenderer>();
         Material[] materials = meshRenderer.materials;
-        // トランプのエフェクトマテリアルをセット（いまはない）
-
+        // トランプのエフェクトマテリアルをセット
         if (Card.deckBuff.None != cardData.deckBuff) materials[(int)cardMaterialType.effect] = BuffUtility.GetTrumpMaterial((int)cardData.deckBuff);
         if (Card.cardBuff.None != cardData.cardBuff) materials[(int)cardMaterialType.effect] = BuffUtility.GetCardMaterial((int)cardData.cardBuff);
         if (Card.sealBuff.None != cardData.sealBuff) materials[(int)cardMaterialType.sael] = BuffUtility.GetSealMaterial((int)cardData.sealBuff);
 
-
         // トランプのソーツとナンバーを含んだマテリアルをセット
         materials[(int)cardMaterialType.main] = _materialManager.GetMaterial((int)cardData.suit, (int)cardData.number);
 
-        meshRenderer.materials = materials;
+        if (cardData.deckBuff == Card.deckBuff.Glass) 
+        {
+            //グラズのマテリアルのときだけベースのマテリアルのレンダリングモードをFadeに変更する
+            materials[(int)cardMaterialType.main].SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            materials[(int)cardMaterialType.main].SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            materials[(int)cardMaterialType.main].SetInt("_ZWrite", 1);
+            materials[(int)cardMaterialType.main].DisableKeyword("_ALPHATEST_ON");
+            materials[(int)cardMaterialType.main].EnableKeyword("_ALPHABLEND_ON");
+            materials[(int)cardMaterialType.main].DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            materials[(int)cardMaterialType.main].renderQueue = 3000;
+        }
+        else 
+        {
+            materials[(int)cardMaterialType.main].SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+            materials[(int)cardMaterialType.main].SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+            materials[(int)cardMaterialType.main].SetInt("_ZWrite", 1);
+            materials[(int)cardMaterialType.main].DisableKeyword("_ALPHATEST_ON");
+            materials[(int)cardMaterialType.main].DisableKeyword("_ALPHABLEND_ON");
+            materials[(int)cardMaterialType.main].DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            materials[(int)cardMaterialType.main].renderQueue = -1;
+        }
+
+
+            meshRenderer.materials = materials;
     }
 
     /// <summary>

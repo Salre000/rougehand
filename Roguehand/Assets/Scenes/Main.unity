@@ -5561,8 +5561,11 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e88a9764518cae641a53d0ec00b2c647, type: 2}
   - {fileID: 2100000, guid: 58629c7cc0186144eafd8a335feead87, type: 2}
   - {fileID: 2100000, guid: 3505d87fbf4b0d24fa4e1243b2ea3f08, type: 2}
-  - {fileID: 2100000, guid: 9fdd010ada9256e44b5f9d88a5f1e82f, type: 2}
   trumpMaterial:
+  - {fileID: 2100000, guid: c6db9a175d8e8f84ea4d16a946e6dad6, type: 2}
+  - {fileID: 2100000, guid: 4ecca7ed166f20d46a9f2f4d27583d18, type: 2}
+  - {fileID: 2100000, guid: 8c462500969d78944810006ebbb2c44b, type: 2}
+  - {fileID: 2100000, guid: a7877cb5258f0284bb5da057b158086e, type: 2}
   - {fileID: 2100000, guid: 9fdd010ada9256e44b5f9d88a5f1e82f, type: 2}
   - {fileID: 2100000, guid: 9fdd010ada9256e44b5f9d88a5f1e82f, type: 2}
   - {fileID: 2100000, guid: 9fdd010ada9256e44b5f9d88a5f1e82f, type: 2}
