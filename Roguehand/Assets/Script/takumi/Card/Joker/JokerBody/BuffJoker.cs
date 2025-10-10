@@ -15,10 +15,41 @@ public class BuffJoker : JokerBase
 
             JokerUtility.JokerChenge(JokerUtility.GetIndex(joker));
 
+
+
         });
+
+        ChengeCard();
 
         //アクション状態に変更するコマンド
         JokerObjectUtility.CardAddAction(-1, -2);
+
+
+
+
+    }
+    private void ChengeCard() 
+    {
+        List<Card.Trump> trumps = CardManager.instance.GetHand();
+
+        for(int i = 0; i < trumps.Count; i++) 
+        {
+            if (trumps[i].sealBuff != Card.sealBuff.None) continue;
+
+            Card.Trump card = trumps[i];
+
+            card.sealBuff = (Card.sealBuff)Random.Range(0, (int)Card.sealBuff.MAX);
+
+            trumps[i] = card;
+
+            CardObjectUtility.SetChengeCard(i, card);
+
+        }
+        // 手札に上書き
+        CardManager.instance.SetHand(trumps);
+
+
+
 
 
 

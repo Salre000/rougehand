@@ -5550,11 +5550,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sealMaterial:
-  - {fileID: 2100000, guid: 9fdd010ada9256e44b5f9d88a5f1e82f, type: 2}
-  - {fileID: 2100000, guid: 9fdd010ada9256e44b5f9d88a5f1e82f, type: 2}
-  - {fileID: 2100000, guid: 9fdd010ada9256e44b5f9d88a5f1e82f, type: 2}
-  - {fileID: 2100000, guid: 9fdd010ada9256e44b5f9d88a5f1e82f, type: 2}
-  - {fileID: 2100000, guid: 9fdd010ada9256e44b5f9d88a5f1e82f, type: 2}
+  - {fileID: 2100000, guid: 6f0f1c185c3d71947b2a87ecd47f1f69, type: 2}
+  - {fileID: 2100000, guid: 5f0f220915915f1448a46ab4bf50fc89, type: 2}
+  - {fileID: 2100000, guid: 49007ddab31f11347a91edc849aa5192, type: 2}
+  - {fileID: 2100000, guid: b4bb3ec82461a934293856cf1928b5d6, type: 2}
+  - {fileID: 2100000, guid: 08918b2cef0ac0a408e2174a58e334a8, type: 2}
+  - {fileID: 2100000, guid: 01eb0795fa61a0246a619d938d621fea, type: 2}
   cardMaterial:
   - {fileID: 2100000, guid: eccfa797e61f3924285028e7b87d8dfb, type: 2}
   - {fileID: 2100000, guid: e88a9764518cae641a53d0ec00b2c647, type: 2}
