@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Card;
 
 public class PlayManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class PlayManager : MonoBehaviour
 
     private bool _isPlay = false;
     private int _roleNumber = -1;   // 中で一番強い役を数字で表す
+    List<int> indexList = new();    // 役の条件にはまっているカードの要素数が入る
+
 
     public enum Role
     {
@@ -79,7 +82,6 @@ public class PlayManager : MonoBehaviour
     // ロイヤルフラッシュ
     private Role RoyalFlush(List<Card.Trump> cards)
     {
-        List<int> jastNums = new();
         List<Card.Trump> jastList = new();
         List<bool> jastNumberBool = new();
         bool ace = false;
@@ -89,15 +91,15 @@ public class PlayManager : MonoBehaviour
         bool ten = false;
 
         // スートが揃っているかチェック
-        jastNums = JastSuitCheck(cards);
+        indexList = JastSuitCheck(cards);
         // 揃っていなければ役は不成立となる
-        if (jastNums == null) return Role.None;
+        if (indexList == null) return Role.None;
 
         // そろっている五つのスートが1~10になっているか
-        for (int j = 0; j < jastNums.Count; j++)
+        for (int j = 0; j < indexList.Count; j++)
         {
             // 同スートカード情報がjastListの中に入る
-            jastList.Add(cards[jastNums[j]]);
+            jastList.Add(cards[indexList[j]]);
         }
         // 中に入れたカード情報はスートが揃っていることが分かっているので
         // 数字の照らし合わせを行い見事五つ揃えばロイヤルフラッシュが認められる
@@ -137,25 +139,56 @@ public class PlayManager : MonoBehaviour
     // ストレートフラッシュ
     private Role StraightFlash(List<Card.Trump> cards)
     {
-        List<int> jastNums = new();
+        List<Card.Trump> jastList = new();
 
         // スートが揃っているかチェック
-        jastNums = JastSuitCheck(cards);
-        for(int i = 0; i < jastNums.Count; i++)
-        {
-            
-        }
+        indexList = JastSuitCheck(cards);
         // 揃っていなければ役は不成立となる
-        if (jastNums == null) return Role.None;
+        if (indexList == null) return Role.None;
+        for (int i = 0; i < indexList.Count; i++)
+            jastList.Add(cards[indexList[i]]);
+        // ストレートかをチェック
+        indexList = StraightCheck(jastList);
+        if (indexList == null) return Role.None;
 
-
-        return Role.None;
+        return Role.straightFlush;
     }
 
+    // ※フェイスファイブカード
+    private Role FiveFeiceCard(List<Card.Trump> cards)
+    {
+        indexList=FaceCheck(cards);
+        if(indexList == null) return Role.None;
 
+        return Role.faceFiveCard;
+    }
+
+    // ※ファイブカード
+    private Role FiveCard(List<Card.Trump> cards)
+    {
+        indexList= JastNumberCheck(cards);
+        if (indexList == null) return Role.None;
+        return Role.faceFiveCard;
+    }
+
+    // ※フェイスフォーカード
+    private Role FaceFourCard(List<Card.Trump> cards)
+    {
+        indexList=FaceCheck(cards,4);
+        if( indexList == null) return Role.None;
+        return Role.faceFourCard;
+    }
+
+    // フォーカード
+    private Role FourCard(List<Card.Trump> cards)
+    {
+        indexList = JastNumberCheck(cards, 4);
+        if(indexList== null) return Role.None;
+        return Role.fourCard;
+    }
 
     /// <summary>
-    /// 引数2数分のスートが揃っているか確認する
+    /// スートが揃っているか判定します。
     /// </summary>
     /// <param name="cards">チェックしたいカードリスト</param>
     /// <param name="jastSuitCount">何枚揃っていれば良いか デフォルト:5</param>
@@ -193,6 +226,39 @@ public class PlayManager : MonoBehaviour
     }
 
     /// <summary>
+    /// ナンバーが揃っているかを判定します。
+    /// </summary>
+    /// <param name="cards">チェックしたいカードリスト</param>
+    /// <param name="jastNumberCount">何枚揃っていれば良いか デフォルト:5</param>
+    /// <param name="number">欲しいナンバーが決まっているなら選択する デフォルト:None</param>
+    /// <returns>どこの要素数に揃っているスートがあるかを返します。揃っていなければnullを返します。</returns>
+    private List<int> JastNumberCheck(List<Card.Trump> cards, int jastNumberCount = 5,Card.number number=Card.number.None)
+    {
+        int jastNumber = 0;
+        if(number!=Card.number.None)
+            jastNumber=(int)number;
+
+        for (int i = jastNumber; i < (int)Card.number.king; i++)
+        {
+            indexList.Clear();
+
+            // 同じナンバーを探す
+            for(int j = 0; j < cards.Count; j++)
+            {
+                if (cards[j].number != (Card.number)i) continue;
+                indexList.Add(j);
+                if (indexList.Count >= jastNumberCount) return indexList;
+            }
+
+            // ナンバーを指定していて、欲しい数揃っていなければnullを返す
+            if (number != Card.number.None)
+                return null;
+        }
+        return null;
+
+    }
+
+    /// <summary>
     /// 数字が連続的に並んでいるか判定します。
     /// </summary>
     /// <param name="cards">チェックしたいカードリスト</param>
@@ -211,9 +277,9 @@ public class PlayManager : MonoBehaviour
         for (int i = 0; i < cards.Count; i++)
         {
             if (cards.Count == i) break;
- 
+
             // 一個上が連続した数値かどうか
-            if (oneSkipFlag ? cards[i].number == cards[i + 1].number + 1|| cards[i].number == cards[i + 1].number + 2 : cards[i].number == cards[i + 1].number + 1)
+            if (oneSkipFlag ? cards[i].number == cards[i + 1].number + 1 || cards[i].number == cards[i + 1].number + 2 : cards[i].number == cards[i + 1].number + 1)
             {
                 // 元のカードリストと同じものを見つける
                 for (int j = 0; j < jastCards.Count; j++)
@@ -235,6 +301,24 @@ public class PlayManager : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// フェイスカードかどうか判定します。
+    /// </summary>
+    /// <param name="cards">チェックしたいカードリスト</param>
+    /// <param name="faceCount">何枚揃っていればいいか デフォルト:5</param>
+    /// <returns>どこの要素数にフェイスカードがあるかを返します。欲しい数揃っていなければnullを返します。</returns>
+    private List<int> FaceCheck(List<Card.Trump> cards, int faceCount = 5)
+    {
+        List<int> indexLists = new List<int>();
+        for (int i = 0; i < cards.Count; i++)
+        {
+            if (cards[i].isFeice != true) continue;
+            indexLists.Add(i);
+            if(indexLists.Count >= faceCount) return indexLists;
+        }
+
+        return null;
+    }
 
     // 役の強さ順
     // ※隠し役
