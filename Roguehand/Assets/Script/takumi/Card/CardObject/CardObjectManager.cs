@@ -23,6 +23,10 @@ public class CardObjectManager : MonoBehaviour
         /// </summary>
         main,
 
+        buff,
+
+        sael
+
     }
 
 
@@ -534,9 +538,12 @@ public class CardObjectManager : MonoBehaviour
 
         if (!_chengeCardID.Contains(id) && cardObjectHand.GetStatus() != CardObject.status.hand)
         {
+
             cardObjectHand.SetStatus(CardObject.status.hand);
 
-            CardPaint(_chengeCardTrump[targetID], id);
+            CardPaint(_chengeCardTrump[0], id);
+
+            _chengeCardTrump.RemoveAt(0);
 
         }
 
@@ -544,7 +551,7 @@ public class CardObjectManager : MonoBehaviour
 
         // 確認した番号の配列を除外
         _chengeCardID.RemoveAt(targetID);
-        _chengeCardTrump.RemoveAt(targetID);
+         
 
     }
 
@@ -559,8 +566,9 @@ public class CardObjectManager : MonoBehaviour
         Material[] materials = meshRenderer.materials;
         // トランプのエフェクトマテリアルをセット（いまはない）
 
-        if (Card.deckBuff.None != cardData.deckBuff ) materials[(int)cardMaterialType.effect]= BuffUtility.GetTrumpMaterial((int)cardData.deckBuff);
-        if(Card.cardBuff.None!= cardData.cardBuff) materials[(int)cardMaterialType.effect]= BuffUtility.GetCardMaterial((int)cardData.cardBuff);
+        if (Card.deckBuff.None != cardData.deckBuff) materials[(int)cardMaterialType.effect] = BuffUtility.GetTrumpMaterial((int)cardData.deckBuff);
+        if (Card.cardBuff.None != cardData.cardBuff) materials[(int)cardMaterialType.effect] = BuffUtility.GetCardMaterial((int)cardData.cardBuff);
+        if (Card.sealBuff.None != cardData.sealBuff) materials[(int)cardMaterialType.sael] = BuffUtility.GetSealMaterial((int)cardData.sealBuff);
 
 
         // トランプのソーツとナンバーを含んだマテリアルをセット
