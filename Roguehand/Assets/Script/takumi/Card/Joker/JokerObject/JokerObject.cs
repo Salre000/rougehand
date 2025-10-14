@@ -4,8 +4,7 @@ using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 using static JokerObjectManager;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
-public class JokerObject : MonoBehaviour
+public class JokerObject : MonoBehaviour,ExplanationInterface
 {
 
 

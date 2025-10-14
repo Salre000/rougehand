@@ -68,6 +68,8 @@ public class GrabManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             GetObjectType(hit.transform.gameObject);
+
+
         }
 
     }
@@ -92,6 +94,7 @@ public class GrabManager : MonoBehaviour
         {
             SetGrabID(hit.transform.gameObject);
 
+            ExplanationManager.instance.Remove(hit.transform.gameObject);
 
         }
 
