@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// アイテムの抽象クラス
 /// </summary>
-public abstract class ItemBase:SaleInterface
+public abstract class ItemBase : SaleInterface
 {
 
 
@@ -19,6 +20,35 @@ public abstract class ItemBase:SaleInterface
     /// クラスの初期化処理
     /// </summary>
     public abstract void Initializ();
+
+    /// <summary>
+    /// 売却に使う関数に変更を加えて使用を可能にした
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <param name="saleValue"></param>
+    /// <param name="action"></param>
+    void SaleInterface.SaleShow(Vector3 pos, int saleValue, Action action)
+    {
+
+        Vector2 ButtonPos = Camera.main.WorldToScreenPoint(pos);
+        if (GUI.Button(new Rect(ButtonPos.x + 75, Screen.height - ButtonPos.y - 90, 60, 90),
+            ("<size=25><color=#ffffff>売却\n$" + saleValue.ToString() + "</color></size>"), SaleUtility.GetStyle()))
+        {
+
+            action();
+
+            //お金を増やす処理
+
+
+        }
+
+        if (GUI.Button(new Rect(ButtonPos.x + 75, Screen.height - ButtonPos.y, 60, 90),
+            ("<size=25><color=#ffffff>使用\n</color></size>"), SaleUtility.GetStyle()))
+        {
+            action();
+            Use();
+        }
+    }
 
 
     /// <summary>
@@ -37,7 +67,7 @@ public abstract class ItemBase:SaleInterface
     /// 売却時のお金の量を増やす関数
     /// </summary>
     /// <param name="add"></param>
-    public void AddReturnMoney(int add) {  _returnMoney += add; }
+    public void AddReturnMoney(int add) { _returnMoney += add; }
 
 
 

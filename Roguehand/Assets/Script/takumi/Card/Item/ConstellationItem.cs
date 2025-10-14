@@ -17,6 +17,7 @@ public class ConstellationItem : ItemBase
         // いまのところ特になし
 
 
+
     }
 
     public override void Use()
@@ -24,7 +25,6 @@ public class ConstellationItem : ItemBase
 
         Debug.Log("星座カードが使用されたよ");
         // IDを使用して星座のレベルを上昇させる処理をかく
-
 
 
     }

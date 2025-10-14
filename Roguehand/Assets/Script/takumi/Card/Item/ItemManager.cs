@@ -71,10 +71,7 @@ public class ItemManager : MonoBehaviour
         // オブジェクトを配列から消去
         _itemObjectList.RemoveAt(index);
 
-        BreakUtility.StartBreak(gameObject);
-        Destroy(gameObject);
-
-        
+        BreakUtility.StartBreak(gameObject);       
 
     }
     public void Remove(int itemBase) 
