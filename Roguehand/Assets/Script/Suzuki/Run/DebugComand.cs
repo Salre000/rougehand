@@ -41,7 +41,7 @@ public class DebugComand : MonoBehaviour
         handCount--;
         SetHandText(handCount.ToString());
         OnePear();
-        PlayManager.instance.SetIsPlay(true);
+        RoleManager.instance.SetIsPlay(true);
     }
 
     public void OnDisCard()

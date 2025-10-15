@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Card;
 
-public class PlayManager : MonoBehaviour
+public class RoleManager : MonoBehaviour
 {
-    public static PlayManager instance;
+    public static RoleManager instance;
 
     private bool _isPlay = false;
     private int _roleNumber = -1;   // 中で一番強い役を数字で表す
@@ -16,20 +16,21 @@ public class PlayManager : MonoBehaviour
     {
         None = -1,
         revolution,
-        royalFlush,
-        straightFlush,
+        flashFive,
+        flashHouse,
         faceFiveCard,
         fiveCard,
         faceFourCard,
+        faceThreeCard,
+        royalFlush,
+        straightFlush,
         fourCard,
-        flashHouse,
         fullHouse,
         flash,
         straight,
-        faceThreeCard,
         threeCard,
-        twoPare,
-        onePare,
+        twoPair,
+        onePair,
         highCard,
     }
 
@@ -43,42 +44,142 @@ public class PlayManager : MonoBehaviour
     /// そろっている役があるか確認する
     /// </summary>
     /// <returns></returns>
-    public int RoleCheck(List<Card.Trump> cards)
+    public Role MainRoleCheck(List<Card.Trump> cards)
     {
-        // cardsの上からそろっているものを確認していく
-        // ナンバーのチェック
-        for (int i = 0; i < cards.Count; i++)
-        {
-            foreach (Card.Trump card in cards)
-            {
+        // 役の強い順に判定
+        if (Revolution(cards) != Role.None) return Role.revolution;
+        else if (FlashFive(cards) != Role.None) return Role.flashFive;
+        else if (flashHouse(cards) != Role.None) return Role.flashHouse;
+        else if (FaceFiveCard(cards) != Role.None) return Role.faceFiveCard;
+        else if (FiveCard(cards) != Role.None) return Role.fiveCard;
+        else if (FaceFourCard(cards) != Role.None) return Role.faceFourCard;
+        else if (FaceThreeCard(cards) != Role.None) return Role.faceThreeCard;
+        else if (RoyalFlush(cards) != Role.None) return Role.royalFlush;
+        else if (StraightFlash(cards) != Role.None) return Role.straightFlush;
+        else if (FourCard(cards) != Role.None) return Role.fourCard;
+        else if (FullHouse(cards) != Role.None) return Role.fullHouse;
+        else if (Flash(cards) != Role.None) return Role.flash;
+        else if (Straight(cards) != Role.None) return Role.straight;
+        else if (ThreeCard(cards) != Role.None) return Role.threeCard;
+        else if (TwoPair(cards) != Role.None) return Role.twoPair;
+        else if (OnePair(cards) != Role.None) return Role.onePair;
 
-            }
-        }
-
-        return _roleNumber;
+        return Role.highCard;
     }
 
-    // 革命
+    // ※革命
     private Role Revolution(List<Card.Trump> cards)
     {
-        List<Card.Trump> copy = new(cards);
-
-        int twoIndex = 0;
-        List<int> revoList = new List<int>();
-        // 革命がそろっているか探します
-        foreach (Card.Trump card in cards)
+        for(int i = 0; i<cards.Count; i++)
         {
-            twoIndex++;
-            if (card.number != Card.number.two) continue;
-            // 2のある場所を記録
-            revoList.Add(twoIndex);
+            if (cards[i].number!=Card.number.two) continue;
+            indexList.Add(i);
         }
 
-        if (revoList.Count < 5) return Role.None;
+        if (indexList.Count >= 5) return Role.revolution;
 
-        return Role.revolution;
+        return Role.None;
     }
 
+    // ※フラッシュファイブ
+    private Role FlashFive(List<Card.Trump> cards)
+    {
+        // 同スートチェック
+        indexList = JastSuitCheck(cards);
+        if (indexList == null) return Role.None;
+        List<Card.Trump> checkList = new();
+        for (int i = 0; i < indexList.Count; i++)
+            checkList.Add(cards[indexList[i]]);
+        // 同ナンバーチェック
+        if (JastNumberCheck(checkList, 5) == null) return Role.None;
+
+        return Role.flashFive;
+    }
+
+    // ※フラッシュハウス
+    private Role flashHouse(List<Card.Trump> cards)
+    {
+        // 同スートチェック
+        indexList = JastSuitCheck(cards);
+        if (indexList == null) return Role.None;
+        List<Card.Trump> checkList = new();
+        for (int i = 0; i < indexList.Count; i++)
+            checkList.Add(cards[indexList[i]]);
+
+        // フルハウスチェック
+        List<Card.Trump> checkList2 = new();
+        List<Card.Trump> checkList3 = new();
+        for (int i = 0; i < checkList.Count; i++)
+        {
+            if (checkList[0].number == checkList[i].number)
+                checkList2.Add(checkList[i]);
+            else
+                checkList3.Add(checkList[i]);
+        }
+        //フルハウスチェック
+        if (checkList2.Count == 3)
+        {
+            if (JastNumberCheck(checkList2, 3) == null) return Role.None;
+            if (JastNumberCheck(checkList3, 2) == null) return Role.None;
+        }
+        else
+        {
+            if (JastNumberCheck(checkList2, 2) == null) return Role.None;
+            if (JastNumberCheck(checkList3, 3) == null) return Role.None;
+        }
+
+        return Role.flashHouse;
+    }
+    // ※フェイスファイブカード
+    private Role FaceFiveCard(List<Card.Trump> cards)
+    {
+        // フェイスカードが揃っているかを確認
+        indexList = FaceCheck(cards);
+        // 揃っていなければ役は不成立となる
+        if (indexList == null) return Role.None;
+        // 確認できたフェイスカードを確認用リストに入れる
+        List<Card.Trump> checkList = new();
+        for (int i = 0; i < indexList.Count; i++)
+            checkList.Add(cards[indexList[i]]);
+        // フェイスでそろっていたカードがナンバーもそろっているか確認する
+        indexList = JastNumberCheck(checkList);
+        if (indexList == null) return Role.None;
+
+        return Role.faceFiveCard;
+    }
+
+    // ※ファイブカード
+    private Role FiveCard(List<Card.Trump> cards)
+    {
+        indexList = JastNumberCheck(cards);
+        if (indexList == null) return Role.None;
+        return Role.faceFiveCard;
+    }
+    // ※フェイスフォーカード
+    private Role FaceFourCard(List<Card.Trump> cards)
+    {
+        indexList = FaceCheck(cards, 4);
+        if (indexList == null) return Role.None;
+        List<Card.Trump> checkList = new();
+        for (int i = 0; i < indexList.Count; i++)
+            checkList.Add(cards[indexList[i]]);
+        indexList = JastNumberCheck(checkList, 4);
+        if (indexList == null) return Role.None;
+        return Role.faceFourCard;
+    }
+    // ※フェイススリーカード
+    private Role FaceThreeCard(List<Card.Trump> cards)
+    {
+        List<Card.Trump> checkList = new();
+
+        indexList = FaceCheck(cards, 3);
+        if (indexList == null) return Role.None;
+        for (int i = 0; i < indexList.Count; i++)
+            checkList.Add(cards[indexList[i]]);
+        indexList = JastNumberCheck(checkList, 3);
+        if (indexList == null) return Role.None;
+        return Role.faceThreeCard;
+    }
     // ロイヤルフラッシュ
     private Role RoyalFlush(List<Card.Trump> cards)
     {
@@ -139,12 +240,12 @@ public class PlayManager : MonoBehaviour
     // ストレートフラッシュ
     private Role StraightFlash(List<Card.Trump> cards)
     {
-        List<Card.Trump> checkList = new();
 
         // スートが揃っているかチェック
         indexList = JastSuitCheck(cards);
         // 揃っていなければ役は不成立となる
         if (indexList == null) return Role.None;
+        List<Card.Trump> checkList = new();
         for (int i = 0; i < indexList.Count; i++)
             checkList.Add(cards[indexList[i]]);
         // ストレートかをチェック
@@ -154,48 +255,115 @@ public class PlayManager : MonoBehaviour
         return Role.straightFlush;
     }
 
-    // ※フェイスファイブカード
-    private Role FiveFeiceCard(List<Card.Trump> cards)
-    {
-        List<Card.Trump> checkList = new();
-
-        // フェイスカードが揃っているかを確認
-        indexList = FaceCheck(cards);
-        if(indexList == null) return Role.None;
-        // 揃っていなければ役は不成立となる
-        if (indexList == null) return Role.None;
-        // 確認できたフェイスカードを確認用リストに入れる
-        for (int i = 0; i < indexList.Count; i++)
-            checkList.Add(cards[indexList[i]]);
-        // フェイスでそろっていたカードがナンバーもそろっているか確認する
-        indexList=JastNumberCheck(checkList);
-        if(indexList == null) return Role.None;
-
-        return Role.faceFiveCard;
-    }
-
-    // ※ファイブカード
-    private Role FiveCard(List<Card.Trump> cards)
-    {
-        indexList= JastNumberCheck(cards);
-        if (indexList == null) return Role.None;
-        return Role.faceFiveCard;
-    }
-
-    // ※フェイスフォーカード
-    private Role FaceFourCard(List<Card.Trump> cards)
-    {
-        indexList=FaceCheck(cards,4);
-        if( indexList == null) return Role.None;
-        return Role.faceFourCard;
-    }
-
     // フォーカード
     private Role FourCard(List<Card.Trump> cards)
     {
         indexList = JastNumberCheck(cards, 4);
-        if(indexList== null) return Role.None;
+        if (indexList == null) return Role.None;
         return Role.fourCard;
+    }
+
+    // フルハウス
+    private Role FullHouse(List<Card.Trump> cards)
+    {
+        // フルハウスチェック
+        List<Card.Trump> checkList2 = new();
+        List<Card.Trump> checkList3 = new();
+        for (int i = 0; i < cards.Count; i++)
+        {
+            if (cards[0].number == cards[i].number)
+                checkList2.Add(cards[i]);
+            else
+                checkList3.Add(cards[i]);
+        }
+        int count = checkList2.Count;
+        //フルハウスチェック
+        if (count == 3)
+        {
+            if (JastNumberCheck(checkList2, 3) == null) return Role.None;
+            if (JastNumberCheck(checkList3, 2) == null) return Role.None;
+        }
+        else
+        {
+            if (JastNumberCheck(checkList2, 2) == null) return Role.None;
+            if (JastNumberCheck(checkList3, 3) == null) return Role.None;
+        }
+
+        return Role.fullHouse;
+    }
+
+    // フラッシュ
+    private Role Flash(List<Card.Trump> cards)
+    {
+        // 同スートチェック
+        indexList = JastSuitCheck(cards);
+        if (indexList == null) return Role.None;
+
+        return Role.flash;
+    }
+
+    // ストレート
+    private Role Straight(List<Card.Trump> cards)
+    {
+        indexList = StraightCheck(cards);
+        if (indexList == null) return Role.None;
+        return Role.straight;
+    }
+
+    // スリーカード
+    private Role ThreeCard(List<Card.Trump> cards)
+    {
+        indexList = JastNumberCheck(cards, 3);
+        if (indexList == null) return Role.None;
+
+        return Role.threeCard;
+    }
+
+    // ツーペア
+    private Role TwoPair(List<Card.Trump> cards)
+    {
+        List<Card.Trump> checkList2 = new();
+        List<Card.Trump> checkList3 = new();
+        for (int i = 0; i < cards.Count; i++)
+            if (cards[0].number == cards[i].number)
+                checkList2.Add(cards[i]);
+            else
+                checkList3.Add(cards[i]);
+
+        if (checkList2.Count <= 1)
+        {
+            checkList2.Clear();
+            checkList3.Clear();
+            for (int i = 0; i < cards.Count; i++)
+            {
+                if (cards[1].number == cards[i].number)
+                    checkList2.Add(cards[i]);
+                else
+                    checkList3.Add(cards[i]);
+            }
+        }
+        if (JastNumberCheck(checkList2, 2) == null) return Role.None;
+        if (JastNumberCheck(checkList3, 2) == null) return Role.None;
+
+        return Role.twoPair;
+    }
+
+    // ワンペア
+    private Role OnePair(List<Card.Trump> cards)
+    {
+        for (int i = 0; i < cards.Count; i++)
+        {
+            indexList.Clear();
+            for (int j = 0; j < cards.Count; j++)
+            {
+                if (cards[i].number != cards[j].number) continue;
+                indexList.Add(j);
+            }
+        }
+
+        if (indexList.Count <= 1) return Role.None;
+
+        return Role.onePair;
     }
 
     /// <summary>
@@ -243,18 +411,19 @@ public class PlayManager : MonoBehaviour
     /// <param name="jastNumberCount">何枚揃っていれば良いか デフォルト:5</param>
     /// <param name="number">欲しいナンバーが決まっているなら選択する デフォルト:None</param>
     /// <returns>どこの要素数に揃っているスートがあるかを返します。揃っていなければnullを返します。</returns>
-    private List<int> JastNumberCheck(List<Card.Trump> cards, int jastNumberCount = 5,Card.number number=Card.number.None)
+    private List<int> JastNumberCheck(List<Card.Trump> cards, int jastNumberCount = 5, Card.number number = Card.number.None)
     {
         int jastNumber = 0;
-        if(number!=Card.number.None)
-            jastNumber=(int)number;
+        // ナンバー指定がある場合そのナンバーのみを探す
+        if (number != Card.number.None)
+            jastNumber = (int)number;
 
         for (int i = jastNumber; i < (int)Card.number.king; i++)
         {
             indexList.Clear();
 
             // 同じナンバーを探す
-            for(int j = 0; j < cards.Count; j++)
+            for (int j = 0; j < cards.Count; j++)
             {
                 if (cards[j].number != (Card.number)i) continue;
                 indexList.Add(j);
@@ -325,7 +494,7 @@ public class PlayManager : MonoBehaviour
         {
             if (cards[i].isFeice != true) continue;
             indexLists.Add(i);
-            if(indexLists.Count >= faceCount) return indexLists;
+            if (indexLists.Count >= faceCount) return indexLists;
         }
 
         return null;
@@ -336,24 +505,25 @@ public class PlayManager : MonoBehaviour
 
     // ※革命                       同じスート２の数字のカードを５枚プレイする
     //                                ↑ ラウンド中役の倍率を強いのと弱いのを入れ替える
-    // 　ロイヤルフラッシュ         同じスートの１～１０をプレイする
-    // 　ストレートフラッシュ       同じスートの連番の５枚をプレイする
+    // ※フラッシュファイブ         同じスートで同じ数字
+    // ※フラッシュハウス           フラッシュとフルハウスの条件を同時に揃えてプレイする
     // ※フェイスファイブカード     同じフェイスカードを５枚プレイする
     // ※ファイブカード             同じ数字のカードを５枚プレイする
     // ※フェイスフォーカード       同じフェイスカードを４枚プレイする
+    // ※フェイススリーカード       同じフェイスカードを３枚プレイする
+    // 　ロイヤルフラッシュ         同じスートの１～１０をプレイする
+    // 　ストレートフラッシュ       同じスートの連番の５枚をプレイする
     //　 フォーカード               同じ数字のカードを４枚プレイする
-    // ※フラッシュフルハウス       フラッシュとフルハウスの条件を同時に揃えてプレイする
     //　 フルハウス                 同じ数字を２枚と３枚でプレイする
     //　 フラッシュ                 同じスートを５枚でプレイする
     //　 ストレート                 連続した数字５枚でプレイする
-    // ※フェイススリーカード       同じフェイスカードを３枚プレイする
     //　 スリーカード               同じ数字のカードを３枚でプレイする
     //　 ツーペア                   同じ数字のカードを２枚とずつプレイする
     //　 ワンペア                   同じ数字のカードを２枚でプレイする
     //　 ハイカード                 以上の役が一つも成立しないとき
 
 
-
+    public List<int> GetIndex() { return indexList; }
     public void SetIsPlay(bool isPlay) { _isPlay = isPlay; }
     public bool IsPlay() { return _isPlay; }
 }

@@ -15,6 +15,7 @@ public class CardManager : MonoBehaviour
     /// </summary>
     public List<Card.Trump> deck = new List<Card.Trump>();
     public List<Card.Trump> hand = new List<Card.Trump>();
+    public List<Card.Trump> pick=new List<Card.Trump>();
 
     // 現在のハンドの大きさ
     private int handSize = 8;
@@ -148,5 +149,7 @@ public class CardManager : MonoBehaviour
     public void SetHand(List<Card.Trump> _hand) { hand = _hand; }
     public List<Card.Trump> GetHand() { return hand; }
 
+    public void SetPick(List<Card.Trump> _pick) { pick = _pick; }
+    public List<Card.Trump > GetPick() { return pick; }
 
 }
