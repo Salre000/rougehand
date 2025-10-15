@@ -8,49 +8,26 @@ using UnityEngine;
 public interface ExplanationInterface 
 {
 
-    public enum ExplanationType
-    {
-        Buy,//w“ü
-        Normal,//’Êí
-
-
-
-    }
-
     /// <summary>
-    /// à–¾•ª‚Ì•`‰æ‚·‚éŠÖ”
+    /// –¼‘O‚ğ•Ô‚·ŠÖ”
     /// </summary>
-    public void CreateExplanation(ExplanationType type,string explanation,Vector3 centerPos) 
-    {
-        switch (type)
-        {
-            case ExplanationType.Buy:
-                break;
-            case ExplanationType.Normal:
-                break;
-        }
-    }
-
-    private void ShowBuy(string explanation, Vector3 centerPos) 
-    {
-
-
-        GUI.Box(new Rect(centerPos.x, Screen.height - centerPos.y + 100, 200, 60),explanation, SaleUtility.GetStyle());
-
-
-
-
-    }
-    private void ShowNormal(string explanation, Vector3 centerPos) 
-    {
-
-        GUI.Box(new Rect(centerPos.x, Screen.height - centerPos.y + 100, 200, 60),explanation, SaleUtility.GetStyle());
-
-
-
-
-
-    }
+    /// <returns></returns>
+    public abstract string GetName();
+    /// <summary>
+    /// à–¾‚ğ•Ô‚·ŠÖ”
+    /// </summary>
+    /// <returns></returns>
+    public abstract string GetExplanation();
+    /// <summary>
+    /// ’Ç‰Á‚Ìà–¾‚ğ•Ô‚·ŠÖ”
+    /// </summary>
+    /// <returns></returns>
+    public abstract string GetExplanation2();
+    /// <summary>
+    /// í—Ş‚ğ•Ô‚·ŠÖ”
+    /// </summary>
+    /// <returns></returns>
+    public abstract string GetType();
 
 
 

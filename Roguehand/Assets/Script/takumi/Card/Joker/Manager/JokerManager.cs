@@ -228,6 +228,8 @@ public class JokerManager : MonoBehaviour
         GameObject joker = JokerObjectUtility.GetIDObject(ID);
 
         SaleUtility.SetSale(_jokers[ID], joker, _jokers[ID].GetSaleValue());
+
+        ExplanationManager.instance.AddExplanation(joker, _jokers[ID]);
            
     }
     /// <summary>

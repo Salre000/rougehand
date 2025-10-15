@@ -3,29 +3,45 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 public static class ALLJoker
-{public enum _allJokerEnum{
-_ConstellationUseNeverJoker,
-_Seraph,
-_ItemUseNeverJoker,
-_SixMinutesOne,
-_ThousandMinutesOne,
-_LostColor,
-_IncreaseTheSellingPrice,
-_BuffJoker,
-MAX
-}
-public static JokerBase GetJoker(_allJokerEnum joker){
-        switch (joker){
+{
+    public enum _allJokerEnum
+    {
+        _ConstellationUseNeverJoker,
+        _Seraph,
+        _ItemUseNeverJoker,
+        _SixMinutesOne,
+        _ThousandMinutesOne,
+        _LostColor,
+        _IncreaseTheSellingPrice,
+        _BuffJoker,
+        MAX
+    }
+    public static JokerBase GetJoker(_allJokerEnum joker)
+    {
 
-            case _allJokerEnum._ConstellationUseNeverJoker:return new ConstellationUseNeverJoker();
-            case _allJokerEnum._Seraph:return new Seraph();
-            case _allJokerEnum._ItemUseNeverJoker:return new ItemUseNeverJoker();
-            case _allJokerEnum._SixMinutesOne:return new SixMinutesOne();
-            case _allJokerEnum._ThousandMinutesOne:return new ThousandMinutesOne();
-            case _allJokerEnum._LostColor:return new LostColor();
-            case _allJokerEnum._IncreaseTheSellingPrice:return new IncreaseTheSellingPrice();
-            case _allJokerEnum._BuffJoker:return new BuffJoker();
-}return null;}
+        JokerBase jokerBase = null;
+
+        switch (joker)
+        {
+
+            case _allJokerEnum._ConstellationUseNeverJoker: jokerBase = new ConstellationUseNeverJoker(); break;
+            case _allJokerEnum._Seraph: jokerBase = new Seraph(); break;
+            case _allJokerEnum._ItemUseNeverJoker: jokerBase = new ItemUseNeverJoker(); break;
+            case _allJokerEnum._SixMinutesOne: jokerBase = new SixMinutesOne(); break;
+            case _allJokerEnum._ThousandMinutesOne: jokerBase = new ThousandMinutesOne(); break;
+            case _allJokerEnum._LostColor: jokerBase = new LostColor(); break;
+            case _allJokerEnum._IncreaseTheSellingPrice: jokerBase = new IncreaseTheSellingPrice(); break;
+            case _allJokerEnum._BuffJoker: jokerBase = new BuffJoker(); break;
+        }
+
+
+        jokerBase?.SetID((int)joker + 1 + 2000);
+
+
+        return jokerBase;
+
+    }
+
 
 
 }

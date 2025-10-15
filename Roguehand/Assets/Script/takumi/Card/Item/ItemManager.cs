@@ -113,6 +113,9 @@ public class ItemManager : MonoBehaviour
     {
 
         SaleUtility.SetSale(_itemList[ID], _itemObjectList[ID].gameObject, _itemList[ID].ReturnMoney());
+
+
+
     }
 
     private void CheckOrder()
