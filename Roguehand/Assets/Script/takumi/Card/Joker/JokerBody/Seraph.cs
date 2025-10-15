@@ -21,5 +21,8 @@ public class Seraph : JokerBase
 
     public override JokerActionUseEnum.JokerRarity GetRarity() { return JokerActionUseEnum.JokerRarity.Rare;}
 
-
+    public override string GetName()
+    {
+        return "レイディアンス";
+    }
 }

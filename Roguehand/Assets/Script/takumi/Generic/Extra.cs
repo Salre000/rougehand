@@ -45,4 +45,55 @@ public static class Extra
 
     }
 
+
+    public static string GetJokerRarityNema(this JokerActionUseEnum.JokerRarity jokerRarity) 
+    {
+        string name=string.Empty;
+
+        switch (jokerRarity)
+        {
+            case JokerActionUseEnum.JokerRarity.Common:
+                name = "コモン";
+                break;
+            case JokerActionUseEnum.JokerRarity.Uncommon:
+                name = "アンコモン";
+                break;
+            case JokerActionUseEnum.JokerRarity.Rare:
+                name = "レア";
+                break;
+            case JokerActionUseEnum.JokerRarity.Legendary:
+                name = "レジェンダリー";
+                break;
+        }
+
+       return name;
+
+    }
+
+    public static Color GetJokerRarityColor(this string jokerRarity) 
+    {
+
+        Color color=new Color();
+
+        switch (jokerRarity)
+        {
+            case "コモン":
+                color = new Color(0,255,227);
+                break;
+            case "アンコモン":
+                color = new Color(8,192,0);
+                break;
+            case "レア":
+                color = new Color(0,72,255);
+                break;
+            case "レジェンダリー":
+                color = new Color(255,0,25);
+                break;
+        }
+
+        return color;
+
+
+    }
+
 }

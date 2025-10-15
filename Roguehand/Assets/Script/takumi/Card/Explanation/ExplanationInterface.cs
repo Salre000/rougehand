@@ -5,29 +5,29 @@ using UnityEngine;
 /// <summary>
 /// à–¾•ª‚ğ•`‰æ‚·‚éinterface
 /// </summary>
-public interface ExplanationInterface 
+public interface ExplanationInterface
 {
 
     /// <summary>
     /// –¼‘O‚ğ•Ô‚·ŠÖ”
     /// </summary>
     /// <returns></returns>
-    public abstract string GetName();
+    public string GetName();
     /// <summary>
     /// à–¾‚ğ•Ô‚·ŠÖ”
     /// </summary>
     /// <returns></returns>
-    public abstract string GetExplanation();
+    public string GetExplanation();
     /// <summary>
     /// ’Ç‰Á‚Ìà–¾‚ğ•Ô‚·ŠÖ”
     /// </summary>
     /// <returns></returns>
-    public abstract string GetExplanation2();
+    public string GetExplanation2();
     /// <summary>
     /// í—Ş‚ğ•Ô‚·ŠÖ”
     /// </summary>
     /// <returns></returns>
-    public abstract string GetType();
+    public string GetTypes();
 
 
 
