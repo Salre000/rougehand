@@ -44,7 +44,7 @@ public class RoleManager : MonoBehaviour
     /// ‚»‚ë‚Á‚Ä‚¢‚é–ğ‚ª‚ ‚é‚©Šm”F‚·‚é
     /// </summary>
     /// <returns></returns>
-    public Role MainRoleCheck(List<Card.Trump> cards)
+    public Role RoleCheck(List<Card.Trump> cards)
     {
         // –ğ‚Ì‹­‚¢‡‚É”»’è
         if (Revolution(cards) != Role.None) return Role.revolution;
