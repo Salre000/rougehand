@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JokerBase : SaleInterface
+public class JokerBase : SaleInterface, ExplanationInterface
 {
     /// <summary>
     /// ジョーカーのオブジェクトの動き方
@@ -11,7 +11,11 @@ public class JokerBase : SaleInterface
 
     protected int _saleValue = 0;
 
-    protected string _jokerName =string.Empty;
+    protected string _jokerName = string.Empty;
+
+    private int explanationID;
+
+
 
     /// <summary>
     /// ジョーカーのバフ内容
@@ -23,24 +27,21 @@ public class JokerBase : SaleInterface
     /// </summary>
     Card.cardBuff _cardBuff;
 
-    public void SetJokerBuff(Card.JokerBuff buff) {  _jokerBuff = buff; }
+    public void SetJokerBuff(Card.JokerBuff buff) { _jokerBuff = buff; }
 
     public Card.JokerBuff GetJokerBuff() { return _jokerBuff; }
     public void SetCardBuff(Card.cardBuff buff) { _cardBuff = buff; }
 
     public Card.cardBuff GetCardBuff() { return _cardBuff; }
 
-    /// <summary>
-    /// ジョーカーの名前を返す関数
-    /// </summary>
-    /// <returns></returns>
-    public string GetName() {  return _jokerName; }
+    public void SetID(int ID) { explanationID = ID; }
+    public virtual string Get() { return StringMaster.instance.GetMaster(explanationID); }
 
     /// <summary>
     /// ジョーカーのオブジェクトの動き方を返す関数
     /// </summary>
     /// <returns></returns>
-    public int GetJokerObjectType() {  return jokerObjecttype; }    
+    public int GetJokerObjectType() { return jokerObjecttype; }
     /// <summary>
     /// ラウンドの開始時のジョーカーの挙動
     /// </summary>
@@ -55,7 +56,7 @@ public class JokerBase : SaleInterface
     /// ジョーカーのターンが回って来た時に動く挙動
     /// </summary>
     /// <returns><基本ゼロだけどこれが倍率増加量/returns>
-    public virtual float Trun() {  return 0; }
+    public virtual float Trun() { return 0; }
 
     /// <summary>
     /// ラウンドの終了時のジョーカーの挙動
@@ -77,21 +78,41 @@ public class JokerBase : SaleInterface
     /// 売却額を返す関数
     /// </summary>
     /// <returns></returns>
-    public int GetSaleValue() {  return _saleValue+(int)GetRarity(); }
+    public int GetSaleValue() { return _saleValue + (int)GetRarity(); }
 
-    public void AddSaleValue(int add) {  _saleValue += add; }
+    public void AddSaleValue(int add) { _saleValue += add; }
 
 
     /// <summary>
     /// ジョーカーの倍率の上昇方法が加算なのか乗算なのかを表す関数
     /// </summary>
     /// <returns></returns>
-    public virtual bool GetAddType() {  return true; }
+    public virtual bool GetAddType() { return true; }
 
- 
+
     /// <summary>
     /// 売却されたときの挙動
     /// </summary>
     public virtual void SaleAction() { }
 
+    string ExplanationInterface.GetName()
+    {
+        return _jokerName;
+    }
+
+    string ExplanationInterface.GetExplanation()
+    {
+        return StringMaster.instance.GetMaster(explanationID);
+    }
+
+    string ExplanationInterface.GetType()
+    {
+        return GetRarity().ToString();
+
+    }
+
+    public string GetExplanation2()
+    {
+        return string.Empty;
+    }
 }

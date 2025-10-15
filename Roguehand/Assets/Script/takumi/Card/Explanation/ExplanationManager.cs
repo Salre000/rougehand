@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -7,30 +8,13 @@ using UnityEngine;
 /// </summary>
 public class ExplanationManager : MonoBehaviour
 {
-    struct Explanation 
-    {
-        /// <summary>
-        /// 説明時の内容を返す関数
-        /// 関数である理由は動的に変更が加わる可能性がある為
-        /// </summary>
-        public System.Func<string> actionString;
-
-        public ExplanationInterface explanationInterface;
-
-        public System.Func<Vector3> centerPos;
-
-        /// <summary>
-        /// 説明の描画位置に関係する列挙体
-        /// </summary>
-        public ExplanationInterface.ExplanationType explanationType;
-
-
-    }
+    [SerializeField] GameObject Prefab;
 
     /// <summary>
     /// 説明をまとめた配列
     /// </summary>
-    private List<Explanation> _list;
+    private List<GameObject> _GameObjectPool=new List<GameObject>();
+    private List<GameObject> _explanationInterface = new List<GameObject>();
 
     /// <summary>
     /// instanceをシングルトンで生成
@@ -40,64 +24,108 @@ public class ExplanationManager : MonoBehaviour
     public void Awake()
     {
         instance = this;
+        CreateObject();
     }
-    public void OnGUI()
+
+    public void Update()
     {
-        LostExplanation();
-
-
-        for (int i = 0; i < _list.Count; i++) 
+        for(int i = 0; i < _explanationInterface.Count; i++) 
         {
-            //内容に不備があるとき
-            if (_list[i].actionString == null) continue;
-            if (_list[i].explanationInterface == null) continue;
-            if (_list[i].centerPos == null) continue;
-            _list[i].explanationInterface.CreateExplanation(_list[i].explanationType, _list[i].actionString(), _list[i].centerPos());
+
+            Vector2 pos = Camera.main.WorldToScreenPoint(_explanationInterface[i].transform.position);
+
+            pos.x -= Screen.width / 2f;
+            pos.y -= Screen.height / 2f;
+
+            pos.y -= 200;
+
+            _GameObjectPool[i].GetComponent<RectTransform>().localPosition = pos;
+
+
+
         }
-
-
     }
 
-    public void AddExplanation(ExplanationInterface explanationInterface, System.Func<string> func, System.Func<Vector3> func2, ExplanationInterface.ExplanationType explanationtype) 
+    public void AddExplanation(GameObject traget, ExplanationInterface explanationInterface) 
     {
-        Explanation explanation = new Explanation();
-
-        explanation.actionString = func;
-        explanation.centerPos = func2;
-        explanation.explanationInterface = explanationInterface;
-        explanation.explanationType = explanationtype;
-        _list.Add(explanation);
-    }
-
-    public void Remove(GameObject gameObject) 
-    {
-        ExplanationInterface explanationInterface = gameObject.GetComponent<ExplanationInterface>();
 
         if (explanationInterface == null) return;
 
-        int index = _list.FindIndex(ss => ss.explanationInterface == explanationInterface);
+        GameObject gameObject = GetGameObject();
 
-        if (index < 0) return;
+        if (gameObject == null) return;
 
-        _list.RemoveAt(index);
+        _explanationInterface.Add(traget);
+
+        gameObject.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = explanationInterface.GetName();
+        gameObject.transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = explanationInterface.GetExplanation();
+        gameObject.transform.GetChild(1).transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = explanationInterface.GetExplanation2();
+        gameObject.transform.GetChild(1).transform.GetChild(3).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = explanationInterface.GetType();
+
 
     }
 
-
-    /// <summary>
-    /// 中身が無くなった時にその要素を破棄する関数
-    /// </summary>
-    private void LostExplanation() 
+    public void Remove() 
     {
-        for (int i = 0; i < _list.Count; i++)
-        {
 
-            //内容に不備があるとき
-            //オブジェクトの破壊などでも起こる
-            if (_list[i].explanationInterface != null) continue;
-            _list.RemoveAt(i);
-            i--;
+        _explanationInterface.Clear();
+
+        for(int i = 0; i < 10; i++) 
+        {
+            _GameObjectPool[i].SetActive(false);
 
         }
+
+
     }
+
+    /// <summary>
+    /// オブジェクトプールを作成
+    /// </summary>
+    private void CreateObject() 
+    {
+        //キャンバスを検索
+        GameObject cav = GameObject.Find("RunCanvas");
+
+        GameObject Object = new GameObject("ExplanationObjects");
+        Object.transform.parent = cav.transform;
+
+        Object.transform.localPosition = Vector3.zero;
+
+        for(int i = 0; i < 10; i++) 
+        {
+            GameObject image=Instantiate(Prefab, Object.transform);
+
+            image.SetActive(false);
+
+            _GameObjectPool.Add(image);
+
+
+
+        }
+
+
+
+    }
+
+
+
+    private GameObject GetGameObject() 
+    {
+        for(int i = 0; i < _GameObjectPool.Count; i++) 
+        {
+            if (_GameObjectPool[i].activeSelf) continue;
+
+            _GameObjectPool[i].SetActive(true);
+
+            return _GameObjectPool[i];
+
+
+        }
+
+        return null;
+
+
+    }
+
 }

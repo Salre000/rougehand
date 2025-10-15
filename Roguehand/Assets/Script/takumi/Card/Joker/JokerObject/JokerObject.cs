@@ -4,7 +4,7 @@ using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 using static JokerObjectManager;
-public class JokerObject : MonoBehaviour,ExplanationInterface
+public class JokerObject : MonoBehaviour
 {
 
 

@@ -86,6 +86,7 @@ public class GrabManager : MonoBehaviour
         if (_status == status.None) return;
 
         SaleUtility.Claer();
+        ExplanationManager.instance.Remove();
 
         //マウスの位置にrayを飛ばす
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -94,7 +95,6 @@ public class GrabManager : MonoBehaviour
         {
             SetGrabID(hit.transform.gameObject);
 
-            ExplanationManager.instance.Remove(hit.transform.gameObject);
 
         }
 
