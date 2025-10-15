@@ -38,6 +38,9 @@ public class LostColor : JokerBase
         PostEffect.Destroy(postEffect);
 
     }
-
+    public override string GetName()
+    {
+        return "ƒŒƒgƒ";
+    }
 
 }

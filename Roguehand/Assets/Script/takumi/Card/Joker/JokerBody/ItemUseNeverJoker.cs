@@ -1,11 +1,20 @@
 using UnityEngine;
-public class ItemUseNeverJoker: JokerBase{
-    public override JokerActionUseEnum.JokerRarity GetRarity() { return JokerActionUseEnum.JokerRarity.Common;}
-float _magnification=0;
-public override void UpData(){if(JokerUtility.GetTarget()!=JokerActionUseEnum.JokerActionTarget.item)return;
-        JokerObjectUtility.CardAddAction(JokerUtility.GetIndex(),2);
-_magnification+=2;}
-public override float Trun(){return _magnification;
-}
-
+public class ItemUseNeverJoker : JokerBase
+{
+    public override JokerActionUseEnum.JokerRarity GetRarity() { return JokerActionUseEnum.JokerRarity.Common; }
+    float _magnification = 0;
+    public override void UpData()
+    {
+        if (JokerUtility.GetTarget() != JokerActionUseEnum.JokerActionTarget.item) return;
+        JokerObjectUtility.CardAddAction(JokerUtility.GetIndex(), 2);
+        _magnification += 2;
+    }
+    public override float Trun()
+    {
+        return _magnification;
+    }
+    public override string GetName()
+    {
+        return "アイテマンザー";
+    }
 }

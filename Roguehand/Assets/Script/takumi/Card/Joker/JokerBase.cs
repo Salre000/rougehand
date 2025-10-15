@@ -11,8 +11,6 @@ public class JokerBase : SaleInterface, ExplanationInterface
 
     protected int _saleValue = 0;
 
-    protected string _jokerName = string.Empty;
-
     private int explanationID;
 
 
@@ -95,24 +93,25 @@ public class JokerBase : SaleInterface, ExplanationInterface
     /// </summary>
     public virtual void SaleAction() { }
 
-    string ExplanationInterface.GetName()
+    public virtual string  GetName()
     {
-        return _jokerName;
+        return string.Empty;
     }
 
-    string ExplanationInterface.GetExplanation()
+    public virtual string GetExplanation()
     {
         return StringMaster.instance.GetMaster(explanationID);
     }
 
-    string ExplanationInterface.GetType()
+    public virtual string GetTypes()
     {
-        return GetRarity().ToString();
+        return GetRarity().GetJokerRarityNema();
 
     }
 
-    public string GetExplanation2()
+    public virtual string GetExplanation2()
     {
         return string.Empty;
     }
+
 }

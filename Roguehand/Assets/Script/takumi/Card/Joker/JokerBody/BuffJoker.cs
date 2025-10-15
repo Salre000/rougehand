@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BuffJoker : JokerBase
 {
+    public override string GetName()
+    {
+        return "バッファーン";
+    }
+
 
     public override void SaleAction()
     {
@@ -49,12 +54,6 @@ public class BuffJoker : JokerBase
         }
         // 手札に上書き
         CardManager.instance.SetHand(trumps);
-
-
-
-
-
-
 
     }
 
