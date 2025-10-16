@@ -58,8 +58,8 @@ public class DistributeHand : MonoBehaviour
         }
 
         // ƒ\[ƒg
-        //hand=CardManager.instance.NumberSort(hand);
-        hand=CardManager.instance.SuitSort(hand);
+        hand = CardManager.instance.NumberSort(hand);
+        //hand =CardManager.instance.SuitSort(hand);
 
         CardManager.instance.SetHand(hand);
         CardObjectUtility.HandToCard(hand);

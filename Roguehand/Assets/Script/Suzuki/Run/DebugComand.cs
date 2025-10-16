@@ -95,9 +95,6 @@ public class DebugComand : MonoBehaviour
         List<int> indexList = new();
         indexList = RoleManager.instance.GetIndex();
         if(role==RoleManager.Role.highCard) return;
-        for(int i = 0; i < indexList.Count; i++)
-        {
-            Debug.Log("RoleCard : "+roleCheck[indexList[i]]);
-        }
+
     }
 }

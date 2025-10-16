@@ -27,6 +27,7 @@ public class Card
         queen,
         king,
         ace=1,
+        max=14,
     }
     /// <summary>
     /// ƒJ[ƒh‚Ìó‘Ô‚ğ¦‚·

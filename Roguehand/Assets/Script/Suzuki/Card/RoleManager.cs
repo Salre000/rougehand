@@ -71,9 +71,9 @@ public class RoleManager : MonoBehaviour
     private Role Revolution(List<Card.Trump> cards)
     {
         indexList.Clear();
-        for(int i = 0; i<cards.Count; i++)
+        for (int i = 0; i < cards.Count; i++)
         {
-            if (cards[i].number!=Card.number.two) continue;
+            if (cards[i].number != Card.number.two) continue;
             indexList.Add(i);
         }
 
@@ -115,25 +115,27 @@ public class RoleManager : MonoBehaviour
         {
             checkList2.Clear();
             checkList3.Clear();
-            for (int j = 0; j < checkList.Count; i++)
+            for (int j = 0; j < checkList.Count; j++)
             {
                 if (checkList[i].number == checkList[j].number)
                     checkList2.Add(checkList[j]);
                 else
                     checkList3.Add(checkList[j]);
             }
+            if (checkList2.Count >= 2) break;
         }
         //フルハウスチェック
         if (checkList2.Count == 3)
         {
-            if (JastNumberCheck(checkList2, 3) == null) return Role.None;
-            if (JastNumberCheck(checkList3, 2) == null) return Role.None;
+            if (JastNumberCheck(checkList2, 3) == null || JastNumberCheck(checkList3, 2) == null)
+                return Role.None;
         }
         else
         {
-            if (JastNumberCheck(checkList2, 2) == null) return Role.None;
-            if (JastNumberCheck(checkList3, 3) == null) return Role.None;
+            if (JastNumberCheck(checkList2, 2) == null || JastNumberCheck(checkList3, 3) == null)
+                return Role.None;
         }
+
 
         return Role.flashHouse;
     }
@@ -177,13 +179,15 @@ public class RoleManager : MonoBehaviour
     // ※フェイススリーカード
     private Role FaceThreeCard(List<Card.Trump> cards)
     {
-        List<Card.Trump> checkList = new();
-
-        indexList = FaceCheck(cards, 3);
+        // スリーカードチェック
+        indexList = JastNumberCheck(cards, 3);
         if (indexList == null) return Role.None;
+        // スリーカード抜き出し
+        List<Card.Trump> checkList = new();
         for (int i = 0; i < indexList.Count; i++)
             checkList.Add(cards[indexList[i]]);
-        indexList = JastNumberCheck(checkList, 3);
+        // フェイスチェック
+        indexList = FaceCheck(checkList, 3);
         if (indexList == null) return Role.None;
         return Role.faceThreeCard;
     }
@@ -191,56 +195,22 @@ public class RoleManager : MonoBehaviour
     private Role RoyalFlush(List<Card.Trump> cards)
     {
         List<Card.Trump> jastList = new();
-        List<bool> jastNumberBool = new();
-        bool ace = false;
-        bool king = false;
-        bool queen = false;
-        bool jack = false;
-        bool ten = false;
 
         // スートが揃っているかチェック
         indexList = JastSuitCheck(cards);
         // 揃っていなければ役は不成立となる
         if (indexList == null) return Role.None;
 
-        // そろっている五つのスートが1~10になっているか
+        // 揃っているカードをjastListに引き抜く
         for (int j = 0; j < indexList.Count; j++)
         {
             // 同スートカード情報がjastListの中に入る
             jastList.Add(cards[indexList[j]]);
         }
         // 中に入れたカード情報はスートが揃っていることが分かっているので
-        // 数字の照らし合わせを行い見事五つ揃えばロイヤルフラッシュが認められる
-        for (int j = 0; j < jastList.Count; j++)
-        {
-            if (ace != true && Card.number.ace == jastList[j].number)
-            {
-                ace = true;
-                jastNumberBool.Add(true);
-            }
-            else if (king != true && Card.number.king == jastList[j].number)
-            {
-                king = true;
-                jastNumberBool.Add(true);
-            }
-            else if (queen != true && Card.number.queen == jastList[j].number)
-            {
-                queen = true;
-                jastNumberBool.Add(true);
-            }
-            else if (jack != true && Card.number.jack == jastList[j].number)
-            {
-                jack = true;
-                jastNumberBool.Add(true);
-            }
-            else if (ten != true && Card.number.ten == jastList[j].number)
-            {
-                ten = true;
-                jastNumberBool.Add(true);
-            }
-            // .Countが5になることで揃っていることが証明される
-            if (jastNumberBool.Count >= 5) return Role.royalFlush;
-        }
+        // 数字の照らし合わせを行い、見事並べばロイヤルフラッシュが認められる
+        if (StraightCheck(jastList) != null) return Role.royalFlush;
+
         return Role.None;
     }
 
@@ -279,38 +249,24 @@ public class RoleManager : MonoBehaviour
         {
             checkList2.Clear();
             checkList3.Clear();
-            for (int j = 0; j < cards.Count; i++)
+            for (int j = 0; j < cards.Count; j++)
             {
                 if (cards[i].number == cards[j].number)
                     checkList2.Add(cards[j]);
                 else
                     checkList3.Add(cards[j]);
             }
+            if (checkList2.Count >= 2) break;
         }
-        //for (int i = 0; i < cards.Count; i++)
-        //{
-        //    if (cards[0].number == cards[i].number)
-        //        checkList2.Add(cards[i]);
-        //    else
-        //        checkList3.Add(cards[i]);
-        //}
-        int count = checkList2.Count;
-        //フルハウスチェック
-        if (count == 3)
+        if (checkList2.Count == 3)
         {
-            if (JastNumberCheck(checkList2, 3) == null|| JastNumberCheck(checkList3, 2) == null)
-            {
-                indexList.Clear();
+            if (JastNumberCheck(checkList2, 3) == null || JastNumberCheck(checkList3, 2) == null)
                 return Role.None;
-            }
         }
         else
         {
-            if (JastNumberCheck(checkList2, 2) == null|| JastNumberCheck(checkList3, 3) == null)
-            {
-                indexList.Clear();
+            if (JastNumberCheck(checkList2, 2) == null || JastNumberCheck(checkList3, 3) == null)
                 return Role.None;
-            }
         }
 
         return Role.fullHouse;
@@ -319,7 +275,6 @@ public class RoleManager : MonoBehaviour
     // フラッシュ
     private Role Flash(List<Card.Trump> cards)
     {
-        indexList.Clear();
         // 同スートチェック
         indexList = JastSuitCheck(cards);
         if (indexList == null) return Role.None;
@@ -330,7 +285,6 @@ public class RoleManager : MonoBehaviour
     // ストレート
     private Role Straight(List<Card.Trump> cards)
     {
-        indexList.Clear();
         indexList = StraightCheck(cards);
         if (indexList == null) return Role.None;
         return Role.straight;
@@ -339,7 +293,6 @@ public class RoleManager : MonoBehaviour
     // スリーカード
     private Role ThreeCard(List<Card.Trump> cards)
     {
-        indexList.Clear();
         indexList = JastNumberCheck(cards, 3);
         if (indexList == null) return Role.None;
 
@@ -349,30 +302,25 @@ public class RoleManager : MonoBehaviour
     // ツーペア
     private Role TwoPair(List<Card.Trump> cards)
     {
-        indexList.Clear();
         List<Card.Trump> checkList2 = new();
         List<Card.Trump> checkList3 = new();
 
-        if (checkList2.Count <= 1)
+        for (int i = 0; i < cards.Count; i++)
         {
             checkList2.Clear();
             checkList3.Clear();
-            for (int i = 1; i < cards.Count; i++)
+            for (int j = 0; j < cards.Count; j++)
             {
-                if (cards[0].number == cards[i].number)
-                {
-                    checkList2.Add(cards[i]);
-                    indexList.Add(i);
-                }
+                if (cards[i].number == cards[j].number)
+                    checkList2.Add(cards[j]);
                 else
-                {
-                    checkList3.Add(cards[i]);
-                    indexList.Add(i);
-                }
+                    checkList3.Add(cards[j]);
             }
+            if (checkList2.Count >= 2) break;
         }
-        if (JastNumberCheck(checkList2, 2) == null) return Role.None;
-        if (JastNumberCheck(checkList3, 2) == null) return Role.None;
+        if (JastNumberCheck(checkList2, 2) == null || JastNumberCheck(checkList3, 2) == null)
+            return Role.None;
+
 
         return Role.twoPair;
     }
@@ -380,7 +328,6 @@ public class RoleManager : MonoBehaviour
     // ワンペア
     private Role OnePair(List<Card.Trump> cards)
     {
-        indexList.Clear();
         for (int i = 0; i < cards.Count; i++)
         {
             indexList.Clear();
@@ -415,30 +362,26 @@ public class RoleManager : MonoBehaviour
     /// <returns>どこの要素数に揃っているスートがあるかをLsit　intで返します。揃ってなかったらnullを返します。</returns>
     private List<int> JastSuitCheck(List<Card.Trump> cards, int jastSuitCount = 5, Card.suit suit = Card.suit.None)
     {
-        int jastIndex = 0;
         // 受け取ったcardsの何番に条件を満たすものがあるかがintListされる
         List<int> jastNum = new List<int>();
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < (int)Card.suit.max; i++)
         {
             // 指定スートがある時は、指定されたスートのみを検索する
             if (suit != Card.suit.None)
                 if (suit != (Card.suit)i) continue;
 
-            jastIndex = 0;
             jastNum.Clear();
 
             // 同じスートを探す
-            foreach (Card.Trump card in cards)
+            for (int j = 0; j < cards.Count; j++)
             {
-                jastIndex++;
-                if (card.suit != (Card.suit)i) continue;
-                // 同じスートが見つかったらindex番号を入れていく
-                jastNum.Add(jastIndex);
+                if (cards[j].suit != (Card.suit)i) continue;
+                jastNum.Add(j);
             }
-            // 欲しい数分揃っていなければなら別のスートで探すために一番上に戻る
-            if (jastNum.Count <= jastSuitCount) continue;
-            // 揃っていれば返す
-            return jastNum;
+
+            // 欲しい数揃っているならここで返す
+            if (jastNum.Count >= jastSuitCount) return jastNum;
+
 
         }
         return null;
@@ -454,12 +397,12 @@ public class RoleManager : MonoBehaviour
     private List<int> JastNumberCheck(List<Card.Trump> cards, int jastNumberCount = 5, Card.number number = Card.number.None)
     {
         indexList = new();
-        int jastNumber = 0;
+        int jastNumber = 1;
         // ナンバー指定がある場合そのナンバーのみを探す
         if (number != Card.number.None)
             jastNumber = (int)number;
 
-        for (int i = jastNumber; i < (int)Card.number.king; i++)
+        for (int i = jastNumber; i < (int)Card.number.max; i++)
         {
             indexList.Clear();
 
@@ -490,14 +433,51 @@ public class RoleManager : MonoBehaviour
     {
         // 受け取ったcardsの何番に条件を満たすものがあるかがintListされる
         List<int> jastNum = new List<int>();
-        List<Card.Trump> jastCards = new(cards);
 
-        // Number順(13～1)に並べなおす
-        cards = CardManager.instance.NumberSort(cards);
+        bool ace = false;
+        bool king = false;
+        bool queen = false;
+        bool jack = false;
+        bool ten = false;
 
+        // A~10のストレートの場合だけ先に判定を行う
         for (int i = 0; i < cards.Count; i++)
         {
-            if (cards.Count-1 == i) break;
+            if (ace != true && Card.number.ace == cards[i].number)
+            {
+                ace = true;
+                jastNum.Add(i);
+            }
+            else if (king != true && Card.number.king == cards[i].number)
+            {
+                king = true;
+                jastNum.Add(i);
+            }
+            else if (queen != true && Card.number.queen == cards[i].number)
+            {
+                queen = true;
+                jastNum.Add(i);
+            }
+            else if (jack != true && Card.number.jack == cards[i].number)
+            {
+                jack = true;
+                jastNum.Add(i);
+            }
+            else if (ten != true && Card.number.ten == cards[i].number)
+            {
+                ten = true;
+                jastNum.Add(i);
+            }
+            if (jastNum.Count >= 5) return jastNum;
+        }
+
+        // Number順(13～1)に並べなおす
+        List<Card.Trump> jastCards = new(cards);
+        cards = CardManager.instance.NumberSort(cards);
+        jastNum.Clear();
+        for (int i = 0; i < cards.Count; i++)
+        {
+            if (cards.Count - 1 == i) break;
 
             // 一個上が連続した数値かどうか
             if (oneSkipFlag ? cards[i].number == cards[i + 1].number + 1 || cards[i].number == cards[i + 1].number + 2 : cards[i].number == cards[i + 1].number + 1)
@@ -512,6 +492,10 @@ public class RoleManager : MonoBehaviour
                     }
                 }
             }
+            // 自分と一個上の数字が一緒の時
+            else if (cards[i].number == cards[i + 1].number)
+                continue;
+            // 連続も一緒にもなっていないとき
             else
                 jastNum.Clear();
 
