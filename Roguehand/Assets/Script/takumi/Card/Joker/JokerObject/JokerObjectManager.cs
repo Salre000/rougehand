@@ -271,7 +271,7 @@ public class JokerObjectManager : MonoBehaviour
 
         _jokerObjects.RemoveAt(ID);
 
-
+        ExplanationManager.instance.Remove();
 
 
 
@@ -325,7 +325,10 @@ public class JokerObjectManager : MonoBehaviour
     /// <returns></returns>
     public Vector2 GetNumPos() { return _numPos; }
     public void SetNumPos(Vector2 vector) { _numPos = vector; }
-
+    /// <summary>
+    /// 現在ジョーカーがアクションを行っているかどうかを判定
+    /// </summary>
+    /// <returns></returns>
     public int ActionCount()
     {
         int count = 0;
@@ -365,6 +368,5 @@ public class JokerObjectManager : MonoBehaviour
         //ひとつもないとき
         _status = _lostStatus; return;
     }
-
 
 }

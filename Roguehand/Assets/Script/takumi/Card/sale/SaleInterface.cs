@@ -8,7 +8,7 @@ public interface SaleInterface
     /// <summary>
     /// ”„‹pŠz‚Ì•`‰æ‚·‚éŠÖ”
     /// </summary>
-    public virtual void SaleShow(Vector3 pos,int saleValue,System.Action action)
+    public  void SaleShow(Vector3 pos,int saleValue,System.Action action)
     {
         Vector2 ButtonPos=Camera.main.WorldToScreenPoint(pos);
         if (GUI.Button(new Rect(ButtonPos.x+75,Screen.height-ButtonPos.y-30, 70, 90), 
@@ -27,7 +27,7 @@ public interface SaleInterface
     /// <summary>
     /// w“ü‚Ì•`‰æ‚ğ‚·‚éŠÖ”
     /// </summary>
-    public virtual void BuyShow(Vector3 pos, int saleValue, System.Action action) 
+    public  void BuyShow(Vector3 pos, int saleValue, System.Action action) 
     {
         Vector2 ButtonPos = Camera.main.WorldToScreenPoint(pos);
 

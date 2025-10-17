@@ -17,8 +17,26 @@ public class JokerManager : MonoBehaviour
 
     /// <summary>
     /// ジョーカーのターゲットになり得る物をキャッシュする
+    /// 順番に処理をする為にリストにした
     /// </summary>
-    private JokerActionUseEnum.JokerActionTarget _target;
+    private List<JokerActionUseEnum.JokerActionTarget> _target=new List<JokerActionUseEnum.JokerActionTarget>();
+
+
+    /// <summary>
+    /// ジョーカーのターゲットになり得るスート
+    /// </summary>
+    private Card.suit _targetSuit;
+    
+    
+    /// <summary>
+    /// ジョーカーのターゲットになり得るナンバー
+    /// </summary>
+    private Card.number _targetNumer;
+
+    /// <summary>
+    /// ジョーカーのターゲットになり得る役
+    /// </summary>
+    private RoleManager.Role _targetRole;
 
     /// <summary>
     /// 現在のループ中のインデックス番号
@@ -28,7 +46,7 @@ public class JokerManager : MonoBehaviour
     public void Awake()
     {
         JokerUtility.instance = this;
-
+        SetTarget(JokerActionUseEnum.JokerActionTarget.None);
     }
 
     private void Update()
@@ -168,7 +186,24 @@ public class JokerManager : MonoBehaviour
     /// 今のフレームないで行われたターゲットの動き
     /// </summary>
     /// <returns></returns>
-    public JokerActionUseEnum.JokerActionTarget GetTarget() { return _target; }
+    public JokerActionUseEnum.JokerActionTarget GetTarget() { return _target[0]; }
+    /// <summary>
+    /// 今のフレームないで行われたターゲットの動き
+    /// </summary>
+    /// <returns></returns>
+    public  Card.suit GetTargetSuit() { return _targetSuit; }
+    /// <summary>
+    /// 今のフレームないで行われたターゲットの動き
+    /// </summary>
+    /// <returns></returns>
+    public Card.number GetTargetNumer() { return _targetNumer; }
+    /// <summary>
+    /// 今のラウンドないで行われたターゲットの動き
+    /// </summary>
+    /// <returns></returns>
+    public RoleManager.Role GetTargetRole() { return _targetRole; }
+
+
 
     /// <summary>
     /// 順番を入れ替える関数
@@ -207,12 +242,31 @@ public class JokerManager : MonoBehaviour
     /// </summary>
     public void SetTarget(JokerActionUseEnum.JokerActionTarget target) 
     {
-
-        _target=target;
-
-        //JokerObjectUtility.SetNumPos();
-
+        _target.Add(target);
     }
+    /// <summary>
+    /// 条件が満たされた瞬間にターゲットの中に代入する関数
+    /// </summary>
+    public void SetTarget(Card.suit target) 
+    {
+        _targetSuit=target;
+    }
+    /// <summary>
+    /// 条件が満たされた瞬間にターゲットの中に代入する関数
+    /// </summary>
+    public void SetTarget(Card.number target) 
+    {
+        _targetNumer=target;
+    }
+    /// <summary>
+    /// 条件が満たされた瞬間にターゲットの中に代入する関数
+    /// </summary>
+    public void SetTarget(RoleManager.Role target) 
+    {
+        _targetRole=target;
+    }
+
+
 
     public int GetIndex() {  return useIndex; }
     public int GetIndex(JokerBase jokerBase) { return _jokers.IndexOf(jokerBase); }
@@ -255,7 +309,11 @@ public class JokerManager : MonoBehaviour
         }
 
         //ターゲットの初期化
-        _target = JokerActionUseEnum.JokerActionTarget.None;
+        if (_target.Count <= 1) _target[0] = JokerActionUseEnum.JokerActionTarget.None; else _target.RemoveAt(0);
+        _targetSuit = Card.suit.None;
+        _targetNumer = Card.number.None;
+        _targetRole = RoleManager.Role.None;
+
 
         useIndex = -1;
     }

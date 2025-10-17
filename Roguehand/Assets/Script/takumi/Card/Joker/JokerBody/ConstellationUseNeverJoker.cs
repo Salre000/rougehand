@@ -15,7 +15,7 @@ public class ConstellationUseNeverJoker : JokerBase
     }
     public override string GetExplanation2()
     {
-        return StringMaster.instance.GetMaster(1999) + _magnification.ToString();
+        return Trun()<1?string.Empty: StringMaster.instance.GetMaster(1999) + _magnification.ToString().GetRedString();
     }
     public override string GetName()
     {

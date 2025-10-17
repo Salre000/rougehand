@@ -93,6 +93,13 @@ public class JokerBase : SaleInterface, ExplanationInterface
     /// </summary>
     public virtual void SaleAction() { }
 
+
+    /// <summary>
+    /// ジョーカーの効果を発動可能かどうか
+    /// </summary>
+    /// <returns></returns>
+    public virtual bool IsActionCheck() {  return false; }
+
     public virtual string  GetName()
     {
         return string.Empty;

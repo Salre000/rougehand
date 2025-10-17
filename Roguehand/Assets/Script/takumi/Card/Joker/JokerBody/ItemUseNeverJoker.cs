@@ -13,6 +13,11 @@ public class ItemUseNeverJoker : JokerBase
     {
         return _magnification;
     }
+    public override string GetExplanation2()
+    {
+        return Trun() < 1 ? string.Empty : StringMaster.instance.GetMaster(1999) + _magnification.ToString().GetRedString();
+    }
+
     public override string GetName()
     {
         return "アイテマンザー";
