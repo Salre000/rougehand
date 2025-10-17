@@ -8,9 +8,8 @@ public class RoleManager : MonoBehaviour
     public static RoleManager instance;
 
     private bool _isPlay = false;
-    private int _roleNumber = -1;   // 中で一番強い役を数字で表す
     List<int> indexList = new();    // 役の条件にはまっているカードの要素数が入る
-
+    private Role _role=Role.None;
 
     public enum Role
     {
@@ -565,6 +564,7 @@ public class RoleManager : MonoBehaviour
     //　 ハイカード                 以上の役が一つも成立しないとき
 
 
+    public void SetRole(Role role) { _role = role; }
     public List<int> GetIndex() { return indexList; }
     public void SetIsPlay(bool isPlay) { _isPlay = isPlay; }
     public bool IsPlay() { return _isPlay; }

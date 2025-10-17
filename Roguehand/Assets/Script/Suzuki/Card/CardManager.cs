@@ -128,6 +128,7 @@ public class CardManager : MonoBehaviour
 
         RoleManager.Role role= RoleManager.instance.RoleCheck(GetPick());
 
+        RoleManager.instance.SetRole(role);
         Debug.Log(" 役 " + StringMaster.instance.GetMaster(3000 + (int)role));
 
         CardObjectUtility.StopCardObject(ID);
