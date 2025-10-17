@@ -70,6 +70,8 @@ public class SaleManager : MonoBehaviour
                         GetType(_saleObject[num]);
                         Remove(index);
 
+                        //売却をした事をジョーカーに知らせる
+                        JokerUtility.SetTraget(JokerActionUseEnum.JokerActionTarget.sale);
 
 
                     });

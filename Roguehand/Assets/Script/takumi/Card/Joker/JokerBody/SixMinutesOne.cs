@@ -10,6 +10,10 @@ public class SixMinutesOne : JokerBase
             JokerUtility.Remove(this);
         }
     }
+    public override string GetExplanation2()
+    {
+        return StringMaster.instance.GetMaster(1999) + Trun().ToString();
+    }
 
     public override string GetName()
     {

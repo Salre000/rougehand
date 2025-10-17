@@ -46,7 +46,11 @@ public abstract class ItemBase : SaleInterface
             ("<size=25><color=#ffffff>使用\n</color></size>"), SaleUtility.GetStyle()))
         {
             action();
+            //ジョーカーにアイテムの使用を知らせる
+            JokerUtility.SetTraget(JokerActionUseEnum.JokerActionTarget.item);
             Use();
+
+
         }
     }
 

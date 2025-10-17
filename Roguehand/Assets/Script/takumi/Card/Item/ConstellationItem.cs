@@ -26,6 +26,8 @@ public class ConstellationItem : ItemBase
         Debug.Log("星座カードが使用されたよ");
         // IDを使用して星座のレベルを上昇させる処理をかく
 
+        //星座カードを使用した事をJokerに知らせる
+        JokerUtility.SetTraget(JokerActionUseEnum.JokerActionTarget.constellation);
 
     }
 
