@@ -78,7 +78,7 @@ public class CardManager : MonoBehaviour
         // 一度Number順でソートし、aceを前に持ってくる
         value = NumberSort(cards);
         // コピーリストの作成
-        // ※foreachでvalueの中身をいじるため、エラー回避
+        // ※foreachでvalueの中身をいじるため
         List<Card.Trump> copy = new(value);
 
         int topIndex = 0;

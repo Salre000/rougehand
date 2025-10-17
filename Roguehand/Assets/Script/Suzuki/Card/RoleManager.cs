@@ -18,10 +18,10 @@ public class RoleManager : MonoBehaviour
         revolution,
         flashFive,
         flashHouse,
-        faceFiveCard,
+        faceFive,
         fiveCard,
-        faceFourCard,
-        faceThreeCard,
+        faceFour,
+        faceThree,
         royalFlush,
         straightFlush,
         fourCard,
@@ -50,10 +50,10 @@ public class RoleManager : MonoBehaviour
         if (Revolution(cards) != Role.None) return Role.revolution;
         else if (FlashFive(cards) != Role.None) return Role.flashFive;
         else if (flashHouse(cards) != Role.None) return Role.flashHouse;
-        else if (FaceFiveCard(cards) != Role.None) return Role.faceFiveCard;
+        else if (FaceFiveCard(cards) != Role.None) return Role.faceFive;
         else if (FiveCard(cards) != Role.None) return Role.fiveCard;
-        else if (FaceFourCard(cards) != Role.None) return Role.faceFourCard;
-        else if (FaceThreeCard(cards) != Role.None) return Role.faceThreeCard;
+        else if (FaceFourCard(cards) != Role.None) return Role.faceFour;
+        else if (FaceThreeCard(cards) != Role.None) return Role.faceThree;
         else if (RoyalFlush(cards) != Role.None) return Role.royalFlush;
         else if (StraightFlash(cards) != Role.None) return Role.straightFlush;
         else if (FourCard(cards) != Role.None) return Role.fourCard;
@@ -66,6 +66,8 @@ public class RoleManager : MonoBehaviour
         else return HighCard(cards);
 
     }
+
+    #region 役
 
     // ※革命
     private Role Revolution(List<Card.Trump> cards)
@@ -154,7 +156,7 @@ public class RoleManager : MonoBehaviour
         indexList = JastNumberCheck(checkList);
         if (indexList == null) return Role.None;
 
-        return Role.faceFiveCard;
+        return Role.faceFive;
     }
 
     // ※ファイブカード
@@ -162,7 +164,7 @@ public class RoleManager : MonoBehaviour
     {
         indexList = JastNumberCheck(cards);
         if (indexList == null) return Role.None;
-        return Role.faceFiveCard;
+        return Role.faceFive;
     }
     // ※フェイスフォーカード
     private Role FaceFourCard(List<Card.Trump> cards)
@@ -174,7 +176,7 @@ public class RoleManager : MonoBehaviour
             checkList.Add(cards[indexList[i]]);
         indexList = JastNumberCheck(checkList, 4);
         if (indexList == null) return Role.None;
-        return Role.faceFourCard;
+        return Role.faceFour;
     }
     // ※フェイススリーカード
     private Role FaceThreeCard(List<Card.Trump> cards)
@@ -189,7 +191,7 @@ public class RoleManager : MonoBehaviour
         // フェイスチェック
         indexList = FaceCheck(checkList, 3);
         if (indexList == null) return Role.None;
-        return Role.faceThreeCard;
+        return Role.faceThree;
     }
     // ロイヤルフラッシュ
     private Role RoyalFlush(List<Card.Trump> cards)
@@ -208,50 +210,9 @@ public class RoleManager : MonoBehaviour
             jastList.Add(cards[indexList[j]]);
         }
 
-        // 受け取ったcardsの何番に条件を満たすものがあるかがintListされる
-        List<int> jastNum = new List<int>();
-
-        bool ace = false;
-        bool king = false;
-        bool queen = false;
-        bool jack = false;
-        bool ten = false;
-
-        // A~10のストレートの場合だけ先に判定を行う
-        for (int i = 0; i < jastList.Count; i++)
-        {
-            if (ace != true && Card.number.ace == jastList[i].number)
-            {
-                ace = true;
-                jastNum.Add(i);
-            }
-            else if (king != true && Card.number.king == jastList[i].number)
-            {
-                king = true;
-                jastNum.Add(i);
-            }
-            else if (queen != true && Card.number.queen == jastList[i].number)
-            {
-                queen = true;
-                jastNum.Add(i);
-            }
-            else if (jack != true && Card.number.jack == jastList[i].number)
-            {
-                jack = true;
-                jastNum.Add(i);
-            }
-            else if (ten != true && Card.number.ten == jastList[i].number)
-            {
-                ten = true;
-                jastNum.Add(i);
-            }
-            if (jastNum.Count >= 5) return Role.royalFlush;
-        }
-
-
         //// 中に入れたカード情報はスートが揃っていることが分かっているので
         //// 数字の照らし合わせを行い、見事並べばロイヤルフラッシュが認められる
-        //if (StraightCheck(jastList) != null) return Role.royalFlush;
+        if (StraightCheck(jastList, 5, false, true) != null) return Role.royalFlush;
 
         return Role.None;
     }
@@ -389,11 +350,21 @@ public class RoleManager : MonoBehaviour
     // ハイカード
     private Role HighCard(List<Card.Trump> cards)
     {
-        indexList.Clear();
-
+        int num = -1;
+        for (int i = 0; i < cards.Count; i++)
+        {
+            if (num < (int)cards[i].number)
+            {
+                num = (int)cards[i].number;
+                indexList.Clear();
+                indexList.Add(i);
+            }
+        }
 
         return Role.highCard;
     }
+
+    #endregion
 
     /// <summary>
     /// スートが揃っているか判定します。
@@ -470,8 +441,9 @@ public class RoleManager : MonoBehaviour
     /// <param name="cards">チェックしたいカードリスト</param>
     /// <param name="straightCount">何枚連続していればいいか デフォルト:5</param>
     /// <param name="oneSkipFlag">ストレートの条件が一つ飛ばしでも良い状態か デフォルト:false</param>
+    /// <param name="isRoyal">A~10の連続した値かどうかだけ調べたいならtrueを引数に加える デフォルト:false</param>
     /// <returns>どこの要素に連続した値があるかを返します。欲しい数揃っていなければnullを返します。</returns>
-    private List<int> StraightCheck(List<Card.Trump> cards, int straightCount = 5, bool oneSkipFlag = false)
+    private List<int> StraightCheck(List<Card.Trump> cards, int straightCount = 5, bool oneSkipFlag = false, bool isRoyal = false)
     {
         // 受け取ったcardsの何番に条件を満たすものがあるかがintListされる
         List<int> jastNum = new List<int>();
@@ -512,6 +484,9 @@ public class RoleManager : MonoBehaviour
             }
             if (jastNum.Count >= 5) return jastNum;
         }
+
+        // この役を判定しているのが A~10のストレートの場合だけみたいなら以降の処理はしない
+        if (isRoyal) return null;
 
         // Number順(13～1)に並べなおす
         List<Card.Trump> jastCards = new(cards);
