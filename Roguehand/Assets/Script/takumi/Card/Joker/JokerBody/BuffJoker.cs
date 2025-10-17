@@ -36,6 +36,11 @@ public class BuffJoker : JokerBase
     private void ChengeCard() 
     {
         List<Card.Trump> trumps = CardManager.instance.GetHand();
+        List<Card.Trump> deck = CardManager.instance.GetDeck();
+
+
+
+        
 
         for(int i = 0; i < trumps.Count; i++) 
         {
@@ -43,17 +48,27 @@ public class BuffJoker : JokerBase
 
             Card.Trump card = trumps[i];
 
+            int index= deck.IndexOf(card);
+
+
+
             card.sealBuff = (Card.sealBuff)Random.Range(0, (int)Card.sealBuff.MAX);
             card.deckBuff = (Card.deckBuff)Random.Range(0, (int)Card.deckBuff.MAX);
             card.cardBuff = (Card.cardBuff)Random.Range(0, (int)Card.cardBuff.MAX);
 
+            deck[index]= card;
             trumps[i] = card;
 
             CardObjectUtility.SetChengeCard(i, card);
 
+
+
         }
         // ŽèŽD‚Éã‘‚«
         CardManager.instance.SetHand(trumps);
+
+        //ƒfƒbƒL‚Éã‘‚«
+        CardManager.instance.SetDeck(deck);
 
 
     }

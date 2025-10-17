@@ -39,7 +39,7 @@ public class BuffManager : MonoBehaviour
     }
     public void Update()
     {
-       // _errorBuff?.UpData();
+       _errorBuff?.UpData();
 
 
 
