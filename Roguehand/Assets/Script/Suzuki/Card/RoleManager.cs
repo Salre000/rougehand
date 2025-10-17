@@ -207,9 +207,51 @@ public class RoleManager : MonoBehaviour
             // 同スートカード情報がjastListの中に入る
             jastList.Add(cards[indexList[j]]);
         }
-        // 中に入れたカード情報はスートが揃っていることが分かっているので
-        // 数字の照らし合わせを行い、見事並べばロイヤルフラッシュが認められる
-        if (StraightCheck(jastList) != null) return Role.royalFlush;
+
+        // 受け取ったcardsの何番に条件を満たすものがあるかがintListされる
+        List<int> jastNum = new List<int>();
+
+        bool ace = false;
+        bool king = false;
+        bool queen = false;
+        bool jack = false;
+        bool ten = false;
+
+        // A~10のストレートの場合だけ先に判定を行う
+        for (int i = 0; i < jastList.Count; i++)
+        {
+            if (ace != true && Card.number.ace == jastList[i].number)
+            {
+                ace = true;
+                jastNum.Add(i);
+            }
+            else if (king != true && Card.number.king == jastList[i].number)
+            {
+                king = true;
+                jastNum.Add(i);
+            }
+            else if (queen != true && Card.number.queen == jastList[i].number)
+            {
+                queen = true;
+                jastNum.Add(i);
+            }
+            else if (jack != true && Card.number.jack == jastList[i].number)
+            {
+                jack = true;
+                jastNum.Add(i);
+            }
+            else if (ten != true && Card.number.ten == jastList[i].number)
+            {
+                ten = true;
+                jastNum.Add(i);
+            }
+            if (jastNum.Count >= 5) return Role.royalFlush;
+        }
+
+
+        //// 中に入れたカード情報はスートが揃っていることが分かっているので
+        //// 数字の照らし合わせを行い、見事並べばロイヤルフラッシュが認められる
+        //if (StraightCheck(jastList) != null) return Role.royalFlush;
 
         return Role.None;
     }

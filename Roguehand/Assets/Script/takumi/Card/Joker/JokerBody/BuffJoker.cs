@@ -55,6 +55,7 @@ public class BuffJoker : JokerBase
         // èD‚Éã‘‚«
         CardManager.instance.SetHand(trumps);
 
+
     }
 
 }

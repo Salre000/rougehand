@@ -61,9 +61,41 @@ public class DistributeHand : MonoBehaviour
         hand = CardManager.instance.NumberSort(hand);
         //hand =CardManager.instance.SuitSort(hand);
 
+        Test();
+
+        //CardManager.instance.SetHand(hand);
+        //CardObjectUtility.HandToCard(hand);
+        //CardObjectUtility.StartHandMove();
+
+    }
+
+    private void Test()
+    {
+        List<Card.Trump> hand = new List<Card.Trump>();
+
+        for (int i = 0; i < 8; i++)
+        {
+            Card.Trump trump = new Trump();
+
+           
+            trump.state = State.hand;
+            trump.suit = Card.suit.Spade;
+            if(i%2==0)
+            trump.number = Card.number.ten;
+            else trump.number = Card.number.ace;
+            trump.isFeice = true;
+            hand.Add(trump);
+
+
+        }
+
+
+
         CardManager.instance.SetHand(hand);
         CardObjectUtility.HandToCard(hand);
         CardObjectUtility.StartHandMove();
+
+
 
     }
 }
