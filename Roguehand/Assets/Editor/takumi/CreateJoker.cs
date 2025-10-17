@@ -363,7 +363,6 @@ public class CreateJoker : EditorWindow
         builder.AppendFormat("public static class ALLJoker");
         builder.AppendLine();
         builder.Append("{");
-        builder.Append("        JokerBase jokerBase = null;");
 
         builder.Append("public enum _allJokerEnum{");
 
@@ -384,6 +383,8 @@ public class CreateJoker : EditorWindow
 
         builder.Append("public static JokerBase GetJoker(_allJokerEnum joker){");
         builder.AppendLine();
+        builder.Append("        JokerBase jokerBase = null;");
+
         builder.Append("        switch (joker){");
         builder.AppendLine();
         for (int i = 0; i < jolerListObject._className.Count; i++)
@@ -394,6 +395,7 @@ public class CreateJoker : EditorWindow
         }
         builder.AppendLine();
         builder.Append("}");
+        builder.Append("        jokerBase?.SetID((int)joker + 1 + 2000);");
         builder.Append("return jokerBase;");
         builder.Append("}");
         builder.AppendLine();

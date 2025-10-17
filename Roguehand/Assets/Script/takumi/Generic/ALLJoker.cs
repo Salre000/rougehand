@@ -14,13 +14,12 @@ public static class ALLJoker
         _LostColor,
         _IncreaseTheSellingPrice,
         _BuffJoker,
+        _RandomRole,
         MAX
     }
     public static JokerBase GetJoker(_allJokerEnum joker)
     {
-
         JokerBase jokerBase = null;
-
         switch (joker)
         {
 
@@ -32,16 +31,13 @@ public static class ALLJoker
             case _allJokerEnum._LostColor: jokerBase = new LostColor(); break;
             case _allJokerEnum._IncreaseTheSellingPrice: jokerBase = new IncreaseTheSellingPrice(); break;
             case _allJokerEnum._BuffJoker: jokerBase = new BuffJoker(); break;
+            case _allJokerEnum._RandomRole: jokerBase = new RandomRole(); break;
         }
 
-
         jokerBase?.SetID((int)joker + 1 + 2000);
-
-
+        
         return jokerBase;
-
     }
-
 
 
 }

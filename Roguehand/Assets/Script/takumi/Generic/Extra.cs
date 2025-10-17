@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 /// <summary>
 /// 拡張クラス
@@ -46,6 +47,11 @@ public static class Extra
     }
 
 
+    /// <summary>
+    /// レアリティの文字列を返す関数
+    /// </summary>
+    /// <param name="jokerRarity"></param>
+    /// <returns></returns>
     public static string GetJokerRarityNema(this JokerActionUseEnum.JokerRarity jokerRarity) 
     {
         string name=string.Empty;
@@ -70,6 +76,11 @@ public static class Extra
 
     }
 
+    /// <summary>
+    /// 調整必要
+    /// </summary>
+    /// <param name="jokerRarity"></param>
+    /// <returns></returns>
     public static Color GetJokerRarityColor(this string jokerRarity) 
     {
 
@@ -93,6 +104,18 @@ public static class Extra
 
         return color;
 
+
+    }
+
+    public static string GetRedString(this string _string) 
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.Append("<color=#FF0000>");
+        stringBuilder.Append(_string);
+        stringBuilder.Append("</color>");
+
+        return stringBuilder.ToString();
 
     }
 
