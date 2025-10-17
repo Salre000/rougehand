@@ -565,6 +565,7 @@ public class RoleManager : MonoBehaviour
 
 
     public void SetRole(Role role) { _role = role; }
+    public Role GetRole() {return _role; }
     public List<int> GetIndex() { return indexList; }
     public void SetIsPlay(bool isPlay) { _isPlay = isPlay; }
     public bool IsPlay() { return _isPlay; }
