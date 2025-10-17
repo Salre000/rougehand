@@ -114,6 +114,22 @@ public class CardManager : MonoBehaviour
 
         this.hand = hand;
 
+
+        List<Card.Trump> pick = GetPick();
+
+        if (hand[ID].isSelect) pick.Add(hand[ID]);
+        else
+        {
+            Card.Trump dommy=hand[ID];
+            dommy.isSelect = !dommy.isSelect;
+            pick.Remove(dommy);
+        }
+        SetPick(pick);
+
+        RoleManager.Role role= RoleManager.instance.RoleCheck(GetPick());
+
+        Debug.Log(" 役 " + StringMaster.instance.GetMaster(3000 + (int)role));
+
         CardObjectUtility.StopCardObject(ID);
         CardObjectUtility.ChengeStandby(ID);
 
