@@ -101,6 +101,14 @@ public class StringMaster : MonoBehaviour
     /// </summary>
     /// <param name="ID"><•¶ŽšID/param>
     /// <returns><ID‚É‘Î‰ž‚µ‚½•¶Žš—ñ/returns>
-    public string GetMaster(int ID) { string value; _stringMasters.TryGetValue(ID, out value); return value; }
+    public string GetMaster(int ID) 
+    {
 
+        string value; 
+        _stringMasters.TryGetValue(ID, out value); 
+
+
+        return value.ErrorText();
+
+    }
 }

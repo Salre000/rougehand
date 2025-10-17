@@ -52,11 +52,11 @@ public class ExplanationManager : MonoBehaviour
 
         if (explanationInterface == null) return;
 
+        _explanationInterface.Add(traget);
         GameObject gameObject = GetGameObject();
 
         if (gameObject == null) return;
 
-        _explanationInterface.Add(traget);
 
         gameObject.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = explanationInterface.GetName();
         gameObject.transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = explanationInterface.GetExplanation();
@@ -79,6 +79,18 @@ public class ExplanationManager : MonoBehaviour
         }
 
 
+    }
+
+    /// <summary>
+    /// 引数のオブジェクトに関係するオブジェクトを返す関数
+    /// </summary>
+    /// <param name="gameObject"></param>
+    /// <returns></returns>
+    public GameObject RelatedObject(GameObject gameObject) 
+    {
+        int index=_GameObjectPool.IndexOf(gameObject);
+
+        return index<0?null: _explanationInterface[index];
     }
 
     /// <summary>

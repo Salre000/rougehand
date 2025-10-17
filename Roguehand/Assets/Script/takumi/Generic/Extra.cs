@@ -119,4 +119,38 @@ public static class Extra
 
     }
 
+    /// <summary>
+    /// 文字化けをする可能性を作成
+    /// </summary>
+    /// <param name="_string"></param>
+    /// <returns></returns>
+    public static string ErrorText(this string _string) 
+    {
+        int count = 0;
+
+        List<Card.Trump> trumps = CardManager.instance.GetDeck();
+
+        for(int i=0;i<trumps.Count; i++) 
+        {
+            if (trumps[i].sealBuff != Card.sealBuff.Black) continue;
+            count++;
+        }
+
+        //デバック用に３で固定
+        if (count == 0) return _string;
+
+        char[] chars = _string.ToCharArray();
+
+        for(int i = 0; i < chars.Length; i++) 
+        {
+            if (i % 5 >= count) continue;
+
+            byte[] utf8Bytes = Encoding.UTF8.GetBytes(new char[] { chars[i] });
+            chars[i]= Encoding.GetEncoding("shift_jis").GetString(utf8Bytes).ToCharArray()[0];
+
+        }
+       
+        return new string(chars);
+    }
+
 }

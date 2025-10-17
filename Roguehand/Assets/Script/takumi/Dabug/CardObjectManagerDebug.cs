@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using UnityEngine;
 
 public class CardObjectManagerDebug : MonoBehaviour
@@ -15,6 +16,9 @@ public class CardObjectManagerDebug : MonoBehaviour
     {
         trump.suit = Card.suit.club;
         trump.number = Card.number.ace;
+        trump.deckBuff = Card.deckBuff.None;
+        trump.cardBuff = Card.cardBuff.None;
+        trump.sealBuff = Card.sealBuff.None;
 
         for (int i = 0; i < 8; i++) ss.Add(trump);
     }
