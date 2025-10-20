@@ -130,6 +130,7 @@ public class CardManager : MonoBehaviour
 
         RoleManager.instance.SetRole(role);
         Debug.Log(" 役 " + StringMaster.instance.GetMaster(3000 + (int)role));
+        RoleManager.instance.SetIsCheck(true);
 
         CardObjectUtility.StopCardObject(ID);
         CardObjectUtility.ChengeStandby(ID);

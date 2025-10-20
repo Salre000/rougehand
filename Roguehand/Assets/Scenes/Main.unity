@@ -373,6 +373,7 @@ GameObject:
   m_Component:
   - component: {fileID: 40209955}
   - component: {fileID: 40209956}
+  - component: {fileID: 40209957}
   m_Layer: 0
   m_Name: ScoreManager
   m_TagString: Untagged
@@ -405,6 +406,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f453e1acc7c2d5f438c974ff378475bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &40209957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40209954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ba5cc1d94476c48a3ebcaa595eeabe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &49965912

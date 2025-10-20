@@ -14,7 +14,7 @@ public class PlayHnad : MonoBehaviour
     void Update()
     {
         // プレイのボタンを押したら通ります。
-        if(!RoleManager.instance.IsPlay()) return;
+        //if(!RoleManager.instance.IsPlay()) return;
         //HandRolePlay();
     }
 

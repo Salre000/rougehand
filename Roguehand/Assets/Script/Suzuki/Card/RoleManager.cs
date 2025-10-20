@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static Card;
 
@@ -10,6 +11,8 @@ public class RoleManager : MonoBehaviour
     private bool _isPlay = false;
     List<int> indexList = new();    // 役の条件にはまっているカードの要素数が入る
     private Role _role=Role.None;
+    private bool _isCheck=false;
+    private List<int> _roleLevelList=new(17);
 
     public enum Role
     {
@@ -31,12 +34,17 @@ public class RoleManager : MonoBehaviour
         twoPair,
         onePair,
         highCard,
+        max,
     }
 
     private void Awake()
     {
         if (instance == null)
             instance = this;
+        for (int i = 0; i < (int)Role.max; i++)
+        {
+            _roleLevelList.Add(1);
+        }
     }
 
     /// <summary>
@@ -567,6 +575,13 @@ public class RoleManager : MonoBehaviour
     public void SetRole(Role role) { _role = role; }
     public Role GetRole() {return _role; }
     public List<int> GetIndex() { return indexList; }
-    public void SetIsPlay(bool isPlay) { _isPlay = isPlay; }
-    public bool IsPlay() { return _isPlay; }
+    public void SetIsCheck(bool isCheck) {  _isCheck = isCheck; }
+    public bool IsCheck() {  return _isCheck; }
+    /// <summary>
+    /// 引数に対応した役のレベルを返します
+    /// </summary>
+    /// <param name="role">現在の役</param>
+    /// <returns></returns>
+    public int GetRoleLevel(Role role) { return _roleLevelList[(int)role]; }
+
 }
