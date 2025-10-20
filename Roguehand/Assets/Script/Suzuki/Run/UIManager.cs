@@ -115,18 +115,18 @@ public static class UIManager
 
     #region ÉQÉbÉ^Å[
 
-    public static string GetRoundNameText() { return _roundNameText.text; }
-    public static string GetLowestScoreText() { return _lowestScereText.text; }
-    public static string GetRewardText() { return _rewardCountText.text; }
-    public static string GetRoundScoreText() { return _roundScereText.text; }
-    public static string GetRoleText() { return _roleText.text; }
-    public static string GetBasicScoreText() { return _basicScoreText.text; }
-    public static string GetMagnificationText() { return _magnificationText.text; }
-    public static string GetHandText() { return _handText.text; }
-    public static string GetDiscardText() { return _discardText.text; }
-    public static string GetMoneyText() { return _moneyText.text; }
-    public static string GetAnteText() { return _anteText.text; }
-    public static string GetRoundText() { return _roundText.text; }
+    public static TextMeshProUGUI GetRoundNameText() { return _roundNameText; }
+    public static TextMeshProUGUI GetLowestScoreText() { return _lowestScereText; }
+    public static TextMeshProUGUI GetRewardText() { return _rewardCountText; }
+    public static TextMeshProUGUI GetRoundScoreText() { return _roundScereText; }
+    public static TextMeshProUGUI GetRoleText() { return _roleText; }
+    public static TextMeshProUGUI GetBasicScoreText() { return _basicScoreText; }
+    public static TextMeshProUGUI GetMagnificationText() { return _magnificationText; }
+    public static TextMeshProUGUI GetHandText() { return _handText; }
+    public static TextMeshProUGUI GetDiscardText() { return _discardText; }
+    public static TextMeshProUGUI GetMoneyText() { return _moneyText; }
+    public static TextMeshProUGUI GetAnteText() { return _anteText; }
+    public static TextMeshProUGUI GetRoundText() { return _roundText; }
 
     #endregion
 

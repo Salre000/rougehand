@@ -26,27 +26,12 @@ public class DebugComand : MonoBehaviour
         ScoreReset();
     }
 
-    void OnePear()
-    {
-        SetRoleText(_onePear);
-        ShakeCamera.Instance.Shake(5, 0.2f);
-        int score = 300;
-        SetRoundScereText(score.ToString());
+    // プレイボタン
 
-    }
-
-    public void OnHandPlay()
-    {
-        int handCount = IntTryParse(GetHandText());
-        if(handCount<=0) return;
-        handCount--;
-        SetHandText(handCount.ToString());
-        OnePear();
-    }
 
     public void OnDisCard()
     {
-        int disCount = IntTryParse(GetDiscardText());
+        int disCount = IntTryParse(GetDiscardText().text);
         if(disCount<=0) return;
         disCount--;
         SetDiscardText(disCount.ToString());

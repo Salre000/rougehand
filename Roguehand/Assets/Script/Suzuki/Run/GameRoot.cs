@@ -22,8 +22,8 @@ public class GameRoot:MonoBehaviour
     {
         return;
         int left=0, right=0;
-        left = IntTryParse(GetLowestScoreText());
-        right = IntTryParse(GetRoundScoreText());
+        left = IntTryParse(GetLowestScoreText().text);
+        right = IntTryParse(GetRoundScoreText().text);
 
         if(left <= right)
         {
