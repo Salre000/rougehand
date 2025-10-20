@@ -8,7 +8,6 @@ public class RoleManager : MonoBehaviour
 {
     public static RoleManager instance;
 
-    private bool _isPlay = false;
     List<int> indexList = new();    // 役の条件にはまっているカードの要素数が入る
     private Role _role=Role.None;
     private bool _isCheck=false;
@@ -151,16 +150,16 @@ public class RoleManager : MonoBehaviour
     // ※フェイスファイブカード
     private Role FaceFiveCard(List<Card.Trump> cards)
     {
-        // フェイスカードが揃っているかを確認
-        indexList = FaceCheck(cards);
-        // 揃っていなければ役は不成立となる
+        // フェイスでそろっていたカードがナンバーもそろっているか確認する
+        indexList = JastNumberCheck(cards);
         if (indexList == null) return Role.None;
         // 確認できたフェイスカードを確認用リストに入れる
         List<Card.Trump> checkList = new();
         for (int i = 0; i < indexList.Count; i++)
             checkList.Add(cards[indexList[i]]);
-        // フェイスでそろっていたカードがナンバーもそろっているか確認する
-        indexList = JastNumberCheck(checkList);
+        // フェイスカードが揃っているかを確認
+        indexList = FaceCheck(checkList);
+        // 揃っていなければ役は不成立となる
         if (indexList == null) return Role.None;
 
         return Role.faceFive;
@@ -176,12 +175,12 @@ public class RoleManager : MonoBehaviour
     // ※フェイスフォーカード
     private Role FaceFourCard(List<Card.Trump> cards)
     {
-        indexList = FaceCheck(cards, 4);
+        indexList = JastNumberCheck(cards, 4);
         if (indexList == null) return Role.None;
         List<Card.Trump> checkList = new();
         for (int i = 0; i < indexList.Count; i++)
             checkList.Add(cards[indexList[i]]);
-        indexList = JastNumberCheck(checkList, 4);
+        indexList = FaceCheck(checkList, 4);
         if (indexList == null) return Role.None;
         return Role.faceFour;
     }

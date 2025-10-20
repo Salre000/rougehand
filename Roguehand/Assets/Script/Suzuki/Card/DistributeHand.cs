@@ -73,15 +73,18 @@ public class DistributeHand : MonoBehaviour
     {
         List<Card.Trump> hand = new List<Card.Trump>();
 
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < CardManager.instance.GetHandSize(); i++)
         {
             Card.Trump trump = new Trump();
 
            
             trump.state = State.hand;
-            trump.suit = Card.suit.Spade;
-            if(i%2==0)
-            trump.number = Card.number.ten;
+            if (i % 3 == 0)
+                trump.suit = Card.suit.Spade;
+            else
+                trump.suit = Card.suit.club;
+            if (i%2==0)
+                    trump.number = Card.number.ten;
             else trump.number = Card.number.ace;
             trump.isFeice = true;
             hand.Add(trump);

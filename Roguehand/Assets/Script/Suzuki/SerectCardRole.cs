@@ -38,7 +38,9 @@ public class SerectCardRole : MonoBehaviour
         RoleManager.Role role = RoleManager.instance.GetRole();
         string name = StringMaster.instance.GetMaster(3000+(int)role);
         _builder.Append(name);
-        if (_builder.Length >= 7)
+        if (_builder.Length >= 9)
+            _roleText.fontSize = 30.1f;
+        else if (_builder.Length >= 7)
             _roleText.fontSize = 34.1f;
         else
             _roleText.fontSize = 41.1f;

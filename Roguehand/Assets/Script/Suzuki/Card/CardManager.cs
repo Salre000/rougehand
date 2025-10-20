@@ -18,7 +18,7 @@ public class CardManager : MonoBehaviour
     public List<Card.Trump> pick=new List<Card.Trump>();
 
     // 現在のハンドの大きさ
-    private int handSize = 8;
+    private int handSize = 10;
 
     private void Awake()
     {
