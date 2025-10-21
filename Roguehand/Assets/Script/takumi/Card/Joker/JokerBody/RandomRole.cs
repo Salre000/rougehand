@@ -52,11 +52,6 @@ public class RandomRole : JokerBase
         return value;
     }
 
-    public override string GetName()
-    {
-        return "フラックスロール";
-    }
-
 
 
 

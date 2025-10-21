@@ -43,9 +43,5 @@ public class LostColor : JokerBase
         return Trun() < 1 ? string.Empty : StringMaster.instance.GetMaster(1999) + Trun().ToString().GetRedString();
     }
 
-    public override string GetName()
-    {
-        return "ƒŒƒgƒ";
-    }
 
 }

@@ -17,9 +17,5 @@ public class IncreaseTheSellingPrice : JokerBase
 
     }
 
-    public override string GetName()
-    {
-        return "マーチャント";
-    }
 
 }

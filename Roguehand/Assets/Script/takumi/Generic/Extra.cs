@@ -107,6 +107,41 @@ public static class Extra
 
     }
 
+    /// <summary>
+    /// バフの内容に応じた色を返す関数
+    /// </summary>
+    /// <param name="jokerbuff"></param>
+    /// <returns></returns>
+    public static Color GetBuffColor(this string jokerbuff) 
+    {
+
+        Color color=new Color();
+
+        switch (jokerbuff)
+        {
+            case "フォイル": color = new Color(0, 0, 0); color= new Color(0,0,0); break;
+            case "ホログラム": color= new Color(0,0,0); break;
+            case "ポリクローム": color= new Color(0,0,0); break;
+            case "マウスジャマー": color= new Color(0,0,0); break;
+            case "ボーナス": color= new Color(0,0,0); break;
+            case "倍率": color= new Color(0,0,0); break;
+            case "ワイルド": color= new Color(0,0,0); break;
+            case "グラズ": color= new Color(0,0,0); break;
+            case "スチール": color= new Color(0,0,0); break;
+            case "ゴールド": color= new Color(0,0,0); break;
+            case "ラッキー": color= new Color(0,0,0); break;
+            case "ランダム": color= new Color(0,0,0); break;
+            case "ブラインド": color= new Color(0,0,0); break;
+            case "ネガティブ": color= new Color(0,0,0); break;
+            case "セピア": color= new Color(0,0,0); break;
+            case "オブジェクトムーブ": color= new Color(0,0,0); break;
+        }
+
+        return color;
+
+
+    }
+
     public static string GetRedString(this string _string) 
     {
         StringBuilder stringBuilder = new StringBuilder();
@@ -121,11 +156,15 @@ public static class Extra
 
     /// <summary>
     /// 文字化けをする可能性を作成
+    /// バックドアを追加
     /// </summary>
     /// <param name="_string"></param>
     /// <returns></returns>
-    public static string ErrorText(this string _string) 
+    public static string ErrorText(this string _string,bool backDoor=false) 
     {
+        //バックドアが有効の場合は何もせずに返す   
+        if(backDoor)return _string;
+
         int count = 0;
 
         List<Card.Trump> trumps = CardManager.instance.GetDeck();

@@ -14,7 +14,7 @@ public class ExplanationManager : MonoBehaviour
     /// <summary>
     /// 説明をまとめた配列
     /// </summary>
-    private List<GameObject> _GameObjectPool=new List<GameObject>();
+    private List<GameObject> _GameObjectPool = new List<GameObject>();
     private List<GameObject> _explanationInterface = new List<GameObject>();
 
     /// <summary>
@@ -30,7 +30,7 @@ public class ExplanationManager : MonoBehaviour
 
     public void Update()
     {
-        for(int i = 0; i < _explanationInterface.Count; i++) 
+        for (int i = 0; i < _explanationInterface.Count; i++)
         {
 
             Vector2 pos = Camera.main.WorldToScreenPoint(_explanationInterface[i].transform.position);
@@ -47,7 +47,7 @@ public class ExplanationManager : MonoBehaviour
         }
     }
 
-    public void AddExplanation(GameObject traget, ExplanationInterface explanationInterface) 
+    public void AddExplanation(GameObject traget, ExplanationInterface explanationInterface, string[] buff)
     {
 
         if (explanationInterface == null) return;
@@ -60,21 +60,38 @@ public class ExplanationManager : MonoBehaviour
 
         gameObject.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = explanationInterface.GetName();
         gameObject.transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = explanationInterface.GetExplanation();
-        
-        gameObject.transform.GetChild(1).transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = explanationInterface.GetExplanation2();
-        gameObject.transform.GetChild(1).transform.GetChild(3).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = explanationInterface.GetTypes();
 
-        gameObject.transform.GetChild(1).transform.GetChild(3).GetComponent<Image>().color= explanationInterface.GetTypes().GetJokerRarityColor();
+        gameObject.transform.GetChild(1).transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = explanationInterface.GetExplanation2();
+        // 諸事情ありこのタイミングで文字化けの可能性を作成
+        gameObject.transform.GetChild(1).transform.GetChild(3).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Extra.ErrorText(explanationInterface.GetTypes());
+
+        gameObject.transform.GetChild(1).transform.GetChild(3).GetComponent<Image>().color = explanationInterface.GetTypes().GetJokerRarityColor();
+
+        int addCount = 0;
+        for (int i = 0; i < buff.Length; i++)
+        {
+            if (buff[i] == string.Empty) continue;
+            addCount++;
+            gameObject.transform.GetChild(1).transform.Find("BuffColor" + addCount.ToString()).gameObject.SetActive(true);
+            gameObject.transform.GetChild(1).transform.Find("BuffColor"+addCount.ToString()).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Extra.ErrorText(buff[i]);
+            gameObject.transform.GetChild(1).transform.Find("BuffColor" + addCount.ToString()).GetComponent<Image>().color = buff[i].GetBuffColor();
+        }
+
     }
 
-    public void Remove() 
+    public void Remove()
     {
 
         _explanationInterface.Clear();
 
-        for(int i = 0; i < 10; i++) 
+        for (int i = 0; i < 10; i++)
         {
+
+            _GameObjectPool[i].transform.GetChild(1).transform.Find("BuffColor1").gameObject.SetActive(false);
+            _GameObjectPool[i].transform.GetChild(1).transform.Find("BuffColor2").gameObject.SetActive(false);
+            _GameObjectPool[i].transform.GetChild(1).transform.Find("BuffColor3").gameObject.SetActive(false);
             _GameObjectPool[i].SetActive(false);
+
 
         }
 
@@ -86,17 +103,17 @@ public class ExplanationManager : MonoBehaviour
     /// </summary>
     /// <param name="gameObject"></param>
     /// <returns></returns>
-    public GameObject RelatedObject(GameObject gameObject) 
+    public GameObject RelatedObject(GameObject gameObject)
     {
-        int index=_GameObjectPool.IndexOf(gameObject);
+        int index = _GameObjectPool.IndexOf(gameObject);
 
-        return index<0?null: _explanationInterface[index];
+        return index < 0 ? null : _explanationInterface[index];
     }
 
     /// <summary>
     /// オブジェクトプールを作成
     /// </summary>
-    private void CreateObject() 
+    private void CreateObject()
     {
         //キャンバスを検索
         GameObject cav = GameObject.Find("RunCanvas");
@@ -106,9 +123,9 @@ public class ExplanationManager : MonoBehaviour
 
         Object.transform.localPosition = Vector3.zero;
 
-        for(int i = 0; i < 10; i++) 
+        for (int i = 0; i < 10; i++)
         {
-            GameObject image=Instantiate(Prefab, Object.transform);
+            GameObject image = Instantiate(Prefab, Object.transform);
 
             image.SetActive(false);
 
@@ -124,9 +141,9 @@ public class ExplanationManager : MonoBehaviour
 
 
 
-    private GameObject GetGameObject() 
+    private GameObject GetGameObject()
     {
-        for(int i = 0; i < _GameObjectPool.Count; i++) 
+        for (int i = 0; i < _GameObjectPool.Count; i++)
         {
             if (_GameObjectPool[i].activeSelf) continue;
 

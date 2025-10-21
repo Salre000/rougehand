@@ -101,9 +101,9 @@ public class JokerBase : SaleInterface, ExplanationInterface
     /// <returns></returns>
     public virtual bool IsActionCheck() {  return false; }
 
-    public virtual string  GetName()
+    public virtual string GetName()
     {
-        return string.Empty;
+        return StringMaster.instance.GetMaster((GetID() + 100));
     }
 
     public virtual string GetExplanation()
@@ -121,5 +121,21 @@ public class JokerBase : SaleInterface, ExplanationInterface
     {
         return string.Empty;
     }
+
+    public string[] JokerBuffs()
+    {
+        string[] strings =
+           {
+            StringMaster.instance.GetMaster((int)_jokerBuff+6299,true),
+            StringMaster.instance.GetMaster((int)_cardBuff+6099,true),
+
+                    };
+        return strings;
+
+
+
+
+    }
+
 
 }

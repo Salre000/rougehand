@@ -101,14 +101,15 @@ public class StringMaster : MonoBehaviour
     /// </summary>
     /// <param name="ID"><•¶ŽšID/param>
     /// <returns><ID‚É‘Î‰ž‚µ‚½•¶Žš—ñ/returns>
-    public string GetMaster(int ID) 
+    public string GetMaster(int ID,bool backDoor=false) 
     {
 
-        string value; 
+        string value=string.Empty; 
         _stringMasters.TryGetValue(ID, out value); 
 
+        if(value==null)value=string.Empty;
 
-        return value.ErrorText();
+        return value.ErrorText(backDoor);
 
     }
 }

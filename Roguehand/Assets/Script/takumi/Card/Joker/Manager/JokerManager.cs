@@ -285,7 +285,7 @@ public class JokerManager : MonoBehaviour
 
         SaleUtility.SetSale(_jokers[ID], joker, _jokers[ID].GetSaleValue());
 
-        ExplanationManager.instance.AddExplanation(joker, _jokers[ID]);
+        ExplanationManager.instance.AddExplanation(joker, _jokers[ID], _jokers[ID].JokerBuffs());
            
     }
     /// <summary>

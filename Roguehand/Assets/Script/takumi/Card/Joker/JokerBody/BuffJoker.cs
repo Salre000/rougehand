@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class BuffJoker : JokerBase
 {
-    public override string GetName()
-    {
-        return "バッファーン";
-    }
 
 
     public override void SaleAction()
@@ -33,22 +29,22 @@ public class BuffJoker : JokerBase
 
 
     }
-    private void ChengeCard() 
+    private void ChengeCard()
     {
         List<Card.Trump> trumps = CardManager.instance.GetHand();
         List<Card.Trump> deck = CardManager.instance.GetDeck();
 
 
 
-        
 
-        for(int i = 0; i < trumps.Count; i++) 
+
+        for (int i = 0; i < trumps.Count; i++)
         {
             if (trumps[i].sealBuff != Card.sealBuff.None) continue;
 
             Card.Trump card = trumps[i];
 
-            int index= deck.IndexOf(card);
+            int index = deck.IndexOf(card);
 
 
 
@@ -56,7 +52,7 @@ public class BuffJoker : JokerBase
             card.deckBuff = (Card.deckBuff)Random.Range(0, (int)Card.deckBuff.MAX);
             card.cardBuff = (Card.cardBuff)Random.Range(0, (int)Card.cardBuff.MAX);
 
-            deck[index]= card;
+            deck[index] = card;
             trumps[i] = card;
 
             CardObjectUtility.SetChengeCard(i, card);

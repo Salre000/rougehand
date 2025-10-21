@@ -61,14 +61,17 @@ public class DistributeHand : MonoBehaviour
         hand = CardManager.instance.NumberSort(hand);
         //hand =CardManager.instance.SuitSort(hand);
 
-        Test();
+        //Test();
 
-        //CardManager.instance.SetHand(hand);
-        //CardObjectUtility.HandToCard(hand);
-        //CardObjectUtility.StartHandMove();
+        CardManager.instance.SetHand(hand);
+        CardObjectUtility.HandToCard(hand);
+        CardObjectUtility.StartHandMove();
 
     }
 
+    /// <summary>
+    /// èD‚ÌƒJ[ƒh‚ğŒÅ’è‚·‚éŠÖ”
+    /// </summary>
     private void Test()
     {
         List<Card.Trump> hand = new List<Card.Trump>();
