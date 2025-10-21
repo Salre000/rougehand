@@ -205,6 +205,7 @@ public class JokerObject : MonoBehaviour
         _time = 0;
     }
 
+    public int GetJokerID() { return _base.GetID(); }
     private void ChengeAction() 
     {
         _time += Time.deltaTime * GameConfig.GetGameSpeed()*reta;

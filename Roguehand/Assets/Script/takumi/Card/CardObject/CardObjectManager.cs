@@ -7,7 +7,7 @@ public class CardObjectManager : MonoBehaviour
     /// <summary>
     /// トランプのマテリアル番号の列挙体
     /// </summary>
-    private enum cardMaterialType
+    public enum cardMaterialType
     {
         /// <summary>
         /// トランプのバフ内容で決まる

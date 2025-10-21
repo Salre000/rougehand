@@ -15,6 +15,8 @@ public class JokerManager : MonoBehaviour
     /// </summary>
     private List<JokerBase> _dommyJoker = new List<JokerBase>(5);
 
+
+
     /// <summary>
     /// ジョーカーのターゲットになり得る物をキャッシュする
     /// 順番に処理をする為にリストにした

@@ -33,6 +33,7 @@ public class JokerBase : SaleInterface, ExplanationInterface
     public Card.cardBuff GetCardBuff() { return _cardBuff; }
 
     public void SetID(int ID) { explanationID = ID; }
+    public int GetID() { return explanationID; }
     public virtual string Get() { return StringMaster.instance.GetMaster(explanationID); }
 
     /// <summary>

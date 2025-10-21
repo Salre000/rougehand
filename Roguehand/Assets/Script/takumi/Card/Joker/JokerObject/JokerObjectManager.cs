@@ -50,6 +50,15 @@ public class JokerObjectManager : MonoBehaviour
     /// </summary>
     [SerializeField] private List<JokerObject> _domyyJokerObjects = new List<JokerObject>();
 
+    /// <summary>
+    /// マテリアルの配列を持ったクラス
+    /// </summary>
+    private MaterialstringList materialList;
+
+    /// <summary>
+    /// マテリアル複製する為のベースになるマテリアル
+    /// </summary>
+    private Material dommyMaterial;
 
     /// <summary>
     /// 現在つかまれているかどうか
@@ -64,6 +73,9 @@ public class JokerObjectManager : MonoBehaviour
     public void Awake()
     {
         JokerObjectUtility.instance = this;
+        materialList = Resources.Load<MaterialstringList>("takumi/JokerMaterial");
+        dommyMaterial= Resources.Load<Material>("takumi/BaseMaterial");
+
     }
 
 
@@ -129,6 +141,29 @@ public class JokerObjectManager : MonoBehaviour
     private void TrunEnd()
     {
         for (int i = 0; i < _jokerObjects.Count; i++) _jokerObjects[i].TrunEnd();
+
+    }
+
+    /// <summary>
+    /// ジョーカーにマテリアルを貼り付ける関数
+    /// </summary>
+    /// <param name="joker"></param>
+    private void PaintJoker(GameObject joker) 
+    {
+        MeshRenderer meshRenderer = joker.transform.GetChild(0).GetComponent<MeshRenderer>();
+
+        Material[] materials= meshRenderer.materials;
+
+
+        Material materialCopy = new Material(dommyMaterial);
+
+        // マイナス2000はジョーカー係数2000を引く
+        materialCopy.SetTexture("_MainTex", materialList._material[_jokerObjects[_jokerObjects.Count - 1].GetJokerID()-2000]);
+
+        materials[(int)CardObjectManager.cardMaterialType.main] = materialCopy;
+
+        meshRenderer.materials = materials;
+
 
     }
 
@@ -221,6 +256,7 @@ public class JokerObjectManager : MonoBehaviour
 
         _jokerObjects[_jokerObjects.Count - 1].name = "JokerID" + (_jokerObjects.Count - 1).ToString();
         _jokerObjects[_jokerObjects.Count - 1].transform.eulerAngles = Vector3.zero;
+        PaintJoker(_jokerObjects[_jokerObjects.Count - 1].gameObject);
 
     }
     public void AddDommyJoker(JokerBase jokerBase)
@@ -235,6 +271,8 @@ public class JokerObjectManager : MonoBehaviour
         _domyyJokerObjects[_jokerObjects.Count - 1].Initializ(jokerBase);
 
         _domyyJokerObjects[_jokerObjects.Count - 1].name = "DomyyJokerID" + (_jokerObjects.Count - 1).ToString();
+        PaintJoker(_domyyJokerObjects[_domyyJokerObjects.Count - 1].gameObject);
+
 
     }
 
