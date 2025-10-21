@@ -38,7 +38,7 @@ public class ExplanationManager : MonoBehaviour
             pos.x -= Screen.width / 2f;
             pos.y -= Screen.height / 2f;
 
-            pos.y -= 200;
+            pos.y -= _GameObjectPool[i].GetComponent<RectTransform>().sizeDelta.y;
 
             _GameObjectPool[i].GetComponent<RectTransform>().localPosition = pos;
 
@@ -76,6 +76,9 @@ public class ExplanationManager : MonoBehaviour
             gameObject.transform.GetChild(1).transform.Find("BuffColor"+addCount.ToString()).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Extra.ErrorText(buff[i]);
             gameObject.transform.GetChild(1).transform.Find("BuffColor" + addCount.ToString()).GetComponent<Image>().color = buff[i].GetBuffColor();
         }
+
+        gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(300,200+50*addCount);
+        
 
     }
 
