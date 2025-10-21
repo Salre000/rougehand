@@ -263,7 +263,6 @@ public class JokerObjectManager : MonoBehaviour
     /// <param name="ID"></param>
     public void RemoveJoker(int ID)
     {
-        Debug.Log("ジョーカーの破壊"+ID);
 
         //ザ・エンドってね
         _jokerObjects[ID].THEEnd();

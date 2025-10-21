@@ -146,7 +146,6 @@ public class SystemErrorBuff
             _lostPos = new Vector2(pOINT.X, pOINT.Y);
 
 
-            Debug.Log("ˆÚ“®‚³‚¹‚é—Ê" + _renge);
             if (MaxRenge > _renge) return;
             MouseMove();
 
@@ -159,11 +158,6 @@ public class SystemErrorBuff
             float renge = 100;//UnityEngine.Random.Range(1,5*errorCount());
 
             float randomAngle = UnityEngine.Random.Range(1, 360) * Mathf.Deg2Rad;
-
-
-
-            Debug.Log((int)(Mathf.Sin(randomAngle) * renge + _lostPos.x) + ":" + (int)(Mathf.Cos(randomAngle) * renge + _lostPos.y));
-            Debug.Log((int)_lostPos.x + "—Ê" + (int)_lostPos.y);
 
             SetCursorPos((int)(Mathf.Sin(randomAngle) * renge + _lostPos.x), (int)(Mathf.Cos(randomAngle) * renge + _lostPos.y));
 
