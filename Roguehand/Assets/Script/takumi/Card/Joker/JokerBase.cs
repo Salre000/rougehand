@@ -122,12 +122,12 @@ public class JokerBase : SaleInterface, ExplanationInterface
         return string.Empty;
     }
 
-    public string[] JokerBuffs()
+    public int[] JokerBuffs()
     {
-        string[] strings =
+        int[] strings =
            {
-            StringMaster.instance.GetMaster((int)_jokerBuff+6299,true),
-            StringMaster.instance.GetMaster((int)_cardBuff+6099,true),
+           (int)_jokerBuff+6300,
+            (int)_cardBuff+6100,
 
                     };
         return strings;

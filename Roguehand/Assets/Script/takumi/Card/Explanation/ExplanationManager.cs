@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -47,7 +48,7 @@ public class ExplanationManager : MonoBehaviour
         }
     }
 
-    public void AddExplanation(GameObject traget, ExplanationInterface explanationInterface, string[] buff)
+    public void AddExplanation(GameObject traget, ExplanationInterface explanationInterface, int[] buff)
     {
 
         if (explanationInterface == null) return;
@@ -63,22 +64,30 @@ public class ExplanationManager : MonoBehaviour
 
         gameObject.transform.GetChild(1).transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = explanationInterface.GetExplanation2();
         // 諸事情ありこのタイミングで文字化けの可能性を作成
-        gameObject.transform.GetChild(1).transform.GetChild(3).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =Extra.ErrorText(explanationInterface.GetTypes());
+        gameObject.transform.GetChild(1).transform.GetChild(3).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Extra.ErrorText(explanationInterface.GetTypes());
 
         gameObject.transform.GetChild(1).transform.GetChild(3).GetComponent<Image>().color = explanationInterface.GetTypes().GetJokerRarityColor();
 
         int addCount = 0;
         for (int i = 0; i < buff.Length; i++)
         {
-            if (buff[i] == string.Empty) continue;
+            if (StringMaster.instance.GetMaster(buff[i],true) == string.Empty) continue;
             addCount++;
             gameObject.transform.GetChild(1).transform.Find("BuffColor" + addCount.ToString()).gameObject.SetActive(true);
-            gameObject.transform.GetChild(1).transform.Find("BuffColor"+addCount.ToString()).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Extra.ErrorText(buff[i]);
-            gameObject.transform.GetChild(1).transform.Find("BuffColor" + addCount.ToString()).GetComponent<Image>().color = buff[i].GetBuffColor();
+            gameObject.transform.GetChild(1).transform.Find("BuffColor" + addCount.ToString()).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = StringMaster.instance.GetMaster(buff[i]);
+            gameObject.transform.GetChild(1).transform.Find("BuffColor" + addCount.ToString()).GetComponent<Image>().color = StringMaster.instance.GetMaster(buff[i], true).GetBuffColor();
+
+            GameObject explanation = gameObject.transform.GetChild(2).transform.Find("BuffUI" + addCount.ToString()).gameObject;
+            explanation.SetActive(true);
+
+            explanation.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Extra.ErrorText(StringMaster.instance.GetMaster(buff[i]));
+            explanation.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = StringMaster.instance.GetMaster(buff[i]+50);
+
+
         }
 
-        gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(300,200+50*addCount);
-        
+        gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(300, 200 + 50 * addCount);
+
 
     }
 

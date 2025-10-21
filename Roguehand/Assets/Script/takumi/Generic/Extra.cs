@@ -117,6 +117,7 @@ public static class Extra
 
         Color color=new Color();
 
+        // 文字が長い場合は文字のサイズを小さくすること対応
         switch (jokerbuff)
         {
             case "フォイル": color = new Color(200, 200, 200); break;
@@ -142,6 +143,34 @@ public static class Extra
 
     }
 
+    public static string GetBuffExplanation(this string buff) 
+    {
+        int index = 0;
+
+        // 文字が長い場合は文字のサイズを小さくすること対応
+        switch (buff)
+        {
+            case "フォイル":  break;
+            case "ホログラム":  break;
+            case "ポリクローム":  break;
+            case "マウスジャマー":  break;
+            case "ボーナス":  break;
+            case "倍率":  break;
+            case "ワイルド":  break;
+            case "グラズ":  break;
+            case "スチール":  break;
+            case "ゴールド":  break;
+            case "ラッキー":  break;
+            case "ランダム":  break;
+            case "ブラインド":  break;
+            case "ネガティブ":  break;
+            case "セピア":  break;
+            case "オブジェクトムーブ":  break;
+        }
+
+        return StringMaster.instance.GetMaster(index);
+    }
+
     public static string GetRedString(this string _string) 
     {
         StringBuilder stringBuilder = new StringBuilder();
@@ -162,7 +191,7 @@ public static class Extra
     /// <returns></returns>
     public static string ErrorText(this string _string,bool backDoor=false) 
     {
-        //バックドアが有効の場合は何もせずに返す   
+        //バックドアが有効の場合は何もせずに返す色なども使えない
         if(backDoor)return _string;
 
         int count = 0;
@@ -175,21 +204,56 @@ public static class Extra
             count++;
         }
 
-        //デバック用に３で固定
-        if (count == 0) return _string;
+        ////デバック用に0で固定
+        count = 0;
 
         char[] chars = _string.ToCharArray();
 
+        StringBuilder stringBuilder = new StringBuilder();
+
+        bool colorFlag = false;
+
         for(int i = 0; i < chars.Length; i++) 
         {
-            if (i % 5 >= count) continue;
+            if (chars[i] == '"')
+            {
+                
+                colorFlag = !colorFlag;
+
+                if (colorFlag)
+                {
+                    i++;
+                    stringBuilder.Append(GetColor(chars[i]));
+                }
+                else stringBuilder.Append("</color>");
+
+                continue;
+
+            }
+
+            if (i % 5 >= count) { stringBuilder.Append(chars[i]); continue; }
 
             byte[] utf8Bytes = Encoding.UTF8.GetBytes(new char[] { chars[i] });
-            chars[i]= Encoding.GetEncoding("shift_jis").GetString(utf8Bytes).ToCharArray()[0];
+            stringBuilder.Append(Encoding.GetEncoding("shift_jis").GetString(utf8Bytes).ToCharArray()[0]);
 
         }
-       
-        return new string(chars);
+
+        return stringBuilder.ToString();
+    }
+    private static string GetColor(char C) 
+    {
+        switch (C) 
+        {
+
+
+            case 'R':return "<color=#FF0000>";
+            case 'B':return "<color=#0000FF>";
+            case 'Y':return "<color=#FFFF00>";
+
+        }
+
+        return string.Empty;
+
     }
 
 }
