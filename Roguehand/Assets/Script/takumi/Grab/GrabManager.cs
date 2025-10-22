@@ -163,9 +163,11 @@ public class GrabManager : MonoBehaviour
                 break;
             case status.Joker:
                 JokerObjectUtility.GrabChange(_grabID, true);
+                JokerUtility.ShowExplanation(_grabID);
                 break;
             case status.Item:
                 ItemUtility.GrabChange(_grabID, true);
+                ItemUtility.ShowExplanation(_grabID);
                 break;
             case status.None: break;
         }

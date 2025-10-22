@@ -6,10 +6,13 @@ using UnityEngine;
 /// <summary>
 /// アイテムの抽象クラス
 /// </summary>
-public abstract class ItemBase : SaleInterface
+public abstract class ItemBase : SaleInterface,ExplanationInterface
 {
 
-
+    /// <summary>
+    /// アイテムのID
+    /// </summary>
+    private int itemID = -1;
     /// <summary>
     /// 売却額の変数  
     /// </summary>
@@ -73,6 +76,28 @@ public abstract class ItemBase : SaleInterface
     /// <param name="add"></param>
     public void AddReturnMoney(int add) { _returnMoney += add; }
 
+    public void SetItemID(int ID) { itemID = ID; }
 
+    public string GetName()
+    {
+        //アイテム係数1000
+        return StringMaster.instance.GetMaster(1000+itemID);
+    }
 
+    public string GetExplanation()
+    {
+        // アイテムの説明係数1500
+        return StringMaster.instance.GetMaster(1500 + itemID);
+    }
+
+    public string GetExplanation2()
+    {
+        return string.Empty;
+    }
+
+    public string GetTypes()
+    {
+        // 予定は未定
+        return Extra.ErrorText("アイテム");
+    }
 }

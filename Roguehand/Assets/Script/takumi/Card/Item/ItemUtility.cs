@@ -20,5 +20,6 @@ public static class ItemUtility
 
     public static void Remove(int ID) { instance.Remove(ID); }
     public static void Remove(ItemBase itemBase) {  instance.Remove(itemBase); }
+    public static void ShowExplanation(int ID) { instance.ShowExplanation(ID); }
 
 }

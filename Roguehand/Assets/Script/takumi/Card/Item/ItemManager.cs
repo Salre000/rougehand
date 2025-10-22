@@ -118,6 +118,14 @@ public class ItemManager : MonoBehaviour
 
     }
 
+    public void ShowExplanation(int ID) 
+    {
+        int[] test=new int [0];
+        ExplanationManager.instance.AddExplanation(_itemObjectList[ID].gameObject, _itemList[ID], test, new Vector2(0, 1));
+
+
+    }
+
     private void CheckOrder()
     {
 

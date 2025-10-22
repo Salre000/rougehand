@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.Scripting;
 
@@ -285,8 +286,12 @@ public class JokerManager : MonoBehaviour
 
         SaleUtility.SetSale(_jokers[ID], joker, _jokers[ID].GetSaleValue());
 
-        ExplanationManager.instance.AddExplanation(joker, _jokers[ID], _jokers[ID].JokerBuffs(),new Vector2(0,1));
            
+    }
+    public void ShowExplanation(int ID) 
+    {
+        ExplanationManager.instance.AddExplanation(JokerObjectUtility.GetIDObject(ID), _jokers[ID], _jokers[ID].JokerBuffs(), new Vector2(0, 1));
+
     }
     /// <summary>
     /// 全てのジョーカーに何かする関数

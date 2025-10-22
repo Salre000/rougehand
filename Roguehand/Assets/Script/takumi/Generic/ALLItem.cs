@@ -11,12 +11,17 @@ public static class ALLItem
 
     public static ItemBase GetItem(ALLItemEnum item)
     {
+        ItemBase itemBase = null;
+
         switch (item)
         {
-            case ALLItemEnum._constellation: return new ConstellationItem();
+            case ALLItemEnum._constellation: itemBase = new ConstellationItem(); break;
 
         }
-        return null;
+
+        itemBase.SetItemID((int)item);
+
+        return itemBase;
     }
 
 

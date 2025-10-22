@@ -52,4 +52,6 @@ public static class JokerUtility
 
     public static void SetMaterial(int ID) { instance.SetMaterial(ID); }
 
+    public static void ShowExplanation(int ID) { instance.ShowExplanation(ID);}
+
 }
