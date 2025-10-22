@@ -30,7 +30,4 @@ public interface ExplanationInterface
     public string GetTypes();
 
 
-
-
-
 }

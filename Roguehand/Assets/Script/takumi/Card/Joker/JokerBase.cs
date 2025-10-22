@@ -18,12 +18,12 @@ public class JokerBase : SaleInterface, ExplanationInterface
     /// <summary>
     /// ジョーカーのバフ内容
     /// </summary>
-    Card.JokerBuff _jokerBuff;
+    Card.JokerBuff _jokerBuff=Card.JokerBuff.None;
 
     /// <summary>
     /// ジョーカー以外にも着く可能性のあるバフの内容
     /// </summary>
-    Card.cardBuff _cardBuff;
+    Card.cardBuff _cardBuff=Card.cardBuff.None;
 
     public void SetJokerBuff(Card.JokerBuff buff) { _jokerBuff = buff; }
 

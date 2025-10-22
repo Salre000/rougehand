@@ -182,6 +182,17 @@ public static class Extra
         return stringBuilder.ToString();
 
     }
+    public static string GetBlueString(this string _string) 
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.Append("<color=#0000FF>");
+        stringBuilder.Append(_string);
+        stringBuilder.Append("</color>");
+
+        return stringBuilder.ToString();
+
+    }
 
     /// <summary>
     /// •¶š‰»‚¯‚ğ‚·‚é‰Â”\«‚ğì¬
@@ -215,7 +226,7 @@ public static class Extra
 
         for(int i = 0; i < chars.Length; i++) 
         {
-            if (chars[i] == '"')
+            if (chars[i] == 'h')
             {
                 
                 colorFlag = !colorFlag;
@@ -248,7 +259,7 @@ public static class Extra
 
             case 'R':return "<color=#FF0000>";
             case 'B':return "<color=#0000FF>";
-            case 'Y':return "<color=#FFFF00>";
+            case 'Y':return "<color=#BFBF00>";
 
         }
 

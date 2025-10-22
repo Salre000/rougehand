@@ -103,9 +103,6 @@ public class GrabManager : MonoBehaviour
         {
             case status.Card:
                 CardObjectUtility.GrabChenge(_grabID, false);
-                if (_time > 1) break;
-
-                CardManager.instance.SetIsSelect(_grabID);
 
                 break;
             case status.Joker:
@@ -117,10 +114,22 @@ public class GrabManager : MonoBehaviour
         }
 
 
-        if (_status != status.Card&&_time<1) 
+        if (_time < 1)
         {
-            if(_status==status.Item)ItemUtility.SetSale(_grabID);
-            if(_status==status.Joker)JokerUtility.SetSale(_grabID);
+            switch (_status)
+            {
+                case status.None:
+                    break;
+                case status.Card:
+                    CardManager.instance.SetIsSelect(_grabID);
+                    break;
+                case status.Joker:
+                    JokerUtility.SetSale(_grabID);
+                    break;
+                case status.Item:
+                    ItemUtility.SetSale(_grabID);
+                    break;
+            }
 
         }
         _time = 0;
@@ -135,7 +144,7 @@ public class GrabManager : MonoBehaviour
     /// <param name="gameObject"></param>
     private void GetObjectType(GameObject gameObject)
     {
-        
+
         SetGrabID(gameObject);
 
         //何かしらの可能性でIDを取得出来なかった時にリセット
@@ -152,7 +161,7 @@ public class GrabManager : MonoBehaviour
             case status.Item:
                 ItemUtility.GrabChange(_grabID, true);
                 break;
-            case status.None:break;
+            case status.None: break;
         }
 
     }

@@ -24,4 +24,6 @@ public static class CardObjectUtility
 
     public static void StopCardObject(int ID) { CardObjectManager.StopMoveCardObject(ID); }
 
+    public static void ShowExplanation(Card.Trump trump,int ID) { CardObjectManager.ShowExplanation(trump,ID); }
+
 }

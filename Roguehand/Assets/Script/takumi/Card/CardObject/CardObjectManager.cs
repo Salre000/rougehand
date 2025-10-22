@@ -1,6 +1,9 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using Unity.VisualScripting;
 using UnityEngine;
 public class CardObjectManager : MonoBehaviour
 {
@@ -305,6 +308,61 @@ public class CardObjectManager : MonoBehaviour
     public void StopMoveCardObject(int ID) { _cardObjectHands[ID].StopMove(); }
 
     /// <summary>
+    /// カードの情報を描画状態に変更する
+    /// </summary>
+    /// <param name="trump"></param>
+    /// <param name="ID"></param>
+    public void ShowExplanation(Card.Trump trump, int ID)
+    {
+        //説明を描画させるダミーのクラス
+        DommyExplanation dommyExplanation = new DommyExplanation();
+
+        //名前の文字
+        dommyExplanation.dommyName = () =>
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(StringMaster.instance.GetMaster((int)trump.suit + 10, true));
+            sb.Append(StringMaster.instance.GetMaster((int)trump.suit));
+            sb.Append(StringMaster.instance.GetMaster(-10, true));
+            sb.Append('の');
+            sb.Append(((int)trump.number).ToString());
+
+            return sb.ToString();
+        };
+
+        // 説明の文字
+        dommyExplanation.dommyExplanation = () =>
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(Extra.ErrorText("基本スコア"));
+            sb.Append(Extra.GetBlueString(Extra.ErrorText("+" + ((int)trump.number).ToString())));
+            sb.Append("\n");
+            if (trump.deckBuff != Card.deckBuff.None)
+            {
+                sb.Append(StringMaster.instance.GetMaster(6250 + (int)trump.deckBuff));
+            }
+
+            return sb.ToString();
+        };
+        dommyExplanation.dommyExplanation2=()=>string.Empty;
+        dommyExplanation.dommyType=()=>string.Empty;
+
+        int[] buff = {6200+(int)trump.deckBuff, 6100+(int)trump.cardBuff,6000+(int)trump.sealBuff };
+
+        ExplanationManager.instance._uiSize = new Vector2(200, 150);
+        ExplanationManager.instance._uiSizeMini = new Vector2(200, 90);
+
+        ExplanationManager.instance.AddExplanation(_cardObjectHands[ID].gameObject, dommyExplanation, buff,new Vector2(0, -1));
+
+
+
+
+
+
+    }
+
+    /// <summary>
     /// つまんでいるカードの移動をする関数
     /// </summary>
     private void MovingCard()
@@ -551,7 +609,7 @@ public class CardObjectManager : MonoBehaviour
 
         // 確認した番号の配列を除外
         _chengeCardID.RemoveAt(targetID);
-         
+
 
     }
 
@@ -572,7 +630,7 @@ public class CardObjectManager : MonoBehaviour
         // トランプのソーツとナンバーを含んだマテリアルをセット
         materials[(int)cardMaterialType.main] = _materialManager.GetMaterial((int)cardData.suit, (int)cardData.number);
 
-        if (cardData.deckBuff == Card.deckBuff.Glass) 
+        if (cardData.deckBuff == Card.deckBuff.Glass)
         {
             //グラズのマテリアルのときだけベースのマテリアルのレンダリングモードをFadeに変更する
             materials[(int)cardMaterialType.main].SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
@@ -583,7 +641,7 @@ public class CardObjectManager : MonoBehaviour
             materials[(int)cardMaterialType.main].DisableKeyword("_ALPHAPREMULTIPLY_ON");
             materials[(int)cardMaterialType.main].renderQueue = 3000;
         }
-        else 
+        else
         {
             materials[(int)cardMaterialType.main].SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
             materials[(int)cardMaterialType.main].SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
@@ -595,7 +653,7 @@ public class CardObjectManager : MonoBehaviour
         }
 
 
-            meshRenderer.materials = materials;
+        meshRenderer.materials = materials;
     }
 
     /// <summary>
