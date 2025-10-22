@@ -45,6 +45,13 @@ public class BuffJoker : JokerBase
             Card.Trump card = trumps[i];
 
             int index = deck.IndexOf(card);
+            if (index < 0) 
+            {
+                //‘I‘ð’†‚¾‚Æˆê’v‚Éˆø‚Á‚©‚©‚ç‚È‚¢ˆ×
+                card.isSelect = !card.isSelect;
+
+                index = deck.IndexOf(card);
+            }
 
 
 

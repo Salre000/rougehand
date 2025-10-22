@@ -291,9 +291,6 @@ public class CardObjectManager : MonoBehaviour
 
         _cardObjectHands[ID].ResetMoveTime();
 
-        // カードの情報をUIとして描画する
-
-        CardObjectUtility.ShowExplanation(CardManager.instance.GetHand()[ID], ID);
 
 
     }
@@ -346,7 +343,8 @@ public class CardObjectManager : MonoBehaviour
             StringBuilder sb = new StringBuilder();
 
             sb.Append(Extra.ErrorText("基本スコア"));
-            sb.Append(Extra.GetBlueString(Extra.ErrorText("+" + ((int)trump.number).ToString())));
+            if((int)trump.number>10||(int)trump.number==1)sb.Append(Extra.GetBlueString(Extra.ErrorText("+11")));
+            else sb.Append(Extra.GetBlueString(Extra.ErrorText("+" + ((int)trump.number).ToString())));
             sb.Append("\n");
             if (trump.deckBuff != Card.deckBuff.None)
             {

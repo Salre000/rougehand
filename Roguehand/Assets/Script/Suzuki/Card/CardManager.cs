@@ -108,6 +108,10 @@ public class CardManager : MonoBehaviour
 
         List<Card.Trump> hand = this.hand;
 
+        // 選択中の個数を５個以上にできない用にする
+        //選択中の物をクリックは可能にしておく
+        if (!hand[ID].isSelect&&hand.GetCount(trump => { return trump.isSelect == true; }) > 4) return;
+
         Card.Trump dummyHand = hand[ID];
         dummyHand.isSelect = !dummyHand.isSelect;
         hand[ID] = dummyHand;
@@ -134,9 +138,6 @@ public class CardManager : MonoBehaviour
         CardObjectUtility.StopCardObject(ID);
         CardObjectUtility.ChengeStandby(ID);
 
-        // カードの情報をUIとして描画する
-
-        CardObjectUtility.ShowExplanation(hand[ID], ID);
 
     }
 

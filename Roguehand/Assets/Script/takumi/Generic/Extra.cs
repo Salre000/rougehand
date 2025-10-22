@@ -253,6 +253,27 @@ public static class Extra
 
         return stringBuilder.ToString();
     }
+    
+
+    /// <summary>
+    /// ƒŠƒXƒg‚Ì’†‚ÉğŒ‚ğ“ü‚ê‚Ä‚»‚ÌğŒ‚É‚ ‚Á‚½•¨‚ÌŒÂ”‚ğ•Ô‚·ŠÖ”
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="values"></param>
+    /// <param name="func"></param>
+    /// <returns></returns>
+    public static int GetCount<T>(this List<T> values,System.Func<T,bool> func) 
+    {
+        int count = 0;
+
+        for(int i = 0; i < values.Count; i++) 
+        {
+            if (!func(values[i])) continue;
+            count++;
+        }
+        return count;
+    }
+    
     private static string GetColor(char C) 
     {
         switch (C) 
@@ -268,5 +289,7 @@ public static class Extra
         return string.Empty;
 
     }
+
+
 
 }
