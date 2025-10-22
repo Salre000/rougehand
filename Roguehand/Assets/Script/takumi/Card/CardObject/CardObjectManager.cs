@@ -331,8 +331,8 @@ public class CardObjectManager : MonoBehaviour
             sb.Append(StringMaster.instance.GetMaster((int)trump.suit + 10, true));
             sb.Append(StringMaster.instance.GetMaster((int)trump.suit));
             sb.Append(StringMaster.instance.GetMaster(-10, true));
-            sb.Append('の');
-            sb.Append(((int)trump.number).ToString());
+            sb.Append(Extra.ErrorText("の"));
+            sb.Append(Extra.ErrorText(((int)trump.number).ToString()));
 
             return sb.ToString();
         };
@@ -343,8 +343,8 @@ public class CardObjectManager : MonoBehaviour
             StringBuilder sb = new StringBuilder();
 
             sb.Append(Extra.ErrorText("基本スコア"));
-            if((int)trump.number>10||(int)trump.number==1)sb.Append(Extra.GetBlueString(Extra.ErrorText("+11")));
-            else sb.Append(Extra.GetBlueString(Extra.ErrorText("+" + ((int)trump.number).ToString())));
+            if((int)trump.number>10||(int)trump.number==1)sb.Append(Extra.ErrorText(Extra.GetBlueString("+11")));
+            else sb.Append(Extra.ErrorText(Extra.GetBlueString("+" + ((int)trump.number).ToString())));
             sb.Append("\n");
             if (trump.deckBuff != Card.deckBuff.None)
             {
@@ -358,6 +358,7 @@ public class CardObjectManager : MonoBehaviour
 
         int[] buff = {6200+(int)trump.deckBuff, 6100+(int)trump.cardBuff,6000+(int)trump.sealBuff };
 
+        //UIの大きさを調整
         ExplanationManager.instance._uiSize = new Vector2(200, 150);
         ExplanationManager.instance._uiSizeMini = new Vector2(200, 90);
 

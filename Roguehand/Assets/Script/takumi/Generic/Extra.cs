@@ -217,8 +217,8 @@ public static class Extra
             count++;
         }
 
-        ////デバック用に0で固定
-        count = 0;
+        ////デバック用に固定
+        count = 5;
 
         char[] chars = _string.ToCharArray();
 
