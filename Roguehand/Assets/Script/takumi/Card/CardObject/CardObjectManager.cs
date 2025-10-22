@@ -285,7 +285,17 @@ public class CardObjectManager : MonoBehaviour
         _isGrab = flag;
         _isGrabID = ID;
 
+        if (flag) _cardObjectHands[ID].SetStatus(CardObject.status.hand);
+
+        else if (_cardObjectHands[ID].GetLostStatus() == CardObject.status.playWait) _cardObjectHands[ID].SetStatus(CardObject.status.playWait);
+
         _cardObjectHands[ID].ResetMoveTime();
+
+        // ƒJ[ƒh‚Ìî•ñ‚ğUI‚Æ‚µ‚Ä•`‰æ‚·‚é
+
+        CardObjectUtility.ShowExplanation(CardManager.instance.GetHand()[ID], ID);
+
+
     }
 
     public void ChengeOrder(int lostID, int nextID)

@@ -110,8 +110,10 @@ public class ExplanationManager : MonoBehaviour
         }
 
         //‰Šú’l‚Ì’è”•ªˆÚ“®‚É•â³‚ğ‚©‚¯‚é
-        gameObject.transform.GetChild(2).localPosition = new Vector3(-_uiSizeMini.x+130, 0, 0);
-        gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(300, 200 + 50 * addCount);
+        gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(_uiSize.x, 200 + 50 * addCount);
+        gameObject.transform.GetChild(2).localPosition = new Vector3(
+            -((-_uiSizeMini.x+defaultSizeMini.x)+(-_uiSize.x+defaultSize.x)),
+            gameObject.GetComponent<RectTransform>().sizeDelta.y/2, 0);
 
         _offsets.Add(offset);
 

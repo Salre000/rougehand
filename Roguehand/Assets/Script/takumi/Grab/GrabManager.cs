@@ -86,7 +86,6 @@ public class GrabManager : MonoBehaviour
         if (_status == status.None) return;
 
         SaleUtility.Claer();
-        ExplanationManager.instance.Remove();
 
         //マウスの位置にrayを飛ばす
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -137,6 +136,9 @@ public class GrabManager : MonoBehaviour
 
         _grabID = -1;
 
+        ExplanationManager.instance.Remove();
+
+
     }
     /// <summary>
     /// rayの対象のオブジェクトの種類を判別
@@ -154,6 +156,10 @@ public class GrabManager : MonoBehaviour
         {
             case status.Card:
                 CardObjectUtility.GrabChenge(_grabID, true);
+                // カードの情報をUIとして描画する
+
+                CardObjectUtility.ShowExplanation(CardManager.instance.GetHand()[_grabID], _grabID);
+
                 break;
             case status.Joker:
                 JokerObjectUtility.GrabChange(_grabID, true);

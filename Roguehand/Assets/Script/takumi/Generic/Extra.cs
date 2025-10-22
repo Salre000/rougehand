@@ -136,6 +136,8 @@ public static class Extra
             case "ネガティブ": color= new Color(200,200,200); break;
             case "セピア": color= new Color(200,200,200); break;
             case "オブジェクトムーブ": color= new Color(200,200,200); break;
+
+            default: color = new Color(100, 100, 100);break;
         }
 
         return color;

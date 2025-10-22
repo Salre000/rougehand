@@ -130,7 +130,7 @@ public class CardObject : MonoBehaviour
     public Vector3 GetBeforeAngle() { return _beforeAngle; }
 
 
-    public void SetGrab(bool flag) {_isGrab = flag;}
+    public void SetGrab(bool flag) { _isGrab = flag;}
 
     public bool IsGrab() { return _isGrab; }
 
