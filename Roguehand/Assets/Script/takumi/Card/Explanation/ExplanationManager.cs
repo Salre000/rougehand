@@ -103,7 +103,9 @@ public class ExplanationManager : MonoBehaviour
             explanation.SetActive(true);
 
             explanation.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Extra.ErrorText(StringMaster.instance.GetMaster(buff[i]));
-            explanation.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = StringMaster.instance.GetMaster(buff[i] + 50,true).TextString(new Vector2(130,90));
+            // テキストボックス
+            explanation.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = StringMaster.instance.GetMaster(buff[i] + 50,true).
+                TextString(_uiSizeMini-new Vector2(0,40));
             explanation.GetComponent<RectTransform>().sizeDelta = _uiSizeMini;
 
         }
@@ -123,7 +125,7 @@ public class ExplanationManager : MonoBehaviour
 
     public void Remove()
     {
-
+        //return;
         _explanationInterface.Clear();
         _offsets.Clear();
         for (int i = 0; i < 10; i++)
