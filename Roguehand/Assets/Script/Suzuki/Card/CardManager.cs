@@ -136,7 +136,7 @@ public class CardManager : MonoBehaviour
         RoleManager.instance.SetIsCheck(true);
 
         CardObjectUtility.StopCardObject(ID);
-        CardObjectUtility.ChengeStandby(ID);
+        CardObjectUtility.ChengeStandby(ID, hand[ID].isSelect);
 
 
     }

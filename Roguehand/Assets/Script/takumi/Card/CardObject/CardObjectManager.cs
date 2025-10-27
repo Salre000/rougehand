@@ -200,12 +200,12 @@ public class CardObjectManager : MonoBehaviour
     /// ƒvƒŒƒC€”õó‘Ô‚ÆèD‚É‚ ‚éó‘Ô‚ğØ‚è‘Ö‚¦‚éŠÖ”
     /// </summary>
     /// <param name="id"></param>
-    public void ChengeStandby(int id)
+    public void ChengeStandby(int id,bool isSelect)
     {
         // “®ì‚Ì“r’†‚Å‚ÌŠ„‚è‚İ‚ğ§ŒÀ
         if (_cardObjectHands[id].IsMovable()) return;
 
-        _cardObjectHands[id].SetStatus(_cardObjectHands[id].GetStatus() == CardObject.status.hand ? CardObject.status.playWait : CardObject.status.hand);
+        _cardObjectHands[id].SetStatus(isSelect ? CardObject.status.playWait : CardObject.status.hand);
         _cardObjectHands[id].ResetMoveTime();
     }
 

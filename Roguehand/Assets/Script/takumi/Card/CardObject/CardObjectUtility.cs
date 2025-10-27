@@ -10,7 +10,7 @@ public static class CardObjectUtility
 
     public static void StartHandMove() {  CardObjectManager.StartHandMove(); }
 
-    public static void ChengeStandby(int id) {  CardObjectManager.ChengeStandby(id);}
+    public static void ChengeStandby(int id,bool isSelect) {  CardObjectManager.ChengeStandby(id, isSelect);}
     public static void Play() { CardObjectManager.Play(); }
     public static void Discard() { CardObjectManager.Discard(); }
     public static void End() { CardObjectManager.End(); }
