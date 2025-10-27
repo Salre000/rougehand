@@ -53,6 +53,8 @@ public class SerectCardRole : MonoBehaviour
         // レベル
         name= StringMaster.instance.GetMaster(4000+level);
         _builder.Append(name);
+        // 基本スコアと倍率
+
     }
 
 }

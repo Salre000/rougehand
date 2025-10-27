@@ -24,9 +24,10 @@ public class PlayHnad : MonoBehaviour
         RoleManager.Role role=RoleManager.instance.GetRole();
         // 何の役もなければreturn
         if(role==RoleManager.Role.None)return;
-        // 
+        // カードが上に行く
         CardObjectUtility.Play();
-        
+        // 
+
         
         // 手札含めたすべて削除
         //CardObjectUtility.End();
