@@ -19,8 +19,12 @@ public class ExplanationManager : MonoBehaviour
     private List<GameObject> _explanationInterface = new List<GameObject>();
     private List<Vector2> _offsets = new List<Vector2>();
 
-    private readonly Vector2 defaultSize = new Vector2(300, 20);
+    private readonly Vector2 DEFAULT_SIZE = new Vector2(300, 20);
     private readonly Vector2 defaultSizeMini = new Vector2(130, 90);
+
+    private readonly float DEFAULT_HEIGHT = 200.0f;
+    private readonly float ONE_BUFF_HEIGHT = 50.0f;
+
 
     public Vector2 _uiSize { private get; set; }
     public Vector2 _uiSizeMini { private get; set; }
@@ -34,7 +38,7 @@ public class ExplanationManager : MonoBehaviour
     {
         instance = this;
         CreateObject();
-        _uiSize = defaultSize;
+        _uiSize = DEFAULT_SIZE;
         _uiSizeMini = defaultSizeMini;
 
     }
@@ -77,14 +81,16 @@ public class ExplanationManager : MonoBehaviour
 
         gameObject.GetComponent<RectTransform>().sizeDelta = _uiSize;
 
-        gameObject.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = explanationInterface.GetName();
-        gameObject.transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = explanationInterface.GetExplanation();
+        ExplanationObject explanationObject=gameObject.GetComponent<ExplanationObject>();
 
-        gameObject.transform.GetChild(1).transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = explanationInterface.GetExplanation2();
+        explanationObject.GetTextName().text = explanationInterface.GetName();
+        explanationObject.GetTextExplanation().text = explanationInterface.GetExplanation();
+
+        explanationObject.GetTextExplanation2().text = explanationInterface.GetExplanation2();
         // 諸事情ありこのタイミングで文字化けの可能性を作成
-        gameObject.transform.GetChild(1).transform.GetChild(3).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Extra.ErrorText(explanationInterface.GetTypes());
+        explanationObject.GetTextRarityText().text = Extra.ErrorText(explanationInterface.GetTypes());
 
-        gameObject.transform.GetChild(1).transform.GetChild(3).GetComponent<Image>().color = explanationInterface.GetTypes().GetJokerRarityColor();
+        explanationObject.GetTextRarityColor().color = explanationInterface.GetTypes().GetJokerRarityColor();
 
         int addCount = 0;
         for (int i = 0; i < buff.Length; i++)
@@ -95,30 +101,28 @@ public class ExplanationManager : MonoBehaviour
             // 名前検索以外に非アクティブオブジェクトに干渉できない為に
             // 苦渋の選択で名前検索にしている
             // オブジェクト指定からの名前検索なので負荷は最小限になっている
-            gameObject.transform.GetChild(1).transform.Find("BuffColor" + addCount.ToString()).gameObject.SetActive(true);
-            gameObject.transform.GetChild(1).transform.Find("BuffColor" + addCount.ToString()).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = StringMaster.instance.GetMaster(buff[i]);
-            gameObject.transform.GetChild(1).transform.Find("BuffColor" + addCount.ToString()).GetComponent<Image>().color = StringMaster.instance.GetMaster(buff[i], true).GetBuffColor();
+            explanationObject.GetBuffColorIcon(i).gameObject.SetActive(true);
+            explanationObject.GetBuffTextIcon(i).text = StringMaster.instance.GetMaster(buff[i]);
+            explanationObject.GetBuffColorIcon(i).color = StringMaster.instance.GetMaster(buff[i], true).GetBuffColor();
 
-            GameObject explanation = gameObject.transform.GetChild(2).transform.Find("BuffUI" + addCount.ToString()).gameObject;
-            explanation.SetActive(true);
+            explanationObject.GetBuffText(i).transform.parent.gameObject.SetActive(true);
 
-            explanation.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Extra.ErrorText(StringMaster.instance.GetMaster(buff[i]));
+            explanationObject.GetBuffName(i).text = Extra.ErrorText(StringMaster.instance.GetMaster(buff[i]));
             // テキストボックス
-            explanation.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = StringMaster.instance.GetMaster(buff[i] + 50,true).
+            explanationObject.GetBuffText(i).text = StringMaster.instance.GetMaster(buff[i] + 50,true).
                 TextString(_uiSizeMini-new Vector2(0,40));
-            explanation.GetComponent<RectTransform>().sizeDelta = _uiSizeMini;
+            explanationObject.GetBuffText(i).transform.parent.gameObject.GetComponent<RectTransform>().sizeDelta = _uiSizeMini;
 
         }
 
         //初期値の定数分移動に補正をかける
-        gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(_uiSize.x, 200 + 50 * addCount);
-        gameObject.transform.GetChild(2).localPosition = new Vector3(
-            -((-_uiSizeMini.x+defaultSizeMini.x)+(-_uiSize.x+defaultSize.x)),
-            gameObject.GetComponent<RectTransform>().sizeDelta.y/2, 0);
+        gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(_uiSize.x, DEFAULT_HEIGHT + ONE_BUFF_HEIGHT * addCount);
+
+        explanationObject.GetTextRarityColor().transform.parent.parent.localPosition = new Vector3(-((-_uiSizeMini.x+defaultSizeMini.x)+(-_uiSize.x+DEFAULT_SIZE.x)),gameObject.GetComponent<RectTransform>().sizeDelta.y/2, 0);
 
         _offsets.Add(offset);
 
-        _uiSize = defaultSize;
+        _uiSize = DEFAULT_SIZE;
         _uiSizeMini = defaultSizeMini;
 
     }
@@ -130,7 +134,7 @@ public class ExplanationManager : MonoBehaviour
         _offsets.Clear();
         for (int i = 0; i < 10; i++)
         {
-            _GameObjectPool[i].GetComponent<RectTransform>().sizeDelta = defaultSize;
+            _GameObjectPool[i].GetComponent<RectTransform>().sizeDelta = DEFAULT_SIZE;
 
             _GameObjectPool[i].transform.GetChild(1).transform.Find("BuffColor1").gameObject.SetActive(false);
             _GameObjectPool[i].transform.GetChild(1).transform.Find("BuffColor2").gameObject.SetActive(false);
