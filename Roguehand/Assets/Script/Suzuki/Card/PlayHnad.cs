@@ -1,37 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UIManager;
+using UnityEngine.UI;
+using static TextUIManager;
 
 public class PlayHnad : MonoBehaviour
 {
-    private Button button;
+    [SerializeField] private Button _playButton;
     // Start is called before the first frame update
     void Start()
     {
-        button=GameObject.Find("").GetComponent<Button>();
-        //button.onClick.AddListener(value=>OnHandPlay());
+        _playButton.onClick.AddListener(OnHandPlay);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // プレイのボタンを押したら通ります。
-        //if(!RoleManager.instance.IsPlay()) return;
-        //HandRolePlay();
-    }
-
-    private void HandRolePlay()
-    {
-        // デバック、確認として特定キーを押したら現在出せる役を表示する
-        List<Card.Trump> roleCheck = CardManager.instance.GetHand();
-        RoleManager.instance.RoleCheck(roleCheck);
-
-    }
+    /// <summary>
+    /// 青いほうのボタンが押されたとき
+    /// </summary>
     public void OnHandPlay()
     {
         // なんのカードも選択されていなければreturn
         if (CardManager.instance.GetPick().Count<=0) return;
+        // カードの役の判定結果をもらう
+        RoleManager.Role role=RoleManager.instance.GetRole();
+        // 何の役もなければreturn
+        if(role==RoleManager.Role.None)return;
     }
 }

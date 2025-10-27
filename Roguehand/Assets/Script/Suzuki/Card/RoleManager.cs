@@ -570,17 +570,17 @@ public class RoleManager : MonoBehaviour
     //　 ワンペア                   同じ数字のカードを２枚でプレイする
     //　 ハイカード                 以上の役が一つも成立しないとき
 
-
+    // 現在の役をローカル変数にセットします
     public void SetRole(Role role) { _role = role; }
+    // 現在判定されている役を返します
     public Role GetRole() {return _role; }
+    // 要素のどこに役になるカードがあるかを渡します
     public List<int> GetIndex() { return indexList; }
+    // 役を判定したかをローカル変数にセットします
     public void SetIsCheck(bool isCheck) {  _isCheck = isCheck; }
+    // 役が判定済みかを返します
     public bool IsCheck() {  return _isCheck; }
-    /// <summary>
-    /// 引数に対応した役のレベルを返します
-    /// </summary>
-    /// <param name="role">現在の役</param>
-    /// <returns></returns>
+    // 引数に対応した役のレベルを返します
     public int GetRoleLevel(Role role) { return _roleLevelList[(int)role]; }
 
 }

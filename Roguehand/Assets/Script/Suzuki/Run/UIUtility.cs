@@ -4,7 +4,7 @@ using System.Text;
 using Unity.VisualScripting;
 using TMPro;
 using UnityEngine;
-using static UIManager;
+using static TextUIManager;
 
 public class UIUtility:MonoBehaviour
 {

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UIManager;
+using static TextUIManager;
 
 public class GameRoot:MonoBehaviour 
 {
@@ -22,8 +22,8 @@ public class GameRoot:MonoBehaviour
     {
         return;
         int left=0, right=0;
-        left = IntTryParse(GetLowestScoreText().text);
-        right = IntTryParse(GetRoundScoreText().text);
+        left = instance.IntTryParse(instance.GetLowestScoreText().text);
+        right = instance.IntTryParse(instance.GetRoundScoreText().text);
 
         if(left <= right)
         {
@@ -35,8 +35,8 @@ public class GameRoot:MonoBehaviour
     {
         _next = true;
         _dontTouchZone.SetActive(true);
-        yield return new WaitForSeconds(1); 
-        UIManager.InitializeText();
+        yield return new WaitForSeconds(1);
+        //instance.InitializeText();
         _shopCanvas.SetActive(true);
     }
 

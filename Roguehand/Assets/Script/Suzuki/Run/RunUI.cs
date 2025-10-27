@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static TextUIManager;
 
 public class RunUI : MonoBehaviour
 {
@@ -18,11 +19,11 @@ public class RunUI : MonoBehaviour
 
     void Initialize()
     {
-        UIManager.Initialize();
+        instance.Initialize();
         UIUtility.getIns().Initialize();
-        UIManager.SetRoundNameText("DebugBlind");
-        UIManager.SetLowestScoreText("300");
-       UIManager.SetRewardCountText(UIUtility.getIns().RewardConversion(5));
+        instance.SetRoundNameText("DebugBlind");
+        instance.SetLowestScoreText("300");
+        instance.SetRewardCountText(UIUtility.getIns().RewardConversion(5));
 
     }
 

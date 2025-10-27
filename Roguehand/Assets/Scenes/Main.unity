@@ -966,6 +966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb948bf0c4673e0479a6f36064202f98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playButton: {fileID: 1152417746}
 --- !u!1 &201485615
 GameObject:
   m_ObjectHideFlags: 0
@@ -2117,6 +2118,7 @@ GameObject:
   - component: {fileID: 380910886}
   - component: {fileID: 380910887}
   - component: {fileID: 380910888}
+  - component: {fileID: 380910889}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -2163,6 +2165,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7944f1236c5b47e41927a6ed09732ef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &380910889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380910885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c42bce1705f988e4cbb83a798a85908f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _roundNameText: {fileID: 1170412354}
+  _lowestScoreText: {fileID: 988807235}
+  _rewardCountText: {fileID: 1112563497}
+  _roundScoreText: {fileID: 255889515}
+  _roleText: {fileID: 1963911101}
+  _basicScoreText: {fileID: 366108066}
+  _magnificationText: {fileID: 937012656}
+  _handText: {fileID: 583089261}
+  _discardText: {fileID: 1766140142}
+  _moneyText: {fileID: 2113582425}
+  _anteText: {fileID: 2047011710}
+  _roundText: {fileID: 111190409}
 --- !u!1 &388659606
 GameObject:
   m_ObjectHideFlags: 0

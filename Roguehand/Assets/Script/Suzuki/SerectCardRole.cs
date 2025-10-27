@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using static TextUIManager;
 
 /// <summary>
 /// 選択したハンドの役をテキストに反映させる
@@ -20,7 +21,7 @@ public class SerectCardRole : MonoBehaviour
     private void CheckRole()
     {
         StringBuild();
-        UIManager.SetRoleText(_builder.ToString());
+        instance.SetRoleText(_builder.ToString());
         RoleManager.instance.SetIsCheck(false);
     }
 
@@ -37,11 +38,11 @@ public class SerectCardRole : MonoBehaviour
         string name = StringMaster.instance.GetMaster(3000+(int)role);
         _builder.Append(name);
         if (_builder.Length >= 9)
-            UIManager.GetRoleText().fontSize=30.1f;
+            instance.GetRoleText().fontSize=30.1f;
         else if (_builder.Length >= 7)
-            UIManager.GetRoleText().fontSize = 34.1f;
+            instance.GetRoleText().fontSize = 34.1f;
         else
-            UIManager.GetRoleText().fontSize = 41.1f;
+            instance.GetRoleText().fontSize = 41.1f;
         // 文字サイズ
         name = StringMaster.instance.GetMaster(5000);
         _builder.Append(name);

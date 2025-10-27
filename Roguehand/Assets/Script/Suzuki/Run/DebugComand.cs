@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UIManager;
+using static TextUIManager;
 
 public class DebugComand : MonoBehaviour
 {
@@ -31,10 +31,10 @@ public class DebugComand : MonoBehaviour
 
     public void OnDisCard()
     {
-        int disCount = IntTryParse(GetDiscardText().text);
+        int disCount = instance.IntTryParse(instance.GetDiscardText().text);
         if(disCount<=0) return;
         disCount--;
-        SetDiscardText(disCount.ToString());
+        instance.SetDiscardText(disCount.ToString());
     }
 
     #region ƒXƒRƒAŒn
