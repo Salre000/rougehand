@@ -82,7 +82,7 @@ public class CardObjectManager : MonoBehaviour
     /// <summary>
     /// ƒvƒŒƒC‘Ò‹@ó‘Ô‚Ì‚Æ‚«‚ÉˆÚ“®‚·‚é‘Š‘ÎˆÚ“®—Ê
     /// </summary>
-    private readonly Vector3 _PLAY_WAIT = new Vector3(0, 50, -50);
+    private readonly Vector3 _PLAY_WAIT = new Vector3(0, 50, 0);
 
 
     /// <summary>
