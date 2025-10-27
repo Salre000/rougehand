@@ -103,9 +103,8 @@ public class ExplanationManager : MonoBehaviour
             explanation.SetActive(true);
 
             explanation.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Extra.ErrorText(StringMaster.instance.GetMaster(buff[i]));
-            explanation.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = StringMaster.instance.GetMaster(buff[i] + 50);
+            explanation.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = StringMaster.instance.GetMaster(buff[i] + 50,true).TextString(new Vector2(130,90));
             explanation.GetComponent<RectTransform>().sizeDelta = _uiSizeMini;
-
 
         }
 
@@ -166,7 +165,7 @@ public class ExplanationManager : MonoBehaviour
     private void CreateObject()
     {
         //ÉLÉÉÉìÉoÉXÇåüçı
-        GameObject cav = GameObject.Find("RunCanvas");
+        GameObject cav = GameObject.Find("UICanvas");
 
         GameObject Object = new GameObject("ExplanationObjects");
         Object.transform.parent = cav.transform;
