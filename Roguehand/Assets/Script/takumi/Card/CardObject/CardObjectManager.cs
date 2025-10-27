@@ -244,6 +244,17 @@ public class CardObjectManager : MonoBehaviour
         }
     }
 
+    public void PlayEnd() 
+    {
+        for (int i = 0; i < _cardObjectHands.Count; i++)
+        {
+            if (_cardObjectHands[i].GetStatus() != CardObject.status.play) continue;
+            _cardObjectHands[i].SetStatus(CardObject.status.trash);
+            _cardObjectHands[i].ResetMoveTime();
+        }
+
+    }
+
     /// <summary>
     /// ƒvƒŒƒC€”õó‘Ô‚©‚ç”jŠüó‘Ô‚ÉˆÚs‚·‚éŠÖ”
     /// </summary>

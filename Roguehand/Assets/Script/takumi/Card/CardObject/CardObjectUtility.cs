@@ -12,6 +12,7 @@ public static class CardObjectUtility
 
     public static void ChengeStandby(int id,bool isSelect) {  CardObjectManager.ChengeStandby(id, isSelect);}
     public static void Play() { CardObjectManager.Play(); }
+    public static void PlayEnd() { CardObjectManager.PlayEnd(); }
     public static void Discard() { CardObjectManager.Discard(); }
     public static void End() { CardObjectManager.End(); }
 

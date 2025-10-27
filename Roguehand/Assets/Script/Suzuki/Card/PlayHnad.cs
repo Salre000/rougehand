@@ -24,5 +24,15 @@ public class PlayHnad : MonoBehaviour
         RoleManager.Role role=RoleManager.instance.GetRole();
         // ‰½‚Ì–ğ‚à‚È‚¯‚ê‚Îreturn
         if(role==RoleManager.Role.None)return;
+        // 
+        CardObjectUtility.Play();
+        
+        
+        // èDŠÜ‚ß‚½‚·‚×‚Äíœ
+        //CardObjectUtility.End();
+
+        // èD‚¾‚¯‚·‚×‚Äíœ
+        //CardObjectUtility.PlayEnd();
+        
     }
 }

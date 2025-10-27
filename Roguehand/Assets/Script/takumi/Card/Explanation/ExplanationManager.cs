@@ -25,6 +25,7 @@ public class ExplanationManager : MonoBehaviour
     private readonly float DEFAULT_HEIGHT = 200.0f;
     private readonly float ONE_BUFF_HEIGHT = 50.0f;
 
+    private readonly float HALF = 2f;
 
     public Vector2 _uiSize { private get; set; }
     public Vector2 _uiSizeMini { private get; set; }
@@ -50,8 +51,8 @@ public class ExplanationManager : MonoBehaviour
 
             Vector2 pos = Camera.main.WorldToScreenPoint(_explanationInterface[i].transform.position);
 
-            pos.x -= Screen.width / 2f;
-            pos.y -= Screen.height / 2f;
+            pos.x -= Screen.width / HALF;
+            pos.y -= Screen.height / HALF;
 
             pos.y -= _GameObjectPool[i].GetComponent<RectTransform>().sizeDelta.y * _offsets[i].y;
             pos.x -= _GameObjectPool[i].GetComponent<RectTransform>().sizeDelta.x * _offsets[i].x;
