@@ -73,6 +73,10 @@ public class JokerObject : MonoBehaviour
     /// </summary>
     private bool _isEnd=false;
 
+
+    private bool _cardBuff = false;
+    private bool _jokerBuff = false;
+
     /// <summary>
     /// ジョーカーの生成時に動く初期化処理
     /// </summary>
@@ -294,6 +298,8 @@ public class JokerObject : MonoBehaviour
         reta = 1;
         _isPlay = false;
 
+
+        //if(_base.GetCardBuff()!=Card.cardBuff.None&&)
         JokerObjectUtility.NestJokerPlay(this);
 
         //プレイの瞬間のアクション
