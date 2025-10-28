@@ -8,7 +8,6 @@ public class ExplanationObject : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI _name;
     [SerializeField] TextMeshProUGUI _explanation;
-    [SerializeField] TextMeshProUGUI _explanation2;
     [SerializeField] Image _rarityColor;
     [SerializeField] TextMeshProUGUI _rarityText;
     [SerializeField]List<Image>_buffColorIcon=new List<Image>();
@@ -18,7 +17,6 @@ public class ExplanationObject : MonoBehaviour
 
     public TextMeshProUGUI GetTextName() {  return _name; }
     public TextMeshProUGUI GetTextExplanation() {  return _explanation; }
-    public TextMeshProUGUI GetTextExplanation2() {  return _explanation2; }
     public TextMeshProUGUI GetTextRarityText() {  return _rarityText; }
     public Image GetTextRarityColor() {  return _rarityColor; }
 

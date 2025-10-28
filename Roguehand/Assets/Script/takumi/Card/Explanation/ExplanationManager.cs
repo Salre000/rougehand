@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,8 +17,8 @@ public class ExplanationManager : MonoBehaviour
     /// 説明をまとめた配列
     /// </summary>
     private List<GameObject> _GameObjectPool = new List<GameObject>();
-    private List<GameObject> _explanationInterface = new List<GameObject>();
-    private List<Vector2> _offsets = new List<Vector2>();
+    [SerializeField]private List<GameObject> _explanationInterface = new List<GameObject>();
+    [SerializeField]private List<Vector2> _offsets = new List<Vector2>();
 
     private readonly Vector2 DEFAULT_SIZE = new Vector2(300, 20);
     private readonly Vector2 defaultSizeMini = new Vector2(130, 90);
@@ -85,9 +86,7 @@ public class ExplanationManager : MonoBehaviour
         ExplanationObject explanationObject=gameObject.GetComponent<ExplanationObject>();
 
         explanationObject.GetTextName().text = explanationInterface.GetName();
-        explanationObject.GetTextExplanation().text = explanationInterface.GetExplanation();
-
-        explanationObject.GetTextExplanation2().text = explanationInterface.GetExplanation2();
+        //explanationObject.GetTextExplanation().text= explanationObject.GetTextExplanation().TextString(GetLineString(explanationInterface.GetExplanation(), explanationInterface.GetExplanation2()),true);
         // 諸事情ありこのタイミングで文字化けの可能性を作成
         explanationObject.GetTextRarityText().text = Extra.ErrorText(explanationInterface.GetTypes());
 
@@ -213,6 +212,17 @@ public class ExplanationManager : MonoBehaviour
         return null;
 
 
+    }
+
+    private string GetLineString(string _string1,string _string2)
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.Append(_string1);
+        stringBuilder.Append("\n");
+        stringBuilder.Append(_string2);
+
+        return stringBuilder.ToString();
     }
 
 }
