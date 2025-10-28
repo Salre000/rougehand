@@ -71,11 +71,12 @@ public class JokerObject : MonoBehaviour
     /// <summary>
     /// このオブジェクトを破壊するかどうかのフラグ
     /// </summary>
-    private bool _isEnd=false;
+    private bool _isEnd = false;
 
-
-    private bool _cardBuff = false;
-    private bool _jokerBuff = false;
+    /// <summary>
+    /// 一ターンに何回の行動をするかの変数
+    /// </summary>
+    private int playCount = 0;
 
     /// <summary>
     /// ジョーカーの生成時に動く初期化処理
@@ -85,10 +86,19 @@ public class JokerObject : MonoBehaviour
     {
         _base = jokerBase;
         _status = JokerStatus.wait;
-        _jokerActionProcess=NormalJokerActionProcess;
+        _jokerActionProcess = NormalJokerActionProcess;
         SetAction();
 
         transform.GetChild(0).AddComponent<JokerObjectAnime>();
+
+    }
+
+    public void PreparationPlay()
+    {
+        if (_base.Trun() < 1) playCount++;
+        if (_base.GetCardBuff() != Card.cardBuff.None) playCount++;
+        if (_base.GetJokerBuff() != Card.JokerBuff.None) playCount++;
+
 
     }
 
@@ -101,14 +111,14 @@ public class JokerObject : MonoBehaviour
         if (_status != JokerStatus.play) return;
 
         //ジョーカーが何もできない時
-        if (_base.Trun() < 1) { _status = JokerStatus.wait; JokerObjectUtility.NestJokerPlay(this); return; }
+        if (playCount < 1) { _status = JokerStatus.wait; JokerObjectUtility.NestJokerPlay(this); return; }
 
 
 
         _jokerPlayAction();
     }
 
-    public void Action() 
+    public void Action()
     {
         if (_status != JokerStatus.action) return;
 
@@ -130,7 +140,7 @@ public class JokerObject : MonoBehaviour
 
         if (Vector3.Distance(transform.position, nextpos) < EPSILON) { _time = 0; _lostpos = nextpos; _lostAngle = Vector3.zero; return; }
 
-        _time += Time.deltaTime * GameConfig.GetGameSpeed()*2.5f;
+        _time += Time.deltaTime * GameConfig.GetGameSpeed() * 2.5f;
 
 
         transform.position = Vector3.Lerp(_lostpos, nextpos, _time);
@@ -171,20 +181,20 @@ public class JokerObject : MonoBehaviour
     /// <param name="flag"></param>
     public void SetGrab(bool flag)
     {
-        _isGrab=flag;
+        _isGrab = flag;
 
-        _lostpos=transform.position;
+        _lostpos = transform.position;
     }
 
     /// <summary>
     /// ジョーカーが自分のターン以外に起こす挙動の開始時
     /// </summary>
-    public void CardAddPlay(float AddNum) 
+    public void CardAddPlay(float AddNum)
     {
         this.AddNum = AddNum;
         _jokerActionProcess = NeverAddJokerActionProcess;
 
-        if (JokerObjectUtility.GetActionCount()>=2) return;
+        if (JokerObjectUtility.GetActionCount() >= 2) return;
         _status = JokerStatus.action;
     }
 
@@ -192,14 +202,14 @@ public class JokerObject : MonoBehaviour
     /// アクションの待機が存在するのかどうか
     /// </summary>
     /// <returns></returns>
-    public bool GetAction() {return AddNum !=0;}
+    public bool GetAction() { return AddNum != 0; }
 
-    public bool CheckAction() { return _status==JokerStatus.action;}
+    public bool CheckAction() { return _status == JokerStatus.action; }
 
-    public void THEEnd() { _isEnd = true;}
-    public bool IsEnd() { return _isEnd;}
+    public void THEEnd() { _isEnd = true; }
+    public bool IsEnd() { return _isEnd; }
 
-    public void StartChenge() 
+    public void StartChenge()
     {
         _status = JokerStatus.action;
 
@@ -210,13 +220,13 @@ public class JokerObject : MonoBehaviour
     }
 
     public int GetJokerID() { return _base.GetID(); }
-    private void ChengeAction() 
+    private void ChengeAction()
     {
-        _time += Time.deltaTime * GameConfig.GetGameSpeed()*reta;
+        _time += Time.deltaTime * GameConfig.GetGameSpeed() * reta;
 
-        transform.eulerAngles = Vector3.Lerp(Vector3.zero, new Vector3(0, 180,0), _time);
+        transform.eulerAngles = Vector3.Lerp(Vector3.zero, new Vector3(0, 180, 0), _time);
 
-        if (_time > 1 && reta == 1) 
+        if (_time > 1 && reta == 1)
         {
 
             //マテリアルを変更
@@ -225,7 +235,7 @@ public class JokerObject : MonoBehaviour
             reta = -1;
         }
 
-        if (_time >0f) return ;
+        if (_time > 0f) return;
 
 
 
@@ -257,7 +267,7 @@ public class JokerObject : MonoBehaviour
     private void JokerCardAction()
     {
 
-        if(!JokerAction())return;
+        if (!JokerAction()) return;
 
         _jokerActionProcess();
 
@@ -267,7 +277,7 @@ public class JokerObject : MonoBehaviour
     /// <summary>
     /// ジョーカーの動き
     /// </summary>
-    private bool JokerAction() 
+    private bool JokerAction()
     {
 
         _time += Time.deltaTime * GameConfig.GetGameSpeed() * 10;
@@ -284,34 +294,43 @@ public class JokerObject : MonoBehaviour
         //一ターンに一度に制限
         if (!_isPlay || reta != -1) return false;
 
-        _status = JokerStatus.wait;
-       
+
 
         return true;
 
     }
 
 
-    private void NormalJokerActionProcess() 
+    private void NormalJokerActionProcess()
     {
 
-        reta = 1;
-        _isPlay = false;
 
+                reta = 1;
 
         //if(_base.GetCardBuff()!=Card.cardBuff.None&&)
-        JokerObjectUtility.NestJokerPlay(this);
 
         //プレイの瞬間のアクション
-
         //倍率に追加
-        JokerUtility.AddMagnification(_base.Trun());
-        Debug.Log("倍率に追加");
+        switch (playCount)
+        {
+            case 1: JokerUtility.AddMagnification(_base.Trun());Debug.Log("追加１"); break;
+            case 2: BuffUtility.PlayBuff(_base.GetCardBuff()); Debug.Log("追加３"); break;
+            case 3: BuffUtility.PlayBuff(_base.GetJokerBuff()); Debug.Log("追加２"); break;
 
 
+            default: JokerObjectUtility.NestJokerPlay(this); 
+                _status = JokerStatus.wait;
+                _isPlay = false;
 
+                break;
+
+        }
+
+        playCount--;
+
+        
     }
-    private void NeverAddJokerActionProcess() 
+    private void NeverAddJokerActionProcess()
     {
         //カードの倍率の上昇したっていうアニメーションを入れる
 
@@ -333,12 +352,12 @@ public class JokerObject : MonoBehaviour
     /// <summary>
     /// 掴んでいるジョーカーの移動関数
     /// </summary>
-    private void GrabMove() 
+    private void GrabMove()
     {
         //マウスポイント依存で座標を決定する
         Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z);
         transform.position = Camera.main.ScreenToWorldPoint(mousePos);
-    
+
     }
 
 
