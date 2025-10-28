@@ -22,7 +22,6 @@ public class DebugComand : MonoBehaviour
         ScoreUp();
         //
         MagUp();
-        RoundResult();
         ScoreReset();
     }
 
@@ -53,11 +52,7 @@ public class DebugComand : MonoBehaviour
             ScoreManager.instance.MagnificationPlus(12.2f);
         }
     }
-    private void RoundResult()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-            ScoreManager.instance.RoundScoreResult();
-    }
+
     private void ScoreReset()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))

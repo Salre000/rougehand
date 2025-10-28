@@ -44,6 +44,7 @@ public class RoleManager : MonoBehaviour
         {
             _roleLevelList.Add(1);
         }
+        indexList = new();
     }
 
     /// <summary>
@@ -85,6 +86,7 @@ public class RoleManager : MonoBehaviour
             indexList.Add(i);
         }
 
+        if(indexList==null) return Role.None;
         if (indexList.Count >= 5) return Role.revolution;
 
         return Role.None;
@@ -494,12 +496,32 @@ public class RoleManager : MonoBehaviour
         // この役を判定しているのが A~10のストレートの場合だけみたいなら以降の処理はしない
         if (isRoyal) return null;
 
+        // TODO:通常のストレートが判定取れてないので要修正
+
         // Number順(13～1)に並べなおす
         List<Card.Trump> jastCards = new(cards);
         cards = CardManager.instance.NumberSort(cards);
         jastNum.Clear();
         for (int i = 0; i < cards.Count; i++)
         {
+
+            // 最後の1枚を入れる
+            if (cards.Count-1 == i)
+            {
+                // 元のカードリストと同じものを見つける
+                for (int j = 0; j < jastCards.Count; j++)
+                {
+                    if (CardManager.instance.JastCardCheck(jastCards[j], cards[i]))
+                    {
+                        // 要素のある値を追加
+                        jastNum.Add(j);
+                    }
+                }
+
+                // 連続したカードが5枚以上見つかっているならreturn
+                if (jastNum.Count >= straightCount) return jastNum;
+                else return null;
+            }
             if (cards.Count - 1 == i) break;
 
             // 一個上が連続した数値かどうか

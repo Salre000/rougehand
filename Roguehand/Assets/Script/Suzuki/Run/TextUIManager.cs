@@ -65,7 +65,7 @@ public class TextUIManager:MonoBehaviour
         SetRoundNameText(texts.roundname);
         SetLowestScoreText(texts.lowestscore);
         SetRewardCountText(texts.rewardCount);
-        SetRoundScereText(texts.roundscore);
+        SetRoundScoreText(texts.roundscore);
         SetRoleText(texts.role);
         SetBasicScoreText(texts.basicscore);
         SetMagnificationText(texts.magnification);
@@ -99,7 +99,7 @@ public class TextUIManager:MonoBehaviour
     public void SetRoundNameText(string value) { _roundNameText.text= value; }
     public void SetLowestScoreText(string value) { _lowestScoreText.text= value; }
     public void SetRewardCountText(string value) { _rewardCountText.text = value; }
-    public void SetRoundScereText(string value) { _roundScoreText.text = value; }
+    public void SetRoundScoreText(string value) { _roundScoreText.text = value; }
     public void SetRoleText(string value) { _roleText.text= value; }
     public void SetBasicScoreText(string value) { _basicScoreText.text = value; }
     public void SetMagnificationText(string value) { _magnificationText.text = value; }

@@ -18,7 +18,7 @@ public class SerectCardRole : MonoBehaviour
 
     private const int _TEXT_MAX_LENGT_TYPE1 = 9;
     private const int _TEXT_MAX_LENGT_TYPE2 = 7;
-    private const float _FONT_SIZE_TYPE1 = 30.1f;
+    private const float _FONT_SIZE_TYPE1 = 27.1f/*30.1f*/;
     private const float _FONT_SIZE_TYPE2 = 34.1f;
     private const float _FONT_SIZE_TYPE3 = 41.1f;
     private const int _NOT_CARD_PICK_COUNT = 0;
@@ -93,13 +93,35 @@ public class SerectCardRole : MonoBehaviour
         // 基本スコアと倍率
         // 基本スコア
         int basic = ScoreMaster.instance.GetBasicScore(_SCORE_ID + (int)role);
+
+        // 役によって変わる上昇幅を獲得
+        int addBasicLevel= ScoreMaster.instance.GetAddBasicScore(_SCORE_ID + (int)role);
+        // プレイされた役の現レベルを獲得
+        int level = RoleManager.instance.GetRoleLevel(role);
+        // レベルに応じてスコアを上昇
+        for (int i = 1; i < level; i++)
+            basic += addBasicLevel;
+
+        // 共有
+        ScoreManager.instance.SetBasic(basic);
         _builder.Append(basic);
         // Textの変更
         instance.SetBasicScoreText(_builder.ToString());
 
+
+
         _builder.Clear();
         // 倍率
         int magnifi = ScoreMaster.instance.GetBasicMagnification(_SCORE_ID + (int)role);
+
+        // 役によって変わる上昇幅を獲得
+        int addMagniLevel = ScoreMaster.instance.GetAddBasicMagnification(_SCORE_ID + (int)role);
+        // レベルに応じてスコアを上昇
+        for (int i = 1; i < level; i++)
+            magnifi += addMagniLevel;
+
+        // 共有
+        ScoreManager.instance.SetMagnification(magnifi);
         _builder.Append(magnifi);
         // Textの変更
         instance.SetMagnificationText(_builder.ToString());
@@ -108,6 +130,7 @@ public class SerectCardRole : MonoBehaviour
     }
 
     // カードがスコアされたら結果を役の名前のほうに、倍率たちをゼロにする
+    // 使わない関数です
     private void PlayScore()
     {
         _builder.Clear();

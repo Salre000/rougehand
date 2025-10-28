@@ -564,7 +564,7 @@ public class CardObjectManager : MonoBehaviour
             _cardObjectHands.GetCount(hand => hand.GetStatus() != CardObject.status.play?false:hand.GetMoveTimeRata()<1?false:true)) return;
 
         // 到着
-
+        PlayManager.instance.SetCardTransComp(true);
     }
     /// <summary>
     /// カードをトラッシュに移動させる関数

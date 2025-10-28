@@ -15,4 +15,9 @@ public class ScoreResult : MonoBehaviour
     {
         
     }
+
+    private void Result()
+    {
+        ScoreManager.instance.RoundScoreResult();
+    }
 }

@@ -13,22 +13,30 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance;
 
     // 基本スコア
-    TextMeshProUGUI _basicScoreText;
     private float _basicScore;
     // 倍率
-    TextMeshProUGUI _magnificationText;
     private float _magnification;
-
-    TextMeshProUGUI _roundScoreText;
-    float _roundScore;
+    // ラウンドの合計スコア
+    private　float _roundScore;
+    // プレイしたハンドのスコア
+    private float _handScore;
 
     private StringBuilder builder;
     // ラウンドスコアの文字が枠外に出るくらいの文字数を検知
-    private int _remit = 9;
+    private int _defaultRemit = 9;
     // 減らす文字サイズ
     private const int _DOWNSIZE = 2;
     // 元のフォントサイズ
-    private const float _OFFSET=44.1f;
+    private const float _DEFAULT_OFFSET=44.1f;
+    // スコア時の文字が枠外に出るくらいの文字数を検知
+    private int _scoreRemitLength = 9;
+    // スコア時のフォントサイズ
+    private const float _SCORE_OFFSET = 70f;
+    // 文字数検知のリセット
+    private const int _RESET_REMIT_SIZE = 9;
+    // ゼロにする
+    private const int _RESET_NUM = 0;
+
 
     private void Awake()
     {
@@ -40,9 +48,7 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         builder = new StringBuilder();
-        _basicScoreText = GameObject.Find("BasicScoreText").GetComponent<TextMeshProUGUI>();
-        _magnificationText = GameObject.Find("MagnificationText").GetComponent<TextMeshProUGUI>();
-        _roundScoreText = GameObject.Find("RoundScoreText").GetComponent<TextMeshProUGUI>();
+
     }
 
     // Update is called once per frame
@@ -60,7 +66,7 @@ public class ScoreManager : MonoBehaviour
         _basicScore += value;
         builder.Clear();
         builder.Append(_basicScore);
-        _basicScoreText.text = builder.ToString();
+        TextUIManager.instance.SetBasicScoreText(builder.ToString());
 
     }
 
@@ -75,28 +81,63 @@ public class ScoreManager : MonoBehaviour
 
         builder.Clear();
         builder.Append(_magnification);
-        _magnificationText.text = builder.ToString();
-
+        TextUIManager.instance.SetMagnificationText(builder.ToString());
     }
 
     /// <summary>
-    /// 二つの結果をまとめる
+    /// 二つの結果を合計ラウンドにまとめる
     /// </summary>
     public void RoundScoreResult()
     {
-        _roundScore=_basicScore*_magnification;
+        _roundScore+= _handScore;
+        // 四捨五入した値が返る
         _roundScore = Rounding(_roundScore,1f);
 
         builder.Clear();
         builder.AppendFormat("{0:#}", _roundScore.ToString("N0"));
         
-        if(builder.Length >= _remit)
+        if(builder.Length >= _defaultRemit)
         {
-            _roundScoreText.fontSize -= _DOWNSIZE;
-            _remit++;
+            TextUIManager.instance.GetRoundScoreText().fontSize -= _DOWNSIZE;
+            _defaultRemit++;
+        }
+        else
+        {
+        _defaultRemit = _RESET_REMIT_SIZE;
+
         }
 
-        _roundScoreText.text = builder.ToString();
+            TextUIManager.instance.SetRoundScoreText(builder.ToString());
+    }
+
+    /// <summary>
+    /// 二つの結果を表示
+    /// </summary>
+    public void PlayScoreResult()
+    {
+
+        _handScore = _basicScore * _magnification;
+        // 四捨五入した値が返る
+        _handScore = Rounding(_handScore, 1f);
+
+        builder.Clear();
+        builder.AppendFormat("{0:#}", _handScore.ToString("N0"));
+
+        if (builder.Length >= _scoreRemitLength)
+        {
+            TextUIManager.instance.GetRoleText().fontSize -= _DOWNSIZE;
+            _scoreRemitLength++;
+        }
+            TextUIManager.instance.GetRoleText().fontSize = _SCORE_OFFSET;
+
+        TextUIManager.instance.SetRoleText(builder.ToString());
+        _scoreRemitLength = _RESET_REMIT_SIZE;
+
+        // ゼロにする
+        builder.Clear();
+        builder.Append(_RESET_NUM);
+        TextUIManager.instance.SetBasicScoreText(builder.ToString());
+        TextUIManager.instance.SetMagnificationText(builder.ToString());
     }
 
     /// <summary>
@@ -106,12 +147,12 @@ public class ScoreManager : MonoBehaviour
     {
         builder.Clear();
         _roundScore = _magnification =_basicScore = 0;
-        _remit = 9;
-        _roundScoreText.fontSize=_OFFSET;
+        _defaultRemit = _RESET_REMIT_SIZE;
+        TextUIManager.instance.GetRoundScoreText().fontSize = _DEFAULT_OFFSET;
         builder.Append(_basicScore);
-        _basicScoreText.text = builder.ToString();
-        _magnificationText.text = builder.ToString();
-        _roundScoreText.text= builder.ToString();
+        TextUIManager.instance.SetBasicScoreText(builder.ToString());
+        TextUIManager.instance.SetMagnificationText(builder.ToString());
+        TextUIManager.instance.SetRoundScoreText(builder.ToString());
     }
 
     /// <summary>
@@ -121,6 +162,28 @@ public class ScoreManager : MonoBehaviour
     public void Multiplication(float value)
     {
         _magnification*=value;
+    }
+
+    /// <summary>
+    /// ハンドスコアをゼロにしながらラウンドスコアに加算
+    /// </summary>
+    public void RoundScorePlus()
+    {
+        // 合計に加算
+        _roundScore += _handScore;
+        // 0にする
+        _handScore = 0;
+        // 空白にする
+        builder.Clear();
+        builder.Append("");
+        TextUIManager.instance.SetRoleText(builder.ToString());
+
+
+        // ラウンドスコアを表示
+        builder.Clear();
+        builder.Append(_roundScore);
+        TextUIManager.instance.SetRoundScoreText(builder.ToString());
+
     }
 
     /// <summary>
@@ -156,4 +219,7 @@ public class ScoreManager : MonoBehaviour
 
         return num1;
     }
+
+    public void SetBasic(int value) { _basicScore = value; }
+    public void SetMagnification(int value) { _magnification = value; }
 }
