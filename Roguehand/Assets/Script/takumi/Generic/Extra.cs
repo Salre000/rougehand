@@ -219,7 +219,7 @@ public static class Extra
         }
 
         ////デバック用に固定
-        count = 5;
+        count = 0;
 
         char[] chars = _string.ToCharArray();
 
@@ -333,15 +333,15 @@ public static class Extra
     public static string GetMaxSizeString(this string _string, Vector2 textBoxSize, int Line = 1)
     {
         // 一行の文字の数
-        int stringCount = _string.Length;
+        int stringCount = _string.GetStringCount()/Line;
 
         
         // XとY方向に許容可能な最大値を取得
-        int sizeX = (int)((textBoxSize.x / stringCount)-1)*Line;
-        int sizeY = (int)(textBoxSize.y / Line);
+        float sizeX = ((textBoxSize.x / stringCount)-1);
+        float sizeY = (textBoxSize.y / Line);
 
         // 小さい方を採用
-        int size=Mathf.Min(sizeX, sizeY);
+        float size=Mathf.Min(sizeX, sizeY);
 
         string text = "<size=" + size.ToString() + ">";
 
@@ -372,6 +372,45 @@ public static class Extra
         }
 
         return string.Empty;
+
+    }
+
+    private static int GetStringCount(this string _string) 
+    {
+
+        char[] chars = _string.ToCharArray();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        bool colorFlag = false;
+
+        int count = 0;
+
+        for (int i = 0; i < chars.Length; i++)
+        {
+            if (chars[i] == '<')
+            {
+
+                colorFlag = true;
+
+                continue;
+
+            }
+            if (chars[i] == '>')
+            {
+
+                colorFlag = false;
+
+                continue;
+
+            }
+
+            if(!colorFlag) count++;
+
+        }
+
+        return count;
+
 
     }
 
