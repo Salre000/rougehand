@@ -86,7 +86,7 @@ public class ExplanationManager : MonoBehaviour
         ExplanationObject explanationObject=gameObject.GetComponent<ExplanationObject>();
 
         explanationObject.GetTextName().text = explanationInterface.GetName();
-        //explanationObject.GetTextExplanation().text= explanationObject.GetTextExplanation().TextString(GetLineString(explanationInterface.GetExplanation(), explanationInterface.GetExplanation2()),true);
+        explanationObject.GetTextExplanation().text= GetLineString(explanationInterface.GetExplanation(), explanationInterface.GetExplanation2());
         // 諸事情ありこのタイミングで文字化けの可能性を作成
         explanationObject.GetTextRarityText().text = Extra.ErrorText(explanationInterface.GetTypes());
 
@@ -109,8 +109,8 @@ public class ExplanationManager : MonoBehaviour
 
             explanationObject.GetBuffName(i).text = Extra.ErrorText(StringMaster.instance.GetMaster(buff[i]));
             // テキストボックス
-            explanationObject.GetBuffText(i).text = StringMaster.instance.GetMaster(buff[i] + 50,true).
-                TextString(_uiSizeMini-new Vector2(0,40));
+            explanationObject.GetBuffText(i).text = StringMaster.instance.GetMaster(buff[i] + 50);
+               
             explanationObject.GetBuffText(i).transform.parent.gameObject.GetComponent<RectTransform>().sizeDelta = _uiSizeMini;
 
         }
@@ -121,6 +121,13 @@ public class ExplanationManager : MonoBehaviour
         explanationObject.GetTextRarityColor().transform.parent.parent.localPosition = new Vector3(-((-_uiSizeMini.x+defaultSizeMini.x)+(-_uiSize.x+DEFAULT_SIZE.x)),gameObject.GetComponent<RectTransform>().sizeDelta.y/2, 0);
 
         _offsets.Add(offset);
+
+        Vector2 size = explanationObject.GetBuffParent().GetComponent<RectTransform>().sizeDelta;
+
+        size.x = _uiSizeMini.x * 2;
+
+        explanationObject.GetBuffParent().GetComponent<RectTransform>().sizeDelta = size;
+        explanationObject.GetBuffParent().GetComponent<RectTransform>().localPosition = new Vector2(-_uiSize.x/HALF, 0);
 
         _uiSize = DEFAULT_SIZE;
         _uiSizeMini = defaultSizeMini;

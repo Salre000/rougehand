@@ -561,7 +561,16 @@ public class CardObjectManager : MonoBehaviour
         if (cardObjectHand.GetMoveTimeRata() < 1) return;
 
         if (_cardObjectHands.GetCount(hand => hand.GetStatus() == CardObject.status.play) !=
-            _cardObjectHands.GetCount(hand => hand.GetStatus() != CardObject.status.play?false:hand.GetMoveTimeRata()<1?false:true)) return;
+            _cardObjectHands.GetCount(
+                hand => {
+
+                    if(hand.GetStatus() != CardObject.status.play)return false;
+                    if (hand.GetMoveTimeRata() < 1) return false;
+                    return true;
+
+                    //ˆês‚Ìƒ‰ƒ€ƒ_Ž®
+                    //hand.GetStatus() != CardObject.status.play ? false : hand.GetMoveTimeRata() < 1 ? false : true
+                })) return;
 
         // “ž’…
         PlayManager.instance.SetCardTransComp(true);

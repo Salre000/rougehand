@@ -14,6 +14,7 @@ public class ExplanationObject : MonoBehaviour
     [SerializeField]List<TextMeshProUGUI> _buffTextIcon = new List<TextMeshProUGUI>();
     [SerializeField]List<TextMeshProUGUI> _buffTextNameMini=new List<TextMeshProUGUI>();
     [SerializeField]List<TextMeshProUGUI> _buffTextMini = new List<TextMeshProUGUI>();
+    [SerializeField] GameObject buffParent;
 
     public TextMeshProUGUI GetTextName() {  return _name; }
     public TextMeshProUGUI GetTextExplanation() {  return _explanation; }
@@ -25,6 +26,6 @@ public class ExplanationObject : MonoBehaviour
     public TextMeshProUGUI GetBuffText(int ID) {  return _buffTextMini[ID]; }
     public TextMeshProUGUI GetBuffName(int ID) {  return _buffTextNameMini[ID]; }
 
-
+    public GameObject GetBuffParent() { return buffParent; }
 
 }

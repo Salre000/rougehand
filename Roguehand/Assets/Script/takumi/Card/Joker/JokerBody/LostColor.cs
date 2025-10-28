@@ -13,17 +13,19 @@ public class LostColor : JokerBase
         return JokerActionUseEnum.JokerRarity.Uncommon;
     }
 
-
-    public override void RoundStart()
+    public override void Initializ()
     {
 
-       if(postEffect==null) postEffect = Camera.main.AddComponent<PostEffect>();
+        if (postEffect == null) postEffect = Camera.main.AddComponent<PostEffect>();
 
         if (sepia == null) sepia = Resources.Load<Material>("takumi/SepiaMterial");
 
-        if(postEffect.sepia==null)postEffect.sepia = sepia;
+        if (postEffect.sepia == null) postEffect.sepia = sepia;
 
 
+    }
+    public override void RoundStart()
+    {
     }
 
     public override float Trun()
@@ -34,8 +36,11 @@ public class LostColor : JokerBase
 
     public override void SaleAction()
     {
+        bool flag = false;
 
-        PostEffect.Destroy(postEffect);
+        JokerUtility.JokerALLAction(joker => { if (joker.GetID() == GetID()&&joker!=this) flag = true; });
+
+        if(!flag)PostEffect.Destroy(postEffect);
 
     }
     public override string GetExplanation2()

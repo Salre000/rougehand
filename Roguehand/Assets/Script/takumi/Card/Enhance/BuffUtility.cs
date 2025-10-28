@@ -14,6 +14,8 @@ public static class BuffUtility
     public static void HandBuff(Card.Trump trump) { BuffManager.HandBuff(trump); }
     public static void DiscardBuff(Card.Trump trump) { BuffManager.DiscardBuff(trump); }
     public static void RoundEndBuff(Card.Trump trump) { BuffManager.RoundEndBuff(trump); }
+    public static void PlayBuff(Card.cardBuff card) { BuffManager.PlayBuff(card); }
+    public static void PlayBuff(Card.JokerBuff card) { BuffManager.PlayBuff(card); }
 
     public static Material GetCardMaterial(int ID) { return BuffManager.GetCardMaterial(ID); }
     public static Material GetTrumpMaterial(int ID) { return BuffManager.GetTrumpMaterial(ID); }

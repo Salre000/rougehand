@@ -235,6 +235,7 @@ public class JokerObjectManager : MonoBehaviour
 
         //最初のジョーカーをプレイ状態に変更する
         _jokerObjects[0].SetStatus(JokerStatus.play);
+        for (int i = 0; i < _jokerObjects.Count; i++) _jokerObjects[i].PreparationPlay();
         _lostStatus = _status;
         _status = JokerStatus.play;
 

@@ -127,6 +127,24 @@ public class BuffManager : MonoBehaviour
 
     }
 
+    public void PlayBuff(Card.cardBuff cardBuff) 
+    {
+        _cardBuff.Play(cardBuff);
+    }
+    public void PlayBuff(Card.JokerBuff jokerbuff) 
+    {
+
+        switch (jokerbuff)
+        {
+            case Card.JokerBuff.Sepia:
+                //int score=ScoreManager.instance.Get
+
+                break;
+        }
+
+
+    }
+
     public Material GetCardMaterial(int ID) {return cardMaterial[ID]; }
     public Material GetTrumpMaterial(int ID) {return trumpMaterial[ID]; }
     public Material GetJokerMaterial(int ID) {return jokerMaterial[ID]; }

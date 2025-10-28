@@ -219,7 +219,7 @@ public static class Extra
         }
 
         ////デバック用に固定
-        count = 5;
+        //count = 0;
 
         char[] chars = _string.ToCharArray();
 
@@ -255,15 +255,61 @@ public static class Extra
         return stringBuilder.ToString();
     }
 
+    /// <summary>
+    /// プレイ時に動きを行うバフかどうかを判断
+    /// </summary>
+    /// <param name="cardBuff"></param>
+    /// <returns></returns>
+    public static bool BuffAction(this Card.cardBuff cardBuff)
+    {
+        bool flag = false;
+
+        switch (cardBuff)
+        {
+            case Card.cardBuff.Foil:
+            case Card.cardBuff.Hologram:
+            case Card.cardBuff.Polychrome:
+                flag = true;
+                break;
+
+
+            default: break;
+        }
+        return flag;
+
+    }
 
     /// <summary>
-    /// リストの中に条件を入れてその条件にあった物の個数を返す関数
+    /// プレイ時に動きを行うバフかどうかを判断
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="values"></param>
-    /// <param name="func"></param>
+    /// <param name="cardBuff"></param>
     /// <returns></returns>
-    public static int GetCount<T>(this List<T> values, System.Func<T, bool> func)
+    public static bool BuffAction(this Card.JokerBuff cardBuff)
+    {
+        bool flag = false;
+
+        switch (cardBuff)
+        {
+            case Card.JokerBuff.Sepia:
+                flag = true;
+                break;
+
+                default: break;
+        }
+    
+        return flag;
+
+    }
+
+
+/// <summary>
+/// リストの中に条件を入れてその条件にあった物の個数を返す関数
+/// </summary>
+/// <typeparam name="T"></typeparam>
+/// <param name="values"></param>
+/// <param name="func"></param>
+/// <returns></returns>
+public static int GetCount<T>(this List<T> values, System.Func<T, bool> func)
     {
         int count = 0;
 
@@ -275,89 +321,6 @@ public static class Extra
         return count;
     }
 
-
-    /// <summary>
-    /// 下の関数の更に派生関数
-    /// 使いやすいように変更
-    /// </summary>
-    public static string TextString(this TextMeshProUGUI text,string _string,bool backDoor=false) 
-    {
-
-        string cash = _string.TextString(text.GetRectTransformSize(),1,backDoor);
-
-        return cash;
-    }
-
-
-    /// <summary>
-    /// テキストボックスの大きさを返す関数
-    /// </summary>
-    /// <param name="text"></param>
-    /// <returns></returns>
-    public static Vector2 GetRectTransformSize(this TextMeshProUGUI text) 
-    {
-        float w = Mathf.Abs(text.GetComponent<RectTransform>().offsetMin.x) + Mathf.Abs( text.GetComponent<RectTransform>().offsetMax.x);
-        float h = Mathf.Abs(text.GetComponent<RectTransform>().offsetMin.y) + Mathf.Abs( text.GetComponent<RectTransform>().offsetMax.y);
-        return new Vector2(w, h);
-    }
-
-
-    /// <summary>
-    /// テキストボックスに入れる文字の簡略化の関数
-    /// </summary>
-    /// <param name="_string"><すでに文字化けを通した文字列/param>
-    /// <param name="textBoxSize"></param>
-    /// <param name="Line"></param>
-    /// <param name="backDoor"></param>
-    /// <returns></returns>
-    public static string TextString(this string _string, Vector2 textBoxSize, int Line = 1, bool backDoor = false) 
-    {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.Append(_string.GetMaxSizeString(textBoxSize));
-        stringBuilder.Append(ErrorText(_string, backDoor));
-        stringBuilder.Append(EndSize());
-
-        return stringBuilder.ToString();
-
-
-    }
-
-    /// <summary>
-    /// テキストボックスに入る最大の大きさになるように
-    /// リッチテキストを返す関数
-    /// </summary>
-    /// <param name="_string"></param>
-    /// <param name="textBoxSize"><テキストボックスの大きさ/param>
-    /// <param name="Line"><行の数/param>
-    /// <returns></returns>
-    public static string GetMaxSizeString(this string _string, Vector2 textBoxSize, int Line = 1)
-    {
-        // 一行の文字の数
-        int stringCount = _string.Length;
-
-        
-        // XとY方向に許容可能な最大値を取得
-        int sizeX = (int)((textBoxSize.x / stringCount)-1)*Line;
-        int sizeY = (int)(textBoxSize.y / Line);
-
-        // 小さい方を採用
-        int size=Mathf.Min(sizeX, sizeY);
-
-        string text = "<size=" + size.ToString() + ">";
-
-        if (sizeX < 12)text= GetMaxSizeString(_string,textBoxSize,Line+1);
-
-        return text;
-    }
-
-    /// <summary>
-    /// リッチテキストの文字の大きさの調整を修正する
-    /// </summary>
-    /// <returns></returns>
-    public static string EndSize() 
-    {
-        return "</size>";
-    }
 
     private static string GetColor(char C)
     {

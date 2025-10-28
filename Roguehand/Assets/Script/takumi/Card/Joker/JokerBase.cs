@@ -37,6 +37,11 @@ public class JokerBase : SaleInterface, ExplanationInterface
     public virtual string Get() { return StringMaster.instance.GetMaster(explanationID); }
 
     /// <summary>
+    /// 初期行動
+    /// </summary>
+    public virtual void Initializ() { }
+
+    /// <summary>
     /// ジョーカーのオブジェクトの動き方を返す関数
     /// </summary>
     /// <returns></returns>
