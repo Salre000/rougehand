@@ -500,7 +500,7 @@ public class RoleManager : MonoBehaviour
 
         // Number‡(13`1)‚É•À‚×‚È‚¨‚·
         List<Card.Trump> jastCards = new(cards);
-        cards = CardManager.instance.NumberSort(cards);
+        cards = CardManager.instance.NumberSort(cards,true);
         jastNum.Clear();
         for (int i = 0; i < cards.Count; i++)
         {

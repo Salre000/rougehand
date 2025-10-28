@@ -40,7 +40,7 @@ public class CardManager : MonoBehaviour
     /// </summary>
     /// <param name="cards">並べなおしたいカードリスト</param>
     /// <returns>整頓済みカードリスト</returns>
-    public List<Card.Trump> NumberSort(List<Card.Trump> cards)
+    public List<Card.Trump> NumberSort(List<Card.Trump> cards,bool straightFlag=false)
     {
         // 並び変えたものをvalueに代入
         List<Card.Trump> value = cards.OrderByDescending(x => x.number).ThenBy(x => x.suit).ToList();
@@ -49,6 +49,9 @@ public class CardManager : MonoBehaviour
         List<Card.Trump> _value = new(value);
 
         int topIndex = 0;
+
+        if (straightFlag) return value;
+
         // aceを先頭に移動させる
         foreach (Card.Trump card in _value)
         {

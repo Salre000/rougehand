@@ -87,7 +87,7 @@ public class DistributeHand : MonoBehaviour
             else
                 trump.suit = Card.suit.club;
             //if (i%2==0)
-            trump.number = (Card.number)(i+1);
+            trump.number = (Card.number)14-(i+1);
             //else trump.number = Card.number.ace;
             trump.isFeice = true;
             hand.Add(trump);
@@ -95,6 +95,17 @@ public class DistributeHand : MonoBehaviour
 
         }
 
+        Card.Trump dommy = new Trump();
+
+
+        dommy.state = State.hand;
+        dommy.suit = Card.suit.club;
+        //if (i%2==0)
+        dommy.number = (Card.number)( 1);
+        //else trump.number = Card.number.ace;
+        dommy.isFeice = true;
+        hand.Add(dommy);
+        hand = CardManager.instance.NumberSort(hand);
 
 
         CardManager.instance.SetHand(hand);
