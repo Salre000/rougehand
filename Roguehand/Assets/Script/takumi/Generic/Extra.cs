@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using TMPro;
 using UnityEngine;
 /// <summary>
 /// 拡張クラス
@@ -276,6 +277,32 @@ public static class Extra
 
 
     /// <summary>
+    /// 下の関数の更に派生関数
+    /// 使いやすいように変更
+    /// </summary>
+    public static string TextString(this TextMeshProUGUI text,string _string,bool backDoor=false) 
+    {
+
+        string cash = _string.TextString(text.GetRectTransformSize(),1,backDoor);
+
+        return cash;
+    }
+
+
+    /// <summary>
+    /// テキストボックスの大きさを返す関数
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
+    public static Vector2 GetRectTransformSize(this TextMeshProUGUI text) 
+    {
+        float w = Mathf.Abs(text.GetComponent<RectTransform>().offsetMin.x) + Mathf.Abs( text.GetComponent<RectTransform>().offsetMax.x);
+        float h = Mathf.Abs(text.GetComponent<RectTransform>().offsetMin.y) + Mathf.Abs( text.GetComponent<RectTransform>().offsetMax.y);
+        return new Vector2(w, h);
+    }
+
+
+    /// <summary>
     /// テキストボックスに入れる文字の簡略化の関数
     /// </summary>
     /// <param name="_string"><すでに文字化けを通した文字列/param>
@@ -287,7 +314,7 @@ public static class Extra
     {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.Append(_string.GetMaxSizeString(textBoxSize));
-        stringBuilder.Append(ErrorText(_string));
+        stringBuilder.Append(ErrorText(_string, backDoor));
         stringBuilder.Append(EndSize());
 
         return stringBuilder.ToString();
@@ -303,7 +330,7 @@ public static class Extra
     /// <param name="textBoxSize"><テキストボックスの大きさ/param>
     /// <param name="Line"><行の数/param>
     /// <returns></returns>
-    public static string GetMaxSizeString(this string _string, Vector2 textBoxSize, int Line = 1, bool backDoor = false)
+    public static string GetMaxSizeString(this string _string, Vector2 textBoxSize, int Line = 1)
     {
         // 一行の文字の数
         int stringCount = _string.Length;

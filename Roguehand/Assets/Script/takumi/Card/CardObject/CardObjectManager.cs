@@ -558,6 +558,13 @@ public class CardObjectManager : MonoBehaviour
         // 移動
         cardObjectHand.transform.position = moveVec;
 
+        if (cardObjectHand.GetMoveTimeRata() < 1) return;
+
+        if (_cardObjectHands.GetCount(hand => hand.GetStatus() == CardObject.status.play) !=
+            _cardObjectHands.GetCount(hand => hand.GetStatus() != CardObject.status.play?false:hand.GetMoveTimeRata()<1?false:true)) return;
+
+        // 到着
+
     }
     /// <summary>
     /// カードをトラッシュに移動させる関数
@@ -583,10 +590,6 @@ public class CardObjectManager : MonoBehaviour
         if (cardObjectHand.GetMoveTimeRata() < 1) return;
 
         _cardObjectHands.Remove(cardObjectHand);
-
-
-
-
     }
     /// <summary>
     /// 既に表になっているカードに変更を加える
