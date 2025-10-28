@@ -6,11 +6,6 @@ using UnityEngine;
 public class TextUIManager:MonoBehaviour
 {
     public static TextUIManager instance;
-    private void Awake()
-    {
-        if(instance==null)
-            instance = this;
-    }
 
     [SerializeField] private TextMeshProUGUI _roundNameText;
     [SerializeField] private TextMeshProUGUI _lowestScoreText;
@@ -24,6 +19,14 @@ public class TextUIManager:MonoBehaviour
     [SerializeField] private TextMeshProUGUI _moneyText;
     [SerializeField] private TextMeshProUGUI _anteText;
     [SerializeField] private TextMeshProUGUI _roundText;
+    private void Awake()
+    {
+        if(instance==null)
+            instance = this;
+        Initialize();
+        // ç°ÇÕìKìñ
+        SetRewardCountText(UIUtility.getIns().RewardConversion(5));
+    }
 
 
     public struct UITexts

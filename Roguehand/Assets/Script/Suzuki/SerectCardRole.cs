@@ -11,6 +11,20 @@ using static TextUIManager;
 public class SerectCardRole : MonoBehaviour
 {
     private StringBuilder _builder = new StringBuilder();
+    private const int _ROLE_ID = 3000;
+    private const int _SCORE_ID = 3000;
+    private const int _LEVEL_ID = 4000;
+    private const int _RICHTEXT_ID = 5000;
+
+    private const int _TEXT_MAX_LENGT_TYPE1 = 9;
+    private const int _TEXT_MAX_LENGT_TYPE2 = 7;
+    private const float _FONT_SIZE_TYPE1 = 30.1f;
+    private const float _FONT_SIZE_TYPE2 = 34.1f;
+    private const float _FONT_SIZE_TYPE3 = 41.1f;
+    private const int _NOT_CARD_PICK_COUNT = 0;
+    private const int _NO_SCORE = 0;
+    // 役
+    RoleManager.Role role;
 
     private void Update()
     {
@@ -20,40 +34,95 @@ public class SerectCardRole : MonoBehaviour
 
     private void CheckRole()
     {
-        StringBuild();
-        instance.SetRoleText(_builder.ToString());
+        // 役の名前とレベルの反映
+        StringBuildRoleNameLevel();
+        // 役のスコア倍率の反映
+        StringBuildScore();
+        // 役の更新の終了をお知らせ
         RoleManager.instance.SetIsCheck(false);
     }
 
-    private void StringBuild()
+    private void StringBuildRoleNameLevel()
     {
         _builder.Clear();
-        if (CardManager.instance.GetPick().Count <= 0)
+        // 選択カードが無い場合
+        if (CardManager.instance.GetPick().Count <= _NOT_CARD_PICK_COUNT)
         {
             _builder.Append("");
+            // Textの変更
+            instance.SetRoleText(_builder.ToString());
             return;
         }
         // 役
-        RoleManager.Role role = RoleManager.instance.GetRole();
-        string name = StringMaster.instance.GetMaster(3000+(int)role);
+        role = RoleManager.instance.GetRole();
+        string name = StringMaster.instance.GetMaster(_ROLE_ID + (int)role);
         _builder.Append(name);
-        if (_builder.Length >= 9)
-            instance.GetRoleText().fontSize=30.1f;
-        else if (_builder.Length >= 7)
-            instance.GetRoleText().fontSize = 34.1f;
+        if (_builder.Length >= _TEXT_MAX_LENGT_TYPE1)
+            instance.GetRoleText().fontSize= _FONT_SIZE_TYPE1;
+        else if (_builder.Length >= _TEXT_MAX_LENGT_TYPE2)
+            instance.GetRoleText().fontSize = _FONT_SIZE_TYPE2;
         else
-            instance.GetRoleText().fontSize = 41.1f;
+            instance.GetRoleText().fontSize = _FONT_SIZE_TYPE3;
         // 文字サイズ
-        name = StringMaster.instance.GetMaster(5000);
+        name = StringMaster.instance.GetMaster(_RICHTEXT_ID);
         _builder.Append(name);
         // レベルカラー
         int level = RoleManager.instance.GetRoleLevel(role);
-        name = StringMaster.instance.GetMaster(5000+level);
+        name = StringMaster.instance.GetMaster(_RICHTEXT_ID + level);
         _builder.Append(name);
         // レベル
-        name= StringMaster.instance.GetMaster(4000+level);
+        name= StringMaster.instance.GetMaster(_LEVEL_ID+level);
         _builder.Append(name);
+        // Textの変更
+        instance.SetRoleText(_builder.ToString());
+
+    }
+
+    private void StringBuildScore()
+    {
+        _builder.Clear();
+        // 選択カードが無い場合
+        if (CardManager.instance.GetPick().Count <= _NOT_CARD_PICK_COUNT)
+        {
+            _builder.Append(_NO_SCORE);
+            // Textの変更
+            instance.SetBasicScoreText(_builder.ToString());
+            instance.SetMagnificationText(_builder.ToString());
+            return;
+        }
         // 基本スコアと倍率
+        // 基本スコア
+        int basic = ScoreMaster.instance.GetBasicScore(_SCORE_ID + (int)role);
+        _builder.Append(basic);
+        // Textの変更
+        instance.SetBasicScoreText(_builder.ToString());
+
+        _builder.Clear();
+        // 倍率
+        int magnifi = ScoreMaster.instance.GetBasicMagnification(_SCORE_ID + (int)role);
+        _builder.Append(magnifi);
+        // Textの変更
+        instance.SetMagnificationText(_builder.ToString());
+
+
+    }
+
+    // カードがスコアされたら結果を役の名前のほうに、倍率たちをゼロにする
+    private void PlayScore()
+    {
+        _builder.Clear();
+
+        #region スコアと倍率のリセット
+
+        _builder.Append(_NO_SCORE);
+        // Textの変更
+        instance.SetBasicScoreText(_builder.ToString());
+        instance.SetMagnificationText(_builder.ToString());
+        _builder.Clear();
+
+        #endregion
+
+        
 
     }
 
