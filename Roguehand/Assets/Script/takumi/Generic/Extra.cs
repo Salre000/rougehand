@@ -255,15 +255,61 @@ public static class Extra
         return stringBuilder.ToString();
     }
 
+    /// <summary>
+    /// プレイ時に動きを行うバフかどうかを判断
+    /// </summary>
+    /// <param name="cardBuff"></param>
+    /// <returns></returns>
+    public static bool BuffAction(this Card.cardBuff cardBuff)
+    {
+        bool flag = false;
+
+        switch (cardBuff)
+        {
+            case Card.cardBuff.Foil:
+            case Card.cardBuff.Hologram:
+            case Card.cardBuff.Polychrome:
+                flag = true;
+                break;
+
+
+            default: break;
+        }
+        return flag;
+
+    }
 
     /// <summary>
-    /// リストの中に条件を入れてその条件にあった物の個数を返す関数
+    /// プレイ時に動きを行うバフかどうかを判断
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="values"></param>
-    /// <param name="func"></param>
+    /// <param name="cardBuff"></param>
     /// <returns></returns>
-    public static int GetCount<T>(this List<T> values, System.Func<T, bool> func)
+    public static bool BuffAction(this Card.JokerBuff cardBuff)
+    {
+        bool flag = false;
+
+        switch (cardBuff)
+        {
+            case Card.JokerBuff.Sepia:
+                flag = true;
+                break;
+
+                default: break;
+        }
+    
+        return flag;
+
+    }
+
+
+/// <summary>
+/// リストの中に条件を入れてその条件にあった物の個数を返す関数
+/// </summary>
+/// <typeparam name="T"></typeparam>
+/// <param name="values"></param>
+/// <param name="func"></param>
+/// <returns></returns>
+public static int GetCount<T>(this List<T> values, System.Func<T, bool> func)
     {
         int count = 0;
 

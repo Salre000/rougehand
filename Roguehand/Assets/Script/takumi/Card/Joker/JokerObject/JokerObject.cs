@@ -74,9 +74,10 @@ public class JokerObject : MonoBehaviour
     private bool _isEnd = false;
 
     /// <summary>
-    /// 一ターンに何回の行動をするかの変数
+    /// 一ターンの行動の変数
     /// </summary>
-    private int playCount = 0;
+    private List<System.Action> actions = new List<System.Action>();
+
 
     /// <summary>
     /// ジョーカーの生成時に動く初期化処理
@@ -93,11 +94,14 @@ public class JokerObject : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// ジョーカーのプレイ前にジョーカーのプレイ時の内容を記録
+    /// </summary>
     public void PreparationPlay()
     {
-        if (_base.Trun() < 1) playCount++;
-        if (_base.GetCardBuff() != Card.cardBuff.None) playCount++;
-        if (_base.GetJokerBuff() != Card.JokerBuff.None) playCount++;
+        if (_base.Trun() >0) actions.Add(() => JokerUtility.AddMagnification(_base.Trun()));
+        if (_base.GetCardBuff().BuffAction()) actions.Add(() => BuffUtility.PlayBuff(_base.GetCardBuff()));
+        if (_base.GetJokerBuff().BuffAction()) actions.Add(() => BuffUtility.PlayBuff(_base.GetJokerBuff()));
 
 
     }
@@ -111,7 +115,7 @@ public class JokerObject : MonoBehaviour
         if (_status != JokerStatus.play) return;
 
         //ジョーカーが何もできない時
-        if (playCount < 1) { _status = JokerStatus.wait; JokerObjectUtility.NestJokerPlay(this); return; }
+        if (actions.Count < 1) { _status = JokerStatus.wait; JokerObjectUtility.NestJokerPlay(this); return; }
 
 
 
@@ -305,30 +309,21 @@ public class JokerObject : MonoBehaviour
     {
 
 
-                reta = 1;
-
-        //if(_base.GetCardBuff()!=Card.cardBuff.None&&)
-
+        reta = 1;
         //プレイの瞬間のアクション
         //倍率に追加
-        switch (playCount)
-        {
-            case 1: JokerUtility.AddMagnification(_base.Trun());Debug.Log("追加１"); break;
-            case 2: BuffUtility.PlayBuff(_base.GetCardBuff()); Debug.Log("追加３"); break;
-            case 3: BuffUtility.PlayBuff(_base.GetJokerBuff()); Debug.Log("追加２"); break;
+        actions[0]();
+
+        actions.RemoveAt(0);
+
+        if (actions.Count > 0) return;
+
+        JokerObjectUtility.NestJokerPlay(this);
+        _status = JokerStatus.wait;
+        _isPlay = false;
 
 
-            default: JokerObjectUtility.NestJokerPlay(this); 
-                _status = JokerStatus.wait;
-                _isPlay = false;
 
-                break;
-
-        }
-
-        playCount--;
-
-        
     }
     private void NeverAddJokerActionProcess()
     {

@@ -13,15 +13,17 @@ public class CardBuff
         //‘Î‰‚µ‚½ƒoƒt‚ğ‹Lq
         switch (cardBuff)
         {
-            case Card.cardBuff.None:
-                break;
             case Card.cardBuff.Foil:
+                //Šî–{ƒXƒRƒA‚É‚T‚O‚ğ‰ÁZ
+                ScoreManager.instance.BasicPlus(50);
                 break;
             case Card.cardBuff.Hologram:
+                //”{—¦‚É‚P‚O‚ğ‰ÁZ
+                ScoreManager.instance.MagnificationPlus(10);
                 break;
             case Card.cardBuff.Polychrome:
-                break;
-            case Card.cardBuff.MouseJammer:
+                //”{—¦‚É1.5‚ÌæZ
+
                 break;
             default:
                 break;
