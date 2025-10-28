@@ -46,6 +46,12 @@ public class JokerManager : MonoBehaviour
     /// </summary>
     private int useIndex=-1;
 
+    /// <summary>
+    /// ジョーカーの最大数
+    /// </summary>
+    private readonly int JOKER_MAX_COUNT = 5;
+
+
     public void Awake()
     {
         JokerUtility.instance = this;
@@ -116,6 +122,13 @@ public class JokerManager : MonoBehaviour
     /// <param name="ID"></param>
     public void AddJoker(int ID)
     {
+
+
+        int jokerCount = 0;
+        JokerUtility.JokerALLAction(joker => { if (joker.GetJokerBuff() != Card.JokerBuff.Negative) jokerCount++; });
+
+        if (jokerCount == JOKER_MAX_COUNT) return;
+
         JokerBase joker = ALLJoker.GetJoker((ALLJoker._allJokerEnum)ID);
         joker.Initializ();
         _jokers.Add(joker);

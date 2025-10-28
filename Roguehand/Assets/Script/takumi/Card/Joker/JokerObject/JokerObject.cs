@@ -224,9 +224,11 @@ public class JokerObject : MonoBehaviour
     }
 
     public int GetJokerID() { return _base.GetID(); }
+
+    private readonly float CHENGE_SPEED=4;
     private void ChengeAction()
     {
-        _time += Time.deltaTime * GameConfig.GetGameSpeed() * reta;
+        _time += Time.deltaTime * GameConfig.GetGameSpeed() * reta* CHENGE_SPEED;
 
         transform.eulerAngles = Vector3.Lerp(Vector3.zero, new Vector3(0, 180, 0), _time);
 
