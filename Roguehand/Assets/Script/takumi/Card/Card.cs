@@ -91,7 +91,7 @@ public class Card
         None = -1,
         Negative,//ジョーカーの枠を追加１
         Sepia,//基本スコアと倍率を入れ替える　セピアー＞コウイカー＞イカサマー＞入れ替え
-        ObjectMove,　//オブジェクトの位置が変わる　　倍率×段階　（段階５）
+        ObjectMoves,　//オブジェクトの位置が変わる　　倍率×段階　（段階５）
             MAX
     }
     public enum trumpMaterial

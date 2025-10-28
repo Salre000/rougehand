@@ -61,11 +61,11 @@ public class DistributeHand : MonoBehaviour
         hand = CardManager.instance.NumberSort(hand);
         //hand =CardManager.instance.SuitSort(hand);
 
-        //Test();
+        Test();
 
-        CardManager.instance.SetHand(hand);
-        CardObjectUtility.HandToCard(hand);
-        CardObjectUtility.StartHandMove();
+        //CardManager.instance.SetHand(hand);
+        //CardObjectUtility.HandToCard(hand);
+        //CardObjectUtility.StartHandMove();
 
     }
 
@@ -86,9 +86,9 @@ public class DistributeHand : MonoBehaviour
                 trump.suit = Card.suit.Spade;
             else
                 trump.suit = Card.suit.club;
-            if (i%2==0)
-                    trump.number = Card.number.ten;
-            else trump.number = Card.number.ace;
+            //if (i%2==0)
+            trump.number = (Card.number)(i+1);
+            //else trump.number = Card.number.ace;
             trump.isFeice = true;
             hand.Add(trump);
 

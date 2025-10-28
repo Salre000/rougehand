@@ -316,6 +316,8 @@ public class JokerManager : MonoBehaviour
             action(_jokers[i]);
     }
 
+    public List<JokerBase> GetJoker() { return _jokers; }
+
 
     /// <summary>
     /// ジョーカーのアップデート処理を回す関数
