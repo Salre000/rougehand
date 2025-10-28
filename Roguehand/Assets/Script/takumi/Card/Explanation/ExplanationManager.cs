@@ -109,8 +109,8 @@ public class ExplanationManager : MonoBehaviour
 
             explanationObject.GetBuffName(i).text = Extra.ErrorText(StringMaster.instance.GetMaster(buff[i]));
             // テキストボックス
-            explanationObject.GetBuffText(i).text = StringMaster.instance.GetMaster(buff[i] + 50,true).
-                TextString(_uiSizeMini-new Vector2(0,40));
+            explanationObject.GetBuffText(i).text = StringMaster.instance.GetMaster(buff[i] + 50);
+               
             explanationObject.GetBuffText(i).transform.parent.gameObject.GetComponent<RectTransform>().sizeDelta = _uiSizeMini;
 
         }

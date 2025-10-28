@@ -1603,6 +1603,10 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 936964763974216071, guid: 817c9a3482376314f92ee1f3ae13b5a9, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4299853294534835780, guid: 817c9a3482376314f92ee1f3ae13b5a9, type: 3}
       propertyPath: m_Name
       value: BuffUI3
@@ -1839,6 +1843,10 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 936964763974216071, guid: 817c9a3482376314f92ee1f3ae13b5a9, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4299853294534835780, guid: 817c9a3482376314f92ee1f3ae13b5a9, type: 3}
       propertyPath: m_Name
       value: BuffUI1
@@ -2062,6 +2070,10 @@ PrefabInstance:
     - target: {fileID: 936964763974216071, guid: 817c9a3482376314f92ee1f3ae13b5a9, type: 3}
       propertyPath: m_fontSizeBase
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 936964763974216071, guid: 817c9a3482376314f92ee1f3ae13b5a9, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4299853294534835780, guid: 817c9a3482376314f92ee1f3ae13b5a9, type: 3}
       propertyPath: m_Name

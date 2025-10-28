@@ -117,6 +117,7 @@ public class JokerManager : MonoBehaviour
     public void AddJoker(int ID)
     {
         JokerBase joker = ALLJoker.GetJoker((ALLJoker._allJokerEnum)ID);
+        joker.Initializ();
         _jokers.Add(joker);
         JokerObjectUtility.AddJoker(joker);
 
