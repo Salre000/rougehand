@@ -10,9 +10,11 @@ using UnityEngine;
 public class TargetScoreChecker : MonoBehaviour
 {
     private const int _TARGET_SCORE_ID = 7000;
+    private const int _REWARD_ID = 8000;
     private int _targetScore;
     private int _roundCount = -1;
     private StringBuilder _builder = new StringBuilder();
+    float roundScore = -1;
 
     // Start is called before the first frame update
     void Start()
@@ -55,8 +57,19 @@ public class TargetScoreChecker : MonoBehaviour
         // 一時的にボタン受付を停止
         GameUtility.SetIsPushButton(false);
         // 合計スコアと比較
-        float roundScore = ScoreManager.instance.GetRoundScore();
+        roundScore = ScoreManager.instance.GetRoundScore();
         // 目標スコアを越していたら次のラウンドへ
+        NextRoundExecute();
+
+        // 最終的にプレイボタンのフラグをリセット
+        GameUtility.SetIsPlay(false);
+        // 合計スコアの増加フラグをリセット
+        GameUtility.SetIsRoundScoreUp(false);
+    }
+
+    // 次のラウンド処理
+    private void NextRoundExecute()
+    {
         if (_targetScore <= roundScore)
         {
             // 合計スコアのリセット
@@ -78,12 +91,10 @@ public class TargetScoreChecker : MonoBehaviour
 
             // ハンド回数のリセット
             GameUtility.SetHandCount(GameUtility.GetBaseHandCound());
+            int reward = MasterData.instance.GetIntMaster(_REWARD_ID + _roundCount);
+            // 報奨金のセット
+            TextUIManager.instance.SetRewardCountText(UIUtility.getIns().RewardConversion(reward));
         }
-
-        // 最終的にプレイボタンのフラグをリセット
-        GameUtility.SetIsPlay(false);
-        // 合計スコアの増加フラグをリセット
-        GameUtility.SetIsRoundScoreUp(false);
     }
 
 }
