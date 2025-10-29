@@ -18,6 +18,8 @@ public class PlayHnad : MonoBehaviour
     /// </summary>
     public void OnHandPlay()
     {
+        // ボタン受付の停止中
+        if (!GameUtility.IsPushButton()) return;
         // なんのカードも選択されていなければreturn
         if (CardManager.instance.GetPick().Count<=0) return;
         // カードの役の判定結果をもらう

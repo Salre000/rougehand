@@ -38,7 +38,11 @@ public class TargetScoreChecker : MonoBehaviour
     // 達しているか確認
     private void RoundCheck()
     {
+        // 目標スコアと現スコアを比較
 
+        // 目標スコアを越していたら
+        // 一時的にボタン受付を停止
+        GameUtility.SetIsPushButton(false);
     }
 
 }
