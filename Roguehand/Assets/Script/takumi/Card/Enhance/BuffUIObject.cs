@@ -74,8 +74,8 @@ public class BuffUIObject : MonoBehaviour
     {
         GameObject game = GameObject.Instantiate(uiObject);
 
-        game.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = StringMaster.instance.GetMaster(ID);
-        game.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = StringMaster.instance.GetMaster(ID2);
+        game.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = MasterData.instance.GetStringMaster(ID);
+        game.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = MasterData.instance.GetStringMaster(ID2);
         return game;
 
     }

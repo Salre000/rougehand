@@ -95,21 +95,21 @@ public class ExplanationManager : MonoBehaviour
         int addCount = 0;
         for (int i = 0; i < buff.Length; i++)
         {
-            if (StringMaster.instance.GetMaster(buff[i], true) == string.Empty) continue;
+            if (MasterData.instance.GetStringMaster(buff[i], true) == string.Empty) continue;
             addCount++;
 
             // 名前検索以外に非アクティブオブジェクトに干渉できない為に
             // 苦渋の選択で名前検索にしている
             // オブジェクト指定からの名前検索なので負荷は最小限になっている
             explanationObject.GetBuffColorIcon(i).gameObject.SetActive(true);
-            explanationObject.GetBuffTextIcon(i).text = StringMaster.instance.GetMaster(buff[i]);
-            explanationObject.GetBuffColorIcon(i).color = StringMaster.instance.GetMaster(buff[i], true).GetBuffColor();
+            explanationObject.GetBuffTextIcon(i).text = MasterData.instance.GetStringMaster(buff[i]);
+            explanationObject.GetBuffColorIcon(i).color = MasterData.instance.GetStringMaster(buff[i], true).GetBuffColor();
 
             explanationObject.GetBuffText(i).transform.parent.gameObject.SetActive(true);
 
-            explanationObject.GetBuffName(i).text = Extra.ErrorText(StringMaster.instance.GetMaster(buff[i]));
+            explanationObject.GetBuffName(i).text = Extra.ErrorText(MasterData.instance.GetStringMaster(buff[i]));
             // テキストボックス
-            explanationObject.GetBuffText(i).text = StringMaster.instance.GetMaster(buff[i] + 50);
+            explanationObject.GetBuffText(i).text = MasterData.instance.GetStringMaster(buff[i] + 50);
                
             explanationObject.GetBuffText(i).transform.parent.gameObject.GetComponent<RectTransform>().sizeDelta = _uiSizeMini;
 

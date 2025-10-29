@@ -31,7 +31,7 @@ public class RandomRole : JokerBase
 
         sb.Append("<size=18>");
         sb.Append("<color=#FF4040>");
-        sb.Append(StringMaster.instance.GetMaster(3000 + (int)_role));
+        sb.Append(MasterData.instance.GetStringMaster(3000 + (int)_role));
         sb.Append("</color>");
         sb.Append(base.GetExplanation());
         sb.Append("</size>");
@@ -43,7 +43,7 @@ public class RandomRole : JokerBase
 
     public override string GetExplanation2()
     {
-        return Trun() < 1 ? string.Empty : StringMaster.instance.GetMaster(1999) + Trun().ToString().GetRedString();
+        return Trun() < 1 ? string.Empty : MasterData.instance.GetStringMaster(1999) + Trun().ToString().GetRedString();
     }
 
 

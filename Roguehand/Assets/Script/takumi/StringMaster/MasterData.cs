@@ -5,14 +5,14 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
-public class StringMaster : MonoBehaviour
+public class MasterData : MonoBehaviour
 {
-    public static StringMaster instance;
+    public static MasterData instance;
 
     /// <summary>
     /// マスターから引き出した文字列の格納先
     /// </summary>
-    private Dictionary<int, string> _stringMasters = new Dictionary<int, string>();
+    private Dictionary<int, string> _masters = new Dictionary<int, string>();
 
     public void Awake()
     {
@@ -22,6 +22,14 @@ public class StringMaster : MonoBehaviour
 
         Lood();
 
+        int ss = GetIntMaster(1000) + 300;
+        Debug.Log(ss.ToString());
+
+    }
+
+    public void Update()
+    {
+        int sss = 0;
     }
 
     /// <summary>
@@ -86,11 +94,12 @@ public class StringMaster : MonoBehaviour
 
             for (int j = 0; j < csvDatas.Count; j++)
             {
-                _stringMasters.Add(int.Parse(csvDatas[j][0]), csvDatas[j][1]);
+                if (csvDatas[j][0] == String.Empty) continue;
+                _masters.Add(int.Parse(csvDatas[j][0]), csvDatas[j][1]);
             }
             csvDatas.Clear();
         }
-        GetMaster(-1);
+        GetStringMaster(-1);
 
     }
 
@@ -101,15 +110,33 @@ public class StringMaster : MonoBehaviour
     /// </summary>
     /// <param name="ID"><文字ID/param>
     /// <returns><IDに対応した文字列/returns>
-    public string GetMaster(int ID,bool backDoor=false) 
+    public string GetStringMaster(int ID, bool backDoor = false)
     {
 
-        string value=string.Empty; 
-        _stringMasters.TryGetValue(ID, out value); 
+        string value = string.Empty;
+        _masters.TryGetValue(ID, out value);
 
-        if(value==null)value=string.Empty;
+        if (value == null) value = string.Empty;
 
         return value.ErrorText(backDoor);
+
+    }
+    public int GetIntMaster(int ID)
+    {
+
+        string value = string.Empty;
+        _masters.TryGetValue(ID, out value);
+
+        if (value == null) value = string.Empty;
+
+        try
+        {
+            return int.Parse(value);
+        }
+        catch
+        {
+            return -1;
+        }
 
     }
 }

@@ -45,7 +45,7 @@ public class LostColor : JokerBase
     }
     public override string GetExplanation2()
     {
-        return Trun() < 1 ? string.Empty : StringMaster.instance.GetMaster(1999) + Trun().ToString().GetRedString();
+        return Trun() < 1 ? string.Empty : MasterData.instance.GetStringMaster(1999) + Trun().ToString().GetRedString();
     }
 
 
