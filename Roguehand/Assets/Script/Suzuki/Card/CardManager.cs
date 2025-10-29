@@ -115,6 +115,9 @@ public class CardManager : MonoBehaviour
         //選択中の物をクリックは可能にしておく
         if (!hand[ID].isSelect&&hand.GetCount(trump => { return trump.isSelect == true; }) > 4) return;
 
+        // つかめてはいけないカードかどうかを判断
+        if (!CardObjectUtility.CheckGrab(ID)) return;
+           
         Card.Trump dummyHand = hand[ID];
         dummyHand.isSelect = !dummyHand.isSelect;
         hand[ID] = dummyHand;

@@ -205,8 +205,19 @@ public class CardObjectManager : MonoBehaviour
         // “®ì‚Ì“r’†‚Å‚ÌŠ„‚è‚İ‚ğ§ŒÀ
         if (_cardObjectHands[id].IsMovable()) return;
 
+
         _cardObjectHands[id].SetStatus(isSelect ? CardObject.status.playWait : CardObject.status.hand);
         _cardObjectHands[id].ResetMoveTime();
+    }
+
+    public bool CheckGrab(int ID) 
+    {
+        bool flag = true;
+
+        if (_cardObjectHands[ID].GetStatus() == CardObject.status.play) flag = false; 
+
+
+        return flag;
     }
 
     /// <summary>
@@ -287,7 +298,14 @@ public class CardObjectManager : MonoBehaviour
     }
 
 
-    public int GetCardIndex(CardObject cardObject) { return _cardObjectHands.FindIndex(card => card == cardObject); }
+    public int GetCardIndex(CardObject cardObject) 
+    { 
+        int index= _cardObjectHands.FindIndex(card => card == cardObject);
+
+        if(index<0)return -1;
+
+        return _cardObjectHands[index].GetStatus() == CardObject.status.play ? -1 : index; 
+    }
 
     public void GrabChenge(int ID, bool flag)
     {

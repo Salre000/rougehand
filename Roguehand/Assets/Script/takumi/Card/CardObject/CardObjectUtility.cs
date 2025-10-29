@@ -27,4 +27,6 @@ public static class CardObjectUtility
 
     public static void ShowExplanation(Card.Trump trump,int ID) { CardObjectManager.ShowExplanation(trump,ID); }
 
+    public static bool CheckGrab(int ID) {return CardObjectManager.CheckGrab(ID); }
+
 }
