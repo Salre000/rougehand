@@ -240,6 +240,13 @@ public class JokerObjectManager : MonoBehaviour
         _status = JokerStatus.play;
 
     }
+
+    /// <summary>
+    /// 現在プレイ中かどうかの判定
+    /// </summary>
+    /// <returns></returns>
+    public bool PlayCheck() { return _status == JokerStatus.play; }
+
     /// <summary>
     /// ジョーカーの追加時に呼ばれるオブジェクトの追加
     /// </summary>

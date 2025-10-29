@@ -260,7 +260,7 @@ public class CardObjectManager : MonoBehaviour
         for (int i = 0; i < _cardObjectHands.Count; i++)
         {
             if (_cardObjectHands[i].GetStatus() != CardObject.status.play) continue;
-            _cardObjectHands[i].SetStatus(CardObject.status.trash);
+            _cardObjectHands[i].SetStatus(CardObject.status.discard);
             _cardObjectHands[i].ResetMoveTime();
         }
 
@@ -479,9 +479,6 @@ public class CardObjectManager : MonoBehaviour
                     CardMovePlay(_cardObjectHands[i], _handPositionRange, playCounter);
                     playCounter++;
                     break;
-                case CardObject.status.trash:
-                    CardMoveDiscard(_cardObjectHands[i]);
-                    break;
                 case CardObject.status.discard:
                     CardMoveDiscard(_cardObjectHands[i]);
                     break;
@@ -568,8 +565,6 @@ public class CardObjectManager : MonoBehaviour
         // 移動目標地点を確認
         Vector3 goalPos = _playPositionLeft.position + new Vector3(vec, 0, 0);
 
-        Debug.Log("座標:" + vec);
-
         // 移動量と座標を合計を算出
         Vector3 moveVec = Vector3.Lerp(cardObjectHand.GetBeforePosition(), goalPos, cardObjectHand.GetMoveTimeRata());
 
@@ -592,6 +587,10 @@ public class CardObjectManager : MonoBehaviour
 
         // 到着
         PlayManager.instance.SetCardTransComp(true);
+
+        // ジョーカーの計算開始
+        JokerUtility.JokerPlayStart();
+
     }
     /// <summary>
     /// カードをトラッシュに移動させる関数
@@ -617,6 +616,11 @@ public class CardObjectManager : MonoBehaviour
         if (cardObjectHand.GetMoveTimeRata() < 1) return;
 
         _cardObjectHands.Remove(cardObjectHand);
+
+        if (_cardObjectHands.GetCount(card => card.GetStatus() == CardObject.status.discard) != 0) return;
+
+        
+
     }
     /// <summary>
     /// 既に表になっているカードに変更を加える

@@ -11,6 +11,7 @@ public static class JokerObjectUtility
     public static void NextAction(JokerObject  jokerObject) { instance.NextAction(jokerObject); } 
 
     public static void StartJokerPlay() {  instance.StartJokerPlay(); }
+    public static bool PlayCheck() {return  instance.PlayCheck(); }
 
     public static void AddJoker(JokerBase jokerBase) { instance.AddJoker(jokerBase); }
     public static void AddDomyyJoker(JokerBase jokerBase) { instance.AddDommyJoker(jokerBase); }

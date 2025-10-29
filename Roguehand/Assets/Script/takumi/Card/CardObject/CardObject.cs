@@ -22,7 +22,6 @@ public class CardObject : MonoBehaviour
         play,
         playWait,
         discard,
-        trash
     }
 
     /// <summary>
