@@ -48,6 +48,7 @@ public class TargetScoreChecker : MonoBehaviour
     {
         // プレイボタンが押されてなかったら比較を行わない
         if(!GameUtility.IsPlay())return;
+
         // 合計スコアが増加されてなかったら比較しない
         if (!GameUtility.IsRoundScoreUp())return ;
         // 目標スコアと現スコアを比較
@@ -60,17 +61,18 @@ public class TargetScoreChecker : MonoBehaviour
         roundScore = ScoreManager.instance.GetRoundScore();
         // 目標スコアを越していたら次のラウンドへ
         NextRoundExecute();
-
-        // 最終的にプレイボタンのフラグをリセット
-        GameUtility.SetIsPlay(false);
         // 合計スコアの増加フラグをリセット
         GameUtility.SetIsRoundScoreUp(false);
+        // 最終的にプレイボタンのフラグをリセット
+        GameUtility.SetIsPlay(false);
+
     }
 
     // 次のラウンド処理
     private void NextRoundExecute()
     {
-        if (_targetScore <= roundScore)
+        roundScore =ScoreManager.instance.Rounding(roundScore, 1f);
+        if (_targetScore <=roundScore)
         {
             // 合計スコアのリセット
             ScoreManager.instance.ResetRoundScore();

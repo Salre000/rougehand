@@ -196,6 +196,7 @@ public class CardObjectManager : MonoBehaviour
                 _cardObjectHands[j] = _cardObjectHands[j - 1];
 
             }
+
             _cardObjectHands[index] = cardObject;
 
 
@@ -552,6 +553,9 @@ public class CardObjectManager : MonoBehaviour
         cardObjectHand.SetStatus(CardObject.status.hand);
         cardObjectHand.GravityStart();
 
+
+        GameUtility.SetIsPushButton(true);
+
     }
     /// <summary>
     /// èD‚©‚çƒvƒŒƒC€”õó‘Ô‚Ö‚ÌˆÚ“®
@@ -622,11 +626,9 @@ public class CardObjectManager : MonoBehaviour
             dommyBase.Add (trump);
         });
 
-        for(int i = 0; i < dommy.Count; i++) 
+        for(int i = 0; i < hands.Count; i++) 
         {
-
-            CardManager.instance.Chenge(dommyBase[i], dommy[i]);
-            hands.Remove(dommyBase[i]);
+            if (hands[i].isSelect) { hands.RemoveAt(i);i--; }
 
 
         }

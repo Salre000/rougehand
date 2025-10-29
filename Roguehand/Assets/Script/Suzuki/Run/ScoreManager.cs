@@ -180,7 +180,7 @@ public class ScoreManager : MonoBehaviour
         TextUIManager.instance.SetRoundScoreText(builder.ToString());
 
         // 合計スコアの増加をした
-        GameUtility.SetIsRoundScoreUp(true);
+       // GameUtility.SetIsRoundScoreUp(true);
     }
 
     /// <summary>
@@ -203,7 +203,7 @@ public class ScoreManager : MonoBehaviour
     /// <param name="value">したい値</param>
     /// <param name="decPoint">小数第〇を指定</param>
     /// <returns>四捨五入した値</returns>
-    private float Rounding(float value,float decPoint)
+    public float Rounding(float value,float decPoint)
     {
         // 小数部分の取り出し
         float num1=value-Mathf.FloorToInt(value);
