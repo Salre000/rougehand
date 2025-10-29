@@ -113,7 +113,7 @@ public class CardManager : MonoBehaviour
 
         // 選択中の個数を５個以上にできない用にする
         //選択中の物をクリックは可能にしておく
-        if (!hand[ID].isSelect&&hand.GetCount(trump => { return trump.isSelect == true; }) > 4) return;
+        if (!hand[ID].isSelect&&hand.GetCount(trump => { return trump.isSelect == true&&trump.state==Card.State.hand; }) > 4) return;
 
         // つかめてはいけないカードかどうかを判断
         if (!CardObjectUtility.CheckGrab(ID)) return;
@@ -167,6 +167,18 @@ public class CardManager : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// トランプを安全に変更させる関数
+    /// </summary>
+    /// <param name="baseCard"><変更前のトランプ/param>
+    /// <param name="ChengeCard"><変更後のトランプ/param>
+    public void Chenge(Card.Trump baseCard, Card.Trump ChengeCard)
+    {
+       if(deck.IndexOf(baseCard)>0) deck[deck.IndexOf(baseCard)] = ChengeCard;
+       if(hand.IndexOf(baseCard)>0) hand[hand.IndexOf(baseCard)] = ChengeCard;
+       if(pick.IndexOf(baseCard)>0) pick[pick.IndexOf(baseCard)] = ChengeCard;
+    }
+
 
     public void SetDeck(List<Card.Trump> _deck) { this.deck = _deck; }
     public List<Card.Trump> GetDeck() { return deck; }
@@ -178,6 +190,8 @@ public class CardManager : MonoBehaviour
     public List<Card.Trump> GetHand() { return hand; }
 
     public void SetPick(List<Card.Trump> _pick) { pick = _pick; }
+    public void ResetPick() { pick.Clear(); }
     public List<Card.Trump > GetPick() { return pick; }
+
 
 }

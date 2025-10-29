@@ -59,21 +59,15 @@ public class BuffJoker : JokerBase
             card.deckBuff = (Card.deckBuff)Random.Range(0, (int)Card.deckBuff.MAX);
             card.cardBuff = (Card.cardBuff)Random.Range(0, (int)Card.cardBuff.MAX);
 
-            deck[index] = card;
-            trumps[i] = card;
+            CardManager.instance.Chenge(deck[index], card);
+
+
 
             CardObjectUtility.SetChengeCard(i, card);
 
 
 
         }
-        // èD‚Éã‘‚«
-        CardManager.instance.SetHand(trumps);
-
-        //ƒfƒbƒL‚Éã‘‚«
-        CardManager.instance.SetDeck(deck);
-
-
     }
 
 }

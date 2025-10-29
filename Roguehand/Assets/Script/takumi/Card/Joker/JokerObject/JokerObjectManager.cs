@@ -239,6 +239,7 @@ public class JokerObjectManager : MonoBehaviour
         _lostStatus = _status;
         _status = JokerStatus.play;
 
+
     }
 
     /// <summary>

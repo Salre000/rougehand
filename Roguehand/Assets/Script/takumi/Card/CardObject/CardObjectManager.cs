@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -167,23 +168,41 @@ public class CardObjectManager : MonoBehaviour
     /// <param name="carDatas"><s/param>
     public void HandToCard(List<Card.Trump> cardDatas)
     {
+        //選択中をリセット
+        CardManager.instance.ResetPick();
+
+        Debug.Log("手札補充");
 
         //cardDatasの中身を確認して取得
         for (int i = 0; i < cardDatas.Count; i++)
         {
-
             // 使用可能なカードかを確認
             CardObject cardObject = GetUseCardObject();
             if (cardObject == null) continue;
 
             cardObject.SetStatus(CardObject.status.hand);
 
+
             // 手札に追加
             _cardObjectHands.Add(cardObject);
 
             // 手札に追加されたカードにマテリアルをセット
-            CardPaint(cardDatas[i], i);
+            CardPaint(cardDatas[i], _cardObjectHands.Count-1);
+
+            int index = CardManager.instance.GetHand().IndexOf(cardDatas[i]);
+
+            for(int j = _cardObjectHands.Count-1; j > index; j--) 
+            {
+                _cardObjectHands[j] = _cardObjectHands[j - 1];
+
+            }
+            _cardObjectHands[index] = cardObject;
+
+
         }
+
+
+
     }
 
     /// <summary>
@@ -589,11 +608,35 @@ public class CardObjectManager : MonoBehaviour
 
         // プレイを行ったカードをトラッシュに移行
         List<Card.Trump> hands= CardManager.instance.GetHand();
-        hands.GetAction(hands => { if (hands.isSelect) hands.state = Card.State.trash; });
+
+        List<Card.Trump> dommy=new List<Card.Trump>();
+        List<Card.Trump> dommyBase=new List<Card.Trump>();
+        
+        hands.GetAction(hands =>
+        {
+            Card.Trump trump = hands;
+            if (!hands.isSelect) return;
+            hands.state = Card.State.trash;
+
+            dommy.Add (hands);
+            dommyBase.Add (trump);
+        });
+
+        for(int i = 0; i < dommy.Count; i++) 
+        {
+
+            CardManager.instance.Chenge(dommyBase[i], dommy[i]);
+            hands.Remove(dommyBase[i]);
+
+
+        }
+
         CardManager.instance.SetHand(hands);
+
 
         // 到着
         PlayManager.instance.SetCardTransComp(true);
+
 
         // ジョーカーの計算開始
         JokerUtility.JokerPlayStart();
@@ -626,7 +669,11 @@ public class CardObjectManager : MonoBehaviour
 
         if (_cardObjectHands.GetCount(card => card.GetStatus() == CardObject.status.discard) != 0) return;
 
-        
+        //ラウンドの終了準備をする
+        RoundObserver.Instance.StartRoundEnd();
+
+
+
 
     }
     /// <summary>

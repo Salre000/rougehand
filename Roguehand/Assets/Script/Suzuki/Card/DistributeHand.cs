@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.XR;
 using static Card;
 
 /// <summary>
@@ -18,6 +19,10 @@ public class DistributeHand : MonoBehaviour
     {
         deck = CardManager.instance.GetDeck();
         hand.Capacity = CardManager.instance.GetHandSize();
+
+        // ラウンドの終了時のドローの処理
+        RoundObserver.Instance.AddRoundEndAction(() => test = false);
+
     }
 
     // Update is called once per frame
@@ -25,7 +30,7 @@ public class DistributeHand : MonoBehaviour
     {
         if (test) return;
 
-        int addHandSize = CardManager.instance.GetHandSize() - hand.Count;
+        int addHandSize = CardManager.instance.GetHandSize() - hand.GetCount(hand=>hand.state==Card.State.hand);
         Distribute(addHandSize);
         test = true;
     }
@@ -33,6 +38,9 @@ public class DistributeHand : MonoBehaviour
     // ランダムで配ります
     private void Distribute(int drawCount)
     {
+
+        List<Card.Trump> dommyHand=new List<Card.Trump>();
+        hand= CardManager.instance.GetHand();
         deck = CardManager.instance.GetDeck();
         hand.Capacity = CardManager.instance.GetHandSize();
         int index = deck.Count;
@@ -46,12 +54,17 @@ public class DistributeHand : MonoBehaviour
         {
             // 一回繰り返すごとにランダムで出た数値を取り除いて手札に渡す
             index = Random.Range(0, dammyDeckArray.Count);
+
+            // 過去に使われたカードを引かないようにする
+            if (deck[dammyDeckArray[index]].state == Card.State.trash) { i--;continue; }
+
             // デッキのダミーデッキの場所にある情報を手札追加
             Card.Trump trump = deck[dammyDeckArray[index]];
             trump.state = State.hand;
             deck[dammyDeckArray[index]] = trump;
 
             hand.Add(deck[dammyDeckArray[index]]);
+            dommyHand.Add(deck[dammyDeckArray[index]]);
             // 一度出た場所の数値は出ないようにする
             dammyDeckArray.RemoveAt(index);
 
@@ -59,12 +72,13 @@ public class DistributeHand : MonoBehaviour
 
         // ソート
         hand = CardManager.instance.NumberSort(hand);
+        dommyHand = CardManager.instance.NumberSort(dommyHand);
         //hand =CardManager.instance.SuitSort(hand);
 
         //Test();
 
         CardManager.instance.SetHand(hand);
-        CardObjectUtility.HandToCard(hand);
+        CardObjectUtility.HandToCard(dommyHand);
         CardObjectUtility.StartHandMove();
 
     }
@@ -108,8 +122,8 @@ public class DistributeHand : MonoBehaviour
         hand = CardManager.instance.NumberSort(hand);
 
 
-        CardManager.instance.SetHand(hand);
         CardObjectUtility.HandToCard(hand);
+        CardManager.instance.SetHand(hand);
         CardObjectUtility.StartHandMove();
 
 
