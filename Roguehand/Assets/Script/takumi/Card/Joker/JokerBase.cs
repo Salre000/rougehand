@@ -34,7 +34,7 @@ public class JokerBase : SaleInterface, ExplanationInterface
 
     public void SetID(int ID) { explanationID = ID; }
     public int GetID() { return explanationID; }
-    public virtual string Get() { return StringMaster.instance.GetMaster(explanationID); }
+    public virtual string Get() { return MasterData.instance.GetStringMaster(explanationID); }
 
     /// <summary>
     /// ‰Šús“®
@@ -108,12 +108,12 @@ public class JokerBase : SaleInterface, ExplanationInterface
 
     public virtual string GetName()
     {
-        return StringMaster.instance.GetMaster((GetID() + 100));
+        return MasterData.instance.GetStringMaster((GetID() + 100));
     }
 
     public virtual string GetExplanation()
     {
-        return StringMaster.instance.GetMaster(explanationID);
+        return MasterData.instance.GetStringMaster(explanationID);
     }
 
     public virtual string GetTypes()

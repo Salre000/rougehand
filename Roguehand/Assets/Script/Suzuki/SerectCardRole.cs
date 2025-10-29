@@ -55,7 +55,7 @@ public class SerectCardRole : MonoBehaviour
         }
         // 役
         role = RoleManager.instance.GetRole();
-        string name = StringMaster.instance.GetMaster(_ROLE_ID + (int)role);
+        string name = MasterData.instance.GetStringMaster(_ROLE_ID + (int)role);
         _builder.Append(name);
         if (_builder.Length >= _TEXT_MAX_LENGT_TYPE1)
             instance.GetRoleText().fontSize= _FONT_SIZE_TYPE1;
@@ -64,14 +64,14 @@ public class SerectCardRole : MonoBehaviour
         else
             instance.GetRoleText().fontSize = _FONT_SIZE_TYPE3;
         // 文字サイズ
-        name = StringMaster.instance.GetMaster(_RICHTEXT_ID);
+        name = MasterData.instance.GetStringMaster(_RICHTEXT_ID);
         _builder.Append(name);
         // レベルカラー
         int level = RoleManager.instance.GetRoleLevel(role);
-        name = StringMaster.instance.GetMaster(_RICHTEXT_ID + level);
+        name = MasterData.instance.GetStringMaster(_RICHTEXT_ID + level);
         _builder.Append(name);
         // レベル
-        name= StringMaster.instance.GetMaster(_LEVEL_ID+level);
+        name= MasterData.instance.GetStringMaster(_LEVEL_ID+level);
         _builder.Append(name);
         // Textの変更
         instance.SetRoleText(_builder.ToString());

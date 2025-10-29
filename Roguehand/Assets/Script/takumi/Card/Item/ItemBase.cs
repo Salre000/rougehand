@@ -81,13 +81,13 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
     public string GetName()
     {
         //アイテム係数1000
-        return StringMaster.instance.GetMaster(1000+itemID);
+        return MasterData.instance.GetStringMaster(1000+itemID);
     }
 
     public string GetExplanation()
     {
         // アイテムの説明係数1500
-        return StringMaster.instance.GetMaster(1500 + itemID);
+        return MasterData.instance.GetStringMaster(1500 + itemID);
     }
 
     public string GetExplanation2()

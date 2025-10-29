@@ -19,7 +19,7 @@ public class TargetScoreChecker : MonoBehaviour
     {
         // ラウンド数と目標スコアの設定
         RoundStart();
-        _builder.Append(StringMaster.instance.GetMaster(_TARGET_SCORE_ID + _roundCount));
+        _builder.Append(MasterData.instance.GetStringMaster(_TARGET_SCORE_ID + _roundCount));
         TextUIManager.instance.SetLowestScoreText(_builder.ToString());
     }
 

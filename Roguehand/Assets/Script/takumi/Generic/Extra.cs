@@ -171,7 +171,7 @@ public static class Extra
             case "オブジェクトムーブ": break;
         }
 
-        return StringMaster.instance.GetMaster(index);
+        return MasterData.instance.GetStringMaster(index);
     }
 
     public static string GetRedString(this string _string)
@@ -294,22 +294,22 @@ public static class Extra
                 flag = true;
                 break;
 
-                default: break;
+            default: break;
         }
-    
+
         return flag;
 
     }
 
 
-/// <summary>
-/// リストの中に条件を入れてその条件にあった物の個数を返す関数
-/// </summary>
-/// <typeparam name="T"></typeparam>
-/// <param name="values"></param>
-/// <param name="func"></param>
-/// <returns></returns>
-public static int GetCount<T>(this List<T> values, System.Func<T, bool> func)
+    /// <summary>
+    /// リストの中に条件を入れてその条件にあった物の個数を返す関数
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="values"></param>
+    /// <param name="func"></param>
+    /// <returns></returns>
+    public static int GetCount<T>(this List<T> values, System.Func<T, bool> func)
     {
         int count = 0;
 
@@ -319,6 +319,22 @@ public static int GetCount<T>(this List<T> values, System.Func<T, bool> func)
             count++;
         }
         return count;
+    }
+
+    /// <summary>
+    /// リストの全てに同じ関数を使用する
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="values"></param>
+    /// <param name="func"></param>
+    public static void GetAction<T>(this List<T> values, System.Action<T> func)
+    {
+        int count = 0;
+
+        for (int i = 0; i < values.Count; i++)
+        {
+            func(values[i]);
+        }
     }
 
 

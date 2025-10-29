@@ -357,9 +357,9 @@ public class CardObjectManager : MonoBehaviour
         dommyExplanation.dommyName = () =>
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(StringMaster.instance.GetMaster((int)trump.suit + 10, true));
-            sb.Append(StringMaster.instance.GetMaster((int)trump.suit));
-            sb.Append(StringMaster.instance.GetMaster(-10, true));
+            sb.Append(MasterData.instance.GetStringMaster((int)trump.suit + 10, true));
+            sb.Append(MasterData.instance.GetStringMaster((int)trump.suit));
+            sb.Append(MasterData.instance.GetStringMaster(-10, true));
             sb.Append(Extra.ErrorText("の"));
             sb.Append(Extra.ErrorText(((int)trump.number).ToString()));
 
@@ -377,7 +377,7 @@ public class CardObjectManager : MonoBehaviour
             sb.Append("\n");
             if (trump.deckBuff != Card.deckBuff.None)
             {
-                sb.Append(StringMaster.instance.GetMaster(6250 + (int)trump.deckBuff));
+                sb.Append(MasterData.instance.GetStringMaster(6250 + (int)trump.deckBuff));
             }
 
             return sb.ToString();
@@ -573,6 +573,8 @@ public class CardObjectManager : MonoBehaviour
 
         if (cardObjectHand.GetMoveTimeRata() < 1) return;
 
+
+
         if (_cardObjectHands.GetCount(hand => hand.GetStatus() == CardObject.status.play) !=
             _cardObjectHands.GetCount(
                 hand => {
@@ -584,6 +586,11 @@ public class CardObjectManager : MonoBehaviour
                     //一行のラムダ式
                     //hand.GetStatus() != CardObject.status.play ? false : hand.GetMoveTimeRata() < 1 ? false : true
                 })) return;
+
+        // プレイを行ったカードをトラッシュに移行
+        List<Card.Trump> hands= CardManager.instance.GetHand();
+        hands.GetAction(hands => { if (hands.isSelect) hands.state = Card.State.trash; });
+        CardManager.instance.SetHand(hands);
 
         // 到着
         PlayManager.instance.SetCardTransComp(true);
