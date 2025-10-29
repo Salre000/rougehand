@@ -24,6 +24,11 @@ public class PlayHnad : MonoBehaviour
         RoleManager.Role role=RoleManager.instance.GetRole();
         // 何の役もなければreturn
         if(role==RoleManager.Role.None)return;
+        // ハンドの数を減らす
+        int handCount=GameUtility.GetHandCount();
+        if (handCount <= 0) return;
+        handCount--;
+        GameUtility.SetHandCount(handCount);
         // カードが上に行く
         CardObjectUtility.Play();
         // 

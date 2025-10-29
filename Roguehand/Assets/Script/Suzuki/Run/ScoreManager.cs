@@ -143,17 +143,17 @@ public class ScoreManager : MonoBehaviour
     /// <summary>
     /// äÓñ{Ç∆î{ó¶Ç∆åãâ ÇÃï\é¶Ç∆íÜêgÇÉ[ÉçÇ…Ç∑ÇÈ
     /// </summary>
-    public void ScoreReset()
-    {
-        builder.Clear();
-        _roundScore = _magnification =_basicScore = 0;
-        _defaultRemit = _RESET_REMIT_SIZE;
-        TextUIManager.instance.GetRoundScoreText().fontSize = _DEFAULT_OFFSET;
-        builder.Append(_basicScore);
-        TextUIManager.instance.SetBasicScoreText(builder.ToString());
-        TextUIManager.instance.SetMagnificationText(builder.ToString());
-        TextUIManager.instance.SetRoundScoreText(builder.ToString());
-    }
+    //public void ScoreReset()
+    //{
+    //    builder.Clear();
+    //    _roundScore = _magnification =_basicScore = 0;
+    //    _defaultRemit = _RESET_REMIT_SIZE;
+    //    TextUIManager.instance.GetRoundScoreText().fontSize = _DEFAULT_OFFSET;
+    //    builder.Append(_basicScore);
+    //    TextUIManager.instance.SetBasicScoreText(builder.ToString());
+    //    TextUIManager.instance.SetMagnificationText(builder.ToString());
+    //    TextUIManager.instance.SetRoundScoreText(builder.ToString());
+    //}
 
     /// <summary>
     /// î{ó¶ÇèÊéZ
