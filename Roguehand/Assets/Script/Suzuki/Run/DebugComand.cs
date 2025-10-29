@@ -6,9 +6,7 @@ using static TextUIManager;
 
 public class DebugComand : MonoBehaviour
 {
-    private int _score = 0;
-    private string _onePear = "ワンペア <size=20><color=#FFFFFF>レベル1";
-    private float _time = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,48 +17,9 @@ public class DebugComand : MonoBehaviour
     void Update()
     {
         CheckHand();
-        ScoreUp();
-        //
-        MagUp();
-        ScoreReset();
+
     }
 
-    // プレイボタン
-
-
-    public void OnDisCard()
-    {
-        int disCount = instance.IntTryParse(instance.GetDiscardText().text);
-        if(disCount<=0) return;
-        disCount--;
-        instance.SetDiscardText(disCount.ToString());
-    }
-
-    #region スコア系
-    private void ScoreUp()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            ScoreManager.instance.BasicPlus(125);
-        }
-    }
-
-    private void MagUp()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            ScoreManager.instance.MagnificationPlus(12.2f);
-        }
-    }
-
-    private void ScoreReset()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            ScoreManager.instance.ScoreReset();
-        }
-    }
-    #endregion
 
     private void CheckHand()
     {
