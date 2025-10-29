@@ -51,11 +51,6 @@ public class ScoreManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     /// <summary>
     /// 基本の加算
@@ -184,6 +179,22 @@ public class ScoreManager : MonoBehaviour
         builder.Append(_roundScore);
         TextUIManager.instance.SetRoundScoreText(builder.ToString());
 
+        // 合計スコアの増加をした
+        GameUtility.SetIsRoundScoreUp(true);
+    }
+
+    /// <summary>
+    /// ラウンドスコアと目標スコアのリセット
+    /// </summary>
+    public void ResetRoundScore()
+    {
+        _roundScore = 0;
+        builder.Clear();
+        builder.Append(_roundScore);
+        TextUIManager.instance.SetRoundScoreText(builder.ToString());
+        builder.Clear() ;
+        builder.Append("");
+        TextUIManager.instance.SetLowestScoreText(builder.ToString());
     }
 
     /// <summary>
@@ -222,4 +233,5 @@ public class ScoreManager : MonoBehaviour
 
     public void SetBasic(int value) { _basicScore = value; }
     public void SetMagnification(int value) { _magnification = value; }
+    public float GetRoundScore() {  return _roundScore; }
 }

@@ -19,6 +19,7 @@ public class TargetScoreChecker : MonoBehaviour
     {
         // ラウンド数と目標スコアの設定
         RoundStart();
+            _builder.Clear();
         _builder.Append(MasterData.instance.GetStringMaster(_TARGET_SCORE_ID + _roundCount));
         TextUIManager.instance.SetLowestScoreText(_builder.ToString());
     }
@@ -26,7 +27,7 @@ public class TargetScoreChecker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        RoundCheck();
     }
 
     private void RoundStart()
@@ -38,11 +39,39 @@ public class TargetScoreChecker : MonoBehaviour
     // 達しているか確認
     private void RoundCheck()
     {
+        // プレイボタンが押されてなかったら比較を行わない
+        if(!GameUtility.IsPlay())return;
+        // 合計スコアが増加されてなかったら比較しない
+        if (!GameUtility.IsRoundScoreUp())return ;
         // 目標スコアと現スコアを比較
-
-        // 目標スコアを越していたら
+        _targetScore = MasterData.instance.GetIntMaster(_TARGET_SCORE_ID+_roundCount);
+        // 不正値が返ってきたならreturn
+        if(_targetScore < 0)return;
         // 一時的にボタン受付を停止
         GameUtility.SetIsPushButton(false);
+        // 合計スコアと比較
+        float roundScore = ScoreManager.instance.GetRoundScore();
+        // 目標スコアを越していたら次のラウンドへ
+        if (_targetScore <= roundScore)
+        {
+            // 合計スコアのリセット
+            ScoreManager.instance.ResetRoundScore();
+            // ラウンド数の増加
+            _roundCount++;
+            GameUtility.SetRoundCount(_roundCount);
+            _builder.Clear();
+            _builder.Append(_roundCount);
+            TextUIManager.instance.SetRoundText(_builder.ToString());
+            // 目標スコアの再設定
+            _builder.Clear();
+            _builder.Append(MasterData.instance.GetStringMaster(_TARGET_SCORE_ID + _roundCount));
+            TextUIManager.instance.SetLowestScoreText(_builder.ToString());
+        }
+
+        // 最終的にプレイボタンのフラグをリセット
+        GameUtility.SetIsPlay(false);
+        // 合計スコアの増加フラグをリセット
+        GameUtility.SetIsRoundScoreUp(false);
     }
 
 }
