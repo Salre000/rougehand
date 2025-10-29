@@ -33,7 +33,12 @@ public class TargetScoreChecker : MonoBehaviour
     private void RoundStart()
     {
         if( _roundCount ==GameUtility.GetRoundCount() )return;
+        // ラウンドカウントのセット
         _roundCount=GameUtility.GetRoundCount();
+        GameUtility.SetRoundCount(_roundCount);
+        _builder.Clear();
+        _builder.Append(_roundCount);
+        TextUIManager.instance.SetRoundText(_builder.ToString());
     }
 
     // 達しているか確認
@@ -66,6 +71,13 @@ public class TargetScoreChecker : MonoBehaviour
             _builder.Clear();
             _builder.Append(MasterData.instance.GetStringMaster(_TARGET_SCORE_ID + _roundCount));
             TextUIManager.instance.SetLowestScoreText(_builder.ToString());
+
+            // 次のラウンドへ移行することを他にも知らせる
+            //GameUtility.SetIsNextRound(true);
+            //GameUtility.SetIsNextRound(false);
+
+            // ハンド回数のリセット
+            GameUtility.SetHandCount(GameUtility.GetBaseHandCound());
         }
 
         // 最終的にプレイボタンのフラグをリセット

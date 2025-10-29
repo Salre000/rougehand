@@ -4,7 +4,9 @@ using UnityEngine;
 
 public static class GameUtility
 {
-    // ハンド回数
+    // ベースになるハンド回数
+    private static int _baseHandCount = 5;
+    // 変動するハンド回数
     private static int _handCount = 5;
     // 現ラウンド
     private static int _roundCount = 1;
@@ -14,8 +16,14 @@ public static class GameUtility
     private static bool _isPlay = false;
     // ラウンドスコアの増加を検知
     private static bool _isRoundScoreUp = false;
+    // 次のラウンドへ移動
+    private static bool _isNextRound = false;
 
-    // ハンド数を設定
+    // ハンド回数の最大値の設定
+    public static void SetBaseHandCount(int value) {  _baseHandCount = value; }
+    // ハンド回数の最大値の取得
+    public static int GetBaseHandCound() {  return _baseHandCount; }
+    // ハンド数を変動
     public static void SetHandCount(int value) { _handCount = value; }
     // 現在のハンド数を取得
     public static int GetHandCount() { return _handCount; }
@@ -35,5 +43,9 @@ public static class GameUtility
     public static void SetIsRoundScoreUp(bool value) { _isRoundScoreUp = value; }
     // 合計スコアが増加されたかを取得
     public static bool IsRoundScoreUp() { return _isRoundScoreUp; }
+    // ラウンド移行のセット
+    public static void SetIsNextRound(bool value) { _isNextRound = value; }
+    // ラウンド移行の取得
+    public static bool IsNextRound() {  return _isNextRound; }
 
 }
