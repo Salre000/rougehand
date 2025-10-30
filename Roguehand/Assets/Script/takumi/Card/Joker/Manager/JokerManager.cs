@@ -22,15 +22,15 @@ public class JokerManager : MonoBehaviour
     /// ジョーカーのターゲットになり得る物をキャッシュする
     /// 順番に処理をする為にリストにした
     /// </summary>
-    private List<JokerActionUseEnum.JokerActionTarget> _target=new List<JokerActionUseEnum.JokerActionTarget>();
+    private List<JokerActionUseEnum.JokerActionTarget> _target = new List<JokerActionUseEnum.JokerActionTarget>();
 
 
     /// <summary>
     /// ジョーカーのターゲットになり得るスート
     /// </summary>
     private Card.suit _targetSuit;
-    
-    
+
+
     /// <summary>
     /// ジョーカーのターゲットになり得るナンバー
     /// </summary>
@@ -44,7 +44,7 @@ public class JokerManager : MonoBehaviour
     /// <summary>
     /// 現在のループ中のインデックス番号
     /// </summary>
-    private int useIndex=-1;
+    private int useIndex = -1;
 
     /// <summary>
     /// ジョーカーの最大数
@@ -136,24 +136,24 @@ public class JokerManager : MonoBehaviour
 
     }
 
-    public void JokerChenge(int ID) 
+    public void JokerChenge(int ID)
     {
         JokerObjectUtility.GetIDJokerObject(ID).StartChenge();
 
     }
 
-    public void SetMaterial(int ID) 
+    public void SetMaterial(int ID)
     {
-        JokerBase jokerBase=_jokers[ID];
+        JokerBase jokerBase = _jokers[ID];
 
-        MeshRenderer meshRenderer=JokerObjectUtility.GetIDObject(ID).transform.GetChild(0).GetComponent<MeshRenderer>();
+        MeshRenderer meshRenderer = JokerObjectUtility.GetIDObject(ID).transform.GetChild(0).GetComponent<MeshRenderer>();
 
         //一度キャッシュする必要あり
         Material[] materials = meshRenderer.materials;
 
-        materials[0]=BuffUtility.GetJokerMaterial((int)jokerBase.GetJokerBuff());
+        materials[0] = BuffUtility.GetJokerMaterial((int)jokerBase.GetJokerBuff());
 
-        if(jokerBase.GetCardBuff()!=Card.cardBuff.None)materials[0]=BuffUtility.GetCardMaterial((int)jokerBase.GetCardBuff());
+        if (jokerBase.GetCardBuff() != Card.cardBuff.None) materials[0] = BuffUtility.GetCardMaterial((int)jokerBase.GetCardBuff());
 
 
         meshRenderer.materials = materials;
@@ -170,17 +170,23 @@ public class JokerManager : MonoBehaviour
     /// ランダム
     /// </summary>
     /// <param name="count"><ジョーカーの数/param>
-    public void ShopJokerAdd(int count=3) 
+    public void ShopJokerAdd(Vector3 left, Vector3 right, int count = 3, System.Func<JokerBase> func = null)
     {
+        //　ジョーカー選択条件を何も入れなかったらランダムで生成する
+        if (func == null) func = GetRoundomJoker;
 
-        for(int i = 0; i < count; i++) 
+        //カードとカードの間
+        float handCardRange = Vector3.Distance(left, right) / (float)(count + 1f);
+
+        for (int i = 0; i < count; i++)
         {
-            JokerBase jokerBase = ALLJoker.GetJoker((ALLJoker._allJokerEnum)Random.Range(0,(int)ALLJoker._allJokerEnum.MAX));
+            JokerBase jokerBase = func();
 
             _dommyJoker.Add(jokerBase);
+            // 移動目標地点を確認
+            Vector3 goalPos = left + new Vector3(handCardRange * (i + 1), 0, 0);
 
-            JokerObjectUtility.AddDomyyJoker(jokerBase);
-
+            JokerObjectUtility.AddDomyyJoker(jokerBase, goalPos);
 
 
         }
@@ -190,11 +196,12 @@ public class JokerManager : MonoBehaviour
     }
 
 
+
     /// <summary>
     /// ID指定の売られたときの挙動
     /// </summary>
     /// <param name="ID"></param>
-    public void SaleAction(int ID) 
+    public void SaleAction(int ID)
     {
         _jokers[ID].SaleAction();
     }
@@ -208,7 +215,7 @@ public class JokerManager : MonoBehaviour
     /// 今のフレームないで行われたターゲットの動き
     /// </summary>
     /// <returns></returns>
-    public  Card.suit GetTargetSuit() { return _targetSuit; }
+    public Card.suit GetTargetSuit() { return _targetSuit; }
     /// <summary>
     /// 今のフレームないで行われたターゲットの動き
     /// </summary>
@@ -257,52 +264,52 @@ public class JokerManager : MonoBehaviour
     /// <summary>
     /// 条件が満たされた瞬間にターゲットの中に代入する関数
     /// </summary>
-    public void SetTarget(JokerActionUseEnum.JokerActionTarget target) 
+    public void SetTarget(JokerActionUseEnum.JokerActionTarget target)
     {
         _target.Add(target);
     }
     /// <summary>
     /// 条件が満たされた瞬間にターゲットの中に代入する関数
     /// </summary>
-    public void SetTarget(Card.suit target) 
+    public void SetTarget(Card.suit target)
     {
-        _targetSuit=target;
+        _targetSuit = target;
     }
     /// <summary>
     /// 条件が満たされた瞬間にターゲットの中に代入する関数
     /// </summary>
-    public void SetTarget(Card.number target) 
+    public void SetTarget(Card.number target)
     {
-        _targetNumer=target;
+        _targetNumer = target;
     }
     /// <summary>
     /// 条件が満たされた瞬間にターゲットの中に代入する関数
     /// </summary>
-    public void SetTarget(RoleManager.Role target) 
+    public void SetTarget(RoleManager.Role target)
     {
-        _targetRole=target;
+        _targetRole = target;
     }
 
 
 
-    public int GetIndex() {  return useIndex; }
+    public int GetIndex() { return useIndex; }
     public int GetIndex(JokerBase jokerBase) { return _jokers.IndexOf(jokerBase); }
 
-    public void GrabChange(int id,bool flag) 
+    public void GrabChange(int id, bool flag)
     {
         JokerObjectUtility.GrabChange(id, flag);
 
     }
 
-    public void SetSale(int ID) 
+    public void SetSale(int ID)
     {
         GameObject joker = JokerObjectUtility.GetIDObject(ID);
 
         SaleUtility.SetSale(_jokers[ID], joker, _jokers[ID].GetSaleValue());
 
-           
+
     }
-    public void ShowExplanation(int ID) 
+    public void ShowExplanation(int ID)
     {
         ExplanationManager.instance.AddExplanation(JokerObjectUtility.GetIDObject(ID), _jokers[ID], _jokers[ID].JokerBuffs(), new Vector2(0, 1));
 
@@ -322,10 +329,10 @@ public class JokerManager : MonoBehaviour
     /// <summary>
     /// ジョーカーのアップデート処理を回す関数
     /// </summary>
-    private void JokerUpData() 
+    private void JokerUpData()
     {
 
-        for(int i=0;i< _jokers.Count; i++) 
+        for (int i = 0; i < _jokers.Count; i++)
         {
             useIndex = i;
             _jokers[i].UpData();
@@ -340,6 +347,8 @@ public class JokerManager : MonoBehaviour
 
         useIndex = -1;
     }
+
+    private JokerBase GetRoundomJoker() { return ALLJoker.GetJoker((ALLJoker._allJokerEnum)Random.Range(0, (int)ALLJoker._allJokerEnum.MAX)); }
 
 
 

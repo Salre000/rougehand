@@ -556,7 +556,6 @@ public class CardObjectManager : MonoBehaviour
 
         GameUtility.SetIsPushButton(true);
 
-
     }
     /// <summary>
     /// 手札からプレイ準備状態への移動
@@ -575,9 +574,6 @@ public class CardObjectManager : MonoBehaviour
         cardObjectHand.transform.position = moveVec;
 
     }
-
-
-
     /// <summary>
     /// 手札からプレイ状態への移動
     /// </summary>
@@ -614,39 +610,51 @@ public class CardObjectManager : MonoBehaviour
                     //hand.GetStatus() != CardObject.status.play ? false : hand.GetMoveTimeRata() < 1 ? false : true
                 })) return;
 
-        // プレイを行ったカードをトラッシュに移行
-        List<Card.Trump> hands= CardManager.instance.GetHand();
+        // 選択状態のカードを全てトラッシュに送る
+        IsSelectTrash();
 
-        List<Card.Trump> dommy=new List<Card.Trump>();
-        List<Card.Trump> dommyBase=new List<Card.Trump>();
-        
+        // 到着
+        PlayManager.instance.SetCardTransComp(true);
+
+
+        // ジョーカーの計算開始
+        JokerUtility.JokerPlayStart();
+
+    }
+
+    /// <summary>
+    /// 選択状態のカードを全てトラッシュに送る
+    /// </summary>
+    private void IsSelectTrash() 
+    {
+
+        // プレイを行ったカードをトラッシュに移行
+        List<Card.Trump> hands = CardManager.instance.GetHand();
+
+        List<Card.Trump> dommy = new List<Card.Trump>();
+        List<Card.Trump> dommyBase = new List<Card.Trump>();
+
         hands.GetAction(hands =>
         {
             Card.Trump trump = hands;
             if (!hands.isSelect) return;
             hands.state = Card.State.trash;
 
-            dommy.Add (hands);
-            dommyBase.Add (trump);
+            dommy.Add(hands);
+            dommyBase.Add(trump);
         });
 
-        for(int i = 0; i < hands.Count; i++) 
+        for (int i = 0; i < hands.Count; i++)
         {
-            if (hands[i].isSelect) { hands.RemoveAt(i);i--; }
+            if (hands[i].isSelect) { hands.RemoveAt(i); i--; }
 
 
         }
 
         CardManager.instance.SetHand(hands);
 
-        // ジョーカーの計算開始
-        JokerUtility.JokerPlayStart();
-       
-        // 到着
-        PlayManager.instance.SetCardTransComp(true);
-
-
     }
+
     /// <summary>
     /// カードをトラッシュに移動させる関数
     /// </summary>
@@ -674,8 +682,14 @@ public class CardObjectManager : MonoBehaviour
 
         if (_cardObjectHands.GetCount(card => card.GetStatus() == CardObject.status.discard) != 0) return;
 
+        // 選択状態のカードを全てトラッシュに送る
+        IsSelectTrash();
+
+
+
         //ラウンドの終了準備をする
         RoundObserver.Instance.StartRoundEnd();
+
 
 
 

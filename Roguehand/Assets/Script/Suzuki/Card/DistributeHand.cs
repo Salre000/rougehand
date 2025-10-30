@@ -55,8 +55,15 @@ public class DistributeHand : MonoBehaviour
             // 一回繰り返すごとにランダムで出た数値を取り除いて手札に渡す
             index = Random.Range(0, dammyDeckArray.Count);
 
-            // 過去に使われたカードを引かないようにする
-            if (deck[dammyDeckArray[index]].state == Card.State.trash) { i--;continue; }
+            // まだ使われていないカードのみを対象にする
+            if (deck[dammyDeckArray[index]].state != Card.State.deck)
+            {
+                //この番号は使用不可能なので廃棄
+                dammyDeckArray.RemoveAt(index);
+
+                i--;
+                continue;
+            }
 
             // デッキのダミーデッキの場所にある情報を手札追加
             Card.Trump trump = deck[dammyDeckArray[index]];

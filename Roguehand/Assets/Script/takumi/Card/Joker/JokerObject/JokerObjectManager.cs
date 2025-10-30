@@ -148,7 +148,7 @@ public class JokerObjectManager : MonoBehaviour
     /// ジョーカーにマテリアルを貼り付ける関数
     /// </summary>
     /// <param name="joker"></param>
-    private void PaintJoker(GameObject joker) 
+    private void PaintJoker(GameObject joker,Texture ID) 
     {
         MeshRenderer meshRenderer = joker.transform.GetChild(0).GetComponent<MeshRenderer>();
 
@@ -158,7 +158,7 @@ public class JokerObjectManager : MonoBehaviour
         Material materialCopy = new Material(dommyMaterial);
 
         // マイナス2000はジョーカー係数2000を引く
-        materialCopy.SetTexture("_MainTex", materialList._material[_jokerObjects[_jokerObjects.Count - 1].GetJokerID()-2000]);
+        materialCopy.SetTexture("_MainTex", ID);
 
         materials[(int)CardObjectManager.cardMaterialType.main] = materialCopy;
 
@@ -265,22 +265,26 @@ public class JokerObjectManager : MonoBehaviour
 
         _jokerObjects[_jokerObjects.Count - 1].name = "JokerID" + (_jokerObjects.Count - 1).ToString();
         _jokerObjects[_jokerObjects.Count - 1].transform.eulerAngles = Vector3.zero;
-        PaintJoker(_jokerObjects[_jokerObjects.Count - 1].gameObject);
+        PaintJoker(_jokerObjects[_jokerObjects.Count - 1].gameObject, materialList._material[_jokerObjects[_jokerObjects.Count - 1].GetJokerID() - 2000]);
 
     }
-    public void AddDommyJoker(JokerBase jokerBase)
+    public void AddDommyJoker(JokerBase jokerBase,Vector3 pos)
     {
         //オブジェクトの生成
         _domyyJokerObjects.Add(GameObject.Instantiate(_prefab, transform).AddComponent<JokerObject>());
 
         //オブジェクトの物理演算を停止
-        _domyyJokerObjects[_jokerObjects.Count - 1].GetComponent<Rigidbody>().isKinematic = true;
+        _domyyJokerObjects[_domyyJokerObjects.Count - 1].GetComponent<Rigidbody>().isKinematic = true;
 
         //オブジェクトの初期化処理
-        _domyyJokerObjects[_jokerObjects.Count - 1].Initializ(jokerBase);
+        _domyyJokerObjects[_domyyJokerObjects.Count - 1].Initializ(jokerBase);
 
-        _domyyJokerObjects[_jokerObjects.Count - 1].name = "DomyyJokerID" + (_jokerObjects.Count - 1).ToString();
-        PaintJoker(_domyyJokerObjects[_domyyJokerObjects.Count - 1].gameObject);
+        // 座標を設定
+        _domyyJokerObjects[_domyyJokerObjects.Count - 1].transform.position= pos;
+
+        _domyyJokerObjects[_domyyJokerObjects.Count - 1].name = "DomyyJokerID" + (_domyyJokerObjects.Count - 1).ToString();
+
+        PaintJoker(_domyyJokerObjects[_domyyJokerObjects.Count - 1].gameObject, materialList._material[_domyyJokerObjects[_domyyJokerObjects.Count - 1].GetJokerID() - 2000]);
 
 
     }

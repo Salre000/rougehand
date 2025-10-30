@@ -6,8 +6,12 @@ public static class GameUtility
 {
     // ベースになるハンド回数
     private static int _baseHandCount = 5;
+    // ベースになるディスカード回数
+    private static int _baseDiscardCount = 5;
     // 変動するハンド回数
     private static int _handCount = 5;
+    // 変動するディスカード回数
+    private static int _discardCount = 5;
     // 現ラウンド
     private static int _roundCount = 1;
     // ボタンの反応の応対
@@ -27,6 +31,14 @@ public static class GameUtility
     public static void SetHandCount(int value) { _handCount = value; }
     // 現在のハンド数を取得
     public static int GetHandCount() { return _handCount; }
+    // ディスカード回数の最大値の設定
+    public static void SetBaseDiscardCount(int value) { _baseDiscardCount = value; }
+    // ディスカード回数の最大値の取得
+    public static int GetBaseDiscardCound() {  return _baseDiscardCount; }
+    // ディスカード数を変動
+    public static void SetDiscardCount(int value) { _discardCount = value; }
+    // 現在のディスカード数を取得
+    public static int GetDiscardCount() { return _discardCount; }
     // ラウンド数を設定
     public static void SetRoundCount(int value) { _roundCount = value; }
     // ラウンド数を取得

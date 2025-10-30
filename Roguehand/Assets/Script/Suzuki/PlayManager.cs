@@ -5,9 +5,12 @@ using UnityEngine;
 public class PlayManager : MonoBehaviour
 {
     public static PlayManager instance;
-    private bool _isSetCard=false;
+    private bool _isSetCard = false;
     // ハンド回数
     private int _checkCount;
+
+    // ディスカード回数
+    private int _checkDiscardCount;
 
     private void Awake()
     {
@@ -17,9 +20,13 @@ public class PlayManager : MonoBehaviour
 
     private void Start()
     {
-        _checkCount =GameUtility.GetHandCount();
+        _checkCount = GameUtility.GetHandCount();
         // ハンド数を反映
         TextUIManager.instance.SetHandText(_checkCount.ToString());
+
+        // ディスカード数を反映
+        _checkDiscardCount = GameUtility.GetDiscardCount();
+        TextUIManager.instance.SetDiscardText(_checkCount.ToString());
     }
 
     // Update is called once per frame
@@ -27,6 +34,7 @@ public class PlayManager : MonoBehaviour
     {
         ScoreView();
         CheckHandCount();
+        CheckDiscardCount();
     }
 
     private void ScoreView()
@@ -72,10 +80,17 @@ public class PlayManager : MonoBehaviour
 
     private void CheckHandCount()
     {
-        if(_checkCount==GameUtility.GetHandCount())return;
+        if (_checkCount == GameUtility.GetHandCount()) return;
 
-        _checkCount=GameUtility.GetHandCount();
-        TextUIManager.instance.SetHandText(_checkCount.ToString() );
+        _checkCount = GameUtility.GetHandCount();
+        TextUIManager.instance.SetHandText(_checkCount.ToString());
+    }
+    private void CheckDiscardCount()
+    {
+        if (_checkDiscardCount == GameUtility.GetDiscardCount()) return;
+
+        _checkDiscardCount = GameUtility.GetDiscardCount();
+        TextUIManager.instance.SetDiscardText(_checkDiscardCount.ToString());
     }
 
     // プレイを押した後のカードの位置が定位置に付いたかをセットする
