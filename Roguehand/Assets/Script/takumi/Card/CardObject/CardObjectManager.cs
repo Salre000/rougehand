@@ -556,6 +556,7 @@ public class CardObjectManager : MonoBehaviour
 
         GameUtility.SetIsPushButton(true);
 
+
     }
     /// <summary>
     /// 手札からプレイ準備状態への移動
@@ -574,6 +575,9 @@ public class CardObjectManager : MonoBehaviour
         cardObjectHand.transform.position = moveVec;
 
     }
+
+
+
     /// <summary>
     /// 手札からプレイ状態への移動
     /// </summary>
@@ -635,13 +639,12 @@ public class CardObjectManager : MonoBehaviour
 
         CardManager.instance.SetHand(hands);
 
-
+        // ジョーカーの計算開始
+        JokerUtility.JokerPlayStart();
+       
         // 到着
         PlayManager.instance.SetCardTransComp(true);
 
-
-        // ジョーカーの計算開始
-        JokerUtility.JokerPlayStart();
 
     }
     /// <summary>
@@ -673,7 +676,6 @@ public class CardObjectManager : MonoBehaviour
 
         //ラウンドの終了準備をする
         RoundObserver.Instance.StartRoundEnd();
-
 
 
 

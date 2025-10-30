@@ -41,6 +41,7 @@ public class PlayManager : MonoBehaviour
         StartCoroutine(RoundScorePlus());
     }
 
+    float roundScore = 0f;
     // ハンドスコアをゼロにしてラウンドを加算
     IEnumerator RoundScorePlus()
     {
@@ -52,7 +53,20 @@ public class PlayManager : MonoBehaviour
         // 手札だけすべて削除
         CardObjectUtility.PlayEnd();
 
-        GameUtility.SetIsRoundScoreUp(true);
+
+        // スコアが増加済みならリターン
+        if (roundScore == ScoreManager.instance.GetRoundScore())
+        {
+
+        }
+        else
+        {
+            roundScore = ScoreManager.instance.GetRoundScore();
+            // 増加の確認
+            GameUtility.SetIsRoundScoreUp(true);
+        }
+
+
 
     }
 

@@ -180,7 +180,7 @@ public class ScoreManager : MonoBehaviour
         TextUIManager.instance.SetRoundScoreText(builder.ToString());
 
         // 合計スコアの増加をした
-       // GameUtility.SetIsRoundScoreUp(true);
+        //GameUtility.SetIsRoundScoreUp(true);
     }
 
     /// <summary>
