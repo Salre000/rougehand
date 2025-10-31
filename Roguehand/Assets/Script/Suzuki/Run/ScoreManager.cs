@@ -179,8 +179,10 @@ public class ScoreManager : MonoBehaviour
         builder.Append(_roundScore);
         TextUIManager.instance.SetRoundScoreText(builder.ToString());
 
+        Debug.Log("デバック :" + builder.ToString());
+
         // 合計スコアの増加をした
-       // GameUtility.SetIsRoundScoreUp(true);
+        GameUtility.SetIsRoundScoreUp(true);
     }
 
     /// <summary>

@@ -60,7 +60,7 @@ public class PlayManager : MonoBehaviour
         // èD‚¾‚¯‚·‚×‚Äíœ
         CardObjectUtility.PlayEnd();
 
-        GameUtility.SetIsRoundScoreUp(true);
+        //GameUtility.SetIsRoundScoreUp(true);
 
     }
 

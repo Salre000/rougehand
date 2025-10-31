@@ -342,6 +342,7 @@ public class JokerObjectManager : MonoBehaviour
 
     public void GrabChange(int ID, bool flag)
     {
+
         _isGrab = flag;
         _isGrabID = ID;
         _jokerObjects[ID].SetGrab(flag);
