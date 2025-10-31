@@ -631,24 +631,31 @@ public class CardObjectManager : MonoBehaviour
         // プレイを行ったカードをトラッシュに移行
         List<Card.Trump> hands = CardManager.instance.GetHand();
 
-        List<Card.Trump> dommy = new List<Card.Trump>();
-        List<Card.Trump> dommyBase = new List<Card.Trump>();
-
         hands.GetAction(hands =>
         {
             Card.Trump trump = hands;
             if (!hands.isSelect) return;
             hands.state = Card.State.trash;
-
-            dommy.Add(hands);
-            dommyBase.Add(trump);
         });
+
+        bool flag = false;
 
         for (int i = 0; i < hands.Count; i++)
         {
-            if (hands[i].isSelect) { hands.RemoveAt(i); i--; }
+            if (hands[i].isSelect) 
+            { 
+
+                hands.RemoveAt(i);
+                i--;
+                flag = true;
+            }
 
 
+        }
+
+        if (!flag) 
+        {
+            int ss =0;
         }
 
         CardManager.instance.SetHand(hands);

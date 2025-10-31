@@ -43,7 +43,6 @@ public class PlayManager : MonoBehaviour
         CheckDiscardCount();
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log("////////"+CardManager.instance.GetHand().Count);
         }
     }
 

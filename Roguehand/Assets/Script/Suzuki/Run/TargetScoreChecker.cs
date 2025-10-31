@@ -71,7 +71,9 @@ public class TargetScoreChecker : MonoBehaviour
     // 次のラウンド処理
     private void NextRoundExecute()
     {
-        roundScore =ScoreManager.instance.Rounding(roundScore, 1f);
+        Debug.Log("ラウンドスコア :" + roundScore);
+
+        roundScore = ScoreManager.instance.Rounding(roundScore, 1f);
         if (_targetScore <=roundScore)
         {
             // 合計スコアのリセット
