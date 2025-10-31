@@ -46,8 +46,6 @@ public class TargetScoreChecker : MonoBehaviour
     // 達しているか確認
     private void RoundCheck()
     {
-        Debug.Log(GameUtility.IsRoundScoreUp()+"ラウンドスコアUP");
-
         // プレイボタンが押されてなかったら比較を行わない
         if(!GameUtility.IsPlay())return;
 
