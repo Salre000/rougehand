@@ -50,6 +50,7 @@ public class PlayManager : MonoBehaviour
     {
         if (!_isSetCard) return;
 
+
         // ジョーカーの計算待機
         if (JokerObjectUtility.PlayCheck()) return;
 
@@ -64,6 +65,8 @@ public class PlayManager : MonoBehaviour
     {
 
         yield return new WaitForSeconds(_WAIT_TIME);
+        if (!_isSetCard) yield break;
+
         ScoreManager.instance.RoundScorePlus();
         _isSetCard = false;
 
