@@ -326,17 +326,18 @@ public static class Extra
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="values"></param>
-    /// <param name="func"></param>
-    public static void GetAction<T>(this List<T> values, System.Action<T> func)
+    /// <param name="actionRef"></param>
+    public static void GetAction<T>(this List<T> values, System.Func<T, T> actionRef)
     {
-        int count = 0;
-
         for (int i = 0; i < values.Count; i++)
         {
-            func(values[i]);
+            values[i] = actionRef(values[i]);
+
         }
     }
 
+    // ref‘Î‰ž‚ÌƒfƒŠƒQ[ƒgŒ^‚ðŽ©ì‚·‚é
+    public delegate void ActionRef<T>(ref T arg);
 
     private static string GetColor(char C)
     {

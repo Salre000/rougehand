@@ -183,7 +183,7 @@ public class CardManager : MonoBehaviour
     public void SetDeck(List<Card.Trump> _deck) { this.deck = _deck; }
     public List<Card.Trump> GetDeck() { return deck; }
 
-    public void ResetDeck() { deck.GetAction(card => { card.isSelect = false; card.state = Card.State.deck; }); }
+    public void ResetDeck() { deck.GetAction( card => { card.isSelect = false; card.state = Card.State.deck; return card; }); }
 
     public void SetHandSize(int _hand) { this.handSize = _hand; }
     public int GetHandSize() { return handSize; }

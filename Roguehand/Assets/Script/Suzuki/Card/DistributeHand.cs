@@ -44,6 +44,7 @@ public class DistributeHand : MonoBehaviour
         List<Card.Trump> dommyHand=new List<Card.Trump>();
         hand= CardManager.instance.GetHand();
         deck = CardManager.instance.GetDeck();
+        Debug.Log( deck.GetCount(card => card.state == Card.State.deck)+"デッキの枚数");
         hand.Capacity = CardManager.instance.GetHandSize();
         int index = deck.Count;
         // デッキ分のキャパを獲得
@@ -68,7 +69,11 @@ public class DistributeHand : MonoBehaviour
                 i--;
 
                 //デッキアウト
-                if (dammyDeckArray.Count < 1) break;
+                if (dammyDeckArray.Count < 1) 
+                {
+                    int deckout = 0;
+                    break;
+                }
                 continue;
             }
 

@@ -425,7 +425,7 @@ public class CardObjectManager : MonoBehaviour
     public void RoundReset()
     {
         
-        _cardObjects.GetAction(card => 
+        _cardObjects.GetAction( card => 
         {
             // 角度をリセット
             card.transform.eulerAngles = _BACK_SIDE;
@@ -435,13 +435,17 @@ public class CardObjectManager : MonoBehaviour
 
             // カードオブジェクトのリセットをする
             card.ResetCard();
+
+            return card;
             
             });
 
         _cardObjectHands.Clear();
 
+
         //ラウンドの終了準備をする
         RoundObserver.Instance.StartRoundEnd();
+
 
     }
 
@@ -660,8 +664,10 @@ public class CardObjectManager : MonoBehaviour
         hands.GetAction(hands =>
         {
             Card.Trump trump = hands;
-            if (!hands.isSelect) return;
+            if (!hands.isSelect) return hands;
             hands.state = Card.State.trash;
+
+            return hands;
         });
 
         bool flag = false;

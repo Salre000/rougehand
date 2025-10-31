@@ -100,6 +100,9 @@ public class TargetScoreChecker : MonoBehaviour
 
             // デッキのリセット
             CardManager.instance.ResetDeck();
+
+            Debug.Log( CardManager.instance.GetDeck().GetCount(card => card.state == Card.State.deck)+"リセット直後");
+
             // 手札のリセット
             CardManager.instance.ResetHand();
 
