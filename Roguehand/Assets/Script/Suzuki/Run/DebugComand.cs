@@ -17,7 +17,7 @@ public class DebugComand : MonoBehaviour
     void Update()
     {
         CheckHand();
-
+        HandAndDisReset();
     }
 
 
@@ -34,5 +34,15 @@ public class DebugComand : MonoBehaviour
         indexList = RoleManager.instance.GetIndex();
         if(role==RoleManager.Role.highCard) return;
 
+    }
+
+    // ハンド回数とディスカード回数のリセット
+    private void HandAndDisReset()
+    {
+        if(!Input.GetKeyDown(KeyCode.Q)) return;
+        // ハンド回数のリセット
+        GameUtility.SetHandCount(GameUtility.GetBaseHandCound());
+        // ディスカードのリセット
+        GameUtility.SetDiscardCount(GameUtility.GetBaseDiscardCound());
     }
 }

@@ -13,6 +13,10 @@ public class PlayManager : MonoBehaviour
     private int _checkDiscardCount;
 
     private float _roundScore = 0f;
+    // ラウンドスコアのリセット時に処理されないように使用する
+    private float _scoreZeroChecker = 1f;
+    // ラウンドスコアに追加するタイミングを秒単位で遅らせる
+    private const float _WAIT_TIME= 1f;
 
     private void Awake()
     {
@@ -60,7 +64,7 @@ public class PlayManager : MonoBehaviour
     IEnumerator RoundScorePlus()
     {
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(_WAIT_TIME);
         ScoreManager.instance.RoundScorePlus();
         _isSetCard = false;
 
@@ -69,7 +73,7 @@ public class PlayManager : MonoBehaviour
 
 
         // スコアが増加済みならリターン
-        if (_roundScore != ScoreManager.instance.GetRoundScore() && 1f < ScoreManager.instance.GetRoundScore())
+        if (_roundScore != ScoreManager.instance.GetRoundScore() && _scoreZeroChecker < ScoreManager.instance.GetRoundScore())
         {
             _roundScore = ScoreManager.instance.GetRoundScore();
             // 増加の確認

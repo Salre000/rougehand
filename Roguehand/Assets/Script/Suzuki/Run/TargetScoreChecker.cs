@@ -94,6 +94,8 @@ public class TargetScoreChecker : MonoBehaviour
 
             // ハンド回数のリセット
             GameUtility.SetHandCount(GameUtility.GetBaseHandCound());
+            // ディスカードのリセット
+            GameUtility.SetDiscardCount(GameUtility.GetBaseDiscardCound());
             int reward = MasterData.instance.GetIntMaster(_REWARD_ID + _roundCount);
             // 報奨金のセット
             TextUIManager.instance.SetRewardCountText(UIUtility.instance.RewardConversion(reward));
