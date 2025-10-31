@@ -55,6 +55,8 @@ public class DistributeHand : MonoBehaviour
         // ハンド分繰り返す
         for (int i = 0; i < drawCount; i++)
         {
+
+
             // 一回繰り返すごとにランダムで出た数値を取り除いて手札に渡す
             index = Random.Range(0, dammyDeckArray.Count);
 
@@ -65,6 +67,9 @@ public class DistributeHand : MonoBehaviour
                 dammyDeckArray.RemoveAt(index);
 
                 i--;
+
+                //デッキアウト
+                if (dammyDeckArray.Count < 1) break;
                 continue;
             }
 

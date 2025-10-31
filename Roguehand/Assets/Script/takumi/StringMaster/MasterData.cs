@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using TMPro;
 using UnityEngine;
 
 public class MasterData : MonoBehaviour
 {
     public static MasterData instance;
+
+    [SerializeField] TextMeshProUGUI proUGUI;
 
     /// <summary>
     /// マスターから引き出した文字列の格納先
@@ -37,31 +40,7 @@ public class MasterData : MonoBehaviour
     /// </summary>
     private void Lood()
     {
-        // ディレクトリパス
-        string path = Application.dataPath + "/Resources/takumi/StringMaster";
-
-        string check = ".meta";
-
         List<string> list = new List<string>();
-
-        // DirectoryInfoのインスタンスを生成する
-        DirectoryInfo di = new DirectoryInfo(path);
-
-        FileInfo[] fiPatterns = di.GetFiles("*Master*");
-        foreach (FileInfo f in fiPatterns)
-        {
-
-            string name = f.Name;
-
-            //メタファイルを除外
-            if (name.Contains(check)) continue;
-
-            //拡張子を削除
-            name = name.Substring(0, name.Length - 4);
-            list.Add(name);
-        }
-
-
 
         //読み込んだCSVファイルを格納
         List<string[]> csvDatas = new List<string[]>();
@@ -72,17 +51,17 @@ public class MasterData : MonoBehaviour
         //ファイルパスとファイルの名前を繋げる
         StringBuilder builder = new StringBuilder();
 
-        for (int i = 0; i < list.Count; i++)
-        {
-            builder.Clear();
-            builder.Append("takumi/StringMaster/");
-            builder.Append(list[i]);
+        builder.Clear();
+        builder.Append("takumi/StringMaster");
 
-            //繋げたファイルパスを使いファイルのロードを行う
-            TextAsset textAsset = Resources.Load<TextAsset>(builder.ToString());
+        //繋げたファイルパスを使いファイルのロードを行う
+        TextAsset[] textAsset = Resources.LoadAll<TextAsset>(builder.ToString());
+
+        for (int i = 0; i < textAsset.Length; i++)
+        {
 
             //読み込んだテキストをString型にして格納
-            StringReader reader = new StringReader(textAsset.text);
+            StringReader reader = new StringReader(textAsset[i].text);
 
             while (reader.Peek() > -1)
             {

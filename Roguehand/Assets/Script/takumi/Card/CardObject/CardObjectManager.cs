@@ -420,6 +420,34 @@ public class CardObjectManager : MonoBehaviour
 
     }
 
+
+    /// <summary>
+    /// ラウンドの再設定時の関数
+    /// </summary>
+    public void RoundReset()
+    {
+        
+        _cardObjects.GetAction(card => 
+        {
+            // 角度をリセット
+            card.transform.eulerAngles = _BACK_SIDE;
+
+            // 座標をリセット
+            card.transform.position = _cardDeck.position;
+
+            // カードオブジェクトのリセットをする
+            card.ResetCard();
+            
+            });
+
+        _cardObjectHands.Clear();
+
+        //ラウンドの終了準備をする
+        RoundObserver.Instance.StartRoundEnd();
+
+    }
+
+
     /// <summary>
     /// つまんでいるカードの移動をする関数
     /// </summary>

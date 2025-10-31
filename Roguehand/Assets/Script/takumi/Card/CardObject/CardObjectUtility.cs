@@ -29,4 +29,6 @@ public static class CardObjectUtility
 
     public static bool CheckGrab(int ID) {return CardObjectManager.CheckGrab(ID); }
 
+    public static void ResetCard() { CardObjectManager.RoundReset(); }
+
 }
