@@ -20,10 +20,10 @@ public class RunUI : MonoBehaviour
     void Initialize()
     {
         instance.Initialize();
-        UIUtility.getIns().Initialize();
+        UIUtility.instance.Initialize();
         instance.SetRoundNameText("DebugBlind");
         instance.SetLowestScoreText("300");
-        instance.SetRewardCountText(UIUtility.getIns().RewardConversion(5));
+        instance.SetRewardCountText(UIUtility.instance.RewardConversion(5));
 
     }
 

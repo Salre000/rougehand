@@ -76,7 +76,10 @@ public class DistributeHand : MonoBehaviour
             dammyDeckArray.RemoveAt(index);
 
         }
-
+        if (dommyHand.Count == 0) 
+        {
+            int ss =0;
+        }
         // É\Å[Ég
         hand = CardManager.instance.NumberSort(hand);
         dommyHand = CardManager.instance.NumberSort(dommyHand);

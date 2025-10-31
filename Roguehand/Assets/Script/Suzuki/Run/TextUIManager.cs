@@ -25,7 +25,7 @@ public class TextUIManager:MonoBehaviour
             instance = this;
         Initialize();
         // ç°ÇÕìKìñ
-        SetRewardCountText(UIUtility.getIns().RewardConversion(5));
+        SetRewardCountText(UIUtility.instance.RewardConversion(5));
     }
 
 

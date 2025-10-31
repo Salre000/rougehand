@@ -8,7 +8,14 @@ using static TextUIManager;
 
 public class UIUtility:MonoBehaviour
 {
-    private static UIUtility instance;
+    public static UIUtility instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance=this;
+        
+    }
 
     public void Initialize()
     {
@@ -33,16 +40,5 @@ public class UIUtility:MonoBehaviour
         }
 
         return dollStringBuilder.ToString();
-    }
-
-    public static UIUtility getIns()
-    {
-        if (instance == null)
-        {
-
-            instance = GameObject.Find("UIManager").GetComponent<UIUtility>();
-        }
-
-        return (instance);
     }
 }

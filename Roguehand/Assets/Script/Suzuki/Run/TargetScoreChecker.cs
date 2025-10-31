@@ -95,11 +95,12 @@ public class TargetScoreChecker : MonoBehaviour
             //GameUtility.SetIsNextRound(true);
             //GameUtility.SetIsNextRound(false);
 
+
             // ハンド回数のリセット
             GameUtility.SetHandCount(GameUtility.GetBaseHandCound());
             int reward = MasterData.instance.GetIntMaster(_REWARD_ID + _roundCount);
             // 報奨金のセット
-            TextUIManager.instance.SetRewardCountText(UIUtility.getIns().RewardConversion(reward));
+            TextUIManager.instance.SetRewardCountText(UIUtility.instance.RewardConversion(reward));
         }
     }
 

@@ -12,6 +12,8 @@ public class PlayManager : MonoBehaviour
     // ディスカード回数
     private int _checkDiscardCount;
 
+    private float _roundScore = 0f;
+
     private void Awake()
     {
         if (instance == null)
@@ -35,6 +37,10 @@ public class PlayManager : MonoBehaviour
         ScoreView();
         CheckHandCount();
         CheckDiscardCount();
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Debug.Log("////////"+CardManager.instance.GetHand().Count);
+        }
     }
 
     private void ScoreView()
@@ -49,7 +55,8 @@ public class PlayManager : MonoBehaviour
         StartCoroutine(RoundScorePlus());
     }
 
-    // ハンドスコアをゼロにしてラウンドを加算
+
+    // ハンドスコアをゼロにしてラウンドスコアを加算
     IEnumerator RoundScorePlus()
     {
 
@@ -60,7 +67,17 @@ public class PlayManager : MonoBehaviour
         // 手札だけすべて削除
         CardObjectUtility.PlayEnd();
 
-        //GameUtility.SetIsRoundScoreUp(true);
+
+        // スコアが増加済みならリターン
+        if (_roundScore != ScoreManager.instance.GetRoundScore() && 1f < ScoreManager.instance.GetRoundScore())
+        {
+            _roundScore = ScoreManager.instance.GetRoundScore();
+            // 増加の確認
+            GameUtility.SetIsRoundScoreUp(true);
+        }
+
+
+
 
     }
 
