@@ -57,11 +57,18 @@ public class JokerManager : MonoBehaviour
         JokerUtility.instance = this;
         SetTarget(JokerActionUseEnum.JokerActionTarget.None);
     }
+    public void Start()
+    {
+        RoundObserver.Instance.AddRoundEndAction(RoundEnd);
+    }
 
     private void Update()
     {
         JokerUpData();
     }
+
+
+
 
     /// <summary>
     /// ジョーカーを破棄する関数
@@ -346,6 +353,14 @@ public class JokerManager : MonoBehaviour
 
 
         useIndex = -1;
+    }
+    /// <summary>
+    /// ラウンド終了時のジョーカーの挙動
+    /// </summary>
+    private void SetRoundEndAction()
+    {
+        for (int i = 0; i < _jokers.Count; i++)
+            _jokers[i].RoundEnd();
     }
 
     private JokerBase GetRoundomJoker() { return ALLJoker.GetJoker((ALLJoker._allJokerEnum)Random.Range(0, (int)ALLJoker._allJokerEnum.MAX)); }

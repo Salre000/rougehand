@@ -87,6 +87,18 @@ public class CardObject : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// カードのリセットに使う関数
+    /// </summary>
+    public void ResetCard() 
+    {
+        SetStatus(CardObject.status.deck);
+        ResetMoveTime();
+        GravityStart();
+        _isGrab = false;    
+
+    }
+
     public void SetStatus(status status) { _lostStatus = _status; _status = status; }
 
     public status GetStatus() { return _status; }

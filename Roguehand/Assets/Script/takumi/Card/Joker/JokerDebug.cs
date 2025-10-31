@@ -7,7 +7,7 @@ public class JokerDebug : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J)) JokerUtility.Addjoker(3/*(int)Random.Range(0, (int)ALLJoker._allJokerEnum.MAX)*//*((int)ALLJoker._allJokerEnum.MAX)-1*/)   ;
+        if (Input.GetKeyDown(KeyCode.J)) JokerUtility.Addjoker(4/*(int)Random.Range(0, (int)ALLJoker._allJokerEnum.MAX)*//*((int)ALLJoker._allJokerEnum.MAX)-1*/)   ;
         if (Input.GetKeyDown(KeyCode.S)) JokerUtility.RoundStartJoker();
         if (Input.GetKeyDown(KeyCode.M)) JokerUtility.JokerPlayStart();
         if (Input.GetKeyDown(KeyCode.C)) JokerUtility.ChengeOrder(0,1);

@@ -71,7 +71,6 @@ public class TargetScoreChecker : MonoBehaviour
     // 次のラウンド処理
     private void NextRoundExecute()
     {
-        Debug.Log("ラウンドスコア :" + roundScore);
 
         roundScore = ScoreManager.instance.Rounding(roundScore, 1f);
         if (_targetScore <=roundScore)
@@ -98,6 +97,18 @@ public class TargetScoreChecker : MonoBehaviour
             GameUtility.SetHandCount(GameUtility.GetBaseHandCound());
             // ディスカードのリセット
             GameUtility.SetDiscardCount(GameUtility.GetBaseDiscardCound());
+
+            // デッキのリセット
+            CardManager.instance.ResetDeck();
+
+            Debug.Log( CardManager.instance.GetDeck().GetCount(card => card.state == Card.State.deck)+"リセット直後");
+
+            // 手札のリセット
+            CardManager.instance.ResetHand();
+
+            // カードオブジェクトをリセット
+            CardObjectUtility.ResetCard();
+
             int reward = MasterData.instance.GetIntMaster(_REWARD_ID + _roundCount);
             // 報奨金のセット
             TextUIManager.instance.SetRewardCountText(UIUtility.instance.RewardConversion(reward));

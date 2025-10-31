@@ -171,8 +171,6 @@ public class CardObjectManager : MonoBehaviour
         //選択中をリセット
         CardManager.instance.ResetPick();
 
-        Debug.Log("手札補充"+cardDatas.Count);
-
         //cardDatasの中身を確認して取得
         for (int i = 0; i < cardDatas.Count; i++)
         {
@@ -420,6 +418,38 @@ public class CardObjectManager : MonoBehaviour
 
     }
 
+
+    /// <summary>
+    /// ラウンドの再設定時の関数
+    /// </summary>
+    public void RoundReset()
+    {
+        
+        _cardObjects.GetAction( card => 
+        {
+            // 角度をリセット
+            card.transform.eulerAngles = _BACK_SIDE;
+
+            // 座標をリセット
+            card.transform.position = _cardDeck.position;
+
+            // カードオブジェクトのリセットをする
+            card.ResetCard();
+
+            return card;
+            
+            });
+
+        _cardObjectHands.Clear();
+
+
+        //ラウンドの終了準備をする
+        RoundObserver.Instance.StartRoundEnd();
+
+
+    }
+
+
     /// <summary>
     /// つまんでいるカードの移動をする関数
     /// </summary>
@@ -634,8 +664,10 @@ public class CardObjectManager : MonoBehaviour
         hands.GetAction(hands =>
         {
             Card.Trump trump = hands;
-            if (!hands.isSelect) return;
+            if (!hands.isSelect) return hands;
             hands.state = Card.State.trash;
+
+            return hands;
         });
 
         bool flag = false;
