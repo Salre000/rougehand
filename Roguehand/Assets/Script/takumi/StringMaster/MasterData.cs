@@ -25,14 +25,10 @@ public class MasterData : MonoBehaviour
 
         Lood();
 
-        int ss = GetIntMaster(1000) + 300;
-        Debug.Log(ss.ToString());
-
     }
 
     public void Update()
     {
-        int sss = 0;
     }
 
     /// <summary>

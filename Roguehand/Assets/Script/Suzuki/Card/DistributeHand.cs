@@ -33,7 +33,6 @@ public class DistributeHand : MonoBehaviour
         hand=CardManager.instance.GetHand();
 
         int addHandSize = CardManager.instance.GetHandSize() - hand.GetCount(hand=>hand.state==Card.State.hand);
-        Debug.Log("////////" + CardManager.instance.GetHand().Count+"*"+ hand.GetCount(hand => hand.state == Card.State.hand));
         Distribute(addHandSize);
         test = true;
     }

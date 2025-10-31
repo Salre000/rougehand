@@ -171,8 +171,6 @@ public class CardObjectManager : MonoBehaviour
         //選択中をリセット
         CardManager.instance.ResetPick();
 
-        Debug.Log("手札補充"+cardDatas.Count);
-
         //cardDatasの中身を確認して取得
         for (int i = 0; i < cardDatas.Count; i++)
         {
