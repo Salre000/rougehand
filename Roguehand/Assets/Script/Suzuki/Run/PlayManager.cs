@@ -50,6 +50,8 @@ public class PlayManager : MonoBehaviour
     {
         if (!_isSetCard) return;
 
+        // トランプの行動待ち
+        if (CardObjectUtility.GetActionCount() > 0) return;
 
         // ジョーカーの計算待機
         if (JokerObjectUtility.PlayCheck()) return;

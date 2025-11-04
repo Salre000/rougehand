@@ -33,4 +33,7 @@ public static class CardObjectUtility
 
     public static void ObjectSort(List<Card.Trump> nowHand, List<Card.Trump> nexthand) { CardObjectManager.ObjectSort(nowHand, nexthand); }
 
+    public static int GetActionCount() { return CardObjectManager.GetActionCount(); }
+    public static void ActionStart() { CardObjectManager.PlayStart(); }
+
 }

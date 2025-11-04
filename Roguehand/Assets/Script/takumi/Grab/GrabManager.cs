@@ -23,7 +23,9 @@ public class GrabManager : MonoBehaviour
         //ここから下はつかまれている対象
         Card,
         Joker,
-        Item
+        Item,
+        //デッキ
+        Deck
     }
 
     /// <summary>
@@ -170,7 +172,10 @@ public class GrabManager : MonoBehaviour
                 ItemUtility.GrabChange(_grabID, true);
                 ItemUtility.ShowExplanation(_grabID);
                 break;
-            case status.None: break;
+            case status.None:
+                
+                break;
+            
         }
 
     }
@@ -192,7 +197,6 @@ public class GrabManager : MonoBehaviour
 
         if (itemObject != null) _status = status.Item;
 
-
         //掴んだオブジェクトのIDを取得
         switch (_status)
         {
@@ -205,6 +209,7 @@ public class GrabManager : MonoBehaviour
             case status.Item:
                 _grabID = ItemUtility.GetItemIndex(itemObject);
                 break;
+
         }
     }
 
