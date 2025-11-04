@@ -13,6 +13,8 @@ public class Shoping : MonoBehaviour
     // ƒ‰ƒ“‚Ö‚ÌŒü‚«
     private const float _TARGET_RUN_CAM_ROTATE = 0.0f;
     float angle=0f;
+    // ƒJƒƒ‰‚ÌˆÚ“®ŠÔ
+    private float _camTime = 8.0f;
 
     // Update is called once per frame
     void Update()
@@ -26,7 +28,7 @@ public class Shoping : MonoBehaviour
     private void CamMove()
     {
         if (!ShopManager.instance.IsShop()) return;
-        _vcam.rotation = Quaternion.RotateTowards(_vcam.rotation, Quaternion.Euler(_TARGET_SHOP_CAM_ROTATE, 0, 0), 1.0f);
+        _vcam.rotation = Quaternion.RotateTowards(_vcam.rotation, Quaternion.Euler(_TARGET_SHOP_CAM_ROTATE, 0, 0), _camTime);
         angle = NormalizeAngle(_vcam.eulerAngles.x);
         if ((Mathf.Abs(angle-_TARGET_SHOP_CAM_ROTATE))< _distance)
             ShopManager.instance.SetIsShop(false);
@@ -44,14 +46,17 @@ public class Shoping : MonoBehaviour
         angle = NormalizeAngle(_vcam.eulerAngles.x);
         if ((angle - _TARGET_RUN_CAM_ROTATE) < _distance) return;
         // ƒ‰ƒ“‰æ–Ê‚ÖŒü‚­
-        _vcam.rotation = Quaternion.RotateTowards(_vcam.rotation, Quaternion.Euler(_TARGET_RUN_CAM_ROTATE, 0, 0), 1.0f);
+        _vcam.rotation = Quaternion.RotateTowards(_vcam.rotation, Quaternion.Euler(_TARGET_RUN_CAM_ROTATE, 0, 0), _camTime);
 
     }
 
+    private float _radius = 180f;
+    private float _circumference = 360f;
+    // ‰~ü‚Ì³‹K‰»
     private float NormalizeAngle(float angle)
     {
-        if (angle < 180f)
-            angle -= 360f;
+        if (angle < _radius)
+            angle -= _circumference;
         return angle;
     }
 
