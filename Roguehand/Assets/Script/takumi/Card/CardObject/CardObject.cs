@@ -55,6 +55,11 @@ public class CardObject : MonoBehaviour
     /// </summary>
     [SerializeField]private bool _isGrab = false;
 
+    /// <summary>
+    /// 現在つかむことが可能かどうか
+    /// </summary>
+    [SerializeField] private bool _grab = true;
+
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag != "Finish") return;
@@ -124,6 +129,8 @@ public class CardObject : MonoBehaviour
         //つかまれている間カウントしない
         if (_isGrab) return;    
         _moveTime -= Time.deltaTime* GameConfig.GetGameSpeed();
+        if (IsMovable()) return;
+        _grab = true;
     }
 
     /// <summary>
@@ -142,6 +149,18 @@ public class CardObject : MonoBehaviour
 
 
     public void SetGrab(bool flag) { _isGrab = flag;}
+
+    /// <summary>
+    /// つかむことが可能かどうかを返す関数
+    /// </summary>
+    /// <returns></returns>
+    public bool GetGrabFlag() {  return _grab; }
+    
+    /// <summary>
+    /// つかむことを出来なく変更
+    /// カードが目的地に着いたら解除
+    /// </summary>
+    public void NotGrab() {  _grab=false; }
 
     public bool IsGrab() { return _isGrab; }
 

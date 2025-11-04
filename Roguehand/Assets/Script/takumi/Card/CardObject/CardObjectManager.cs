@@ -232,7 +232,8 @@ public class CardObjectManager : MonoBehaviour
     {
         bool flag = true;
 
-        if (_cardObjectHands[ID].GetStatus() == CardObject.status.play) flag = false; 
+        if (_cardObjectHands[ID].GetStatus() == CardObject.status.play) flag = false;
+
 
 
         return flag;
@@ -316,13 +317,30 @@ public class CardObjectManager : MonoBehaviour
     }
 
 
-    public int GetCardIndex(CardObject cardObject) 
+    /// <summary>
+    /// 掴みの処理に使用する番号を返す関数
+    /// </summary>
+    /// <param name="cardObject"></param>
+    /// <returns></returns>
+    public int GetGrabCardIndex(CardObject cardObject) 
     { 
         int index= _cardObjectHands.FindIndex(card => card == cardObject);
 
         if(index<0)return -1;
 
-        return _cardObjectHands[index].GetStatus() == CardObject.status.play ? -1 : index; 
+        // つかむことの出来る対象かどうかを判断
+        bool returnFlag = true;
+
+        //動いている時に不正値
+        if(cardObject.IsMovable())returnFlag = false;
+
+        // 動いていても捕まれていたら正常値
+        if (cardObject.IsGrab()) returnFlag = true;
+
+        // プレイ中だと問答無用で不正値
+        if(cardObject.GetStatus()==CardObject.status.play)returnFlag = false;
+
+        return returnFlag ?index:-1; 
     }
 
     public void GrabChenge(int ID, bool flag)

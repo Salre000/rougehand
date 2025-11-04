@@ -97,6 +97,7 @@ public class GrabManager : MonoBehaviour
 
         }
 
+        if(_grabID<0) _status = status.None;
 
         switch (_status)
         {

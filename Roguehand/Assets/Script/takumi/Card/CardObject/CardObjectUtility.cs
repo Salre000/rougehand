@@ -18,7 +18,7 @@ public static class CardObjectUtility
 
     public static void SetChengeCard(int id, Card.Trump trump) { CardObjectManager.SetChengeCard(id, trump);}
 
-    public static int GetCardObjectIndex(CardObject card)  { return CardObjectManager.GetCardIndex(card); }
+    public static int GetCardObjectIndex(CardObject card)  { return CardObjectManager.GetGrabCardIndex(card); }
     public static void GrabChenge(int ID,bool flag)  {  CardObjectManager.GrabChenge(ID,flag); }
 
     public static void ChengeOrder(int lostID,int nextID) { CardObjectManager.ChengeOrder(lostID, nextID); }
