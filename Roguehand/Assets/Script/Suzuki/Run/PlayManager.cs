@@ -41,9 +41,7 @@ public class PlayManager : MonoBehaviour
         ScoreView();
         CheckHandCount();
         CheckDiscardCount();
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-        }
+
     }
 
     private void ScoreView()
@@ -80,6 +78,7 @@ public class PlayManager : MonoBehaviour
         if (_roundScore != ScoreManager.instance.GetRoundScore() && _scoreZeroChecker < ScoreManager.instance.GetRoundScore())
         {
             _roundScore = ScoreManager.instance.GetRoundScore();
+            // スコアが目標に達しているか確認
             ScoreManager.instance.RoundCheck();
             // 増加の確認
             GameUtility.SetIsRoundScoreUp(true);

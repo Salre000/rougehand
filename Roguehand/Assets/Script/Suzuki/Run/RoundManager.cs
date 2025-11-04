@@ -10,9 +10,10 @@ public static class RoundManager
     private static StringBuilder _builder = new StringBuilder();
 
     // 次のラウンド処理
-    public static void NextRoundExecute(float roundScore,int _targetScore,ref int _roundCount,int _TARGET_SCORE_ID,int _REWARD_ID)
+    public static void NextRoundExecute(int _targetScore,ref int _roundCount,int _TARGET_SCORE_ID,int _REWARD_ID)
     {
-
+        // 合計スコアと比較
+        float　roundScore = ScoreManager.instance.GetRoundScore();
         roundScore = ScoreManager.instance.Rounding(roundScore, 1f);
         if (_targetScore > roundScore) return;
         

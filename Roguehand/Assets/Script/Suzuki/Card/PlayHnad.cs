@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
-using static TextUIManager;
+
 
 public class PlayHnad : MonoBehaviour
 {
     [SerializeField] private Button _playButton;
     [SerializeField] private Button _discardButton;
+    private StringBuilder _builder=new StringBuilder();
+    private int _RESET_NUM = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,7 +62,7 @@ public class PlayHnad : MonoBehaviour
         if (!GameUtility.IsPushButton()) return;
         if (GameUtility.IsDiscard()) return;
 
-        // ハンドの数を減らす
+        // ディスカードの数を減らす
         int handCount = GameUtility.GetDiscardCount();
         if (handCount <= 0) return;
         handCount--;
@@ -68,6 +72,16 @@ public class PlayHnad : MonoBehaviour
         GameUtility.SetDiscardCount(handCount);
         // カードが上に行く
         CardObjectUtility.Discard();
+
+        // 空白にする
+        _builder.Clear();
+        _builder.Append("");
+        TextUIManager.instance.SetRoleText(_builder.ToString());
+        // ゼロにする
+        _builder.Clear();
+        _builder.Append(_RESET_NUM);
+        TextUIManager.instance.SetBasicScoreText(_builder.ToString());
+        TextUIManager.instance.SetMagnificationText(_builder.ToString());
 
         // 手札だけすべて削除
         CardObjectUtility.PlayEnd();
