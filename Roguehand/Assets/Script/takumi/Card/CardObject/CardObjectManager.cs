@@ -716,13 +716,12 @@ public class CardObjectManager : MonoBehaviour
                     //hand.GetStatus() != CardObject.status.play ? false : hand.GetMoveTimeRata() < 1 ? false : true
                 })) return;
 
-        // 選択状態のカードを全てトラッシュに送る
-        IsSelectTrash();
 
+        Debug.Log("プレイスタート");
         // 到着
         PlayManager.instance.SetCardTransComp(true);
 
-        //PlayStart();
+        PlayStart();
     }
 
     /// <summary>
@@ -874,15 +873,34 @@ public class CardObjectManager : MonoBehaviour
 
         if (reta != -1) return;
 
-        _cardObjectHands[ID].SetStatus(CardObject.status.play);
+        // アクションを追加した事にあたり変更した値を戻している
+        _cardObjectHands[ID].SetStatus(_cardObjectHands[ID].GetLostStatus());
         _cardObjectHands[ID].SetGrab(false);
+        _cardObjectHands[ID].StopMove();
         reta = 1;
         _time = 0;
-
+        //仮組み　スコアの加算 後で変更する
+        TrunpScore(ID);
         //アクション待機が存在している
         if (_cardObjectHands.GetCount(hand => hand.GetStatus() == CardObject.status.action) > 0) return;
 
         JokerUtility.JokerPlayStart();
+
+    }
+
+    /// <summary>
+    /// 仮組み
+    /// </summary>
+    /// <param name="ID"></param>
+    private void TrunpScore(int ID) 
+    {
+        float score = 0;
+
+        score = (int)CardManager.instance.GetHand()[ID].number;
+
+        if (score <= 1 || 11 < score) score = 11;
+
+        ScoreManager.instance.BasicPlus(score);
 
     }
 

@@ -300,6 +300,15 @@ public static class Extra
         return flag;
 
     }
+   // public static List<List<System.Action>> GetTrunpBuffs(Card.Trump trump) 
+    //{
+
+
+
+
+
+    //}
+
 
 
     /// <summary>
@@ -326,18 +335,15 @@ public static class Extra
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="values"></param>
-    /// <param name="actionRef"></param>
-    public static void GetAction<T>(this List<T> values, System.Func<T, T> actionRef)
+    /// <param name="action"></param>
+    public static void GetAction<T>(this List<T> values, System.Func<T, T> action)
     {
         for (int i = 0; i < values.Count; i++)
         {
-            values[i] = actionRef(values[i]);
+            values[i] = action(values[i]);
 
         }
     }
-
-    // ref‘Î‰ž‚ÌƒfƒŠƒQ[ƒgŒ^‚ðŽ©ì‚·‚é
-    public delegate void ActionRef<T>(ref T arg);
 
     private static string GetColor(char C)
     {
