@@ -449,6 +449,43 @@ public class CardObjectManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// カードのオブジェクトを並び変える関数
+    /// 手札のオブジェクトと内容がずれていない前提
+    /// </summary>
+    /// <param name="nowHand"></param>
+    /// <param name="nexthand"></param>
+    public void ObjectSort(List<Card.Trump>nowHand, List<Card.Trump> nexthand) 
+    {
+        List<CardObject> dommyObjectList= new List<CardObject>();
+
+
+
+        for(int i = 0; i < nexthand.Count; i++) 
+        {
+            int index=nowHand.IndexOf(nexthand[i]);
+
+
+            dommyObjectList.Add(_cardObjectHands[index]);
+
+            nowHand.RemoveAt(index);
+
+            _cardObjectHands.RemoveAt(index);
+
+        }
+
+        _cardObjectHands = dommyObjectList;
+
+        for(int i=0;i<_cardObjectHands.Count;i++)
+        {
+            _cardObjectHands[i].ResetMoveTime();
+
+
+        }
+
+
+    }
+
 
     /// <summary>
     /// つまんでいるカードの移動をする関数

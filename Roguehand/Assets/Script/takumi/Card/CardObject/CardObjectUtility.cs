@@ -31,4 +31,6 @@ public static class CardObjectUtility
 
     public static void ResetCard() { CardObjectManager.RoundReset(); }
 
+    public static void ObjectSort(List<Card.Trump> nowHand, List<Card.Trump> nexthand) { CardObjectManager.ObjectSort(nowHand, nexthand); }
+
 }
