@@ -112,6 +112,9 @@ public class TargetScoreChecker : MonoBehaviour
             int reward = MasterData.instance.GetIntMaster(_REWARD_ID + _roundCount);
             // 報奨金のセット
             TextUIManager.instance.SetRewardCountText(UIUtility.instance.RewardConversion(reward));
+
+            // ショップ状態へ移行
+            ShopManager.instance.SetIsShop(true);
         }
     }
 

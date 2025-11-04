@@ -18,6 +18,8 @@ public static class GameUtility
     private static bool _isPushButton = true;
     // プレイボタンが押されたか
     private static bool _isPlay = false;
+    // ディスカードが押されているか
+    private static bool _isDiscard = false;
     // ラウンドスコアの増加を検知
     private static bool _isRoundScoreUp = false;
     // 次のラウンドへ移動
@@ -51,6 +53,10 @@ public static class GameUtility
     public static void SetIsPlay(bool value) { _isPlay = value;}
     // プレイボタンが押されたかを取得
     public static bool IsPlay() { return _isPlay; }
+    // ディスカードボタンが押されたかをセット
+    public static void SetIsDiscard(bool value) { _isDiscard = value;}
+    // ディスカードボタンが押されたかを取得
+    public static bool IsDiscard() { return _isDiscard; }
     // 合計スコアが増加されたかをセット
     public static void SetIsRoundScoreUp(bool value) { _isRoundScoreUp = value; }
     // 合計スコアが増加されたかを取得

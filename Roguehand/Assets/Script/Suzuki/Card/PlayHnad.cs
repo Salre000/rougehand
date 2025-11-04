@@ -22,8 +22,9 @@ public class PlayHnad : MonoBehaviour
     {
         // ボタン受付の停止中
         if (!GameUtility.IsPushButton()) return;
+        if (GameUtility.IsPlay())return ;
         // ハンドの数を減らす
-        int handCount=GameUtility.GetHandCount();
+        int handCount =GameUtility.GetHandCount();
         if (handCount <= 0) return;
         handCount--;
         // なんのカードも選択されていなければreturn
@@ -55,6 +56,8 @@ public class PlayHnad : MonoBehaviour
     {
         // ボタン受付の停止中
         if (!GameUtility.IsPushButton()) return;
+        if (GameUtility.IsDiscard()) return;
+
         // ハンドの数を減らす
         int handCount = GameUtility.GetDiscardCount();
         if (handCount <= 0) return;
@@ -68,7 +71,7 @@ public class PlayHnad : MonoBehaviour
 
         // 手札だけすべて削除
         CardObjectUtility.PlayEnd();
-
+        GameUtility.SetIsDiscard(true);
     }
 
 }
