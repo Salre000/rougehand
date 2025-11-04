@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SortHand : MonoBehaviour
 {
+    public static SortHand instance;
 
     /// <summary>
     /// ソート時に使用するボタン
@@ -15,6 +16,7 @@ public class SortHand : MonoBehaviour
 
     public void Start()
     {
+        instance = this;
         siutButton.onClick.AddListener(OnSortSuitButton);
         numberButton.onClick.AddListener(OnSortNumberButton);
     }
@@ -41,7 +43,7 @@ public class SortHand : MonoBehaviour
         CardObjectUtility.ObjectSort(nowHand, nextHand);
 
     }
-    private void OnSortNumberButton() 
+    public void OnSortNumberButton() 
     {
 
         List <Card.Trump> nowHand=CardManager.instance.GetHand();

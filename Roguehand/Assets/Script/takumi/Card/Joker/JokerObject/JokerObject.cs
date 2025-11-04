@@ -331,8 +331,6 @@ public class JokerObject : MonoBehaviour
     {
         //カードの倍率の上昇したっていうアニメーションを入れる
 
-        Debug.Log("倍率上昇追加" + AddNum);
-
         reta = 1;
         AddNum = 0;
 

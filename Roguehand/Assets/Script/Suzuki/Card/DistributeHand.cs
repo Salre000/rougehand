@@ -88,9 +88,8 @@ public class DistributeHand : MonoBehaviour
             dammyDeckArray.RemoveAt(index);
 
         }
-        // ソート
-        hand = CardManager.instance.NumberSort(hand);
-        dommyHand = CardManager.instance.NumberSort(dommyHand);
+        //hand = CardManager.instance.NumberSort(hand);
+        //dommyHand = CardManager.instance.NumberSort(dommyHand);
         //hand =CardManager.instance.SuitSort(hand);
 
         //Test();
@@ -100,6 +99,8 @@ public class DistributeHand : MonoBehaviour
         CardObjectUtility.StartHandMove();
         GameUtility.SetIsDiscard(false);
 
+        // ソート
+        SortHand.instance.OnSortNumberButton();
 
     }
 
