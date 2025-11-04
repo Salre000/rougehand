@@ -47,7 +47,7 @@ public class ExplanationManager : MonoBehaviour
 
     public void Update()
     {
-        for (int i = 0; i < _explanationInterface.Count; i++)
+        for (int i = 0; i < _offsets.Count; i++)
         {
 
             Vector2 pos = Camera.main.WorldToScreenPoint(_explanationInterface[i].transform.position);

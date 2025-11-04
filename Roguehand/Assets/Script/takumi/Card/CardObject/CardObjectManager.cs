@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 public class CardObjectManager : MonoBehaviour
 {
     /// <summary>
@@ -185,11 +186,11 @@ public class CardObjectManager : MonoBehaviour
             _cardObjectHands.Add(cardObject);
 
             // 手札に追加されたカードにマテリアルをセット
-            CardPaint(cardDatas[i], _cardObjectHands.Count-1);
+            CardPaint(cardDatas[i], _cardObjectHands.Count - 1);
 
             int index = CardManager.instance.GetHand().IndexOf(cardDatas[i]);
 
-            for(int j = _cardObjectHands.Count-1; j > index; j--) 
+            for (int j = _cardObjectHands.Count - 1; j > index; j--)
             {
                 _cardObjectHands[j] = _cardObjectHands[j - 1];
 
@@ -218,7 +219,7 @@ public class CardObjectManager : MonoBehaviour
     /// プレイ準備状態と手札にある状態を切り替える関数
     /// </summary>
     /// <param name="id"></param>
-    public void ChengeStandby(int id,bool isSelect)
+    public void ChengeStandby(int id, bool isSelect)
     {
         // 動作の途中での割り込みを制限
         if (_cardObjectHands[id].IsMovable()) return;
@@ -228,7 +229,7 @@ public class CardObjectManager : MonoBehaviour
         _cardObjectHands[id].ResetMoveTime();
     }
 
-    public bool CheckGrab(int ID) 
+    public bool CheckGrab(int ID)
     {
         bool flag = true;
 
@@ -274,7 +275,7 @@ public class CardObjectManager : MonoBehaviour
         }
     }
 
-    public void PlayEnd() 
+    public void PlayEnd()
     {
         for (int i = 0; i < _cardObjectHands.Count; i++)
         {
@@ -322,25 +323,25 @@ public class CardObjectManager : MonoBehaviour
     /// </summary>
     /// <param name="cardObject"></param>
     /// <returns></returns>
-    public int GetGrabCardIndex(CardObject cardObject) 
-    { 
-        int index= _cardObjectHands.FindIndex(card => card == cardObject);
+    public int GetGrabCardIndex(CardObject cardObject)
+    {
+        int index = _cardObjectHands.FindIndex(card => card == cardObject);
 
-        if(index<0)return -1;
+        if (index < 0) return -1;
 
         // つかむことの出来る対象かどうかを判断
         bool returnFlag = true;
 
         //動いている時に不正値
-        if(cardObject.IsMovable())returnFlag = false;
+        if (cardObject.IsMovable()) returnFlag = false;
 
         // 動いていても捕まれていたら正常値
         if (cardObject.IsGrab()) returnFlag = true;
 
         // プレイ中だと問答無用で不正値
-        if(cardObject.GetStatus()==CardObject.status.play)returnFlag = false;
+        if (cardObject.GetStatus() == CardObject.status.play) returnFlag = false;
 
-        return returnFlag ?index:-1; 
+        return returnFlag ? index : -1;
     }
 
     public void GrabChenge(int ID, bool flag)
@@ -408,7 +409,7 @@ public class CardObjectManager : MonoBehaviour
             StringBuilder sb = new StringBuilder();
 
             sb.Append(Extra.ErrorText("基本スコア"));
-            if((int)trump.number>10||(int)trump.number==1)sb.Append(Extra.ErrorText(Extra.GetBlueString("+11")));
+            if ((int)trump.number > 10 || (int)trump.number == 1) sb.Append(Extra.ErrorText(Extra.GetBlueString("+11")));
             else sb.Append(Extra.ErrorText(Extra.GetBlueString("+" + ((int)trump.number).ToString())));
             sb.Append("\n");
             if (trump.deckBuff != Card.deckBuff.None)
@@ -418,16 +419,16 @@ public class CardObjectManager : MonoBehaviour
 
             return sb.ToString();
         };
-        dommyExplanation.dommyExplanation2=()=>string.Empty;
-        dommyExplanation.dommyType=()=>string.Empty;
+        dommyExplanation.dommyExplanation2 = () => string.Empty;
+        dommyExplanation.dommyType = () => string.Empty;
 
-        int[] buff = {6200+(int)trump.deckBuff, 6100+(int)trump.cardBuff,6000+(int)trump.sealBuff };
+        int[] buff = { 6200 + (int)trump.deckBuff, 6100 + (int)trump.cardBuff, 6000 + (int)trump.sealBuff };
 
         //UIの大きさを調整
         ExplanationManager.instance._uiSize = new Vector2(200, 150);
         ExplanationManager.instance._uiSizeMini = new Vector2(200, 90);
 
-        ExplanationManager.instance.AddExplanation(_cardObjectHands[ID].gameObject, dommyExplanation, buff,new Vector2(0, -1));
+        ExplanationManager.instance.AddExplanation(_cardObjectHands[ID].gameObject, dommyExplanation, buff, new Vector2(0, -1));
 
 
 
@@ -442,8 +443,8 @@ public class CardObjectManager : MonoBehaviour
     /// </summary>
     public void RoundReset()
     {
-        
-        _cardObjects.GetAction( card => 
+
+        _cardObjects.GetAction(card =>
         {
             // 角度をリセット
             card.transform.eulerAngles = _BACK_SIDE;
@@ -455,8 +456,8 @@ public class CardObjectManager : MonoBehaviour
             card.ResetCard();
 
             return card;
-            
-            });
+
+        });
 
         _cardObjectHands.Clear();
 
@@ -473,15 +474,15 @@ public class CardObjectManager : MonoBehaviour
     /// </summary>
     /// <param name="nowHand"></param>
     /// <param name="nexthand"></param>
-    public void ObjectSort(List<Card.Trump>nowHand, List<Card.Trump> nexthand) 
+    public void ObjectSort(List<Card.Trump> nowHand, List<Card.Trump> nexthand)
     {
-        List<CardObject> dommyObjectList= new List<CardObject>();
+        List<CardObject> dommyObjectList = new List<CardObject>();
 
 
 
-        for(int i = 0; i < nexthand.Count; i++) 
+        for (int i = 0; i < nexthand.Count; i++)
         {
-            int index=nowHand.IndexOf(nexthand[i]);
+            int index = nowHand.IndexOf(nexthand[i]);
 
 
             dommyObjectList.Add(_cardObjectHands[index]);
@@ -494,7 +495,7 @@ public class CardObjectManager : MonoBehaviour
 
         _cardObjectHands = dommyObjectList;
 
-        for(int i=0;i<_cardObjectHands.Count;i++)
+        for (int i = 0; i < _cardObjectHands.Count; i++)
         {
             _cardObjectHands[i].ResetMoveTime();
 
@@ -504,6 +505,22 @@ public class CardObjectManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// プレイを開始する関数
+    /// </summary>
+    public void PlayStart()
+    {
+        for(int i = 0; i < _cardObjectHands.Count; i++) 
+        {
+            if (_cardObjectHands[i].GetStatus() != CardObject.status.play) continue;
+
+            _cardObjectHands[i].SetStatus(CardObject.status.action);
+            _cardObjectHands[i].ResetMoveTime();
+            _cardObjectHands[i].SetGrab(true);
+        }
+    }
+
+    public int GetActionCount() { return _cardObjectHands.GetCount(card=>card.GetStatus()== CardObject.status.action); }
 
     /// <summary>
     /// つまんでいるカードの移動をする関数
@@ -590,6 +607,9 @@ public class CardObjectManager : MonoBehaviour
                 //既に表になっているカードに変更を加える状態
                 case CardObject.status.change:
                     HandCardChengeTrump(_cardObjectHands[i], i);
+                    break;
+                case CardObject.status.action:
+                    HandCardActionTrump(_cardObjectHands[i], i);
                     break;
             }
 
@@ -685,9 +705,10 @@ public class CardObjectManager : MonoBehaviour
 
         if (_cardObjectHands.GetCount(hand => hand.GetStatus() == CardObject.status.play) !=
             _cardObjectHands.GetCount(
-                hand => {
+                hand =>
+                {
 
-                    if(hand.GetStatus() != CardObject.status.play)return false;
+                    if (hand.GetStatus() != CardObject.status.play) return false;
                     if (hand.GetMoveTimeRata() < 1) return false;
                     return true;
 
@@ -701,16 +722,13 @@ public class CardObjectManager : MonoBehaviour
         // 到着
         PlayManager.instance.SetCardTransComp(true);
 
-
-        // ジョーカーの計算開始
-        JokerUtility.JokerPlayStart();
-
+        //PlayStart();
     }
 
     /// <summary>
     /// 選択状態のカードを全てトラッシュに送る
     /// </summary>
-    private void IsSelectTrash() 
+    private void IsSelectTrash()
     {
 
         // プレイを行ったカードをトラッシュに移行
@@ -729,8 +747,8 @@ public class CardObjectManager : MonoBehaviour
 
         for (int i = 0; i < hands.Count; i++)
         {
-            if (hands[i].isSelect) 
-            { 
+            if (hands[i].isSelect)
+            {
 
                 hands.RemoveAt(i);
                 i--;
@@ -740,9 +758,9 @@ public class CardObjectManager : MonoBehaviour
 
         }
 
-        if (!flag) 
+        if (!flag)
         {
-            int ss =0;
+            int ss = 0;
         }
 
         CardManager.instance.SetHand(hands);
@@ -830,6 +848,41 @@ public class CardObjectManager : MonoBehaviour
         // 確認した番号の配列を除外
         _chengeCardID.RemoveAt(targetID);
 
+
+    }
+
+    private float _time = 0;
+    private int reta = 1;
+    private Vector3 _lostAngle = Vector3.zero;
+    private void HandCardActionTrump(CardObject cardObjectHand, int ID)
+    {
+
+        // アクション待機の中で一番若いオブジェクトのときだけ通す
+        if (ID != _cardObjectHands.FindIndex(hand => hand.GetStatus() == CardObject.status.action)) return;
+
+
+        _time += Time.deltaTime * GameConfig.GetGameSpeed() * 10;
+
+        cardObjectHand.transform.eulerAngles = Vector3.Lerp(_lostAngle, new Vector3(0, 0, 45 * reta), _time);
+
+        if (_time < 1) return;
+
+        _time = 0;
+        if (reta == 0) reta = -1;
+        if (reta == 1) reta = 0;
+        _lostAngle = cardObjectHand.transform.eulerAngles;
+
+        if (reta != -1) return;
+
+        _cardObjectHands[ID].SetStatus(CardObject.status.play);
+        _cardObjectHands[ID].SetGrab(false);
+        reta = 1;
+        _time = 0;
+
+        //アクション待機が存在している
+        if (_cardObjectHands.GetCount(hand => hand.GetStatus() == CardObject.status.action) > 0) return;
+
+        JokerUtility.JokerPlayStart();
 
     }
 
