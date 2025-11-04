@@ -78,6 +78,7 @@ public class PlayManager : MonoBehaviour
         if (_roundScore != ScoreManager.instance.GetRoundScore() && _scoreZeroChecker < ScoreManager.instance.GetRoundScore())
         {
             _roundScore = ScoreManager.instance.GetRoundScore();
+            ScoreManager.instance.RoundCheck();
             // ‘‰Á‚ÌŠm”F
             GameUtility.SetIsRoundScoreUp(true);
         }

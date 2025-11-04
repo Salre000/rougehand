@@ -50,7 +50,7 @@ public class TargetScoreChecker : MonoBehaviour
         if(!GameUtility.IsPlay())return;
 
         // 合計スコアが増加されてなかったら比較しない
-        if (!GameUtility.IsRoundScoreUp())return ;
+        //if (!GameUtility.IsRoundScoreUp())return ;
         // 目標スコアと現スコアを比較
         _targetScore = MasterData.instance.GetIntMaster(_TARGET_SCORE_ID+_roundCount);
         // 不正値が返ってきたならreturn
