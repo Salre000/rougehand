@@ -36,4 +36,6 @@ public static class CardObjectUtility
     public static int GetActionCount() { return CardObjectManager.GetActionCount(); }
     public static void ActionStart() { CardObjectManager.PlayStart(); }
 
+    public static bool IsPlaying() { return CardObjectManager.IsPlaying(); }
+
 }

@@ -47,6 +47,9 @@ public class GrabManager : MonoBehaviour
 
     private void Update()
     {
+        // プレイ途中でカードなどに触れなくする
+        if (CardObjectUtility.IsPlaying()) return;
+
 
         _time += Time.deltaTime;
 
