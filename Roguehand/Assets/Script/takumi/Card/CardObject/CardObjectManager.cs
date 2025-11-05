@@ -160,7 +160,7 @@ public class CardObjectManager : MonoBehaviour
     }
 
 
-
+    public Material GetTrunpMatarial(int suit,int number) { return _materialManager.GetMaterial(suit, number); }
 
 
     /// <summary>

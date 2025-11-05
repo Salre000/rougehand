@@ -38,4 +38,6 @@ public static class CardObjectUtility
 
     public static bool IsPlaying() { return CardObjectManager.IsPlaying(); }
 
+    public static Material GetMaterial(int suit,int number) { return CardObjectManager.GetTrunpMatarial(suit, number); }
+
 }

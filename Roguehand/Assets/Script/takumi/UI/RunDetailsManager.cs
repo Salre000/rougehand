@@ -49,7 +49,7 @@ public class RunDetailsManager : MonoBehaviour
     /// <summary>
     /// 内容ごとのUIの描画を行う関数
     /// </summary>
-    private List<System.Action> _detailsTypeAction=new List<System.Action>((int)RunDetailsType.max);
+    private List<DetailsBase> _detailsTypeAction=new List<DetailsBase>((int)RunDetailsType.max);
 
     #region 定数
 
@@ -61,7 +61,7 @@ public class RunDetailsManager : MonoBehaviour
     /// <summary>
     /// デッキ一覧時のボタンの横幅
     /// </summary>
-    readonly private Vector2 _typeButtonDeckSizeX = new Vector2(400, 100);
+    readonly private Vector2 _typeButtonDeckSizeX = new Vector2(350, 100);
 
     /// <summary>
     /// デフォルト時のUIの横幅
@@ -70,11 +70,11 @@ public class RunDetailsManager : MonoBehaviour
     /// <summary>
     /// デッキ一覧時のUIの横幅
     /// </summary>
-    readonly private float _backImageDeckSizeX = 1720;
+    readonly private float _backImageDeckSizeX = 1520;
 
     #endregion
 
-    public void Awake()
+    public void Start()
     {
         Initializ();
     }
@@ -87,14 +87,14 @@ public class RunDetailsManager : MonoBehaviour
         // 詳細UIを閉じるボダンに閉じる関数をわたす
         _endrRunInfo.onClick.AddListener(End);
 
+        // 内容ごとのアクションを保存
+        SetShows();
         // 描画内容を変える関数をわたす関数
         SetChengeType();
 
         // もしも現在のタイプが不正値だったらロールで上書きする
         if (_nowDetailsType == RunDetailsType.none) ChengeType(RunDetailsType.role);
 
-        // 内容ごとのアクションを保存
-        SetShows();
 
         // 非アクティブ状態に移行
         End();
@@ -114,6 +114,8 @@ public class RunDetailsManager : MonoBehaviour
 
         // 現在選択中のタイプのオブジェクトだけアクティブ状態に移行
         _runDetailsTypeParents[(int)_nowDetailsType].gameObject.SetActive(true);
+
+        _detailsTypeAction[(int)_nowDetailsType].Show();
 
     }
     /// <summary>
@@ -172,6 +174,7 @@ public class RunDetailsManager : MonoBehaviour
         _runDetailsTypeParents[(int)_nowDetailsType].gameObject.SetActive(true);
 
 
+
         Vector2 backImageSize = _backImageRectTransform.sizeDelta;
 
         Vector2 buttonSize = Vector2.zero;
@@ -195,26 +198,23 @@ public class RunDetailsManager : MonoBehaviour
         for(int i=0;i< _runDetailsTypeButtons.Count;i++)
             _runDetailsTypeButtons[i].GetComponent<RectTransform>().sizeDelta = buttonSize;
 
+        // 内容を描画
+        _detailsTypeAction[(int)_nowDetailsType].Show();
     }
 
-    #region 内容のそれぞれ違う関数
 
     /// <summary>
     ///  内容ごとの関数を代入する
     /// </summary>
     private void SetShows() 
     {
+        for (int i = 0; i < _runDetailsTypeParents.Count; i++) 
+        {
+            _detailsTypeAction.Add( _runDetailsTypeParents[i].GetComponent<DetailsBase>());
+            _detailsTypeAction[i].Initializ();
 
+        }
     }
 
-    private void ShowAllDeck() 
-    {
-
-
-
-    }
-
-
-    #endregion
 
 }
