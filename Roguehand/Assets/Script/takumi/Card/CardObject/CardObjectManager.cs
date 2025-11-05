@@ -523,6 +523,29 @@ public class CardObjectManager : MonoBehaviour
     public int GetActionCount() { return _cardObjectHands.GetCount(card=>card.GetStatus()== CardObject.status.action); }
 
     /// <summary>
+    /// 現在プレイの途中かどうかを判断する関数
+    /// </summary>
+    /// <returns></returns>
+    public bool IsPlaying() 
+    {
+        int count = 0;
+
+        // アクション中の枚数
+        count += _cardObjectHands.GetCount(card => card.GetStatus() == CardObject.status.action);
+        // プレイ中の枚数
+        count += _cardObjectHands.GetCount(card => card.GetStatus() == CardObject.status.play);
+        // ディスカード中の枚数
+        count += _cardObjectHands.GetCount(card => card.GetStatus() == CardObject.status.discard);
+
+        // 上記の枚数が一枚でもあったらプレイ途中と判定
+
+
+        // カウントが増えていたらプレイの途中
+        return count > 0 ? true : false;
+    }
+
+
+    /// <summary>
     /// つまんでいるカードの移動をする関数
     /// </summary>
     private void MovingCard()
