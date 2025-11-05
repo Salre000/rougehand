@@ -24,6 +24,8 @@ public static class GameUtility
     private static bool _isRoundScoreUp = false;
     // 次のラウンドへ移動
     private static bool _isNextRound = false;
+    // ラウンドクリアのリザルト状態
+    private static bool _isRoundResult = false;
 
     // ハンド回数の最大値の設定
     public static void SetBaseHandCount(int value) {  _baseHandCount = value; }
@@ -65,5 +67,9 @@ public static class GameUtility
     public static void SetIsNextRound(bool value) { _isNextRound = value; }
     // ラウンド移行の取得
     public static bool IsNextRound() {  return _isNextRound; }
+    // ラウンドクリアの状態をセット
+    public static void SetIsRoundResult(bool value) { _isRoundResult = value; }
+    // ラウンドクリアの状態を取得
+    public static bool IsRoundResult() {  return _isRoundResult; }
 
 }

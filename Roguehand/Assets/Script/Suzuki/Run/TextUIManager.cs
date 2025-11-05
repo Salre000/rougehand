@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class TextUIManager:MonoBehaviour
+public class TextUIManager : MonoBehaviour
 {
     public static TextUIManager instance;
 
@@ -19,9 +19,13 @@ public class TextUIManager:MonoBehaviour
     [SerializeField] private TextMeshProUGUI _moneyText;
     [SerializeField] private TextMeshProUGUI _anteText;
     [SerializeField] private TextMeshProUGUI _roundText;
+    [SerializeField] private TextMeshProUGUI _resultLowestScoreText;
+    [SerializeField] private TextMeshProUGUI _resultHandText;
+    [SerializeField] private TextMeshProUGUI _resultMoneyText;
+    [SerializeField] private TextMeshProUGUI _resultClearMoneyText;
     private void Awake()
     {
-        if(instance==null)
+        if (instance == null)
             instance = this;
         Initialize();
         // 今は適当
@@ -91,16 +95,20 @@ public class TextUIManager:MonoBehaviour
     public TextMeshProUGUI GetMoneyText() { return _moneyText; }
     public TextMeshProUGUI GetAnteText() { return _anteText; }
     public TextMeshProUGUI GetRoundText() { return _roundText; }
+    public TextMeshProUGUI GetResultLowestScoreText() { return _resultLowestScoreText; }
+    public TextMeshProUGUI GetResultHandText() { return _resultHandText; }
+    public TextMeshProUGUI GetResultMoneyText() { return _resultMoneyText; }
+    public TextMeshProUGUI GetResultClearMoneyText() { return _resultClearMoneyText; }
 
     #endregion
 
     #region セッター
 
-    public void SetRoundNameText(string value) { _roundNameText.text= value; }
-    public void SetLowestScoreText(string value) { _lowestScoreText.text= value; }
+    public void SetRoundNameText(string value) { _roundNameText.text = value; }
+    public void SetLowestScoreText(string value) { _lowestScoreText.text = value; }
     public void SetRewardCountText(string value) { _rewardCountText.text = value; }
     public void SetRoundScoreText(string value) { _roundScoreText.text = value; }
-    public void SetRoleText(string value) { _roleText.text= value; }
+    public void SetRoleText(string value) { _roleText.text = value; }
     public void SetBasicScoreText(string value) { _basicScoreText.text = value; }
     public void SetMagnificationText(string value) { _magnificationText.text = value; }
     public void SetHandText(string value) { _handText.text = value; }
@@ -108,22 +116,12 @@ public class TextUIManager:MonoBehaviour
     public void SetMoneyText(string value) { _moneyText.text = value; }
     public void SetAnteText(string value) { _anteText.text = value; }
     public void SetRoundText(string value) { _roundText.text = value; }
+    public void SetResultLowestScoreText(string value) { _resultLowestScoreText.text = value; }
+    public void SetResultHandText(string value) { _resultHandText.text = value; }
+    public void SetResultMoneyText(string value) { _resultMoneyText.text = value; }
+    public void SetResultClearMoneyText(string value) { _resultClearMoneyText.text = value; }
 
     #endregion
 
-    /// <summary>
-    /// 文字列を整数に変換、成功したならoutに出力
-    /// </summary>
-    /// <param name="value"></param>
-    /// <returns></returns>
-    public int IntTryParse(string value) 
-    {
-        int result = 0;
-        if(int.TryParse(value, out result))
-        {
-            return result;
-        }
-        Debug.Log("!!!FAILED!!!");
-        return result=-1;
-    }
+
 }

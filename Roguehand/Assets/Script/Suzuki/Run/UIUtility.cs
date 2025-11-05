@@ -41,4 +41,19 @@ public class UIUtility:MonoBehaviour
 
         return dollStringBuilder.ToString();
     }
+    /// <summary>
+    /// •¶š—ñ‚ğ®”‚É•ÏŠ·A¬Œ÷‚µ‚½‚È‚çout‚Éo—Í
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    public int IntTryParse(string value)
+    {
+        int result = 0;
+        if (int.TryParse(value, out result))
+        {
+            return result;
+        }
+        Debug.Log("!!!FAILED!!!");
+        return result = -1;
+    }
 }

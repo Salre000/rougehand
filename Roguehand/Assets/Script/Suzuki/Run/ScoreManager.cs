@@ -248,7 +248,9 @@ public class ScoreManager : MonoBehaviour
         GameUtility.SetIsPushButton(false);
 
         // 目標スコアを越していたら次のラウンドへ
-        RoundManager.NextRoundExecute(_targetScore,ref _roundCount,_TARGET_SCORE_ID,_REWARD_ID);
+        //RoundUtility.NextRoundExecute(_targetScore,ref _roundCount,_TARGET_SCORE_ID,_REWARD_ID);
+        RoundUtility.NextStartRound(_targetScore,ref _roundCount,_TARGET_SCORE_ID,_REWARD_ID);
+
         // 合計スコアの増加フラグをリセット
         GameUtility.SetIsRoundScoreUp(false);
         // 最終的にプレイボタンのフラグをリセット

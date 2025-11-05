@@ -14,6 +14,8 @@ public class GameRoot:MonoBehaviour
 
     private StringBuilder _builder = new StringBuilder();
 
+    [SerializeField] Transform _crearResult;
+
     private void Start()
     {
         _dontTouchZone.SetActive(false);
@@ -57,18 +59,12 @@ public class GameRoot:MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// ƒŠƒUƒ‹ƒg‚ð’èˆÊ’u‚É
+    /// </summary>
     void RoundClearCheck()
     {
-        return;
-        int left=0, right=0;
-        left = instance.IntTryParse(instance.GetLowestScoreText().text);
-        right = instance.IntTryParse(instance.GetRoundScoreText().text);
-
-        if(left <= right)
-        {
-            StartCoroutine(NextRound());
-        }
+        if(!GameUtility.IsRoundResult())return;
     }
 
     IEnumerator NextRound()

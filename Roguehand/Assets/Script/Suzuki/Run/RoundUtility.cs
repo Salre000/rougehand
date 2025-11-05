@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-public static class RoundManager
+public static class RoundUtility
 {
 
     private static StringBuilder _builder = new StringBuilder();
@@ -57,5 +57,46 @@ public static class RoundManager
             // ショップ状態へ移行
             ShopManager.instance.SetIsShop(true);
         
+    }
+
+    // スコアが足りてリザルトを出す
+    public static void NextStartRound(int _targetScore, ref int _roundCount, int _TARGET_SCORE_ID, int _REWARD_ID)
+    {
+        // 合計スコアと比較
+        float roundScore = ScoreManager.instance.GetRoundScore();
+        roundScore = ScoreManager.instance.Rounding(roundScore, 1f);
+        if (_targetScore > roundScore) return;
+
+        // 合計スコアのリセット
+        ScoreManager.instance.ResetRoundScore();
+
+        // 目標スコアの再設定
+        _builder.Clear();
+        _builder.Append("");
+        TextUIManager.instance.SetLowestScoreText(_builder.ToString());
+
+        // リザルトのスコアとハンドの設定
+        _builder.Clear();
+        _builder.Append(MasterData.instance.GetStringMaster(_TARGET_SCORE_ID + _roundCount));
+        TextUIManager.instance.SetResultLowestScoreText(_builder.ToString());
+
+        _builder.Clear();
+        _builder.Append(GameUtility.GetHandCount());
+        TextUIManager.instance.SetResultHandText(_builder.ToString());
+
+        // ハンドの残り回数によるお金の表示
+        _builder.Clear();
+        int count = GameUtility.GetHandCount();
+        _builder.Append(UIUtility.instance.RewardConversion(count));
+        TextUIManager.instance.SetResultMoneyText(_builder.ToString());
+
+        // ラウンドクリア報酬金
+        int reward = MasterData.instance.GetIntMaster(_REWARD_ID + _roundCount);
+        TextUIManager.instance.SetResultClearMoneyText(UIUtility.instance.RewardConversion(reward));
+
+
+
+        // ショップ状態へ移行
+        //ShopManager.instance.SetIsShop(true);
     }
 }
