@@ -88,11 +88,13 @@ public class DistributeHand : MonoBehaviour
             dammyDeckArray.RemoveAt(index);
 
         }
-        //hand = CardManager.instance.NumberSort(hand);
-        //dommyHand = CardManager.instance.NumberSort(dommyHand);
-        //hand =CardManager.instance.SuitSort(hand);
 
-        //Test();
+        // デッキの中に使用可能なカードが一枚もない場合
+        if (dommyHand.Count <= 0) 
+        {
+            // リザルト画面に移行する
+
+        }
 
         CardManager.instance.SetHand(hand);
         CardObjectUtility.HandToCard(dommyHand);
