@@ -7,14 +7,14 @@ public class Shoping : MonoBehaviour
 {
     // ショップにカメラを向けさせるために必要
     [SerializeField] private Transform _vcam;
-    private float _distance = 0.01f;
+    private float _distance = 0.5f;
     // ショップへの向き
     private const float _TARGET_SHOP_CAM_ROTATE = 270;
     // ランへの向き
     private const float _TARGET_RUN_CAM_ROTATE = 0.0f;
     float angle=0f;
-    // カメラの移動時間
-    private float _camTime = 8.0f;
+    // カメラの補間移動時間
+    private float _camTime = 8f;
 
     // Update is called once per frame
     void Update()
@@ -28,7 +28,7 @@ public class Shoping : MonoBehaviour
     private void CamMove()
     {
         if (!ShopManager.instance.IsShop()) return;
-        _vcam.rotation = Quaternion.RotateTowards(_vcam.rotation, Quaternion.Euler(_TARGET_SHOP_CAM_ROTATE, 0, 0), _camTime);
+        _vcam.rotation = Quaternion.Slerp(_vcam.rotation, Quaternion.Euler(_TARGET_SHOP_CAM_ROTATE, 0, 0), Time.deltaTime*_camTime);
         angle = NormalizeAngle(_vcam.eulerAngles.x);
         if ((Mathf.Abs(angle-_TARGET_SHOP_CAM_ROTATE))< _distance)
             ShopManager.instance.SetIsShop(false);
@@ -46,7 +46,7 @@ public class Shoping : MonoBehaviour
         angle = NormalizeAngle(_vcam.eulerAngles.x);
         if ((angle - _TARGET_RUN_CAM_ROTATE) < _distance) return;
         // ラン画面へ向く
-        _vcam.rotation = Quaternion.RotateTowards(_vcam.rotation, Quaternion.Euler(_TARGET_RUN_CAM_ROTATE, 0, 0), _camTime);
+        _vcam.rotation = Quaternion.Lerp(_vcam.rotation, Quaternion.Euler(_TARGET_RUN_CAM_ROTATE, 0, 0), Time.deltaTime * _camTime);
 
     }
 
