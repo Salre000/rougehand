@@ -23,6 +23,7 @@ public class TextUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _resultHandText;
     [SerializeField] private TextMeshProUGUI _resultMoneyText;
     [SerializeField] private TextMeshProUGUI _resultClearMoneyText;
+    [SerializeField] private TextMeshProUGUI _clearMoneyText;
     private void Awake()
     {
         if (instance == null)
@@ -99,6 +100,7 @@ public class TextUIManager : MonoBehaviour
     public TextMeshProUGUI GetResultHandText() { return _resultHandText; }
     public TextMeshProUGUI GetResultMoneyText() { return _resultMoneyText; }
     public TextMeshProUGUI GetResultClearMoneyText() { return _resultClearMoneyText; }
+    public TextMeshProUGUI GetClearMoneyText() { return _clearMoneyText; }
 
     #endregion
 
@@ -120,6 +122,7 @@ public class TextUIManager : MonoBehaviour
     public void SetResultHandText(string value) { _resultHandText.text = value; }
     public void SetResultMoneyText(string value) { _resultMoneyText.text = value; }
     public void SetResultClearMoneyText(string value) { _resultClearMoneyText.text = value; }
+    public void SetClearMoneyText(string value) { _clearMoneyText.text = value; }
 
     #endregion
 

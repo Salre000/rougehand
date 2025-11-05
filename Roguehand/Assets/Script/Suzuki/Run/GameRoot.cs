@@ -4,29 +4,28 @@ using System.Text;
 using UnityEngine;
 using static TextUIManager;
 
+/// <summary>
+/// ゲームの進行
+/// </summary>
 public class GameRoot:MonoBehaviour 
 {
     [SerializeField] GameObject _dontTouchZone;
-    [SerializeField] GameObject _shopCanvas;
     bool _next = false;
     bool clear=false;
     bool over=false;
 
     private StringBuilder _builder = new StringBuilder();
 
-    [SerializeField] Transform _crearResult;
 
     private void Start()
     {
         _dontTouchZone.SetActive(false);
-        _shopCanvas.SetActive(false);
     }
     private void Update()
     {
         GameClear();
         GameOver();
         if(_next) return;
-        RoundClearCheck();
     }
 
     // クリアしたかどうか
@@ -59,21 +58,12 @@ public class GameRoot:MonoBehaviour
     }
 
 
-    /// <summary>
-    /// リザルトを定位置に
-    /// </summary>
-    void RoundClearCheck()
-    {
-        if(!GameUtility.IsRoundResult())return;
-    }
-
     IEnumerator NextRound()
     {
         _next = true;
         _dontTouchZone.SetActive(true);
         yield return new WaitForSeconds(1);
         //instance.InitializeText();
-        _shopCanvas.SetActive(true);
     }
 
 }

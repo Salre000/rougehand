@@ -94,8 +94,14 @@ public static class RoundUtility
         int reward = MasterData.instance.GetIntMaster(_REWARD_ID + _roundCount);
         TextUIManager.instance.SetResultClearMoneyText(UIUtility.instance.RewardConversion(reward));
 
+        // 清算ボタンの合計金表示
+        int allReward = count + reward;
+        _builder.Clear();
+        _builder.Append("$");
+        _builder.Append(allReward);
+        TextUIManager.instance.SetClearMoneyText(_builder.ToString());
 
-
+        GameUtility.SetIsRoundResult(true);
         // ショップ状態へ移行
         //ShopManager.instance.SetIsShop(true);
     }
