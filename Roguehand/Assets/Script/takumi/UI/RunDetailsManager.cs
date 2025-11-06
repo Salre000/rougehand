@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,6 +46,7 @@ public class RunDetailsManager : MonoBehaviour
     /// 詳細情報のUIを閉じる関数を持たせるボタン
     /// </summary>
     [SerializeField]private Button _endrRunInfo;
+
 
     /// <summary>
     /// 内容ごとのUIの描画を行う関数
@@ -116,6 +118,7 @@ public class RunDetailsManager : MonoBehaviour
         _runDetailsTypeParents[(int)_nowDetailsType].gameObject.SetActive(true);
 
         _detailsTypeAction[(int)_nowDetailsType].Show();
+
 
     }
     /// <summary>
@@ -215,6 +218,7 @@ public class RunDetailsManager : MonoBehaviour
 
         }
     }
+
 
 
 }
