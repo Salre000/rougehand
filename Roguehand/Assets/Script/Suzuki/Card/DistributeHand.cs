@@ -21,7 +21,25 @@ public class DistributeHand : MonoBehaviour
         hand.Capacity = CardManager.instance.GetHandSize();
 
         // ラウンドの終了時のドローの処理
-        RoundObserver.Instance.AddRoundEndAction(() => test = false);
+        RoundObserver.Instance.AddRoundEndAction(
+            () =>
+            {
+
+                //ショップに入っていたら
+                if (GameUtility.IsRoundResult()) 
+                {
+                    // 手札のオブジェクトを全破棄
+                    CardObjectUtility.End();
+                    return;
+                }
+
+
+
+
+                //ドローを可能にする
+                test = false;
+
+            });
 
     }
 
