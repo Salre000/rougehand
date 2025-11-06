@@ -9,8 +9,7 @@ using UnityEngine;
 /// </summary>
 public class TargetScoreChecker : MonoBehaviour
 {
-    private const int _TARGET_SCORE_ID = 7000;
-    private const int _REWARD_ID = 8000;
+
     private int _targetScore;
     private int _roundCount = -1;
     private StringBuilder _builder = new StringBuilder();
@@ -22,7 +21,7 @@ public class TargetScoreChecker : MonoBehaviour
         // ラウンド数と目標スコアの設定
         RoundStart();
             _builder.Clear();
-        _builder.Append(MasterData.instance.GetStringMaster(_TARGET_SCORE_ID + _roundCount));
+        _builder.Append(MasterData.instance.GetStringMaster(IDUtility.TARGET_SCORE_ID+ _roundCount));
         TextUIManager.instance.SetLowestScoreText(_builder.ToString());
     }
 

@@ -21,7 +21,7 @@ public class ScoreManager : MonoBehaviour
     // プレイしたハンドのスコア
     private float _handScore;
 
-    private StringBuilder builder;
+    private StringBuilder _builder = new StringBuilder();
     // ラウンドスコアの文字が枠外に出るくらいの文字数を検知
     private int _defaultRemit = 9;
     // 減らす文字サイズ
@@ -44,13 +44,25 @@ public class ScoreManager : MonoBehaviour
             instance = this;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        builder = new StringBuilder();
-
+        NextRoundScoreReset();
     }
 
+    private void NextRoundScoreReset()
+    {
+        // ショップが終わり次ラウンドに移行するときにリセット
+        if(!ShopManager.instance.IsPushEndShop())return;
+
+        // 合計スコアのリセット
+        ScoreManager.instance.ResetRoundScore();
+
+        // 目標スコアの再設定
+        _builder.Clear();
+        int id = IDUtility.TARGET_SCORE_ID + GameUtility.GetRoundCount();
+        _builder.Append(MasterData.instance.GetIntMaster(id));
+        TextUIManager.instance.SetLowestScoreText(_builder.ToString());
+    }
 
     /// <summary>
     /// 基本の加算
@@ -59,9 +71,9 @@ public class ScoreManager : MonoBehaviour
     public void BasicPlus(float value)
     {
         _basicScore += value;
-        builder.Clear();
-        builder.Append(_basicScore);
-        TextUIManager.instance.SetBasicScoreText(builder.ToString());
+        _builder.Clear();
+        _builder.Append(_basicScore);
+        TextUIManager.instance.SetBasicScoreText(_builder.ToString());
 
     }
 
@@ -74,9 +86,9 @@ public class ScoreManager : MonoBehaviour
         _magnification += value;
         _magnification = Rounding(_magnification,2f);
 
-        builder.Clear();
-        builder.Append(_magnification);
-        TextUIManager.instance.SetMagnificationText(builder.ToString());
+        _builder.Clear();
+        _builder.Append(_magnification);
+        TextUIManager.instance.SetMagnificationText(_builder.ToString());
     }
 
     /// <summary>
@@ -88,10 +100,10 @@ public class ScoreManager : MonoBehaviour
         // 四捨五入した値が返る
         _roundScore = Rounding(_roundScore,1f);
 
-        builder.Clear();
-        builder.AppendFormat("{0:#}", _roundScore.ToString("N0"));
+        _builder.Clear();
+        _builder.AppendFormat("{0:#}", _roundScore.ToString("N0"));
         
-        if(builder.Length >= _defaultRemit)
+        if(_builder.Length >= _defaultRemit)
         {
             TextUIManager.instance.GetRoundScoreText().fontSize -= _DOWNSIZE;
             _defaultRemit++;
@@ -102,7 +114,7 @@ public class ScoreManager : MonoBehaviour
 
         }
 
-            TextUIManager.instance.SetRoundScoreText(builder.ToString());
+            TextUIManager.instance.SetRoundScoreText(_builder.ToString());
     }
 
     /// <summary>
@@ -115,18 +127,18 @@ public class ScoreManager : MonoBehaviour
         // 四捨五入した値が返る
         _handScore = Rounding(_handScore, 1f);
 
-        builder.Clear();
-        builder.AppendFormat("{0:#}", _handScore.ToString("N0"));
+        _builder.Clear();
+        _builder.AppendFormat("{0:#}", _handScore.ToString("N0"));
 
         // フォントサイズの調整
-        if (builder.Length >= _scoreRemitLength)
+        if (_builder.Length >= _scoreRemitLength)
         {
             TextUIManager.instance.GetRoleText().fontSize -= _DOWNSIZE;
             _scoreRemitLength++;
         }
             TextUIManager.instance.GetRoleText().fontSize = _SCORE_OFFSET;
 
-        TextUIManager.instance.SetRoleText(builder.ToString());
+        TextUIManager.instance.SetRoleText(_builder.ToString());
         _scoreRemitLength = _RESET_REMIT_SIZE;
 
         ScoreReset();
@@ -138,10 +150,10 @@ public class ScoreManager : MonoBehaviour
     public void ScoreReset()
     {
         // 基本と倍率をゼロにする
-        builder.Clear();
-        builder.Append(_RESET_NUM);
-        TextUIManager.instance.SetBasicScoreText(builder.ToString());
-        TextUIManager.instance.SetMagnificationText(builder.ToString());
+        _builder.Clear();
+        _builder.Append(_RESET_NUM);
+        TextUIManager.instance.SetBasicScoreText(_builder.ToString());
+        TextUIManager.instance.SetMagnificationText(_builder.ToString());
     }
 
     /// <summary>
@@ -163,18 +175,16 @@ public class ScoreManager : MonoBehaviour
         // 0にする
         _handScore = 0;
         // 空白にする
-        builder.Clear();
-        builder.Append("");
-        TextUIManager.instance.SetRoleText(builder.ToString());
+        _builder.Clear();
+        _builder.Append("");
+        TextUIManager.instance.SetRoleText(_builder.ToString());
 
 
         // ラウンドスコアを表示
-        builder.Clear();
-        builder.Append(_roundScore);
-        TextUIManager.instance.SetRoundScoreText(builder.ToString());
+        _builder.Clear();
+        _builder.Append(_roundScore);
+        TextUIManager.instance.SetRoundScoreText(_builder.ToString());
 
-        // 合計スコアの増加をした
-        //GameUtility.SetIsRoundScoreUp(true);
     }
 
     /// <summary>
@@ -183,12 +193,12 @@ public class ScoreManager : MonoBehaviour
     public void ResetRoundScore()
     {
         _roundScore = 0;
-        builder.Clear();
-        builder.Append(_roundScore);
-        TextUIManager.instance.SetRoundScoreText(builder.ToString());
-        builder.Clear() ;
-        builder.Append("");
-        TextUIManager.instance.SetLowestScoreText(builder.ToString());
+        _builder.Clear();
+        _builder.Append(_roundScore);
+        TextUIManager.instance.SetRoundScoreText(_builder.ToString());
+        _builder.Clear() ;
+        _builder.Append("");
+        TextUIManager.instance.SetLowestScoreText(_builder.ToString());
     }
 
     /// <summary>
@@ -242,8 +252,7 @@ public class ScoreManager : MonoBehaviour
         GameUtility.SetIsPushButton(false);
 
         // 目標スコアを越していたら次のラウンドへ
-        //RoundUtility.NextRoundExecute(_targetScore,ref _roundCount,_TARGET_SCORE_ID,_REWARD_ID);
-        RoundUtility.NextStartRound(_targetScore,ref _roundCount,_TARGET_SCORE_ID,_REWARD_ID);
+        RoundUtility.NextStartRound(_targetScore, _roundCount,_TARGET_SCORE_ID,_REWARD_ID);
 
         // 合計スコアの増加フラグをリセット
         GameUtility.SetIsRoundScoreUp(false);
