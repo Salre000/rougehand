@@ -69,6 +69,20 @@ public class Shoping : MonoBehaviour
         GameUtility.SetRoundCount(roundCount);
         
         // TODO:他にもリセットを仕込む必要がある
+        // 手札の内部をリセット　
+        CardManager.instance.ResetHand();
+        // デッキの内部をリセット
+        List<Card.Trump> dommyDeck = CardManager.instance.GetDeck();
+        dommyDeck.GetAction(card=>
+        {
+            card.isSelect = false;
+            card.state = Card.State.deck;
+            return card;
+
+        });
+        // ドローの処理をリセット
+        RoundObserver.Instance.RoundStartActions();
+
 
     }
 

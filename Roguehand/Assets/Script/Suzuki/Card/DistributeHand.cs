@@ -41,6 +41,9 @@ public class DistributeHand : MonoBehaviour
 
             });
 
+        //ラウンド開始時のドローの処理
+        RoundObserver.Instance.AddRoundStartAction(() => test = false);
+
     }
 
     // Update is called once per frame

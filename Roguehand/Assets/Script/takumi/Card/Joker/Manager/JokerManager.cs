@@ -60,6 +60,7 @@ public class JokerManager : MonoBehaviour
     public void Start()
     {
         RoundObserver.Instance.AddRoundEndAction(RoundEnd);
+        RoundObserver.Instance.AddRoundStartAction(RoundStart);
     }
 
     private void Update()

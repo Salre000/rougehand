@@ -14,6 +14,7 @@ public class RoundObserver : MonoBehaviour
     private bool _roundEnd = false;
 
     private List<Action> _roundEndActions=new List<Action>();   
+    private List<Action> _roundStartActions=new List<Action>();   
 
     public void Awake()
     {
@@ -46,5 +47,8 @@ public class RoundObserver : MonoBehaviour
     /// </summary>
     /// <param name="action"></param>
     public void AddRoundEndAction(System.Action action) {  _roundEndActions.Add(action); }
+    public void AddRoundStartAction(System.Action action) {  _roundStartActions.Add(action); }
+
+    public void RoundStartActions() { for (int i = 0; i < _roundStartActions.Count; i++) _roundStartActions[i](); }
 
 }
