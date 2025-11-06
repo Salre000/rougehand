@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // ショップ状態がtrueになっているときの処理
 public class Shoping : MonoBehaviour
@@ -15,6 +16,8 @@ public class Shoping : MonoBehaviour
     float angle=0f;
     // カメラの補間移動時間
     private float _camTime = 8f;
+    // ショップ終了ボタン
+    [SerializeField] private Button _shopEndButton;
 
     // Update is called once per frame
     void Update()
@@ -30,17 +33,12 @@ public class Shoping : MonoBehaviour
         if (!ShopManager.instance.IsShop()) return;
         _vcam.rotation = Quaternion.Slerp(_vcam.rotation, Quaternion.Euler(_TARGET_SHOP_CAM_ROTATE, 0, 0), Time.deltaTime*_camTime);
         angle = NormalizeAngle(_vcam.eulerAngles.x);
-        if ((Mathf.Abs(angle-_TARGET_SHOP_CAM_ROTATE))< _distance)
-            ShopManager.instance.SetIsShop(false);
+        //if ((Mathf.Abs(angle-_TARGET_SHOP_CAM_ROTATE))< _distance)
+        //    ShopManager.instance.SetIsShop(false);
     }
 
     private void ShopEnd()
     {
-        // でバグ。
-        if (Input.GetKeyDown(KeyCode.E))
-            // ショップの終了
-            ShopManager.instance.SetIsShop(false);
-
         if (ShopManager.instance.IsShop()) return;
         // ほとんど0ゼロならreturn
         angle = NormalizeAngle(_vcam.eulerAngles.x);

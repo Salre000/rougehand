@@ -61,8 +61,12 @@ public class ClearResult : MonoBehaviour
     /// </summary>
     private void OnLiquidation()
     {
+        // 定位置につくまでボタンの発火を防ぐ
         if (!_isResultArrival) return;
         _isPush = true;
+        ShopManager.instance.SetIsShop(true);
+        _isResultArrival = false;
+
     }
 
     private void ResetResultPosition()
@@ -79,8 +83,8 @@ public class ClearResult : MonoBehaviour
         // 完了通知
         if ((resultPosition - _resetLocalPosition).sqrMagnitude < 0.01f)
         {
-            _isResultArrival = false;
             _isPush=false;
+            _clearResult.SetActive(false);
         }
     }
 

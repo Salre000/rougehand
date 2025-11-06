@@ -8,6 +8,8 @@ public class ShopManager : MonoBehaviour
 
     // ショップ状態フラグ
     private bool _isShop = false;
+    // ショップ終了ボタンが押されたか
+    private bool _isPushEndShop = false;
 
 
     private void Awake()
@@ -30,4 +32,9 @@ public class ShopManager : MonoBehaviour
     public void SetIsShop(bool flag) { _isShop = flag; }
     // ショップ状態を取得
     public bool IsShop() { return _isShop; }
+    // ショップの終了ボタンが押されたかセット
+    public void SetPushEndShop(bool flag) { _isPushEndShop = flag; }
+    // 終了ボタンが押されたかを取得
+    public bool IsPushEndShop() { return _isPushEndShop; }
+
 }

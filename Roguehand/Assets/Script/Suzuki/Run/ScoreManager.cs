@@ -118,6 +118,7 @@ public class ScoreManager : MonoBehaviour
         builder.Clear();
         builder.AppendFormat("{0:#}", _handScore.ToString("N0"));
 
+        // ƒtƒHƒ“ƒgƒTƒCƒY‚Ì’²®
         if (builder.Length >= _scoreRemitLength)
         {
             TextUIManager.instance.GetRoleText().fontSize -= _DOWNSIZE;
@@ -128,27 +129,20 @@ public class ScoreManager : MonoBehaviour
         TextUIManager.instance.SetRoleText(builder.ToString());
         _scoreRemitLength = _RESET_REMIT_SIZE;
 
-        // ƒ[ƒ‚É‚·‚é
+        ScoreReset();
+    }
+
+    /// <summary>
+    /// Šî–{‚Æ”{—¦‚Ì•\¦‚ğƒ[ƒ‚É‚·‚é
+    /// </summary>
+    public void ScoreReset()
+    {
+        // Šî–{‚Æ”{—¦‚ğƒ[ƒ‚É‚·‚é
         builder.Clear();
         builder.Append(_RESET_NUM);
         TextUIManager.instance.SetBasicScoreText(builder.ToString());
         TextUIManager.instance.SetMagnificationText(builder.ToString());
     }
-
-    /// <summary>
-    /// Šî–{‚Æ”{—¦‚ÆŒ‹‰Ê‚Ì•\¦‚Æ’†g‚ğƒ[ƒ‚É‚·‚é
-    /// </summary>
-    //public void ScoreReset()
-    //{
-    //    builder.Clear();
-    //    _roundScore = _magnification =_basicScore = 0;
-    //    _defaultRemit = _RESET_REMIT_SIZE;
-    //    TextUIManager.instance.GetRoundScoreText().fontSize = _DEFAULT_OFFSET;
-    //    builder.Append(_basicScore);
-    //    TextUIManager.instance.SetBasicScoreText(builder.ToString());
-    //    TextUIManager.instance.SetMagnificationText(builder.ToString());
-    //    TextUIManager.instance.SetRoundScoreText(builder.ToString());
-    //}
 
     /// <summary>
     /// ”{—¦‚ğæZ
