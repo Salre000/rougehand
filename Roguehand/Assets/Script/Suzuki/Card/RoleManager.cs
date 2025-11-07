@@ -256,6 +256,9 @@ public class RoleManager : MonoBehaviour
         // フルハウスチェック
         List<Card.Trump> checkList2 = new();
         List<Card.Trump> checkList3 = new();
+
+        List<int>dommyIndex=new();
+
         for (int i = 0; i < cards.Count; i++)
         {
             checkList2.Clear();
@@ -266,6 +269,8 @@ public class RoleManager : MonoBehaviour
                     checkList2.Add(cards[j]);
                 else
                     checkList3.Add(cards[j]);
+
+                dommyIndex.Add(j);
             }
             if (checkList2.Count >= 2) break;
         }
@@ -279,6 +284,9 @@ public class RoleManager : MonoBehaviour
             if (JastNumberCheck(checkList2, 2) == null || JastNumberCheck(checkList3, 3) == null)
                 return Role.None;
         }
+        // indexListにフルハウスのindexをつむ
+        indexList.Clear();
+        indexList=dommyIndex;
 
         return Role.fullHouse;
     }
@@ -316,6 +324,8 @@ public class RoleManager : MonoBehaviour
         List<Card.Trump> checkList2 = new();
         List<Card.Trump> checkList3 = new();
 
+        List<int>dommyIndex=new();
+
         for (int i = 0; i < cards.Count; i++)
         {
             checkList2.Clear();
@@ -326,12 +336,17 @@ public class RoleManager : MonoBehaviour
                     checkList2.Add(cards[j]);
                 else
                     checkList3.Add(cards[j]);
+                dommyIndex.Add(j);
             }
             if (checkList2.Count >= 2) break;
         }
         if (JastNumberCheck(checkList2, 2) == null || JastNumberCheck(checkList3, 2) == null)
             return Role.None;
 
+        // indexListにツーペアのindexをつむ
+        indexList.Clear();
+
+        indexList = dommyIndex;
 
         return Role.twoPair;
     }

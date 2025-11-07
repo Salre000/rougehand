@@ -160,7 +160,7 @@ public class CardObjectManager : MonoBehaviour
     }
 
 
-    public Material GetTrunpMatarial(int suit,int number) { return _materialManager.GetMaterial(suit, number); }
+    public Material GetTrunpMatarial(int suit, int number) { return _materialManager.GetMaterial(suit, number); }
 
 
     /// <summary>
@@ -510,23 +510,32 @@ public class CardObjectManager : MonoBehaviour
     /// </summary>
     public void PlayStart()
     {
-        for(int i = 0; i < _cardObjectHands.Count; i++) 
+        // スコアの加算をしないカードの場合は返す関数
+        List<int> index = CardManager.instance.GetPlayRoleIndexs();
+
+        for (int i = 0; i < _cardObjectHands.Count; i++)
         {
             if (_cardObjectHands[i].GetStatus() != CardObject.status.play) continue;
 
-            _cardObjectHands[i].SetStatus(CardObject.status.action);
             _cardObjectHands[i].ResetMoveTime();
             _cardObjectHands[i].SetGrab(true);
+            if (!index.Contains(i))
+            {
+                _cardObjectHands[i].StopMove();
+                _cardObjectHands[i].SetGrab(false);
+                continue;
+            }
+            else _cardObjectHands[i].SetStatus(CardObject.status.action);
         }
     }
 
-    public int GetActionCount() { return _cardObjectHands.GetCount(card=>card.GetStatus()== CardObject.status.action); }
+    public int GetActionCount() { return _cardObjectHands.GetCount(card => card.GetStatus() == CardObject.status.action); }
 
     /// <summary>
     /// 現在プレイの途中かどうかを判断する関数
     /// </summary>
     /// <returns></returns>
-    public bool IsPlaying() 
+    public bool IsPlaying()
     {
         int count = 0;
 
@@ -876,6 +885,11 @@ public class CardObjectManager : MonoBehaviour
     private float _time = 0;
     private int reta = 1;
     private Vector3 _lostAngle = Vector3.zero;
+    /// <summary>
+    /// カードのアクションを行うクラス
+    /// </summary>
+    /// <param name="cardObjectHand"></param>
+    /// <param name="ID"></param>
     private void HandCardActionTrump(CardObject cardObjectHand, int ID)
     {
 
@@ -915,13 +929,14 @@ public class CardObjectManager : MonoBehaviour
     /// 仮組み
     /// </summary>
     /// <param name="ID"></param>
-    private void TrunpScore(int ID) 
+    private void TrunpScore(int ID)
     {
         float score = 0;
 
         score = (int)CardManager.instance.GetHand()[ID].number;
 
         if (score <= 1 || 11 < score) score = 11;
+
 
         ScoreManager.instance.BasicPlus(score);
 

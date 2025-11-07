@@ -331,6 +331,28 @@ public static class Extra
     }
 
     /// <summary>
+    /// リストを使い他の型に変更して返す関数
+    /// </summary>
+    /// <typeparam name="T"><変更前の型/typeparam>
+    /// <typeparam name="T2"><変更後の型/typeparam>
+    /// <param name="values"><使用するリスト/param>
+    /// <param name="func"><変更後の型を返す関数/param>
+    /// <returns></returns>
+    public static List<T2> GetSeparateList<T,T2>(this List<T> values, System.Func<T,T2> func) 
+    {
+        List<T2> list = new();
+
+        for(int i = 0; i < values.Count; i++) 
+        {
+            list.Add(func(values[i]));
+
+        }
+
+        return list;
+
+    }
+
+    /// <summary>
     /// リストの全てに同じ関数を使用する
     /// </summary>
     /// <typeparam name="T"></typeparam>

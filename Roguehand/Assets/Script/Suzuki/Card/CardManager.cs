@@ -15,7 +15,7 @@ public class CardManager : MonoBehaviour
     /// </summary>
     public List<Card.Trump> deck = new List<Card.Trump>();
     public List<Card.Trump> hand = new List<Card.Trump>();
-    public List<Card.Trump> pick=new List<Card.Trump>();
+    public List<Card.Trump> pick = new List<Card.Trump>();
 
     // 現在のハンドの大きさ
     private int handSize = 10;
@@ -40,7 +40,7 @@ public class CardManager : MonoBehaviour
     /// </summary>
     /// <param name="cards">並べなおしたいカードリスト</param>
     /// <returns>整頓済みカードリスト</returns>
-    public List<Card.Trump> NumberSort(List<Card.Trump> cards,bool straightFlag=false)
+    public List<Card.Trump> NumberSort(List<Card.Trump> cards, bool straightFlag = false)
     {
         // 並び変えたものをvalueに代入
         List<Card.Trump> value = cards.OrderByDescending(x => x.number).ThenBy(x => x.suit).ToList();
@@ -113,11 +113,11 @@ public class CardManager : MonoBehaviour
 
         // 選択中の個数を５個以上にできない用にする
         //選択中の物をクリックは可能にしておく
-        if (!hand[ID].isSelect&&hand.GetCount(trump => { return trump.isSelect == true&&trump.state==Card.State.hand; }) > 4) return;
+        if (!hand[ID].isSelect && hand.GetCount(trump => { return trump.isSelect == true && trump.state == Card.State.hand; }) > 4) return;
 
         // つかめてはいけないカードかどうかを判断
         if (!CardObjectUtility.CheckGrab(ID)) return;
-           
+
         Card.Trump dummyHand = hand[ID];
         dummyHand.isSelect = !dummyHand.isSelect;
         hand[ID] = dummyHand;
@@ -130,13 +130,13 @@ public class CardManager : MonoBehaviour
         if (hand[ID].isSelect) pick.Add(hand[ID]);
         else
         {
-            Card.Trump dommy=hand[ID];
+            Card.Trump dommy = hand[ID];
             dommy.isSelect = !dommy.isSelect;
             pick.Remove(dommy);
         }
         SetPick(pick);
 
-        RoleManager.Role role= RoleManager.instance.RoleCheck(GetPick());
+        RoleManager.Role role = RoleManager.instance.RoleCheck(GetPick());
 
         RoleManager.instance.SetRole(role);
         RoleManager.instance.SetIsCheck(true);
@@ -155,14 +155,14 @@ public class CardManager : MonoBehaviour
     /// <returns>全て合致していればtrue</returns>
     public bool JastCardCheck(Card.Trump card1, Card.Trump card2)
     {
-        if (card1.suit != card2.suit)           return false;
-        if (card1.number != card2.number)       return false;
-        if (card1.sealBuff != card2.sealBuff)   return false;
-        if (card1.cardBuff != card2.cardBuff)   return false;
-        if (card1.deckBuff != card2.deckBuff)   return false;
-        if (card1.state != card2.state)         return false;
-        if (card1.isFeice != card2.isFeice)     return false;
-        if (card1.isSelect != card2.isSelect)   return false;
+        if (card1.suit != card2.suit) return false;
+        if (card1.number != card2.number) return false;
+        if (card1.sealBuff != card2.sealBuff) return false;
+        if (card1.cardBuff != card2.cardBuff) return false;
+        if (card1.deckBuff != card2.deckBuff) return false;
+        if (card1.state != card2.state) return false;
+        if (card1.isFeice != card2.isFeice) return false;
+        if (card1.isSelect != card2.isSelect) return false;
 
         return true;
     }
@@ -174,16 +174,16 @@ public class CardManager : MonoBehaviour
     /// <param name="ChengeCard"><変更後のトランプ/param>
     public void Chenge(Card.Trump baseCard, Card.Trump ChengeCard)
     {
-       if(deck.IndexOf(baseCard)>0) deck[deck.IndexOf(baseCard)] = ChengeCard;
-       if(hand.IndexOf(baseCard)>0) hand[hand.IndexOf(baseCard)] = ChengeCard;
-       if(pick.IndexOf(baseCard)>0) pick[pick.IndexOf(baseCard)] = ChengeCard;
+        if (deck.IndexOf(baseCard) > 0) deck[deck.IndexOf(baseCard)] = ChengeCard;
+        if (hand.IndexOf(baseCard) > 0) hand[hand.IndexOf(baseCard)] = ChengeCard;
+        if (pick.IndexOf(baseCard) > 0) pick[pick.IndexOf(baseCard)] = ChengeCard;
     }
 
 
     public void SetDeck(List<Card.Trump> _deck) { this.deck = _deck; }
     public List<Card.Trump> GetDeck() { return deck; }
 
-    public void ResetDeck() { deck.GetAction( card => { card.isSelect = false; card.state = Card.State.deck; return card; }); }
+    public void ResetDeck() { deck.GetAction(card => { card.isSelect = false; card.state = Card.State.deck; return card; }); }
 
     public void SetHandSize(int _hand) { this.handSize = _hand; }
     public int GetHandSize() { return handSize; }
@@ -195,7 +195,37 @@ public class CardManager : MonoBehaviour
 
     public void SetPick(List<Card.Trump> _pick) { pick = _pick; }
     public void ResetPick() { pick.Clear(); }
-    public List<Card.Trump > GetPick() { return pick; }
+    public List<Card.Trump> GetPick() { return pick; }
+
+    /// <summary>
+    /// ピックの中で役に使われているインデックスのリストを返す関数
+    /// </summary>
+    /// <returns></returns>
+    public List<int> GetPlayRoleIndexs()
+    {
+        List<int> result = new();
+        List<int> index = RoleManager.instance.GetIndex();
+        List<Card.Trump> dommyHand = hand.GetSeparateList(card=>card);
+
+        for (int i = 0; i < RoleManager.instance.GetIndex().Count; i++)
+        {
+            // このIDはピックないの番号
+            int ID = index[i];
+
+            // ピックないの番号依存でハンド内の番号を取得
+            int handIndex = dommyHand.IndexOf(pick[ID]);
+
+            // 重複しない用に一度カウントしたら除外
+            dommyHand[handIndex]=new Card.Trump();
+
+            // リストにつむ
+            result.Add(handIndex);
+
+        }
+
+        return result;
+
+    }
 
 
 }
