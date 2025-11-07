@@ -40,15 +40,10 @@ public class PlayHnad : MonoBehaviour
         GameUtility.SetHandCount(handCount);
         // カードが上に行く
         CardObjectUtility.Play();
-        // 
 
-        
-        // 手札含めたすべて削除
-        //CardObjectUtility.End();
+        // 役をプレイした回数を追加
+        RoleManager.instance.AddRolePlayCountList(role);
 
-        // 手札だけすべて削除
-        //CardObjectUtility.PlayEnd();
-        
         // プレイボタンが押されたことを知らせる
         GameUtility.SetIsPlay(true);
     }

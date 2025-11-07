@@ -14,12 +14,12 @@ public class ScoreMaster : MonoBehaviour
     public void Awake()
     {
         instance = this;
+        Lood();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        Lood();
     }
 
     // Update is called once per frame

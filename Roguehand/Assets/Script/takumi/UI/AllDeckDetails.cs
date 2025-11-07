@@ -44,6 +44,12 @@ public class AllDeckDetails : DetailsBase
         SetCounter();
 
     }
+    public override void Hide()
+    {
+        for (int i = 0; i < _pollList.Count; i++)
+            _pollList[i].SetActive(false);
+
+    }
     public override void Initializ()
     {
         _pool = new GameObject("CardUIPool");
@@ -55,6 +61,7 @@ public class AllDeckDetails : DetailsBase
 
             _pollList.Add(Instantiate(_cardPrefab, _pool.transform));
             _pollList[i].SetActive(false);
+
 
 
         }
@@ -79,6 +86,8 @@ public class AllDeckDetails : DetailsBase
             Material material=new Material( CardObjectUtility.GetMaterial((int)deckList[i].suit, (int)deckList[i].number));
 
             material.shader = Shader.Find("UI/Default");
+
+            material.color = Color.white;
 
             game.GetComponent<Image>().material = material;
 

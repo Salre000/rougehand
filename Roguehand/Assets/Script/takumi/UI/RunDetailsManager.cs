@@ -127,8 +127,11 @@ public class RunDetailsManager : MonoBehaviour
     private void End()
     {
         // すべての要素のオブジェクトを非アクティブ状態に移行
-        for(int i=0;i< _runDetailsTypeParents.Count;i++)
+        for(int i=0;i< _runDetailsTypeParents.Count; i++) 
+        {
+            _detailsTypeAction[i].Hide();
             _runDetailsTypeParents[i].gameObject.SetActive(false);
+        }
 
         // 非アクティブ状態に移行
         gameObject.SetActive(false);
@@ -198,8 +201,12 @@ public class RunDetailsManager : MonoBehaviour
         // 背景の大きさを設定
         _backImageRectTransform.sizeDelta = backImageSize;
 
-        for(int i=0;i< _runDetailsTypeButtons.Count;i++)
+        for(int i=0;i< _runDetailsTypeButtons.Count; i++)
+        {
+            _detailsTypeAction[i].Hide();
+
             _runDetailsTypeButtons[i].GetComponent<RectTransform>().sizeDelta = buttonSize;
+        }
 
         // 内容を描画
         _detailsTypeAction[(int)_nowDetailsType].Show();

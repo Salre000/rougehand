@@ -12,6 +12,7 @@ public class RoleManager : MonoBehaviour
     private Role _role=Role.None;
     private bool _isCheck=false;
     private List<int> _roleLevelList=new(17);
+    private List<int> _rolePlayCountList=new(17);
 
     public enum Role
     {
@@ -43,6 +44,7 @@ public class RoleManager : MonoBehaviour
         for (int i = 0; i < (int)Role.max; i++)
         {
             _roleLevelList.Add(1);
+            _rolePlayCountList.Add(0);
         }
         indexList = new();
     }
@@ -619,5 +621,9 @@ public class RoleManager : MonoBehaviour
     public bool IsCheck() {  return _isCheck; }
     // 引数に対応した役のレベルを返します
     public int GetRoleLevel(Role role) { return _roleLevelList[(int)role]; }
+    // どの役が何回プレイされたかを返す
+    public List<int> GetRolePlayCountList() { return _rolePlayCountList; }
+    // 役を指定してそのプレイ回数を追加する
+    public void AddRolePlayCountList(Role role) {_rolePlayCountList[(int)role]++;}
 
 }
