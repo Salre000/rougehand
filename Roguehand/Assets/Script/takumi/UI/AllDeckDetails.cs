@@ -76,7 +76,7 @@ public class AllDeckDetails : DetailsBase
             //@”wŒi‚Ì”’‚ğ•`‰æ‚·‚é‚½‚ß‚Éƒ}ƒeƒŠƒAƒ‹‚ğ“\‚è•t‚¯‚é‚Ì‚Íq‹Ÿs
             game = game.transform.GetChild(0).gameObject;
 
-            Material material= CardObjectUtility.GetMaterial((int)deckList[i].suit, (int)deckList[i].number);
+            Material material=new Material( CardObjectUtility.GetMaterial((int)deckList[i].suit, (int)deckList[i].number));
 
             material.shader = Shader.Find("UI/Default");
 
