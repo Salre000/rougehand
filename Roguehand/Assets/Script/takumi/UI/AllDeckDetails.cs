@@ -31,6 +31,9 @@ public class AllDeckDetails : DetailsBase
     [SerializeField] private List<TextMeshProUGUI> _suitText = new List<TextMeshProUGUI>((int)Card.suit.max);
 
     [SerializeField] private List<List<Material>> _trumpMaterial = new List<List<Material>>();
+    [SerializeField] private List<Material> _deckBuffMaterial = new ();
+    [SerializeField] private List<Material> _cardBuffMaterial = new ();
+    [SerializeField] private List<Material> _sealBuffMaterial = new ();
 
     private GameObject _pool;
     private List<UICardObject> _pollList = new List<UICardObject>();
@@ -92,6 +95,44 @@ public class AllDeckDetails : DetailsBase
 
         }
 
+        // シールのマテリアルを追加
+        for(int i = 0; i < (int)Card.sealBuff.MAX; i++) 
+        {
+            Material material=BuffUtility.GetSealMaterial(i);
+
+            material.shader = Shader.Find("UI/Default");
+
+            material.color = Color.white;
+
+            _sealBuffMaterial.Add(material);
+
+        }
+
+        // cardBuffのマテリアルを追加
+        for(int i = 0; i < (int)Card.cardBuff.MAX; i++) 
+        {
+            Material material=BuffUtility.GetSealMaterial(i);
+
+            material.shader = Shader.Find("UI/Default");
+
+            material.color = Color.white;
+
+            _cardBuffMaterial.Add(material);
+
+        }
+        // DeckBuffのマテリアルを追加
+        for(int i = 0; i < (int)Card.cardBuff.MAX; i++) 
+        {
+            Material material=BuffUtility.GetTrumpMaterial(i);
+
+            material.shader = Shader.Find("UI/Default");
+
+            material.color = Color.white;
+
+            _deckBuffMaterial.Add(material);
+
+        }
+
 
 
     }
@@ -108,10 +149,25 @@ public class AllDeckDetails : DetailsBase
 
             if (deckList[i].state!=Card.State.deck) game.SetNowColor(USE_COLOR);
 
-            game.SetImage(_trumpMaterial[(int)deckList[i].suit][(int)deckList[i].number-1], null,null);
+            game.SetImage(_trumpMaterial[(int)deckList[i].suit][(int)deckList[i].number-1], null, GetSealBuff(deckList[i].sealBuff));
 
 
         }
+
+
+    }
+    private Material GetSealBuff(Card.sealBuff sealBuff) 
+    {
+        if (sealBuff != Card.sealBuff.None) return _sealBuffMaterial[(int)sealBuff];
+        return null;
+
+
+    }
+    private Material GetEffctBuff(Card.Trump buff) 
+    {
+        //if (sealBuff != Card.sealBuff.None) return _sealBuffMaterial[(int)sealBuff];
+
+        return null;
 
 
     }
