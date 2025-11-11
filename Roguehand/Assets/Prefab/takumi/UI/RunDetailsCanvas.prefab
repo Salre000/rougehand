@@ -602,7 +602,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5198575331115947411}
   - component: {fileID: 6737324511145915023}
-  - component: {fileID: 8317232711175921149}
   - component: {fileID: 1667560418078378053}
   m_Layer: 5
   m_Name: SuitDiamond
@@ -639,32 +638,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 884844972545273564}
   m_CullTransparentMesh: 1
---- !u!114 &8317232711175921149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 884844972545273564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!114 &1667560418078378053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,7 +650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1cd903315b89c4488b3bdd07e212810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  suit: 0
+  suit: 2
 --- !u!1 &1042496893267252888
 GameObject:
   m_ObjectHideFlags: 0
@@ -3661,7 +3634,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8007918786171298150}
   - component: {fileID: 1089946113321196847}
-  - component: {fileID: 7555900105361154445}
   - component: {fileID: 7397862206633922217}
   m_Layer: 5
   m_Name: SuitHeart
@@ -3698,32 +3670,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3692519080392415364}
   m_CullTransparentMesh: 1
---- !u!114 &7555900105361154445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3692519080392415364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!114 &7397862206633922217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3736,7 +3682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1cd903315b89c4488b3bdd07e212810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  suit: 0
+  suit: 1
 --- !u!1 &3872735886957210955
 GameObject:
   m_ObjectHideFlags: 0
@@ -7473,7 +7419,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7448131845527710397}
   - component: {fileID: 7330985714468089295}
-  - component: {fileID: 3756923927104286262}
   - component: {fileID: 3478444903391124985}
   m_Layer: 5
   m_Name: SuitClub
@@ -7510,32 +7455,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8003675427248170447}
   m_CullTransparentMesh: 1
---- !u!114 &3756923927104286262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8003675427248170447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!114 &3478444903391124985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7548,7 +7467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1cd903315b89c4488b3bdd07e212810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  suit: 0
+  suit: 3
 --- !u!1 &8016450375596893638
 GameObject:
   m_ObjectHideFlags: 0
@@ -8113,6 +8032,9 @@ MonoBehaviour:
   - {fileID: 2515714944954938654}
   - {fileID: 8622082971615665070}
   - {fileID: 2467226821760100830}
+  _deckBuffMaterial: []
+  _cardBuffMaterial: []
+  _sealBuffMaterial: []
 --- !u!1 &8309347452336785138
 GameObject:
   m_ObjectHideFlags: 0

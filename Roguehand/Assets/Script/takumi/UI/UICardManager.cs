@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using static ScriptCountNumber;
 public class UICardManager : MonoBehaviour
 {
     [SerializeField, Header("ï¿Ç◊ÇÈÉXÅ[Ég")] Card.suit suit = Card.suit.Spade;
@@ -14,6 +14,8 @@ public class UICardManager : MonoBehaviour
     private readonly float CARD_POS_Z = -20;
 
     float centerPointY = 4000f;
+
+    private readonly float _HEIGHT_OFFSET = 0.5f;
     public void Show()
     {
         RectTransform thisRect=GetComponent<RectTransform>();
@@ -32,10 +34,10 @@ public class UICardManager : MonoBehaviour
 
             float angleRange = renge * (i + 1) / WIDE_SIZE;
 
-            angleRange -= 0.5f;
-            angleRange *= -2;
+            angleRange -= _HEIGHT_OFFSET;
+            angleRange *= DOUBLE;
 
-            pos.x = renge * (i + 1)- WIDE_SIZE / 2;
+            pos.x = renge * (i + 1)- WIDE_SIZE / HALF;
             pos.y = -Mathf.Abs( Mathf.Sin(angleRange))* MAX_HEIGHT+OFFSET;
             pos.z = CARD_POS_Z;
 
@@ -45,7 +47,7 @@ public class UICardManager : MonoBehaviour
             Vector2 vec= rectTransform.localPosition-new Vector3(0, centerPointY, 0);
 
 
-            angle.z = Mathf.Atan2(vec.x,vec.y)*Mathf.Rad2Deg;
+            angle.z =HALF_ROTATION-( Mathf.Atan2(vec.x,vec.y)*Mathf.Rad2Deg)*ALTERNATIVE;
             rectTransform.eulerAngles = angle;
 
 

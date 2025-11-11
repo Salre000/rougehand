@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class BuffManager : MonoBehaviour
 {
-
+    [SerializeField] BuffMaterialLists materialLists;
     /// <summary>
     /// シール属性のバフ内容
     /// </summary>
@@ -80,6 +80,10 @@ public class BuffManager : MonoBehaviour
         BuffUtility.BuffManager = this;
         _errorBuff.CreateErrorBuff();
 
+        sealMaterial = materialLists.sealBuff;
+        cardMaterial=materialLists.cardBuff;
+        trumpMaterial=materialLists.deckBuff;
+        jokerMaterial=materialLists.jokerBuff;
 
     }
 

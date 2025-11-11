@@ -31,9 +31,9 @@ public class AllDeckDetails : DetailsBase
     [SerializeField] private List<TextMeshProUGUI> _suitText = new List<TextMeshProUGUI>((int)Card.suit.max);
 
     [SerializeField] private List<List<Material>> _trumpMaterial = new List<List<Material>>();
-    [SerializeField] private List<Material> _deckBuffMaterial = new ();
-    [SerializeField] private List<Material> _cardBuffMaterial = new ();
-    [SerializeField] private List<Material> _sealBuffMaterial = new ();
+    [SerializeField] private List<Material> _deckBuffMaterial = new();
+    [SerializeField] private List<Material> _cardBuffMaterial = new();
+    [SerializeField] private List<Material> _sealBuffMaterial = new();
 
     private GameObject _pool;
     private List<UICardObject> _pollList = new List<UICardObject>();
@@ -53,7 +53,7 @@ public class AllDeckDetails : DetailsBase
     }
     public override void Hide()
     {
-        for (int i = 0; i < _pollList.Count; i++) 
+        for (int i = 0; i < _pollList.Count; i++)
         {
             _pollList[i].gameObject.SetActive(false);
             _pollList[i].ResetImage();
@@ -96,9 +96,9 @@ public class AllDeckDetails : DetailsBase
         }
 
         // シールのマテリアルを追加
-        for(int i = 0; i < (int)Card.sealBuff.MAX; i++) 
+        for (int i = 0; i < (int)Card.sealBuff.MAX; i++)
         {
-            Material material=BuffUtility.GetSealMaterial(i);
+            Material material = new Material(BuffUtility.GetSealMaterial(i));
 
             material.shader = Shader.Find("UI/Default");
 
@@ -109,9 +109,9 @@ public class AllDeckDetails : DetailsBase
         }
 
         // cardBuffのマテリアルを追加
-        for(int i = 0; i < (int)Card.cardBuff.MAX; i++) 
+        for (int i = 0; i < (int)Card.cardBuff.MAX; i++)
         {
-            Material material=BuffUtility.GetSealMaterial(i);
+            Material material =new Material( BuffUtility.GetCardMaterial(i));
 
             material.shader = Shader.Find("UI/Default");
 
@@ -121,9 +121,9 @@ public class AllDeckDetails : DetailsBase
 
         }
         // DeckBuffのマテリアルを追加
-        for(int i = 0; i < (int)Card.cardBuff.MAX; i++) 
+        for (int i = 0; i < (int)Card.deckBuff.MAX; i++)
         {
-            Material material=BuffUtility.GetTrumpMaterial(i);
+            Material material = new Material(BuffUtility.GetTrumpMaterial(i));
 
             material.shader = Shader.Find("UI/Default");
 
@@ -147,25 +147,28 @@ public class AllDeckDetails : DetailsBase
 
             game.transform.SetParent(uICards[(int)deckList[i].suit].transform);
 
-            if (deckList[i].state!=Card.State.deck) game.SetNowColor(USE_COLOR);
+            if (deckList[i].state != Card.State.deck) game.SetNowColor(USE_COLOR);
 
-            game.SetImage(_trumpMaterial[(int)deckList[i].suit][(int)deckList[i].number-1], null, GetSealBuff(deckList[i].sealBuff));
+            game.SetImage(_trumpMaterial[(int)deckList[i].suit][(int)deckList[i].number - 1], GetEffctBuff(deckList[i]), GetSealBuff(deckList[i].sealBuff));
 
 
         }
 
 
     }
-    private Material GetSealBuff(Card.sealBuff sealBuff) 
+    private Material GetSealBuff(Card.sealBuff sealBuff)
     {
         if (sealBuff != Card.sealBuff.None) return _sealBuffMaterial[(int)sealBuff];
         return null;
 
 
     }
-    private Material GetEffctBuff(Card.Trump buff) 
+    private Material GetEffctBuff(Card.Trump buff)
     {
-        //if (sealBuff != Card.sealBuff.None) return _sealBuffMaterial[(int)sealBuff];
+        if (buff.deckBuff != Card.deckBuff.None) return _deckBuffMaterial[(int)buff.deckBuff];
+        if (buff.cardBuff != Card.cardBuff.None) return _cardBuffMaterial[(int)buff.cardBuff];
+
+
 
         return null;
 

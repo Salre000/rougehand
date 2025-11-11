@@ -14,11 +14,12 @@ public class UICardObject : MonoBehaviour
 
     private Color _nowColor;
 
-    public void SetImage(Material main,Material effect,Material seal)
+    public void SetImage(Material main, Material effect, Material seal)
     {
         _main.material = main;
-        if(effect!=null)_effect.material = effect;
-        if (seal != null) _seal.material = seal;
+        if (effect != null) { _effect.material = effect; _effect.color = Color.white; };
+        if (seal != null){ _seal.material = seal; _seal.color = Color.white; };
+        
 
         _color.color = _nowColor;
 
