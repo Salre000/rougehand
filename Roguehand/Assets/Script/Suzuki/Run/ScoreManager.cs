@@ -259,8 +259,6 @@ public class ScoreManager : MonoBehaviour
         // 最終的にプレイボタンのフラグをリセット
         GameUtility.SetIsPlay(false);
 
-        // 手札のリセット
-        CardManager.instance.ResetHand();
 
     }
 
