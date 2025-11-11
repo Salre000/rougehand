@@ -24,6 +24,11 @@ public class JokerObjectManager : MonoBehaviour
 
     [SerializeField, Header("ジョーカーのオブジェクトの一番左側")] private Transform LeftPos;
     [SerializeField, Header("ジョーカーのオブジェクトの一番右側")] private Transform RightPos;
+    [SerializeField, Header("ジョーカーのオブジェクトのショップ一番左側")] private Transform _shopLeftPos;
+    [SerializeField, Header("ジョーカーのオブジェクトのショップ一番右側")] private Transform _shopRightPos;
+
+    private readonly Vector3 _SHOP_ANGLE = new Vector3(-90, 0, 0); 
+    private readonly Vector3 _NORMAL_ANGLE = new Vector3(0, 0, 0); 
 
     /// <summary>
     ///現在のジョーカーの状況
@@ -82,6 +87,14 @@ public class JokerObjectManager : MonoBehaviour
 
     public void Update()
     {
+
+        if (ShopManager.instance.IsShop()) 
+        {
+            ObjectMovePosShop();
+
+            return;
+        }
+
         Play();
         ObjectMovePos();
         Action();
@@ -128,10 +141,35 @@ public class JokerObjectManager : MonoBehaviour
         //ジョーカー同士の距離を作成
         float renge = Vector3.Distance(LeftPos.transform.position, RightPos.transform.position) / (_jokerObjects.Count + 1);
 
-        for (int i = 0; i < _jokerObjects.Count; i++) _jokerObjects[i].MovePos(LeftPos.transform.position + new Vector3(renge * (i + 1), 0, 0));
+        for (int i = 0; i < _jokerObjects.Count; i++)
+        {
+            _jokerObjects[i].MovePos(LeftPos.transform.position + new Vector3(renge * (i + 1), 0, 0));
+
+            _jokerObjects[i].transform.eulerAngles = _NORMAL_ANGLE;
+        }
 
         //手動の移動によって順番が入れ替わる関数
         CheckOrder();
+
+
+    }
+
+    private void ObjectMovePosShop() 
+    {
+
+        //ジョーカー同士の距離を作成
+        float renge = Vector3.Distance(_shopLeftPos.transform.position, _shopRightPos.transform.position) / (_jokerObjects.Count + 1);
+
+        for (int i = 0; i < _jokerObjects.Count; i++)
+        {
+            _jokerObjects[i].MovePos(_shopLeftPos.transform.position + new Vector3(renge * (i + 1), 0, 0));
+
+            _jokerObjects[i].transform.eulerAngles = _SHOP_ANGLE;
+        }
+        //手動の移動によって順番が入れ替わる関数
+        CheckOrder();
+
+
 
 
     }

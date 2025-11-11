@@ -43,6 +43,8 @@ public static class RoundUtility
         TextUIManager.instance.SetClearMoneyText(_builder.ToString());
 
         GameUtility.SetIsRoundResult(true);
+        // èD‚ÌƒŠƒZƒbƒg
+        CardManager.instance.ResetHand();
 
     }
 }

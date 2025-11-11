@@ -137,6 +137,57 @@ public class BuffManager : MonoBehaviour
 
 
     }
+    public bool CheckPlayBuffCard(Card.cardBuff cardBuff) 
+    {
+        bool flag=false;
+
+        switch (cardBuff)
+        {
+            case Card.cardBuff.Foil:
+            case Card.cardBuff.Hologram:
+            case Card.cardBuff.Polychrome:
+                flag = true;
+                break;
+        }
+
+        return flag;
+
+    }
+    /// <summary>
+    ///  カードのバフの関数自体を返す
+    /// </summary>
+    /// <param name="cardBuff"></param>
+    /// <returns></returns>
+    public System.Action GetActionPlayBuffCard(Card.cardBuff cardBuff)
+    {
+        return ()=> _cardBuff.Hand(cardBuff);
+    }
+    public bool CheckPlayBuffDeck(Card.deckBuff cardBuff) 
+    {
+        bool flag=false;
+
+        switch (cardBuff)
+        {
+            case Card.deckBuff.Glass:
+            case Card.deckBuff.Lucky:
+                flag = true;
+                break;
+        }
+
+        return flag;
+
+    }
+    /// <summary>
+    ///  カードのバフの関数自体を返す
+    /// </summary>
+    /// <param name="deckBuff"></param>
+    /// <returns></returns>
+    public System.Action GetActionPlayBuffDeck(Card.deckBuff deckBuff)
+    {
+        return ()=> _trumpBuff.Play(deckBuff); ;
+    }
+
+
 
     /// <summary>
     /// カードをプレイした時に手札で発動するバフ

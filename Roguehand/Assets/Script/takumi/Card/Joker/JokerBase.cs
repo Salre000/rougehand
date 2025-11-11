@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class JokerBase : SaleInterface, ExplanationInterface
 {
+
+    /// <summary>
+    /// 売却額を決める基準の倍率
+    /// </summary>
+    private readonly int SALE_VALUE_RATE = 2;
+
     /// <summary>
     /// ジョーカーのオブジェクトの動き方
     /// </summary>
@@ -82,7 +88,7 @@ public class JokerBase : SaleInterface, ExplanationInterface
     /// 売却額を返す関数
     /// </summary>
     /// <returns></returns>
-    public int GetSaleValue() { return _saleValue + (int)GetRarity(); }
+    public int GetSaleValue() { return _saleValue + ((int)GetRarity()+1)* SALE_VALUE_RATE; }
 
     public void AddSaleValue(int add) { _saleValue += add; }
 

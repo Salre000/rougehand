@@ -478,7 +478,7 @@ public class CardObjectManager : MonoBehaviour
     {
         List<CardObject> dommyObjectList = new List<CardObject>();
 
-
+         
 
         for (int i = 0; i < nexthand.Count; i++)
         {
@@ -510,6 +510,8 @@ public class CardObjectManager : MonoBehaviour
     /// </summary>
     public void PlayStart()
     {
+        List<Card.Trump> trumps = CardManager.instance.GetHand();
+
         // スコアの加算をしないカードの場合は返す関数
         List<int> index = CardManager.instance.GetPlayRoleIndexs();
 
@@ -525,7 +527,12 @@ public class CardObjectManager : MonoBehaviour
                 _cardObjectHands[i].SetGrab(false);
                 continue;
             }
-            else _cardObjectHands[i].SetStatus(CardObject.status.action);
+            else 
+            {
+            
+                _cardObjectHands[i].SetStatus(CardObject.status.action);
+                _cardObjectHands[i].GetCheckBuff(trumps[i]);
+            }
         }
     }
 

@@ -17,6 +17,8 @@ public class BreakManager : MonoBehaviour
 
     private Vector3 _offset = new Vector3(0,0,-15f);
 
+    private readonly Vector3 POS = new Vector3(90, 0, 0);
+
     public void Awake()
     {
         BreakUtility.instance = this;
@@ -39,6 +41,12 @@ public class BreakManager : MonoBehaviour
         GameObject breakObject= GetObject();
 
         breakObject.transform.position = gameObject.transform.position+_offset;
+
+        breakObject.transform.parent = gameObject.transform;
+
+        breakObject.transform.localEulerAngles = POS;
+
+        breakObject.transform.parent = transform;
 
 
 

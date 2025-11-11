@@ -28,12 +28,12 @@ public class CardObject : MonoBehaviour
     /// <summary>
     /// 現在の状態
     /// </summary>
-   [SerializeField]private status _status = status.none;
-   
+    [SerializeField] private status _status = status.none;
+
     /// <summary>
     /// ひとつ前の状態
     /// </summary>
-    [SerializeField]private status _lostStatus = status.none;
+    [SerializeField] private status _lostStatus = status.none;
 
     private float _moveTime = 0;
 
@@ -54,19 +54,22 @@ public class CardObject : MonoBehaviour
     /// <summary>
     /// 現在つかまれているかどうか
     /// </summary>
-    [SerializeField]private bool _isGrab = false;
+    [SerializeField] private bool _isGrab = false;
 
     /// <summary>
     /// 現在つかむことが可能かどうか
     /// </summary>
     [SerializeField] private bool _grab = true;
 
+    [SerializeField] private List<System.Action> actions = new List<System.Action>();
+
+
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag != "Finish") return;
 
-        _rigidbody.useGravity=false;
-        _rigidbody.isKinematic=true;
+        _rigidbody.useGravity = false;
+        _rigidbody.isKinematic = true;
 
         tag = collision.transform.tag;
 
@@ -78,14 +81,14 @@ public class CardObject : MonoBehaviour
 
     public void initialize()
     {
-        _rigidbody=GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
 
     }
 
     /// <summary>
     /// 重力を操作可能状態に変更
     /// </summary>
-    public void GravityStart() 
+    public void GravityStart()
     {
         tag = "Untagged";
         _rigidbody.useGravity = true;
@@ -96,12 +99,35 @@ public class CardObject : MonoBehaviour
     /// <summary>
     /// カードのリセットに使う関数
     /// </summary>
-    public void ResetCard() 
+    public void ResetCard()
     {
         SetStatus(CardObject.status.deck);
         ResetMoveTime();
         GravityStart();
-        _isGrab = false;    
+        _isGrab = false;
+
+    }
+
+    public void GetCheckBuff(Card.Trump trump)
+    {
+        if (BuffUtility.CheckPlayBuffDeck(trump.deckBuff))
+            actions.Add(BuffUtility.GetActionPlayBuffDeck(trump.deckBuff));
+
+        if (BuffUtility.CheckPlayBuffCard(trump.cardBuff))
+            actions.Add(BuffUtility.GetActionPlayBuffCard(trump.cardBuff));
+
+        actions.Add(AddScore(trump.number));
+    }
+
+    public int GetActionsCount() {  return actions.Count; }
+
+    public void PlayAction() 
+    {
+        actions[0]();
+
+        actions.RemoveAt(0);
+
+
 
     }
 
@@ -128,8 +154,8 @@ public class CardObject : MonoBehaviour
     public void CountDown()
     {
         //つかまれている間カウントしない
-        if (_isGrab) return;    
-        _moveTime -= Time.deltaTime* GameConfig.GetGameSpeed();
+        if (_isGrab) return;
+        _moveTime -= Time.deltaTime * GameConfig.GetGameSpeed();
         if (IsMovable()) return;
         _grab = true;
     }
@@ -143,26 +169,41 @@ public class CardObject : MonoBehaviour
     public float GetMoveTime() { return _moveTime; }
     public float GetMoveTimeRata() { return 1f - (_moveTime / MOVE_TIME); }
 
-    public void StopMove() {  _moveTime = 0f; }
+    public void StopMove() { _moveTime = 0f; }
 
     public Vector3 GetBeforePosition() { return _beforePosition; }
     public Vector3 GetBeforeAngle() { return _beforeAngle; }
 
 
-    public void SetGrab(bool flag) { _isGrab = flag;}
+    public void SetGrab(bool flag) { _isGrab = flag; }
 
     /// <summary>
     /// つかむことが可能かどうかを返す関数
     /// </summary>
     /// <returns></returns>
-    public bool GetGrabFlag() {  return _grab; }
-    
+    public bool GetGrabFlag() { return _grab; }
+
     /// <summary>
     /// つかむことを出来なく変更
     /// カードが目的地に着いたら解除
     /// </summary>
-    public void NotGrab() {  _grab=false; }
+    public void NotGrab() { _grab = false; }
 
     public bool IsGrab() { return _isGrab; }
+
+    public System.Action AddScore(Card.number number)
+    {
+        return () =>
+        {
+            float score = (int)number;
+            if (score <= 1 || 11 < score) score = 11;
+
+
+            ScoreManager.instance.BasicPlus(score);
+        };
+
+
+    }
+
 
 }
