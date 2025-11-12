@@ -14,6 +14,8 @@ public static class GameUtility
     private static int _discardCount = 5;
     // 現ラウンド
     private static int _roundCount = 1;
+    // 所持金
+    private static int _myMoney = 0;
     // ボタンの反応の応対
     private static bool _isPushButton = true;
     // プレイボタンが押されたか
@@ -47,6 +49,10 @@ public static class GameUtility
     public static void SetRoundCount(int value) { _roundCount = value; }
     // ラウンド数を取得
     public static int GetRoundCount() { return _roundCount; }
+    // 所持金の設定
+    public static void SetMyMoney(int value) { _myMoney = value; }
+    // 所持金の取得
+    public static int GetMyMoney() { return _myMoney; }
     // ボタン受付フラグのセット
     public static void SetIsPushButton(bool value) { _isPushButton = value; }
     // ボタン受付フラグの取得

@@ -18,6 +18,8 @@ public class PlayManager : MonoBehaviour
     // ラウンドスコアに追加するタイミングを秒単位で遅らせる
     private const float _WAIT_TIME= 1f;
 
+    private bool isFluctuation=false;
+
     private void Awake()
     {
         if (instance == null)
@@ -107,4 +109,6 @@ public class PlayManager : MonoBehaviour
     // プレイを押した後のカードの位置が定位置に付いたかをセットする
     public void SetCardTransComp(bool flag) { _isSetCard = flag; }
 
+    public void SetIsFluctuation(bool flag) { isFluctuation = flag; }
+    public bool IsFluctuation() { return isFluctuation; }
 }
