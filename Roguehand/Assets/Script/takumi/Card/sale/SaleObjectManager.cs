@@ -159,7 +159,10 @@ public class SaleObjectManager : MonoBehaviour
         _productsSaleValue.Add(value);
     }
 
-    public void IndexBuy(int index) { _productsBuy[index](); }
+    public void IndexBuy(int index) 
+    { 
+        _productsBuy[index](); 
+    }
 
     public void Remove(GameObject gameObject) 
     {
