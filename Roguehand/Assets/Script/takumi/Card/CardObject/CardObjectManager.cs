@@ -469,6 +469,7 @@ public class CardObjectManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 問題あり　修正しないといけない
     /// カードのオブジェクトを並び変える関数
     /// 手札のオブジェクトと内容がずれていない前提
     /// </summary>

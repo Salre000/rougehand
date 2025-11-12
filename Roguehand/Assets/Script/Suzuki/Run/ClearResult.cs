@@ -14,7 +14,8 @@ public class ClearResult : MonoBehaviour
     // リザルト関連
     [SerializeField] GameObject _clearResult;
     [SerializeField] Transform _targetcClearResult;
-    private float _transTime = 5f;
+    private float _transTime = 8f;
+    private float _okLine = 0.1f;
     [SerializeField] Button _liquidationButton;
     private bool _isResultArrival = false;
     private Vector3 _resetLocalPosition;
@@ -56,7 +57,7 @@ public class ClearResult : MonoBehaviour
         resultPosition = Vector3.Lerp(resultPosition, _targetcClearResult.localPosition, Time.deltaTime * _transTime);
         _clearResult.transform.localPosition = resultPosition;
         // 完了通知
-        if ((resultPosition - _targetcClearResult.localPosition).sqrMagnitude < 0.01f)
+        if ((resultPosition - _targetcClearResult.localPosition).sqrMagnitude < _okLine)
         {
             _isResultArrival=true;
         }
@@ -106,7 +107,7 @@ public class ClearResult : MonoBehaviour
         _clearResult.transform.localPosition = resultPosition;
 
         // 完了通知
-        if ((resultPosition - _resetLocalPosition).sqrMagnitude < 0.01f)
+        if ((resultPosition - _resetLocalPosition).sqrMagnitude < _okLine)
         {
             _time = _resetTime;
             _isPush=false;

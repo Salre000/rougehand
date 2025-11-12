@@ -18,6 +18,7 @@ public class Shoping : MonoBehaviour
     private float _camTime = 8f;
     // ショップ終了ボタン
     [SerializeField] private Button _shopEndButton;
+    private bool _shopCompFlag=false;
 
     private void Awake()
     {
@@ -38,6 +39,11 @@ public class Shoping : MonoBehaviour
         if (!ShopManager.instance.IsShop()) return;
         _vcam.rotation = Quaternion.Slerp(_vcam.rotation, Quaternion.Euler(_TARGET_SHOP_CAM_ROTATE, 0, 0), Time.deltaTime * _camTime);
         angle = NormalizeAngle(_vcam.eulerAngles.x);
+        // 完全にショップを向いてから次へを押せるようにする
+        if (angle - _TARGET_SHOP_CAM_ROTATE < 0.01f)
+        {
+            _shopCompFlag = true;
+        }
     }
 
     private void ShopEnd()
@@ -49,6 +55,7 @@ public class Shoping : MonoBehaviour
         {
             // ラン画面に向ききったら終了お知らせフラグをリセット 
             ShopManager.instance.SetPushEndShop(false);
+            _shopCompFlag = false;
             return;
         }
 
@@ -60,6 +67,7 @@ public class Shoping : MonoBehaviour
     private void OnShopEnd()
     {
         if(!ShopManager.instance.IsShop()) return;
+        if(!_shopCompFlag)return;
 
         // 次ラウンドへを押してショップを終了した
         ShopManager.instance.SetPushEndShop(true);
