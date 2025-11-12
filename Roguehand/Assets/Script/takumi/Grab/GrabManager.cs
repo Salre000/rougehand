@@ -121,6 +121,7 @@ public class GrabManager : MonoBehaviour
         }
 
 
+        ExplanationManager.instance.Remove();
         if (_time < 1)
         {
             switch (_status)
@@ -147,7 +148,6 @@ public class GrabManager : MonoBehaviour
 
         _grabID = -1;
 
-        ExplanationManager.instance.Remove();
 
 
     }

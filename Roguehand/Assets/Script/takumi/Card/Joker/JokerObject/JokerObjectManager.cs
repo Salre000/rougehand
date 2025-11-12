@@ -261,6 +261,19 @@ public class JokerObjectManager : MonoBehaviour
 
     }
 
+    private readonly Vector2 SHOP_UI_OFFSET = new Vector2(1, 0);
+    /// <summary>
+    /// ショップ内のジョーカーの説明を描画する関数
+    /// </summary>
+    /// <param name="gameObject"></param>
+    /// <param name="jokerBase"></param>
+    private void ShopExplamtion(GameObject gameObject,JokerBase jokerBase) 
+    {
+        SaleUtility.SetSale(jokerBase, gameObject, jokerBase.GetSaleValue(), false);
+
+        ExplanationManager.instance.AddExplanation(gameObject,jokerBase,jokerBase.JokerBuffs(), SHOP_UI_OFFSET);
+
+    }
 
     /// <summary>
     /// 次のジョーカーをプレイ状態に変更する
@@ -344,12 +357,13 @@ public class JokerObjectManager : MonoBehaviour
 
         SaleObjectManager.instance.ProductExplantion(jokerBase.GetSaleValue());
         SaleObjectManager.instance.AddProducts(dommyObject,
-            () => { SaleUtility.SetSale(jokerBase, dommyObject, jokerBase.GetSaleValue(), false); },
+            () => { ShopExplamtion(dommyObject, jokerBase); },
             () => 
             {
-                JokerUtility.Addjoker(jokerBase.GetID());
+                JokerUtility.Addjoker(jokerBase.GetID()-IDUtility.JOKER_ID-1);
 
-                SaleObjectManager.instance.Remove(dommyObject);
+                GameObject domyy = dommyObject;
+                SaleObjectManager.instance.Remove(domyy);
 
 
             }

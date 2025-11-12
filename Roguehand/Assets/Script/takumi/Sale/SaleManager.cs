@@ -85,7 +85,7 @@ public class SaleManager : MonoBehaviour
                     int index = _saleObject.IndexOf(cashObject);
 
                     //購入できない０はダミーで置いている
-                    if (0 < _saleValue[num]) return;
+                    if (0 > _saleValue[num]) return;
 
 
 

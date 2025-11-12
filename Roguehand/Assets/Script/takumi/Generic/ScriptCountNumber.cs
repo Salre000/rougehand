@@ -30,6 +30,10 @@ public static class ScriptCountNumber
     /// </summary>
     public const float ALTERNATIVE = -1f;
 
+    /// <summary>
+    /// Œë·‚ğ”F‚ß‚éÛ‚Ég—p‚·‚é
+    /// </summary>
+    public const float EPSILON = 0.01f;
 
 
 

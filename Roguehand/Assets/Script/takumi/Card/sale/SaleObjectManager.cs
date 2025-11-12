@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static ScriptCountNumber;
 /// <summary>
 /// ショップ時の購入売却などを行うクラス
 /// </summary>
@@ -160,9 +161,19 @@ public class SaleObjectManager : MonoBehaviour
 
     public void IndexBuy(int index) { _productsBuy[index](); }
 
-    public void gamRemove(GameObject gameObject) 
+    public void Remove(GameObject gameObject) 
     {
-        int index= _products.IndexOf(gameObject);
+        int index = -1;//_products.IndexOf(gameObject);
+        int ID = 0; 
+
+        //かなり非効率な事にをしているが他の方法を今の手持ちでは行えない
+        _products.GetAction(product =>
+        {
+            if (Vector3.Distance(product.transform.position, gameObject.transform.position) < EPSILON) index = ID;
+            ID++;
+            return product;
+
+        });
 
         if (index < 0) return;
 
@@ -172,6 +183,18 @@ public class SaleObjectManager : MonoBehaviour
         _productsSaleShow.RemoveAt(index);
         _productsBuy.RemoveAt(index);
 
+        int i = 0;
+        _valuePool.GetAction(value =>
+        {
+            if (!value.gameObject.activeSelf) return value;
+
+            if (i == index) value.gameObject.SetActive(false);
+
+            i++;
+
+            return value;
+
+        });
     }
 
     public int GetIndex(GameObject gameObject) {  return _products.IndexOf(gameObject); }
