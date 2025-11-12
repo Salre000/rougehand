@@ -73,7 +73,7 @@ public class PackManager : MonoBehaviour
     private void JokerMaga()
     {
 
-        JokerUtility.ShopJoker(_leftPos.position,_rightPos.position,MEGA_COUNT);
+        //JokerUtility.ShopJoker(_leftPos.position,_rightPos.position,MEGA_COUNT);
 
 
 

@@ -13,6 +13,10 @@ public class ItemManager : MonoBehaviour
 
     [SerializeField] private GameObject _prefab;
 
+    private readonly Vector3 _SHOP_ANGLE = new Vector3(-90, 0, 0);
+    private readonly Vector3 _NORMAL_ANGLE = new Vector3(0, 0, 0);
+
+
     /// <summary>
     /// アイテムの本体
     /// </summary>
@@ -21,16 +25,24 @@ public class ItemManager : MonoBehaviour
     /// <summary>
     /// アイテムのオブジェクト
     /// </summary>
-    [SerializeField]private List<ItemObject> _itemObjectList = new List<ItemObject>();
+    [SerializeField] private List<ItemObject> _itemObjectList = new List<ItemObject>();
 
     /// <summary>
     /// アイテムの左端の座標
     /// </summary>
-    [SerializeField]private Transform _leftTransform;
+    [SerializeField] private Transform _leftTransform;
     /// <summary>
     /// アイテムの右端の座標
     /// </summary>
     [SerializeField] private Transform _rightTransform;
+    /// <summary>
+    /// ショップ時のアイテムの左端の座標
+    /// </summary>
+    [SerializeField] private Transform _leftShopTransform;
+    /// <summary>
+    /// ショップ時のアイテムの右端の座標
+    /// </summary>
+    [SerializeField] private Transform _rightShopTransform;
 
     private bool _isGrab = false;
     private int _isGrabID = -1;
@@ -42,6 +54,14 @@ public class ItemManager : MonoBehaviour
 
     public void Update()
     {
+        // ショップ時の処理
+        if (ShopManager.instance.IsShop())
+        {
+            SetShopPosition();
+            CheckOrder();
+            return;
+        }
+
         SetPosition();
         CheckOrder();
     }
@@ -56,7 +76,7 @@ public class ItemManager : MonoBehaviour
         _itemList.Add(ALLItem.GetItem((ALLItem.ALLItemEnum)ID));
         _itemObjectList.Add(Instantiate(_prefab, transform).AddComponent<ItemObject>());
     }
-    public void Remove(ItemBase itemBase) 
+    public void Remove(ItemBase itemBase)
     {
 
         bool flag = _itemList.Contains(itemBase);
@@ -71,10 +91,10 @@ public class ItemManager : MonoBehaviour
         // オブジェクトを配列から消去
         _itemObjectList.RemoveAt(index);
 
-        BreakUtility.StartBreak(gameObject);       
+        BreakUtility.StartBreak(gameObject);
 
     }
-    public void Remove(int itemBase) 
+    public void Remove(int itemBase)
     {
 
         _itemList.RemoveAt(itemBase);
@@ -91,13 +111,13 @@ public class ItemManager : MonoBehaviour
     }
 
 
-    public void ChengeOrder(int lostID,int NextID) 
+    public void ChengeOrder(int lostID, int NextID)
     {
 
-        _itemObjectList= Extra.ChengeOrder(_itemObjectList, lostID, NextID);
-        _itemList= Extra.ChengeOrder(_itemList, lostID, NextID);
+        _itemObjectList = Extra.ChengeOrder(_itemObjectList, lostID, NextID);
+        _itemList = Extra.ChengeOrder(_itemList, lostID, NextID);
 
-        for(int i=0;i<_itemObjectList.Count;i++)
+        for (int i = 0; i < _itemObjectList.Count; i++)
             _itemObjectList[i].ResetTime();
 
     }
@@ -109,7 +129,7 @@ public class ItemManager : MonoBehaviour
 
     }
 
-    public void SetSale(int ID) 
+    public void SetSale(int ID)
     {
 
         SaleUtility.SetSale(_itemList[ID], _itemObjectList[ID].gameObject, _itemList[ID].ReturnMoney());
@@ -118,9 +138,9 @@ public class ItemManager : MonoBehaviour
 
     }
 
-    public void ShowExplanation(int ID) 
+    public void ShowExplanation(int ID)
     {
-        int[] test=new int [0];
+        int[] test = new int[0];
         ExplanationManager.instance.AddExplanation(_itemObjectList[ID].gameObject, _itemList[ID], test, new Vector2(0, 1));
 
 
@@ -166,17 +186,40 @@ public class ItemManager : MonoBehaviour
     /// <summary>
     /// アイテムの位置を元の場所に戻す処理
     /// </summary>
-    private void SetPosition() 
+    private void SetPosition()
     {
 
-        float renge = Vector3.Distance(_leftTransform.position, _rightTransform.position)/(_itemObjectList.Count+1);
+        float renge = Vector3.Distance(_leftTransform.position, _rightTransform.position) / (_itemObjectList.Count + 1);
 
 
 
 
-        for (int i = 0; i < _itemObjectList.Count; i++)
-            _itemObjectList[i].MovePos(_leftTransform.position+new Vector3(renge*(i+1), 0,0));
+        for (int i = 0; i < _itemObjectList.Count; i++) 
+        {
+            _itemObjectList[i].MovePos(_leftTransform.position + new Vector3(renge * (i + 1), 0, 0));
 
+            _itemObjectList[i].transform.eulerAngles = _NORMAL_ANGLE;
+        }
+
+    }
+    /// <summary>
+    /// ショップのときのアイテムの位置を元の場所に戻す処理
+    /// </summary>
+    private void SetShopPosition()
+    {
+
+        float renge = Vector3.Distance(_leftShopTransform.position, _rightShopTransform.position) / (_itemObjectList.Count + 1);
+
+
+
+
+        for (int i = 0; i < _itemObjectList.Count; i++) 
+        {
+            _itemObjectList[i].MovePos(_leftShopTransform.position + new Vector3(renge * (i + 1), 0, 0));
+
+            _itemObjectList[i].transform.eulerAngles = _SHOP_ANGLE;
+
+        }
 
     }
 

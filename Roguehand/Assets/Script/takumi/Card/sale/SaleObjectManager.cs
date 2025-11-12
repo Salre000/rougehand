@@ -1,0 +1,196 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+/// <summary>
+/// ショップ時の購入売却などを行うクラス
+/// </summary>
+public class SaleObjectManager : MonoBehaviour
+{
+    private enum shoptype
+    {
+        joker,
+        item,
+        trump,
+        max
+    }
+
+    /// <summary>
+    /// もうこれでいいや
+    /// </summary>
+    public static SaleObjectManager instance;
+    /// <summary>
+    /// 購入可能なオブジェクトのリスト
+    /// </summary>
+    [SerializeField] private List<GameObject> _products = new List<GameObject>();
+    [SerializeField] private List<System.Action> _productsSaleShow = new List<System.Action>();
+    [SerializeField] private List<float> _productsSaleValue = new List<float>();
+    [SerializeField] private List<System.Action> _productsBuy = new List<System.Action>();
+
+    [SerializeField] private GameObject _valuePrefab;
+    [SerializeField]private List<UISaleValueObject>  _valuePool = new List<UISaleValueObject>();
+    [SerializeField] Canvas shopCanvas;
+
+    [SerializeField] private Transform _shopLeftPos;
+    [SerializeField] private Transform _shopRightPos;
+    private readonly Vector3 _SHOP_ANGLE = new Vector3(-90, 0, 0);
+    private readonly Vector3 UI_VALUE_OFFSET = new Vector3(0,130,0);
+    float RENGE = 916;
+
+    public void Awake()
+    {
+        instance = this;
+
+        Initializ();
+    }
+
+    private void Initializ() 
+    {
+        GameObject pollParent = new GameObject("UIValueParent");
+        pollParent.transform.parent = shopCanvas.transform;
+        for (int i = 0; i < 10; i++) 
+        {
+            _valuePool.Add(Instantiate(_valuePrefab, pollParent.transform).GetComponent<UISaleValueObject>());
+        }
+        ValueUISetActiveFalse();
+    }
+    private void SetShopObjectPos()
+    {
+
+        ValueUISetActiveFalse();
+
+        float renge = RENGE / (_products.Count + 1);
+        Debug.Log(renge);
+        for (int i = 0; i < _products.Count; i++)
+        {
+
+            _products[i].transform.position = _shopLeftPos.position + new Vector3(renge * (i + 1), 0, 0);
+            _products[i].transform.eulerAngles = _SHOP_ANGLE;
+
+            // UIを描画する
+            UISaleValueObject uISale = GetValue();
+
+            uISale.SetValue(_productsSaleValue[i]);
+
+            uISale.transform.position = Camera.main.WorldToScreenPoint(_products[i].transform.position) + UI_VALUE_OFFSET;
+
+        }
+    }
+
+    private void ValueUISetActiveFalse() 
+    {
+        for(int i=0;i<_valuePool.Count;i++)
+            _valuePool[i].transform.gameObject.SetActive(false);
+    }
+    private UISaleValueObject GetValue() 
+    {
+        for(int i = 0; i < _valuePool.Count; i++) 
+        {
+            if (_valuePool[i].gameObject.activeSelf) continue;
+            _valuePool[i].gameObject.SetActive(true);
+            return _valuePool[i];
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// ランダムに引数の数だけショップにオブジェクトを並べる
+    /// </summary>
+    /// <param name="count"></param>
+    public void CreateRondom(int count = 2)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            shoptype type = (shoptype)Random.Range(0, (int)shoptype.max);
+            switch (type)
+            {
+                case shoptype.joker:
+                    CreateJoker();
+                    break;
+                case shoptype.item:
+                    if (true) { i--; continue; }
+                    CreateItem();
+                    break;
+                case shoptype.trump:
+                    // バウンチャーを取っていなければ戻す
+                    if (true) { i--; continue; }
+                    // トランプの生成
+
+                    break;
+            }
+
+
+        }
+
+
+        // 位置を修正
+        SetShopObjectPos();
+
+    }
+
+    public void CreateItem(int ID = -1)
+    {
+        if (ID < 0) ID = Random.Range(0, (int)ALLItem.ALLItemEnum._MAX);
+
+
+    }
+
+    public void CreateJoker(int ID = -1)
+    {
+        if (ID < 0) ID = Random.Range(0, (int)ALLJoker._allJokerEnum.MAX);
+
+        JokerUtility.ShopJoker(() => ALLJoker.GetJoker((ALLJoker._allJokerEnum)ID));
+
+    }
+
+    public void AddProducts(GameObject product, System.Action action,System.Action buy)
+    {
+        _products.Add(product);
+
+        _productsSaleShow.Add(action);
+
+        _productsBuy.Add(buy);
+    }
+
+    public void ProductExplantion(float value) 
+    {
+        _productsSaleValue.Add(value);
+    }
+
+    public void IndexBuy(int index) { _productsBuy[index](); }
+
+    public void gamRemove(GameObject gameObject) 
+    {
+        int index= _products.IndexOf(gameObject);
+
+        if (index < 0) return;
+
+        BreakUtility.StartBreak(_products[index]);
+        Destroy(_products[index]);
+        _products.RemoveAt(index);
+        _productsSaleShow.RemoveAt(index);
+        _productsBuy.RemoveAt(index);
+
+    }
+
+    public int GetIndex(GameObject gameObject) {  return _products.IndexOf(gameObject); }
+
+    public void SetSale(int index)
+    {
+        _productsSaleShow[index]();
+
+
+    }
+
+    /// <summary>
+    /// 保存したリストを初期化
+    /// </summary>
+    public void Clear() 
+    {
+        _productsSaleValue.Clear();
+        _productsSaleShow.Clear();
+        _products.Clear();
+    }
+
+}

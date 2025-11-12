@@ -14,7 +14,7 @@ public static class JokerObjectUtility
     public static bool PlayCheck() {return  instance.PlayCheck(); }
 
     public static void AddJoker(JokerBase jokerBase) { instance.AddJoker(jokerBase); }
-    public static void AddDomyyJoker(JokerBase jokerBase,Vector3 pos) { instance.AddDommyJoker(jokerBase, pos); }
+    public static void AddDomyyJoker(JokerBase jokerBase) { instance.AddDommyJoker(jokerBase); }
     public static void RemoveJoker(int ID) { instance.RemoveJoker(ID); }
     public static void RemoveDomyyJoker() { instance.DommyDestroy(); }
 

@@ -55,6 +55,6 @@ public static class JokerUtility
 
     public static void ShowExplanation(int ID) { instance.ShowExplanation(ID);}
 
-    public static void ShopJoker(Vector3 left, Vector3 right, int count = 3, System.Func<JokerBase> func = null) { instance.ShopJokerAdd(left,right,count,func); }
+    public static void ShopJoker(System.Func<JokerBase> func = null) { instance.ShopJokerAdd(func); }
 
 }

@@ -51,8 +51,12 @@ public class Shoping : MonoBehaviour
             ShopManager.instance.SetPushEndShop(false);
             return;
         }
+
         // ラン画面へ向く
         _vcam.rotation = Quaternion.Lerp(_vcam.rotation, Quaternion.Euler(_TARGET_RUN_CAM_ROTATE, 0, 0), Time.deltaTime * _camTime);
+
+        // 購入や売却の表示を全て削除
+        SaleUtility.Claer(true);
 
     }
 
@@ -82,9 +86,11 @@ public class Shoping : MonoBehaviour
             return card;
 
         });
+
         // ドローの処理をリセット
         RoundObserver.Instance.RoundStartActions();
 
+        SaleObjectManager.instance.CreateRondom();
 
     }
 

@@ -177,27 +177,15 @@ public class JokerManager : MonoBehaviour
     /// ジョーカーを選択できる状態にする関数
     /// ランダム
     /// </summary>
-    /// <param name="count"><ジョーカーの数/param>
-    public void ShopJokerAdd(Vector3 left, Vector3 right, int count = 3, System.Func<JokerBase> func = null)
+    public void ShopJokerAdd(System.Func<JokerBase> func = null)
     {
         //　ジョーカー選択条件を何も入れなかったらランダムで生成する
         if (func == null) func = GetRoundomJoker;
 
         //カードとカードの間
-        float handCardRange = Vector3.Distance(left, right) / (float)(count + 1f);
+        JokerBase jokerBase = func();
 
-        for (int i = 0; i < count; i++)
-        {
-            JokerBase jokerBase = func();
-
-            _dommyJoker.Add(jokerBase);
-            // 移動目標地点を確認
-            Vector3 goalPos = left + new Vector3(handCardRange * (i + 1), 0, 0);
-
-            JokerObjectUtility.AddDomyyJoker(jokerBase, goalPos);
-
-
-        }
+        JokerObjectUtility.AddDomyyJoker(jokerBase);
 
 
 
