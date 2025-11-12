@@ -126,7 +126,12 @@ public class JokerObject : MonoBehaviour
     {
         if (_status != JokerStatus.action) return;
 
+        //　アクションを開始時に角度を記憶する
+        LostAngle = transform.eulerAngles;
+
+
         _jokerPlayAction();
+
 
 
     }
@@ -226,11 +231,13 @@ public class JokerObject : MonoBehaviour
     public int GetJokerID() { return _base.GetID(); }
 
     private readonly float CHENGE_SPEED=4;
+
+    private Vector3 LostAngle = Vector3.zero;
     private void ChengeAction()
     {
         _time += Time.deltaTime * GameConfig.GetGameSpeed() * reta* CHENGE_SPEED;
 
-        transform.eulerAngles = Vector3.Lerp(Vector3.zero, new Vector3(0, 180, 0), _time);
+        transform.eulerAngles = Vector3.Lerp(Vector3.zero, LostAngle+new Vector3(0, 180, 0), _time);
 
         if (_time > 1 && reta == 1)
         {
@@ -239,6 +246,8 @@ public class JokerObject : MonoBehaviour
             JokerUtility.SetMaterial(JokerObjectUtility.GetJokerIndex(this));
 
             reta = -1;
+
+            LostAngle = transform.eulerAngles;
         }
 
         if (_time > 0f) return;

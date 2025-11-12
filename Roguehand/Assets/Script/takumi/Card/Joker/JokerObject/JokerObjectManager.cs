@@ -92,6 +92,7 @@ public class JokerObjectManager : MonoBehaviour
         {
             ObjectMovePosShop();
 
+            ShopAction();
             return;
         }
 
@@ -154,6 +155,9 @@ public class JokerObjectManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// ショップでの整列処理
+    /// </summary>
     private void ObjectMovePosShop() 
     {
 
@@ -173,6 +177,21 @@ public class JokerObjectManager : MonoBehaviour
 
 
     }
+
+    /// <summary>
+    /// カードのアクションに応じた動きの関数
+    /// </summary>
+    private void ShopAction()
+    {
+        if (_status != JokerStatus.action) return;
+
+
+        for (int i = 0; i < _jokerObjects.Count; i++) _jokerObjects[i].Action();
+
+        if (_jokerObjects.Find(joker => joker.CheckAction()) == null) _status = JokerStatus.wait;
+
+    }
+
     /// <summary>
     /// ターンの終了時に呼ぶ関数
     /// </summary>
