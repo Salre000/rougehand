@@ -7,6 +7,7 @@ public class TextUIManager : MonoBehaviour
 {
     public static TextUIManager instance;
 
+    [Header("ƒ‰ƒ“‰æ–Ê‚ÌTextUI")]
     [SerializeField] private TextMeshProUGUI _roundNameText;
     [SerializeField] private TextMeshProUGUI _lowestScoreText;
     [SerializeField] private TextMeshProUGUI _rewardCountText;
@@ -24,6 +25,14 @@ public class TextUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _resultMoneyText;
     [SerializeField] private TextMeshProUGUI _resultClearMoneyText;
     [SerializeField] private TextMeshProUGUI _clearMoneyText;
+
+    [Header("ƒVƒ‡ƒbƒv‰æ–Ê‚ÌTextUI")]
+    [SerializeField] private TextMeshProUGUI _shopHandText;
+    [SerializeField] private TextMeshProUGUI _shopDiscardText;
+    [SerializeField] private TextMeshProUGUI _shopRoundText;
+    [SerializeField] private TextMeshProUGUI _shopAnteText;
+    [SerializeField] private TextMeshProUGUI _shopMoneyText;
+
     private void Awake()
     {
         if (instance == null)
@@ -113,11 +122,11 @@ public class TextUIManager : MonoBehaviour
     public void SetRoleText(string value) { _roleText.text = value; }
     public void SetBasicScoreText(string value) { _basicScoreText.text = value; }
     public void SetMagnificationText(string value) { _magnificationText.text = value; }
-    public void SetHandText(string value) { _handText.text = value; }
-    public void SetDiscardText(string value) { _discardText.text = value; }
-    public void SetMoneyText(string value) { _moneyText.text = value; }
-    public void SetAnteText(string value) { _anteText.text = value; }
-    public void SetRoundText(string value) { _roundText.text = value; }
+    public void SetHandText(string value) { _shopHandText.text = _handText.text = value; }
+    public void SetDiscardText(string value) { _shopDiscardText.text = _discardText.text = value; }
+    public void SetMoneyText(string value) { _shopMoneyText.text = _moneyText.text = value; }
+    public void SetAnteText(string value) { _shopAnteText.text = _anteText.text = value; }
+    public void SetRoundText(string value) { _shopRoundText.text = _roundText.text = value; }
     public void SetResultLowestScoreText(string value) { _resultLowestScoreText.text = value; }
     public void SetResultHandText(string value) { _resultHandText.text = value; }
     public void SetResultMoneyText(string value) { _resultMoneyText.text = value; }

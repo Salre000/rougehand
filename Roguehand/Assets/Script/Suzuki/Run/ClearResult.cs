@@ -21,8 +21,11 @@ public class ClearResult : MonoBehaviour
     private bool _isPush = false;
     private bool _isComp = false;
     int allReward;
+    float _resetTime = 0f;
     float _time = 0f;
     float _endTime = 1f;
+    float _flucSpeedTime = 0f;
+    float _flucEndTime = 0.2f;
 
     // Start is called before the first frame update
     void Awake()
@@ -46,12 +49,12 @@ public class ClearResult : MonoBehaviour
     void RoundClearCheck()
     {
         if (!GameUtility.IsRoundResult()) return;
+        if (_isPush) return;
         _clearResult.SetActive(true);
         Vector3 resultPosition = _clearResult.transform.localPosition;
         // 移動
         resultPosition = Vector3.Lerp(resultPosition, _targetcClearResult.localPosition, Time.deltaTime * _transTime);
         _clearResult.transform.localPosition = resultPosition;
-
         // 完了通知
         if ((resultPosition - _targetcClearResult.localPosition).sqrMagnitude < 0.01f)
         {
@@ -68,8 +71,8 @@ public class ClearResult : MonoBehaviour
         // 定位置につくまでボタンの発火を防ぐ
         if (!_isResultArrival) return;
         _isPush = true;
-        
         _isComp = false;
+
         _isResultArrival = false;
 
     }
@@ -80,7 +83,7 @@ public class ClearResult : MonoBehaviour
 
         MoneyFluctuation();
 
-        // 終わったら下通す
+        // 変動中なら通さない
         if (PlayManager.instance.IsFluctuation()) return;
 
 
@@ -92,6 +95,7 @@ public class ClearResult : MonoBehaviour
 
         // ショップ画面へ向かせる
         ShopManager.instance.SetIsShop(true);
+        ResetHandDis();
 
         GameUtility.SetIsRoundResult(false);
 
@@ -104,7 +108,7 @@ public class ClearResult : MonoBehaviour
         // 完了通知
         if ((resultPosition - _resetLocalPosition).sqrMagnitude < 0.01f)
         {
-            _time = 0f;
+            _time = _resetTime;
             _isPush=false;
             _clearResult.SetActive(false);
         }
@@ -123,7 +127,15 @@ public class ClearResult : MonoBehaviour
             // 余った手数と合わせて合計金を算出
             allReward = GameUtility.GetHandCount() + reward;
             _isComp = true;
+            PlayManager.instance.SetIsFluctuation(true);
         }
+
+        if (_flucSpeedTime < _flucEndTime)
+        {
+            _flucSpeedTime += Time.deltaTime;
+            return;
+        }
+        _flucSpeedTime = _resetTime;
 
         // 現在の所持金を取得
         int myMoney = GameUtility.GetMyMoney();
@@ -149,8 +161,16 @@ public class ClearResult : MonoBehaviour
     /// <summary>
     /// ショップに移行が完了したタイミングでランのほうをリセットする
     /// </summary>
-    void ResetShopEnd()
+    void ResetHandDis()
     {
-
+        // ハンドとディスカードの回数をリセット
+        GameUtility.SetHandCount(GameUtility.GetBaseHandCound());
+        GameUtility.SetDiscardCount(GameUtility.GetBaseDiscardCound());
+        _builder.Clear();
+        _builder.Append(GameUtility.GetHandCount());
+        TextUIManager.instance.SetHandText(_builder.ToString());
+        _builder.Clear();
+        _builder.Append(GameUtility.GetDiscardCount());
+        TextUIManager.instance.SetDiscardText(_builder.ToString());
     }
 }
