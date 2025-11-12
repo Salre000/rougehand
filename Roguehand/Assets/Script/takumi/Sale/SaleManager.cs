@@ -96,7 +96,7 @@ public class SaleManager : MonoBehaviour
 
                     int saleIndex = SaleObjectManager.instance.GetIndex(cashObject);
 
-                    SaleObjectManager.instance.IndexBuy(index);
+                    SaleObjectManager.instance.IndexBuy(saleIndex);
 
 
                     Remove(index);
