@@ -7,6 +7,7 @@ public static class ALLItem
     public enum ALLItemEnum 
     {
         _constellation,
+        _MAX,
     }
 
     public static ItemBase GetItem(ALLItemEnum item)

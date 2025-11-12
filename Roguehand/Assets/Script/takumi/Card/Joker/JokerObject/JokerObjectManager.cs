@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class JokerObjectManager : MonoBehaviour
@@ -87,7 +88,7 @@ public class JokerObjectManager : MonoBehaviour
 
     public void Update()
     {
-
+        // ショップの時
         if (ShopManager.instance.IsShop()) 
         {
             ObjectMovePosShop();
@@ -325,23 +326,35 @@ public class JokerObjectManager : MonoBehaviour
         PaintJoker(_jokerObjects[_jokerObjects.Count - 1].gameObject, materialList._material[_jokerObjects[_jokerObjects.Count - 1].GetJokerID() - 2000]);
 
     }
-    public void AddDommyJoker(JokerBase jokerBase,Vector3 pos)
+    public void AddDommyJoker(JokerBase jokerBase)
     {
         //オブジェクトの生成
-        _domyyJokerObjects.Add(GameObject.Instantiate(_prefab, transform).AddComponent<JokerObject>());
+        GameObject dommyObject=GameObject.Instantiate(_prefab, transform);
+
+        // コンポーネントの追加と初期化処理
+        JokerObject dommyJoker=  dommyObject.AddComponent<JokerObject>();
+
+        dommyJoker.Initializ(jokerBase);
 
         //オブジェクトの物理演算を停止
-        _domyyJokerObjects[_domyyJokerObjects.Count - 1].GetComponent<Rigidbody>().isKinematic = true;
+        dommyObject.GetComponent<Rigidbody>().isKinematic = true;
 
-        //オブジェクトの初期化処理
-        _domyyJokerObjects[_domyyJokerObjects.Count - 1].Initializ(jokerBase);
 
-        // 座標を設定
-        _domyyJokerObjects[_domyyJokerObjects.Count - 1].transform.position= pos;
+        PaintJoker(dommyObject, materialList._material[dommyJoker.GetJokerID() - 2000]);
 
-        _domyyJokerObjects[_domyyJokerObjects.Count - 1].name = "DomyyJokerID" + (_domyyJokerObjects.Count - 1).ToString();
+        SaleObjectManager.instance.ProductExplantion(jokerBase.GetSaleValue());
+        SaleObjectManager.instance.AddProducts(dommyObject,
+            () => { SaleUtility.SetSale(jokerBase, dommyObject, jokerBase.GetSaleValue(), false); },
+            () => 
+            {
+                JokerUtility.Addjoker(jokerBase.GetID());
 
-        PaintJoker(_domyyJokerObjects[_domyyJokerObjects.Count - 1].gameObject, materialList._material[_domyyJokerObjects[_domyyJokerObjects.Count - 1].GetJokerID() - 2000]);
+                SaleObjectManager.instance.Remove(dommyObject);
+
+
+            }
+            
+            );
 
 
     }

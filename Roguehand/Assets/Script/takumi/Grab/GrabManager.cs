@@ -24,6 +24,8 @@ public class GrabManager : MonoBehaviour
         Card,
         Joker,
         Item,
+        // ショップの物
+        Sale,
         //デッキ
         Deck
     }
@@ -134,6 +136,9 @@ public class GrabManager : MonoBehaviour
                 case status.Item:
                     ItemUtility.SetSale(_grabID);
                     break;
+                case status.Sale:
+                    SaleObjectManager.instance.SetSale(_grabID);
+                    break;
             }
 
         }
@@ -200,6 +205,10 @@ public class GrabManager : MonoBehaviour
 
         if (itemObject != null) _status = status.Item;
 
+        int saleIndex = SaleObjectManager.instance.GetIndex(gameObject);
+
+        if(!(saleIndex<0))_status=status.Sale;
+
         //掴んだオブジェクトのIDを取得
         switch (_status)
         {
@@ -212,7 +221,9 @@ public class GrabManager : MonoBehaviour
             case status.Item:
                 _grabID = ItemUtility.GetItemIndex(itemObject);
                 break;
-
+            case status.Sale:
+                _grabID = saleIndex;
+                break;
         }
     }
 

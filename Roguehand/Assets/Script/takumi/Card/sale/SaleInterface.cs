@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public interface SaleInterface 
+using static ScriptCountNumber;
+public interface SaleInterface
 {
 
     /// <summary>
     /// îÑãpäzÇÃï`âÊÇ∑ÇÈä÷êî
     /// </summary>
-    public  void SaleShow(Vector3 pos,int saleValue,System.Action action)
+    public void SaleShow(Vector3 pos, int saleValue, System.Action action)
     {
-        Vector2 ButtonPos=Camera.main.WorldToScreenPoint(pos);
-        if (GUI.Button(new Rect(ButtonPos.x+75,Screen.height-ButtonPos.y-30, 70, 90), 
-            ("<size=25><color=#ffffff>îÑãp\n$" + saleValue.ToString()+ "</color></size>"), SaleUtility.GetStyle()))
+        Vector2 ButtonPos = Camera.main.WorldToScreenPoint(pos);
+        if (GUI.Button(new Rect(ButtonPos.x + 75, Screen.height - ButtonPos.y - 30, 70, 90),
+            ("<size=25><color=#ffffff>îÑãp\n$" + saleValue.ToString() + "</color></size>"), SaleUtility.GetStyle()))
         {
 
             action();
@@ -24,15 +24,18 @@ public interface SaleInterface
         }
     }
 
+
     /// <summary>
     /// çwì¸éûÇÃï`âÊÇÇ∑ÇÈä÷êî
     /// </summary>
-    public  void BuyShow(Vector3 pos, int saleValue, System.Action action) 
+    public void BuyShow(Vector3 pos, int saleValue, System.Action action)
     {
         Vector2 ButtonPos = Camera.main.WorldToScreenPoint(pos);
 
-        if (GUI.Button(new Rect(ButtonPos.x, Screen.height - ButtonPos.y + 100, 200, 60),
-            ("<size=25><color=#ffffff>$" + saleValue.ToString() + "</color></size>"), SaleUtility.GetStyle()))
+        float BUY_WIDHT = 100;
+
+        if (GUI.Button(new Rect(ButtonPos.x - BUY_WIDHT /HALF, Screen.height - ButtonPos.y + 100, BUY_WIDHT, 60),
+            ("<size=30><color=#ffffff>" + Extra.ErrorText("çwì¸") + "</color></size>"), SaleUtility.GetStyle()))
         {
 
             action();
@@ -40,4 +43,4 @@ public interface SaleInterface
 
         }
     }
-} 
+}

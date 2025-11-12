@@ -91,7 +91,12 @@ public class SaleManager : MonoBehaviour
 
                     //購入時に_saleValue[num]の分だけ現金をマイナスする
 
+
                     //購入処理を書く
+
+                    int saleIndex = SaleObjectManager.instance.GetIndex(cashObject);
+
+                    SaleObjectManager.instance.IndexBuy(index);
 
 
                     Remove(index);
@@ -121,8 +126,26 @@ public class SaleManager : MonoBehaviour
     public GUIStyle GetStyle() { return style; }
     /// <summary>
     /// リストの全消去
+    /// バックドア有
+    /// バックドアがtrueのは問答無用で全消去
     /// </summary>
-    public void Clear() { _saleInterfaces.Clear(); _saleObject.Clear(); _saleValue.Clear();_saletype.Clear(); }
+    public void Clear(bool backdoor = false)
+    {
+        //int index = 0;  
+        //for (int i = 0; i < _saleInterfaces.Count; i++)
+        //{
+        //    // 必要無くなった
+        // //   if (!backdoor && !_saletype[index] && ShopManager.instance.IsShop()) { index++; continue; }
+        //    _saleInterfaces.RemoveAt(index);
+        //    _saleObject.RemoveAt(index);
+        //    _saleValue.RemoveAt(index);
+        //    _saletype.RemoveAt(index);
+        //}
+        _saleInterfaces.Clear();
+        _saleObject.Clear();
+        _saleValue.Clear();
+        _saletype.Clear();
+    }
 
 
 
@@ -174,10 +197,10 @@ public class SaleManager : MonoBehaviour
 
     }
 
-   /// <summary>
-   /// 購入した時の処理
-   /// </summary>
-   /// <param name="gameObject"></param>
+    /// <summary>
+    /// 購入した時の処理
+    /// </summary>
+    /// <param name="gameObject"></param>
     private void Buy(GameObject gameObject)
     {
 
