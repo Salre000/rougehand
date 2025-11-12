@@ -17,6 +17,8 @@ public class GrabManager : MonoBehaviour
     /// </summary>
     [SerializeField] private int _grabID = -1;
 
+    private System.Action continuationAction = null;
+
     public enum status
     {
         None,
@@ -52,6 +54,7 @@ public class GrabManager : MonoBehaviour
         // プレイ途中でカードなどに触れなくする
         if (CardObjectUtility.IsPlaying()) return;
 
+        if (continuationAction != null) continuationAction();
 
         _time += Time.deltaTime;
 
@@ -106,6 +109,7 @@ public class GrabManager : MonoBehaviour
 
         if(_grabID<0) _status = status.None;
 
+        ExplanationManager.instance.Remove();
         switch (_status)
         {
             case status.Card:
@@ -118,10 +122,10 @@ public class GrabManager : MonoBehaviour
             case status.Item:
                 ItemUtility.GrabChange(_grabID, false);
                 break;
+
         }
 
 
-        ExplanationManager.instance.Remove();
         if (_time < 1)
         {
             switch (_status)
@@ -139,7 +143,27 @@ public class GrabManager : MonoBehaviour
                     break;
                 case status.Sale:
                     SaleObjectManager.instance.SetSale(_grabID);
+                    continuationAction = () =>
+                    {
+                        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                        RaycastHit hit;
+                        if (Physics.Raycast(ray, out hit))
+                        {
+                            if (SaleObjectManager.instance.GetIndex(hit.transform.gameObject)<0)
+                            {
+                                continuationAction = null;
+                                ExplanationManager.instance.Remove();
+                            }
+
+                        }
+                        else
+                        {
+                            continuationAction = null;
+                            ExplanationManager.instance.Remove();
+                        }
+                    };
                     break;
+
             }
 
         }
