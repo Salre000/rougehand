@@ -16,6 +16,8 @@ public class RunDetailsManager : MonoBehaviour
         max
     }
 
+    public static RunDetailsManager instance;
+
     /// <summary>
     /// 現在のタイプの状態
     /// </summary>
@@ -52,6 +54,11 @@ public class RunDetailsManager : MonoBehaviour
     /// 内容ごとのUIの描画を行う関数
     /// </summary>
     private List<DetailsBase> _detailsTypeAction=new List<DetailsBase>((int)RunDetailsType.max);
+
+    /// <summary>
+    /// ランの詳細が見えるかどうかのフラグ
+    /// </summary>
+    private bool IsRunDetailsOpen = false;  
 
     #region 定数
 
@@ -100,7 +107,7 @@ public class RunDetailsManager : MonoBehaviour
 
         // 非アクティブ状態に移行
         End();
-
+        instance = this;
 
     }
     /// <summary>
@@ -108,7 +115,7 @@ public class RunDetailsManager : MonoBehaviour
     /// </summary>
     private void Show()
     {
-
+        IsRunDetailsOpen = true;
 
         // アクティブ状態に移行
         gameObject.SetActive(true);
@@ -126,8 +133,9 @@ public class RunDetailsManager : MonoBehaviour
     /// </summary>
     private void End()
     {
+        IsRunDetailsOpen = false;
         // すべての要素のオブジェクトを非アクティブ状態に移行
-        for(int i=0;i< _runDetailsTypeParents.Count; i++) 
+        for (int i=0;i< _runDetailsTypeParents.Count; i++) 
         {
             _detailsTypeAction[i].Hide();
             _runDetailsTypeParents[i].gameObject.SetActive(false);
@@ -226,6 +234,5 @@ public class RunDetailsManager : MonoBehaviour
         }
     }
 
-
-
+    public bool IsOpen() { return IsRunDetailsOpen; }
 }

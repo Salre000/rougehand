@@ -51,6 +51,9 @@ public class GrabManager : MonoBehaviour
 
     private void Update()
     {
+        // ランの詳細が見えるときは触れられなくする
+        if (RunDetailsManager.instance.IsOpen()) return;
+
         // プレイ途中でカードなどに触れなくする
         if (CardObjectUtility.IsPlaying()) return;
 
