@@ -34,7 +34,6 @@ public class DistributeHand : MonoBehaviour
                 }
 
 
-                Debug.Log("ラウンド終了ドロー");
 
                 //ドローを可能にする
                 test = false;
@@ -43,7 +42,7 @@ public class DistributeHand : MonoBehaviour
 
         //ラウンド開始時のドローの処理
         RoundObserver.Instance.AddRoundStartAction(
-            () => { test = false;Debug.Log("ラウンド開始ドロー"); }
+            () => { test = false;}
             );
 
     }
@@ -67,7 +66,6 @@ public class DistributeHand : MonoBehaviour
         List<Card.Trump> dommyHand=new List<Card.Trump>();
         hand= CardManager.instance.GetHand();
         deck = CardManager.instance.GetDeck();
-        Debug.Log( deck.GetCount(card => card.state == Card.State.deck)+"デッキの枚数");
         hand.Capacity = CardManager.instance.GetHandSize();
         int index = deck.Count;
         // デッキ分のキャパを獲得

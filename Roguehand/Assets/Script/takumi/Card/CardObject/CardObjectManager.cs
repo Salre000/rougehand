@@ -752,7 +752,6 @@ public class CardObjectManager : MonoBehaviour
                 })) return;
 
 
-        Debug.Log("プレイスタート");
         // 到着
         PlayManager.instance.SetCardTransComp(true);
 

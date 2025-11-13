@@ -15,7 +15,5 @@ public class JokerDebug : MonoBehaviour
         //if (Input.GetKeyDown(KeyCode.Alpha1)) JokerObjectUtility.CardAddAction(1,2);
         //if (Input.GetKeyDown(KeyCode.Alpha0)) JokerUtility.SetTraget(JokerActionUseEnum.JokerActionTarget.item);
 
-
-
     }
 }

@@ -98,10 +98,6 @@ public class Shoping : MonoBehaviour
 
         // ドローの処理をリセット
         RoundObserver.Instance.RoundStartActions();
-        Debug.Log("ドロー");
-
-        //SaleObjectManager.instance.CreateRondom();
-
         // 購入や売却の表示を全て削除
         SaleUtility.Claer(true);
 

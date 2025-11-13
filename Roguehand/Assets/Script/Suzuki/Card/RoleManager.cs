@@ -8,7 +8,8 @@ public class RoleManager : MonoBehaviour
 {
     public static RoleManager instance;
 
-    List<int> indexList = new();    // 役の条件にはまっているカードの要素数が入る
+    
+    [SerializeField,Header("デバックように外から見える")]List<int> indexList = new();    // 役の条件にはまっているカードの要素数が入る
     private Role _role=Role.None;
     private bool _isCheck=false;
     private List<int> _roleLevelList=new(17);
@@ -334,11 +335,13 @@ public class RoleManager : MonoBehaviour
             checkList3.Clear();
             for (int j = 0; j < cards.Count; j++)
             {
-                if (cards[i].number == cards[j].number)
+                if (cards[i].number == cards[j].number) 
+                {
                     checkList2.Add(cards[j]);
+                    dommyIndex.Add(j);
+                }
                 else
                     checkList3.Add(cards[j]);
-                dommyIndex.Add(j);
             }
             if (checkList2.Count >= 2) break;
         }
@@ -346,9 +349,16 @@ public class RoleManager : MonoBehaviour
             return Role.None;
 
         // indexListにツーペアのindexをつむ
-        indexList.Clear();
 
-        indexList = dommyIndex;
+        List<int> domyy = new List<int>(cards.SearchListIndex(checkList2.GetList(JastNumberCheck(checkList2, 2))));
+        List<int> domyy2 = new List<int>(cards.SearchListIndex(checkList3.GetList(JastNumberCheck(checkList3, 2))));
+        // checkに入っているリストを使いcardsのインデックス番号のリストを追加
+        indexList.Clear();
+        indexList.AddRange(domyy);
+        indexList.AddRange(domyy2);
+
+        // 同じ値を省いたリストを返す
+        indexList = indexList.GetDuplicateDelete();
 
         return Role.twoPair;
     }

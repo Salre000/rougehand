@@ -353,6 +353,80 @@ public static class Extra
     }
 
     /// <summary>
+    /// リストの重複した値を削除したリストを返す関数
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="list"></param>
+    /// <returns></returns>
+    public static List<int> GetDuplicateDelete(this List<int> list) 
+    {
+        List<int> result = new();
+        List<int> dommy = list;
+        for(int i = 0; i < dommy.Count; i++) 
+        {
+
+            if (dommy.GetCount(value => value == dommy[i]) > 1)
+            {
+
+                dommy.RemoveAt(i);
+                i--;
+                continue;
+            }
+
+
+            result.Add(dommy[i]);
+
+
+        }
+        return result;
+
+    }
+
+    /// <summary>
+    /// 対象のリストから同じ値のインデックス番号のリストを返す関数
+    /// 戻り値はvalueのインデックス番号で-1が入っているのはガッチがない
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="value"></param>
+    /// <param name="traget"></param>
+    /// <returns></returns>
+    public static List<int> SearchListIndex<T>(this List<T> value, List<T> traget) 
+    {
+        List<int> result=new();
+
+        for(int i = 0; i < traget.Count; i++) 
+        {
+            for(int j = 0; j < value.Count; j++) 
+            {
+                if (!EqualityComparer<T>.Default.Equals(traget[i], value[j])) continue;
+                result.Add(j);
+                break;
+            }
+            // resultの配列番号とtargetの番号を合わせるために埋める
+            if ((i + 1) != result.Count) result.Add(-1);
+
+
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// 引数２のリストのインデックス番号だけをリストにまとめて返す関数
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="value"></param>
+    /// <param name="indexs"></param>
+    /// <returns></returns>
+    public static List<T>GetList<T>(this List<T> value,List<int> indexs)
+    {
+        List<T> result = new();
+
+        for(int i=0;i<indexs.Count;i++)
+            result.Add(value[indexs[i]]);
+        return result;
+    }
+
+    /// <summary>
     /// リストの全てに同じ関数を使用する
     /// </summary>
     /// <typeparam name="T"></typeparam>

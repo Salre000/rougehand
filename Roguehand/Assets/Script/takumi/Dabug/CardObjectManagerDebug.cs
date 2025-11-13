@@ -21,6 +21,9 @@ public class CardObjectManagerDebug : MonoBehaviour
         trump.sealBuff = Card.sealBuff.None;
 
         for (int i = 0; i < 8; i++) ss.Add(trump);
+
+
+             
     }
 
 
