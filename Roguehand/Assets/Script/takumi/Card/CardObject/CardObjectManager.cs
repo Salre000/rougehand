@@ -461,11 +461,6 @@ public class CardObjectManager : MonoBehaviour
 
         _cardObjectHands.Clear();
 
-
-        //ƒ‰ƒEƒ“ƒh‚ÌI—¹€”õ‚ğ‚·‚é
-        RoundObserver.Instance.StartRoundEnd();
-
-
     }
 
     /// <summary>

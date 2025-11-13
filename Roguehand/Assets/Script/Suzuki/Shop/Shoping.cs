@@ -92,8 +92,13 @@ public class Shoping : MonoBehaviour
 
         });
 
+        // デッキのオブジェクトをリセット
+        CardObjectUtility.ResetCard();
+
+
         // ドローの処理をリセット
         RoundObserver.Instance.RoundStartActions();
+        Debug.Log("ドロー");
 
         //SaleObjectManager.instance.CreateRondom();
 

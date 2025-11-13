@@ -34,7 +34,7 @@ public class DistributeHand : MonoBehaviour
                 }
 
 
-
+                Debug.Log("ラウンド終了ドロー");
 
                 //ドローを可能にする
                 test = false;
@@ -42,7 +42,9 @@ public class DistributeHand : MonoBehaviour
             });
 
         //ラウンド開始時のドローの処理
-        RoundObserver.Instance.AddRoundStartAction(() => test = false);
+        RoundObserver.Instance.AddRoundStartAction(
+            () => { test = false;Debug.Log("ラウンド開始ドロー"); }
+            );
 
     }
 
@@ -114,6 +116,8 @@ public class DistributeHand : MonoBehaviour
         if (dommyHand.Count <= 0) 
         {
             // リザルト画面に移行する
+
+            Application.Quit();
 
         }
 
