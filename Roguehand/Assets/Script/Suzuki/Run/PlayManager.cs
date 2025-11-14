@@ -18,7 +18,8 @@ public class PlayManager : MonoBehaviour
     // ラウンドスコアに追加するタイミングを秒単位で遅らせる
     private const float _WAIT_TIME= 1f;
 
-    private bool isFluctuation=false;
+    private bool _isFluctuation=false;
+    private bool _isShack=false;
 
     private void Awake()
     {
@@ -58,6 +59,10 @@ public class PlayManager : MonoBehaviour
 
         // スコアが役の部分に表示される
         ScoreManager.instance.PlayScoreResult();
+        if (!_isShack)
+            ShakeCamera.Instance.Shake(5, 0.2f);
+        _isShack = true;
+        _roundScore = 0f;
         StartCoroutine(RoundScorePlus());
     }
 
@@ -84,6 +89,7 @@ public class PlayManager : MonoBehaviour
             ScoreManager.instance.RoundCheck();
             // 増加の確認
             GameUtility.SetIsRoundScoreUp(true);
+            _isShack=false;
         }
 
 
@@ -109,6 +115,6 @@ public class PlayManager : MonoBehaviour
     // プレイを押した後のカードの位置が定位置に付いたかをセットする
     public void SetCardTransComp(bool flag) { _isSetCard = flag; }
 
-    public void SetIsFluctuation(bool flag) { isFluctuation = flag; }
-    public bool IsFluctuation() { return isFluctuation; }
+    public void SetIsFluctuation(bool flag) { _isFluctuation = flag; }
+    public bool IsFluctuation() { return _isFluctuation; }
 }

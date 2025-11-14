@@ -235,24 +235,14 @@ public class ScoreManager : MonoBehaviour
         return num1;
     }
 
-
-    private const int _TARGET_SCORE_ID = 7000;
-    private const int _REWARD_ID = 8000;
-    private int _targetScore;
-    private int _roundCount = -1;
     // 達しているか確認
     public void RoundCheck()
     {
-        _roundCount =GameUtility.GetRoundCount();
-        // 目標スコアと現スコアを比較
-        _targetScore = MasterData.instance.GetIntMaster(_TARGET_SCORE_ID + _roundCount);
-        // 不正値が返ってきたならreturn
-        if (_targetScore < 0) return;
         // 一時的にボタン受付を停止
         GameUtility.SetIsPushButton(false);
 
         // 目標スコアを越していたら次のラウンドへ
-        RoundUtility.NextStartRound(_targetScore, _roundCount,_TARGET_SCORE_ID,_REWARD_ID);
+        if(!RoundUtility.NextStartRound()) return;
 
         // 合計スコアの増加フラグをリセット
         GameUtility.SetIsRoundScoreUp(false);

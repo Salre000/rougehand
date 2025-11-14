@@ -87,12 +87,23 @@ public class SerectCardRole : MonoBehaviour
             instance.SetMagnificationText(_builder.ToString());
             return;
         }
-        // 基本スコアと倍率
-        // 基本スコア
-        int basic = ScoreMaster.instance.GetBasicScore(SCORE_ID + (int)role);
+
+        ////////////////////////
+        /// デバッグ
+        int num = 0;
+        if (role == RoleManager.Role.highCard)
+            num = 1;
+        else
+            num = 0;
+        ///
+        ////////////////////////
+
+            // 基本スコアと倍率
+            // 基本スコア
+            int basic = ScoreMaster.instance.GetBasicScore(SCORE_ID + (int)role+num);
 
         // 役によって変わる上昇幅を獲得
-        int addBasicLevel= ScoreMaster.instance.GetAddBasicScore(SCORE_ID + (int)role);
+        int addBasicLevel= ScoreMaster.instance.GetAddBasicScore(SCORE_ID + (int)role+num);
         // プレイされた役の現レベルを獲得
         int level = RoleManager.instance.GetRoleLevel(role);
         // レベルに応じてスコアを上昇
@@ -109,10 +120,10 @@ public class SerectCardRole : MonoBehaviour
 
         _builder.Clear();
         // 倍率
-        int magnifi = ScoreMaster.instance.GetBasicMagnification(SCORE_ID + (int)role);
+        int magnifi = ScoreMaster.instance.GetBasicMagnification(SCORE_ID + (int)role + num);
 
         // 役によって変わる上昇幅を獲得
-        int addMagniLevel = ScoreMaster.instance.GetAddBasicMagnification(SCORE_ID + (int)role);
+        int addMagniLevel = ScoreMaster.instance.GetAddBasicMagnification( SCORE_ID + (int)role + num);
         // レベルに応じてスコアを上昇
         for (int i = 1; i < level; i++)
             magnifi += addMagniLevel;
@@ -123,26 +134,6 @@ public class SerectCardRole : MonoBehaviour
         // Textの変更
         instance.SetMagnificationText(_builder.ToString());
 
-
-    }
-
-    // カードがスコアされたら結果を役の名前のほうに、倍率たちをゼロにする
-    // 使わない関数です
-    private void PlayScore()
-    {
-        _builder.Clear();
-
-        #region スコアと倍率のリセット
-
-        _builder.Append(_NO_SCORE);
-        // Textの変更
-        instance.SetBasicScoreText(_builder.ToString());
-        instance.SetMagnificationText(_builder.ToString());
-        _builder.Clear();
-
-        #endregion
-
-        
 
     }
 

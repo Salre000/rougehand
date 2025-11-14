@@ -8,17 +8,25 @@ public static class RoundUtility
 
     private static StringBuilder _builder = new StringBuilder();
 
-    // スコアが足りてリザルトを出す
-    public static void NextStartRound(int _targetScore, int _roundCount, int _TARGET_SCORE_ID, int _REWARD_ID)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>false 不正値:true 正常</returns>
+    public static bool NextStartRound()
     {
+        int roundCount = GameUtility.GetRoundCount();
+        // 目標スコアの取得
+        int targetScore = MasterData.instance.GetIntMaster(IDUtility.TARGET_SCORE_ID + roundCount);
+        // 不正値が返ってきたならreturn
+        if (targetScore < 0) return false;
         // 合計スコアと比較
         float roundScore = ScoreManager.instance.GetRoundScore();
         roundScore = ScoreManager.instance.Rounding(roundScore, 1f);
-        if (_targetScore > roundScore) return;
+        if (targetScore > roundScore) return true;
 
         // リザルトのスコアとハンドの設定
         _builder.Clear();
-        _builder.Append(MasterData.instance.GetStringMaster(_TARGET_SCORE_ID + _roundCount));
+        _builder.Append(MasterData.instance.GetStringMaster(IDUtility.TARGET_SCORE_ID + roundCount));
         TextUIManager.instance.SetResultLowestScoreText(_builder.ToString());
 
         _builder.Clear();
@@ -32,7 +40,7 @@ public static class RoundUtility
         TextUIManager.instance.SetResultMoneyText(_builder.ToString());
 
         // ラウンドクリア報酬金
-        int reward = MasterData.instance.GetIntMaster(_REWARD_ID + _roundCount);
+        int reward = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID + GameUtility.GetRoundCount());
         TextUIManager.instance.SetResultClearMoneyText(UIUtility.instance.RewardConversion(reward));
 
         // 清算ボタンの合計金表示
@@ -46,5 +54,6 @@ public static class RoundUtility
         // 手札のリセット
         CardManager.instance.ResetHand();
 
+        return true;
     }
 }
