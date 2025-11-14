@@ -182,7 +182,8 @@ public class ScoreManager : MonoBehaviour
 
         // ラウンドスコアを表示
         _builder.Clear();
-        _builder.Append(_roundScore);
+        //_builder.Append(_roundScore);
+        _builder.AppendFormat("{0:#}", _roundScore.ToString("N0"));
         TextUIManager.instance.SetRoundScoreText(_builder.ToString());
 
     }

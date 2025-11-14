@@ -14,6 +14,9 @@ public static class GameUtility
     private static int _discardCount = 5;
     // 現ラウンド
     private static int _roundCount = 1;
+    // 現アンティ
+    private static int _anteCount = 1;
+
     // 所持金
     private static int _myMoney = 0;
     // ボタンの反応の応対
@@ -49,6 +52,10 @@ public static class GameUtility
     public static void SetRoundCount(int value) { _roundCount = value; }
     // ラウンド数を取得
     public static int GetRoundCount() { return _roundCount; }
+    // アンティ数を設定
+    public static void SetAnteCount(int value) { _anteCount = value; }
+    // アンティ数を取得
+    public static int GetAnteCount() { return _anteCount; }
     // 所持金の設定
     public static void SetMyMoney(int value) { _myMoney = value; }
     // 所持金の取得
