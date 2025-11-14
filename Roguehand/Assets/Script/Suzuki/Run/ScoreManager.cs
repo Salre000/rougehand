@@ -59,7 +59,7 @@ public class ScoreManager : MonoBehaviour
 
         // 目標スコアの再設定
         _builder.Clear();
-        int id = IDUtility.TARGET_SCORE_ID + GameUtility.GetRoundCount();
+        int id = IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount();
         _builder.Append(MasterData.instance.GetIntMaster(id));
         TextUIManager.instance.SetLowestScoreText(_builder.ToString());
     }

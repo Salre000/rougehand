@@ -16,10 +16,10 @@ public class PlayManager : MonoBehaviour
     // ラウンドスコアのリセット時に処理されないように使用する
     private float _scoreZeroChecker = 1f;
     // ラウンドスコアに追加するタイミングを秒単位で遅らせる
-    private const float _WAIT_TIME= 1f;
+    private const float _WAIT_TIME = 1f;
 
-    private bool _isFluctuation=false;
-    private bool _isShack=false;
+    private bool _isFluctuation = false;
+    private bool _isShack = false;
 
     private void Awake()
     {
@@ -62,7 +62,6 @@ public class PlayManager : MonoBehaviour
         if (!_isShack)
             ShakeCamera.Instance.Shake(5, 0.2f);
         _isShack = true;
-        _roundScore = 0f;
         StartCoroutine(RoundScorePlus());
     }
 
@@ -81,16 +80,13 @@ public class PlayManager : MonoBehaviour
         CardObjectUtility.PlayEnd();
 
 
-        // スコアが増加済みならリターン
-        if (_roundScore != ScoreManager.instance.GetRoundScore() && _scoreZeroChecker < ScoreManager.instance.GetRoundScore())
-        {
-            _roundScore = ScoreManager.instance.GetRoundScore();
-            // スコアが目標に達しているか確認
-            ScoreManager.instance.RoundCheck();
-            // 増加の確認
-            GameUtility.SetIsRoundScoreUp(true);
-            _isShack=false;
-        }
+        _roundScore = ScoreManager.instance.GetRoundScore();
+        // スコアが目標に達しているか確認
+        ScoreManager.instance.RoundCheck();
+        // 増加の確認
+        GameUtility.SetIsRoundScoreUp(true);
+        _isShack = false;
+
 
 
 

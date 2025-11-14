@@ -12,6 +12,8 @@ public static class GameUtility
     private static int _handCount = 5;
     // 変動するディスカード回数
     private static int _discardCount = 5;
+    // 累計ラウンド
+    private static int _allRoundCount = 1;
     // 現ラウンド
     private static int _roundCount = 1;
     // 現アンティ
@@ -48,6 +50,10 @@ public static class GameUtility
     public static void SetDiscardCount(int value) { _discardCount = value; }
     // 現在のディスカード数を取得
     public static int GetDiscardCount() { return _discardCount; }
+    // 累計ラウンド数を設定
+    public static void SetAllRoundCount(int value) { _allRoundCount = value; }
+    // 累計ラウンド数を取得
+    public static int GetAllRoundCount() { return _allRoundCount; }
     // ラウンド数を設定
     public static void SetRoundCount(int value) { _roundCount = value; }
     // ラウンド数を取得

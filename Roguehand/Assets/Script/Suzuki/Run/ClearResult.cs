@@ -124,7 +124,7 @@ public class ClearResult : MonoBehaviour
         if (!_isComp)
         {
             // •ñV‹à‚Ìæ“¾
-            int reward = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID + GameUtility.GetRoundCount());
+            int reward = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID + GameUtility.GetAllRoundCount());
             // —]‚Á‚½è”‚Æ‡‚í‚¹‚Ä‡Œv‹à‚ğZo
             allReward = GameUtility.GetHandCount() + reward;
             _isComp = true;

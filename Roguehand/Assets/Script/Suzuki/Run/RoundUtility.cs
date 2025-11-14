@@ -14,7 +14,7 @@ public static class RoundUtility
     /// <returns>false 不正値:true 正常</returns>
     public static bool NextStartRound()
     {
-        int roundCount = GameUtility.GetRoundCount();
+        int roundCount = GameUtility.GetAllRoundCount();
         // 目標スコアの取得
         int targetScore = MasterData.instance.GetIntMaster(IDUtility.TARGET_SCORE_ID + roundCount);
         // 不正値が返ってきたならreturn
@@ -40,7 +40,7 @@ public static class RoundUtility
         TextUIManager.instance.SetResultMoneyText(_builder.ToString());
 
         // ラウンドクリア報酬金
-        int reward = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID + GameUtility.GetRoundCount());
+        int reward = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID + GameUtility.GetAllRoundCount());
         TextUIManager.instance.SetResultClearMoneyText(UIUtility.instance.RewardConversion(reward));
 
         // 清算ボタンの合計金表示

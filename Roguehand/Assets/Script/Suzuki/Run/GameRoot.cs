@@ -46,7 +46,7 @@ public class GameRoot:MonoBehaviour
         // 合計スコアと比較
         float roundScore = ScoreManager.instance.GetRoundScore();
         roundScore = ScoreManager.instance.Rounding(roundScore, 1f);
-        int _targetScore = MasterData.instance.GetIntMaster(7000 + GameUtility.GetRoundCount());
+        int _targetScore = MasterData.instance.GetIntMaster(7000 + GameUtility.GetAllRoundCount());
 
         if (_targetScore < roundScore) return;
         over =true;

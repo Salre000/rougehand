@@ -87,6 +87,11 @@ public class Shoping : MonoBehaviour
         GameUtility.SetRoundCount(roundCount);
         // ラウンド数の反映
         TextUIManager.instance.SetRoundText(roundCount.ToString());
+
+        // 累計ラウンド数の増加
+        int allRoundCount=GameUtility.GetAllRoundCount();
+        allRoundCount++;
+        GameUtility .SetAllRoundCount(allRoundCount);
         
         // TODO:他にもリセットを仕込む必要がある
         // 手札の内部をリセット　
