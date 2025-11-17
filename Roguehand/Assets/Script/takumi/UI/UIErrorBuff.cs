@@ -1,55 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using static ErrorBuffDetalis;
 public class UIErrorBuff : MonoBehaviour
 {
-    private enum systemBuff 
-    {
-        None = -1,
-        Mouse,
-        Brack,
-        ObujectMove,
-        Number
-    }
+    [SerializeField]UICardManager _managers;
 
     [SerializeField] systemBuff _thisBuff= systemBuff.None;
 
 
-    public void SetCard() 
+    public void SetCard(List<GameObject> objects) 
     {
         List<MeshRenderer> meshRenderers = new();
 
-        int count = 0;
 
-        // それぞれのバフの対象の数を取得
-        switch (_thisBuff)
+        for (int i = 0; i < objects.Count; i++) 
         {
-            case systemBuff.Mouse:
-                // ジョーカーのマウスジャマーの数を追加
-                count += JokerUtility.GetJokers().GetCount(joker => joker.GetCardBuff() == Card.cardBuff.MouseJammer);
-                // デッキのマウスジャマーの数を追加
-                count += CardManager.instance.GetDeck().GetCount(card => card.cardBuff == Card.cardBuff.MouseJammer);
-                break;
-            case systemBuff.Brack:
-                // デッキのブラックシールの数を追加
-                count += CardManager.instance.GetDeck().GetCount(card => card.sealBuff == Card.sealBuff.Black);
+            objects[i].transform.parent = _managers.gameObject.transform;
 
-                break;
-            case systemBuff.ObujectMove:
-                // ジョーカーのオブジェクトムーブの数を追加
-                count += JokerUtility.GetJokers().GetCount(Joker => Joker.GetJokerBuff() == Card.JokerBuff.ObjectMoves);
-
-
-                break;
-            case systemBuff.Number:
-                // デッキのブラインドスコアの数を追加
-                count += CardManager.instance.GetDeck().GetCount(card => card.deckBuff == Card.deckBuff.BlindScore);
-                break;
-        }
-
-
-        for (int i = 0; i < count; i++) 
-        {
             switch (_thisBuff)
             {
 
@@ -70,7 +37,7 @@ public class UIErrorBuff : MonoBehaviour
         }
 
 
-
+        _managers.Show();
 
     }
 
