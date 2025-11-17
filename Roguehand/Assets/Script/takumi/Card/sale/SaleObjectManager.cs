@@ -110,7 +110,6 @@ public class SaleObjectManager : MonoBehaviour
                     CreateJoker();
                     break;
                 case shoptype.item:
-                    if (true) { i--; continue; }
                     CreateItem();
                     break;
                 case shoptype.trump:
@@ -133,6 +132,8 @@ public class SaleObjectManager : MonoBehaviour
     public void CreateItem(int ID = -1)
     {
         if (ID < 0) ID = Random.Range(0, (int)ALLItem.ALLItemEnum._MAX);
+
+        ItemUtility.ShopItem(() => ALLItem.GetItem((ALLItem.ALLItemEnum)ID));
 
 
     }

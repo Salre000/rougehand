@@ -112,6 +112,8 @@ public class ClearResult : MonoBehaviour
             _time = _resetTime;
             _isPush=false;
             _clearResult.SetActive(false);
+
+            SaleObjectManager.instance.CreateRondom();
         }
     }
 

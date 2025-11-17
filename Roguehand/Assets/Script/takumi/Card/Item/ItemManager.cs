@@ -144,7 +144,55 @@ public class ItemManager : MonoBehaviour
         ExplanationManager.instance.AddExplanation(_itemObjectList[ID].gameObject, _itemList[ID], test, new Vector2(0, 1));
 
 
+
     }
+
+    public void ShopItemAdd(System.Func<ItemBase> func=null) 
+    {
+        if (func == null) func = () => ALLItem.GetItem((ALLItem.ALLItemEnum)UnityEngine.Random.Range(0, (int)ALLItem.ALLItemEnum._MAX));
+
+        ItemBase item = func();
+
+        GameObject saleObjecet = Instantiate(_prefab, transform);
+        ItemObject itemObject = saleObjecet.AddComponent<ItemObject>();
+
+        item.Initializ();
+
+        //オブジェクトの物理演算を停止
+        saleObjecet.GetComponent<Rigidbody>().isKinematic = true;
+
+
+
+        SaleObjectManager.instance.ProductExplantion(item.ReturnMoney());
+        SaleObjectManager.instance.AddProducts(saleObjecet,
+            () => { ShopExplamtion(saleObjecet, item); },
+            () =>
+            {
+                AddItem(item.GetID());
+
+                GameObject domyy = saleObjecet;
+                SaleObjectManager.instance.Remove(domyy);
+
+
+            }
+
+            );
+
+
+    }
+    private readonly Vector2 SHOP_UI_OFFSET = new Vector2(1, 0);
+    private readonly int[] SHOP_DOMMY_BUFF = new int[0];
+
+    private void ShopExplamtion(GameObject gameObject, ItemBase itembase)
+    {
+        SaleUtility.SetSale(itembase, gameObject, itembase.ReturnMoney(), false);
+
+
+
+        ExplanationManager.instance.AddExplanation(gameObject, itembase, SHOP_DOMMY_BUFF, SHOP_UI_OFFSET);
+
+    }
+
 
     private void CheckOrder()
     {
