@@ -190,6 +190,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _managers: {fileID: 805863152294552162}
   _thisBuff: 0
+  _name: {fileID: 5440762367935512284}
+  _explantion: {fileID: 54857331681241312}
+  _lavel: {fileID: 4245181488639501993}
 --- !u!1 &4310617338343148871
 GameObject:
   m_ObjectHideFlags: 0

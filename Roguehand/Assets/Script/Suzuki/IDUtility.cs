@@ -9,7 +9,7 @@ public static class IDUtility
     public const int SCORE_ID = 3000;
     public const int LEVEL_ID = 4000;
     public const int RICHTEXT_ID = 5000;
-
+    public const int BUFF_ID = 6000;
     public const int TARGET_SCORE_ID = 7000;
     public const int REWARD_ID = 8000;
 
