@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using static ScriptCountNumber;
 /// <summary>
 /// ショップ時の購入売却などを行うクラス
@@ -34,6 +35,7 @@ public class SaleObjectManager : MonoBehaviour
 
     [SerializeField] private Transform _shopLeftPos;
     [SerializeField] private Transform _shopRightPos;
+    [SerializeField] private Button _reroolButton;
     private readonly Vector3 _SHOP_ANGLE = new Vector3(-90, 0, 0);
     private readonly Vector3 UI_VALUE_OFFSET = new Vector3(0,130,0);
     float RENGE = 916;
@@ -43,6 +45,8 @@ public class SaleObjectManager : MonoBehaviour
         instance = this;
 
         Initializ();
+
+        _reroolButton.onClick.AddListener(()=> { Clear(); CreateRondom(); });
     }
 
     private void Initializ() 
@@ -217,6 +221,8 @@ public class SaleObjectManager : MonoBehaviour
     {
         _productsSaleValue.Clear();
         _productsSaleShow.Clear();
+        for (int i = 0; i < _products.Count; i++)
+            Destroy(_products[i]);
         _products.Clear();
     }
 

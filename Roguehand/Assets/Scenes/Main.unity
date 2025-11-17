@@ -19508,6 +19508,7 @@ MonoBehaviour:
   shopCanvas: {fileID: 1679044630}
   _shopLeftPos: {fileID: 74154256}
   _shopRightPos: {fileID: 110296654}
+  _reroolButton: {fileID: 829326753}
 --- !u!1 &2131690238
 GameObject:
   m_ObjectHideFlags: 0
