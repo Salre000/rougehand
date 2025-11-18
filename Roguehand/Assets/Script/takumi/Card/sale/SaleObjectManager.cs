@@ -47,7 +47,7 @@ public class SaleObjectManager : MonoBehaviour
 
         Initializ();
 
-        _reroolButton.onClick.AddListener(()=> { Clear(); CreateRondom(); });
+        _reroolButton.onClick.AddListener(()=> { ClearCard(); CreateRondom(); });
     }
     public void Update()
     {
@@ -226,15 +226,40 @@ public class SaleObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 保存したリストを初期化
+    /// 保存したリストを全て初期化
     /// </summary>
     public void Clear() 
     {
+        
         _productsSaleValue.Clear();
         _productsSaleShow.Clear();
         for (int i = 0; i < _products.Count; i++)
             Destroy(_products[i]);
         _products.Clear();
+        _isPack.Clear();
+    }
+
+    /// <summary>
+    /// 保存したリストのパックを消さずに残りを消す
+    /// </summary>
+    public void ClearCard() 
+    {
+        for(int i = 0; i < _isPack.Count; i++) 
+        {
+            if (_isPack[i]) continue;
+            _productsSaleValue.RemoveAt(i);
+            _productsSaleShow.RemoveAt(i);
+            _isPack.RemoveAt(i);
+
+            GameObject gameObject = _products[i];
+            _products.RemoveAt(i);
+            Destroy(gameObject);
+
+            i--;
+
+        }
+
+
     }
 
 }

@@ -24,37 +24,6 @@ public class TesPackObject : MonoBehaviour,SaleInterface,ExplanationInterface
     }
 
     public int GetSaleValue() { return saleValue; }
-    //public void SetSale() 
-    //{
-
-
-    //    //オブジェクトの生成
-    //    GameObject dommyObject = GameObject.Instantiate(_prefab, transform);
-
-    //    // コンポーネントの獲得と初期化処理
-    //    TesPackObject dommyPack = dommyObject.GetComponent<TesPackObject>();
-
-    //    // マテリアルの貼り付けや初期化処理をするならばこの行で
-
-    //    SaleObjectManager.instance.ProductExplantion(dommyPack.GetSaleValue());
-    //    SaleObjectManager.instance.AddProducts(dommyObject,
-    //        () => { dommyPack.ShopExplantion(); },
-    //        () =>
-    //        {
-
-    //            // パックの購入時の処理を描く
-
-    //            GameObject domyy = dommyObject;
-    //            SaleObjectManager.instance.Remove(domyy);
-
-
-    //        }
-
-    //        );
-
-
-
-    //}
 
     /// <summary>
     /// 説明を描画する関数

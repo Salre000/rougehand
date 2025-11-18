@@ -84,14 +84,14 @@ public class SaleManager : MonoBehaviour
                     if (_saleObject.Count < num || _saleObject[num] == null) return;
                     int index = _saleObject.IndexOf(cashObject);
 
-                    //w“ü‚Å‚«‚È‚¢‚O‚Íƒ_ƒ~[‚Å’u‚¢‚Ä‚¢‚é
-                    if (0 > _saleValue[num]) return;
+                    //w“ü‚Å‚«‚È‚¢
+                    if (GameUtility.GetMyMoney() < _saleValue[num]) return;
 
 
 
                     //w“ü‚É_saleValue[num]‚Ì•ª‚¾‚¯Œ»‹à‚ğƒ}ƒCƒiƒX‚·‚é
 
-
+                    GameUtility.SetMyMoney(GameUtility.GetMyMoney() - _saleValue[num]);
                     //w“üˆ—‚ğ‘‚­
 
                     int saleIndex = SaleObjectManager.instance.GetIndex(cashObject);
