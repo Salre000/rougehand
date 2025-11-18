@@ -14,11 +14,12 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
     /// </summary>
     private int itemID = -1;
 
-    public int GetID() {  return itemID; }
     /// <summary>
     /// 売却額の変数  
     /// </summary>
     protected int _returnMoney = 0;
+
+    private readonly int ITEM_EXPLANTION_ID = 1500;
 
 
     /// <summary>
@@ -43,6 +44,7 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
             action();
 
             //お金を増やす処理
+            GameUtility.SetMyMoney(GameUtility.GetMyMoney() + saleValue);
 
 
         }
@@ -77,19 +79,20 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
     /// </summary>
     /// <param name="add"></param>
     public void AddReturnMoney(int add) { _returnMoney += add; }
+    public int GetID() { return itemID; }
 
     public void SetItemID(int ID) { itemID = ID; }
 
     public string GetName()
     {
         //アイテム係数1000
-        return MasterData.instance.GetStringMaster(1000+itemID);
+        return MasterData.instance.GetStringMaster(IDUtility.ITEM_ID+itemID);
     }
 
     public string GetExplanation()
     {
         // アイテムの説明係数1500
-        return MasterData.instance.GetStringMaster(1500 + itemID);
+        return MasterData.instance.GetStringMaster(ITEM_EXPLANTION_ID + itemID);
     }
 
     public string GetExplanation2()
@@ -97,7 +100,7 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
         return string.Empty;
     }
 
-    public string GetTypes()
+    public virtual string GetTypes()
     {
         // 予定は未定
         return Extra.ErrorText("アイテム");

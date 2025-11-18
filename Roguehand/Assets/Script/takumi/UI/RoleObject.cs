@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using UnityEngine;
 
@@ -39,7 +40,7 @@ public class RoleObject : MonoBehaviour
         _role = role;
 
         // この変数はデバックようにレベルを固定する物
-        int level = 1;
+        int level = RoleManager.instance.GetRoleLevel(role);
 
         int roleID = IDUtility.ROLE_ID + (int)_role;
 
@@ -47,8 +48,10 @@ public class RoleObject : MonoBehaviour
 
         _name.text = MasterData.instance.GetStringMaster(roleID);
 
-        _score.text = ScoreMaster.instance.GetBasicScore(roleID).ToString();
-        _magnification.text = ScoreMaster.instance.GetBasicMagnification(roleID).ToString();
+        int score = ScoreMaster.instance.GetBasicScore(roleID) + (ScoreMaster.instance.GetAddBasicScore(roleID) * level);
+        _score.text = score.ToString();
+        int magnification = ScoreMaster.instance.GetBasicMagnification(roleID) + (ScoreMaster.instance.GetAddBasicMagnification(roleID) * level);
+        _magnification.text = magnification.ToString();
 
         // 使用回数
         _playCount.text = RoleManager.instance.GetRolePlayCountList()[(int)_role].ToString();

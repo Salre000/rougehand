@@ -47,6 +47,8 @@ public class UIErrorBuff : MonoBehaviour
 
         _explantion.text = GetEXPLANTION();
 
+        _lavel.text = GetLevel(objects.Count);
+
     }
 
 
@@ -95,6 +97,16 @@ public class UIErrorBuff : MonoBehaviour
                 name = MasterData.instance.GetStringMaster(DLIND_SCORE_ID);
                 break;
         }
+
+        name = Extra.ErrorText(name);
+
+        return name;
+    }
+    private string GetLevel(int objectsCount) 
+    {
+        string name=string.Empty;
+
+        name=MasterData.instance.GetStringMaster(IDUtility.LEVEL_ID + objectsCount);
 
         name = Extra.ErrorText(name);
 

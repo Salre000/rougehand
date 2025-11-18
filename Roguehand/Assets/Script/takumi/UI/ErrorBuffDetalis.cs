@@ -36,7 +36,7 @@ public class ErrorBuffDetalis : DommyDetalis
         }
 
     }
-    private List<GameObject> GetActiveObject(int count)
+    private List<GameObject> GetActiveObject(int count,List<Card.Trump> trumps,List<JokerBase> jokers)
     {
         List<GameObject> list = new List<GameObject>();
 
@@ -64,14 +64,20 @@ public class ErrorBuffDetalis : DommyDetalis
 
             int count = 0;
 
+            List<Card.Trump> trumps=new List<Card.Trump>();
+
+            List<JokerBase> jokers=new List<JokerBase>();
+
             // それぞれのバフの対象の数を取得
             switch ((systemBuff)i)
             {
                 case systemBuff.Mouse:
                     // ジョーカーのマウスジャマーの数を追加
-                    count += JokerUtility.GetJokers().GetCount(joker => joker.GetCardBuff() == Card.cardBuff.MouseJammer);
+                    count += JokerUtility.GetJokers().GetCount(joker => 
+                    { if (joker.GetCardBuff() == Card.cardBuff.MouseJammer) { jokers.Add(joker); return true; }return false; });
                     // デッキのマウスジャマーの数を追加
-                    count += CardManager.instance.GetDeck().GetCount(card => card.cardBuff == Card.cardBuff.MouseJammer);
+                    count += CardManager.instance.GetDeck().GetCount(card =>
+                    { if (card.cardBuff == Card.cardBuff.MouseJammer) { trumps.Add(card); return true; }return false; });
                     break;
                 case systemBuff.Brack:
                     // デッキのブラックシールの数を追加
@@ -90,7 +96,7 @@ public class ErrorBuffDetalis : DommyDetalis
                     break;
             }
 
-            uIErrorBuffs[i].SetCard(GetActiveObject(count));
+            uIErrorBuffs[i].SetCard(GetActiveObject(count, trumps, jokers));
 
         }
 

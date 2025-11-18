@@ -28,6 +28,7 @@ public class SaleObjectManager : MonoBehaviour
     [SerializeField] private List<System.Action> _productsSaleShow = new List<System.Action>();
     [SerializeField] private List<float> _productsSaleValue = new List<float>();
     [SerializeField] private List<System.Action> _productsBuy = new List<System.Action>();
+    [SerializeField] private List<bool> _isPack = new List<bool>();
 
     [SerializeField] private GameObject _valuePrefab;
     [SerializeField]private List<UISaleValueObject>  _valuePool = new List<UISaleValueObject>();
@@ -48,6 +49,10 @@ public class SaleObjectManager : MonoBehaviour
 
         _reroolButton.onClick.AddListener(()=> { Clear(); CreateRondom(); });
     }
+    public void Update()
+    {
+        SetShopObjectPos();
+    }
 
     private void Initializ() 
     {
@@ -64,13 +69,13 @@ public class SaleObjectManager : MonoBehaviour
 
         ValueUISetActiveFalse();
 
-        float renge = RENGE / (_products.Count + 1);
-        Debug.Log(renge);
+        float renge = RENGE / (_isPack.GetCount(flag=>!flag) + 1);
+
+        int packCount = 0;
+
         for (int i = 0; i < _products.Count; i++)
         {
 
-            _products[i].transform.position = _shopLeftPos.position + new Vector3(renge * (i + 1), 0, 0);
-            _products[i].transform.eulerAngles = _SHOP_ANGLE;
 
             // UI‚ð•`‰æ‚·‚é
             UISaleValueObject uISale = GetValue();
@@ -79,6 +84,9 @@ public class SaleObjectManager : MonoBehaviour
 
             uISale.transform.position = Camera.main.WorldToScreenPoint(_products[i].transform.position) + UI_VALUE_OFFSET;
 
+            if (_isPack[i]) { packCount++; continue; }
+            _products[i].transform.eulerAngles = _SHOP_ANGLE;
+            _products[i].transform.position = _shopLeftPos.position + new Vector3(renge * (i + 1- packCount), 0, 0);
         }
     }
 
@@ -150,13 +158,15 @@ public class SaleObjectManager : MonoBehaviour
 
     }
 
-    public void AddProducts(GameObject product, System.Action action,System.Action buy)
+    public void AddProducts(GameObject product, System.Action action,System.Action buy,bool isPack=false)
     {
         _products.Add(product);
 
         _productsSaleShow.Add(action);
 
         _productsBuy.Add(buy);
+
+        _isPack.Add(isPack);
     }
 
     public void ProductExplantion(float value) 
@@ -190,6 +200,7 @@ public class SaleObjectManager : MonoBehaviour
         _products.RemoveAt(index);
         _productsSaleShow.RemoveAt(index);
         _productsBuy.RemoveAt(index);
+        _isPack.RemoveAt(index);
 
         int i = 0;
         _valuePool.GetAction(value =>

@@ -20,6 +20,10 @@ public static class ALLItem
 
         }
 
+        int itemID = (int)item;
+        // 星座カードの分だけIDを前に進める
+        if (itemID != 0) itemID += (int)ConstellationItem.ConstellationType.MAX;
+
         itemBase.SetItemID((int)item);
 
         return itemBase;

@@ -74,6 +74,8 @@ public class ItemManager : MonoBehaviour
     public void AddItem(int ID)
     {
         _itemList.Add(ALLItem.GetItem((ALLItem.ALLItemEnum)ID));
+        _itemList[_itemList.Count-1].Initializ();
+
         _itemObjectList.Add(Instantiate(_prefab, transform).AddComponent<ItemObject>());
     }
     public void Remove(ItemBase itemBase)

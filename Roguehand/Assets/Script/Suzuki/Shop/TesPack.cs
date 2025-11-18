@@ -37,8 +37,9 @@ public class TesPack : MonoBehaviour
             _packs.Add(Instantiate(_pack,_targetPos));
             // ƒNƒ‰ƒX‚Ì•t—^
             _packs[i].AddComponent<TesPackObject>();
+
         }
-        _isInstantiate=true;
+        _isInstantiate =true;
     }
 
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class IDUtility
 {
+    public const int ITEM_ID = 1000;
     public const int JOKER_ID = 2000;
     public const int ROLE_ID = 3000;
     public const int SCORE_ID = 3000;
