@@ -43,6 +43,7 @@ public class Shoping : MonoBehaviour
         if (angle - _TARGET_SHOP_CAM_ROTATE < 0.01f)
         {
             _shopCompFlag = true;
+
         }
     }
 

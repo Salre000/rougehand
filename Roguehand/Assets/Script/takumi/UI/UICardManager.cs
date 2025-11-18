@@ -6,7 +6,7 @@ public class UICardManager : MonoBehaviour
 {
     [SerializeField, Header("•À‚×‚éƒX[ƒg")] Card.suit suit = Card.suit.Spade;
 
-    private readonly float WIDE_SIZE = 910;
+    [SerializeField]private float WIDE_SIZE = 910;
 
     private  float MAX_HEIGHT = 20f;
     private readonly float OFFSET = 15;

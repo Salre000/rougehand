@@ -22,4 +22,6 @@ public static class ItemUtility
     public static void Remove(ItemBase itemBase) {  instance.Remove(itemBase); }
     public static void ShowExplanation(int ID) { instance.ShowExplanation(ID); }
 
+    public static void ShopItem(System.Func<ItemBase> func=null) { instance.ShopItemAdd(func); }
+
 }

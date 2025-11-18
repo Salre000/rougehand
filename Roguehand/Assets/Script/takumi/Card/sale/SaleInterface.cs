@@ -18,7 +18,7 @@ public interface SaleInterface
             action();
 
             //‚¨‹à‚ğ‘‚â‚·ˆ—
-
+            GameUtility.SetMyMoney(GameUtility.GetMyMoney() + saleValue);
 
 
         }
@@ -37,6 +37,11 @@ public interface SaleInterface
         if (GUI.Button(new Rect(ButtonPos.x - BUY_WIDHT /HALF, Screen.height - ButtonPos.y + 100, BUY_WIDHT, 60),
             ("<size=30><color=#ffffff>" + Extra.ErrorText("w“ü") + "</color></size>"), SaleUtility.GetStyle()))
         {
+            // ‚¨‹à‚ª‘«‚è‚Ä‚¢‚é‚©‚Ç‚¤‚©‚Ì”»’f
+            if (GameUtility.GetMyMoney() < saleValue) { Debug.Log("‚¨‹à‚ª‘«‚è‚È‚¢"); return; }
+
+            // ‚¨‹à‚ğŒ¸‚ç‚·ˆ—
+            GameUtility.SetMyMoney(GameUtility.GetMyMoney() - saleValue);
 
             action();
 

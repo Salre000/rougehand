@@ -13,6 +13,8 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
     /// ƒAƒCƒeƒ€‚ÌID
     /// </summary>
     private int itemID = -1;
+
+    public int GetID() {  return itemID; }
     /// <summary>
     /// ”„‹pŠz‚Ì•Ï”  
     /// </summary>
