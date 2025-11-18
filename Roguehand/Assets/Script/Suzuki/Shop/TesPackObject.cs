@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// パック一つ一つに付与されるクラス
 /// </summary>
-public class TesPackObject : MonoBehaviour,SaleInterface,ExplanationInterface
+public class TesPackObject : MonoBehaviour, SaleInterface, ExplanationInterface
 {
     /// <summary>
     /// パックの購入にかかるお金の量
@@ -18,7 +18,7 @@ public class TesPackObject : MonoBehaviour,SaleInterface,ExplanationInterface
     /// <summary>s
     /// 初期化処理
     /// </summary>
-    public void Initializ() 
+    public void Initializ()
     {
 
     }
@@ -28,7 +28,7 @@ public class TesPackObject : MonoBehaviour,SaleInterface,ExplanationInterface
     /// <summary>
     /// 説明を描画する関数
     /// </summary>
-    public void ShopExplantion() 
+    public void ShopExplantion()
     {
         SaleUtility.SetSale(this, gameObject, GetSaleValue(), false);
 
@@ -38,6 +38,17 @@ public class TesPackObject : MonoBehaviour,SaleInterface,ExplanationInterface
         ExplanationManager.instance.AddExplanation(gameObject, this, dommyBuff, SHOP_UI_OFFSET);
 
     }
+
+    /// <summary>
+    /// パックを開けたときの処理
+    /// </summary>
+    /// <param name="createCount"><何枚生成するかどうか/param>
+    /// <param name="getCount"><何枚獲得できるかどうか/param>
+    public void Create(TesPack.PackType packType, int createCount, int getCount)
+    {
+
+    }
+
 
     public string GetName()
     {

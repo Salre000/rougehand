@@ -88,7 +88,6 @@ public class SaleObjectManager : MonoBehaviour
             if (_isPack[i]) { packCount++; continue; }
             _products[i].transform.eulerAngles = _SHOP_ANGLE;
             _products[i].transform.position = _shopLeftPos.position + new Vector3(renge * (i + 1- packCount), 0, 0);
-            Debug.Log((i + 1 - packCount)+"å¬êî");
         }
     }
 
