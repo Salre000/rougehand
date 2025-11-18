@@ -47,6 +47,26 @@ public class TesPack : MonoBehaviour
             _packs.Add(Instantiate(_pack,_targetPos));
             // クラスの付与
             _packs[i].AddComponent<TesPackObject>();
+            // このキャッシュは必須
+            int cash = i;
+            TesPackObject obj = _packs[i].GetComponent<TesPackObject>();
+            SaleObjectManager.instance.ProductExplantion(obj.GetSaleValue());
+            SaleObjectManager.instance.AddProducts(_packs[i],
+                () => { obj.ShopExplantion(); },
+                () =>
+                {
+
+                    Debug.Log("パックを購入したよー");
+                    // パックの購入時の処理を描く
+
+                    GameObject domyy = _packs[cash];
+                    SaleObjectManager.instance.Remove(domyy);
+
+
+                }
+                , true
+                );
+
 
         }
         _isInstantiate =true;
