@@ -170,7 +170,7 @@ public class ItemManager : MonoBehaviour
             () => { ShopExplamtion(saleObjecet, item); },
             () =>
             {
-                AddItem(item.GetID());
+                AddItem(item.GetID()<(int)ConstellationItem.ConstellationType.MAX?0:item.GetID()- (int)ConstellationItem.ConstellationType.MAX);
 
                 GameObject domyy = saleObjecet;
                 SaleObjectManager.instance.Remove(domyy);

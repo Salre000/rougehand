@@ -69,8 +69,9 @@ public class SaleObjectManager : MonoBehaviour
 
         ValueUISetActiveFalse();
 
-        float renge = RENGE / (_isPack.GetCount(flag=>!flag) + 1);
+        float renge = Vector2.Distance(_shopLeftPos.position,_shopRightPos.position) / (_isPack.GetCount(flag=>!flag==true) + 1);
 
+            Debug.Log((_isPack.GetCount(flag => !flag==true) + 1 )+ "Š„‡");
         int packCount = 0;
 
         for (int i = 0; i < _products.Count; i++)
@@ -87,6 +88,7 @@ public class SaleObjectManager : MonoBehaviour
             if (_isPack[i]) { packCount++; continue; }
             _products[i].transform.eulerAngles = _SHOP_ANGLE;
             _products[i].transform.position = _shopLeftPos.position + new Vector3(renge * (i + 1- packCount), 0, 0);
+            Debug.Log((i + 1 - packCount)+"ŒÂ”");
         }
     }
 
