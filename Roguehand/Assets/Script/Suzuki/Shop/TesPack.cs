@@ -11,10 +11,20 @@ public class TesPack : MonoBehaviour
 {
     [SerializeField] GameObject _pack;
     [SerializeField] Transform _targetPos;
+    [SerializeField] Transform _leftTargetPos;
+    [SerializeField] Transform _rightTargetPos;
     private int ID;
     private int MAX_PACK=2;
     private List<GameObject> _packs = new();
     private bool _isInstantiate = false;
+
+    public enum PackType
+    {
+        none=-1,
+        joker,
+        card,
+        max
+    }
 
     private void Update()
     {
@@ -40,6 +50,16 @@ public class TesPack : MonoBehaviour
 
         }
         _isInstantiate =true;
+    }
+
+    /// <summary>
+    /// 並び替え
+    /// </summary>
+    private void Trans()
+    {
+        // leftとrightから直線を作り、線を分割することで中心点を出す
+
+
     }
 
 }
