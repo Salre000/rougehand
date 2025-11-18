@@ -2,42 +2,43 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static ScriptCountNumber;
 
 /// <summary>
-/// パックを選択時
+/// パックの生成
 /// </summary>
-public class TesPack : SaleInterface
+public class TesPack : MonoBehaviour
 {
-    /// <summary>
-    /// 購入時
-    /// </summary>
-    /// <param name="pos"></param>
-    /// <param name="saleValue"></param>
-    /// <param name="action"></param>
-    void SaleInterface.SaleShow(Vector3 pos, int saleValue, Action action)
+    [SerializeField] GameObject _pack;
+    [SerializeField] Transform _targetPos;
+    private int ID;
+    private int MAX_PACK=2;
+    private List<GameObject> _packs = new();
+    private bool _isInstantiate = false;
+
+    private void Update()
     {
-        Vector2 ButtonPos = Camera.main.WorldToScreenPoint(pos);
-        if (GUI.Button(new Rect(ButtonPos.x + 75, Screen.height - ButtonPos.y - 90, 60, 90),
-            ("<size=25><color=#ffffff>売却\n$" + saleValue.ToString() + "</color></size>"), SaleUtility.GetStyle()))
+        if (!ShopManager.instance.IsShop()) return;
+        PackCreate();
+
+
+    }
+
+    /// <summary>
+    /// ショップ入場時にパックが作成される
+    /// </summary>
+    private void PackCreate()
+    {
+        if(_isInstantiate)return;
+        // 置けるパック分生成
+        for(int i = 0; i < MAX_PACK; i++)
         {
-
-            action();
-
-            //お金を増やす処理
-
-
+            // 生成
+            _packs.Add(Instantiate(_pack,_targetPos));
+            // クラスの付与
+            _packs[i].AddComponent<TesPackObject>();
         }
-
-        if (GUI.Button(new Rect(ButtonPos.x + 75, Screen.height - ButtonPos.y, 60, 90),
-            ("<size=25><color=#ffffff>使用\n</color></size>"), SaleUtility.GetStyle()))
-        {
-            action();
-            //ジョーカーにアイテムの使用を知らせる
-            JokerUtility.SetTraget(JokerActionUseEnum.JokerActionTarget.item);
-            //Use();
-
-
-        }
+        _isInstantiate=true;
     }
 
 }
