@@ -7,7 +7,7 @@ using static ScriptCountNumber;
 /// <summary>
 /// パックの生成
 /// </summary>
-public class TesPack : MonoBehaviour
+public class InstantiatePack : MonoBehaviour
 {
     [SerializeField] GameObject _pack;
     [SerializeField] Transform _packZone;
@@ -51,10 +51,10 @@ public class TesPack : MonoBehaviour
             // 生成
             _packs.Add(Instantiate(_pack, _packZone));
             // クラスの付与
-            _packs[i].AddComponent<TesPackObject>();
+            _packs[i].AddComponent<AssignPack>();
             // このキャッシュは必須
             int cash = i;
-            TesPackObject obj = _packs[i].GetComponent<TesPackObject>();
+            AssignPack obj = _packs[i].GetComponent<AssignPack>();
             SaleObjectManager.instance.ProductExplantion(obj.GetSaleValue());
             SaleObjectManager.instance.AddProducts(_packs[i],
                 () => { obj.ShopExplantion(); },
@@ -63,6 +63,7 @@ public class TesPack : MonoBehaviour
 
                     Debug.Log("パックを購入したよー");
                     // パックの購入時の処理を描く
+                    PackManager.instance.SetIsBuyPack(true);
                     GameObject domyy = _packs[cash];
                     SaleObjectManager.instance.Remove(domyy);
                     BuyTrans(cash);
