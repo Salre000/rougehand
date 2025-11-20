@@ -14,7 +14,6 @@ public class InstantiatePack : MonoBehaviour
     [SerializeField] Transform _targetPos;
     [SerializeField] Transform _leftTargetPos;
     [SerializeField] Transform _rightTargetPos;
-    private int ID;
     private int MAX_PACK = 3;
     private List<GameObject> _packs = new();
     private bool _isInstantiate = false;
@@ -65,6 +64,8 @@ public class InstantiatePack : MonoBehaviour
                     // パックの購入時の処理を描く
                     PackManager.instance.SetIsBuyPack(true);
                     GameObject domyy = _packs[cash];
+                    // 選択されたパックオブジェクトをマネージャーに保存
+                    PackManager.instance.SetPickPack(domyy);
                     SaleObjectManager.instance.Remove(domyy);
                     BuyTrans(cash);
 
@@ -117,11 +118,6 @@ public class InstantiatePack : MonoBehaviour
         _packs[ID]=null;
         Trans();
 
-    }
-
-    public List<GameObject> GetList()
-    {
-        return _packs;
     }
 
 }
