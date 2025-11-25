@@ -136,5 +136,15 @@ public class Card
         }
     }
 
+    /// <summary>
+    /// トランプの情報をクラスに持たせる苦肉の策
+    /// </summary>
+    public class TrumpClass 
+    {
+        public TrumpClass(Card.Trump trump) { this.trump = trump; } 
+
+       public Card.Trump trump;
+
+    }
 
 }

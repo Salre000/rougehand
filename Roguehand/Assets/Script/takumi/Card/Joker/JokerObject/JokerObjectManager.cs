@@ -202,6 +202,7 @@ public class JokerObjectManager : MonoBehaviour
 
     }
 
+
     /// <summary>
     /// ジョーカーにマテリアルを貼り付ける関数
     /// </summary>
@@ -274,6 +275,8 @@ public class JokerObjectManager : MonoBehaviour
         ExplanationManager.instance.AddExplanation(gameObject,jokerBase,jokerBase.JokerBuffs(), SHOP_UI_OFFSET);
 
     }
+
+    public void JokerObjectALLAction(System.Func<JokerObject, JokerObject> funk) { _jokerObjects.GetAction(funk); }
 
     /// <summary>
     /// 次のジョーカーをプレイ状態に変更する

@@ -430,6 +430,25 @@ public class CardObjectManager : MonoBehaviour
 
         ExplanationManager.instance.AddExplanation(_cardObjectHands[ID].gameObject, dommyExplanation, buff, new Vector2(0, -1));
     }
+
+    /// <summary>
+    /// デッキのカードを増やす関数
+    /// </summary>
+    /// <param name="trump"></param>
+    public void AddTrump(Card.Trump trump) 
+    {
+        List<Card.Trump> deck = CardManager.instance.GetDeck();
+        deck.Add(trump);
+        CardManager.instance.SetDeck(deck);
+
+        _cardObjects.Add(Instantiate(_cardBase, _cardDeck.position, Quaternion.identity).AddComponent<CardObject>());
+        _cardObjects[_cardObjects.Count-1].SetStatus(CardObject.status.deck);
+        _cardObjects[_cardObjects.Count - 1].transform.eulerAngles = _BACK_SIDE;
+        _cardObjects[_cardObjects.Count - 1].transform.parent = _cardPool.transform;
+
+
+    }
+
     public void ShowExplanation(Card.Trump trump, GameObject _object)
     {
         //説明を描画させるダミーのクラス

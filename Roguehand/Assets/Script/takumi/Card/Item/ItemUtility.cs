@@ -9,6 +9,7 @@ public static class ItemUtility
     public static ItemManager instance { set; private get; }
 
     public static void AddItem(int iD) {  instance.AddItem(iD); }
+    public static void SetItemID(int iD) {  instance.SetItemID(iD); }
 
     public static void GrabChange(int ID,bool flag) { instance.GrabChange(ID, flag); }
 
@@ -21,8 +22,9 @@ public static class ItemUtility
     public static void Remove(int ID) { instance.Remove(ID); }
     public static void Remove(ItemBase itemBase) {  instance.Remove(itemBase); }
     public static void ShowExplanation(int ID) { instance.ShowExplanation(ID); }
-    public static void ShowExplanation(GameObject gameObject,ItemBase itemBase) { instance.ShowExplanation(gameObject,itemBase); }
+    public static void ShowExplanation(GameObject gameObject,ItemBase itemBase, Vector2 offset) { instance.ShowExplanation(gameObject,itemBase,offset); }
 
     public static void ShopItem(System.Func<ItemBase> func=null) { instance.ShopItemAdd(func); }
 
+    public static void ItemALLAction(System.Func<ItemObject, ItemObject> func) { instance.ItemALLAction(func); }
 }

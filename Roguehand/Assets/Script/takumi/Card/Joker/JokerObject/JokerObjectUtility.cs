@@ -33,4 +33,5 @@ public static class JokerObjectUtility
 
     public static GameObject GetIDObject(int id) { return instance.GetIDObject(id); }
     public static JokerObject GetIDJokerObject(int id) { return instance.GetIDJokerObject(id); }
+    public static void JokerObjectALLAction(System.Func<JokerObject, JokerObject> funk) {instance.JokerObjectALLAction(funk);}
 }

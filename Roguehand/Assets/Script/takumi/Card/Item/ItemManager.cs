@@ -66,6 +66,7 @@ public class ItemManager : MonoBehaviour
         CheckOrder();
     }
 
+    public void ItemALLAction(System.Func<ItemObject,ItemObject> func) { _itemObjectList.GetAction(func); }
 
     /// <summary>
     /// ÉAÉCÉeÉÄÇí«â¡Ç∑ÇÈä÷êî
@@ -78,6 +79,7 @@ public class ItemManager : MonoBehaviour
 
         _itemObjectList.Add(Instantiate(_prefab, transform).AddComponent<ItemObject>());
     }
+    public void SetItemID(int ID) { _itemList[_itemList.Count - 1].SetItemID(ID); }
     public void Remove(ItemBase itemBase)
     {
 
@@ -148,10 +150,10 @@ public class ItemManager : MonoBehaviour
 
 
     }
-    public void ShowExplanation(GameObject gameObject,ItemBase itemBase)
+    public void ShowExplanation(GameObject gameObject,ItemBase itemBase,Vector2 offset)
     {
         int[] test = new int[0];
-        ExplanationManager.instance.AddExplanation(gameObject, itemBase, test, new Vector2(0, 1));
+        ExplanationManager.instance.AddExplanation(gameObject, itemBase, test, offset);
 
 
 
