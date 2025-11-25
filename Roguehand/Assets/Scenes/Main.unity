@@ -20264,6 +20264,7 @@ MonoBehaviour:
   _shopLeftPos: {fileID: 74154256}
   _shopRightPos: {fileID: 110296654}
   _reroolButton: {fileID: 829326753}
+  _reroolText: {fileID: 419879649}
   _packModeButton: {fileID: 1633760055}
   _isPackMode: 0
   _packSelectCount: 0
