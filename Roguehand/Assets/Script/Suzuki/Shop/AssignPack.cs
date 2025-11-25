@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// パック一つ一つに付与されるクラス
 /// </summary>
-public class TesPackObject : MonoBehaviour, SaleInterface, ExplanationInterface
+public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 {
     /// <summary>
     /// パックの購入にかかるお金の量
@@ -29,7 +29,7 @@ public class TesPackObject : MonoBehaviour, SaleInterface, ExplanationInterface
     /// <summary>s
     /// 初期化処理
     /// </summary>
-    public void Initializ()
+    public void Initialize()
     {
 
     }
@@ -55,7 +55,7 @@ public class TesPackObject : MonoBehaviour, SaleInterface, ExplanationInterface
     /// </summary>
     /// <param name="createCount"><何枚生成するかどうか/param>
     /// <param name="getCount"><何枚獲得できるかどうか/param>
-    public void Create(TesPack.PackType packType, int createCount, int getCount)
+    public void Create(InstantiatePack.PackType packType, int createCount, int getCount)
     {
         _type = packType;
         _packCardCount = createCount;
