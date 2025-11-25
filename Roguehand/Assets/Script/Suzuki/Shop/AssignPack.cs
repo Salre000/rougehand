@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static ScriptCountNumber;
+using static Extra;
+using System.Text;
 /// <summary>
 /// パック一つ一つに付与されるクラス
 /// </summary>
@@ -107,7 +109,18 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
     public string GetName()
     {
-        return "名前";
+        StringBuilder　sb = new StringBuilder();
+
+        // +１がメガの文字
+        if (_packCardCount > 4) sb.Append(MasterData.instance.GetStringMaster( IDUtility.PACK_ID + 1));
+
+        // +2がからが種類の文字
+        sb.Append(MasterData.instance.GetStringMaster(IDUtility.PACK_ID + 2+(int)_type));
+
+        // パックの名前
+        sb.Append(MasterData.instance.GetStringMaster(IDUtility.PACK_ID));
+
+        return sb.ToString();
     }
 
     public string GetExplanation()
@@ -122,7 +135,7 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
     public string GetTypes()
     {
-        return "パック";
+        return (MasterData.instance.GetStringMaster(IDUtility.PACK_ID + 2 + (int)_type)+ (MasterData.instance.GetStringMaster(IDUtility.PACK_ID)));
     }
 
     private void PackTime(List<GameObject> cards)
@@ -165,7 +178,7 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                 JokerBase joker = t as JokerBase;
                 return () => 
                 {
-                    JokerUtility.Addjoker(joker.GetID()-IDUtility.JOKER_ID);
+                    JokerUtility.Addjoker(joker.GetID()-IDUtility.JOKER_ID-1);
 
                     SaleObjectManager.instance.PackSekect(card);   
 
