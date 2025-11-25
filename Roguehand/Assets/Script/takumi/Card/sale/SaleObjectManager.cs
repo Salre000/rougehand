@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,6 +38,7 @@ public class SaleObjectManager : MonoBehaviour
     [SerializeField] private Transform _shopLeftPos;
     [SerializeField] private Transform _shopRightPos;
     [SerializeField] private Button _reroolButton;
+    [SerializeField] private TextMeshProUGUI _reroolText;
     [SerializeField] private Button _packModeButton;
 
     [SerializeField, Header("デバック")] private bool _isPackMode = false;
@@ -44,6 +46,10 @@ public class SaleObjectManager : MonoBehaviour
     private readonly Vector3 _SHOP_ANGLE = new Vector3(-90, 0, 0);
     private readonly Vector3 UI_VALUE_OFFSET = new Vector3(0, 130, 0);
     float RENGE = 916;
+    private readonly int START_REROOL = 3;
+    private readonly int ADD_REROOL = 1;
+
+    private int nowRerool = 0;
 
     /// <summary>
     /// ゲーム中に加わる処理のリスト
@@ -56,8 +62,18 @@ public class SaleObjectManager : MonoBehaviour
         instance = this;
 
         Initializ();
+        nowRerool = START_REROOL;
 
-        _reroolButton.onClick.AddListener(() => { ClearCard(); CreateRondom(); });
+        _reroolButton.onClick.AddListener(() =>
+        {
+            if (nowRerool > GameUtility.GetMyMoney()) return;
+
+            GameUtility.SetMyMoney(GameUtility.GetMyMoney() - nowRerool);
+
+            nowRerool += ADD_REROOL;
+
+            ClearCard(); CreateRondom();
+        });
 
         _packModeButton.onClick.AddListener(() => { _packSelectCount = 0; });
 
@@ -65,8 +81,10 @@ public class SaleObjectManager : MonoBehaviour
     }
     public void Update()
     {
+        IsShop();
         CheckPackModeEnd();
         SetShopObjectPos();
+        ReroolSet();
 
         // 動的に実装される関数を実行
         for (int i = 0; i < dynamicAction.Count; i++) dynamicAction[i]();
@@ -138,6 +156,23 @@ public class SaleObjectManager : MonoBehaviour
 
         }
         ALLActive();
+    }
+
+    private bool oneFlag = false;
+    private void IsShop()
+    {
+        if (!ShopManager.instance.IsShop()) return;
+        if (oneFlag) return;
+        oneFlag = true;
+
+        CreateRondom();
+
+    }
+
+    private void ReroolSet() 
+    {
+
+        _reroolText.text = nowRerool.ToString();
     }
 
 
@@ -288,6 +323,10 @@ public class SaleObjectManager : MonoBehaviour
             Destroy(_products[i]);
         _products.Clear();
         _isNotMove.Clear();
+
+        oneFlag = false;
+
+        nowRerool = START_REROOL;
     }
 
     /// <summary>
@@ -329,7 +368,7 @@ public class SaleObjectManager : MonoBehaviour
 
     public void AllInactive() { _products.GetAction(product => { product.SetActive(false); return product; }); }
 
-    public void ChengePackMode(bool flag) 
+    public void ChengePackMode(bool flag)
     { _isPackMode = flag; ValueUISetActiveFalse(); _packModeButton.gameObject.SetActive(_isPackMode); }
 
     public void SetPackSelectCount(int count) { _packSelectCount = count; }

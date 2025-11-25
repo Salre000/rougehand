@@ -32,14 +32,24 @@ public class InstantiatePack : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(_packs.Count);
+        Debug.Log(_packs.Count+"パックの数");
 
+        CheckNotShop();
         if (!ShopManager.instance.IsShop()) return;
         PackCreate();
 
 
     }
 
+    private void CheckNotShop() 
+    {
+        if (ShopManager.instance.IsShop()) return;
+        if (!_isInstantiate) return;
+
+        _packs.Clear();
+
+        _isInstantiate = false;
+    }
     /// <summary>
     /// ショップ入場時にパックが作成される
     /// </summary>
