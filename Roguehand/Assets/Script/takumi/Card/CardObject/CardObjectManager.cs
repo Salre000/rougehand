@@ -429,12 +429,51 @@ public class CardObjectManager : MonoBehaviour
         ExplanationManager.instance._uiSizeMini = new Vector2(200, 90);
 
         ExplanationManager.instance.AddExplanation(_cardObjectHands[ID].gameObject, dommyExplanation, buff, new Vector2(0, -1));
+    }
+    public void ShowExplanation(Card.Trump trump, GameObject _object)
+    {
+        //説明を描画させるダミーのクラス
+        DommyExplanation dommyExplanation = new DommyExplanation();
 
+        //名前の文字
+        dommyExplanation.dommyName = () =>
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(MasterData.instance.GetStringMaster((int)trump.suit + 10, true));
+            sb.Append(MasterData.instance.GetStringMaster((int)trump.suit));
+            sb.Append(MasterData.instance.GetStringMaster(-10, true));
+            sb.Append(Extra.ErrorText("の"));
+            sb.Append(Extra.ErrorText(((int)trump.number).ToString()));
 
+            return sb.ToString();
+        };
 
+        // 説明の文字
+        dommyExplanation.dommyExplanation = () =>
+        {
+            StringBuilder sb = new StringBuilder();
 
+            sb.Append(Extra.ErrorText("基本スコア"));
+            if ((int)trump.number > 10 || (int)trump.number == 1) sb.Append(Extra.ErrorText(Extra.GetBlueString("+11")));
+            else sb.Append(Extra.ErrorText(Extra.GetBlueString("+" + ((int)trump.number).ToString())));
+            sb.Append("\n");
+            if (trump.deckBuff != Card.deckBuff.None)
+            {
+                sb.Append(MasterData.instance.GetStringMaster(6250 + (int)trump.deckBuff));
+            }
 
+            return sb.ToString();
+        };
+        dommyExplanation.dommyExplanation2 = () => string.Empty;
+        dommyExplanation.dommyType = () => string.Empty;
 
+        int[] buff = { 6200 + (int)trump.deckBuff, 6100 + (int)trump.cardBuff, 6000 + (int)trump.sealBuff };
+
+        //UIの大きさを調整
+        ExplanationManager.instance._uiSize = new Vector2(200, 150);
+        ExplanationManager.instance._uiSizeMini = new Vector2(200, 90);
+
+        ExplanationManager.instance.AddExplanation(_object, dommyExplanation, buff, new Vector2(0, -1));
     }
 
 

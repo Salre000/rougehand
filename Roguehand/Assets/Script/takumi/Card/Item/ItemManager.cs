@@ -148,6 +148,14 @@ public class ItemManager : MonoBehaviour
 
 
     }
+    public void ShowExplanation(GameObject gameObject,ItemBase itemBase)
+    {
+        int[] test = new int[0];
+        ExplanationManager.instance.AddExplanation(gameObject, itemBase, test, new Vector2(0, 1));
+
+
+
+    }
 
     public void ShopItemAdd(System.Func<ItemBase> func=null) 
     {

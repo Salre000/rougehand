@@ -54,7 +54,9 @@ public static class JokerUtility
     public static void SetMaterial(int ID) { instance.SetMaterial(ID); }
 
     public static void ShowExplanation(int ID) { instance.ShowExplanation(ID);}
-
+    public static void ShowExplanation(GameObject gameObject,JokerBase jokerBase) 
+    { instance.ShowExplanation(gameObject,jokerBase);}
+     
     public static void ShopJoker(System.Func<JokerBase> func = null) { instance.ShopJokerAdd(func); }
 
 }

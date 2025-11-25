@@ -59,6 +59,7 @@ public class TesPack : MonoBehaviour
 
                     Debug.Log("パックを購入したよー");
                     // パックの購入時の処理を描く
+                    //obj.Use();
 
                     GameObject domyy = _packs[cash];
                     SaleObjectManager.instance.Remove(domyy);

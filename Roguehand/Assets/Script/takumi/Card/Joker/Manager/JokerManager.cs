@@ -310,6 +310,11 @@ public class JokerManager : MonoBehaviour
         ExplanationManager.instance.AddExplanation(JokerObjectUtility.GetIDObject(ID), _jokers[ID], _jokers[ID].JokerBuffs(), new Vector2(0, 1));
 
     }
+    public void ShowExplanation(GameObject gameObject,JokerBase jokerBase)
+    {
+        ExplanationManager.instance.AddExplanation(gameObject, jokerBase, jokerBase.JokerBuffs(), new Vector2(0, 1));
+
+    }
     /// <summary>
     /// 全てのジョーカーに何かする関数
     /// </summary>

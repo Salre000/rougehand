@@ -28,7 +28,7 @@ public class SaleObjectManager : MonoBehaviour
     [SerializeField] private List<System.Action> _productsSaleShow = new List<System.Action>();
     [SerializeField] private List<float> _productsSaleValue = new List<float>();
     [SerializeField] private List<System.Action> _productsBuy = new List<System.Action>();
-    [SerializeField] private List<bool> _isPack = new List<bool>();
+    [SerializeField] private List<bool> _isNotMove = new List<bool>();
 
     [SerializeField] private GameObject _valuePrefab;
     [SerializeField]private List<UISaleValueObject>  _valuePool = new List<UISaleValueObject>();
@@ -41,6 +41,12 @@ public class SaleObjectManager : MonoBehaviour
     private readonly Vector3 UI_VALUE_OFFSET = new Vector3(0,130,0);
     float RENGE = 916;
 
+    /// <summary>
+    /// ゲーム中に加わる処理のリスト
+    /// </summary>
+    private List<System.Action> dynamicAction= new ();
+
+
     public void Awake()
     {
         instance = this;
@@ -52,6 +58,9 @@ public class SaleObjectManager : MonoBehaviour
     public void Update()
     {
         SetShopObjectPos();
+
+        // 動的に実装される関数を実行
+        for (int i = 0; i < dynamicAction.Count; i++) dynamicAction[i]();
     }
 
     private void Initializ() 
@@ -69,9 +78,9 @@ public class SaleObjectManager : MonoBehaviour
 
         ValueUISetActiveFalse();
 
-        float renge = Vector2.Distance(_shopLeftPos.position,_shopRightPos.position) / (_isPack.GetCount(flag=>!flag==true) + 1);
+        float renge = Vector2.Distance(_shopLeftPos.position,_shopRightPos.position) / (_isNotMove.GetCount(flag=>!flag==true) + 1);
 
-            Debug.Log((_isPack.GetCount(flag => !flag==true) + 1 )+ "割合");
+            Debug.Log((_isNotMove.GetCount(flag => !flag==true) + 1 )+ "割合");
         int packCount = 0;
 
         for (int i = 0; i < _products.Count; i++)
@@ -85,7 +94,7 @@ public class SaleObjectManager : MonoBehaviour
 
             uISale.transform.position = Camera.main.WorldToScreenPoint(_products[i].transform.position) + UI_VALUE_OFFSET;
 
-            if (_isPack[i]) { packCount++; continue; }
+            if (_isNotMove[i]) { packCount++; continue; }
             _products[i].transform.eulerAngles = _SHOP_ANGLE;
             _products[i].transform.position = _shopLeftPos.position + new Vector3(renge * (i + 1- packCount), 0, 0);
         }
@@ -167,7 +176,7 @@ public class SaleObjectManager : MonoBehaviour
 
         _productsBuy.Add(buy);
 
-        _isPack.Add(isPack);
+        _isNotMove.Add(isPack);
     }
 
     public void ProductExplantion(float value) 
@@ -201,7 +210,7 @@ public class SaleObjectManager : MonoBehaviour
         _products.RemoveAt(index);
         _productsSaleShow.RemoveAt(index);
         _productsBuy.RemoveAt(index);
-        _isPack.RemoveAt(index);
+        _isNotMove.RemoveAt(index);
 
         int i = 0;
         _valuePool.GetAction(value =>
@@ -237,7 +246,7 @@ public class SaleObjectManager : MonoBehaviour
         for (int i = 0; i < _products.Count; i++)
             Destroy(_products[i]);
         _products.Clear();
-        _isPack.Clear();
+        _isNotMove.Clear();
     }
 
     /// <summary>
@@ -245,12 +254,12 @@ public class SaleObjectManager : MonoBehaviour
     /// </summary>
     public void ClearCard() 
     {
-        for(int i = 0; i < _isPack.Count; i++) 
+        for(int i = 0; i < _isNotMove.Count; i++) 
         {
-            if (_isPack[i]) continue;
+            if (_isNotMove[i]) continue;
             _productsSaleValue.RemoveAt(i);
             _productsSaleShow.RemoveAt(i);
-            _isPack.RemoveAt(i);
+            _isNotMove.RemoveAt(i);
 
             GameObject gameObject = _products[i];
             _products.RemoveAt(i);
@@ -261,6 +270,17 @@ public class SaleObjectManager : MonoBehaviour
         }
 
 
+    }
+
+    public System.Func<int> AddDynamicAction(System.Action action) 
+    {
+        dynamicAction.Add(action);
+        return () => dynamicAction.IndexOf(action);
+    }
+
+    public void RemoveDynamicAction(int index) 
+    {
+        dynamicAction.RemoveAt(index);
     }
 
 }
