@@ -143,6 +143,7 @@ public class SaleObjectManager : MonoBehaviour
 
         // パックモードを終了
         ChengePackMode(false);
+        PackManager.instance.SetIsBuyPack(false);
         // パックモードの時に描画しているオブジェクトを削除
         for (int i = 0; i < _products.Count; i++)
         {
