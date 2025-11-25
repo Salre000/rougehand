@@ -19080,8 +19080,8 @@ MonoBehaviour:
   _targetPos: {fileID: 1942247993}
   _leftTargetPos: {fileID: 2119893630}
   _rightTargetPos: {fileID: 396610027}
-  _packItemLeftTargetPos: {fileID: 1205621739}
-  _packItemRightTargetPos: {fileID: 162235747}
+  _packItemLeftTargetPos: {fileID: 1605428835}
+  _packItemRightTargetPos: {fileID: 226237575}
 --- !u!114 &1891625319
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -180,12 +180,37 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                 {
                     JokerUtility.Addjoker(joker.GetID()-IDUtility.JOKER_ID-1);
 
-                    SaleObjectManager.instance.PackSekect(card);   
+                    SaleObjectManager.instance.PackSekect(card);
+
+                    JokerObjectUtility.JokerObjectALLAction(
+                        joker => { joker.gameObject.SetActive(false); return joker; });
 
 
                 };
             case InstantiatePack.PackType.item:
-                return () => { };
+                ItemBase itemBase = t as ItemBase;
+                return () => 
+                {
+
+                    ItemUtility.AddItem(
+                        itemBase.GetID()<(int)ConstellationItem.ConstellationType.MAX?0:itemBase.GetID());
+
+                    ItemUtility.SetItemID(itemBase.GetID());
+
+                    SaleObjectManager.instance.PackSekect(card);
+                    ItemUtility.ItemALLAction(
+                        item => { item.gameObject.SetActive(false); return item; });
+
+
+                };
+            case InstantiatePack.PackType.trump:
+                Card.TrumpClass trumpClass= t as Card.TrumpClass;
+                return () =>
+                {
+                    CardObjectUtility.AddTrump(trumpClass.trump);
+                    SaleObjectManager.instance.PackSekect(card);
+
+                };
 
 
         }
@@ -209,7 +234,19 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
                 break;
             case InstantiatePack.PackType.item:
+                ItemBase itemBase =t as ItemBase;
+
+                actions.Add(() => { SaleUtility.SetSale(itemBase, gameObject, 0, false); });
+                actions.Add(() => {ItemUtility.ShowExplanation(gameObject, itemBase, SHOP_UI_OFFSET); });
                 break;
+
+            case InstantiatePack.PackType.trump:
+                Card.TrumpClass trumpClass = t as Card.TrumpClass;
+                DommySaleObject doomy = new DommySaleObject();
+                actions.Add(() => { SaleUtility.SetSale(doomy, gameObject, 0, false); });
+                actions.Add(() => { CardObjectUtility.ShowExplanation(trumpClass.trump, gameObject); });
+
+                break;  
         }
 
         return () => { for (int i = 0; i < actions.Count; i++) actions[i](); };

@@ -139,6 +139,8 @@ public class SaleObjectManager : MonoBehaviour
 
         if (_packSelectCount > 0) return;
 
+
+
         // パックモードを終了
         ChengePackMode(false);
         PackManager.instance.SetIsBuyPack(false);
@@ -324,6 +326,7 @@ public class SaleObjectManager : MonoBehaviour
             Destroy(_products[i]);
         _products.Clear();
         _isNotMove.Clear();
+        _productsBuy.Clear();
 
         oneFlag = false;
 
@@ -370,7 +373,15 @@ public class SaleObjectManager : MonoBehaviour
     public void AllInactive() { _products.GetAction(product => { product.SetActive(false); return product; }); }
 
     public void ChengePackMode(bool flag)
-    { _isPackMode = flag; ValueUISetActiveFalse(); _packModeButton.gameObject.SetActive(_isPackMode); }
+    {
+        _isPackMode = flag; 
+        ValueUISetActiveFalse();
+        _packModeButton.gameObject.SetActive(_isPackMode);
+
+        JokerObjectUtility.JokerObjectALLAction(joker => { joker.gameObject.SetActive(!_isPackMode); return joker; });
+        ItemUtility.ItemALLAction(item => { item.gameObject.SetActive(!_isPackMode); return item; });
+
+    }
 
     public void SetPackSelectCount(int count) { _packSelectCount = count; }
 
