@@ -449,7 +449,7 @@ public class CardObjectManager : MonoBehaviour
 
     }
 
-    public void ShowExplanation(Card.Trump trump, GameObject _object)
+    public void ShowExplanation(Card.Trump trump, GameObject _object,Vector2 offset)
     {
         //説明を描画させるダミーのクラス
         DommyExplanation dommyExplanation = new DommyExplanation();
@@ -492,7 +492,7 @@ public class CardObjectManager : MonoBehaviour
         ExplanationManager.instance._uiSize = new Vector2(200, 150);
         ExplanationManager.instance._uiSizeMini = new Vector2(200, 90);
 
-        ExplanationManager.instance.AddExplanation(_object, dommyExplanation, buff, new Vector2(0, -1));
+        ExplanationManager.instance.AddExplanation(_object, dommyExplanation, buff, offset);
     }
 
 

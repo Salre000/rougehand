@@ -102,6 +102,7 @@ public class InstantiatePack : MonoBehaviour
                         case PackType.spectrum:
                             break;
                         case PackType.trump:
+                            obj.Use(GetRandomTrump(5), GetPos(5));
                             break;
                     }
 
@@ -192,13 +193,13 @@ public class InstantiatePack : MonoBehaviour
 
     }
     /// <summary>
-    /// アイテムのリストを返す関数
+    /// トランプのリストを返す関数
     /// </summary>
     /// <param name="createCount"></param>
     /// <returns></returns>
     private List<Card.TrumpClass> GetRandomTrump(int createCount)
     {
-        List<Card.TrumpClass> itemBases = new List<Card.TrumpClass>();
+        List<Card.TrumpClass> trumps = new List<Card.TrumpClass>();
 
         for (int i = 0; i < createCount; i++)
         {
@@ -206,6 +207,9 @@ public class InstantiatePack : MonoBehaviour
 
             trump.number = (Card.number)UnityEngine.Random.Range(1, (int)Card.number.max);
             trump.suit = (Card.suit)UnityEngine.Random.Range(0, (int)Card.suit.max);
+            trump.sealBuff = Card.sealBuff.None;
+            trump.cardBuff = Card.cardBuff.None;
+            trump.deckBuff = Card.deckBuff.None;
 
             int buffCount = UnityEngine.Random.Range(0, 4);
 
@@ -217,23 +221,34 @@ public class InstantiatePack : MonoBehaviour
 
                 switch (buffNum)
                 {
-                    //case 0:if (trump.sealBuff == Card.sealBuff.None) { } break;
-                    case 1: break;
-                    case 2: break;
+                    case 0:if (trump.sealBuff == Card.sealBuff.None) 
+                        {
+                            j++;
+                            trump.sealBuff = (Card.sealBuff)UnityEngine.Random.Range(0, (int)Card.sealBuff.MAX);
+                        } break;
+                    case 1:
+                        if (trump.cardBuff == Card.cardBuff.None)
+                        {
+                            j++;
+                            trump.cardBuff = (Card.cardBuff)UnityEngine.Random.Range(0, (int)Card.cardBuff.MAX);
+                        }
+                        break;
+                    case 2:
+                        if (trump.deckBuff == Card.deckBuff.None)
+                        {
+                            j++;
+                            trump.deckBuff = (Card.deckBuff)UnityEngine.Random.Range(0, (int)Card.deckBuff.MAX);
+                        }
+                        break;
                 }
 
                 if (continueFlag) continue;
-
-
-
-
             }
 
-            i++;
+            trumps.Add(new Card.TrumpClass(trump));
 
         }
-
-        return itemBases;
+        return trumps;
 
     }
 

@@ -244,7 +244,7 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                 Card.TrumpClass trumpClass = t as Card.TrumpClass;
                 DommySaleObject doomy = new DommySaleObject();
                 actions.Add(() => { SaleUtility.SetSale(doomy, gameObject, 0, false); });
-                actions.Add(() => { CardObjectUtility.ShowExplanation(trumpClass.trump, gameObject); });
+                actions.Add(() => { CardObjectUtility.ShowExplanation(trumpClass.trump, gameObject, SHOP_UI_OFFSET); });
 
                 break;  
         }

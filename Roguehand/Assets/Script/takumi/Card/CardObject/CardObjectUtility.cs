@@ -26,7 +26,7 @@ public static class CardObjectUtility
     public static void StopCardObject(int ID) { CardObjectManager.StopMoveCardObject(ID); }
 
     public static void ShowExplanation(Card.Trump trump,int ID) { CardObjectManager.ShowExplanation(trump,ID); }
-    public static void ShowExplanation(Card.Trump trump,GameObject _object) { CardObjectManager.ShowExplanation(trump,_object); }
+    public static void ShowExplanation(Card.Trump trump,GameObject _object,Vector2 offset) { CardObjectManager.ShowExplanation(trump,_object, offset); }
 
     public static bool CheckGrab(int ID) {return CardObjectManager.CheckGrab(ID); }
 
