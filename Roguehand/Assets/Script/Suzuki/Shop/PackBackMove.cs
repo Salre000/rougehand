@@ -22,6 +22,7 @@ public class PackBackMove : MonoBehaviour
     void Update()
     {
         BuyPackBackMove();
+        EndPack();
     }
 
     /// <summary>
