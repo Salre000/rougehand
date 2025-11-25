@@ -14,4 +14,6 @@ public static class IDUtility
     public const int TARGET_SCORE_ID = 7000;
     public const int REWARD_ID = 8000;
 
+    public const int PACK_ID=10000;
+
 }

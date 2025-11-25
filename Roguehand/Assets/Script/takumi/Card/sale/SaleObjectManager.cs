@@ -31,20 +31,24 @@ public class SaleObjectManager : MonoBehaviour
     [SerializeField] private List<bool> _isNotMove = new List<bool>();
 
     [SerializeField] private GameObject _valuePrefab;
-    [SerializeField]private List<UISaleValueObject>  _valuePool = new List<UISaleValueObject>();
+    [SerializeField] private List<UISaleValueObject> _valuePool = new List<UISaleValueObject>();
     [SerializeField] Canvas shopCanvas;
 
     [SerializeField] private Transform _shopLeftPos;
     [SerializeField] private Transform _shopRightPos;
     [SerializeField] private Button _reroolButton;
+    [SerializeField] private Button _packModeButton;
+
+    [SerializeField, Header("デバック")] private bool _isPackMode = false;
+    [SerializeField, Header("デバック")] private int _packSelectCount = 0;
     private readonly Vector3 _SHOP_ANGLE = new Vector3(-90, 0, 0);
-    private readonly Vector3 UI_VALUE_OFFSET = new Vector3(0,130,0);
+    private readonly Vector3 UI_VALUE_OFFSET = new Vector3(0, 130, 0);
     float RENGE = 916;
 
     /// <summary>
     /// ゲーム中に加わる処理のリスト
     /// </summary>
-    private List<System.Action> dynamicAction= new ();
+    private List<System.Action> dynamicAction = new();
 
 
     public void Awake()
@@ -53,21 +57,26 @@ public class SaleObjectManager : MonoBehaviour
 
         Initializ();
 
-        _reroolButton.onClick.AddListener(()=> { ClearCard(); CreateRondom(); });
+        _reroolButton.onClick.AddListener(() => { ClearCard(); CreateRondom(); });
+
+        _packModeButton.onClick.AddListener(() => { _packSelectCount = 0; });
+
+        _packModeButton.gameObject.SetActive(false);
     }
     public void Update()
     {
+        CheckPackModeEnd();
         SetShopObjectPos();
 
         // 動的に実装される関数を実行
         for (int i = 0; i < dynamicAction.Count; i++) dynamicAction[i]();
     }
 
-    private void Initializ() 
+    private void Initializ()
     {
         GameObject pollParent = new GameObject("UIValueParent");
         pollParent.transform.parent = shopCanvas.transform;
-        for (int i = 0; i < 10; i++) 
+        for (int i = 0; i < 10; i++)
         {
             _valuePool.Add(Instantiate(_valuePrefab, pollParent.transform).GetComponent<UISaleValueObject>());
         }
@@ -75,17 +84,18 @@ public class SaleObjectManager : MonoBehaviour
     }
     private void SetShopObjectPos()
     {
+        // パックモードのときは描画しない
+        if (_isPackMode) { return; }
 
         ValueUISetActiveFalse();
 
-        float renge = Vector2.Distance(_shopLeftPos.position,_shopRightPos.position) / (_isNotMove.GetCount(flag=>!flag==true) + 1);
+        float renge = Vector2.Distance(_shopLeftPos.position, _shopRightPos.position) / (_isNotMove.GetCount(flag => !flag == true) + 1);
 
-            Debug.Log((_isNotMove.GetCount(flag => !flag==true) + 1 )+ "割合");
         int packCount = 0;
 
         for (int i = 0; i < _products.Count; i++)
         {
-
+            if (!_products[i].activeSelf) continue;
 
             // UIを描画する
             UISaleValueObject uISale = GetValue();
@@ -96,18 +106,49 @@ public class SaleObjectManager : MonoBehaviour
 
             if (_isNotMove[i]) { packCount++; continue; }
             _products[i].transform.eulerAngles = _SHOP_ANGLE;
-            _products[i].transform.position = _shopLeftPos.position + new Vector3(renge * (i + 1- packCount), 0, 0);
+            _products[i].transform.position = _shopLeftPos.position + new Vector3(renge * (i + 1 - packCount), 0, 0);
         }
     }
 
-    private void ValueUISetActiveFalse() 
+    /// <summary>
+    /// パックモードを終わるかどうかを確認する関数
+    /// </summary>
+    private void CheckPackModeEnd()
     {
-        for(int i=0;i<_valuePool.Count;i++)
+        // パックモードでなければ返す
+        if (!_isPackMode) return;
+
+
+        if (_packSelectCount > 0) return;
+
+        // パックモードを終了
+        ChengePackMode(false);
+        // パックモードの時に描画しているオブジェクトを削除
+        for (int i = 0; i < _products.Count; i++)
+        {
+            if (!_products[i].activeSelf) continue;
+
+            GameObject dommyObject = _products[i].gameObject;
+
+            Remove(dommyObject);
+
+            Destroy(dommyObject);
+
+            i--;
+
+        }
+        ALLActive();
+    }
+
+
+    private void ValueUISetActiveFalse()
+    {
+        for (int i = 0; i < _valuePool.Count; i++)
             _valuePool[i].transform.gameObject.SetActive(false);
     }
-    private UISaleValueObject GetValue() 
+    private UISaleValueObject GetValue()
     {
-        for(int i = 0; i < _valuePool.Count; i++) 
+        for (int i = 0; i < _valuePool.Count; i++)
         {
             if (_valuePool[i].gameObject.activeSelf) continue;
             _valuePool[i].gameObject.SetActive(true);
@@ -168,7 +209,7 @@ public class SaleObjectManager : MonoBehaviour
 
     }
 
-    public void AddProducts(GameObject product, System.Action action,System.Action buy,bool isPack=false)
+    public void AddProducts(GameObject product, System.Action action, System.Action buy, bool isPack = false)
     {
         _products.Add(product);
 
@@ -179,20 +220,20 @@ public class SaleObjectManager : MonoBehaviour
         _isNotMove.Add(isPack);
     }
 
-    public void ProductExplantion(float value) 
+    public void ProductExplantion(float value)
     {
         _productsSaleValue.Add(value);
     }
 
-    public void IndexBuy(int index) 
-    { 
-        _productsBuy[index](); 
+    public void IndexBuy(int index)
+    {
+        _productsBuy[index]();
     }
 
-    public void Remove(GameObject gameObject) 
+    public void Remove(GameObject gameObject)
     {
         int index = -1;//_products.IndexOf(gameObject);
-        int ID = 0; 
+        int ID = 0;
 
         //かなり非効率な事にをしているが他の方法を今の手持ちでは行えない
         _products.GetAction(product =>
@@ -226,7 +267,7 @@ public class SaleObjectManager : MonoBehaviour
         });
     }
 
-    public int GetIndex(GameObject gameObject) {  return _products.IndexOf(gameObject); }
+    public int GetIndex(GameObject gameObject) { return _products.IndexOf(gameObject); }
 
     public void SetSale(int index)
     {
@@ -238,9 +279,9 @@ public class SaleObjectManager : MonoBehaviour
     /// <summary>
     /// 保存したリストを全て初期化
     /// </summary>
-    public void Clear() 
+    public void Clear()
     {
-        
+
         _productsSaleValue.Clear();
         _productsSaleShow.Clear();
         for (int i = 0; i < _products.Count; i++)
@@ -252,9 +293,9 @@ public class SaleObjectManager : MonoBehaviour
     /// <summary>
     /// 保存したリストのパックを消さずに残りを消す
     /// </summary>
-    public void ClearCard() 
+    public void ClearCard()
     {
-        for(int i = 0; i < _isNotMove.Count; i++) 
+        for (int i = 0; i < _isNotMove.Count; i++)
         {
             if (_isNotMove[i]) continue;
             _productsSaleValue.RemoveAt(i);
@@ -272,15 +313,32 @@ public class SaleObjectManager : MonoBehaviour
 
     }
 
-    public System.Func<int> AddDynamicAction(System.Action action) 
+    public System.Func<int> AddDynamicAction(System.Action action)
     {
         dynamicAction.Add(action);
         return () => dynamicAction.IndexOf(action);
     }
 
-    public void RemoveDynamicAction(int index) 
+    public void RemoveDynamicAction(int index)
     {
         dynamicAction.RemoveAt(index);
+    }
+
+
+    public void ALLActive() { _products.GetAction(product => { product.SetActive(true); return product; }); }
+
+    public void AllInactive() { _products.GetAction(product => { product.SetActive(false); return product; }); }
+
+    public void ChengePackMode(bool flag) 
+    { _isPackMode = flag; ValueUISetActiveFalse(); _packModeButton.gameObject.SetActive(_isPackMode); }
+
+    public void SetPackSelectCount(int count) { _packSelectCount = count; }
+
+    public void PackSekect(GameObject gameObject)
+    {
+        Remove(gameObject);
+
+        _packSelectCount--;
     }
 
 }

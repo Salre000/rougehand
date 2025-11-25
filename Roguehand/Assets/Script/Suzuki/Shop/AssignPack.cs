@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-
+using static ScriptCountNumber;
 /// <summary>
 /// パック一つ一つに付与されるクラス
 /// </summary>
@@ -18,7 +17,7 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
     /// <summary>
     /// パックの取得可能なカードの種類
     /// </summary>
-    private TesPack.PackType _type;
+    private InstantiatePack.PackType _type;
 
     private int _packCardCount = 0;
 
@@ -31,7 +30,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
     /// </summary>
     public void Initialize()
     {
-
     }
 
     public int GetSaleValue() { return saleValue; }
@@ -65,48 +63,45 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
     /// <summary>
     /// パックを開けたときの処理
     /// </summary>
-    public void Use<T>(System.Func<List<T>> values=null)
+    public void Use<T>(List<T> values,List<Vector3>poss)
     {
-        if (values == null)
-        {
-            switch (_type)
-            {
-                case TesPack.PackType.joker:
-
-                    break;
-                case TesPack.PackType.card:
-
-                    break;
-            }
-        }
+        // パックの中身を選択中は他のショップのカードを削除
+        SaleObjectManager.instance.AllInactive();
+        SaleObjectManager.instance.SetPackSelectCount(_packGetCount);
+        SaleObjectManager.instance.ChengePackMode(true);
 
         List<GameObject> cards = new();
         // 購入時のアクション
 
-        for (int i = 0; i < values().Count; i++)
+        for (int i = 0; i < values.Count; i++)
         {
             GameObject card = Instantiate(this.gameObject);
 
             // 自分自身のクラスを破棄
-            Destroy(card.GetComponent<TesPackObject>());
+            Destroy(card.GetComponent<AssignPack>());
+
+            card.AddComponent<PackInObject>().SetTragetPos(poss[i]);
 
             // マテリアルの貼り付け
             //card.GetComponent<MeshRenderer>().materials = GetTypeMaterial(_type, values()[i]);
 
             cards.Add(card);
 
-            System.Action buy = TypeBay(values()[i]);
-            System.Action explation = ShopExplamtion(card, values()[i]);
+            System.Action buy = TypeBay(values[i],card);
+            System.Action explation = ShopExplamtion(card, values[i]);
+
+            SaleObjectManager.instance.ProductExplantion(0);
 
             SaleObjectManager.instance.AddProducts(card,
                 explation,
                 buy,
-                true);
+                false);
         }
 
         // カードのオブジェクトの座標を移動させる関数を
         //saleObjectmanagerに渡す
 
+        Debug.Log("パックの使用");
 
     }
 
@@ -138,18 +133,18 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
     }
 
     private readonly int onlyMaterialCount = 4;
-    private Material[] GetTypeMaterial<T>(TesPack.PackType type, T t)
+    private Material[] GetTypeMaterial<T>(InstantiatePack.PackType type, T t)
     {
 
         Material[] materials = new Material[onlyMaterialCount];
 
         switch (type)
         {
-            case TesPack.PackType.joker:
+            case InstantiatePack.PackType.joker:
                 JokerBase joker = t as JokerBase;
 
                 break;
-            case TesPack.PackType.card:
+            case InstantiatePack.PackType.item:
 
 
                 break;
@@ -162,14 +157,21 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
         return materials;
     }
 
-    private System.Action TypeBay<T>(T t)
+    private System.Action TypeBay<T>(T t,GameObject card)
     {
         switch (_type)
         {
-            case TesPack.PackType.joker:
+            case InstantiatePack.PackType.joker:
+                JokerBase joker = t as JokerBase;
+                return () => 
+                {
+                    JokerUtility.Addjoker(joker.GetID()-IDUtility.JOKER_ID);
 
-                return () => { };
-            case TesPack.PackType.card:
+                    SaleObjectManager.instance.PackSekect(card);   
+
+
+                };
+            case InstantiatePack.PackType.item:
                 return () => { };
 
 
@@ -185,15 +187,15 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
         switch (_type)
         {
-            case TesPack.PackType.joker:
+            case InstantiatePack.PackType.joker:
 
                 JokerBase joker = t as JokerBase;
-                actions.Add(() => { SaleUtility.SetSale(joker, gameObject, 0, true); });
-                actions.Add(() => { JokerUtility.ShowExplanation(gameObject, joker); });
+                actions.Add(() => { SaleUtility.SetSale(joker, gameObject, 0, false); });
+                actions.Add(() => { JokerUtility.ShowExplanation(gameObject, joker, SHOP_UI_OFFSET); });
 
 
                 break;
-            case TesPack.PackType.card:
+            case InstantiatePack.PackType.item:
                 break;
         }
 
@@ -205,7 +207,7 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
     {
         switch (_type)
         {
-            case TesPack.PackType.joker:
+            case InstantiatePack.PackType.joker:
                 JokerBase joker = t as JokerBase;
                 return joker.JokerBuffs();
                 //case TesPack.PackType.card:
@@ -215,5 +217,21 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
         return new int[0];
 
     }
+
+
+    void SaleInterface.BuyShow(Vector3 pos, int saleValue, System.Action action)
+    {
+        Vector2 ButtonPos = Camera.main.WorldToScreenPoint(pos);
+
+        float BUY_WIDHT = 100;
+
+        if (GUI.Button(new Rect(ButtonPos.x - BUY_WIDHT / HALF, Screen.height - ButtonPos.y + 100, BUY_WIDHT, 60),
+            ("<size=30><color=#ffffff>" + Extra.ErrorText("購入") + "</color></size>"), SaleUtility.GetStyle()))
+        {
+            action();
+
+        }
+    }
+
 
 }
