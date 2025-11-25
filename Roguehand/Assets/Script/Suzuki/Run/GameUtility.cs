@@ -63,7 +63,7 @@ public static class GameUtility
     // アンティ数を取得
     public static int GetAnteCount() { return _anteCount; }
     // 所持金の設定
-    public static void SetMyMoney(int value) { _myMoney = value; }
+    public static void SetMyMoney(int value) { _myMoney = value;TextUIManager.instance.SetMoneyText("$"+_myMoney.ToString()); }
     // 所持金の取得
     public static int GetMyMoney() { return _myMoney; }
     // ボタン受付フラグのセット
