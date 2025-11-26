@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public static class GameSceneManager
 {
     // シーンの名前
+    public const string titleScene = "Title";
     public const string mainScene = "Main";
 
     // 普通のシーン遷移
