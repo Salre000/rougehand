@@ -12,6 +12,11 @@ public class ConstellationItem : ItemBase
     /// </summary>
     private int _constellationID = -1;
 
+    public override void SetItemID(int ID)
+    {
+        base.SetItemID(ID);
+        _constellationID = ID;
+    }
     /// <summary>
     /// ¯À‚Ìí—Ş‚Ì—ñ‹“‘Ì
     /// </summary>

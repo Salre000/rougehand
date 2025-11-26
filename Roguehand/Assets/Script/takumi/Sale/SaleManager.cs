@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SaleManager : MonoBehaviour
@@ -41,7 +42,7 @@ public class SaleManager : MonoBehaviour
 
     public void OnGUI()
     {
-
+        Debug.Log(_saleInterfaces.Count + "数");
         if (style == null)
         {
             style = new GUIStyle(GUI.skin.button);
@@ -73,7 +74,7 @@ public class SaleManager : MonoBehaviour
                         //売却をした事をジョーカーに知らせる
                         JokerUtility.SetTraget(JokerActionUseEnum.JokerActionTarget.sale);
 
-
+                        i=_saleInterfaces.Count;
                     });
 
             }
@@ -91,7 +92,9 @@ public class SaleManager : MonoBehaviour
                     SaleObjectManager.instance.IndexBuy(saleIndex);
 
 
-                    Remove(index);
+
+                    i = _saleInterfaces.Count;
+
 
                 });
 

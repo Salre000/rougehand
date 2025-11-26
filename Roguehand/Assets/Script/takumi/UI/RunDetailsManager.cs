@@ -110,6 +110,7 @@ public class RunDetailsManager : MonoBehaviour
         instance = this;
 
     }
+
     /// <summary>
     ///  •`‰æ‚ğŠJn‚·‚éŠÖ”
     /// </summary>

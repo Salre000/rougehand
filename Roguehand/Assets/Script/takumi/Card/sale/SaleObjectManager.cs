@@ -72,7 +72,9 @@ public class SaleObjectManager : MonoBehaviour
 
             nowRerool += ADD_REROOL;
 
-            ClearCard(); CreateRondom();
+            ClearCard();
+            SaleUtility.Claer();
+            CreateRondom();
         });
 
         _packModeButton.onClick.AddListener(() => { _packSelectCount = 0; });
@@ -158,6 +160,8 @@ public class SaleObjectManager : MonoBehaviour
             i--;
 
         }
+        SaleUtility.Claer();
+
         ALLActive();
     }
 
@@ -273,6 +277,8 @@ public class SaleObjectManager : MonoBehaviour
         int index = -1;//_products.IndexOf(gameObject);
         int ID = 0;
 
+        SaleUtility.Claer();
+
         //‚©‚È‚è”ñŒø—¦‚ÈŽ–‚É‚ð‚µ‚Ä‚¢‚é‚ª‘¼‚Ì•û–@‚ð¡‚ÌŽèŽ‚¿‚Å‚Ís‚¦‚È‚¢
         _products.GetAction(product =>
         {
@@ -319,7 +325,7 @@ public class SaleObjectManager : MonoBehaviour
     /// </summary>
     public void Clear()
     {
-
+        SaleUtility.Claer();
         _productsSaleValue.Clear();
         _productsSaleShow.Clear();
         for (int i = 0; i < _products.Count; i++)
@@ -344,7 +350,7 @@ public class SaleObjectManager : MonoBehaviour
             _productsSaleValue.RemoveAt(i);
             _productsSaleShow.RemoveAt(i);
             _isNotMove.RemoveAt(i);
-
+            _productsBuy.RemoveAt(i);
             GameObject gameObject = _products[i];
             _products.RemoveAt(i);
             Destroy(gameObject);

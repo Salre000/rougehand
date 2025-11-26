@@ -83,7 +83,7 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
     public void AddReturnMoney(int add) { _returnMoney += add; }
     public int GetID() { return itemID; }
 
-    public void SetItemID(int ID) { itemID = ID; }
+    public virtual void SetItemID(int ID) { itemID = ID; }
 
     public string GetName()
     {
