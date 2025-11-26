@@ -72,7 +72,9 @@ public class SaleObjectManager : MonoBehaviour
 
             nowRerool += ADD_REROOL;
 
-            ClearCard(); CreateRondom();
+            ClearCard();
+            SaleUtility.Claer();
+            CreateRondom();
         });
 
         _packModeButton.onClick.AddListener(() => { _packSelectCount = 0; });
@@ -348,7 +350,7 @@ public class SaleObjectManager : MonoBehaviour
             _productsSaleValue.RemoveAt(i);
             _productsSaleShow.RemoveAt(i);
             _isNotMove.RemoveAt(i);
-
+            _productsBuy.RemoveAt(i);
             GameObject gameObject = _products[i];
             _products.RemoveAt(i);
             Destroy(gameObject);

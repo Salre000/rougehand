@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SaleManager : MonoBehaviour
@@ -73,7 +74,7 @@ public class SaleManager : MonoBehaviour
                         //売却をした事をジョーカーに知らせる
                         JokerUtility.SetTraget(JokerActionUseEnum.JokerActionTarget.sale);
 
-                        Clear();
+                        i=_saleInterfaces.Count;
                     });
 
             }
@@ -91,8 +92,9 @@ public class SaleManager : MonoBehaviour
                     SaleObjectManager.instance.IndexBuy(saleIndex);
 
 
-                    Remove(index);
-                    Clear();
+
+                    i = _saleInterfaces.Count;
+
 
                 });
 
