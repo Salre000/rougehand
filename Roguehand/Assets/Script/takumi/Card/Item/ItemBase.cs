@@ -17,7 +17,9 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
     /// <summary>
     /// ”„‹pŠz‚Ì•Ï”  
     /// </summary>
-    protected int _returnMoney = 0;
+    protected int _returnMoney = BASE_MONEY;
+
+    private const int BASE_MONEY = 4;
 
     private readonly int ITEM_EXPLANTION_ID = 1500;
 
