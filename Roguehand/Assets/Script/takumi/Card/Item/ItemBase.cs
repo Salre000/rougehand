@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using static ScriptCountNumber;
 /// <summary>
 /// アイテムの抽象クラス
 /// </summary>
@@ -105,4 +105,23 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
         // 予定は未定
         return Extra.ErrorText("アイテム");
     }
+
+    bool SaleInterface.AddFlag()
+    {
+        return ItemUtility.ItemAddCheck();
+    }
+
+    void SaleInterface.NotAddButton(Vector2 ButtonPos)
+    {
+
+        int BUY_WIDHT = 250;
+
+        if (GUI.Button(new Rect(ButtonPos.x - BUY_WIDHT / HALF, Screen.height - ButtonPos.y + 100, BUY_WIDHT, 60),
+            ("<size=20><color=#ffffff>" + Extra.ErrorText("アイテムの枠がいっぱい") + "</color></size>"), SaleUtility.GetStyle()))
+        {
+
+        }
+
+    }
+
 }
