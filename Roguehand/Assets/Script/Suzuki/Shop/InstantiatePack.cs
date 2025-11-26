@@ -62,7 +62,7 @@ public class InstantiatePack : MonoBehaviour
         for (int i = 0; i < MAX_PACK; i++)
         {
 
-            PackType pack = (PackType)UnityEngine.Random.Range(0, (int)PackType.max);
+            PackType pack = (PackType)UnityEngine.Random.Range(0, (int)PackType.spectrum);
 
             // ¶¬
             _packs.Add(Instantiate(_pack, _packZone));

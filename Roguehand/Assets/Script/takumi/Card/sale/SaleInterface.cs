@@ -34,6 +34,15 @@ public interface SaleInterface
 
         float BUY_WIDHT = 100;
 
+        if (!AddFlag()) 
+        {
+
+            NotAddButton(ButtonPos);
+
+            return;
+        }
+
+
         if (GUI.Button(new Rect(ButtonPos.x - BUY_WIDHT /HALF, Screen.height - ButtonPos.y + 100, BUY_WIDHT, 60),
             ("<size=30><color=#ffffff>" + Extra.ErrorText("w“ü") + "</color></size>"), SaleUtility.GetStyle()))
         {
@@ -48,4 +57,15 @@ public interface SaleInterface
 
         }
     }
+
+    /// <summary>
+    /// ’Ç‰Á‚ª‰Â”\‚©‚Ç‚¤‚©‚ğ”»’f‚·‚éŠÖ”    
+    /// </summary>
+    /// <returns></returns>
+    public bool AddFlag() {  return true; }
+
+    /// <summary>
+    /// ’Ç‰Á‚ğ‚Å‚«‚È‚¢‚Æ‚«‚Ìƒ{ƒ^ƒ“
+    /// </summary>
+    public void NotAddButton(Vector2 ButtonPos) { }
 }

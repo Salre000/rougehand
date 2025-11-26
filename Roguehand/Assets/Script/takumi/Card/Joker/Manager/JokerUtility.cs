@@ -59,4 +59,5 @@ public static class JokerUtility
      
     public static void ShopJoker(System.Func<JokerBase> func = null) { instance.ShopJokerAdd(func); }
 
+    public static bool JokerAddCheck() {  return instance.JokerAddCheck(); }
 }

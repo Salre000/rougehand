@@ -27,4 +27,6 @@ public static class ItemUtility
     public static void ShopItem(System.Func<ItemBase> func=null) { instance.ShopItemAdd(func); }
 
     public static void ItemALLAction(System.Func<ItemObject, ItemObject> func) { instance.ItemALLAction(func); }
+
+    public static bool ItemAddCheck() {  return instance.ItemAddCheck(); }
 }

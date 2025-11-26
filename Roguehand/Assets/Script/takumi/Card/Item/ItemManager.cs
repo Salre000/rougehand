@@ -44,6 +44,8 @@ public class ItemManager : MonoBehaviour
     /// </summary>
     [SerializeField] private Transform _rightShopTransform;
 
+    private readonly int ITEM_MAX_COUNT = 2;
+
     private bool _isGrab = false;
     private int _isGrabID = -1;
 
@@ -69,11 +71,19 @@ public class ItemManager : MonoBehaviour
     public void ItemALLAction(System.Func<ItemObject,ItemObject> func) { _itemObjectList.GetAction(func); }
 
     /// <summary>
+    /// 何かしらの効果によってアイテムの最大値を変更する値
+    /// </summary>
+    private int negativeItemCounter = 0;
+    /// <summary>
     /// アイテムを追加する関数
     /// </summary>
     /// <param name="ID"></param>
     public void AddItem(int ID)
     {
+
+        if (_itemList.Count >= ITEM_MAX_COUNT+ negativeItemCounter) return;
+
+
         _itemList.Add(ALLItem.GetItem((ALLItem.ALLItemEnum)ID));
         _itemList[_itemList.Count-1].Initializ();
 
@@ -114,6 +124,7 @@ public class ItemManager : MonoBehaviour
 
     }
 
+    public bool ItemAddCheck() {  return _itemList.Count<ITEM_MAX_COUNT; }
 
     public void ChengeOrder(int lostID, int NextID)
     {

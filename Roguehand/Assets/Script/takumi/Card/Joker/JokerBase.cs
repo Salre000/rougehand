@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using static ScriptCountNumber;
 public class JokerBase : SaleInterface, ExplanationInterface
 {
 
@@ -143,8 +144,24 @@ public class JokerBase : SaleInterface, ExplanationInterface
                     };
         return strings;
 
+    }
 
 
+    bool SaleInterface.AddFlag()
+    {
+        return JokerUtility.JokerAddCheck();
+    }
+
+    void SaleInterface.NotAddButton(Vector2 ButtonPos)
+    {
+
+        int BUY_WIDHT = 250;
+
+        if (GUI.Button(new Rect(ButtonPos.x - BUY_WIDHT / HALF, Screen.height - ButtonPos.y + 100, BUY_WIDHT, 60),
+            ("<size=20><color=#ffffff>" + Extra.ErrorText("ジョーカーの枠がいっぱい") + "</color></size>"), SaleUtility.GetStyle()))
+        {
+
+        }
 
     }
 

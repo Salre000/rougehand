@@ -60,6 +60,8 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
         _type = packType;
         _packCardCount = createCount;
         _packGetCount = getCount;
+
+        saleValue = _packCardCount * _packGetCount;
     }
 
     /// <summary>
@@ -267,21 +269,5 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
         return new int[0];
 
     }
-
-
-    void SaleInterface.BuyShow(Vector3 pos, int saleValue, System.Action action)
-    {
-        Vector2 ButtonPos = Camera.main.WorldToScreenPoint(pos);
-
-        float BUY_WIDHT = 100;
-
-        if (GUI.Button(new Rect(ButtonPos.x - BUY_WIDHT / HALF, Screen.height - ButtonPos.y + 100, BUY_WIDHT, 60),
-            ("<size=30><color=#ffffff>" + Extra.ErrorText("çwì¸") + "</color></size>"), SaleUtility.GetStyle()))
-        {
-            action();
-
-        }
-    }
-
 
 }

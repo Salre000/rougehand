@@ -223,6 +223,11 @@ public class JokerManager : MonoBehaviour
     /// <returns></returns>
     public RoleManager.Role GetTargetRole() { return _targetRole; }
 
+    /// <summary>
+    /// ジョーカーの追加が可能かどうかを判断する関数
+    /// </summary>
+    /// <returns></returns>
+    public bool JokerAddCheck() { return _jokers.Count < JOKER_MAX_COUNT; }
 
 
     /// <summary>

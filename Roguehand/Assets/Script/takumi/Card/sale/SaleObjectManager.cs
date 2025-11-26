@@ -284,13 +284,13 @@ public class SaleObjectManager : MonoBehaviour
 
         if (index < 0) return;
 
-        BreakUtility.StartBreak(_products[index]);
+        //BreakUtility.StartBreak(_products[index]);
         Destroy(_products[index]);
         _products.RemoveAt(index);
         _productsSaleShow.RemoveAt(index);
         _productsBuy.RemoveAt(index);
         _isNotMove.RemoveAt(index);
-
+        _productsSaleValue.RemoveAt(index);
         int i = 0;
         _valuePool.GetAction(value =>
         {
