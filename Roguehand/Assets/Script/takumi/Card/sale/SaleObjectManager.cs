@@ -158,6 +158,8 @@ public class SaleObjectManager : MonoBehaviour
             i--;
 
         }
+        SaleUtility.Claer();
+
         ALLActive();
     }
 
@@ -273,6 +275,8 @@ public class SaleObjectManager : MonoBehaviour
         int index = -1;//_products.IndexOf(gameObject);
         int ID = 0;
 
+        SaleUtility.Claer();
+
         //‚©‚È‚è”ñŒø—¦‚ÈŽ–‚É‚ð‚µ‚Ä‚¢‚é‚ª‘¼‚Ì•û–@‚ð¡‚ÌŽèŽ‚¿‚Å‚Ís‚¦‚È‚¢
         _products.GetAction(product =>
         {
@@ -319,7 +323,7 @@ public class SaleObjectManager : MonoBehaviour
     /// </summary>
     public void Clear()
     {
-
+        SaleUtility.Claer();
         _productsSaleValue.Clear();
         _productsSaleShow.Clear();
         for (int i = 0; i < _products.Count; i++)

@@ -192,7 +192,7 @@ public class ItemManager : MonoBehaviour
             () =>
             {
                 AddItem(item.GetID()<(int)ConstellationItem.ConstellationType.MAX?0:item.GetID()- (int)ConstellationItem.ConstellationType.MAX);
-
+                _itemList[_itemList.Count-1].SetItemID(item.GetID());
                 GameObject domyy = saleObjecet;
                 SaleObjectManager.instance.Remove(domyy);
 

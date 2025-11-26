@@ -41,7 +41,7 @@ public class SaleManager : MonoBehaviour
 
     public void OnGUI()
     {
-
+        Debug.Log(_saleInterfaces.Count + "数");
         if (style == null)
         {
             style = new GUIStyle(GUI.skin.button);
@@ -73,7 +73,7 @@ public class SaleManager : MonoBehaviour
                         //売却をした事をジョーカーに知らせる
                         JokerUtility.SetTraget(JokerActionUseEnum.JokerActionTarget.sale);
 
-
+                        Clear();
                     });
 
             }
@@ -92,6 +92,7 @@ public class SaleManager : MonoBehaviour
 
 
                     Remove(index);
+                    Clear();
 
                 });
 
