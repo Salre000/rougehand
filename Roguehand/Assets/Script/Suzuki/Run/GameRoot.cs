@@ -15,6 +15,7 @@ public class GameRoot:MonoBehaviour
     bool over=false;
 
     private StringBuilder _builder = new StringBuilder();
+    float _Dtime = 0f;
 
 
     private void Start()
@@ -42,7 +43,15 @@ public class GameRoot:MonoBehaviour
     private void GameOver()
     {
         if (clear) return;
-        if(0<GameUtility.GetHandCount()) return;
+        if (0 < GameUtility.GetHandCount())
+        {
+            _Dtime = 0f;
+            return;
+        }
+        
+            _Dtime += Time.deltaTime;
+        if(_Dtime<5f)return;
+
         // 合計スコアと比較
         float roundScore = ScoreManager.instance.GetRoundScore();
         roundScore = ScoreManager.instance.Rounding(roundScore, 1f);
@@ -53,7 +62,7 @@ public class GameRoot:MonoBehaviour
         _builder.Clear();
         _builder.Append("Game Over");
         TextUIManager.instance.SetRoleText(_builder.ToString());
-        GameSceneManager.LoadScene(GameSceneManager.mainScene);
+
 
     }
 
