@@ -90,20 +90,20 @@ public class SerectCardRole : MonoBehaviour
 
         ////////////////////////
         /// デバッグ
-        int num = 0;
-        if (role == RoleManager.Role.highCard)
-            num = 1;
-        else
-            num = 0;
+        //int num = 0;
+        //if (role == RoleManager.Role.highCard)
+        //    num = 1;
+        //else
+        //    num = 0;
         ///
         ////////////////////////
 
             // 基本スコアと倍率
             // 基本スコア
-            int basic = ScoreMaster.instance.GetBasicScore(SCORE_ID + (int)role+num);
+            int basic = ScoreMaster.instance.GetBasicScore(SCORE_ID + (int)role);
 
         // 役によって変わる上昇幅を獲得
-        int addBasicLevel= ScoreMaster.instance.GetAddBasicScore(SCORE_ID + (int)role+num);
+        int addBasicLevel= ScoreMaster.instance.GetAddBasicScore(SCORE_ID + (int)role);
         // プレイされた役の現レベルを獲得
         int level = RoleManager.instance.GetRoleLevel(role);
         // レベルに応じてスコアを上昇
@@ -120,10 +120,10 @@ public class SerectCardRole : MonoBehaviour
 
         _builder.Clear();
         // 倍率
-        int magnifi = ScoreMaster.instance.GetBasicMagnification(SCORE_ID + (int)role + num);
+        int magnifi = ScoreMaster.instance.GetBasicMagnification(SCORE_ID + (int)role);
 
         // 役によって変わる上昇幅を獲得
-        int addMagniLevel = ScoreMaster.instance.GetAddBasicMagnification( SCORE_ID + (int)role + num);
+        int addMagniLevel = ScoreMaster.instance.GetAddBasicMagnification( SCORE_ID + (int)role);
         // レベルに応じてスコアを上昇
         for (int i = 1; i < level; i++)
             magnifi += addMagniLevel;
