@@ -614,6 +614,8 @@ public class CardObjectManager : MonoBehaviour
         return count > 0 ? true : false;
     }
 
+    public List<CardObject> CardObjects() { return _cardObjects; }
+
 
     /// <summary>
     /// ‚Â‚Ü‚ñ‚Å‚¢‚éƒJ[ƒh‚ÌˆÚ“®‚ğ‚·‚éŠÖ”

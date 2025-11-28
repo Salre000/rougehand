@@ -22,7 +22,13 @@ public class CommandUpData : MonoBehaviour
 
     private void Auto() 
     {
-        for(int i=0;i< CardManager.instance.GetPick().Count; i++) 
+
+        // ボタン受付の停止中
+        if (!GameUtility.IsPushButton()) return;
+        if (GameUtility.IsPlay()) return;
+
+
+        for (int i=0;i< CardManager.instance.GetPick().Count; i++) 
             CardManager.instance.SetIsSelect(CardManager.instance.GetHand().IndexOf(CardManager.instance.GetPick()[i]));
      
         RoleManager.instance.RoleCheck(CardManager.instance.GetHand());
@@ -32,6 +38,11 @@ public class CommandUpData : MonoBehaviour
             CardManager.instance.SetIsSelect(indexs[i]);
         }
         play();
+
+        // この方法だとスコアの加算を行わずに行ける
+        //CardManager.instance.ResetPick();
+        //RoleManager.instance.RoleCheck(CardManager.instance.GetPick());
+
     }
 
     public void SetPlay(System.Action action) {  play = action; }
