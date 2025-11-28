@@ -15,6 +15,11 @@ public class InstantiatePack : MonoBehaviour
     [SerializeField] Transform _rightTargetPos;
     [SerializeField] Transform _packItemLeftTargetPos;
     [SerializeField] Transform _packItemRightTargetPos;
+
+    /// <summary>
+    /// パックのマテリアルを管理するクラス
+    /// </summary>
+    [SerializeField]private PackMaterialManager materialManager;
     private float distance = 0;
     private int MAX_PACK = 3;
     private List<GameObject> _packs = new();
@@ -74,6 +79,9 @@ public class InstantiatePack : MonoBehaviour
             obj.Initialize();
             // 今は固定値で作成数と選択数を置いている
             obj.Create(pack, 5, 2);
+
+            materialManager.SetPackPaint(_packs[i], pack, 5);
+
             // 目標座標をセット
             SaleObjectManager.instance.ProductExplantion(obj.GetSaleValue());
             SaleObjectManager.instance.AddProducts(_packs[i],

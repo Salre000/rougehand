@@ -409,6 +409,9 @@ public class JokerObjectManager : MonoBehaviour
         _jokerObjects.RemoveAt(ID);
 
         ExplanationManager.instance.Remove();
+        GrabChange(_isGrabID, false);
+        _isGrab = false;
+        _isGrabID = -1;
 
 
 
