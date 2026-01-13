@@ -278,7 +278,7 @@ public class RoleManager : MonoBehaviour
             if (checkList2.Count >= 2) break;
         }
 
-        int count = checkList2.Count == 3?2:3;
+        int count = checkList2.Count == 3 ? 2 : 3;
 
         if (checkList2.Count == 3)
         {
@@ -647,4 +647,6 @@ public class RoleManager : MonoBehaviour
     // –ğ‚ğw’è‚µ‚Ä‚»‚ÌƒvƒŒƒC‰ñ”‚ğ’Ç‰Á‚·‚é
     public void AddRolePlayCountList(Role role) { _rolePlayCountList[(int)role]++; }
 
+    public void SetRoleLevel(List<int> levels) { _roleLevelList = levels; }
+    public void SetRoleCount(List<int> counters) { _rolePlayCountList = counters; }
 }

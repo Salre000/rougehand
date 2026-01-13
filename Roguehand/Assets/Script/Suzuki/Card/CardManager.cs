@@ -5,6 +5,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using static Card;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class CardManager : MonoBehaviour
 {
@@ -31,8 +32,8 @@ public class CardManager : MonoBehaviour
     }
     private void Start()
     {
-        trumpCard.CreateDeck();
-
+        //trumpCard.CreateDeck();
+        MemoryManager.Use();
     }
 
     /// <summary>

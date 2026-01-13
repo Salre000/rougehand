@@ -37,7 +37,38 @@ public class TrumpCard
                 _index++;
             }
         }
-
         CardManager.instance.SetDeck(deck);
     }
+
+    /// <summary>
+    ///  CSVŠî€‚ÅƒfƒbƒL‚ğì¬‚·‚éŠÖ”
+    /// </summary>
+    public void CreateDeck(List<List<int>> deckBlueprint)
+    {
+
+        // 4í—Ş‚Ì
+        for (int i = 0; i < (int)Card.suit.max; i++)
+        {
+            _suit = (Card.suit)i;
+            // j =  0~12 = Spade
+            // j = 13~25 = heart
+            // j = 26~38 = diamond
+            // j = 39~51 = club
+            for (int j = 0; j < (int)Card.number.king; j++)
+            {
+                if (deckBlueprint[i][j] <= 0) { j++; continue; }
+
+                deck.Add(new Card.Trump());
+                _number = (Card.number)j + 1;
+                if (j + 1 >= 11) _isFeice = true;
+                else _isFeice = false;
+                deck[_index] = new(_suit, _number, Card.State.deck, _isFeice);
+                _index++;
+                deckBlueprint[i][j]--;
+            }
+        }
+        CardManager.instance.SetDeck(deck);
+    }
+
+
 }
