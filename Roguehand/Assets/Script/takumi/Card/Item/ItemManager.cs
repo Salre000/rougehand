@@ -203,6 +203,9 @@ public class ItemManager : MonoBehaviour
 
 
     }
+
+    public List<ItemBase> GetItemBases() { return _itemList; }
+
     private readonly Vector2 SHOP_UI_OFFSET = new Vector2(1, 0);
     private readonly int[] SHOP_DOMMY_BUFF = new int[0];
 

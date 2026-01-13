@@ -638,6 +638,8 @@ public class RoleManager : MonoBehaviour
     public bool IsCheck() { return _isCheck; }
     // 引数に対応した役のレベルを返します
     public int GetRoleLevel(Role role) { return _roleLevelList[(int)role]; }
+    // 役のレベルを返します
+    public List<int> GetRoleLevels() { return _roleLevelList; }
     // 引数に対応した役のレベルを上昇させます
     public void AddRoleLevel(Role role) { _roleLevelList[(int)role]++; ; }
     // どの役が何回プレイされたかを返す

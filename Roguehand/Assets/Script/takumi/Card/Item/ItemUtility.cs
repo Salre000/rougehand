@@ -29,4 +29,6 @@ public static class ItemUtility
     public static void ItemALLAction(System.Func<ItemObject, ItemObject> func) { instance.ItemALLAction(func); }
 
     public static bool ItemAddCheck() {  return instance.ItemAddCheck(); }
+
+    public static List<ItemBase> GetItemBase() { return instance.GetItemBases(); }
 }

@@ -8,9 +8,6 @@ public class BossBase
 
     public virtual void Update() { }
 
-    public virtual void Play() { }
-
-
-
-
+    public virtual void Play() {
+    }
 }

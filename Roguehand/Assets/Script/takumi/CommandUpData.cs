@@ -17,6 +17,8 @@ public class CommandUpData : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.A)) Auto();
+
+        if (Input.GetKeyDown(KeyCode.M)) MemoryManager.CreateMemory();
         
     }
 
