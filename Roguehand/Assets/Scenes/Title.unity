@@ -714,6 +714,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startButton: {fileID: 976902422}
+  _continueButton: {fileID: 559140080}
+  _exidButton: {fileID: 2003923009}
   _fadePanel: {fileID: 910900638}
   _selectDeckPanel: {fileID: 1621005286}
 --- !u!4 &600272322
