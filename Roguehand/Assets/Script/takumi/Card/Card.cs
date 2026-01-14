@@ -1,3 +1,4 @@
+[System.Serializable]
 public class Card
 {
 
@@ -105,6 +106,7 @@ public class Card
     /// <summary>
     /// ˆê–‡‚ÌƒJ[ƒh‚Ìî•ñ
     /// </summary>
+   [System.Serializable]
     public struct Trump
     {
         public suit suit;

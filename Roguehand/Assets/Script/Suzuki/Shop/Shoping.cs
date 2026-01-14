@@ -84,6 +84,14 @@ public class Shoping : MonoBehaviour
             TextUIManager.instance.SetAnteText(ante.ToString());
             roundCount = 0;
         }
+        // ボス戦を開始する
+        if (roundCount == 2) 
+        {
+
+            BossManager.instance.CreateBoss(0);
+
+        }
+
         // ラウンドのカウント数を増やす
         roundCount++;
         GameUtility.SetRoundCount(roundCount);

@@ -8,12 +8,12 @@ public class RoleManager : MonoBehaviour
 {
     public static RoleManager instance;
 
-    
-    [SerializeField,Header("デバックように外から見える")]List<int> indexList = new();    // 役の条件にはまっているカードの要素数が入る
-    private Role _role=Role.None;
-    private bool _isCheck=false;
-    private List<int> _roleLevelList=new(17);
-    private List<int> _rolePlayCountList=new(17);
+
+    [SerializeField, Header("デバックように外から見える")] List<int> indexList = new();    // 役の条件にはまっているカードの要素数が入る
+    private Role _role = Role.None;
+    private bool _isCheck = false;
+    private List<int> _roleLevelList = new(17);
+    private List<int> _rolePlayCountList = new(17);
 
     public enum Role
     {
@@ -89,7 +89,7 @@ public class RoleManager : MonoBehaviour
             indexList.Add(i);
         }
 
-        if(indexList==null) return Role.None;
+        if (indexList == null) return Role.None;
         if (indexList.Count >= 5) return Role.revolution;
 
         return Role.None;
@@ -260,7 +260,6 @@ public class RoleManager : MonoBehaviour
         List<Card.Trump> checkList2 = new();
         List<Card.Trump> checkList3 = new();
 
-        List<int>dommyIndex=new();
 
         for (int i = 0; i < cards.Count; i++)
         {
@@ -269,16 +268,21 @@ public class RoleManager : MonoBehaviour
             for (int j = 0; j < cards.Count; j++)
             {
                 if (cards[i].number == cards[j].number)
+                {
                     checkList2.Add(cards[j]);
+                }
                 else
                     checkList3.Add(cards[j]);
 
-                dommyIndex.Add(j);
             }
             if (checkList2.Count >= 2) break;
         }
+
+        int count = checkList2.Count == 3 ? 2 : 3;
+
         if (checkList2.Count == 3)
         {
+
             if (JastNumberCheck(checkList2, 3) == null || JastNumberCheck(checkList3, 2) == null)
                 return Role.None;
         }
@@ -287,9 +291,14 @@ public class RoleManager : MonoBehaviour
             if (JastNumberCheck(checkList2, 2) == null || JastNumberCheck(checkList3, 3) == null)
                 return Role.None;
         }
-        // indexListにフルハウスのindexをつむ
+        // indexListにツーペアのindexをつむ
+
+        List<int> domyy = new List<int>(cards.SearchListIndex(checkList2.GetList(JastNumberCheck(checkList2, checkList2.Count))));
+        List<int> domyy2 = new List<int>(cards.SearchListIndex(checkList3.GetList(JastNumberCheck(checkList3, count))));
+        // checkに入っているリストを使いcardsのインデックス番号のリストを追加
         indexList.Clear();
-        indexList=dommyIndex;
+        indexList.AddRange(domyy);
+        indexList.AddRange(domyy2);
 
         return Role.fullHouse;
     }
@@ -327,7 +336,6 @@ public class RoleManager : MonoBehaviour
         List<Card.Trump> checkList2 = new();
         List<Card.Trump> checkList3 = new();
 
-        List<int>dommyIndex=new();
 
         for (int i = 0; i < cards.Count; i++)
         {
@@ -335,10 +343,9 @@ public class RoleManager : MonoBehaviour
             checkList3.Clear();
             for (int j = 0; j < cards.Count; j++)
             {
-                if (cards[i].number == cards[j].number) 
+                if (cards[i].number == cards[j].number)
                 {
                     checkList2.Add(cards[j]);
-                    dommyIndex.Add(j);
                 }
                 else
                     checkList3.Add(cards[j]);
@@ -527,13 +534,13 @@ public class RoleManager : MonoBehaviour
 
         // Number順(13～1)に並べなおす
         List<Card.Trump> jastCards = new(cards);
-        cards = CardManager.instance.NumberSort(cards,true);
+        cards = CardManager.instance.NumberSort(cards, true);
         jastNum.Clear();
         for (int i = 0; i < cards.Count; i++)
         {
 
             // 最後の1枚を入れる
-            if (cards.Count-1 == i)
+            if (cards.Count - 1 == i)
             {
                 // 元のカードリストと同じものを見つける
                 for (int j = 0; j < jastCards.Count; j++)
@@ -622,20 +629,24 @@ public class RoleManager : MonoBehaviour
     // 現在の役をローカル変数にセットします
     public void SetRole(Role role) { _role = role; }
     // 現在判定されている役を返します
-    public Role GetRole() {return _role; }
+    public Role GetRole() { return _role; }
     // 要素のどこに役になるカードがあるかを渡します
     public List<int> GetIndex() { return indexList; }
     // 役を判定したかをローカル変数にセットします
-    public void SetIsCheck(bool isCheck) {  _isCheck = isCheck; }
+    public void SetIsCheck(bool isCheck) { _isCheck = isCheck; }
     // 役が判定済みかを返します
-    public bool IsCheck() {  return _isCheck; }
+    public bool IsCheck() { return _isCheck; }
     // 引数に対応した役のレベルを返します
     public int GetRoleLevel(Role role) { return _roleLevelList[(int)role]; }
+    // 役のレベルを返します
+    public List<int> GetRoleLevels() { return _roleLevelList; }
     // 引数に対応した役のレベルを上昇させます
-    public void AddRoleLevel(Role role) {_roleLevelList[(int)role]++; ; }
+    public void AddRoleLevel(Role role) { _roleLevelList[(int)role]++; ; }
     // どの役が何回プレイされたかを返す
     public List<int> GetRolePlayCountList() { return _rolePlayCountList; }
     // 役を指定してそのプレイ回数を追加する
-    public void AddRolePlayCountList(Role role) {_rolePlayCountList[(int)role]++;}
+    public void AddRolePlayCountList(Role role) { _rolePlayCountList[(int)role]++; }
 
+    public void SetRoleLevel(List<int> levels) { _roleLevelList = levels; }
+    public void SetRoleCount(List<int> counters) { _rolePlayCountList = counters; }
 }

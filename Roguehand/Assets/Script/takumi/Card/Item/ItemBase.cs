@@ -6,6 +6,7 @@ using static ScriptCountNumber;
 /// <summary>
 /// アイテムの抽象クラス
 /// </summary>
+ [System.Serializable]
 public abstract class ItemBase : SaleInterface,ExplanationInterface
 {
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static ScriptCountNumber;
+[System.Serializable]
 public class JokerBase : SaleInterface, ExplanationInterface
 {
 

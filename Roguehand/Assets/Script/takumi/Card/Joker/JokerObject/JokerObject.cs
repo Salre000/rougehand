@@ -56,7 +56,7 @@ public class JokerObject : MonoBehaviour
     /// <summary>
     /// 一ターンに一度だけにする為の変数
     /// </summary>
-    private bool _isPlay = true;
+    [SerializeField]private bool _isPlay = true;
 
     /// <summary>
     /// ジョーカーのオブジェクと移動で使用する誤差

@@ -17,6 +17,7 @@ public class PlayHnad : MonoBehaviour
     {
         _playButton.onClick.AddListener(OnHandPlay);
         _discardButton.onClick.AddListener(OnHandDiscard);
+        CommandUpData.instance.SetPlay(OnHandPlay);
     }
 
     /// <summary>

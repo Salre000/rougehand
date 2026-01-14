@@ -89,6 +89,15 @@ public class ItemManager : MonoBehaviour
 
         _itemObjectList.Add(Instantiate(_prefab, transform).AddComponent<ItemObject>());
     }
+
+    public void AddItem(ItemBase itemBase) 
+    {
+
+        _itemList.Add(itemBase);
+        _itemObjectList.Add(Instantiate(_prefab, transform).AddComponent<ItemObject>());
+
+
+    }
     public void SetItemID(int ID) { _itemList[_itemList.Count - 1].SetItemID(ID); }
     public void Remove(ItemBase itemBase)
     {
@@ -203,6 +212,9 @@ public class ItemManager : MonoBehaviour
 
 
     }
+
+    public List<ItemBase> GetItemBases() { return _itemList; }
+
     private readonly Vector2 SHOP_UI_OFFSET = new Vector2(1, 0);
     private readonly int[] SHOP_DOMMY_BUFF = new int[0];
 

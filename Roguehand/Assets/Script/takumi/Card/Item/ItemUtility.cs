@@ -9,6 +9,8 @@ public static class ItemUtility
     public static ItemManager instance { set; private get; }
 
     public static void AddItem(int iD) {  instance.AddItem(iD); }
+    public static void AddItem(ItemBase itemBase) {  instance.AddItem(itemBase); }
+
     public static void SetItemID(int iD) {  instance.SetItemID(iD); }
 
     public static void GrabChange(int ID,bool flag) { instance.GrabChange(ID, flag); }
@@ -29,4 +31,6 @@ public static class ItemUtility
     public static void ItemALLAction(System.Func<ItemObject, ItemObject> func) { instance.ItemALLAction(func); }
 
     public static bool ItemAddCheck() {  return instance.ItemAddCheck(); }
+
+    public static List<ItemBase> GetItemBase() { return instance.GetItemBases(); }
 }

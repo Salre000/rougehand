@@ -41,7 +41,9 @@ public static class CardObjectUtility
 
     public static Material GetMaterial(int suit,int number) { return CardObjectManager.GetTrunpMatarial(suit, number); }
 
-
+    public static List<CardObject> CardObjects() {  return CardObjectManager.CardObjects(); }
     public static void AddTrump(Card.Trump trump) {  CardObjectManager.AddTrump(trump);}
+
+    public static List<CardObject> GetCardHands() { return CardObjectManager.CardHands(); }
 
 }
