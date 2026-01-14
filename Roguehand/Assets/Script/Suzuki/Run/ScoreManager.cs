@@ -62,6 +62,10 @@ public class ScoreManager : MonoBehaviour
         int id = IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount();
         _builder.Append(MasterData.instance.GetIntMaster(id));
         TextUIManager.instance.SetLowestScoreText(_builder.ToString());
+
+        // •ñV‹à‚ÌÄİ’è
+        int reward = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID + GameUtility.GetAllRoundCount());
+        TextUIManager.instance.SetRewardCountText(UIUtility.instance.RewardConversion(reward));
     }
 
     /// <summary>
