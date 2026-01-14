@@ -8,12 +8,16 @@ using UnityEngine.UI;
 public class OptionOpen : MonoBehaviour
 {
     [SerializeField] private Button _opButton;
+    [SerializeField] private Button _opCloseButton;
+    [SerializeField] private Button _resButton;
     [SerializeField] private GameObject _opObject;
     // Start is called before the first frame update
     void Start()
     {
-        _opButton=GetComponent<Button>();
         _opButton.onClick.AddListener(Onclick);
+        _opCloseButton.onClick.AddListener(Onclick);
+        _resButton.onClick.AddListener(OnReset);
+        _opObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -28,5 +32,10 @@ public class OptionOpen : MonoBehaviour
             _opObject.SetActive(false);
         else
             _opObject.SetActive(true);
+    }
+
+    private void OnReset()
+    {
+        GameSceneManager.LoadScene(GameSceneManager.mainScene);
     }
 }
