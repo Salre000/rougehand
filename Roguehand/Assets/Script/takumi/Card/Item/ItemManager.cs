@@ -89,6 +89,15 @@ public class ItemManager : MonoBehaviour
 
         _itemObjectList.Add(Instantiate(_prefab, transform).AddComponent<ItemObject>());
     }
+
+    public void AddItem(ItemBase itemBase) 
+    {
+
+        _itemList.Add(itemBase);
+        _itemObjectList.Add(Instantiate(_prefab, transform).AddComponent<ItemObject>());
+
+
+    }
     public void SetItemID(int ID) { _itemList[_itemList.Count - 1].SetItemID(ID); }
     public void Remove(ItemBase itemBase)
     {

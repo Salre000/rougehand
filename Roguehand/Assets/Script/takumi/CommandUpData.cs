@@ -19,7 +19,10 @@ public class CommandUpData : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A)) Auto();
 
         if (Input.GetKeyDown(KeyCode.M)) MemoryManager.CreateMemory();
-        
+
+        if (Input.GetKeyDown(KeyCode.S)) MemoryManager.Keep();
+
+
     }
 
     private void Auto() 
@@ -48,4 +51,12 @@ public class CommandUpData : MonoBehaviour
     }
 
     public void SetPlay(System.Action action) {  play = action; }
+
+    private void OnApplicationQuit()
+    {
+        // ここにセーブ処理を記述します。
+        // 例えば、ゲームデータを保存するメソッド。
+        MemoryManager.Keep();
+
+    }
 }

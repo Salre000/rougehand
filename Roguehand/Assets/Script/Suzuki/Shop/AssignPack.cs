@@ -180,7 +180,7 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                 JokerBase joker = t as JokerBase;
                 return () => 
                 {
-                    JokerUtility.Addjoker(joker.GetID()-IDUtility.JOKER_ID-1);
+                    JokerUtility.AddJoker(joker.GetID()-IDUtility.JOKER_ID-1);
 
                     SaleObjectManager.instance.PackSekect(card);
 

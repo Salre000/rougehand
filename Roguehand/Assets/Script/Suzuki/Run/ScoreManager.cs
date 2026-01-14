@@ -245,6 +245,9 @@ public class ScoreManager : MonoBehaviour
         // 目標スコアを越していたら次のラウンドへ
         if(!RoundUtility.NextStartRound()) return;
 
+        // ボスであったらボスを消す
+        BossManager.instance.BossEnd();
+
         // 合計スコアの増加フラグをリセット
         GameUtility.SetIsRoundScoreUp(false);
         // 最終的にプレイボタンのフラグをリセット
@@ -256,4 +259,5 @@ public class ScoreManager : MonoBehaviour
     public void SetBasic(int value) { _basicScore = value; }
     public void SetMagnification(int value) { _magnification = value; }
     public float GetRoundScore() {  return _roundScore; }
+    public void SetRoundScore(float value) {  _roundScore = value; }
 }

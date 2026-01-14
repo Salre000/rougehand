@@ -46,6 +46,9 @@ public class Memory
 
         //  現在のディスカードの可能回数を取得
         _discardCount = GameUtility.GetDiscardCount();
+
+        // 現在のラウンドのスコアを取得
+        _score = ScoreManager.instance.GetRoundScore();
     }
 
     public Memory(string fileName)
@@ -107,6 +110,50 @@ public class Memory
     /// </summary>
     public void Use()
     {
+        //　現在のデッキデータを取得
+        CardManager.instance.deck= _trumps;
+
+        //  現在のジョーカーのデータを取得
+        for(int i = 0; i < _jokers.Count; i++) JokerUtility.AddJoker(_jokers[i]);
+
+        //　現在のアイテムのデータを取得
+        for (int i = 0; i < _items.Count; i++) ItemUtility.AddItem(_items[i]);
+
+        //  現在のお金のデータを取得
+        GameUtility.SetMyMoney(_money);
+
+        // 　現在のラウンドのカウントを取得
+        GameUtility.SetRoundCount(_round);
+
+        // 　現在のアンティのカウントを取得
+        GameUtility.SetAnteCount(_ante);
+
+        StringBuilder _builder = new StringBuilder();
+        int id = IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount();
+        _builder.Append(MasterData.instance.GetIntMaster(id));
+        TextUIManager.instance.SetLowestScoreText(_builder.ToString());
+
+
+        //  現在の役の使用数を取得
+        RoleManager.instance.SetRoleCount(_roleCount);
+
+        //  現在の役のレベルを取得
+        RoleManager.instance.SetRoleLevel(_roleLevelCount);
+
+        //  現在のプレイ可能回数を取得
+        GameUtility.SetHandCount(_handCount);
+        TextUIManager.instance.SetHandText(_handCount.ToString());
+
+
+        //  現在のディスカードの可能回数を取得
+        GameUtility.SetDiscardCount(_discardCount);
+        TextUIManager.instance.SetDiscardText(_discardCount.ToString());
+
+
+
+        ScoreManager.instance.SetRoundScore(_score);
+        ScoreManager.instance.RoundScorePlus();
+
 
 
 
@@ -138,7 +185,7 @@ public class Memory
         {
             if (!int.TryParse(data[i], out int tryInt)) return;
 
-            JokerUtility.Addjoker(tryInt);
+            JokerUtility.AddJoker(tryInt);
         }
 
     }
@@ -281,6 +328,10 @@ public class Memory
     /// </summary>
     private int _discardCount;
 
+    /// <summary>
+    /// 現在のスコア
+    /// </summary>
+    private float _score;
 
 
 

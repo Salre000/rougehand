@@ -363,7 +363,7 @@ public class JokerObjectManager : MonoBehaviour
             () => { ShopExplamtion(dommyObject, jokerBase); },
             () => 
             {
-                JokerUtility.Addjoker(jokerBase.GetID()-IDUtility.JOKER_ID-1);
+                JokerUtility.AddJoker(jokerBase.GetID()-IDUtility.JOKER_ID-1);
 
                 GameObject domyy = dommyObject;
                 SaleObjectManager.instance.Remove(domyy);

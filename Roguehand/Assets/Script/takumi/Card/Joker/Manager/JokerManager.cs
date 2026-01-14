@@ -143,6 +143,12 @@ public class JokerManager : MonoBehaviour
         JokerObjectUtility.AddJoker(joker);
 
     }
+    public void AddJoker(JokerBase jokerBase) 
+    {
+        _jokers.Add(jokerBase);
+        JokerObjectUtility.AddJoker(jokerBase);
+
+    }
 
     public void JokerChenge(int ID)
     {
