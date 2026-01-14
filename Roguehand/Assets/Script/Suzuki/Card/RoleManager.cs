@@ -632,6 +632,7 @@ public class RoleManager : MonoBehaviour
     public Role GetRole() { return _role; }
     // 要素のどこに役になるカードがあるかを渡します
     public List<int> GetIndex() { return indexList; }
+    public void SetIndex(List<int>indexs) { indexList=indexs; }
     // 役を判定したかをローカル変数にセットします
     public void SetIsCheck(bool isCheck) { _isCheck = isCheck; }
     // 役が判定済みかを返します

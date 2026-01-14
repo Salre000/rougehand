@@ -39,25 +39,27 @@ public class BanArt : BossBase
 
     public override void LateUpdate()
     {
-        if (OneFlag) return;
         bool flag = false;
         CardObjectUtility.GetCardHands().GetAction(hand => { if (hand.GetStatus() == CardObject.status.play) flag = true; return hand; });
 
         if (!flag) return;
 
-        List<Card.Trump> hands = CardManager.instance.GetHand();
+        Debug.Log("’Ê‚Á‚Ä‚¢‚é");
 
-        for(int i=0;i< CardObjectUtility.GetCardHands().Count; i++) 
+        List<int> indexs = RoleManager.instance.GetIndex();
+
+        for (int i=0;i< CardManager.instance.GetPick().Count; i++) 
         {
-            //if (CardManager.instance.GetHand()[i].suit != suit) continue;
+            if (CardManager.instance.GetPick()[i].suit != suit) continue;
 
-            //if (RoleManager.instance.GetIndex().Exists(j => i != j)) continue;
+            if (indexs.FindIndex(index=>index==i)<0) continue;
 
-            //RoleManager.instance.GetIndex().GetAction(value => { if (i == value) return -1; return value; });
 
+            indexs.Remove(i);
 
         }
 
+        RoleManager.instance.SetIndex(indexs);
 
 
     }

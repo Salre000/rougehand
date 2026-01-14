@@ -22,7 +22,10 @@ public static class RoundUtility
         // 合計スコアと比較
         float roundScore = ScoreManager.instance.GetRoundScore();
         roundScore = ScoreManager.instance.Rounding(roundScore, 1f);
-        if (targetScore > roundScore) return true;
+        if (targetScore > roundScore)
+        {
+            return true;
+        }
 
         // リザルトのスコアとハンドの設定
         _builder.Clear();
