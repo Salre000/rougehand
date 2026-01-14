@@ -9,6 +9,7 @@ public class TextUIManager : MonoBehaviour
 
     [Header("ラン画面のTextUI")]
     [SerializeField] private TextMeshProUGUI _roundNameText;
+    [SerializeField] private TextMeshProUGUI _roundExceptionText;
     [SerializeField] private TextMeshProUGUI _lowestScoreText;
     [SerializeField] private TextMeshProUGUI _rewardCountText;
     [SerializeField] private TextMeshProUGUI _roundScoreText;
@@ -94,6 +95,7 @@ public class TextUIManager : MonoBehaviour
     #region ゲッター
 
     public TextMeshProUGUI GetRoundNameText() { return _roundNameText; }
+    public TextMeshProUGUI GetRoundExceptionText() { return _roundExceptionText; }
     public TextMeshProUGUI GetLowestScoreText() { return _lowestScoreText; }
     public TextMeshProUGUI GetRewardText() { return _rewardCountText; }
     public TextMeshProUGUI GetRoundScoreText() { return _roundScoreText; }
@@ -116,6 +118,7 @@ public class TextUIManager : MonoBehaviour
     #region セッター
 
     public void SetRoundNameText(string value) { _roundNameText.text = value; }
+    public void SetRoundExceptionText(string value) { _roundExceptionText.text = value; }
     public void SetLowestScoreText(string value) { _lowestScoreText.text = value; }
     public void SetRewardCountText(string value) { _rewardCountText.text = value; }
     public void SetRoundScoreText(string value) { _roundScoreText.text = value; }

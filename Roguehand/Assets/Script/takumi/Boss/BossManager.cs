@@ -49,8 +49,11 @@ public class BossManager : MonoBehaviour
         switch(id)
         {
             case 0: bossBase = new AlternativeBoss(); break;
+            case 1:bossBase = new BanArt();break;
         }
 
+
+        bossBase.bossTextID = _id;
         bossBase.Initializ();
 
         bossBases.Add(bossBase);

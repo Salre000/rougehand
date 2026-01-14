@@ -13,6 +13,8 @@ public class AlternativeBoss : BossBase
 
     public override void Initializ()
     {
+        base.Initializ();
+
         for(int i=0;i< alternativeCount; i++) 
         {
             int random=Random.Range(0, CardManager.instance.GetDeck().Count);
