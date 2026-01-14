@@ -39,8 +39,14 @@ public class TextUIManager : MonoBehaviour
         if (instance == null)
             instance = this;
         Initialize();
-        // 今は適当
-        SetRewardCountText(UIUtility.instance.RewardConversion(5));
+
+    }
+
+    private void Start()
+    {
+        // ラウンドクリア報酬金
+        int reward = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID + GameUtility.GetAllRoundCount());
+        SetRewardCountText(UIUtility.instance.RewardConversion(reward));
     }
 
 
