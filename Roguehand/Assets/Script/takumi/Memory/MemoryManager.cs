@@ -46,7 +46,7 @@ public class MemoryManager
     /// <summary>
     /// データを使いゲームを構築する
     /// </summary>
-    public static void Use()
+    public static void Use(string flieName="")
     {
         if (LoodLostData())
         {
@@ -54,7 +54,7 @@ public class MemoryManager
         }
         else
         {
-            instantMemory = new Memory(string.Empty);
+            instantMemory = new Memory("DiceDeck");
         }
     }
 

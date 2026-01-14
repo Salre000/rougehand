@@ -432,6 +432,7 @@ public class JokerObjectManager : MonoBehaviour
 
     public void GrabChange(int ID, bool flag)
     {
+        if (ID < 0) return;
 
         _isGrab = flag;
         _isGrabID = ID;
