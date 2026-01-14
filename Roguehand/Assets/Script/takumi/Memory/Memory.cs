@@ -49,6 +49,9 @@ public class Memory
 
         // 現在のラウンドのスコアを取得
         _score = ScoreManager.instance.GetRoundScore();
+
+        // 現在ショップにいるかどうかをINTに変換して取得
+        _isShop=ShopManager.instance.IsShop()?1:0;
     }
 
     public Memory(string fileName)
@@ -103,6 +106,8 @@ public class Memory
         CreateHandCount(csvDatas[height]);
         height++;
         CreateDiscard(csvDatas[height]);
+        height++;
+        CreateISShotp(csvDatas[height]);
     }
 
     /// <summary>
@@ -121,12 +126,16 @@ public class Memory
 
         //  現在のお金のデータを取得
         GameUtility.SetMyMoney(_money);
+        TextUIManager.instance.SetMoneyText(_money.ToString());
 
         // 　現在のラウンドのカウントを取得
         GameUtility.SetRoundCount(_round);
+        TextUIManager.instance.SetRoundText(_round.ToString());
 
         // 　現在のアンティのカウントを取得
         GameUtility.SetAnteCount(_ante);
+        TextUIManager.instance.SetAnteText(_ante.ToString());
+        GameUtility.SetAllRoundCount(_round + ((_ante - 1) * 3));
 
         StringBuilder _builder = new StringBuilder();
         int id = IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount();
@@ -150,11 +159,10 @@ public class Memory
         TextUIManager.instance.SetDiscardText(_discardCount.ToString());
 
 
-
         ScoreManager.instance.SetRoundScore(_score);
         ScoreManager.instance.RoundScorePlus();
 
-
+        ShopManager.instance.SetIsShop(_isShop > 0 ? true : false);
 
 
     }
@@ -280,6 +288,14 @@ public class Memory
 
     }
 
+    private void CreateISShotp(string[] data) 
+    {
+        int discardPoint = 1;
+        if (!int.TryParse(data[discardPoint], out int tryInt)) return;
+
+        ShopManager.instance.SetIsShop(tryInt > 0 ? true : false);
+    }
+
     /// <summary>
     /// カードの保存先
     /// </summary>
@@ -334,6 +350,9 @@ public class Memory
     private float _score;
 
 
-
+    /// <summary>
+    /// ショップにいるかどうか
+    /// </summary>
+    private int _isShop;
 
 }

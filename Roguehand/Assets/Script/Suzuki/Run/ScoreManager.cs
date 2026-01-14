@@ -54,6 +54,7 @@ public class ScoreManager : MonoBehaviour
         // ショップが終わり次ラウンドに移行するときにリセット
         if(!ShopManager.instance.IsPushEndShop())return;
 
+
         // 合計スコアのリセット
         ScoreManager.instance.ResetRoundScore();
 
@@ -245,8 +246,7 @@ public class ScoreManager : MonoBehaviour
         // 目標スコアを越していたら次のラウンドへ
         if(!RoundUtility.NextStartRound()) return;
 
-        // ボスであったらボスを消す
-        BossManager.instance.BossEnd();
+
 
         // 合計スコアの増加フラグをリセット
         GameUtility.SetIsRoundScoreUp(false);
