@@ -68,7 +68,8 @@ public class SaleManager : MonoBehaviour
                         if (_saleObject.Count < num || _saleObject[num] == null) return;
 
                         int index = _saleObject.IndexOf(cashObject);
-                        GetType(_saleObject[num]);
+                        GrabManager.status status= GetType(_saleObject[num]);
+
                         Remove(index);
 
                         //売却をした事をジョーカーに知らせる

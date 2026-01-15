@@ -54,7 +54,7 @@ public class TrumpCard
             // j = 13~25 = heart
             // j = 26~38 = diamond
             // j = 39~51 = club
-            for (int j = 0; j < (int)Card.number.king; j++)
+            for (int j = 0; j < (int)Card.number.king;)
             {
                 if (deckBlueprint[i][j] <= 0) { j++; continue; }
 

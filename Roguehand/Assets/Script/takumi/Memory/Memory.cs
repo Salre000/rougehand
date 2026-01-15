@@ -56,7 +56,7 @@ public class Memory
 
     public Memory(string fileName)
     {
-        if (fileName == string.Empty) fileName = BASE_DECK;
+        //if (fileName == string.Empty) fileName = BASE_DECK;
 
         //読み込んだCSVファイルを格納
         List<string[]> csvDatas = new List<string[]>();
@@ -69,7 +69,7 @@ public class Memory
         builder.Clear();
         builder.Append(FREE_PASS);
         builder.Append(BASE_FILE);
-        builder.Append(BASE_DECK);
+        builder.Append(fileName);
 
 
         //繋げたファイルパスを使いファイルのロードを行う
@@ -170,7 +170,7 @@ public class Memory
     private void CreateDeck(List<string[]> deta)
     {
         List<List<int>> dommy = new List<List<int>>();
-        for (int i = 0; i < deta.Count; i++)
+        for (int i = 0; i < (int)Card.suit.max; i++)
         {
             dommy.Add(new List<int>());
             for (int j = 1; j < deta[i].Length; j++)

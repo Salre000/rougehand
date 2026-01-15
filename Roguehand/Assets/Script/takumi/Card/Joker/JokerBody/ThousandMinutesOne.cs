@@ -1,4 +1,7 @@
 using UnityEngine;
+
+[System.Serializable]
+
 public class ThousandMinutesOne : JokerBase
 {
     public override JokerActionUseEnum.JokerRarity GetRarity() { return JokerActionUseEnum.JokerRarity.Rare; }
