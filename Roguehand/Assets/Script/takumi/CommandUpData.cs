@@ -18,10 +18,6 @@ public class CommandUpData : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A)) Auto();
 
-        if (Input.GetKeyDown(KeyCode.M)) MemoryManager.CreateMemory();
-
-        if (Input.GetKeyDown(KeyCode.S)) MemoryManager.Keep();
-
         if (Input.GetKeyDown(KeyCode.R)) ResultUIManager.Instance.Active();
 
 

@@ -23,9 +23,8 @@ public class ResultUIManager : MonoBehaviour
     [SerializeField, Header("エンドレスモードを起動するボタン")] Button endless;
     [SerializeField, Header("新しいラン")] Button newRun;
     [SerializeField, Header("メインメニュー")] Button mainMene;
-    Memory resultMemory;
 
-    public bool resultFlag{ private set; get; }
+    public bool resultFlag { private set; get; }
 
 
     public void Awake()
@@ -38,13 +37,12 @@ public class ResultUIManager : MonoBehaviour
 
 
 
-    public void Active(string text="") 
+    public void Active(string text = "")
     {
-
         gameObject.SetActive(true);
         resultFlag = true;
 
-        resultMemory = MemoryManager.instantMemory=new Memory();
+        Memory resultMemory = MemoryManager.instantMemory;
         SetResultAnswer(text);
         BestHand();
         RoleCount();
@@ -56,13 +54,13 @@ public class ResultUIManager : MonoBehaviour
         RoundCount();
     }
 
-    private void SetResultAnswer(string text) 
+    private void SetResultAnswer(string text)
     {
-        for(int i=0;i< text.Length; i++) 
+        for (int i = 0; i < text.Length; i++)
         {
             if (i > ResultAnswer.Length) return;
 
-            ResultAnswer[i].text=text[i];
+            ResultAnswer[i].text = text[i].ToString();
 
         }
 
@@ -73,28 +71,28 @@ public class ResultUIManager : MonoBehaviour
 
     private void BestHand()
     {
-
+        Memory resultMemory = MemoryManager.instantMemory;
         highScoreText.text = resultMemory._highScore.ToString("3");
 
     }
     private readonly int COLORID = 7;
 
-    private void RoleCount() 
+    private void RoleCount()
     {
         int index = 0;
         int value = 0;
-
-        for(int i = 0; i < resultMemory._roleCount.Count; i++) 
+        Memory resultMemory = MemoryManager.instantMemory;
+        for (int i = 0; i < resultMemory._roleCount.Count; i++)
         {
             if (value > resultMemory._roleCount[i]) continue;
-            value= resultMemory._roleCount[i];
+            value = resultMemory._roleCount[i];
             index = i;
         }
-        StringBuilder sb= new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         sb.Clear();
-        sb.Append(MasterData.instance.GetStringMaster(index + IDUtility.ROLE_ID,true));
+        sb.Append(MasterData.instance.GetStringMaster(index + IDUtility.ROLE_ID, true));
         sb.Append(MasterData.instance.GetStringMaster(IDUtility.RICHTEXT_ID));
-        sb.Append(MasterData.instance.GetStringMaster(IDUtility.RICHTEXT_ID+COLORID));
+        sb.Append(MasterData.instance.GetStringMaster(IDUtility.RICHTEXT_ID + COLORID));
         sb.Append("[");
         sb.Append(resultMemory._roleCount[index].ToString());
         sb.Append("]");
@@ -102,30 +100,36 @@ public class ResultUIManager : MonoBehaviour
         highRoleText.text = sb.ToString();
     }
 
-    private void PlayCardCount() 
+    private void PlayCardCount()
     {
+        Memory resultMemory = MemoryManager.instantMemory;
         playCardCountText.text = resultMemory._playCardCount.ToString();
     }
 
-    private void DiscardCardCount() 
+    private void DiscardCardCount()
     {
+        Memory resultMemory = MemoryManager.instantMemory;
         discardCardCountText.text = resultMemory._discardCardCount.ToString();
     }
 
-    private void BuyCardCount() 
+    private void BuyCardCount()
     {
-        buyCardCountText.text= resultMemory._buyCardCount.ToString();
+        Memory resultMemory = MemoryManager.instantMemory;
+        buyCardCountText.text = resultMemory._buyCardCount.ToString();
     }
-    private void ReroolCount() 
+    private void ReroolCount()
     {
-        reroolCountText.text=resultMemory._reroolCount.ToString();
+        Memory resultMemory = MemoryManager.instantMemory;
+        reroolCountText.text = resultMemory._reroolCount.ToString();
     }
-    private void AnteCount() 
+    private void AnteCount()
     {
-        anteText.text=resultMemory._ante.ToString();
+        Memory resultMemory = MemoryManager.instantMemory;
+        anteText.text = resultMemory._ante.ToString();
     }
     private void RoundCount()
     {
+        Memory resultMemory = MemoryManager.instantMemory;
         roundText.text = resultMemory._round.ToString();
     }
 

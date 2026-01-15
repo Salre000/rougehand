@@ -18,7 +18,7 @@ public class MemoryManager
 
     public static void CreateMemory()
     {
-        instantMemory = new Memory();
+      instantMemory = new Memory();
     }
 
     /// <summary>

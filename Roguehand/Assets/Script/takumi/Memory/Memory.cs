@@ -16,7 +16,7 @@ public class Memory
     /// </summary>
     public Memory()
     {
-
+        Debug.Log("TEST");
         //　現在のデッキデータを取得
         _trumps = CardManager.instance.deck;
 
