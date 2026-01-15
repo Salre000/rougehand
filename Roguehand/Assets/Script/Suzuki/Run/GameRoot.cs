@@ -38,6 +38,9 @@ public class GameRoot:MonoBehaviour
         _builder.Clear();
         _builder.Append("Clear");
         TextUIManager.instance.SetRoleText(_builder.ToString());
+        // リザルト画面を開く
+        ResultUIManager.Instance.Active("勝利!");
+
     }
     // ハンドがゼロか
     private void GameOver()
@@ -63,6 +66,8 @@ public class GameRoot:MonoBehaviour
         _builder.Append("Game Over");
         TextUIManager.instance.SetRoleText(_builder.ToString());
 
+        // リザルト画面を開く
+        ResultUIManager.Instance.Active("敗北");
 
     }
 

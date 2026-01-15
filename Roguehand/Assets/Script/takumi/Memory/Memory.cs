@@ -52,6 +52,17 @@ public class Memory
 
         // 現在ショップにいるかどうかをINTに変換して取得
         _isShop=ShopManager.instance.IsShop()?1:0;
+
+        // リロールの回数を取得
+        _reroolCount=SaleObjectManager.instance.GetReroolCount();
+
+        _playCardCount=CardObjectUtility.GetPlayCardCount();
+
+        _discardCardCount=CardObjectUtility.GetDiscardCardCount();
+
+        _highScore=(int)ScoreManager.instance.GetHighScore();
+
+        _buyCardCount=SaleObjectManager.instance.GetCardBuyCount();
     }
 
     public Memory(string fileName)
@@ -164,7 +175,15 @@ public class Memory
 
         ShopManager.instance.SetIsShop(_isShop > 0 ? true : false);
 
+        SaleObjectManager.instance.SetReroolCount(_reroolCount);
 
+        CardObjectUtility.SetPlayCardCount(_playCardCount);
+
+        CardObjectUtility.SetDiscardCardCount(_discardCardCount);
+
+        ScoreManager.instance.SetHighScore((float)_highScore);
+
+        SaleObjectManager.instance.SetCardBuyCount(_buyCardCount);
     }
 
     private void CreateDeck(List<string[]> deta)
@@ -299,60 +318,97 @@ public class Memory
     /// <summary>
     /// カードの保存先
     /// </summary>
-    private List<Card.Trump> _trumps;
+    public List<Card.Trump> _trumps { private set; get; }
 
     /// <summary>
     /// ジョーカーの保存先
     /// </summary>
-    private List<JokerBase> _jokers;
+    public List<JokerBase> _jokers { private set; get; }
 
     /// <summary>
     /// アイテムの保存先
     /// </summary>
-    private List<ItemBase> _items;
+    public List<ItemBase> _items { private set; get; }
 
     /// <summary>
     /// お金の保存先
     /// </summary>
-    private int _money;
+    public int _money { private set; get; }
 
     /// <summary>
     /// アンティの保存先
     /// </summary>
-    private int _ante;
+    public int _ante { private set; get; }
     /// <summary>
     /// ラウンドの保存先
     /// </summary>
-    private int _round;
+    public int _round { private set; get; }
 
     /// <summary>
     /// 役の使用回数の保存先
     /// </summary>
-    private List<int> _roleCount;
+    public List<int> _roleCount { private set; get; }
     /// <summary>
     /// 役のレベルの保存先
     /// </summary>
-    private List<int> _roleLevelCount;
+    public List<int> _roleLevelCount { private set; get; }
 
     /// <summary>
     /// プレイ回数の保存先
     /// </summary>
-    private int _handCount;
+    public int _handCount { private set; get; }
 
     /// <summary>
     /// ディスカードの回数
     /// </summary>
-    private int _discardCount;
+    public int _discardCount { private set; get; }
 
     /// <summary>
     /// 現在のスコア
     /// </summary>
-    private float _score;
+    public float _score { private set; get; }
 
 
     /// <summary>
     /// ショップにいるかどうか
     /// </summary>
-    private int _isShop;
+    public int _isShop { private set; get; }
+
+    /// <summary>
+    /// ラン内で一番高いラウンドのスコア
+    /// </summary>
+    public int _highScore { private set; get; }
+
+    /// <summary>
+    /// プレイしたカードの総数
+    /// </summary>
+    public int _playCardCount { private set; get; }
+
+    /// <summary>
+    /// ディスカードしたカードの総数
+    /// </summary>
+    public int _discardCardCount { private set; get; }
+
+    /// <summary>
+    /// 購入したカードの総数
+    /// </summary>
+    public int _buyCardCount { private set; get; }
+
+    /// <summary>
+    /// リロールしたカードの総数
+    /// </summary>
+    public int _reroolCount { private set; get; }
+
+    /// <summary>
+    /// 新発売したかいすう
+    /// </summary>
+    public int newDiscoveryCount { private set; get; }
+
+    /// <summary>
+    /// 世界の種子
+    /// </summary>
+    public int theSeed { private set; get; }
+
+    
 
 }

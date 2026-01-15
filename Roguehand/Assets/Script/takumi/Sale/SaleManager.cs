@@ -86,8 +86,8 @@ public class SaleManager : MonoBehaviour
                     if (_saleObject.Count < num || _saleObject[num] == null) return;
                     int index = _saleObject.IndexOf(cashObject);
 
+                    SaleObjectManager.instance.AddCardBuyCount();
                     //w“üˆ—‚ð‘‚­
-
                     int saleIndex = SaleObjectManager.instance.GetIndex(cashObject);
 
                     SaleObjectManager.instance.IndexBuy(saleIndex);

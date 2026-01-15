@@ -20,6 +20,8 @@ public class ScoreManager : MonoBehaviour
     private　float _roundScore;
     // プレイしたハンドのスコア
     private float _handScore;
+    // これまでのスコアで一番高い物
+    private float _highScore=0;
 
     private StringBuilder _builder = new StringBuilder();
     // ラウンドスコアの文字が枠外に出るくらいの文字数を検知
@@ -177,6 +179,7 @@ public class ScoreManager : MonoBehaviour
     {
         // 合計に加算
         _roundScore += _handScore;
+        if(_highScore<_handScore)_highScore = _handScore;
         // 0にする
         _handScore = 0;
         // 空白にする
@@ -264,4 +267,6 @@ public class ScoreManager : MonoBehaviour
     public void SetMagnification(int value) { _magnification = value; }
     public float GetRoundScore() {  return _roundScore; }
     public void SetRoundScore(float value) {  _roundScore = value; }
+    public float GetHighScore() {  return _highScore; }
+    public void SetHighScore(float value) { _highScore = value; }
 }

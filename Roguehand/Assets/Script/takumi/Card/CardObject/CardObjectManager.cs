@@ -120,6 +120,17 @@ public class CardObjectManager : MonoBehaviour
     private TrumpMaterialManager _materialManager;
 
     /// <summary>
+    /// プレイしたカードの枚数を記憶する変数
+    /// </summary>
+    private int _playCardCount = 0;
+
+    /// <summary>
+    /// ディスカードしたカードの枚数を記憶する変数
+    /// </summary>
+    private int _discardCardCount = 0;
+
+
+    /// <summary>
     /// カードオブジェクトを纏めるプール
     /// </summary>
     private GameObject _cardPool;
@@ -267,6 +278,8 @@ public class CardObjectManager : MonoBehaviour
     /// <returns></returns>
     public void Play()
     {
+        _playCardCount++;
+
         for (int i = 0; i < _cardObjectHands.Count; i++)
         {
             if (_cardObjectHands[i].GetStatus() != CardObject.status.playWait) continue;
@@ -291,6 +304,7 @@ public class CardObjectManager : MonoBehaviour
     /// </summary>
     public void Discard()
     {
+        _discardCardCount++;
 
         for (int i = 0; i < _cardObjectHands.Count; i++)
         {
@@ -617,6 +631,11 @@ public class CardObjectManager : MonoBehaviour
     public List<CardObject> CardObjects() { return _cardObjects; }
 
     public List<CardObject> CardHands() {return _cardObjectHands; }
+
+    public void SetPlayCardCount(int value) { _playCardCount = value; }
+    public int GetPlayCardCountMemry() { return _playCardCount; }
+    public void SetDiscardCardCount(int value) { _discardCardCount = value; }
+    public int GetDiscardCardCount() { return _discardCardCount; }
 
 
     /// <summary>

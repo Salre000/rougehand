@@ -22,6 +22,8 @@ public class CommandUpData : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.S)) MemoryManager.Keep();
 
+        if (Input.GetKeyDown(KeyCode.R)) ResultUIManager.Instance.Active();
+
 
     }
 

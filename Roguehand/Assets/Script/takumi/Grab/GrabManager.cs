@@ -51,6 +51,9 @@ public class GrabManager : MonoBehaviour
 
     private void Update()
     {
+        // ƒŠƒUƒ‹ƒg‰æ–Ê‚ªŠJ‚¢‚Ä‚¢‚½‚çG‚ê‚ç‚ê‚È‚­‚·‚é
+        if (ResultUIManager.Instance.resultFlag) return;
+
         // ƒ‰ƒ“‚ÌÚ×‚ªŒ©‚¦‚é‚Æ‚«‚ÍG‚ê‚ç‚ê‚È‚­‚·‚é
         if (RunDetailsManager.instance.IsOpen()) return;
 

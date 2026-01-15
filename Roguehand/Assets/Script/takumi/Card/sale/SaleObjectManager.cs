@@ -50,6 +50,14 @@ public class SaleObjectManager : MonoBehaviour
     private readonly int ADD_REROOL = 1;
 
     private int nowRerool = 0;
+    private int reroolCount = 0;
+
+
+    /// <summary>
+    /// カードを購入した回数
+    /// </summary>
+    private int _cardBuyCount = 0;
+
 
     /// <summary>
     /// ゲーム中に加わる処理のリスト
@@ -75,6 +83,7 @@ public class SaleObjectManager : MonoBehaviour
             ClearCard();
             SaleUtility.Claer();
             CreateRondom();
+            reroolCount++;
         });
 
         _packModeButton.onClick.AddListener(() => { _packSelectCount = 0; });
@@ -91,6 +100,12 @@ public class SaleObjectManager : MonoBehaviour
         // 動的に実装される関数を実行
         for (int i = 0; i < dynamicAction.Count; i++) dynamicAction[i]();
     }
+
+    public void SetReroolCount(int value) { reroolCount = value; }
+    public int GetReroolCount() { return reroolCount; }
+    public void SetCardBuyCount(int value) { _cardBuyCount = value; }
+    public int GetCardBuyCount() { return _cardBuyCount; }
+    public void AddCardBuyCount() {_cardBuyCount++; }
 
     private void Initializ()
     {

@@ -46,4 +46,9 @@ public static class CardObjectUtility
 
     public static List<CardObject> GetCardHands() { return CardObjectManager.CardHands(); }
 
+    public static void SetPlayCardCount(int value) { CardObjectManager.SetPlayCardCount(value); }
+    public static void SetDiscardCardCount(int value) { CardObjectManager.SetDiscardCardCount(value); }
+    public static int GetPlayCardCount() {return CardObjectManager.GetPlayCardCountMemry(); }
+    public static int GetDiscardCardCount() {return CardObjectManager.GetDiscardCardCount(); }
+
 }

@@ -174,6 +174,7 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
     private System.Action TypeBay<T>(T t,GameObject card)
     {
+       
         switch (_type)
         {
             case InstantiatePack.PackType.joker:
