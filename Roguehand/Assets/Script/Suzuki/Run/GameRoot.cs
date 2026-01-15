@@ -17,6 +17,13 @@ public class GameRoot:MonoBehaviour
     private StringBuilder _builder = new StringBuilder();
     float _Dtime = 0f;
 
+    private int _resetRoundCount = 1;
+
+    private void Awake()
+    {
+        // ラウンドのカウントを初期値に設定
+        GameUtility .SetAllRoundCount(_resetRoundCount);
+    }
 
     private void Start()
     {

@@ -23,10 +23,14 @@ public class ClearResult : MonoBehaviour
     private bool _isComp = false;
     int allReward;
     float _resetTime = 0f;
-    float _time = 0f;
-    float _endTime = 1f;
+    // 清算し終わってからショップに画面が向くまでの時間
+    float _variableTime = 0f;
+    float _endTime = 0.2f;
     float _flucSpeedTime = 0f;
-    float _flucEndTime = 0.2f;
+    /// <summary>
+    ///  報酬から所持金に移る時間速度
+    /// </summary>
+    float _flucEndTime = 0.1f;
 
     // Start is called before the first frame update
     void Awake()
@@ -88,9 +92,9 @@ public class ClearResult : MonoBehaviour
         if (PlayManager.instance.IsFluctuation()) return;
 
 
-        if (_time < _endTime)
+        if (_variableTime < _endTime)
         {
-            _time += Time.deltaTime;
+            _variableTime += Time.deltaTime;
             return;
         }
 
@@ -109,7 +113,7 @@ public class ClearResult : MonoBehaviour
         // 完了通知
         if ((resultPosition - _resetLocalPosition).sqrMagnitude < _okLine)
         {
-            _time = _resetTime;
+            _variableTime = _resetTime;
             _isPush=false;
             _clearResult.SetActive(false);
 
