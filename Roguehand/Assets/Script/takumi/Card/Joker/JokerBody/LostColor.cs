@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[System.Serializable]
+
 public class LostColor : JokerBase
 {
     private static PostEffect postEffect;

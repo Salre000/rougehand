@@ -1,4 +1,7 @@
 using UnityEngine;
+
+[System.Serializable]
+
 public class ItemUseNeverJoker : JokerBase
 {
     public override JokerActionUseEnum.JokerRarity GetRarity() { return JokerActionUseEnum.JokerRarity.Common; }

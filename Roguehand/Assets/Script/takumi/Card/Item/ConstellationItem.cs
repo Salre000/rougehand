@@ -5,6 +5,9 @@ using UnityEngine;
 /// <summary>
 /// 星座カードを纏めてこのクラス  
 /// </summary>
+/// 
+[System.Serializable]
+
 public class ConstellationItem : ItemBase
 {
     /// <summary>

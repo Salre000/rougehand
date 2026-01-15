@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Text;
 using UnityEngine;
 
+[System.Serializable]
+
 public class RandomRole : JokerBase
 {
 

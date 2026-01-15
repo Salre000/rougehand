@@ -56,7 +56,6 @@ public class Shoping : MonoBehaviour
         {
             // ラン画面に向ききったら終了お知らせフラグをリセット 
             ShopManager.instance.SetPushEndShop(false);
-            SaleObjectManager.instance.Clear();
             _shopCompFlag = false;
             return;
         }
