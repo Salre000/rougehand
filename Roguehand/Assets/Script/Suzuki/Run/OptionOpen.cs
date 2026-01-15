@@ -10,6 +10,7 @@ public class OptionOpen : MonoBehaviour
     [SerializeField] private Button _opButton;
     [SerializeField] private Button _opCloseButton;
     [SerializeField] private Button _resButton;
+    [SerializeField] private Button _retireButton;
     [SerializeField] private GameObject _opObject;
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,7 @@ public class OptionOpen : MonoBehaviour
         _opButton.onClick.AddListener(Onclick);
         _opCloseButton.onClick.AddListener(Onclick);
         _resButton.onClick.AddListener(OnReset);
+        _retireButton.onClick.AddListener(OnRetire);
         _opObject.SetActive(false);
     }
 
@@ -37,5 +39,11 @@ public class OptionOpen : MonoBehaviour
     private void OnReset()
     {
         GameSceneManager.LoadScene(GameSceneManager.mainScene);
+    }
+
+    private void OnRetire()
+    {
+        GameSceneManager.LoadScene(GameSceneManager.titleScene);
+
     }
 }
