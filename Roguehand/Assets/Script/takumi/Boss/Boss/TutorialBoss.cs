@@ -6,8 +6,9 @@ using UnityEngine.XR;
 public class TutorialBoss : BossBase
 {
 
-    private int[] cardIndexs = { 0, 13,3,16,29,12,25,38};
+    private int[] cardIndexs = { 0, 13,12,25,38,9,22,35};
 
+    private bool oneFlag = false;
 
     public override void Initializ()
     {
@@ -19,6 +20,8 @@ public class TutorialBoss : BossBase
 
     public override void Update()
     {
+        if (oneFlag) return;
+
         if (DistributeHand.instanse.GetHandDrawFlag()) return;
 
         DistributeHand.instanse.SetHandDrawFlag(true);
@@ -27,6 +30,7 @@ public class TutorialBoss : BossBase
 
         Distribute(cardIndexs.Length);
 
+        oneFlag = true;
 
     }
 

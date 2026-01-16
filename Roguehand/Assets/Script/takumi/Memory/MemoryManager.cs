@@ -58,6 +58,7 @@ public class MemoryManager
         {
             // デバックように色々と切り替えられるデッキ
             //flieName = "DebugDeck";
+            flieName = Tutorial;
             instantMemory = new Memory(flieName);
 
             if (Tutorial == flieName) 
