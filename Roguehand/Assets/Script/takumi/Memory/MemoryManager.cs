@@ -50,14 +50,14 @@ public class MemoryManager
     /// </summary>
     public static void Use(string flieName="")
     {
-        if (false)//LoodLostData())
+        if (LoodLostData())
         {
             instantMemory.Use();
         }
         else
         {
-
-            flieName = "DebugDeck";
+            // デバックように色々と切り替えられるデッキ
+            //flieName = "DebugDeck";
             instantMemory = new Memory(flieName);
 
             if (Tutorial == flieName) 
