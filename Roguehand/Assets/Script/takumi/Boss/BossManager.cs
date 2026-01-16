@@ -62,6 +62,13 @@ public class BossManager : MonoBehaviour
         bossBase.SetAction(() => { bossBases.Remove(bossBase);});
     }
 
+    public void RandomCreateBoss() 
+    {
+        CreateBoss(Random.Range(1,2));
+
+
+    }
+
 
 
 

@@ -90,7 +90,7 @@ public class Shoping : MonoBehaviour
         if (roundCount == 2) 
         {
 
-            BossManager.instance.CreateBoss(0);
+            BossManager.instance.RandomCreateBoss();
 
         }
 
