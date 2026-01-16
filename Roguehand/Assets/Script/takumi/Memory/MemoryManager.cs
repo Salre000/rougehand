@@ -73,6 +73,13 @@ public class MemoryManager
 
         }
     }
+    /// <summary>
+    /// 過去のデータを消去する
+    /// </summary>
+    public static void Lost() 
+    {
+        instantMemory = null;
+    }
 
     /// <summary>
     /// 過去のデータを作成する
