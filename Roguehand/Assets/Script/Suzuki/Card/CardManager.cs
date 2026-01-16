@@ -10,6 +10,7 @@ using static UnityEngine.UIElements.UxmlAttributeDescription;
 public class CardManager : MonoBehaviour
 {
     public static CardManager instance;
+    public static string deckName = "";
     TrumpCard trumpCard;
     /// <summary>
     /// 作られたデッキはマネージャーが持つ
@@ -33,7 +34,7 @@ public class CardManager : MonoBehaviour
     private void Start()
     {
         //trumpCard.CreateDeck();
-        MemoryManager.Use();
+        MemoryManager.Use(deckName);
     }
 
     /// <summary>

@@ -31,7 +31,7 @@ public class BossManager : MonoBehaviour
 
 
 
-    public void BossEnd() 
+    public void BossEnd()
     {
         if (bossBases.Count < 1) return;
 
@@ -40,16 +40,20 @@ public class BossManager : MonoBehaviour
 
 
 
-    public void CreateBoss(int id) 
+    public void CreateBoss(int id)
     {
         int _id = id + IDUtility.BOSS_ID;
 
         BossBase bossBase = null;
 
-        switch(id)
+        switch (id)
         {
-            case 0: bossBase = new AlternativeBoss(); break;
-            case 1:bossBase = new BanArt();break;
+            case 0: bossBase = new TutorialBoss(); break;
+            case 1: bossBase = new AlternativeBoss(); break;
+            case 2: bossBase = new BanArt(); break;
+            case 3: bossBase = new Castle(); break;
+            case 4: bossBase = new Delete(); break;
+            case 5: bossBase = new Equality(); break;
         }
 
 
@@ -58,7 +62,15 @@ public class BossManager : MonoBehaviour
 
         bossBases.Add(bossBase);
 
-        bossBase.SetAction(() => { bossBases.Remove(bossBase);});
+        bossBase.SetAction(() => { bossBases.Remove(bossBase); });
+    }
+
+    public void RandomCreateBoss()
+    {
+        CreateBoss(Random.Range(1, 5))
+            ;
+
+
     }
 
 

@@ -15,6 +15,8 @@ public class MemoryManager
     private static readonly string FILR_EXTENSION = ".txt";
 
 
+    private static readonly string Tutorial = "TutorialDeck";
+
 
     public static void CreateMemory()
     {
@@ -54,8 +56,29 @@ public class MemoryManager
         }
         else
         {
-            instantMemory = new Memory("DiceDeck");
+            // デバックように色々と切り替えられるデッキ
+            //flieName = "DebugDeck";
+            instantMemory = new Memory(flieName);
+
+            if (Tutorial == flieName) 
+            {
+                // TODO: チュートリアルの専用処理をかく
+
+                BossManager.instance.CreateBoss(0);
+
+
+
+
+            }
+
         }
+    }
+    /// <summary>
+    /// 過去のデータを消去する
+    /// </summary>
+    public static void Lost() 
+    {
+        instantMemory = null;
     }
 
     /// <summary>

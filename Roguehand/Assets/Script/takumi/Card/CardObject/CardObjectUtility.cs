@@ -43,6 +43,7 @@ public static class CardObjectUtility
 
     public static List<CardObject> CardObjects() {  return CardObjectManager.CardObjects(); }
     public static void AddTrump(Card.Trump trump) {  CardObjectManager.AddTrump(trump);}
+    public static void RemoveTrump(Card.Trump trump) {  CardObjectManager.RemoveTrump(trump);}
 
     public static List<CardObject> GetCardHands() { return CardObjectManager.CardHands(); }
 

@@ -40,7 +40,8 @@ public class GameRoot:MonoBehaviour
     private void GameClear()
     {
         if (over) return;
-        if(GameUtility.GetRoundCount() != 11) return;
+        if(GameUtility.GetAnteCount() != 9) return;
+        if(GameUtility.GetRoundCount() != 1) return;
         clear = true;
         _builder.Clear();
         _builder.Append("Clear");
@@ -72,9 +73,9 @@ public class GameRoot:MonoBehaviour
         _builder.Clear();
         _builder.Append("Game Over");
         TextUIManager.instance.SetRoleText(_builder.ToString());
-
+        
         // ƒŠƒUƒ‹ƒg‰æ–Ê‚ðŠJ‚­
-        ResultUIManager.Instance.Active("”s–k");
+        ResultUIManager.Instance.Active("”s–k ");
 
     }
 

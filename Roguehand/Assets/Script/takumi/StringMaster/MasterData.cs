@@ -96,6 +96,10 @@ public class MasterData : MonoBehaviour
         return value.ErrorText(backDoor);
 
     }
+    public void SetStringMaster(int ID,string value) 
+    {
+        _masters[ID]=value;
+    }
     public int GetIntMaster(int ID)
     {
 

@@ -71,10 +71,11 @@ public class ScoreMaster : MonoBehaviour
     public int GetAddBasicScore(int Key) { score score; scoreMap.TryGetValue(Key, out score); return score.AddBasicScore; }
     public int GetAddBasicMagnification(int Key) { score score; scoreMap.TryGetValue(Key, out score); return score.AddBasicMagnification; }
 
+    public score GetScore(int key) {return scoreMap[key]; }
+    public void SetScore(int key,score score) {scoreMap[key]=score; }
 
 
-
-    class score
+    public class score
     {
         public int BasicScore = -1;
         public int BasicMagnification = -1;

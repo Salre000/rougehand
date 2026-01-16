@@ -10,10 +10,16 @@ using static Card;
 /// </summary>
 public class DistributeHand : MonoBehaviour
 {
+    public static DistributeHand instanse=null;
     // 手札リスト
     private List<Card.Trump> deck = new List<Card.Trump>();
     private List<Card.Trump> hand = new List<Card.Trump>();
-    private bool test = false;
+    private bool handDrawFlag = false;
+
+    private void Awake()
+    {
+        instanse = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -36,13 +42,13 @@ public class DistributeHand : MonoBehaviour
 
 
                 //ドローを可能にする
-                test = false;
+                handDrawFlag = false;
 
             });
 
         //ラウンド開始時のドローの処理
         RoundObserver.Instance.AddRoundStartAction(
-            () => { test = false;}
+            () => { handDrawFlag = false;}
             );
 
     }
@@ -50,13 +56,13 @@ public class DistributeHand : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (test) return;
+        if (handDrawFlag) return;
 
         hand=CardManager.instance.GetHand();
 
         int addHandSize = CardManager.instance.GetHandSize() - hand.GetCount(hand=>hand.state==Card.State.hand);
         Distribute(addHandSize);
-        test = true;
+        handDrawFlag = true;
     }
 
     // ランダムで配ります
@@ -175,4 +181,7 @@ public class DistributeHand : MonoBehaviour
 
 
     }
+
+    public void SetHandDrawFlag(bool flag) { handDrawFlag=flag; }
+    public bool GetHandDrawFlag() { return handDrawFlag; }
 }
