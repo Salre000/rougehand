@@ -462,6 +462,28 @@ public class CardObjectManager : MonoBehaviour
 
 
     }
+    /// <summary>
+    /// ÉJÅ[ÉhÇå∏ÇÁÇ∑ä÷êî
+    /// </summary>
+    /// <param name="trump"></param>
+    public void RemoveTrump(Card.Trump trump) 
+    {
+       CardManager.instance.GetDeck().IndexOf(trump);
+
+        int index = CardManager.instance.GetHand().IndexOf(trump);
+
+        CardManager.instance.hand.Remove(trump);
+        CardManager.instance.pick.Remove(trump);
+        CardManager.instance.deck.Remove(trump);
+        CardObject dommy= _cardObjectHands[index];
+        _cardObjects.Remove(dommy);
+        _cardObjectHands.Remove(dommy);
+        ExplanationManager.instance.Remove();
+        BreakUtility.StartBreak(dommy.gameObject);
+        Destroy(dommy.gameObject);
+
+
+    }
 
     public void ShowExplanation(Card.Trump trump, GameObject _object,Vector2 offset)
     {

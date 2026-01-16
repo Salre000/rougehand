@@ -22,7 +22,17 @@ public class BossBase
     public virtual void LateUpdate() { }
 
 
-    public virtual void End() { endAction(); }
+    public virtual void End() 
+    {
+
+        TextUIManager.instance.SetRoundNameText(string.Empty);
+
+        TextUIManager.instance.SetRoundExceptionText(string.Empty);
+
+
+        endAction();
+   
+    }
 
     public void SetAction(System.Action action) {endAction = action;}
 

@@ -34,11 +34,18 @@ public class ResultUIManager : MonoBehaviour
         gameObject.SetActive(false);
         resultFlag = false;
     }
+    public void Update()
+    {
+        
 
+
+    }
 
 
     public void Active(string text = "")
     {
+        MemoryManager.Keep();
+
         gameObject.SetActive(true);
         resultFlag = true;
 
@@ -72,7 +79,7 @@ public class ResultUIManager : MonoBehaviour
     private void BestHand()
     {
         Memory resultMemory = MemoryManager.instantMemory;
-        highScoreText.text = resultMemory._highScore.ToString("3");
+        highScoreText.text = resultMemory._highScore.ToString();
 
     }
     private readonly int COLORID = 7;
@@ -132,5 +139,7 @@ public class ResultUIManager : MonoBehaviour
         Memory resultMemory = MemoryManager.instantMemory;
         roundText.text = resultMemory._round.ToString();
     }
+
+
 
 }
