@@ -6,7 +6,7 @@ using UnityEngine.XR;
 public class TutorialBoss : BossBase
 {
 
-    private int[] cardIndexs = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+    private int[] cardIndexs = { 0, 13,3,16,29,12,25,38};
 
 
     public override void Initializ()
@@ -25,7 +25,7 @@ public class TutorialBoss : BossBase
 
         Debug.Log("“ž’BSS");
 
-        Distribute(8);
+        Distribute(cardIndexs.Length);
 
 
     }
