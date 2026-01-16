@@ -48,8 +48,9 @@ public class BossManager : MonoBehaviour
 
         switch(id)
         {
-            case 0: bossBase = new AlternativeBoss(); break;
-            case 1:bossBase = new BanArt();break;
+            case 0:bossBase = new TutorialBoss();break;
+            case 1: bossBase = new AlternativeBoss(); break;
+            case 2:bossBase = new BanArt();break;
         }
 
 

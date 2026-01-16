@@ -15,6 +15,8 @@ public class MemoryManager
     private static readonly string FILR_EXTENSION = ".txt";
 
 
+    private static readonly string Tutorial = "TutorialDeck";
+
 
     public static void CreateMemory()
     {
@@ -48,13 +50,26 @@ public class MemoryManager
     /// </summary>
     public static void Use(string flieName="")
     {
-        if (LoodLostData())
+        if (false)//LoodLostData())
         {
             instantMemory.Use();
         }
         else
         {
-            instantMemory = new Memory("DiceDeck");
+            flieName = Tutorial;
+            instantMemory = new Memory(flieName);
+
+            if (Tutorial == flieName) 
+            {
+                // TODO: チュートリアルの専用処理をかく
+
+                BossManager.instance.CreateBoss(0);
+
+
+
+
+            }
+
         }
     }
 

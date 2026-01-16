@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -16,7 +17,8 @@ public class Memory
     /// </summary>
     public Memory()
     {
-        Debug.Log("TEST");
+        System.Diagnostics.Debug.WriteLine(Environment.StackTrace);
+
         //　現在のデッキデータを取得
         _trumps = CardManager.instance.deck;
 
@@ -67,7 +69,7 @@ public class Memory
 
     public Memory(string fileName)
     {
-        //if (fileName == string.Empty) fileName = BASE_DECK;
+        if (fileName == string.Empty) fileName = BASE_DECK;
 
         //読み込んだCSVファイルを格納
         List<string[]> csvDatas = new List<string[]>();
