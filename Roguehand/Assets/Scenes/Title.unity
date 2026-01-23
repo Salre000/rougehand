@@ -910,11 +910,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3fb3ba5df431f940b912a55dd0f806c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startButton: {fileID: 976902422}
   _continueButton: {fileID: 559140080}
   _exitButton: {fileID: 2003923009}
-  _fadePanel: {fileID: 910900638}
-  _selectDeckPanel: {fileID: 1621005286}
 --- !u!4 &600272322
 Transform:
   m_ObjectHideFlags: 0

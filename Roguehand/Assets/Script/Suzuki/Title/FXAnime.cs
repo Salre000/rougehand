@@ -31,6 +31,8 @@ public class FXAnime : MonoBehaviour
         _startButton.onClick.AddListener(StartFlag);
         _backButton.onClick.AddListener(OnBack);
         _position = _panel.localPosition;
+        _gameObject.SetActive(false);
+        _fadePanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -45,6 +47,7 @@ public class FXAnime : MonoBehaviour
     {
         _startF = true;
         _fadePanel.SetActive(true);
+        _gameObject.SetActive(true);
     }
 
     void OnBack()
