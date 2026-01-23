@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +16,7 @@ public class DeckMove : MonoBehaviour
 
     [SerializeField] List<Transform> _decks;
 
-    float _speed = 50;
+    float _speed = 90f;
 
     bool _leftF = false;
     bool _rightF = false;
@@ -29,6 +31,10 @@ public class DeckMove : MonoBehaviour
     int _selectMax = 3;
     public int selectIndex = 0;
 
+    [SerializeField] TextMeshProUGUI _deckName;
+    StringBuilder _builder = new StringBuilder();
+    string _deckDefault = "○○○○";
+    string _deckTutorial = "チュートリアル";
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +45,8 @@ public class DeckMove : MonoBehaviour
         _tageIndex = _decks.Count - 1;
         _deckMaxIndex = _decks.Count - 1;
         _deckIndex = _deckMaxIndex;
+        DeckName();
+
     }
 
     // Update is called once per frame
@@ -56,8 +64,8 @@ public class DeckMove : MonoBehaviour
         selectIndex++;
         if( selectIndex > _selectMax) 
             selectIndex = 0;
-        Debug.Log("現在選択されているデッキ番号: " + selectIndex);
         if (_deckIndex > _deckMaxIndex) _deckIndex = _reset;
+        DeckName();
     }
     private void RightFlag()
     {
@@ -67,8 +75,8 @@ public class DeckMove : MonoBehaviour
         selectIndex--;
         if (selectIndex < 0)
             selectIndex = _selectMax;
-        Debug.Log("現在選択されているデッキ番号: " + selectIndex);
         if (_deckIndex < _reset) _deckIndex = _deckMaxIndex;
+        DeckName();
     }
 
 
@@ -95,5 +103,20 @@ public class DeckMove : MonoBehaviour
         if ((_decks[_deckMaxIndex].localPosition - _tagePos[_tageIndex].localPosition).sqrMagnitude < _magnitude)
             _rightF = false;
 
+    }
+
+    private void DeckName()
+    {
+        _builder.Clear();
+        switch (selectIndex)
+        {
+            case 0:
+                _builder.Append(_deckTutorial);
+                break;
+            default:
+                _builder.Append(_deckDefault);
+                break;
+        }
+        _deckName.text = _builder.ToString();
     }
 }

@@ -35,7 +35,7 @@ public class CardManager : MonoBehaviour
     private void Start()
     {
         //trumpCard.CreateDeck();
-        try { MemoryManager.Use(deckLists._enumName[TitlStatic.GetDeckNumber()]);
+        try { MemoryManager.Use(deckLists._enumName[TitleStatic.GetDeckNumber()]);
         }
         catch 
         {

@@ -13,19 +13,13 @@ public class DeckStartButton : MonoBehaviour
         _startButton.onClick.AddListener(OnStart);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnStart()
     {
         // 前回のセーブデータを消去
         MemoryManager.Lost();
 
         // デッキ番号をシーン持越し
-        TitlStatic.SetDeckNumber(_deckMove.selectIndex);
+        TitleStatic.SetDeckNumber(_deckMove.selectIndex);
         GameSceneManager.LoadScene(GameSceneManager.mainScene);
     }
 }
