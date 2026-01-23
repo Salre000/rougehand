@@ -26,8 +26,6 @@ public class TutorialBoss : BossBase
 
         DistributeHand.instanse.SetHandDrawFlag(true);
 
-        Debug.Log("“ž’BSS");
-
         Distribute(cardIndexs.Length);
 
         oneFlag = true;

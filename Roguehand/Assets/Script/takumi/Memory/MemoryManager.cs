@@ -17,6 +17,8 @@ public class MemoryManager
 
     private static readonly string Tutorial = "TutorialDeck";
 
+    private static bool tutorialFlag=false;
+
     /// <summary>
     ///  セーブデータがあるどうかを判断する関数
     /// </summary>
@@ -84,7 +86,7 @@ public class MemoryManager
                 BossManager.instance.CreateBoss(0);
 
 
-
+                tutorialFlag = true;
 
             }
 
@@ -112,5 +114,10 @@ public class MemoryManager
         stream.Close();
     }
 
+    /// <summary>
+    /// チュートリアルかどうかを判断
+    /// </summary>
+    /// <returns></returns>
+    public static bool GetTutorialFlag() {return tutorialFlag;}
 
 }
