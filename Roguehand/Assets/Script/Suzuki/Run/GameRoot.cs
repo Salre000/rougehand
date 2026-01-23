@@ -42,7 +42,7 @@ public class GameRoot:MonoBehaviour
         if (over) return;
         if(GameUtility.GetAnteCount() != 9) return;
         if(GameUtility.GetRoundCount() != 1) return;
-        clear = true;
+        over = true;
         _builder.Clear();
         _builder.Append("Clear");
         TextUIManager.instance.SetRoleText(_builder.ToString());

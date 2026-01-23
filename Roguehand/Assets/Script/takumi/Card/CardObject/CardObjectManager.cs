@@ -659,6 +659,17 @@ public class CardObjectManager : MonoBehaviour
     public void SetDiscardCardCount(int value) { _discardCardCount = value; }
     public int GetDiscardCardCount() { return _discardCardCount; }
 
+    public bool checkCardMove() 
+    {
+        bool flag = false;  
+        for(int i = 0; i < _cardObjectHands.Count; i++) 
+        {
+            if (_cardObjectHands[i].IsMovable())flag = true;
+
+        }
+
+        return flag;
+    }
 
     /// <summary>
     /// ‚Â‚Ü‚ñ‚Å‚¢‚éƒJ[ƒh‚ÌˆÚ“®‚ğ‚·‚éŠÖ”

@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class ResultUIManager : MonoBehaviour
 {
@@ -24,6 +27,8 @@ public class ResultUIManager : MonoBehaviour
     [SerializeField, Header("新しいラン")] Button newRun;
     [SerializeField, Header("メインメニュー")] Button mainMene;
 
+    [SerializeField, Header("ショップから出たときのボタン")] Button shopEndButton;
+
     public bool resultFlag { private set; get; }
 
 
@@ -33,6 +38,11 @@ public class ResultUIManager : MonoBehaviour
 
         gameObject.SetActive(false);
         resultFlag = false;
+
+        newRun.onClick.AddListener(ReLoodScene);
+        mainMene.onClick.AddListener(TitelScene);
+        endless.onClick.AddListener(StartEndless);
+
     }
     public void Update()
     {
@@ -59,6 +69,7 @@ public class ResultUIManager : MonoBehaviour
         ReroolCount();
         AnteCount();
         RoundCount();
+        SeedCount();
     }
 
     private void SetResultAnswer(string text)
@@ -140,6 +151,56 @@ public class ResultUIManager : MonoBehaviour
         roundText.text = resultMemory._round.ToString();
     }
 
+    private void SeedCount()
+    {
+        Memory resultMemory = MemoryManager.instantMemory;
+        seedText.text = resultMemory.theSeed.ToString();
+    }
 
+    private void ReLoodScene() 
+    {
+        GameSceneManager.LoadScene(GameSceneManager.mainScene);
+    }
+    private void TitelScene() 
+    {
+        GameSceneManager.LoadScene(GameSceneManager.titleScene);
+    }
+
+    private void StartEndless() 
+    {
+        gameObject.SetActive(false);
+        resultFlag = false;
+        GameUtility.SetAllRoundCount(GameUtility.GetAllRoundCount() - 1);
+
+        shopEndButton.onClick.AddListener(() => 
+        {
+            int baseScore = MasterData.instance.GetIntMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount());
+            
+            float reta=1+(Random.Range(0,5)/10f);
+
+
+
+            MasterData.instance.AddStringMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount()+1,
+                ((int)(baseScore * reta)).ToString());
+
+
+        });
+
+        ShopManager.instance.SetIsShop(true);
+
+        int baseScore = MasterData.instance.GetIntMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount());
+
+        float reta = 1 + (Random.Range(0, 5) / 10f);
+
+
+
+        MasterData.instance.AddStringMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount() + 1,
+            ((int)(baseScore * reta)).ToString());
+
+
+
+
+
+    }
 
 }

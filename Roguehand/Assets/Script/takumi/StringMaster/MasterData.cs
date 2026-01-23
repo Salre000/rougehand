@@ -100,6 +100,10 @@ public class MasterData : MonoBehaviour
     {
         _masters[ID]=value;
     }
+    public void AddStringMaster(int key,string value) 
+    {
+        _masters.Add(key,value);
+    }
     public int GetIntMaster(int ID)
     {
 

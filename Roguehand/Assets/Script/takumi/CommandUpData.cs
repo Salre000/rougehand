@@ -29,7 +29,8 @@ public class CommandUpData : MonoBehaviour
         // ƒ{ƒ^ƒ“Žó•t‚Ì’âŽ~’†
         if (!GameUtility.IsPushButton()) return;
         if (GameUtility.IsPlay()) return;
-
+        if (CardObjectUtility.CheckCardMove()) return;
+        if (CardManager.instance.GetPick().Count != 0) return;
 
         for (int i=0;i< CardManager.instance.GetPick().Count; i++) 
             CardManager.instance.SetIsSelect(CardManager.instance.GetHand().IndexOf(CardManager.instance.GetPick()[i]));

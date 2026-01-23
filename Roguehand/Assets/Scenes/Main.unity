@@ -12754,6 +12754,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 131
       objectReference: {fileID: 0}
+    - target: {fileID: 3206707767778460932, guid: 3c5cc036e946bd542b8c5f7a6fc28c1d, type: 3}
+      propertyPath: shopEndButton
+      value: 
+      objectReference: {fileID: 1721937069}
     - target: {fileID: 5701628949407132434, guid: 3c5cc036e946bd542b8c5f7a6fc28c1d, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
