@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public@static class TitlStatic
+public@static class TitleStatic
 {
     private static int _deckNumber=-1;
 

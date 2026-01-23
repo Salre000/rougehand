@@ -1011,6 +1011,7 @@ MonoBehaviour:
   - {fileID: 2011985256}
   - {fileID: 763876775}
   selectIndex: 0
+  _deckName: {fileID: 1548699543}
 --- !u!114 &600272325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2557,7 +2558,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 406.13, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1548699543
 MonoBehaviour:
