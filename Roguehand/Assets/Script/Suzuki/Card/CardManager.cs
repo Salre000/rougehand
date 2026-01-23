@@ -35,10 +35,10 @@ public class CardManager : MonoBehaviour
     private void Start()
     {
         //trumpCard.CreateDeck();
-       if(TitlStatic.GetDeckNumber()!=-1) MemoryManager.Use(deckLists._enumName[TitlStatic.GetDeckNumber()]);
+        if (TitleStatic.GetDeckNumber() != -1) MemoryManager.Use(deckLists._enumName[TitleStatic.GetDeckNumber()]);
         else MemoryManager.Use();
-        
-        }
+
+    }
 
     /// <summary>
     /// 受け取ったカードリストを数字は降順、次にスートを昇順で並べなおします
