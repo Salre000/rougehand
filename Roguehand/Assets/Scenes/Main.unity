@@ -6380,6 +6380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d102aa75a87ad34a87aa34c9d29b280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deckLists: {fileID: 11400000, guid: 8ab68e0efbe6c1e41a136819db9b3e1d, type: 2}
   deck: []
   hand: []
   pick: []

@@ -9,6 +9,7 @@ using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class CardManager : MonoBehaviour
 {
+    [SerializeField] StringList deckLists;
     public static CardManager instance;
     public static string deckName = "";
     TrumpCard trumpCard;
@@ -34,8 +35,13 @@ public class CardManager : MonoBehaviour
     private void Start()
     {
         //trumpCard.CreateDeck();
-        MemoryManager.Use(deckName);
-    }
+        try { MemoryManager.Use(deckLists._enumName[TitlStatic.GetDeckNumber()]);
+        }
+        catch 
+        {
+            MemoryManager.Use();
+        }
+        }
 
     /// <summary>
     /// 受け取ったカードリストを数字は降順、次にスートを昇順で並べなおします

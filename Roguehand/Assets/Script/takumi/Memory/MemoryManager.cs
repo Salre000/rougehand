@@ -65,8 +65,13 @@ public class MemoryManager
     /// </summary>
     public static void Use(string flieName="")
     {
-        if (LoodLostData())
+        
+         
+
+
+        if (flieName==string.Empty)
         {
+            LoodLostData();
             instantMemory.Use();
         }
         else
