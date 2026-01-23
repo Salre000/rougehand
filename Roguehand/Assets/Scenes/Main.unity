@@ -15445,6 +15445,10 @@ PrefabInstance:
       propertyPath: _runInfo
       value: 
       objectReference: {fileID: 1676692609}
+    - target: {fileID: 4870042908813653728, guid: 721f4b3ee9754f14b86183d85e3d7548, type: 3}
+      propertyPath: _runInfoShop
+      value: 
+      objectReference: {fileID: 1648762277}
     - target: {fileID: 5198575331115947411, guid: 721f4b3ee9754f14b86183d85e3d7548, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
