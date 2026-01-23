@@ -66,6 +66,7 @@ public class DeckMove : MonoBehaviour
             selectIndex = 0;
         if (_deckIndex > _deckMaxIndex) _deckIndex = _reset;
         DeckName();
+        TitleDeckUI.instance.SetName(selectIndex);
     }
     private void RightFlag()
     {
@@ -77,6 +78,7 @@ public class DeckMove : MonoBehaviour
             selectIndex = _selectMax;
         if (_deckIndex < _reset) _deckIndex = _deckMaxIndex;
         DeckName();
+        TitleDeckUI.instance.SetName(selectIndex);
     }
 
 
