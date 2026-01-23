@@ -17,6 +17,21 @@ public class MemoryManager
 
     private static readonly string Tutorial = "TutorialDeck";
 
+    /// <summary>
+    ///  セーブデータがあるどうかを判断する関数
+    /// </summary>
+    /// <returns></returns>
+    public static bool CheckSaveDeta() 
+    {
+
+        string path = Application.dataPath + FILE_PASS + FILE_NAME_KD + FILR_EXTENSION;
+        if (!File.Exists(path)) return false;
+
+        return true;
+
+
+    }
+
 
     public static void CreateMemory()
     {
@@ -56,15 +71,11 @@ public class MemoryManager
         }
         else
         {
-            // デバックように色々と切り替えられるデッキ
-            //flieName = "DebugDeck";
-            flieName = Tutorial;
             instantMemory = new Memory(flieName);
 
             if (Tutorial == flieName) 
             {
                 // TODO: チュートリアルの専用処理をかく
-
                 BossManager.instance.CreateBoss(0);
 
 

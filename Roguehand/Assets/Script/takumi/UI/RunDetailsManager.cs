@@ -49,6 +49,11 @@ public class RunDetailsManager : MonoBehaviour
     /// </summary>
     [SerializeField]private Button _endrRunInfo;
 
+    /// <summary>
+    /// 詳細情報のUIを描画関数を持たせるボタン
+    /// </summary>
+    [SerializeField]private Button _runInfoShop;
+
 
     /// <summary>
     /// 内容ごとのUIの描画を行う関数
@@ -93,6 +98,7 @@ public class RunDetailsManager : MonoBehaviour
     {
         // 詳細UIを開くボダンに開く関数をわたす
         _runInfo.onClick.AddListener(Show);
+        _runInfoShop.onClick.AddListener(Show);
         // 詳細UIを閉じるボダンに閉じる関数をわたす
         _endrRunInfo.onClick.AddListener(End);
 
