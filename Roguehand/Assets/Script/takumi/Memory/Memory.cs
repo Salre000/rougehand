@@ -68,6 +68,8 @@ public class Memory
 
         theSeed = MemoryManager.seed;
 
+        lowstRoundScore = MasterData.instance.GetIntMaster(7000 + GameUtility.GetAllRoundCount());
+
 
 
     }
@@ -133,6 +135,9 @@ public class Memory
     /// </summary>
     public void Use()
     {
+
+
+
         //　現在のデッキデータを取得
         CardManager.instance.deck= _trumps;
 
@@ -155,10 +160,9 @@ public class Memory
         TextUIManager.instance.SetAnteText(_ante.ToString());
         GameUtility.SetAllRoundCount(_round + ((_ante - 1) * 3));
 
-        StringBuilder _builder = new StringBuilder();
-        int id = IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount();
-        _builder.Append(MasterData.instance.GetIntMaster(id));
-        TextUIManager.instance.SetLowestScoreText(_builder.ToString());
+        MasterData.instance.AddStringMaster( IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount()
+        ,lowstRoundScore.ToString());
+        TextUIManager.instance.SetLowestScoreText(lowstRoundScore.ToString());
 
 
         //  現在の役の使用数を取得
@@ -416,6 +420,7 @@ public class Memory
     /// </summary>
     public int theSeed= -1;
 
+    public int lowstRoundScore {  private set; get; }
     
 
 }
