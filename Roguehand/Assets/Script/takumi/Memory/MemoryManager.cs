@@ -19,6 +19,7 @@ public class MemoryManager
 
     private static bool tutorialFlag=false;
 
+    public static int seed = -1;
     /// <summary>
     ///  セーブデータがあるどうかを判断する関数
     /// </summary>
@@ -67,6 +68,7 @@ public class MemoryManager
     /// </summary>
     public static void Use(string flieName="")
     {
+
         
          
 
@@ -91,6 +93,13 @@ public class MemoryManager
             }
 
         }
+
+        if (instantMemory.theSeed == -1) instantMemory.theSeed = SetSeed();
+
+        Random.InitState(instantMemory.theSeed);
+
+        seed = instantMemory.theSeed;
+
     }
     /// <summary>
     /// 過去のデータを消去する
@@ -119,5 +128,18 @@ public class MemoryManager
     /// </summary>
     /// <returns></returns>
     public static bool GetTutorialFlag() {return tutorialFlag;}
+
+    private static int SetSeed() 
+    {
+        int seed = 0;
+        seed += Random.RandomRange(1, 9) * 10000;
+        seed += Random.RandomRange(0, 9) * 1000;
+        seed += Random.RandomRange(0, 9) * 100;
+        seed += Random.RandomRange(0, 9) * 10;
+        seed += Random.RandomRange(0, 9);
+
+        return seed;
+
+    }
 
 }

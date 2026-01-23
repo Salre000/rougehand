@@ -65,6 +65,11 @@ public class Memory
         _highScore=(int)ScoreManager.instance.GetHighScore();
 
         _buyCardCount=SaleObjectManager.instance.GetCardBuyCount();
+
+        theSeed = MemoryManager.seed;
+
+
+
     }
 
     public Memory(string fileName)
@@ -409,7 +414,7 @@ public class Memory
     /// <summary>
     /// ¢ŠE‚Ìíq
     /// </summary>
-    public int theSeed { private set; get; }
+    public int theSeed= -1;
 
     
 

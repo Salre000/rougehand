@@ -108,6 +108,7 @@ public class Shoping : MonoBehaviour
         // TODO:他にもリセットを仕込む必要がある
         // 手札の内部をリセット　
         CardManager.instance.ResetHand();
+        SaleObjectManager.instance.Clear();
         // デッキの内部をリセット
         List<Card.Trump> dommyDeck = CardManager.instance.GetDeck();
         dommyDeck.GetAction(card=>

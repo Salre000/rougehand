@@ -52,4 +52,5 @@ public static class CardObjectUtility
     public static int GetPlayCardCount() {return CardObjectManager.GetPlayCardCountMemry(); }
     public static int GetDiscardCardCount() {return CardObjectManager.GetDiscardCardCount(); }
 
+    public static bool CheckCardMove() { return CardObjectManager.checkCardMove(); }
 }
