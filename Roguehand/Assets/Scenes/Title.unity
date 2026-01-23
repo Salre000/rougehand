@@ -935,6 +935,7 @@ GameObject:
   - component: {fileID: 600272323}
   - component: {fileID: 600272324}
   - component: {fileID: 600272325}
+  - component: {fileID: 600272326}
   m_Layer: 0
   m_Name: TitleManager
   m_TagString: Untagged
@@ -1027,6 +1028,20 @@ MonoBehaviour:
   _gameObject: {fileID: 1621005286}
   _fx: {fileID: 1423423372}
   _fadePanel: {fileID: 910900638}
+--- !u!114 &600272326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600272320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 810795f21b39ffa4e8659bf6275d20df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deckName: {fileID: 1548699543}
+  deckNamses: {fileID: 11400000, guid: 8ab68e0efbe6c1e41a136819db9b3e1d, type: 2}
 --- !u!1 &624653624
 GameObject:
   m_ObjectHideFlags: 0
@@ -2591,10 +2606,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 34.5
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0

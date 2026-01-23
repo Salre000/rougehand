@@ -58,6 +58,7 @@ public class DeckMove : MonoBehaviour
             selectIndex = 0;
         Debug.Log("現在選択されているデッキ番号: " + selectIndex);
         if (_deckIndex > _deckMaxIndex) _deckIndex = _reset;
+        TitleDeckUI.instance.SetName(selectIndex);
     }
     private void RightFlag()
     {
@@ -69,6 +70,7 @@ public class DeckMove : MonoBehaviour
             selectIndex = _selectMax;
         Debug.Log("現在選択されているデッキ番号: " + selectIndex);
         if (_deckIndex < _reset) _deckIndex = _deckMaxIndex;
+        TitleDeckUI.instance.SetName(selectIndex);
     }
 
 
