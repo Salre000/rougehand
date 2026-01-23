@@ -24,6 +24,8 @@ public class FXAnime : MonoBehaviour
     bool fade1F = false;
     bool fade2F = false;
 
+
+
     // Start is called before the first frame update
     void Start()
     {

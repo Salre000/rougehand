@@ -26,11 +26,15 @@ public class DeckMove : MonoBehaviour
     int _reset = 0;
     int _magnitude = 5;
 
+    int _selectMax = 3;
+    public int selectIndex = 0;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        _leftButton.onClick.AddListener(LefFlag);
-        _rightButton.onClick.AddListener(RigFlag);
+        _leftButton.onClick.AddListener(LeftFlag);
+        _rightButton.onClick.AddListener(RightFlag);
 
         _tageIndex = _decks.Count - 1;
         _deckMaxIndex = _decks.Count - 1;
@@ -44,18 +48,26 @@ public class DeckMove : MonoBehaviour
         RightLoopMove();
     }
 
-    private void LefFlag()
+    private void LeftFlag()
     {
         if (_leftF) return;
         _leftF = true;
         _deckIndex += _default;
+        selectIndex++;
+        if( selectIndex > _selectMax) 
+            selectIndex = 0;
+        Debug.Log("現在選択されているデッキ番号: " + selectIndex);
         if (_deckIndex > _deckMaxIndex) _deckIndex = _reset;
     }
-    private void RigFlag()
+    private void RightFlag()
     {
         if (_rightF) return;
         _rightF = true;
         _deckIndex -= _default;
+        selectIndex--;
+        if (selectIndex < 0)
+            selectIndex = _selectMax;
+        Debug.Log("現在選択されているデッキ番号: " + selectIndex);
         if (_deckIndex < _reset) _deckIndex = _deckMaxIndex;
     }
 

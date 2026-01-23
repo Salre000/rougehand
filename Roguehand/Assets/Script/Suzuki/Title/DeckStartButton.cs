@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class DeckStartButton : MonoBehaviour
 {
     [SerializeField] Button _startButton;
+    [SerializeField] DeckMove _deckMove;
 
     private void Awake()
     {
@@ -20,6 +21,8 @@ public class DeckStartButton : MonoBehaviour
 
     void OnStart()
     {
+        // デッキ番号をシーン持越し
+        TitlStatic.SetDeckNumber(_deckMove.selectIndex);
         GameSceneManager.LoadScene(GameSceneManager.mainScene);
     }
 }

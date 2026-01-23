@@ -892,7 +892,7 @@ GameObject:
   - component: {fileID: 600272324}
   - component: {fileID: 600272325}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: TitleManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -940,6 +940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startButton: {fileID: 1308823291}
+  _deckMove: {fileID: 600272324}
 --- !u!114 &600272324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -964,6 +965,7 @@ MonoBehaviour:
   - {fileID: 1191916648}
   - {fileID: 2011985256}
   - {fileID: 763876775}
+  selectIndex: 0
 --- !u!114 &600272325
 MonoBehaviour:
   m_ObjectHideFlags: 0
