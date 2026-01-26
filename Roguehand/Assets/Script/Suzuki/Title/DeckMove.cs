@@ -16,7 +16,7 @@ public class DeckMove : MonoBehaviour
 
     [SerializeField] List<Transform> _decks;
 
-    float _speed = 90f;
+    float _speed = 50f;
 
     bool _leftF = false;
     bool _rightF = false;
