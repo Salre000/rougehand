@@ -15389,6 +15389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materialLists: {fileID: 11400000, guid: a75a92c5ff75bef4b9a5b7dd7be6e835, type: 2}
+  dommyMaterial: {fileID: 2100000, guid: 9fdd010ada9256e44b5f9d88a5f1e82f, type: 2}
   sealMaterial: []
   cardMaterial: []
   trumpMaterial: []

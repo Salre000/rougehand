@@ -8,6 +8,12 @@ using UnityEngine;
 public class BuffManager : MonoBehaviour
 {
     [SerializeField] BuffMaterialLists materialLists;
+
+    /// <summary>
+    /// デフォルト時に使われる透明なマテリアル
+    /// </summary>
+    [SerializeField]private Material dommyMaterial;
+
     /// <summary>
     /// シール属性のバフ内容
     /// </summary>
@@ -250,7 +256,15 @@ public class BuffManager : MonoBehaviour
         switch (jokerbuff)
         {
             case Card.JokerBuff.Sepia:
-                //int score=ScoreManager.instance.Get
+                float copyValue = ScoreManager.instance.GetBasicScore();
+                ScoreManager.instance.SetBasic((int)ScoreManager.instance.GetMagnification());
+                ScoreManager.instance.SetMagnification((int)copyValue);
+
+
+                break;
+            case Card.JokerBuff.Negative:
+                break;
+            case Card.JokerBuff.ObjectMoves:
 
                 break;
         }
@@ -263,5 +277,5 @@ public class BuffManager : MonoBehaviour
     public Material GetJokerMaterial(int ID) { return jokerMaterial[ID]; }
     public Material GetSealMaterial(int ID) { return sealMaterial[ID]; }
 
-
+    public Material GetDommyMaterial() { return dommyMaterial; }
 }

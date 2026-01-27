@@ -21,7 +21,7 @@ public static class BuffUtility
     public static Material GetTrumpMaterial(int ID) { return BuffManager.GetTrumpMaterial(ID); }
     public static Material GetJokerMaterial(int ID) { return BuffManager.GetJokerMaterial(ID); }
     public static Material GetSealMaterial(int ID) { return BuffManager.GetSealMaterial(ID); }
-
+    public static Material GetDommyMaterial() {return BuffManager.GetDommyMaterial(); }
     public static System.Action GetActionPlayBuffCard(Card.cardBuff cardBuff) { return BuffManager.GetActionPlayBuffCard(cardBuff); }
     public static System.Action GetActionPlayBuffDeck(Card.deckBuff cardBuff) { return BuffManager.GetActionPlayBuffDeck(cardBuff); }
     public static bool CheckPlayBuffDeck(Card.deckBuff cardBuff) { return BuffManager.CheckPlayBuffDeck(cardBuff); }

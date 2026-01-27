@@ -10,14 +10,16 @@ public class BuffJoker : JokerBase
 
     public override void SaleAction()
     {
+        int count = 0;
 
         JokerUtility.JokerALLAction(joker =>
         {
+            if (count >= 2) return;
             joker.SetCardBuff((Card.cardBuff)Random.Range(0, (int)Card.cardBuff.MAX));
             joker.SetJokerBuff((Card.JokerBuff)Random.Range(0, (int)Card.JokerBuff.MAX));
 
             JokerUtility.JokerChenge(JokerUtility.GetIndex(joker));
-
+            count++;
 
 
         });
@@ -33,14 +35,14 @@ public class BuffJoker : JokerBase
     }
     private void ChengeCard()
     {
-        List<Card.Trump> trumps = CardManager.instance.GetHand();
+        List<Card.Trump> trumps = CardManager.instance.GetPick();
         List<Card.Trump> deck = CardManager.instance.GetDeck();
 
 
 
 
 
-        for (int i = 0; i < trumps.Count; i++)
+        for (int i = 0; i < 2; i++)
         {
             if (trumps[i].sealBuff != Card.sealBuff.None) continue;
 
