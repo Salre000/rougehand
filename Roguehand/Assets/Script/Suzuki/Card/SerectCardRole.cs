@@ -89,12 +89,12 @@ public class SerectCardRole : MonoBehaviour
         }
 
         ////////////////////////
-        /// デバッグ
-        int num = 0;
-        if (role == RoleManager.Role.highCard)
-            num = 9*999;
-        else
-            num = 0;
+        /// ハイカードデバッグ
+        //int num = 0;
+        //if (role == RoleManager.Role.highCard)
+        //    num = 9*999;
+        //else
+        //    num = 0;
         ///
         //    //////////////////////
 
@@ -120,7 +120,7 @@ public class SerectCardRole : MonoBehaviour
 
         _builder.Clear();
         // 倍率
-        int magnifi = ScoreMaster.instance.GetBasicMagnification(SCORE_ID + (int)role)+num;
+        int magnifi = ScoreMaster.instance.GetBasicMagnification(SCORE_ID + (int)role)/*+num*/;
 
         // 役によって変わる上昇幅を獲得
         int addMagniLevel = ScoreMaster.instance.GetAddBasicMagnification( SCORE_ID + (int)role);
