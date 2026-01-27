@@ -23,6 +23,7 @@ public class CardBuff
                 break;
             case Card.cardBuff.Polychrome:
                 //”{—¦‚É1.5‚ÌæZ
+                ScoreManager.instance.MagnificationPlus(ScoreManager.instance.GetMagnification()/2f);
 
                 break;
             default:

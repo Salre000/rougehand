@@ -196,7 +196,7 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                 {
 
                     ItemUtility.AddItem(
-                        itemBase.GetID()<(int)ConstellationItem.ConstellationType.MAX?0:itemBase.GetID());
+                        itemBase.GetID()<(int)ConstellationItem.ConstellationType.MAX?0:itemBase.GetID()- ((int)ConstellationItem.ConstellationType.MAX-1));
 
                     ItemUtility.SetItemID(itemBase.GetID());
 

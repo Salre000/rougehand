@@ -1069,8 +1069,10 @@ public class CardObjectManager : MonoBehaviour
         Material[] materials = meshRenderer.materials;
         // トランプのエフェクトマテリアルをセット
         if (Card.deckBuff.None != cardData.deckBuff) materials[(int)cardMaterialType.effect] = BuffUtility.GetTrumpMaterial((int)cardData.deckBuff);
+        else materials[(int)cardMaterialType.effect] = BuffUtility.GetDommyMaterial();
         if (Card.cardBuff.None != cardData.cardBuff) materials[(int)cardMaterialType.effect] = BuffUtility.GetCardMaterial((int)cardData.cardBuff);
         if (Card.sealBuff.None != cardData.sealBuff) materials[(int)cardMaterialType.sael] = BuffUtility.GetSealMaterial((int)cardData.sealBuff);
+        else materials[(int)cardMaterialType.sael] = BuffUtility.GetDommyMaterial();
 
         // トランプのソーツとナンバーを含んだマテリアルをセット
         materials[(int)cardMaterialType.main] = _materialManager.GetMaterial((int)cardData.suit, (int)cardData.number);

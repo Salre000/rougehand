@@ -263,7 +263,9 @@ public class ScoreManager : MonoBehaviour
 
     }
 
+    public float GetBasicScore() { return _basicScore; }
     public void SetBasic(int value) { _basicScore = value; }
+    public float GetMagnification() {  return _magnification; }
     public void SetMagnification(int value) { _magnification = value; }
     public float GetRoundScore() {  return _roundScore; }
     public void SetRoundScore(float value) {  _roundScore = value; }
