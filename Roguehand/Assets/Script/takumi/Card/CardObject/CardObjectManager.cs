@@ -196,6 +196,8 @@ public class CardObjectManager : MonoBehaviour
             // 手札に追加
             _cardObjectHands.Add(cardObject);
 
+            Debug.Log(cardDatas[i].suit.ToString() + i);
+
             // 手札に追加されたカードにマテリアルをセット
             CardPaint(cardDatas[i], _cardObjectHands.Count - 1);
 
@@ -566,6 +568,7 @@ public class CardObjectManager : MonoBehaviour
     /// <param name="nexthand"></param>
     public void ObjectSort(List<Card.Trump> nowHand, List<Card.Trump> nexthand)
     {
+        
         List<CardObject> dommyObjectList = new List<CardObject>();
 
          
@@ -1064,6 +1067,8 @@ public class CardObjectManager : MonoBehaviour
     /// </summary>
     private void CardPaint(Card.Trump cardData, int id)
     {
+        Debug.Log(cardData.suit.ToString() + id+":"+ _cardObjectHands[id].name);
+
 
         MeshRenderer meshRenderer = _cardObjectHands[id].transform.GetChild(0).GetComponent<MeshRenderer>();
         Material[] materials = meshRenderer.materials;
@@ -1134,6 +1139,7 @@ public class CardObjectManager : MonoBehaviour
             _cardObjects[i].SetStatus(CardObject.status.deck);
             _cardObjects[i].transform.eulerAngles = _BACK_SIDE;
             _cardObjects[i].transform.parent = _cardPool.transform;
+            _cardObjects[i].gameObject.name = "Card" + i;
         }
     }
 

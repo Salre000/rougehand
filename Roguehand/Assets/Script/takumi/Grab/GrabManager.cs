@@ -7,6 +7,10 @@ using UnityEngine;
 public class GrabManager : MonoBehaviour
 {
 
+    public static GrabManager instance;
+
+    private bool grabFlag = true;
+
     /// <summary>
     /// メインカメラのオブジェクト
     /// </summary>
@@ -47,10 +51,13 @@ public class GrabManager : MonoBehaviour
     {
         //カメラのオブジェクトを取得
         _camera = Camera.main.gameObject;
+        instance = this;
     }
 
     private void Update()
     {
+        if (!grabFlag) return;
+
         // リザルト画面が開いていたら触れられなくする
         if (ResultUIManager.Instance.resultFlag) return;
 
@@ -256,5 +263,8 @@ public class GrabManager : MonoBehaviour
                 break;
         }
     }
+
+    public void SetGrabFlag(bool flag) { grabFlag = flag; }
+    public bool GetGrabFlag() { return grabFlag; }
 
 }
