@@ -254,7 +254,7 @@ public class JokerObject : MonoBehaviour
         if (_time > 0f) return;
 
 
-
+        GameConfig.AccelerateGameSpeed();
 
         _status = JokerStatus.wait;
         reta = 1;
@@ -311,6 +311,7 @@ public class JokerObject : MonoBehaviour
         if (!_isPlay || reta != -1) return false;
 
 
+        GameConfig.AccelerateGameSpeed();
 
         return true;
 

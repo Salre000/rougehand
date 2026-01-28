@@ -92,7 +92,7 @@ public class CardObjectManager : MonoBehaviour
     /// </summary>
     private float _handPositionRange = 0;
 
-    private readonly int _ANGLE_CHANGE_SPEED = 2 * GameConfig.GetGameSpeed();
+    private readonly float _ANGLE_CHANGE_SPEED = 2 * GameConfig.GetGameSpeed();
 
 
     /// <summary>
@@ -1041,6 +1041,8 @@ public class CardObjectManager : MonoBehaviour
         if (_cardObjectHands.GetCount(hand => hand.GetStatus() == CardObject.status.action) > 0) return;
 
         JokerUtility.JokerPlayStart();
+
+        GameConfig.AccelerateGameSpeed();
 
     }
 

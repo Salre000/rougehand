@@ -160,6 +160,7 @@ public class Memory
         TextUIManager.instance.SetAnteText(_ante.ToString());
         GameUtility.SetAllRoundCount(_round + ((_ante - 1) * 3));
 
+        if(!(GameUtility.GetAllRoundCount()<=24))
         MasterData.instance.AddStringMaster( IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount()
         ,lowstRoundScore.ToString());
         TextUIManager.instance.SetLowestScoreText(lowstRoundScore.ToString());

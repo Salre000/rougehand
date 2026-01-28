@@ -253,7 +253,8 @@ public class ScoreManager : MonoBehaviour
         // 目標スコアを越していたら次のラウンドへ
         if(!RoundUtility.NextStartRound()) return;
 
-
+        // ゲームの速度をリセット
+        GameConfig.ResetGameSpeed();
 
         // 合計スコアの増加フラグをリセット
         GameUtility.SetIsRoundScoreUp(false);
