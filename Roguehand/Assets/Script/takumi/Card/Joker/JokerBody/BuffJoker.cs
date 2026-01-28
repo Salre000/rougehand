@@ -39,6 +39,7 @@ public class BuffJoker : JokerBase
         List<Card.Trump> deck = CardManager.instance.GetDeck();
 
 
+        if (trumps.Count < 1) return;
 
 
 

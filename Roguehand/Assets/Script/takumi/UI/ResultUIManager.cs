@@ -29,8 +29,8 @@ public class ResultUIManager : MonoBehaviour
 
     [SerializeField, Header("ショップから出たときのボタン")] Button shopEndButton;
 
+    private readonly string REWARD_CONST = "9";
     public bool resultFlag { private set; get; }
-
 
     public void Awake()
     {
@@ -179,6 +179,8 @@ public class ResultUIManager : MonoBehaviour
             float reta=1+(Random.Range(0,5)/10f);
 
 
+        MasterData.instance.AddStringMaster(IDUtility.REWARD_ID + GameUtility.GetAllRoundCount() + 1,
+            (REWARD_CONST));
 
             MasterData.instance.AddStringMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount()+1,
                 ((int)(baseScore * reta)).ToString());
@@ -192,10 +194,12 @@ public class ResultUIManager : MonoBehaviour
 
         float reta = 1 + (Random.Range(0, 5) / 10f);
 
-
-
         MasterData.instance.AddStringMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount() + 1,
             ((int)(baseScore * reta)).ToString());
+
+        MasterData.instance.AddStringMaster(IDUtility.REWARD_ID + GameUtility.GetAllRoundCount() + 1,
+            (REWARD_CONST));
+
 
 
 
