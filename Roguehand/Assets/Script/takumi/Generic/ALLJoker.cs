@@ -15,6 +15,7 @@ public static class ALLJoker
         _IncreaseTheSellingPrice,
         _BuffJoker,
         _RandomRole,
+        _Money,
         MAX
     }
     public static JokerBase GetJoker(_allJokerEnum joker)
@@ -32,6 +33,7 @@ public static class ALLJoker
             case _allJokerEnum._IncreaseTheSellingPrice: jokerBase = new IncreaseTheSellingPrice(); break;
             case _allJokerEnum._BuffJoker: jokerBase = new BuffJoker(); break;
             case _allJokerEnum._RandomRole: jokerBase = new RandomRole(); break;
+            case _allJokerEnum._Money:jokerBase = new MoneyJoker();break;
         }
 
         jokerBase?.SetID((int)joker + 1 + 2000);

@@ -261,6 +261,7 @@ public class ScoreManager : MonoBehaviour
         GameUtility.SetIsPlay(false);
 
 
+
     }
 
     public float GetBasicScore() { return _basicScore; }

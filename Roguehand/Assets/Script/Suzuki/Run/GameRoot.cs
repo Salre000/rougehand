@@ -9,6 +9,9 @@ using static TextUIManager;
 /// </summary>
 public class GameRoot:MonoBehaviour 
 {
+
+    public static GameRoot instance;
+
     [SerializeField] GameObject _dontTouchZone;
     bool _next = false;
     bool clear=false;
@@ -21,6 +24,7 @@ public class GameRoot:MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         // ラウンドのカウントを初期値に設定
         GameUtility .SetAllRoundCount(_resetRoundCount);
     }
@@ -31,17 +35,16 @@ public class GameRoot:MonoBehaviour
     }
     private void Update()
     {
-        GameClear();
         GameOver();
         if(_next) return;
     }
 
     // クリアしたかどうか
-    private void GameClear()
+    public void GameClearCheck()
     {
         if (over) return;
-        if(GameUtility.GetAnteCount() != 9) return;
-        if(GameUtility.GetRoundCount() != 1) return;
+        if(GameUtility.GetAnteCount() != 8) return;
+        if(GameUtility.GetRoundCount() != 3) return;
         over = true;
         _builder.Clear();
         _builder.Append("Clear");

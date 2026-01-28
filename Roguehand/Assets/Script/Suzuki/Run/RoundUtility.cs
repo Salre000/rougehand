@@ -27,6 +27,10 @@ public static class RoundUtility
             return true;
         }
 
+        GameRoot.instance.GameClearCheck();
+
+
+
         // リザルトのスコアとハンドの設定
         _builder.Clear();
         _builder.Append(MasterData.instance.GetStringMaster(IDUtility.TARGET_SCORE_ID + roundCount));

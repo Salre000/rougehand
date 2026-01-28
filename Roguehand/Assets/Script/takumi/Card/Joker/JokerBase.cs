@@ -21,6 +21,7 @@ public class JokerBase : SaleInterface, ExplanationInterface
 
     private int explanationID;
 
+    public bool baseScoreFlag = false;  
 
 
     /// <summary>

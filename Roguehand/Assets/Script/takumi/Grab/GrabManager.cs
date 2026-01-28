@@ -206,6 +206,7 @@ public class GrabManager : MonoBehaviour
                 CardObjectUtility.GrabChenge(_grabID, true);
                 // ƒJ[ƒh‚Ìî•ñ‚ğUI‚Æ‚µ‚Ä•`‰æ‚·‚é
 
+                if (gameObject.transform.localEulerAngles.y < 300) return;
                 CardObjectUtility.ShowExplanation(CardManager.instance.GetHand()[_grabID], _grabID);
 
                 break;

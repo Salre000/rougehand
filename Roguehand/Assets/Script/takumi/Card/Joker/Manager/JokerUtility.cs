@@ -16,6 +16,7 @@ public static class JokerUtility
     public static RoleManager.Role GetTargetRole() { return instance.GetTargetRole(); }
 
     public static void AddMagnification(float magnification) {instance.JokerAddMagnification(magnification);}
+    public static void AddBaseValue(float magnification) {instance.JokerAddBaseValue(magnification);}
 
     public static void AddJoker(int ID) { instance.AddJoker(ID); }
 

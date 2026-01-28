@@ -170,7 +170,6 @@ public class ResultUIManager : MonoBehaviour
     {
         gameObject.SetActive(false);
         resultFlag = false;
-        GameUtility.SetAllRoundCount(GameUtility.GetAllRoundCount() - 1);
 
         shopEndButton.onClick.AddListener(() => 
         {
@@ -187,8 +186,6 @@ public class ResultUIManager : MonoBehaviour
 
 
         });
-
-        ShopManager.instance.SetIsShop(true);
 
         int baseScore = MasterData.instance.GetIntMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount());
 

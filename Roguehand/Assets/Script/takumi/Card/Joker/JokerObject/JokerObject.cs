@@ -99,7 +99,8 @@ public class JokerObject : MonoBehaviour
     /// </summary>
     public void PreparationPlay()
     {
-        if (_base.Trun() >0) actions.Add(() => JokerUtility.AddMagnification(_base.Trun()));
+        if(_base.Trun() > 0&&_base.baseScoreFlag) actions.Add(() => JokerUtility.AddBaseValue(_base.Trun()));
+        else if (_base.Trun() > 0) actions.Add(() => JokerUtility.AddMagnification(_base.Trun()));
         if (_base.GetCardBuff().BuffAction()) actions.Add(() => BuffUtility.PlayBuff(_base.GetCardBuff()));
         if (_base.GetJokerBuff().BuffAction()) actions.Add(() => BuffUtility.PlayBuff(_base.GetJokerBuff()));
 

@@ -41,8 +41,12 @@ public class AlternativeBoss : BossBase
 
     public override void LateUpdate()
     {
-        for (int i = 0; i < alternativeObjects.Count; i++)
-            alternativeObjects[i].transform.eulerAngles = new Vector3(180, 0, 0);
+        for (int i = 0; i < alternativeObjects.Count; i++) 
+        {
+            Vector3 vecter = alternativeObjects[i].transform.eulerAngles;
+            vecter.y = 180;
+            alternativeObjects[i].transform.eulerAngles = vecter;
+        }
     }
 
     public override void End()
