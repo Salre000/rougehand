@@ -70,7 +70,7 @@ public class GrabManager : MonoBehaviour
         if (continuationAction != null) continuationAction();
 
         _time += Time.deltaTime;
-
+        MouseOver();
         Grab();
         Separate();
 
@@ -97,6 +97,54 @@ public class GrabManager : MonoBehaviour
 
     }
 
+    GameObject mouseOverObject;
+    private void MouseOver()
+    {
+
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (mouseOverObject != hit.transform.gameObject) 
+            {
+                ExplanationManager.instance.Remove(); 
+                mouseOverObject = hit.transform.gameObject; 
+            }
+            else return;
+
+            SetGrabID(hit.transform.gameObject);
+
+            switch (_status)
+            {
+                case status.Card:
+                    CardObjectUtility.ShowExplanation(CardManager.instance.GetHand()[_grabID], _grabID);
+
+                    break;
+                case status.Joker:
+                    JokerUtility.ShowExplanation(_grabID);
+                    break;
+                case status.Item:
+                    ItemUtility.ShowExplanation(_grabID);
+                    break;
+                case status.None:
+
+                    break;
+
+            }
+
+            _status = status.None;
+            _grabID = -1;
+
+
+        }
+        else
+        {
+            
+                ExplanationManager.instance.Remove(); 
+        }
+    }
+
 
     /// <summary>
     /// 離す関数
@@ -120,7 +168,7 @@ public class GrabManager : MonoBehaviour
 
         }
 
-        if(_grabID<0) _status = status.None;
+        if (_grabID < 0) _status = status.None;
 
         ExplanationManager.instance.Remove();
         switch (_status)
@@ -162,7 +210,7 @@ public class GrabManager : MonoBehaviour
                         RaycastHit hit;
                         if (Physics.Raycast(ray, out hit))
                         {
-                            if (SaleObjectManager.instance.GetIndex(hit.transform.gameObject)<0)
+                            if (SaleObjectManager.instance.GetIndex(hit.transform.gameObject) < 0)
                             {
                                 continuationAction = null;
                                 ExplanationManager.instance.Remove();
@@ -219,9 +267,9 @@ public class GrabManager : MonoBehaviour
                 ItemUtility.ShowExplanation(_grabID);
                 break;
             case status.None:
-                
+
                 break;
-            
+
         }
 
     }
@@ -245,7 +293,7 @@ public class GrabManager : MonoBehaviour
 
         int saleIndex = SaleObjectManager.instance.GetIndex(gameObject);
 
-        if(!(saleIndex<0))_status=status.Sale;
+        if (!(saleIndex < 0)) _status = status.Sale;
 
         //掴んだオブジェクトのIDを取得
         switch (_status)
@@ -262,6 +310,7 @@ public class GrabManager : MonoBehaviour
             case status.Sale:
                 _grabID = saleIndex;
                 break;
+            default: break;
         }
     }
 

@@ -101,7 +101,6 @@ public class ExplanationManager : MonoBehaviour
             // 名前検索以外に非アクティブオブジェクトに干渉できない為に
             // 苦渋の選択で名前検索にしている
             // オブジェクト指定からの名前検索なので負荷は最小限になっている
-            explanationObject.GetBuffColorIcon(i).gameObject.SetActive(true);
             explanationObject.GetBuffTextIcon(i).text = MasterData.instance.GetStringMaster(buff[i]);
             explanationObject.GetBuffColorIcon(i).color = MasterData.instance.GetStringMaster(buff[i], true).GetBuffColor();
 
@@ -112,6 +111,7 @@ public class ExplanationManager : MonoBehaviour
             explanationObject.GetBuffText(i).text = MasterData.instance.GetStringMaster(buff[i] + 50);
                
             explanationObject.GetBuffText(i).transform.parent.gameObject.GetComponent<RectTransform>().sizeDelta = _uiSizeMini;
+            explanationObject.GetBuffColorIcon(i).gameObject.SetActive(true);
 
         }
 

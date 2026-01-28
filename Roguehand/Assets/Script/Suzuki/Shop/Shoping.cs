@@ -69,6 +69,7 @@ public class Shoping : MonoBehaviour
     {
         if(!ShopManager.instance.IsShop()) return;
         if(!_shopCompFlag)return;
+        MemoryManager.Keep();
 
         // 次ラウンドへを押してショップを終了した
         ShopManager.instance.SetPushEndShop(true);

@@ -91,4 +91,6 @@ public class GameRoot:MonoBehaviour
         //instance.InitializeText();
     }
 
+    public bool GetGameOver() { return over;}
+
 }

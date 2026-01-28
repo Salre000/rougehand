@@ -114,6 +114,7 @@ public class MemoryManager
     /// </summary>
     public static void Keep() 
     {
+        if (GameRoot.instance.GetGameOver()) return;
         instantMemory=new Memory();
 
         BinaryFormatter formatter = new BinaryFormatter();
