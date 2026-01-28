@@ -1042,7 +1042,6 @@ public class CardObjectManager : MonoBehaviour
 
         JokerUtility.JokerPlayStart();
 
-        GameConfig.AccelerateGameSpeed();
 
     }
 
@@ -1060,6 +1059,8 @@ public class CardObjectManager : MonoBehaviour
 
 
         ScoreManager.instance.BasicPlus(score);
+        GameConfig.AccelerateGameSpeed();
+
 
     }
 

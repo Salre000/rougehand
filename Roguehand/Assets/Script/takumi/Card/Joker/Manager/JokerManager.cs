@@ -256,6 +256,7 @@ public class JokerManager : MonoBehaviour
     public void JokerAddMagnification(float magnification)
     {
         ScoreManager.instance.MagnificationPlus(magnification);
+        GameConfig.AccelerateGameSpeed();
 
     }
     /// <summary>
@@ -266,6 +267,8 @@ public class JokerManager : MonoBehaviour
     {
 
         ScoreManager.instance.BasicPlus(baseValue);
+        GameConfig.AccelerateGameSpeed();
+
     }
 
     /// <summary>

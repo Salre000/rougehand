@@ -14,7 +14,7 @@ public class GameConfig
     /// </summary>
     static float _gameSpeed = 1;
 
-    static float _accelerateSpeed = 0.001f;
+    static float _accelerateSpeed = 0.2f;
 
     /// <summary>
     /// ゲームのスピードを管理する変数を返す関数
