@@ -118,6 +118,7 @@ public class GrabManager : MonoBehaviour
             switch (_status)
             {
                 case status.Card:
+                    if (CardManager.instance.GetHand().Count < _grabID||_grabID<0) break;
                     CardObjectUtility.ShowExplanation(CardManager.instance.GetHand()[_grabID], _grabID);
 
                     break;
