@@ -108,7 +108,7 @@ public class GrabManager : MonoBehaviour
         {
             if (mouseOverObject != hit.transform.gameObject) 
             {
-                ExplanationManager.instance.Remove(); 
+                ExplanationManager.instance.Remove();
                 mouseOverObject = hit.transform.gameObject; 
             }
             else return;
@@ -127,6 +127,30 @@ public class GrabManager : MonoBehaviour
                 case status.Item:
                     ItemUtility.ShowExplanation(_grabID);
                     break;
+                case status.Sale:
+                    SaleObjectManager.instance.SetSale(_grabID);
+                    continuationAction = () =>
+                    {
+                        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                        RaycastHit hit;
+                        if (Physics.Raycast(ray, out hit))
+                        {
+                            if (SaleObjectManager.instance.GetIndex(hit.transform.gameObject) < 0)
+                            {
+                                continuationAction = null;
+                                ExplanationManager.instance.Remove();
+                            }
+
+                        }
+                        else
+                        {
+                            continuationAction = null;
+                            ExplanationManager.instance.Remove();
+                        }
+                    };
+
+                    break;
+
                 case status.None:
 
                     break;
@@ -203,26 +227,7 @@ public class GrabManager : MonoBehaviour
                     ItemUtility.SetSale(_grabID);
                     break;
                 case status.Sale:
-                    SaleObjectManager.instance.SetSale(_grabID);
-                    continuationAction = () =>
-                    {
-                        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                        RaycastHit hit;
-                        if (Physics.Raycast(ray, out hit))
-                        {
-                            if (SaleObjectManager.instance.GetIndex(hit.transform.gameObject) < 0)
-                            {
-                                continuationAction = null;
-                                ExplanationManager.instance.Remove();
-                            }
-
-                        }
-                        else
-                        {
-                            continuationAction = null;
-                            ExplanationManager.instance.Remove();
-                        }
-                    };
+                    //SaleObjectManager.instance.SetSale(_grabID);
                     break;
 
             }
@@ -255,16 +260,16 @@ public class GrabManager : MonoBehaviour
                 // ƒJ[ƒh‚Ìî•ñ‚ðUI‚Æ‚µ‚Ä•`‰æ‚·‚é
 
                 if (gameObject.transform.localEulerAngles.y < 300) return;
-                CardObjectUtility.ShowExplanation(CardManager.instance.GetHand()[_grabID], _grabID);
+                //CardObjectUtility.ShowExplanation(CardManager.instance.GetHand()[_grabID], _grabID);
 
                 break;
             case status.Joker:
                 JokerObjectUtility.GrabChange(_grabID, true);
-                JokerUtility.ShowExplanation(_grabID);
+                //JokerUtility.ShowExplanation(_grabID);
                 break;
             case status.Item:
                 ItemUtility.GrabChange(_grabID, true);
-                ItemUtility.ShowExplanation(_grabID);
+                //ItemUtility.ShowExplanation(_grabID);
                 break;
             case status.None:
 
