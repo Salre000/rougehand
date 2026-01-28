@@ -128,7 +128,7 @@ public class GrabManager : MonoBehaviour
                     ItemUtility.ShowExplanation(_grabID);
                     break;
                 case status.Sale:
-                    SaleObjectManager.instance.SetSale(_grabID);
+                    SaleObjectManager.instance.Explantion(_grabID);
                     continuationAction = () =>
                     {
                         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -194,7 +194,7 @@ public class GrabManager : MonoBehaviour
 
         if (_grabID < 0) _status = status.None;
 
-        ExplanationManager.instance.Remove();
+        //ExplanationManager.instance.Remove();
         switch (_status)
         {
             case status.Card:
@@ -227,7 +227,7 @@ public class GrabManager : MonoBehaviour
                     ItemUtility.SetSale(_grabID);
                     break;
                 case status.Sale:
-                    //SaleObjectManager.instance.SetSale(_grabID);
+                    SaleObjectManager.instance.SetSale(_grabID);
                     break;
 
             }

@@ -197,6 +197,7 @@ public class ItemManager : MonoBehaviour
 
         SaleObjectManager.instance.ProductExplantion(item.ReturnMoney());
         SaleObjectManager.instance.AddProducts(saleObjecet,
+            () => { ShopSale(saleObjecet, item); },
             () => { ShopExplamtion(saleObjecet, item); },
             () =>
             {
@@ -220,15 +221,14 @@ public class ItemManager : MonoBehaviour
 
     private void ShopExplamtion(GameObject gameObject, ItemBase itembase)
     {
-        SaleUtility.SetSale(itembase, gameObject, itembase.ReturnMoney(), false);
-
-
-
         ExplanationManager.instance.AddExplanation(gameObject, itembase, SHOP_DOMMY_BUFF, SHOP_UI_OFFSET);
 
     }
 
-
+    private void ShopSale(GameObject gameObject, ItemBase itembase)
+    {
+        SaleUtility.SetSale(itembase, gameObject, itembase.ReturnMoney(), false);
+    }
     private void CheckOrder()
     {
 

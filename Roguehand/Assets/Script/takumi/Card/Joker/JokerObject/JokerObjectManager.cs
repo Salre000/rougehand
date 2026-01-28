@@ -270,9 +270,13 @@ public class JokerObjectManager : MonoBehaviour
     /// <param name="jokerBase"></param>
     private void ShopExplamtion(GameObject gameObject,JokerBase jokerBase) 
     {
-        SaleUtility.SetSale(jokerBase, gameObject, jokerBase.GetSaleValue(), false);
 
         ExplanationManager.instance.AddExplanation(gameObject,jokerBase,jokerBase.JokerBuffs(), SHOP_UI_OFFSET);
+
+    }
+    private void ShopSale(GameObject gameObject,JokerBase jokerBase) 
+    {
+        SaleUtility.SetSale(jokerBase, gameObject, jokerBase.GetSaleValue(), false);
 
     }
 
@@ -360,6 +364,7 @@ public class JokerObjectManager : MonoBehaviour
 
         SaleObjectManager.instance.ProductExplantion(jokerBase.GetSaleValue());
         SaleObjectManager.instance.AddProducts(dommyObject,
+            () => { ShopSale(dommyObject, jokerBase); },
             () => { ShopExplamtion(dommyObject, jokerBase); },
             () => 
             {

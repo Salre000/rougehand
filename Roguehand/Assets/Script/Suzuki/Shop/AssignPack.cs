@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using static ScriptCountNumber;
-using static Extra;
 using System.Text;
+using Unity.VisualScripting.Antlr3.Runtime;
+using UnityEngine;
+using static Extra;
+using static ScriptCountNumber;
 /// <summary>
 /// パック一つ一つに付与されるクラス
 /// </summary>
@@ -41,7 +42,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
     /// </summary>
     public void ShopExplantion()
     {
-        SaleUtility.SetSale(this, gameObject, GetSaleValue(), false);
 
         // バフがないからこれで騙す
         int[] dommyBuff = new int[0];
@@ -49,6 +49,12 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
         ExplanationManager.instance.AddExplanation(gameObject, this, dommyBuff, SHOP_UI_OFFSET);
 
     }
+
+    public void ShopSale() 
+    {
+        SaleUtility.SetSale(this, gameObject, 0, false);
+    }
+
 
     /// <summary>
     /// パックを生成した時の処理 initializと同じような扱い
@@ -93,10 +99,12 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
             System.Action buy = TypeBay(values[i],card);
             System.Action explation = ShopExplamtion(card, values[i]);
+            System.Action show = ShopSaleShow(card, values[i]);
 
             SaleObjectManager.instance.ProductExplantion(0);
 
             SaleObjectManager.instance.AddProducts(card,
+                show,
                 explation,
                 buy,
                 false);
@@ -222,7 +230,7 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
         return () => { };
     }
     // まだじょーかにしか対応していない
-    private System.Action ShopExplamtion<T>(GameObject gameObject, T t)
+    private System.Action ShopSaleShow<T>(GameObject gameObject, T t)
     {
         List<System.Action> actions = new List<System.Action>();
 
@@ -232,7 +240,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
                 JokerBase joker = t as JokerBase;
                 actions.Add(() => { SaleUtility.SetSale(joker, gameObject, 0, false); });
-                actions.Add(() => { JokerUtility.ShowExplanation(gameObject, joker, SHOP_UI_OFFSET); });
 
 
                 break;
@@ -240,13 +247,41 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                 ItemBase itemBase =t as ItemBase;
 
                 actions.Add(() => { SaleUtility.SetSale(itemBase, gameObject, 0, false); });
-                actions.Add(() => {ItemUtility.ShowExplanation(gameObject, itemBase, SHOP_UI_OFFSET); });
                 break;
 
             case InstantiatePack.PackType.trump:
                 Card.TrumpClass trumpClass = t as Card.TrumpClass;
                 DommySaleObject doomy = new DommySaleObject();
                 actions.Add(() => { SaleUtility.SetSale(doomy, gameObject, 0, false); });
+
+                break;  
+        }
+
+        return () => { for (int i = 0; i < actions.Count; i++) actions[i](); };
+
+    }
+    private System.Action ShopExplamtion<T>(GameObject gameObject, T t)
+    {
+        List<System.Action> actions = new List<System.Action>();
+
+        switch (_type)
+        {
+            case InstantiatePack.PackType.joker:
+
+                JokerBase joker = t as JokerBase;
+                actions.Add(() => { JokerUtility.ShowExplanation(gameObject, joker, SHOP_UI_OFFSET); });
+
+
+                break;
+            case InstantiatePack.PackType.item:
+                ItemBase itemBase =t as ItemBase;
+
+                actions.Add(() => {ItemUtility.ShowExplanation(gameObject, itemBase, SHOP_UI_OFFSET); });
+                break;
+
+            case InstantiatePack.PackType.trump:
+                Card.TrumpClass trumpClass = t as Card.TrumpClass;
+                DommySaleObject doomy = new DommySaleObject();
                 actions.Add(() => { CardObjectUtility.ShowExplanation(trumpClass.trump, gameObject, SHOP_UI_OFFSET); });
 
                 break;  

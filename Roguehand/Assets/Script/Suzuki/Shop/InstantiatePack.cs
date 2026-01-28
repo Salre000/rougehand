@@ -85,6 +85,7 @@ public class InstantiatePack : MonoBehaviour
             // 目標座標をセット
             SaleObjectManager.instance.ProductExplantion(obj.GetSaleValue());
             SaleObjectManager.instance.AddProducts(_packs[i],
+                () => {obj.ShopSale(); },
                 () => { obj.ShopExplantion(); },
                 () =>
                 {

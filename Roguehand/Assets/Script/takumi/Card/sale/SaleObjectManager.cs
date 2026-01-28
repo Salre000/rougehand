@@ -27,6 +27,7 @@ public class SaleObjectManager : MonoBehaviour
     /// </summary>
     [SerializeField] private List<GameObject> _products = new List<GameObject>();
     [SerializeField] private List<System.Action> _productsSaleShow = new List<System.Action>();
+    [SerializeField] private List<System.Action> _ExplantionShow = new List<System.Action>();
     [SerializeField] private List<float> _productsSaleValue = new List<float>();
     [SerializeField] private List<System.Action> _productsBuy = new List<System.Action>();
     [SerializeField] private List<bool> _isNotMove = new List<bool>();
@@ -266,11 +267,13 @@ public class SaleObjectManager : MonoBehaviour
 
     }
 
-    public void AddProducts(GameObject product, System.Action action, System.Action buy, bool isPack = false)
+    public void AddProducts(GameObject product, System.Action action,System.Action Eaction, System.Action buy, bool isPack = false)
     {
         _products.Add(product);
 
         _productsSaleShow.Add(action);
+
+        _ExplantionShow.Add(Eaction);
 
         _productsBuy.Add(buy);
 
@@ -309,6 +312,7 @@ public class SaleObjectManager : MonoBehaviour
         Destroy(_products[index]);
         _products.RemoveAt(index);
         _productsSaleShow.RemoveAt(index);
+        _ExplantionShow.RemoveAt(index);
         _productsBuy.RemoveAt(index);
         _isNotMove.RemoveAt(index);
         _productsSaleValue.RemoveAt(index);
@@ -334,6 +338,10 @@ public class SaleObjectManager : MonoBehaviour
 
 
     }
+    public void Explantion(int index)
+    {
+        _ExplantionShow[index]();
+    }
 
     /// <summary>
     /// ï€ë∂ÇµÇΩÉäÉXÉgÇëSÇƒèâä˙âª
@@ -343,6 +351,7 @@ public class SaleObjectManager : MonoBehaviour
         SaleUtility.Claer();
         _productsSaleValue.Clear();
         _productsSaleShow.Clear();
+        _ExplantionShow.Clear();
         for (int i = 0; i < _products.Count; i++)
             Destroy(_products[i]);
         _products.Clear();
@@ -364,6 +373,7 @@ public class SaleObjectManager : MonoBehaviour
             if (_isNotMove[i]) continue;
             _productsSaleValue.RemoveAt(i);
             _productsSaleShow.RemoveAt(i);
+            _ExplantionShow.RemoveAt(i);
             _isNotMove.RemoveAt(i);
             _productsBuy.RemoveAt(i);
             GameObject gameObject = _products[i];
