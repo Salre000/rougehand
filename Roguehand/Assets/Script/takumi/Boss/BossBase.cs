@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
 public class BossBase
 {
 
@@ -10,7 +10,13 @@ public class BossBase
     public int bossTextID = 0;
 
     public System.Action endAction = null;
+
     public virtual void Initializ() 
+    {
+        BaseInitializ();
+    }
+
+    public void BaseInitializ() 
     {
         TextUIManager.instance.SetRoundNameText(GetBossName());
 

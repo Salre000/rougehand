@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
 public class Equality : BossBase
 {
     List<ScoreMaster.score> BaseScores = new List<ScoreMaster.score>();

@@ -169,18 +169,7 @@ public class ResultUIManager : MonoBehaviour
         gameObject.SetActive(false);
         resultFlag = false;
 
-        shopEndButton.onClick.AddListener(() => 
-        {
-            int baseScore = MasterData.instance.GetIntMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount());
-            
-            float reta=1+(Random.Range(0,5)/10f);
-
-
-            MasterData.instance.AddStringMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount()+1,
-                ((int)(baseScore * reta)).ToString());
-
-
-        });
+        SetNextScoreCreate();
 
         int baseScore = MasterData.instance.GetIntMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount());
 
@@ -197,4 +186,25 @@ public class ResultUIManager : MonoBehaviour
 
     }
 
+    public void SetNextScoreCreate() 
+    {
+        shopEndButton.onClick.AddListener(NextTargetScoreCreate);
+
+    }
+
+    public void NextTargetScoreCreate()
+    {
+        int baseScore = MasterData.instance.GetIntMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount());
+
+        float reta = 1 + (Random.Range(0, 5) / 10f);
+
+
+        MasterData.instance.AddStringMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount() + 1,
+            ((int)(baseScore * reta)).ToString());
+
+
+
+    }
 }
+
+

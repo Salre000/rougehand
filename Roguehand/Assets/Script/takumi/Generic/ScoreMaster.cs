@@ -74,7 +74,7 @@ public class ScoreMaster : MonoBehaviour
     public score GetScore(int key) {return scoreMap[key]; }
     public void SetScore(int key,score score) {scoreMap[key]=score; }
 
-
+    [System.Serializable]
     public class score
     {
         public int BasicScore = -1;

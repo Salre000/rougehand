@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
 public class AlternativeBoss : BossBase
 {
 
     List<int> alternativeIndexs=new List<int>();
 
-    List<GameObject> alternativeObjects=new List<GameObject>();
 
     private readonly int alternativeCount = 16;
 
@@ -25,10 +24,6 @@ public class AlternativeBoss : BossBase
 
         }
 
-        for(int i=0;i< alternativeIndexs.Count; i++) 
-        {
-            alternativeObjects.Add(CardObjectUtility.CardObjects()[alternativeIndexs[i]].gameObject);
-        }
 
 
 
@@ -41,6 +36,13 @@ public class AlternativeBoss : BossBase
 
     public override void LateUpdate()
     {
+        List<GameObject> alternativeObjects=new List<GameObject>();
+
+        for (int i = 0; i < alternativeIndexs.Count; i++)
+        {
+            alternativeObjects.Add(CardObjectUtility.CardObjects()[alternativeIndexs[i]].gameObject);
+        }
+
         for (int i = 0; i < alternativeObjects.Count; i++) 
         {
             Vector3 vecter = alternativeObjects[i].transform.eulerAngles;
