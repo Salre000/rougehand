@@ -11,6 +11,7 @@ public class TutorialRun : MonoBehaviour
 
     [SerializeField] TesChan _textGroup;
     [SerializeField] GameObject _clickCome;
+    [SerializeField] GameObject _fadePanel;
     [SerializeField] GameObject _mesegePanel;
     [SerializeField] GameObject _mesegeObj;
     [SerializeField] TextMeshProUGUI _mesegeText;
@@ -48,6 +49,8 @@ public class TutorialRun : MonoBehaviour
             opImage[i].SetActive(false);
         }
         _clickCome.SetActive(false);
+        // カードに触れなくさせる
+        GrabManager.instance.SetGrabFlag(false);
     }
 
     // Update is called once per frame
@@ -107,40 +110,50 @@ public class TutorialRun : MonoBehaviour
     {
         switch (indexNumber)
         {
+            case 0:
+
+                break;
             case 2: // 強い役
                 opImage[opIndex].SetActive(true);
+                _fadePanel.SetActive(false);
                 break;
             case 4: // スコアを
+                DefaultCase();
+                break;
+            case 5:// ディスカードを押すと
+                DefaultCase();
+                break;
+            case 6:// 選択したカードを捨て
+                DefaultCase();
+                break;
+            case 7:// 捨てた枚数分だけ
+                DefaultCase();
+                break;
+            case 8:// ディスカードのカウントが
+                DefaultCase();
+                break;
+            case 10: // プレイを
+                DefaultCase();
+                break;
+            case 11: // ハンドが
+                DefaultCase();
+                break;
+            case 13: // ゲームは
                 opImage[opIndex].SetActive(false);
-                opIndex++;
-                opImage[opIndex].SetActive(true);
+                _fadePanel.SetActive(true);
                 break;
-            case 5: // プレイを
-                opImage[opIndex].SetActive(false);
-                opIndex++;
-                opImage[opIndex].SetActive(true);
+            case 15: // 報酬分
+                _fadePanel.SetActive(false);
+                DefaultCase();
                 break;
-            case 6: // ハンドが
-                opImage[opIndex].SetActive(false);
-                opIndex++;
-                opImage[opIndex].SetActive(true);
+            case 16: // より好み
+                DefaultCase();
                 break;
-            case 8: // ゲームは
+            case 17:// まずは
+                _fadePanel.SetActive(true);
                 opImage[opIndex].SetActive(false);
                 break;
-            case 10: // 報酬分
-                opIndex++;
-                opImage[opIndex].SetActive(true);
-                break;
-            case 11: // より好み
-                opIndex++;
-                opImage[opIndex].SetActive(true);
-                break;
-            case 12:// まずは
-                opImage[opIndex - 1].SetActive(false);
-                opImage[opIndex].SetActive(false);
-                break;
-            case 13: // タイトルに戻す
+            case 18: // タイトルに戻す
                 GameSceneManager.LoadScene(GameSceneManager.titleScene);
                 break;
 
@@ -149,41 +162,12 @@ public class TutorialRun : MonoBehaviour
         }
     }
 
-    //void TutorialFade2()
-    //{
-    //    if (fade[1]) return;
-    //    if (_time >= viewTime)
-    //    {
-    //        // ようこそ
-    //        Builder(_textGroup.tutorialText[indexNumber]);
-    //        if(!ClickChack())return;
-
-    //        indexNumber++;
-    //        _time = 0;
-    //        fade[1] = true;
-    //        fade[2] = false;
-    //    }
-
-    //}
-
-    //void TutorialFade3()
-    //{
-    //    if (fade[2]) return;
-    //    if (_time >= viewTime)
-    //    {
-    //        // ルールは
-    //        Builder(_textGroup.tutorialText[indexNumber]);
-    //        opImage[opIndex].SetActive(true);
-    //        if (!ClickChack()) return;
-    //        opImage[opIndex].SetActive(false);
-    //        opIndex++;
-    //        indexNumber++;
-    //        _time = 0;
-    //        fade[2] = true;
-    //        fade[3] = false;
-    //    }
-    //}
-
+    void DefaultCase()
+    {
+        opImage[opIndex].SetActive(false);
+        opIndex++;
+        opImage[opIndex].SetActive(true);
+    }
 
     void Builder(string text)
     {
