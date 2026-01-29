@@ -27,6 +27,8 @@ public class TutorialRun : MonoBehaviour
     List<bool> fade = new List<bool>();
     float viewTime = 0.5f;
 
+    bool playFlag = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,13 +72,12 @@ public class TutorialRun : MonoBehaviour
         Builder(non);
         TutorialText();
         TutorialPata();
-        //TutorialFade2();
-        //TutorialFade3();
 
     }
 
     void TutorialText()
     {
+        if (playFlag) return;
         if (fade[0]) return;
         if (_time >= 0.5f)
             _mesegePanel.SetActive(true);
@@ -153,8 +154,11 @@ public class TutorialRun : MonoBehaviour
                 _fadePanel.SetActive(true);
                 opImage[opIndex].SetActive(false);
                 break;
-            case 18: // タイトルに戻す
-                GameSceneManager.LoadScene(GameSceneManager.titleScene);
+            case 18: // カードの操作を可能にする
+                opImage[opIndex].SetActive(false);
+                _mesegePanel.SetActive(false);
+                playFlag=true;
+                GrabManager.instance.SetGrabFlag(false);
                 break;
 
             default:
