@@ -53,24 +53,26 @@ public class Memory
         _score = ScoreManager.instance.GetRoundScore();
 
         // 現在ショップにいるかどうかをINTに変換して取得
-        _isShop=ShopManager.instance.IsShop()?1:0;
+        _isShop = ShopManager.instance.IsShop() ? 1 : 0;
 
         // リロールの回数を取得
-        _reroolCount=SaleObjectManager.instance.GetReroolCount();
+        _reroolCount = SaleObjectManager.instance.GetReroolCount();
 
-        _playCardCount=CardObjectUtility.GetPlayCardCount();
+        _playCardCount = CardObjectUtility.GetPlayCardCount();
 
-        _discardCardCount=CardObjectUtility.GetDiscardCardCount();
+        _discardCardCount = CardObjectUtility.GetDiscardCardCount();
 
-        _highScore=(int)ScoreManager.instance.GetHighScore();
+        _highScore = (int)ScoreManager.instance.GetHighScore();
 
-        _buyCardCount=SaleObjectManager.instance.GetCardBuyCount();
+        _buyCardCount = SaleObjectManager.instance.GetCardBuyCount();
 
         theSeed = MemoryManager.seed;
 
+
+
         lowstRoundScore = MasterData.instance.GetIntMaster(7000 + GameUtility.GetAllRoundCount());
 
-
+        _boss = BossUtility.GetBossBase();
 
     }
 
@@ -139,10 +141,10 @@ public class Memory
 
 
         //　現在のデッキデータを取得
-        CardManager.instance.deck= _trumps;
+        CardManager.instance.deck = _trumps;
 
         //  現在のジョーカーのデータを取得
-        for(int i = 0; i < _jokers.Count; i++) JokerUtility.AddJoker(_jokers[i]);
+        for (int i = 0; i < _jokers.Count; i++) JokerUtility.AddJoker(_jokers[i]);
 
         //　現在のアイテムのデータを取得
         for (int i = 0; i < _items.Count; i++) ItemUtility.AddItem(_items[i]);
@@ -160,9 +162,27 @@ public class Memory
         TextUIManager.instance.SetAnteText(_ante.ToString());
         GameUtility.SetAllRoundCount(_round + ((_ante - 1) * 3));
 
-        if(!(GameUtility.GetAllRoundCount()<=24))
-        MasterData.instance.AddStringMaster( IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount()
-        ,lowstRoundScore.ToString());
+        if (!(GameUtility.GetAllRoundCount() <= 24))
+        {
+
+            MasterData.instance.AddStringMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount()
+            , lowstRoundScore.ToString());
+
+            // 次のターゲットスコアを作る機能を付与
+            ResultUIManager.Instance.SetNextScoreCreate();
+
+            if (_isShop > 0)
+            {
+                int baseScore = MasterData.instance.GetIntMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount());
+
+                float reta = 1 + (UnityEngine.Random.Range(1, 6) / 10f);
+
+
+                MasterData.instance.AddStringMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount() + 1,
+                    ((int)(baseScore * reta)).ToString());
+
+            }
+        }
         TextUIManager.instance.SetLowestScoreText(lowstRoundScore.ToString());
 
 
@@ -196,6 +216,8 @@ public class Memory
         ScoreManager.instance.SetHighScore((float)_highScore);
 
         SaleObjectManager.instance.SetCardBuyCount(_buyCardCount);
+
+        if (_boss != null) BossUtility.CreateBoss(_boss);
 
     }
 
@@ -303,7 +325,7 @@ public class Memory
 
     }
 
-    private void CreateHandCount(string[] data) 
+    private void CreateHandCount(string[] data)
     {
         int handCountPoint = 1;
         if (!int.TryParse(data[handCountPoint], out int tryInt)) return;
@@ -311,7 +333,7 @@ public class Memory
         TextUIManager.instance.SetHandText(tryInt.ToString());
 
     }
-    private void CreateDiscard(string[] data) 
+    private void CreateDiscard(string[] data)
     {
         int discardPoint = 1;
         if (!int.TryParse(data[discardPoint], out int tryInt)) return;
@@ -320,7 +342,7 @@ public class Memory
 
     }
 
-    private void CreateISShotp(string[] data) 
+    private void CreateISShotp(string[] data)
     {
         int discardPoint = 1;
         if (!int.TryParse(data[discardPoint], out int tryInt)) return;
@@ -420,9 +442,11 @@ public class Memory
     /// <summary>
     /// 世界の種子
     /// </summary>
-    public int theSeed= -1;
+    public int theSeed = -1;
 
-    public int lowstRoundScore {  private set; get; }
-    
+    public int lowstRoundScore { private set; get; }
+
+    private BossBase _boss;
+
 
 }

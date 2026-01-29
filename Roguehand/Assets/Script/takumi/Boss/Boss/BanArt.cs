@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
+[System.Serializable]
 
 public class BanArt : BossBase
 {
@@ -11,8 +12,6 @@ public class BanArt : BossBase
     bool OneFlag = false;
 
     Card.suit suit;
-
-    System.Action endAction;
 
 
     public override void Initializ()

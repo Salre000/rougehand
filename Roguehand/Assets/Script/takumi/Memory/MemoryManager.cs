@@ -86,7 +86,7 @@ public class MemoryManager
             if (Tutorial == flieName) 
             {
                 // TODO: チュートリアルの専用処理をかく
-                BossManager.instance.CreateBoss(0);
+                BossUtility.CreateBoss(0);
 
 
                 tutorialFlag = true;

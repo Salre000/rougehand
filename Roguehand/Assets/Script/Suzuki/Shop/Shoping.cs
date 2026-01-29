@@ -84,13 +84,13 @@ public class Shoping : MonoBehaviour
             roundCount = 0;
         }
         // ボスであったらボスを消す
-        BossManager.instance.BossEnd();
+        BossUtility.BossEnd();
 
         // ボス戦を開始する
         if (roundCount == 2) 
         {
 
-            BossManager.instance.RandomCreateBoss();
+            BossUtility.RandomCreateBoss();
 
         }
 

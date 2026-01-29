@@ -6,13 +6,12 @@ using UnityEngine;
 public class BossManager : MonoBehaviour
 {
 
-    public static BossManager instance;
 
     private List<BossBase> bossBases = new List<BossBase>();
 
     public void Awake()
     {
-        instance = this;
+        BossUtility.bossManager = this;
     }
 
     public void Update()
@@ -36,6 +35,8 @@ public class BossManager : MonoBehaviour
         if (bossBases.Count < 1) return;
 
         for (int i = 0; i < bossBases.Count; i++) bossBases[i].End();
+
+        bossBases.Clear();
     }
 
 
@@ -63,7 +64,12 @@ public class BossManager : MonoBehaviour
 
         bossBases.Add(bossBase);
 
-        bossBase.SetAction(() => { bossBases.Remove(bossBase); });
+    }
+
+    public void CreateBoss(BossBase bossBase) 
+    {
+        bossBases.Add(bossBase);
+        bossBase.BaseInitializ();
     }
 
     public void RandomCreateBoss()
@@ -74,6 +80,12 @@ public class BossManager : MonoBehaviour
 
     }
 
+    public BossBase GetBossBase() 
+    {
+
+        if(bossBases.Count<1)return null;
+        return bossBases[0];
+    }
 
 
 
