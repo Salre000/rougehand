@@ -197,9 +197,6 @@ public class Memory
 
         SaleObjectManager.instance.SetCardBuyCount(_buyCardCount);
 
-        MasterData.instance.AddStringMaster(IDUtility.REWARD_ID + GameUtility.GetAllRoundCount() + 1,
-    ("9"));
-
     }
 
     private void CreateDeck(List<string[]> deta)

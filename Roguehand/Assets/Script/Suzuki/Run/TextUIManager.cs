@@ -7,6 +7,7 @@ public class TextUIManager : MonoBehaviour
 {
     public static TextUIManager instance;
 
+
     [Header("ラン画面のTextUI")]
     [SerializeField] private TextMeshProUGUI _roundNameText;
     [SerializeField] private TextMeshProUGUI _roundExceptionText;
@@ -44,8 +45,9 @@ public class TextUIManager : MonoBehaviour
 
     private void Start()
     {
+        int roundCount = GameUtility.GetRewardMaxCount();
         // ラウンドクリア報酬金
-        int reward = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID + GameUtility.GetAllRoundCount());
+        int reward = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID + roundCount);
         SetRewardCountText(UIUtility.instance.RewardConversion(reward));
     }
 

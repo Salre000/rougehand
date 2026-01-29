@@ -42,7 +42,6 @@ public class BossManager : MonoBehaviour
 
     public void CreateBoss(int id)
     {
-        id = 1;
         int _id = id + IDUtility.BOSS_ID;
 
 
