@@ -20,6 +20,7 @@ public class MemoryManager
     private static bool tutorialFlag=false;
 
     public static int seed = -1;
+
     /// <summary>
     ///  セーブデータがあるどうかを判断する関数
     /// </summary>
@@ -115,6 +116,23 @@ public class MemoryManager
     public static void Keep() 
     {
         if (GameRoot.instance.GetGameOver()) return;
+
+        // リザルトが呼び出されているならば
+        if (GameUtility.IsRoundResult()) 
+        {
+            ShopManager.instance.SetIsShop(true);
+
+            int roundCount = GameUtility.GetRewardMaxCount();
+
+            int addMoney = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID+roundCount);
+
+            addMoney += GameUtility.GetHandCount();
+
+            GameUtility.SetMyMoney(GameUtility.GetMyMoney() + addMoney);
+
+
+        }
+
         instantMemory=new Memory();
 
         BinaryFormatter formatter = new BinaryFormatter();

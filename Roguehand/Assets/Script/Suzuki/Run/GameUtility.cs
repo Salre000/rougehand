@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class GameUtility
 {
+
+    private const int _MAX_REWARD = 13;
     // ベースになるハンド回数
     private static int _baseHandCount = 5;
     // ベースになるディスカード回数
@@ -54,6 +56,10 @@ public static class GameUtility
     public static void SetAllRoundCount(int value) { _allRoundCount = value; }
     // 累計ラウンド数を取得
     public static int GetAllRoundCount() { return _allRoundCount; }
+
+    public static int GetRewardMaxCount() {
+        return GameUtility.GetAllRoundCount() < _MAX_REWARD ? GameUtility.GetAllRoundCount() : _MAX_REWARD;
+    }
     // ラウンド数を設定
     public static void SetRoundCount(int value) { _roundCount = value; }
     // ラウンド数を取得

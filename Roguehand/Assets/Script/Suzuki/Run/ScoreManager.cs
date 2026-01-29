@@ -39,7 +39,6 @@ public class ScoreManager : MonoBehaviour
     // ゼロにする
     private const int _RESET_NUM = 0;
 
-
     private void Awake()
     {
         if(instance == null)
@@ -66,8 +65,11 @@ public class ScoreManager : MonoBehaviour
         _builder.Append(MasterData.instance.GetIntMaster(id));
         TextUIManager.instance.SetLowestScoreText(_builder.ToString());
 
+        //リワードが最大になるラウンド数でそれ以上に行かないようにする
+        int roundCount = GameUtility.GetRewardMaxCount();
+
         // 報酬金の再設定
-        int reward = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID + GameUtility.GetAllRoundCount());
+        int reward = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID + roundCount);
         TextUIManager.instance.SetRewardCountText(UIUtility.instance.RewardConversion(reward));
     }
 

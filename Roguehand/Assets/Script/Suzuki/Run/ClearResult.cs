@@ -128,8 +128,9 @@ public class ClearResult : MonoBehaviour
         // 一度だけ通す
         if (!_isComp)
         {
+            int maxReward= GameUtility.GetRewardMaxCount();
             // 報酬金の取得
-            int reward = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID + GameUtility.GetAllRoundCount());
+            int reward = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID + maxReward);
             // 余った手数と合わせて合計金を算出
             allReward = GameUtility.GetHandCount() + reward;
             _isComp = true;

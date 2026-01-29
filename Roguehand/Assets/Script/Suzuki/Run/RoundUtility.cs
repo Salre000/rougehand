@@ -8,6 +8,7 @@ public static class RoundUtility
 
     private static StringBuilder _builder = new StringBuilder();
 
+
     /// <summary>
     /// 
     /// </summary>
@@ -47,7 +48,10 @@ public static class RoundUtility
         TextUIManager.instance.SetResultMoneyText(_builder.ToString());
 
         // ラウンドクリア報酬金
-        int reward = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID + GameUtility.GetAllRoundCount());
+
+        int roundMax = GameUtility.GetRewardMaxCount();
+
+        int reward = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID + roundMax);
         TextUIManager.instance.SetResultClearMoneyText(UIUtility.instance.RewardConversion(reward));
 
         // 清算ボタンの合計金表示
