@@ -73,8 +73,10 @@ public class Shoping : MonoBehaviour
         // 次ラウンドへを押してショップを終了した
         ShopManager.instance.SetPushEndShop(true);
         ShopManager.instance.SetIsShop(false);
+        VolumeManager.instance.PlaySystemSE();
+
         // ラウンドのカウントが3の場合にアンティのカウントを上げる
-        int roundCount=GameUtility.GetRoundCount();
+        int roundCount =GameUtility.GetRoundCount();
         if (roundCount >= 3)
         {
             int ante = GameUtility.GetAnteCount();

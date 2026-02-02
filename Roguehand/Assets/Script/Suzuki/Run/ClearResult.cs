@@ -167,6 +167,7 @@ public class ClearResult : MonoBehaviour
 
         //‚¨‹à‚ðŽó‚¯Žæ‚Á‚Ä‚¢‚é‰¹‚ð–Â‚ç‚·
         VolumeManager.instance.PlayMoneySE();
+        VolumeManager.instance.ResetBGM();
     }
 
     /// <summary>

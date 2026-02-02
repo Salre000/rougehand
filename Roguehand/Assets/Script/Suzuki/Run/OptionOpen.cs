@@ -40,6 +40,7 @@ public class OptionOpen : MonoBehaviour
 
     void Onclick()
     {
+        VolumeManager.instance.PlaySystemSE();
         if (_opObject.activeSelf)
         {
             _opObject.SetActive(false);
@@ -54,6 +55,8 @@ public class OptionOpen : MonoBehaviour
     }
     void OnShopOpClick()
     {
+        VolumeManager.instance.PlaySystemSE();
+
         if (_opObject.activeSelf)
         {
             _opObject.SetActive(false);
@@ -69,22 +72,30 @@ public class OptionOpen : MonoBehaviour
 
     private void OnReset()
     {
+        VolumeManager.instance.PlaySystemSE();
+
         GameSceneManager.LoadScene(GameSceneManager.mainScene);
     }
 
     private void OnRetire()
     {
+        VolumeManager.instance.PlaySystemSE();
+
         GameSceneManager.LoadScene(GameSceneManager.titleScene);
         MemoryManager.Lost();
     }
     private void OnChengeTitel()
     {
+        VolumeManager.instance.PlaySystemSE();
+
         GameSceneManager.LoadScene(GameSceneManager.titleScene);
         MemoryManager.Keep();
 
     }
     private void OpenEdit() 
     {
-       _opObjectEdit.SetActive(true);
+        VolumeManager.instance.PlaySystemSE();
+
+        _opObjectEdit.SetActive(true);
     }
 }

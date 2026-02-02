@@ -761,6 +761,9 @@ MonoBehaviour:
   TestBGM: {fileID: 8300000, guid: 2136f766f3f72b84eadf9c27fefdbf1e, type: 3}
   TestSE: {fileID: 8300000, guid: 71159e102d91dda4d9e666cd847ec33d, type: 3}
   moneySE: {fileID: 8300000, guid: a2543d1d9ac78654a97ef322e3a02286, type: 3}
+  cardMoveSE: {fileID: 8300000, guid: d816995406e10cc45bafe2852fffd4a9, type: 3}
+  systemSE: {fileID: 8300000, guid: 8d17886f24f3cb048bdd8364f2d85f74, type: 3}
+  rerollSE: {fileID: 8300000, guid: fe1a9456047a27a4b8317a9cec8df9e6, type: 3}
 --- !u!82 &431620157
 AudioSource:
   m_ObjectHideFlags: 0

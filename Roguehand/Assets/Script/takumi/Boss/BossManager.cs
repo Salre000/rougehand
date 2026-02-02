@@ -57,7 +57,7 @@ public class BossManager : MonoBehaviour
             case 4: bossBase = new Delete(); break;
             case 5: bossBase = new Equality(); break;
         }
-
+        if (id != 0) VolumeManager.instance.UpBGM();
 
         bossBase.bossTextID = _id;
         bossBase.Initializ();

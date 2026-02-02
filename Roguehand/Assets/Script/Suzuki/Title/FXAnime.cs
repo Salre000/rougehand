@@ -50,6 +50,7 @@ public class FXAnime : MonoBehaviour
         _startF = true;
         _fadePanel.SetActive(true);
         _gameObject.SetActive(true);
+        VolumeManager.instance.PlaySystemSE();
     }
 
     void OnBack()

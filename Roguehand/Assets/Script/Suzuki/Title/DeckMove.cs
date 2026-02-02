@@ -67,6 +67,9 @@ public class DeckMove : MonoBehaviour
         if (_deckIndex > _deckMaxIndex) _deckIndex = _reset;
         DeckName();
         TitleDeckUI.instance.SetName(selectIndex);
+
+        VolumeManager.instance.PlaySystemSE();
+
     }
     private void RightFlag()
     {
@@ -79,6 +82,8 @@ public class DeckMove : MonoBehaviour
         if (_deckIndex < _reset) _deckIndex = _deckMaxIndex;
         DeckName();
         TitleDeckUI.instance.SetName(selectIndex);
+        VolumeManager.instance.PlaySystemSE();
+
     }
 
 

@@ -85,6 +85,7 @@ public class SaleObjectManager : MonoBehaviour
             SaleUtility.Claer();
             CreateRondom();
             reroolCount++;
+            VolumeManager.instance.PlayrerollSE();
         });
 
         _packModeButton.onClick.AddListener(() => { _packSelectCount = 0; });

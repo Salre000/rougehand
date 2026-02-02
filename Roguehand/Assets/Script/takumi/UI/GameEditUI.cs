@@ -18,7 +18,9 @@ public class GameEditUI : MonoBehaviour
         _master.value = VolumeManager.instance.GetMaster();
         _BGM.value = VolumeManager.instance.GetBGM();
         _SE.value = VolumeManager.instance.GetSE();
-        _endButton.onClick.AddListener(() => { onObjectedit.SetActive(false); });
+        _endButton.onClick.AddListener(() => {
+            VolumeManager.instance.PlaySystemSE();
+            onObjectedit.SetActive(false); });
         _master.onValueChanged.AddListener(ChengeVolumeMaster);
         _BGM.onValueChanged.AddListener(ChengeVolumeBGM);
         _SE.onValueChanged.AddListener(ChengeVolumeSE);

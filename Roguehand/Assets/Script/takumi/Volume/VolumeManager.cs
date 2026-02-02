@@ -13,6 +13,8 @@ public class VolumeManager : MonoBehaviour
     [SerializeField] private AudioClip TestSE;
     [SerializeField] private AudioClip moneySE;
     [SerializeField] private AudioClip cardMoveSE;
+    [SerializeField] private AudioClip systemSE;
+    [SerializeField] private AudioClip rerollSE;
     
 
     private AudioSource BGMsource;
@@ -108,10 +110,31 @@ public class VolumeManager : MonoBehaviour
         SESource.PlayOneShot(cardMoveSE);
 
     }
+    public void PlaySystemSE() 
+    {
+        SESource.pitch = 1f;
+        SESource.PlayOneShot(systemSE);
+
+    }
+    public void PlayrerollSE() 
+    {
+        SESource.pitch = 2f;
+        SESource.PlayOneShot(rerollSE);
+
+    }
     public void EndSE() 
     {
 
         SESource.Stop();
 
+    }
+
+    public void UpBGM() 
+    {
+        BGMsource.pitch = 2f;
+    }
+    public void ResetBGM() 
+    {
+        BGMsource.pitch = 1;
     }
 }

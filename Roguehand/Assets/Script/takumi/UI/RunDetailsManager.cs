@@ -133,6 +133,8 @@ public class RunDetailsManager : MonoBehaviour
 
         _detailsTypeAction[(int)_nowDetailsType].Show();
 
+        VolumeManager.instance.PlaySystemSE();
+
 
     }
     /// <summary>
@@ -140,6 +142,8 @@ public class RunDetailsManager : MonoBehaviour
     /// </summary>
     private void End()
     {
+        VolumeManager.instance.PlaySystemSE();
+
         IsRunDetailsOpen = false;
         // すべての要素のオブジェクトを非アクティブ状態に移行
         for (int i=0;i< _runDetailsTypeParents.Count; i++) 
@@ -184,9 +188,11 @@ public class RunDetailsManager : MonoBehaviour
     {
         if (_nowDetailsType == type) return;
 
+        VolumeManager.instance.PlaySystemSE();
+
         // 前回選択中のタイプのオブジェクトだけ非アクティブ状態に移行
         // 例外として前回の選択がnoneだったら切り替えを行わない
-        if(_nowDetailsType!=RunDetailsType.none) _runDetailsTypeParents[(int)_nowDetailsType].gameObject.SetActive(false);
+        if (_nowDetailsType!=RunDetailsType.none) _runDetailsTypeParents[(int)_nowDetailsType].gameObject.SetActive(false);
 
          // 選択中を変更
         _nowDetailsType = type;

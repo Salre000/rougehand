@@ -12,18 +12,14 @@ public class ShredderItem : ItemBase
 
     public override void Use()
     {
-        for(int i = 0; i < maxBreackCount; i++) 
+        List<Card.Trump> indexs = CardManager.instance.GetPick();
+        for (int i = 0; i < maxBreackCount; i++)
         {
-            List<int> indexs = RoleManager.instance.GetIndex();
+
             if (indexs.Count < 1) return;
-
-            Card.Trump trump = CardManager.instance.GetPick()[0];
-
-            CardObjectUtility.RemoveTrump(trump);
+            CardObjectUtility.RemoveTrump(indexs[i]);
 
             indexs.RemoveAt(0);
-
-            RoleManager.instance.SetIndex(indexs);
 
         }
 

@@ -18,6 +18,8 @@ public class DeckStartButton : MonoBehaviour
         // 前回のセーブデータを消去
         MemoryManager.Lost();
 
+        VolumeManager.instance.PlaySystemSE();
+
         // デッキ番号をシーン持越し
         TitleStatic.SetDeckNumber(_deckMove.selectIndex);
         GameSceneManager.LoadScene(GameSceneManager.mainScene);

@@ -34,6 +34,8 @@ public class TitleButtons : MonoBehaviour
 
     void OnContinue()
     {
+        VolumeManager.instance.PlaySystemSE();
+
         GameSceneManager.LoadScene(GameSceneManager.mainScene);
 
     }

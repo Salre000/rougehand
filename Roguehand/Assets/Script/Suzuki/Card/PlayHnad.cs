@@ -48,6 +48,7 @@ public class PlayHnad : MonoBehaviour
 
         // プレイボタンが押されたことを知らせる
         GameUtility.SetIsPlay(true);
+        if (handCount <= 1) VolumeManager.instance.UpBGM();
     }
 
     /// <summary>
