@@ -47,9 +47,7 @@ public class GameRoot:MonoBehaviour
         if(GameUtility.GetAnteCount() != 8) return;
         if(GameUtility.GetRoundCount() != 3) return;
         clear = true;
-        _builder.Clear();
-        _builder.Append("Clear");
-        TextUIManager.instance.SetRoleText(_builder.ToString());
+
         // リザルト画面を開く
         ResultUIManager.Instance.Active("勝利!");
 
@@ -57,15 +55,14 @@ public class GameRoot:MonoBehaviour
     // ハンドがゼロか
     private void GameOver()
     {
+        // ラウンドスコアが加算されたタイミング
+        if (!GameUtility.IsRoundScoreUp()) return;
+        // 合計スコアの増加フラグをリセット
+        GameUtility.SetIsRoundScoreUp(false);
+        // クリアチェック
         if (clear) return;
-        if (0 < GameUtility.GetHandCount())
-        {
-            _Dtime = 0f;
-            return;
-        }
-        
-            _Dtime += Time.deltaTime;
-        if(_Dtime<5f)return;
+        // ハンドカウントチェック
+        if (0 < GameUtility.GetHandCount())    return;
 
         // 合計スコアと比較
         float roundScore = ScoreManager.instance.GetRoundScore();
@@ -74,9 +71,6 @@ public class GameRoot:MonoBehaviour
 
         if (_targetScore < roundScore) return;
         over =true;
-        _builder.Clear();
-        _builder.Append("Game Over");
-        TextUIManager.instance.SetRoleText(_builder.ToString());
         
         // リザルト画面を開く
         ResultUIManager.Instance.Active("敗北 ");

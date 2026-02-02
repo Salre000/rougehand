@@ -6360,6 +6360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _textGroup: {fileID: 0}
   _clickCome: {fileID: 0}
+  _noClickPanel: {fileID: 0}
   _fadePanel: {fileID: 0}
   _mesegePanel: {fileID: 0}
   _mesegeObj: {fileID: 0}
@@ -6833,6 +6834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _textGroup: {fileID: 428678786}
   _clickCome: {fileID: 238916999}
+  _noClickPanel: {fileID: 604892160}
   _fadePanel: {fileID: 718378258}
   _mesegePanel: {fileID: 288519051}
   _mesegeObj: {fileID: 1351473604}
