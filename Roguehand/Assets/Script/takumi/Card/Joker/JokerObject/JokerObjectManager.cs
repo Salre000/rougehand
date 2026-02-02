@@ -216,7 +216,6 @@ public class JokerObjectManager : MonoBehaviour
 
         Material materialCopy = new Material(dommyMaterial);
 
-        // マイナス2000はジョーカー係数2000を引く
         materialCopy.SetTexture("_MainTex", ID);
 
         materials[(int)CardObjectManager.cardMaterialType.main] = materialCopy;
@@ -343,7 +342,8 @@ public class JokerObjectManager : MonoBehaviour
 
         _jokerObjects[_jokerObjects.Count - 1].name = "JokerID" + (_jokerObjects.Count - 1).ToString();
         _jokerObjects[_jokerObjects.Count - 1].transform.eulerAngles = Vector3.zero;
-        PaintJoker(_jokerObjects[_jokerObjects.Count - 1].gameObject, materialList._material[_jokerObjects[_jokerObjects.Count - 1].GetJokerID() - 2000]);
+        PaintJoker(_jokerObjects[_jokerObjects.Count - 1].gameObject,
+            materialList._material[_jokerObjects[_jokerObjects.Count - 1].GetJokerID() - 2001]);
 
     }
     public void AddDommyJoker(JokerBase jokerBase)
