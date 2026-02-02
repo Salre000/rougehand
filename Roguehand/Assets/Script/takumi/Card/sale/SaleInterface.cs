@@ -54,6 +54,7 @@ public interface SaleInterface
 
             action();
 
+            VolumeManager.instance.PlayMoneyShop();
 
         }
     }

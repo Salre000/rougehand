@@ -11,6 +11,7 @@ public class VolumeManager : MonoBehaviour
 
     [SerializeField] private AudioClip TestBGM;
     [SerializeField] private AudioClip TestSE;
+    [SerializeField] private AudioClip moneySE;
     
 
     private AudioSource BGMsource;
@@ -39,6 +40,9 @@ public class VolumeManager : MonoBehaviour
     }
     private void Initialize()
     {
+        master.GetFloat("MasterVolume",out masterVolume);
+        master.GetFloat("BGMVolume", out BGMVolume);
+        master.GetFloat("SEVolume", out SEVolume);
         master.SetFloat("MasterVolume", masterVolume);
         master.SetFloat("BGMVolume", BGMVolume);
         master.SetFloat("SEVolume", SEVolume);
@@ -80,9 +84,27 @@ public class VolumeManager : MonoBehaviour
     public float GetMaster() {  return masterVolume+ MixerRate; }
     public float GetBGM() {  return BGMVolume+ MixerRate; }
     public float GetSE() {  return SEVolume+ MixerRate; }
-
-    public void PlaySE() 
+    public void PlayScoreSE() 
     {
-        SESource.PlayOneShot(TestSE);
+        SESource.pitch = GameConfig.GetGameSpeed();
+        SESource.PlayOneShot(TestSE,1);
+    }
+    public void PlayMoneySE() 
+    {
+        SESource.pitch =5f;
+        SESource.clip = moneySE;
+        SESource.Play();
+    }
+    public void PlayMoneyShop() 
+    {
+        SESource.pitch = 0.5f;
+        SESource.PlayOneShot(moneySE);
+
+    }
+    public void EndSE() 
+    {
+
+        SESource.Stop();
+
     }
 }
