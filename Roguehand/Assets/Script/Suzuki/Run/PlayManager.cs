@@ -81,10 +81,10 @@ public class PlayManager : MonoBehaviour
 
 
         _roundScore = ScoreManager.instance.GetRoundScore();
-        // スコアが目標に達しているか確認
-        ScoreManager.instance.RoundCheck();
         // 増加の確認
         GameUtility.SetIsRoundScoreUp(true);
+        // スコアが目標に達しているか確認
+        ScoreManager.instance.RoundCheck();
         _isShack = false;
 
 

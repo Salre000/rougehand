@@ -17,11 +17,11 @@ public class ScoreManager : MonoBehaviour
     // 倍率
     private float _magnification;
     // ラウンドの合計スコア
-    private　float _roundScore;
+    private float _roundScore;
     // プレイしたハンドのスコア
     private float _handScore;
     // これまでのスコアで一番高い物
-    private float _highScore=0;
+    private float _highScore = 0;
 
     private StringBuilder _builder = new StringBuilder();
     // ラウンドスコアの文字が枠外に出るくらいの文字数を検知
@@ -29,7 +29,7 @@ public class ScoreManager : MonoBehaviour
     // 減らす文字サイズ
     private const int _DOWNSIZE = 2;
     // 元のフォントサイズ
-    private const float _DEFAULT_OFFSET=44.1f;
+    private const float _DEFAULT_OFFSET = 44.1f;
     // スコア時の文字が枠外に出るくらいの文字数を検知
     private int _scoreRemitLength = 9;
     // スコア時のフォントサイズ
@@ -39,9 +39,12 @@ public class ScoreManager : MonoBehaviour
     // ゼロにする
     private const int _RESET_NUM = 0;
 
+    // ラウンドスコアが加算された時true
+    private bool _additionScore = false;
+
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
             instance = this;
     }
 
@@ -53,7 +56,7 @@ public class ScoreManager : MonoBehaviour
     private void NextRoundScoreReset()
     {
         // ショップが終わり次ラウンドに移行するときにリセット
-        if(!ShopManager.instance.IsPushEndShop())return;
+        if (!ShopManager.instance.IsPushEndShop()) return;
 
 
         // 合計スコアのリセット
@@ -92,7 +95,7 @@ public class ScoreManager : MonoBehaviour
     public void MagnificationPlus(float value)
     {
         _magnification += value;
-        _magnification = Rounding(_magnification,2f);
+        _magnification = Rounding(_magnification, 2f);
 
         _builder.Clear();
         _builder.Append(_magnification);
@@ -105,25 +108,25 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     public void RoundScoreResult()
     {
-        _roundScore+= _handScore;
+        _roundScore += _handScore;
         // 四捨五入した値が返る
-        _roundScore = Rounding(_roundScore,1f);
+        _roundScore = Rounding(_roundScore, 1f);
 
         _builder.Clear();
         _builder.AppendFormat("{0:#}", _roundScore.ToString("N0"));
-        
-        if(_builder.Length >= _defaultRemit)
+
+        if (_builder.Length >= _defaultRemit)
         {
             TextUIManager.instance.GetRoundScoreText().fontSize -= _DOWNSIZE;
             _defaultRemit++;
         }
         else
         {
-        _defaultRemit = _RESET_REMIT_SIZE;
+            _defaultRemit = _RESET_REMIT_SIZE;
 
         }
 
-            TextUIManager.instance.SetRoundScoreText(_builder.ToString());
+        TextUIManager.instance.SetRoundScoreText(_builder.ToString());
     }
 
     /// <summary>
@@ -145,7 +148,7 @@ public class ScoreManager : MonoBehaviour
             TextUIManager.instance.GetRoleText().fontSize -= _DOWNSIZE;
             _scoreRemitLength++;
         }
-            TextUIManager.instance.GetRoleText().fontSize = _SCORE_OFFSET;
+        TextUIManager.instance.GetRoleText().fontSize = _SCORE_OFFSET;
 
         TextUIManager.instance.SetRoleText(_builder.ToString());
         _scoreRemitLength = _RESET_REMIT_SIZE;
@@ -171,7 +174,7 @@ public class ScoreManager : MonoBehaviour
     /// <param name="value"></param>
     public void Multiplication(float value)
     {
-        _magnification*=value;
+        _magnification *= value;
     }
 
     /// <summary>
@@ -181,7 +184,7 @@ public class ScoreManager : MonoBehaviour
     {
         // 合計に加算
         _roundScore += _handScore;
-        if(_highScore<_handScore)_highScore = _handScore;
+        if (_highScore < _handScore) _highScore = _handScore;
         // 0にする
         _handScore = 0;
         // 空白にする
@@ -207,7 +210,7 @@ public class ScoreManager : MonoBehaviour
         _builder.Clear();
         _builder.Append(_roundScore);
         TextUIManager.instance.SetRoundScoreText(_builder.ToString());
-        _builder.Clear() ;
+        _builder.Clear();
         _builder.Append("");
         TextUIManager.instance.SetLowestScoreText(_builder.ToString());
     }
@@ -218,19 +221,19 @@ public class ScoreManager : MonoBehaviour
     /// <param name="value">したい値</param>
     /// <param name="decPoint">小数第〇を指定</param>
     /// <returns>四捨五入した値</returns>
-    public float Rounding(float value,float decPoint)
+    public float Rounding(float value, float decPoint)
     {
         // 小数部分の取り出し
-        float num1=value-Mathf.FloorToInt(value);
+        float num1 = value - Mathf.FloorToInt(value);
         // 四捨五入したい位を一の位に持ってくる
         int num2 = Mathf.FloorToInt(num1 * Mathf.Pow(10, decPoint));
         // 十以上の位をなくす
         int num3 = num2 - Mathf.FloorToInt(num2 / 10) * 10;
-        if( num3 >= 5 )
+        if (num3 >= 5)
         {
             // 切り上げ
             // 切り上げたい位まで小数点を移動させて切り上げ
-            num1= Mathf.CeilToInt(value * Mathf.Pow(10, decPoint - 1));
+            num1 = Mathf.CeilToInt(value * Mathf.Pow(10, decPoint - 1));
             // 戻す
             num1 /= Mathf.Pow(10, decPoint - 1);
         }
@@ -238,7 +241,7 @@ public class ScoreManager : MonoBehaviour
         {
             // 切り捨て
             // 同様に
-            num1 =Mathf.FloorToInt(value * Mathf.Pow(10, decPoint - 1));
+            num1 = Mathf.FloorToInt(value * Mathf.Pow(10, decPoint - 1));
             // 戻す
             num1 /= Mathf.Pow(10, decPoint - 1);
         }
@@ -253,13 +256,12 @@ public class ScoreManager : MonoBehaviour
         GameUtility.SetIsPushButton(false);
 
         // 目標スコアを越していたら次のラウンドへ
-        if(!RoundUtility.NextStartRound()) return;
+        if (!RoundUtility.NextStartRound()) return;
 
         // ゲームの速度をリセット
         GameConfig.ResetGameSpeed();
 
-        // 合計スコアの増加フラグをリセット
-        GameUtility.SetIsRoundScoreUp(false);
+
         // 最終的にプレイボタンのフラグをリセット
         GameUtility.SetIsPlay(false);
 
@@ -269,10 +271,10 @@ public class ScoreManager : MonoBehaviour
 
     public float GetBasicScore() { return _basicScore; }
     public void SetBasic(int value) { _basicScore = value; }
-    public float GetMagnification() {  return _magnification; }
+    public float GetMagnification() { return _magnification; }
     public void SetMagnification(int value) { _magnification = value; }
-    public float GetRoundScore() {  return _roundScore; }
-    public void SetRoundScore(float value) {  _roundScore = value; }
-    public float GetHighScore() {  return _highScore; }
+    public float GetRoundScore() { return _roundScore; }
+    public void SetRoundScore(float value) { _roundScore = value; }
+    public float GetHighScore() { return _highScore; }
     public void SetHighScore(float value) { _highScore = value; }
 }

@@ -11,6 +11,7 @@ public class TutorialRun : MonoBehaviour
 
     [SerializeField] TesChan _textGroup;
     [SerializeField] GameObject _clickCome;
+    [SerializeField] GameObject _noClickPanel;
     [SerializeField] GameObject _fadePanel;
     [SerializeField] GameObject _mesegePanel;
     [SerializeField] GameObject _mesegeObj;
@@ -92,6 +93,7 @@ public class TutorialRun : MonoBehaviour
 
     void TutorialPata()
     {
+        if (playFlag) return;
         if (fade[1]) return;
         if (_time >= viewTime)
         {
@@ -158,7 +160,9 @@ public class TutorialRun : MonoBehaviour
                 opImage[opIndex].SetActive(false);
                 _mesegePanel.SetActive(false);
                 playFlag=true;
-                GrabManager.instance.SetGrabFlag(false);
+                _fadePanel.SetActive(false);
+                _noClickPanel.SetActive(false);
+                GrabManager.instance.SetGrabFlag(true);
                 break;
 
             default:
