@@ -106,10 +106,10 @@ public class GrabManager : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            if (mouseOverObject != hit.transform.gameObject) 
+            if (mouseOverObject != hit.transform.gameObject)
             {
                 ExplanationManager.instance.Remove();
-                mouseOverObject = hit.transform.gameObject; 
+                mouseOverObject = hit.transform.gameObject;
             }
             else return;
 
@@ -118,7 +118,9 @@ public class GrabManager : MonoBehaviour
             switch (_status)
             {
                 case status.Card:
-                    if (CardManager.instance.GetHand().Count < _grabID||_grabID<0) break;
+                    if (CardManager.instance.GetHand().Count < _grabID || _grabID < 0) break;
+                    if (gameObject.transform.localEulerAngles.y > 300) break;
+
                     CardObjectUtility.ShowExplanation(CardManager.instance.GetHand()[_grabID], _grabID);
 
                     break;
@@ -165,8 +167,8 @@ public class GrabManager : MonoBehaviour
         }
         else
         {
-            
-                ExplanationManager.instance.Remove(); 
+
+            ExplanationManager.instance.Remove();
         }
     }
 
@@ -254,6 +256,7 @@ public class GrabManager : MonoBehaviour
         //何かしらの可能性でIDを取得出来なかった時にリセット
         if (_grabID == -1) { _status = status.None; }
 
+        VolumeManager.instance.PlayCardMoveSE();
         switch (_status)
         {
             case status.Card:

@@ -12,6 +12,7 @@ public class VolumeManager : MonoBehaviour
     [SerializeField] private AudioClip TestBGM;
     [SerializeField] private AudioClip TestSE;
     [SerializeField] private AudioClip moneySE;
+    [SerializeField] private AudioClip cardMoveSE;
     
 
     private AudioSource BGMsource;
@@ -99,6 +100,12 @@ public class VolumeManager : MonoBehaviour
     {
         SESource.pitch = 0.5f;
         SESource.PlayOneShot(moneySE);
+
+    }
+    public void PlayCardMoveSE() 
+    {
+        SESource.pitch = 1f;
+        SESource.PlayOneShot(cardMoveSE);
 
     }
     public void EndSE() 
