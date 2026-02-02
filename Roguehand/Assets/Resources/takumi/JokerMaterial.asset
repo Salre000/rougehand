@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: JokerMaterial
   m_EditorClassIdentifier: 
   _material:
+  - {fileID: 2800000, guid: 7712e2cabf041004ba857db178c593b5, type: 3}
+  - {fileID: 2800000, guid: 210b4a67534575c46815267601bea82b, type: 3}
+  - {fileID: 2800000, guid: 2eaaad8f5a712e447b9ba75678758dd4, type: 3}
+  - {fileID: 2800000, guid: cad86609d3aeb9649a1b15f1d731f5ea, type: 3}
+  - {fileID: 2800000, guid: af959957bca006448994cbb497d22807, type: 3}
   - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
-  - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
-  - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
-  - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
-  - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
-  - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
-  - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
-  - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
-  - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
-  - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
+  - {fileID: 2800000, guid: cb0f4223148295c4a9666e240d716c78, type: 3}
+  - {fileID: 2800000, guid: d74ede9395ca5c4488d93a169ec71115, type: 3}
+  - {fileID: 2800000, guid: 253b0f1bcfae3064b977cc31e4581775, type: 3}
+  - {fileID: 2800000, guid: e1779be9b9c6af5489b134613300a4ab, type: 3}
   - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
   - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
