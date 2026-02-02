@@ -91,6 +91,7 @@ public class ClearResult : MonoBehaviour
         // •Ï“®’†‚È‚ç’Ê‚³‚È‚¢
         if (PlayManager.instance.IsFluctuation()) return;
 
+        VolumeManager.instance.EndSE();
 
         if (_variableTime < _endTime)
         {
@@ -163,6 +164,9 @@ public class ClearResult : MonoBehaviour
         _builder.Append("$");
         _builder.Append(allReward);
         TextUIManager.instance.SetClearMoneyText(_builder.ToString());
+
+        //‚¨‹à‚ðŽó‚¯Žæ‚Á‚Ä‚¢‚é‰¹‚ð–Â‚ç‚·
+        VolumeManager.instance.PlayMoneySE();
     }
 
     /// <summary>

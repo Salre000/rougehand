@@ -15,13 +15,13 @@ public class GameEditUI : MonoBehaviour
 
     public void Awake()
     {
+        _master.value = VolumeManager.instance.GetMaster();
+        _BGM.value = VolumeManager.instance.GetBGM();
+        _SE.value = VolumeManager.instance.GetSE();
         _endButton.onClick.AddListener(() => { onObjectedit.SetActive(false); });
         _master.onValueChanged.AddListener(ChengeVolumeMaster);
         _BGM.onValueChanged.AddListener(ChengeVolumeBGM);
         _SE.onValueChanged.AddListener(ChengeVolumeSE);
-        _master.value = VolumeManager.instance.GetMaster();
-        _BGM.value = VolumeManager.instance.GetBGM();
-        _SE.value = VolumeManager.instance.GetSE();
     }
 
     private void ChengeVolumeMaster(float value) 

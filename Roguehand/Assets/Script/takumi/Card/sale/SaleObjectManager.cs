@@ -249,6 +249,40 @@ public class SaleObjectManager : MonoBehaviour
         SetShopObjectPos();
 
     }
+    public void CreateShop(int count = 2)
+    {
+        ClearCard();
+        SaleUtility.Claer();
+
+        int[] shopItems = new int[]{0,1};
+        for (int i = 0; i < count; i++)
+        {
+            shoptype type = (shoptype)shopItems[i];
+            switch (type)
+            {
+                case shoptype.joker:
+                    CreateJoker();
+                    break;
+                case shoptype.item:
+                    CreateItem();
+                    break;
+                case shoptype.trump:
+                    // バウンチャーを取っていなければ戻す
+                    if (true) { i--; continue; }
+                    // トランプの生成
+
+                    break;
+            }
+
+
+        }
+
+
+        // 位置を修正
+        SetShopObjectPos();
+
+    }
+
 
     public void CreateItem(int ID = -1)
     {

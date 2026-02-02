@@ -19,8 +19,7 @@ public class CommandUpData : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A)) Auto();
 
         if (Input.GetKeyDown(KeyCode.R)) ResultUIManager.Instance.Active();
-
-        if(Input.GetKeyDown(KeyCode.S))VolumeManager.instance.PlaySE();
+        if(Input.GetKeyDown(KeyCode.D))VolumeManager.instance.PlayScoreSE();
 
 
     }

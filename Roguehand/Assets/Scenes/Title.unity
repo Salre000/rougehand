@@ -758,8 +758,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   master: {fileID: 24100000, guid: 97e79bd19170d4e41a52a9dc6aa51133, type: 2}
-  TestBGM: {fileID: 8300000, guid: a4e368483063dbe438fe3602d93b824b, type: 3}
-  TestSE: {fileID: 8300000, guid: 3741a1181993339459df2dddff7d8271, type: 3}
+  TestBGM: {fileID: 8300000, guid: 2136f766f3f72b84eadf9c27fefdbf1e, type: 3}
+  TestSE: {fileID: 8300000, guid: 71159e102d91dda4d9e666cd847ec33d, type: 3}
+  moneySE: {fileID: 8300000, guid: a2543d1d9ac78654a97ef322e3a02286, type: 3}
 --- !u!82 &431620157
 AudioSource:
   m_ObjectHideFlags: 0

@@ -86,6 +86,7 @@ public class ScoreManager : MonoBehaviour
         _builder.Clear();
         _builder.Append(_basicScore);
         TextUIManager.instance.SetBasicScoreText(_builder.ToString());
+        VolumeManager.instance.PlayScoreSE();
     }
 
     /// <summary>
@@ -100,6 +101,7 @@ public class ScoreManager : MonoBehaviour
         _builder.Clear();
         _builder.Append(_magnification);
         TextUIManager.instance.SetMagnificationText(_builder.ToString());
+        VolumeManager.instance.PlayScoreSE();
 
     }
 

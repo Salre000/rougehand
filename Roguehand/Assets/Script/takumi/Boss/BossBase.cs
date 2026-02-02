@@ -36,7 +36,7 @@ public class BossBase
         TextUIManager.instance.SetRoundExceptionText(string.Empty);
 
 
-        endAction();
+        //endAction();
    
     }
 

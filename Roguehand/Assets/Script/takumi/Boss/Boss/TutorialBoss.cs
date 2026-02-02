@@ -9,6 +9,7 @@ public class TutorialBoss : BossBase
     private int[] cardIndexs = { 0, 13,12,25,38,9,22,35};
 
     private bool oneFlag = false;
+    private bool oneShopFlag = false;
 
     public override void Initializ()
     {
@@ -34,6 +35,12 @@ public class TutorialBoss : BossBase
 
     public override void LateUpdate()
     {
+        if (oneShopFlag) return;
+        if (!ShopManager.instance.IsShop()) return;
+
+        SaleObjectManager.instance.CreateShop();
+        oneShopFlag = true;
+
     }
 
     public override void End()

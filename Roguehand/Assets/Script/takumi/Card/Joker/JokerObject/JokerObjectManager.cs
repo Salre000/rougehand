@@ -360,7 +360,7 @@ public class JokerObjectManager : MonoBehaviour
         dommyObject.GetComponent<Rigidbody>().isKinematic = true;
 
 
-        PaintJoker(dommyObject, materialList._material[dommyJoker.GetJokerID() - 2000]);
+        PaintJoker(dommyObject, materialList._material[dommyJoker.GetJokerID() - 2001]);
 
         SaleObjectManager.instance.ProductExplantion(jokerBase.GetSaleValue());
         SaleObjectManager.instance.AddProducts(dommyObject,
