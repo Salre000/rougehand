@@ -13,6 +13,8 @@ public class TutorialRun : MonoBehaviour
     [SerializeField] GameObject _clickCome;
     [SerializeField] GameObject _noClickPanel;
     [SerializeField] GameObject _fadePanel;
+    [SerializeField] Transform _tutorialCanvas;
+    [SerializeField] Transform _targetShopMessege;
     [SerializeField] GameObject _mesegePanel;
     [SerializeField] GameObject _mesegeObj;
     [SerializeField] TextMeshProUGUI _mesegeText;
@@ -29,6 +31,7 @@ public class TutorialRun : MonoBehaviour
     float viewTime = 0.5f;
 
     bool playFlag = false;
+    bool oneShopFlag = false;
 
     // Start is called before the first frame update
     void Start()
@@ -73,7 +76,7 @@ public class TutorialRun : MonoBehaviour
         Builder(non);
         TutorialText();
         TutorialPata();
-
+        ShopTutorial();
     }
 
     void TutorialText()
@@ -159,15 +162,61 @@ public class TutorialRun : MonoBehaviour
             case 18: // カードの操作を可能にする
                 opImage[opIndex].SetActive(false);
                 _mesegePanel.SetActive(false);
-                playFlag=true;
+                playFlag = true;
                 _fadePanel.SetActive(false);
                 _noClickPanel.SetActive(false);
-                GrabManager.instance.SetGrabFlag(true);
+                GrabManager.instance.SetGrabFlag(playFlag);
+                break;
+            case 23: // ジョーカー
+                _fadePanel.SetActive(false);
+                opIndex++;
+                opImage[opIndex].SetActive(true);
+                _noClickPanel.SetActive(true);
+                break;
+            case 24: // 星座
+                DefaultCase();
+                break;
+            case 25: // それらが
+                opImage[opIndex].SetActive(false);
+                _fadePanel.SetActive(true);
+                break;
+            case 26: // パック
+                _fadePanel.SetActive(false);
+                opIndex++;
+                opImage[opIndex].SetActive(true);
+                break;
+            case 28: // リロール
+                DefaultCase();
+                break;
+            case 29: // 次のラウンド
+                DefaultCase();
+                break;
+            case 30: // チュートリアルは
+                opImage[opIndex].SetActive(false);
+                _fadePanel.SetActive(true);
+                break;
+                case 32:
+                GameSceneManager.LoadScene(GameSceneManager.titleScene);
                 break;
 
             default:
                 break;
         }
+    }
+
+    void ShopTutorial()
+    {
+        if (oneShopFlag) return;
+        // ショップに移行した時
+        if (!ShopManager.instance.IsShop()) return;
+        _tutorialCanvas.localPosition = _targetShopMessege.localPosition;
+        _tutorialCanvas.localRotation = _targetShopMessege.localRotation;
+        _mesegePanel.SetActive(true);
+        playFlag = false;
+        _fadePanel.SetActive(true);
+        _noClickPanel.SetActive(true);
+        GrabManager.instance.SetGrabFlag(playFlag);
+        oneShopFlag = true;
     }
 
     void DefaultCase()
