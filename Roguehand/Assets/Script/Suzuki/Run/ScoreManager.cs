@@ -12,6 +12,16 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
 
+    // 場に出されたカードの上にスコアを出すためのText群
+    [SerializeField] private List<TextMeshProUGUI> scoreViewTexts;
+    [SerializeField] private List<Transform> scoreViewTrans;
+    private int _viewIndex = 0;
+    public const int VIEW_INDEX_MAX = 4;
+
+    public void SetScoreViewText(string text) { scoreViewTexts[_viewIndex].text = text; _viewIndex++; }
+    public void SetScoreViewTrans(Vector3 position) { scoreViewTrans[_viewIndex].localPosition = position; }
+    public void SetViewIndex(int index) { _viewIndex = index; }
+
     // 基本スコア
     private float _basicScore;
     // 倍率
