@@ -17,23 +17,17 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private List<GameObject> score;
      private List<TextMeshProUGUI> scoreViewTexts= new List<TextMeshProUGUI>();
      private List<Transform> scoreViewTrans= new List<Transform>();
-    [SerializeField] private List<GameObject> joker;
-    private List<TextMeshProUGUI> jokerViewTexts=new List<TextMeshProUGUI>();
-    private List<Transform> jokerViewTrans= new List<Transform>();
+
     private int _scoreIndex = 0;
     public int SCORE_INDEX_MAX = 5;
-    private int _jokerIndex = 0;
-    public int JOKER_INDEX_MAX = 5;
     private Color32 _pulsColor = new Color32(0, 147, 255, 255);
     private Color32 _magColor = new Color32(255, 23, 0, 255);
 
     public void SetScoreViewText(string text,bool magnification=false) { scoreViewTexts[_scoreIndex].text = text; 
         scoreViewTexts[_scoreIndex].color = (magnification)? _magColor : _pulsColor; _scoreIndex++; }
-    public void SetScoreViewTrans(Vector3 position) {position.y+=150f; scoreViewTrans[_scoreIndex].position = position; }
+    public void SetScoreViewTrans(Vector3 position) {position.y-=140f; scoreViewTrans[_scoreIndex].position = position; }
     public void SetViewIndex(int index) { _scoreIndex = index; }
-    public void SetJokerViewText(string text) { jokerViewTexts[_jokerIndex].text = text; _jokerIndex++; }
-    public void SetJokerViewTrans(Vector3 position) {position.y-=200f; jokerViewTrans[_jokerIndex].position = position; }
-    public void SetViewJokerIndex(int index) { _jokerIndex = index; }
+
 
     // 基本スコア
     private float _basicScore;
@@ -70,13 +64,6 @@ public class ScoreManager : MonoBehaviour
         if (instance == null)
             instance = this;
         SCORE_INDEX_MAX = score.Count;
-        JOKER_INDEX_MAX = joker.Count;
-        for (int i = 0; i < JOKER_INDEX_MAX; i++)
-        {
-            jokerViewTexts.Add(joker[i].GetComponent<TextMeshProUGUI>());
-            jokerViewTrans.Add(joker[i].GetComponent<Transform>());
-          jokerViewTexts[i].text="";
-        }
         for (int i = 0; i < SCORE_INDEX_MAX; i++)
         {
             scoreViewTexts.Add(score[i].GetComponent<TextMeshProUGUI>());

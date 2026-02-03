@@ -22,13 +22,8 @@ public class ScoreViewControle : MonoBehaviour
     public void ClearScoreViewText()
     {
         ScoreManager.instance.SetViewIndex(0);
-        ScoreManager.instance.SetViewJokerIndex(0);
-
         for (int i = 0; i < ScoreManager.instance.SCORE_INDEX_MAX; i++)
             ScoreManager.instance.SetScoreViewText("");
-        for (int i = 0; i < ScoreManager.instance.JOKER_INDEX_MAX; i++)
-            ScoreManager.instance.SetJokerViewText("");
         ScoreManager.instance.SetViewIndex(0);
-        ScoreManager.instance.SetViewJokerIndex(0);
     }
 }

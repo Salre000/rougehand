@@ -104,12 +104,13 @@ public class JokerObject : MonoBehaviour
             () =>
           {
                 JokerUtility.AddBaseValue(_base.Trun());
-                // TODO: 文字を出す
-                //_base.Trun() 値
-                // gameObject.transform.position 座標
-                //基本スコア
-
-         });
+              // TODO: 文字を出す
+              //_base.Trun() 値
+              // gameObject.transform.position 座標
+              //基本スコア
+              ScoreManager.instance.SetScoreViewTrans(gameObject.transform.position);
+              ScoreManager.instance.SetScoreViewText("+" + _base.Trun(), false);
+          });
         else if (_base.Trun() > 0) actions.Add(
             () =>
             {
@@ -118,6 +119,8 @@ public class JokerObject : MonoBehaviour
                 //_base.Trun() 値
                 // gameObject.transform.position 座標
                 //　倍率
+                ScoreManager.instance.SetScoreViewTrans(gameObject.transform.position);
+                ScoreManager.instance.SetScoreViewText("x" + _base.Trun(), true);
             });
         if (_base.GetCardBuff().BuffAction()) actions.Add(() =>
         {
