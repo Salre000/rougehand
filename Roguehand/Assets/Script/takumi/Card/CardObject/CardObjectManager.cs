@@ -1060,6 +1060,10 @@ public class CardObjectManager : MonoBehaviour
 
         ScoreManager.instance.BasicPlus(score);
         GameConfig.AccelerateGameSpeed();
+        // TODO:文字を出す　マジで後免
+        // score
+        //_cardObjectHands[ID].gameObject
+        // 基本スコア
 
 
     }
