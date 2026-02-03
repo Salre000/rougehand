@@ -1,11 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.Audio;
 using static Unity.VisualScripting.Member;
 
 public class VolumeManager : MonoBehaviour
 {
+    private static readonly string FILE_PASS = "/Resources/";
+
+    public const string FILE_NAME_KD = "SaveDataVolume";
+
+    private static readonly string FILR_EXTENSION = ".txt";
+
+
     public static VolumeManager instance;
     [SerializeField] private AudioMixer master;
 
@@ -46,9 +55,8 @@ public class VolumeManager : MonoBehaviour
     }
     private void Initialize()
     {
-        master.GetFloat("MasterVolume",out masterVolume);
-        master.GetFloat("BGMVolume", out BGMVolume);
-        master.GetFloat("SEVolume", out SEVolume);
+
+        Lood();
         master.SetFloat("MasterVolume", masterVolume);
         master.SetFloat("BGMVolume", BGMVolume);
         master.SetFloat("SEVolume", SEVolume);
@@ -164,4 +172,49 @@ public class VolumeManager : MonoBehaviour
     {
         BGMsource.pitch = 1;
     }
+
+    public void Save() 
+    {
+
+        VolumeMemory volume = new VolumeMemory();
+
+        volume.BGMVolume = BGMVolume;
+        volume.masterVolume = masterVolume;
+        volume.SEVolume = SEVolume;
+
+
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.dataPath + FILE_PASS + FILE_NAME_KD + FILR_EXTENSION;
+        FileStream stream = new FileStream(path, FileMode.OpenOrCreate);
+        formatter.Serialize(stream, volume);
+        stream.Close();
+
+    }
+    public void Lood() 
+    {
+
+        string path = Application.dataPath + FILE_PASS + FILE_NAME_KD + FILR_EXTENSION;
+        if (!File.Exists(path)) return;
+
+        Debug.Log("TEST");
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(path, FileMode.Open);
+        VolumeMemory volume = formatter.Deserialize(stream) as VolumeMemory;
+        stream.Close();
+
+        BGMVolume = volume.BGMVolume;
+        masterVolume = volume.masterVolume;
+        SEVolume = volume.SEVolume;
+
+        Debug.Log(BGMVolume);
+
+
+    }
+
+    private void OnApplicationQuit()
+    {
+        // ここにセーブ処理を記述します。
+        Save();
+    }
+
 }
