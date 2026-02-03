@@ -131,7 +131,7 @@ public class DistributeHand : MonoBehaviour
         GameUtility.SetIsDiscard(false);
 
         // É\Å[Ég
-        //SortHand.instance.OnSortNumberButton();
+        SortHand.instance.OnSortNumberButton();
 
     }
 
