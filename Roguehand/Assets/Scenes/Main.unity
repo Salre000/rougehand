@@ -826,11 +826,11 @@ MonoBehaviour:
   - {fileID: 1367163374}
   - {fileID: 1535499107}
   - {fileID: 903949553}
-  scoreViewObjects:
-  - {fileID: 892984116}
-  - {fileID: 1367163372}
-  - {fileID: 1535499105}
-  - {fileID: 903949551}
+  scoreViewTrans:
+  - {fileID: 892984117}
+  - {fileID: 1367163373}
+  - {fileID: 1535499106}
+  - {fileID: 903949552}
 --- !u!114 &40209957
 MonoBehaviour:
   m_ObjectHideFlags: 0
