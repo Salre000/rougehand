@@ -111,10 +111,19 @@ public class CardObject : MonoBehaviour
     public void GetCheckBuff(Card.Trump trump)
     {
         if (BuffUtility.CheckPlayBuffDeck(trump.deckBuff))
-            actions.Add(BuffUtility.GetActionPlayBuffDeck(trump.deckBuff));
+            actions.Add(()=>
+            {
+                TrumpBuff.target = gameObject;
+                BuffUtility.GetActionPlayBuffDeck(trump.deckBuff)();
+            });
 
         if (BuffUtility.CheckPlayBuffCard(trump.cardBuff))
-            actions.Add(BuffUtility.GetActionPlayBuffCard(trump.cardBuff));
+            actions.Add(()=>
+            {
+                TrumpBuff.target = gameObject;
+
+                BuffUtility.GetActionPlayBuffCard(trump.cardBuff)();
+            });
 
         actions.Add(AddScore(trump.number));
     }
@@ -200,6 +209,11 @@ public class CardObject : MonoBehaviour
 
 
             ScoreManager.instance.BasicPlus(score);
+            // TODO: 文字を出す
+            // score 値
+            // gameObject.transform.position 座標
+            // 基本スコア
+
         };
 
 

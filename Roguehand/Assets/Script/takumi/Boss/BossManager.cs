@@ -2,16 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossManager : MonoBehaviour
 {
 
+    [SerializeField] Image bossIcon;
 
     private List<BossBase> bossBases = new List<BossBase>();
 
+    IconList iconList;  
     public void Awake()
     {
         BossUtility.bossManager = this;
+
+        iconList = Resources.Load<IconList>("takumi/iconObject");
+        EndIcon();
     }
 
     public void Update()
@@ -37,6 +43,7 @@ public class BossManager : MonoBehaviour
         for (int i = 0; i < bossBases.Count; i++) bossBases[i].End();
 
         bossBases.Clear();
+        EndIcon();
     }
 
 
@@ -62,6 +69,8 @@ public class BossManager : MonoBehaviour
         bossBase.bossTextID = _id;
         bossBase.Initializ();
 
+        SetBossIcon(id);
+
         bossBases.Add(bossBase);
 
     }
@@ -74,7 +83,7 @@ public class BossManager : MonoBehaviour
 
     public void RandomCreateBoss()
     {
-        CreateBoss(Random.Range(1, 5))
+        CreateBoss(Random.Range(1, 6))
             ;
 
 
@@ -87,8 +96,17 @@ public class BossManager : MonoBehaviour
         return bossBases[0];
     }
 
+    private void SetBossIcon(int ID) 
+    {
+        bossIcon.gameObject.SetActive(true);
+        bossIcon.sprite = iconList._iconList[ID];
+    }
 
-
+    private void EndIcon() 
+    {
+        bossIcon.sprite = null;
+        bossIcon.gameObject.SetActive(false);
+    }
 
 
 }

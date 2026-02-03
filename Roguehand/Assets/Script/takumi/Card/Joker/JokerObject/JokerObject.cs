@@ -56,7 +56,7 @@ public class JokerObject : MonoBehaviour
     /// <summary>
     /// 一ターンに一度だけにする為の変数
     /// </summary>
-    [SerializeField]private bool _isPlay = true;
+    [SerializeField] private bool _isPlay = true;
 
     /// <summary>
     /// ジョーカーのオブジェクと移動で使用する誤差
@@ -99,10 +99,37 @@ public class JokerObject : MonoBehaviour
     /// </summary>
     public void PreparationPlay()
     {
-        if(_base.Trun() > 0&&_base.baseScoreFlag) actions.Add(() => JokerUtility.AddBaseValue(_base.Trun()));
-        else if (_base.Trun() > 0) actions.Add(() => JokerUtility.AddMagnification(_base.Trun()));
-        if (_base.GetCardBuff().BuffAction()) actions.Add(() => BuffUtility.PlayBuff(_base.GetCardBuff()));
-        if (_base.GetJokerBuff().BuffAction()) actions.Add(() => BuffUtility.PlayBuff(_base.GetJokerBuff()));
+
+        if (_base.Trun() > 0 && _base.baseScoreFlag) actions.Add(
+            () =>
+          {
+                JokerUtility.AddBaseValue(_base.Trun());
+                // TODO: 文字を出す
+                //_base.Trun() 値
+                // gameObject.transform.position 座標
+
+         });
+        else if (_base.Trun() > 0) actions.Add(
+            () =>
+            {
+                JokerUtility.AddMagnification(_base.Trun());
+                // TODO: 文字を出す
+                //_base.Trun() 値
+                // gameObject.transform.position 座標
+
+            });
+        if (_base.GetCardBuff().BuffAction()) actions.Add(() =>
+        {
+            CardBuff.target = gameObject;
+            BuffUtility.PlayBuff(_base.GetCardBuff());
+
+        });
+        if (_base.GetJokerBuff().BuffAction()) actions.Add(() =>
+        {
+            CardBuff.target = gameObject;
+
+            BuffUtility.PlayBuff(_base.GetJokerBuff());
+        });
 
 
     }
@@ -231,14 +258,14 @@ public class JokerObject : MonoBehaviour
 
     public int GetJokerID() { return _base.GetID(); }
 
-    private readonly float CHENGE_SPEED=4;
+    private readonly float CHENGE_SPEED = 4;
 
     private Vector3 LostAngle = Vector3.zero;
     private void ChengeAction()
     {
-        _time += Time.deltaTime * GameConfig.GetGameSpeed() * reta* CHENGE_SPEED;
+        _time += Time.deltaTime * GameConfig.GetGameSpeed() * reta * CHENGE_SPEED;
 
-        transform.eulerAngles = Vector3.Lerp(Vector3.zero, LostAngle+new Vector3(0, 180, 0), _time);
+        transform.eulerAngles = Vector3.Lerp(Vector3.zero, LostAngle + new Vector3(0, 180, 0), _time);
 
         if (_time > 1 && reta == 1)
         {

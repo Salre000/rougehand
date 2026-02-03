@@ -5,33 +5,53 @@ using UnityEngine;
 public class TrumpBuff
 {
 
+    public static GameObject target;
+
     /// <summary>
     /// カードをプレイした時のバフ
     /// </summary>
     public void Play(Card.deckBuff deckBuff)
     {
+        bool Magnification = false;
+        int value = 0;
 
         //対応したバフを記述
         switch (deckBuff)
         {
             case Card.deckBuff.Bonus:
-                ScoreManager.instance.BasicPlus(30);
+                value = 30;
+                ScoreManager.instance.BasicPlus(value);
                 break;
             case Card.deckBuff.Magnification:
-                ScoreManager.instance.MagnificationPlus(10);
+                value = 10;
+                Magnification = true;
+                ScoreManager.instance.MagnificationPlus(value);
                 break;
             case Card.deckBuff.Wild:
                 break;
             case Card.deckBuff.Glass:
 
                 //　十分の一で発動
-                if (Random.Range(0, 10) != 0) return;
+                if (Random.Range(0, 10) != 1) return;
+
+                value =(int)ScoreManager.instance.GetMagnification();
+                Magnification = true;
+                ScoreManager.instance.MagnificationPlus(value);
+
 
 
                 break;
             case Card.deckBuff.Lucky:
                 break;
         }
+
+        // TODO: 文字を出す
+        //value 値
+        // target.transform.position 座標
+        // Magnification このフラグがtrueの時は倍率falseの時は基本スコア
+        //　valueが０の時は出さない
+
+
     }
 
     /// <summary>

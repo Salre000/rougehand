@@ -1,25 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CardBuff 
 {
+    public static GameObject target;
 
     /// <summary>
     /// カードをプレイした時のバフ
     /// </summary>
     public void Play(Card.cardBuff cardBuff)
     {
+        int value = 0;
         //対応したバフを記述
         switch (cardBuff)
         {
             case Card.cardBuff.Foil:
                 //基本スコアに５０を加算
-                ScoreManager.instance.BasicPlus(50);
+                value = 50;
+                ScoreManager.instance.BasicPlus(value);
                 break;
             case Card.cardBuff.Hologram:
                 //倍率に１０を加算
-                ScoreManager.instance.MagnificationPlus(10);
+                value = 10;
+                ScoreManager.instance.MagnificationPlus(value);
                 break;
             case Card.cardBuff.Polychrome:
                 //倍率に1.5の乗算
@@ -29,6 +34,12 @@ public class CardBuff
             default:
                 break;
         }
+
+
+        // TODO: 文字を出す
+        //　value 値
+        // target.transform.position 座標
+
     }
 
     /// <summary>

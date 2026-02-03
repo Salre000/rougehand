@@ -11,7 +11,7 @@ public class Seraph : JokerBase
     public override void SaleAction() 
     {
 
-        JokerUtility.AddMagnification(100f);
+        //JokerUtility.AddMagnification(100f);
 
 
         //ƒnƒ“ƒh‚Ìc‚è‰ñ”‚ğƒ[ƒ‚É‚·‚é
