@@ -39,7 +39,7 @@ public class GrabManager : MonoBehaviour
     /// <summary>
     /// 現在の状態
     /// </summary>
-    private status _status = status.None;
+    [SerializeField]private status _status = status.None;
 
     /// <summary>
     /// 時間計測をする変数
@@ -85,6 +85,8 @@ public class GrabManager : MonoBehaviour
         if (_status != status.None) return;
         //クリックしていないと返す
         if (!Input.GetMouseButton(0)) return;
+
+        if (_grabID >= 0) return;
         //マウスの位置にrayを飛ばす
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -101,6 +103,7 @@ public class GrabManager : MonoBehaviour
     private void MouseOver()
     {
 
+        if (_status != status.None) return;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
