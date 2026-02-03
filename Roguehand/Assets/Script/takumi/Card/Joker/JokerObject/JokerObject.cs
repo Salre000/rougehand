@@ -107,6 +107,7 @@ public class JokerObject : MonoBehaviour
                 // TODO: 文字を出す
                 //_base.Trun() 値
                 // gameObject.transform.position 座標
+                //基本スコア
 
          });
         else if (_base.Trun() > 0) actions.Add(
@@ -116,7 +117,7 @@ public class JokerObject : MonoBehaviour
                 // TODO: 文字を出す
                 //_base.Trun() 値
                 // gameObject.transform.position 座標
-
+                //　倍率
             });
         if (_base.GetCardBuff().BuffAction()) actions.Add(() =>
         {

@@ -13,6 +13,7 @@ public class CardBuff
     public void Play(Card.cardBuff cardBuff)
     {
         int value = 0;
+        bool Magnification = false;
         //対応したバフを記述
         switch (cardBuff)
         {
@@ -24,11 +25,14 @@ public class CardBuff
             case Card.cardBuff.Hologram:
                 //倍率に１０を加算
                 value = 10;
+                Magnification = true;
                 ScoreManager.instance.MagnificationPlus(value);
                 break;
             case Card.cardBuff.Polychrome:
                 //倍率に1.5の乗算
-                ScoreManager.instance.MagnificationPlus(ScoreManager.instance.GetMagnification()/2f);
+                value = (int)(ScoreManager.instance.GetMagnification() / 2f);
+                Magnification = true;
+                ScoreManager.instance.MagnificationPlus(value);
 
                 break;
             default:
@@ -39,7 +43,8 @@ public class CardBuff
         // TODO: 文字を出す
         //　value 値
         // target.transform.position 座標
-
+        // Magnificationがtrueの時は倍率falseの時は基本スコア
+        // valueが０の時は出さない
     }
 
     /// <summary>
