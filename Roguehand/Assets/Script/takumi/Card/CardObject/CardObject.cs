@@ -211,8 +211,10 @@ public class CardObject : MonoBehaviour
             //ScoreManager.instance.BasicPlus(score);
             // TODO: 文字を出す
             // score 値
-            // gameObject.transform.position 座標
             // 基本スコア
+            // gameObject.transform.position 座標
+            ScoreManager.instance.SetScoreViewTrans(gameObject.transform.position);
+            ScoreManager.instance.SetScoreViewText("+" + score);
 
 
         };
