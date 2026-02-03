@@ -6,7 +6,7 @@ using UnityEngine.XR;
 public class TutorialBoss : BossBase
 {
 
-    private int[] cardIndexs = { 0, 13,12,25,38,9,22,35};
+    private int[] cardIndexs = { 0, 13,7,20,33,9,22,35};
 
     private bool oneFlag = false;
     private bool oneShopFlag = false;
