@@ -108,7 +108,7 @@ public class CardObject : MonoBehaviour
 
     }
 
-    public void GetCheckBuff(Card.Trump trump)
+    public void GetCheckBuff(Card.Trump trump,System.Action<int> action,int id)
     {
         if (BuffUtility.CheckPlayBuffDeck(trump.deckBuff))
             actions.Add(()=>
@@ -125,7 +125,7 @@ public class CardObject : MonoBehaviour
                 BuffUtility.GetActionPlayBuffCard(trump.cardBuff)();
             });
 
-        actions.Add(AddScore(trump.number));
+        actions.Add(()=>action(id));
     }
 
     public int GetActionsCount() {  return actions.Count; }
