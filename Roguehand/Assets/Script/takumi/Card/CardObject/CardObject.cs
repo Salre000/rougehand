@@ -206,13 +206,6 @@ public class CardObject : MonoBehaviour
         {
             float score = (int)number;
             if (score <= 1 || 11 < score) score = 11;
-
-
-            //ScoreManager.instance.BasicPlus(score);
-            // TODO: 文字を出す
-            // score 値
-            // 基本スコア
-            // gameObject.transform.position 座標
             ScoreManager.instance.SetScoreViewTrans(gameObject.transform.position);
             ScoreManager.instance.SetScoreViewText("+" + score);
 
