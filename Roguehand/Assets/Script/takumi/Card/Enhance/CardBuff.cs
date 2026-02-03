@@ -45,6 +45,12 @@ public class CardBuff
         // target.transform.position 座標
         // Magnificationがtrueの時は倍率falseの時は基本スコア
         // valueが０の時は出さない
+        if (value <= 0) return;
+        ScoreManager.instance.SetScoreViewTrans(target.transform.position);
+        if (Magnification)
+            ScoreManager.instance.SetScoreViewText("x+" + value);
+        else
+            ScoreManager.instance.SetScoreViewText("+" + value);
     }
 
     /// <summary>
