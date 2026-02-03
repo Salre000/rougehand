@@ -32,5 +32,6 @@ public static class ItemUtility
 
     public static bool ItemAddCheck() {  return instance.ItemAddCheck(); }
 
+    public static void PaintItemObject(ItemBase itemBase, GameObject gameObject) { instance.PaintItemObject(itemBase, gameObject); }
     public static List<ItemBase> GetItemBase() { return instance.GetItemBases(); }
 }

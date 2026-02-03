@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Media;
 using UnityEngine;
 using static ScriptCountNumber;
 /// <summary>
@@ -49,6 +50,7 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
             //お金を増やす処理
             GameUtility.SetMyMoney(GameUtility.GetMyMoney() + saleValue);
 
+            VolumeManager.instance.PlayMoneySE();
 
         }
 
@@ -59,7 +61,7 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
             //ジョーカーにアイテムの使用を知らせる
             JokerUtility.SetTraget(JokerActionUseEnum.JokerActionTarget.item);
             Use();
-
+            VolumeManager.instance.PlayUseSE();
 
         }
     }

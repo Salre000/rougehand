@@ -20,6 +20,8 @@ public interface SaleInterface
             //‚¨‹à‚ğ‘‚â‚·ˆ—
             GameUtility.SetMyMoney(GameUtility.GetMyMoney() + saleValue);
 
+            VolumeManager.instance.PlayMoneySE();
+
 
         }
     }

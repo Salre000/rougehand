@@ -48,7 +48,7 @@ public class BreakManager : MonoBehaviour
 
         breakObject.transform.parent = transform;
 
-
+        VolumeManager.instance.PlayBreckSE();
 
     }
 

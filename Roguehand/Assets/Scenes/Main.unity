@@ -36120,6 +36120,7 @@ MonoBehaviour:
   _rightTargetPos: {fileID: 396610027}
   _packItemLeftTargetPos: {fileID: 1605428835}
   _packItemRightTargetPos: {fileID: 226237575}
+  card: {fileID: 6512616054942477538, guid: 91844a34be2085b4094bc334ef2e4145, type: 3}
   materialManager: {fileID: 1891625322}
 --- !u!114 &1891625319
 MonoBehaviour:

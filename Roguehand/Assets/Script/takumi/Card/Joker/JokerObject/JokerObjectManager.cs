@@ -421,7 +421,11 @@ public class JokerObjectManager : MonoBehaviour
 
 
     }
+    public void GetJokerMaterials(JokerBase jokerBase, GameObject gameObject) 
+    {
+        PaintJoker(gameObject, materialList._material[jokerBase.GetID() - 2001]);
 
+    }
     public GameObject GetIDObject(int ID) { return _jokerObjects[ID].gameObject; }
     public JokerObject GetIDJokerObject(int ID) { return _jokerObjects[ID]; }
 

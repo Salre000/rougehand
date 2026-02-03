@@ -764,6 +764,9 @@ MonoBehaviour:
   cardMoveSE: {fileID: 8300000, guid: d816995406e10cc45bafe2852fffd4a9, type: 3}
   systemSE: {fileID: 8300000, guid: 8d17886f24f3cb048bdd8364f2d85f74, type: 3}
   rerollSE: {fileID: 8300000, guid: fe1a9456047a27a4b8317a9cec8df9e6, type: 3}
+  levelUpSE: {fileID: 8300000, guid: 94b8461f429688c4f8b430cdb86311e0, type: 3}
+  breckSE: {fileID: 8300000, guid: 3cca566f8d4da754f902a7bb886ca6b2, type: 3}
+  useSE: {fileID: 8300000, guid: 3ff28b10e13ac7340ade64a8608278c3, type: 3}
 --- !u!82 &431620157
 AudioSource:
   m_ObjectHideFlags: 0

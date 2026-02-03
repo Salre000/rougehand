@@ -70,6 +70,9 @@ public class ConstellationItem : ItemBase
     {
 
         Debug.Log("星座カードが使用されたよ");
+
+        VolumeManager.instance.PlayLevelUpSE();
+
         // IDを使用して星座のレベルを上昇させる処理をかく
         RoleManager.instance.AddRoleLevel((RoleManager.Role)_constellationID);
 

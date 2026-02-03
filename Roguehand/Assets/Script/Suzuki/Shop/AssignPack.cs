@@ -28,6 +28,9 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
     public static bool isPack = false;
 
+    private GameObject defaultObject;
+
+
     /// <summary>s
     /// ‰Šú‰»ˆ—
     /// </summary>
@@ -36,6 +39,11 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
     }
 
     public int GetSaleValue() { return saleValue; }
+
+    public void SetDefaultObject(GameObject gameObject) 
+    {
+        defaultObject = gameObject;
+    }
 
     /// <summary>
     /// à–¾‚ğ•`‰æ‚·‚éŠÖ”
@@ -85,15 +93,20 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
         for (int i = 0; i < values.Count; i++)
         {
-            GameObject card = Instantiate(this.gameObject);
+            GameObject card = Instantiate(defaultObject);
 
-            // ©•ª©g‚ÌƒNƒ‰ƒX‚ğ”jŠü
-            Destroy(card.GetComponent<AssignPack>());
+            card.GetComponent<Rigidbody>().useGravity = false;
+
+
+            card.GetComponent<Rigidbody>().constraints = 
+                RigidbodyConstraints.FreezePosition| 
+                RigidbodyConstraints.FreezeRotation;
+
 
             card.AddComponent<PackInObject>().SetTragetPos(poss[i]);
 
             // ƒ}ƒeƒŠƒAƒ‹‚Ì“\‚è•t‚¯
-            //card.GetComponent<MeshRenderer>().materials = GetTypeMaterial(_type, values()[i]);
+            GetTypeMaterial(_type, values[i],card);
 
             cards.Add(card);
 
@@ -135,12 +148,27 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
     public string GetExplanation()
     {
-        return "à–¾‚P";
+        StringBuilder sb = new StringBuilder();
+        int ExplanationRate = 500;
+        
+
+        // +‚P‚ªƒƒK‚Ì•¶š
+        if (_packCardCount > 4) sb.Append(MasterData.instance.GetStringMaster(IDUtility.PACK_ID + 1+ ExplanationRate));
+        else sb.Append(MasterData.instance.GetStringMaster(IDUtility.PACK_ID+ ExplanationRate));
+
+        return sb.ToString();
+
     }
 
     public string GetExplanation2()
     {
-        return "à–¾‚Q";
+        StringBuilder sb = new StringBuilder();
+
+        int ExplanationRate = 10;
+
+        // +2‚ª‚©‚ç‚ªí—Ş‚Ì•¶š
+        sb.Append(MasterData.instance.GetStringMaster(IDUtility.PACK_ID + 2 + (int)_type+ ExplanationRate));
+        return sb.ToString();
     }
 
     public string GetTypes()
@@ -156,20 +184,21 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
     }
 
     private readonly int onlyMaterialCount = 4;
-    private Material[] GetTypeMaterial<T>(InstantiatePack.PackType type, T t)
+    private void GetTypeMaterial<T>(InstantiatePack.PackType type, T t,GameObject gameObject)
     {
 
-        Material[] materials = new Material[onlyMaterialCount];
 
         switch (type)
         {
             case InstantiatePack.PackType.joker:
                 JokerBase joker = t as JokerBase;
 
+                JokerObjectUtility.PaintJokerObject(joker, gameObject);
                 break;
             case InstantiatePack.PackType.item:
 
-
+                ItemBase item = t as ItemBase;
+                ItemUtility.PaintItemObject(item, gameObject);
                 break;
         }
 
@@ -177,7 +206,7 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
 
 
-        return materials;
+        return ;
     }
 
     private System.Action TypeBay<T>(T t,GameObject card)

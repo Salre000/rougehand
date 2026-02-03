@@ -13,11 +13,9 @@ MonoBehaviour:
   m_Name: PackMaterialList
   m_EditorClassIdentifier: 
   _material:
+  - {fileID: 2800000, guid: d6a5332e7bced0446b9a20d5c509d6b0, type: 3}
+  - {fileID: 2800000, guid: e4affef4fffe1de429560376fb1d4c09, type: 3}
   - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
-  - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
-  - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
-  - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
-  - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
-  - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
-  - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
+  - {fileID: 2800000, guid: 167b4a83cb0374b44a423cf571bbd988, type: 3}
+  - {fileID: 2800000, guid: 0f9d6f69d32bbd14abcda2a3f2e5af41, type: 3}
   - {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}

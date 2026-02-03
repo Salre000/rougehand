@@ -15,7 +15,8 @@ public class InstantiatePack : MonoBehaviour
     [SerializeField] Transform _rightTargetPos;
     [SerializeField] Transform _packItemLeftTargetPos;
     [SerializeField] Transform _packItemRightTargetPos;
-
+    [SerializeField, Header("パック内のデフォルトオブジェクト")]
+    GameObject card;
     /// <summary>
     /// パックのマテリアルを管理するクラス
     /// </summary>
@@ -30,7 +31,6 @@ public class InstantiatePack : MonoBehaviour
         none = -1,
         joker,
         item,
-        spectrum,
         trump,
         max
     }
@@ -67,7 +67,7 @@ public class InstantiatePack : MonoBehaviour
         for (int i = 0; i < MAX_PACK; i++)
         {
 
-            PackType pack = (PackType)UnityEngine.Random.Range(0, (int)PackType.spectrum);
+            PackType pack = (PackType)UnityEngine.Random.Range(0, (int)PackType.max-1);
 
             // 生成
             _packs.Add(Instantiate(_pack, _packZone));
@@ -77,8 +77,10 @@ public class InstantiatePack : MonoBehaviour
             int cash = i;
             AssignPack obj = _packs[i].GetComponent<AssignPack>();
             obj.Initialize();
+            obj.SetDefaultObject(card);
             // 今は固定値で作成数と選択数を置いている
             obj.Create(pack, 5, 2);
+
 
             materialManager.SetPackPaint(_packs[i], pack, 5);
 
@@ -107,8 +109,6 @@ public class InstantiatePack : MonoBehaviour
                             break;
                         case PackType.item:
                             obj.Use(GetRandomItem(5), GetPos(5));
-                            break;
-                        case PackType.spectrum:
                             break;
                         case PackType.trump:
                             obj.Use(GetRandomTrump(5), GetPos(5));
@@ -273,7 +273,7 @@ public class InstantiatePack : MonoBehaviour
         distance = Vector3.Distance(_packItemLeftTargetPos.position, _packItemRightTargetPos.position) / (createCount + 1);
 
         for (int i = 0; i < createCount; i++)
-            poss.Add(_packItemLeftTargetPos.position + new Vector3(distance * (i + 1), 0, 0));
+            poss.Add(_packItemLeftTargetPos.position + new Vector3(distance * (i + 1), -10,0));
 
         return poss;
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 /// <summary>
 /// アイテムを纏めるクラス
@@ -188,6 +189,11 @@ public class ItemManager : MonoBehaviour
 
 
 
+    }
+
+    public void PaintItemObject(ItemBase itemBase, GameObject gameObject) 
+    {
+        SetPaint(gameObject, _materialList._material[itemBase.GetID()]);
     }
 
     public void ShopItemAdd(System.Func<ItemBase> func=null) 

@@ -166,7 +166,7 @@ public class ClearResult : MonoBehaviour
         TextUIManager.instance.SetClearMoneyText(_builder.ToString());
 
         //‚¨‹à‚ðŽó‚¯Žæ‚Á‚Ä‚¢‚é‰¹‚ð–Â‚ç‚·
-        VolumeManager.instance.PlayMoneySE();
+        VolumeManager.instance.StartMoneySE();
         VolumeManager.instance.ResetBGM();
     }
 

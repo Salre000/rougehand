@@ -5,7 +5,7 @@ using UnityEngine;
 public class PackInObject : MonoBehaviour
 {
 
-    private readonly Vector2 ANGLE = new Vector2(180f, 0);
+    private readonly Vector2 ANGLE = new Vector2(-90, 0);
 
     private Vector3 _tragetPos;
 

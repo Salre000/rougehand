@@ -36,7 +36,7 @@ public class PackMaterialManager : MonoBehaviour
             {
                 // シルバーを原型にコピーを作成
                 Material dommy = new Material(_silver);
-                dommy.SetTexture("_MainTex", _packMaterialList._material[(i*((int)InstantiatePack.PackType.max)+j)]);
+                dommy.SetTexture("_MainTex", _packMaterialList._material[(i*(int)InstantiatePack.PackType.max)+j]);
                 
                 // 配列に追加していく
                 materialArray[i][j] = dommy;
@@ -55,7 +55,6 @@ public class PackMaterialManager : MonoBehaviour
         PackMaterialObject pack=packObject.GetComponent<PackMaterialObject>();
 
         pack.SetMaterial(GetMaterial(type,packCount), _silver);
-
 
 
     }
