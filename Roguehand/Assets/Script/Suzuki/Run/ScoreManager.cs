@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -13,14 +14,23 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance;
 
     // 場に出されたカードの上にスコアを出すためのText群
-    [SerializeField] private List<TextMeshProUGUI> scoreViewTexts;
-    [SerializeField] private List<Transform> scoreViewTrans;
-    private int _viewIndex = 0;
-    public const int VIEW_INDEX_MAX = 4;
+    [SerializeField] private List<GameObject> score;
+     private List<TextMeshProUGUI> scoreViewTexts= new List<TextMeshProUGUI>();
+     private List<Transform> scoreViewTrans= new List<Transform>();
+    [SerializeField] private List<GameObject> joker;
+    private List<TextMeshProUGUI> jokerViewTexts=new List<TextMeshProUGUI>();
+    private List<Transform> jokerViewTrans= new List<Transform>();
+    private int _scoreIndex = 0;
+    public int SCORE_INDEX_MAX = 5;
+    private int _jokerIndex = 0;
+    public int JOKER_INDEX_MAX = 5;
 
-    public void SetScoreViewText(string text) { scoreViewTexts[_viewIndex].text = text; _viewIndex++; }
-    public void SetScoreViewTrans(Vector3 position) { scoreViewTrans[_viewIndex].localPosition = position; }
-    public void SetViewIndex(int index) { _viewIndex = index; }
+    public void SetScoreViewText(string text) { scoreViewTexts[_scoreIndex].text = text; _scoreIndex++; }
+    public void SetScoreViewTrans(Vector3 position) {position.y+=150f; scoreViewTrans[_scoreIndex].position = position; }
+    public void SetViewIndex(int index) { _scoreIndex = index; }
+    public void SetJokerViewText(string text) { jokerViewTexts[_jokerIndex].text = text; _jokerIndex++; }
+    public void SetJokerViewTrans(Vector3 position) {position.y-=200f; jokerViewTrans[_jokerIndex].position = position; }
+    public void SetViewJokerIndex(int index) { _jokerIndex = index; }
 
     // 基本スコア
     private float _basicScore;
@@ -56,6 +66,21 @@ public class ScoreManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
+        SCORE_INDEX_MAX = score.Count;
+        JOKER_INDEX_MAX = joker.Count;
+        for (int i = 0; i < JOKER_INDEX_MAX; i++)
+        {
+            jokerViewTexts.Add(joker[i].GetComponent<TextMeshProUGUI>());
+            jokerViewTrans.Add(joker[i].GetComponent<Transform>());
+          jokerViewTexts[i].text="";
+        }
+        for (int i = 0; i < SCORE_INDEX_MAX; i++)
+        {
+            scoreViewTexts.Add(score[i].GetComponent<TextMeshProUGUI>());
+            scoreViewTrans.Add(score[i].GetComponent<Transform>());
+            scoreViewTexts[i].text="";
+        }
+
     }
 
     private void Update()

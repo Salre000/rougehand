@@ -206,10 +206,6 @@ public class CardObject : MonoBehaviour
         {
             float score = (int)number;
             if (score <= 1 || 11 < score) score = 11;
-            ScoreManager.instance.SetScoreViewTrans(gameObject.transform.position);
-            ScoreManager.instance.SetScoreViewText("+" + score);
-
-
         };
 
 

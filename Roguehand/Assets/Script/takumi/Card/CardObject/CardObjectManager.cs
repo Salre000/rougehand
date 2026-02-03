@@ -1064,6 +1064,9 @@ public class CardObjectManager : MonoBehaviour
         // score
         //_cardObjectHands[ID].gameObject
         // 基本スコア
+        ScoreManager.instance.SetScoreViewTrans(_cardObjectHands[ID].gameObject.transform.position);
+
+            ScoreManager.instance.SetScoreViewText("+" + score);
 
 
     }

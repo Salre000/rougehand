@@ -7,10 +7,7 @@ public class ScoreViewControle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // ビューテキストを空白にする
-        for(int i =0; i<ScoreManager.VIEW_INDEX_MAX; i++)
-            ScoreManager.instance.SetScoreViewText("");
-        ScoreManager.instance.SetViewIndex(0);
+
     }
 
     // Update is called once per frame
@@ -18,13 +15,20 @@ public class ScoreViewControle : MonoBehaviour
     {
         // ラウンドスコアが加算されたタイミング
         if (!GameUtility.IsRoundScoreUp()) return;
+        ClearScoreViewText();
     }
 
     // ビューテキストを空にする
     public void ClearScoreViewText()
     {
-        for (int i = 0; i < ScoreManager.VIEW_INDEX_MAX; i++)
-            ScoreManager.instance.SetScoreViewText("");
         ScoreManager.instance.SetViewIndex(0);
+        ScoreManager.instance.SetViewJokerIndex(0);
+
+        for (int i = 0; i < ScoreManager.instance.SCORE_INDEX_MAX; i++)
+            ScoreManager.instance.SetScoreViewText("");
+        for (int i = 0; i < ScoreManager.instance.JOKER_INDEX_MAX; i++)
+            ScoreManager.instance.SetJokerViewText("");
+        ScoreManager.instance.SetViewIndex(0);
+        ScoreManager.instance.SetViewJokerIndex(0);
     }
 }
