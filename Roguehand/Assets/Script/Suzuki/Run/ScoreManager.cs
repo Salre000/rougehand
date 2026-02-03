@@ -24,8 +24,11 @@ public class ScoreManager : MonoBehaviour
     public int SCORE_INDEX_MAX = 5;
     private int _jokerIndex = 0;
     public int JOKER_INDEX_MAX = 5;
+    private Color32 _pulsColor = new Color32(0, 147, 255, 255);
+    private Color32 _magColor = new Color32(255, 23, 0, 255);
 
-    public void SetScoreViewText(string text) { scoreViewTexts[_scoreIndex].text = text; _scoreIndex++; }
+    public void SetScoreViewText(string text,bool magnification=false) { scoreViewTexts[_scoreIndex].text = text; 
+        scoreViewTexts[_scoreIndex].color = (magnification)? _magColor : _pulsColor; _scoreIndex++; }
     public void SetScoreViewTrans(Vector3 position) {position.y+=150f; scoreViewTrans[_scoreIndex].position = position; }
     public void SetViewIndex(int index) { _scoreIndex = index; }
     public void SetJokerViewText(string text) { jokerViewTexts[_jokerIndex].text = text; _jokerIndex++; }

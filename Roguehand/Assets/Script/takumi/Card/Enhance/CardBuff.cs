@@ -48,9 +48,9 @@ public class CardBuff
         if (value <= 0) return;
         ScoreManager.instance.SetScoreViewTrans(target.transform.position);
         if (Magnification)
-            ScoreManager.instance.SetScoreViewText("x+" + value);
+            ScoreManager.instance.SetScoreViewText("x" + value,Magnification);
         else
-            ScoreManager.instance.SetScoreViewText("+" + value);
+            ScoreManager.instance.SetScoreViewText("+" + value,Magnification);
     }
 
     /// <summary>
