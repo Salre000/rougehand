@@ -624,7 +624,7 @@ public class CardObjectManager : MonoBehaviour
             {
             
                 _cardObjectHands[i].SetStatus(CardObject.status.action);
-                _cardObjectHands[i].GetCheckBuff(trumps[i]);
+                _cardObjectHands[i].GetCheckBuff(trumps[i],TrunpScore,i);
             }
         }
     }
@@ -1028,15 +1028,23 @@ public class CardObjectManager : MonoBehaviour
         _lostAngle = cardObjectHand.transform.eulerAngles;
 
         if (reta != -1) return;
+        _cardObjectHands[ID].PlayAction();
 
+        reta = 1;
+        _time = 0;
+
+        if (_cardObjectHands[ID].GetActionsCount() > 0) return;
+
+        //仮組み　スコアの加算 後で変更する
         // アクションを追加した事にあたり変更した値を戻している
         _cardObjectHands[ID].SetStatus(_cardObjectHands[ID].GetLostStatus());
         _cardObjectHands[ID].SetGrab(false);
         _cardObjectHands[ID].StopMove();
-        reta = 1;
-        _time = 0;
-        //仮組み　スコアの加算 後で変更する
-        TrunpScore(ID);
+
+
+
+
+
         //アクション待機が存在している
         if (_cardObjectHands.GetCount(hand => hand.GetStatus() == CardObject.status.action) > 0) return;
 

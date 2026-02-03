@@ -179,9 +179,22 @@ public class CardManager : MonoBehaviour
     /// <param name="ChengeCard"><変更後のトランプ/param>
     public void Chenge(Card.Trump baseCard, Card.Trump ChengeCard)
     {
-        if (deck.IndexOf(baseCard) > 0) deck[deck.IndexOf(baseCard)] = ChengeCard;
-        if (hand.IndexOf(baseCard) > 0) hand[hand.IndexOf(baseCard)] = ChengeCard;
-        if (pick.IndexOf(baseCard) > 0) pick[pick.IndexOf(baseCard)] = ChengeCard;
+        Card.Trump dommy = baseCard;
+        dommy.isSelect = !dommy.isSelect;
+
+        if (deck.IndexOf(baseCard) > 0) 
+            deck[deck.IndexOf(baseCard)] = ChengeCard;
+        if (hand.IndexOf(baseCard) > 0) 
+            hand[hand.IndexOf(baseCard)] = ChengeCard;
+        if (pick.IndexOf(baseCard) > 0) 
+            pick[pick.IndexOf(baseCard)] = ChengeCard;
+
+        if (deck.IndexOf(dommy) > 0) 
+            deck[deck.IndexOf(dommy)] = ChengeCard;
+        if (hand.IndexOf(dommy) > 0) 
+            hand[hand.IndexOf(dommy)] = ChengeCard;
+        if (pick.IndexOf(dommy) > 0) 
+            pick[pick.IndexOf(dommy)] = ChengeCard;
     }
 
 

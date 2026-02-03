@@ -26,7 +26,7 @@ public class BuffJoker : JokerBase
 
         });
 
-        ChengeCard();
+        //ChengeCard();
 
         //アクション状態に変更するコマンド
         JokerObjectUtility.CardAddAction(-1, -2);
