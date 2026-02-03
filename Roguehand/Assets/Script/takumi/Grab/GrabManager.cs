@@ -118,8 +118,10 @@ public class GrabManager : MonoBehaviour
             switch (_status)
             {
                 case status.Card:
+
+                    Debug.Log(mouseOverObject.transform.localEulerAngles);
                     if (CardManager.instance.GetHand().Count < _grabID || _grabID < 0) break;
-                    if (gameObject.transform.localEulerAngles.y > 300) break;
+                    if (mouseOverObject.transform.localEulerAngles.y <300) break;
 
                     CardObjectUtility.ShowExplanation(CardManager.instance.GetHand()[_grabID], _grabID);
 
