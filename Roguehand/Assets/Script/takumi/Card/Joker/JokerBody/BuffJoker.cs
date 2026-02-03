@@ -15,10 +15,12 @@ public class BuffJoker : JokerBase
         JokerUtility.JokerALLAction(joker =>
         {
             if (count >= 2) return;
+            JokerBase jokerBase= joker; 
+
             joker.SetCardBuff((Card.cardBuff)Random.Range(0, (int)Card.cardBuff.MAX));
             joker.SetJokerBuff((Card.JokerBuff)Random.Range(0, (int)Card.JokerBuff.MAX));
 
-            JokerUtility.JokerChenge(JokerUtility.GetIndex(joker));
+            JokerUtility.JokerChenge(JokerUtility.GetIndex(jokerBase));
             count++;
 
 

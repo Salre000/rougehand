@@ -208,11 +208,12 @@ public class CardObject : MonoBehaviour
             if (score <= 1 || 11 < score) score = 11;
 
 
-            ScoreManager.instance.BasicPlus(score);
+            //ScoreManager.instance.BasicPlus(score);
             // TODO: 文字を出す
             // score 値
             // gameObject.transform.position 座標
             // 基本スコア
+
 
         };
 
