@@ -44,6 +44,8 @@ public class ItemManager : MonoBehaviour
     /// </summary>
     [SerializeField] private Transform _rightShopTransform;
 
+    private MaterialstringList _materialList;
+    private Material dommyMaterial;
     private readonly int ITEM_MAX_COUNT = 2;
 
     private bool _isGrab = false;
@@ -52,6 +54,10 @@ public class ItemManager : MonoBehaviour
     public void Awake()
     {
         ItemUtility.instance = this;
+
+        _materialList = Resources.Load<MaterialstringList>("takumi/ItemMaterial");
+        dommyMaterial = Resources.Load<Material>("takumi/BaseMaterial");
+
     }
 
     public void Update()
@@ -88,6 +94,9 @@ public class ItemManager : MonoBehaviour
         _itemList[_itemList.Count-1].Initializ();
 
         _itemObjectList.Add(Instantiate(_prefab, transform).AddComponent<ItemObject>());
+
+        SetPaint(_itemObjectList[_itemObjectList.Count - 1].gameObject,
+            _materialList._material[_itemList[_itemList.Count - 1].GetID()]);
     }
 
     public void AddItem(ItemBase itemBase) 
@@ -96,6 +105,8 @@ public class ItemManager : MonoBehaviour
         _itemList.Add(itemBase);
         _itemObjectList.Add(Instantiate(_prefab, transform).AddComponent<ItemObject>());
 
+        SetPaint(_itemObjectList[_itemObjectList.Count - 1].gameObject,
+            _materialList._material[_itemList[_itemList.Count - 1].GetID() -IDUtility.ITEM_ID]);
 
     }
     public void SetItemID(int ID) { _itemList[_itemList.Count - 1].SetItemID(ID); }
@@ -193,6 +204,8 @@ public class ItemManager : MonoBehaviour
         //オブジェクトの物理演算を停止
         saleObjecet.GetComponent<Rigidbody>().isKinematic = true;
 
+        SetPaint(saleObjecet,_materialList._material[item.GetID()]);
+
 
 
         SaleObjectManager.instance.ProductExplantion(item.ReturnMoney());
@@ -201,8 +214,13 @@ public class ItemManager : MonoBehaviour
             () => { ShopExplamtion(saleObjecet, item); },
             () =>
             {
-                AddItem(item.GetID()<(int)ConstellationItem.ConstellationType.MAX?0:item.GetID()- (int)ConstellationItem.ConstellationType.MAX);
+                AddItem(item.GetID()<(int)ConstellationItem.ConstellationType.MAX?0:item.GetID()- ((int)ConstellationItem.ConstellationType.MAX-1));
                 _itemList[_itemList.Count-1].SetItemID(item.GetID());
+
+                SetPaint(_itemObjectList[_itemObjectList.Count - 1].gameObject,
+                    _materialList._material[_itemList[_itemList.Count - 1].GetID()]);
+
+
                 GameObject domyy = saleObjecet;
                 SaleObjectManager.instance.Remove(domyy);
 
@@ -306,6 +324,24 @@ public class ItemManager : MonoBehaviour
 
     }
 
+
+    private void SetPaint(GameObject item, Texture ID)
+    {
+        MeshRenderer meshRenderer = item.transform.GetChild(0).GetComponent<MeshRenderer>();
+
+        Material[] materials = meshRenderer.materials;
+
+
+        Material materialCopy = new Material(dommyMaterial);
+
+        materialCopy.SetTexture("_MainTex", ID);
+
+        materials[(int)CardObjectManager.cardMaterialType.main] = materialCopy;
+
+        meshRenderer.materials = materials;
+
+
+    }
 
 
 }
