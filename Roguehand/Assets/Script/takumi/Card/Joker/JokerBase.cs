@@ -142,6 +142,7 @@ public class JokerBase : SaleInterface, ExplanationInterface
            {
            (int)_jokerBuff+6300,
             (int)_cardBuff+6100,
+            0
 
                     };
         return strings;

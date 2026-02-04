@@ -29,6 +29,7 @@ public class CardObjectManagerDebug : MonoBehaviour
 
     public void Update()
     {
+        return;
         if (Input.GetKeyDown(KeyCode.P)) CardObjectUtility.Play();
         if (Input.GetKeyDown(KeyCode.D)) CardObjectUtility.Discard();
         if (Input.GetKeyDown(KeyCode.E)) CardObjectUtility.End();

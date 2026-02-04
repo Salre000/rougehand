@@ -37,7 +37,7 @@ public class SystemErrorBuff
             _errorList[i].UpData();
 
         //デバック用
-
+        return;
         if (Input.GetKeyDown(KeyCode.Y)) CreateErrorBuff();
         if (Input.GetKeyDown(KeyCode.H)) Clear();
 
@@ -84,7 +84,7 @@ public class SystemErrorBuff
         /// <summary>
         /// 今は決め打ち
         /// </summary>
-        private float MaxRenge = 30;
+        private float MaxRenge = 1000;
 
         public override void Start()
         {

@@ -219,7 +219,7 @@ public static class Extra
         }
 
         ////デバック用に固定
-        count = 0;
+        //count = 0;
 
         char[] chars = _string.ToCharArray();
 

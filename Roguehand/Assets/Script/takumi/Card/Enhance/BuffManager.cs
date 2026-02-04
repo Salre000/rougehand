@@ -258,8 +258,11 @@ public class BuffManager : MonoBehaviour
             case Card.JokerBuff.Sepia:
                 float copyValue = ScoreManager.instance.GetBasicScore();
                 ScoreManager.instance.SetBasic((int)ScoreManager.instance.GetMagnification());
-                ScoreManager.instance.SetMagnification((int)copyValue);
 
+                ScoreManager.instance.SetScoreViewText("x" + (int)ScoreManager .instance.GetMagnification(), false);
+
+                ScoreManager.instance.SetMagnification((int)copyValue);
+                ScoreManager.instance.SetScoreViewText("x" + copyValue, true);
 
                 break;
             case Card.JokerBuff.Negative:

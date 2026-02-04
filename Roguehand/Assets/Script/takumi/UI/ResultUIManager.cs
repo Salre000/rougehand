@@ -166,6 +166,13 @@ public class ResultUIManager : MonoBehaviour
 
     private void StartEndless() 
     {
+
+        if (GameUtility.GetHandCount() < 1) 
+        {
+            TitelScene();
+            return;
+        }
+
         gameObject.SetActive(false);
         resultFlag = false;
 

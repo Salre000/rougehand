@@ -16,6 +16,8 @@ public class CommandUpData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        return;
+
         if (Input.GetKeyDown(KeyCode.A)) Auto();
 
         if (Input.GetKeyDown(KeyCode.R)) ResultUIManager.Instance.Active();

@@ -60,7 +60,7 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
     public void ShopSale() 
     {
-        SaleUtility.SetSale(this, gameObject, 0, false);
+        SaleUtility.SetSale(this, gameObject, 10, false);
     }
 
 

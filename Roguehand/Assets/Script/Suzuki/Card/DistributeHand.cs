@@ -119,9 +119,13 @@ public class DistributeHand : MonoBehaviour
         // デッキの中に使用可能なカードが一枚もない場合
         if (dommyHand.Count <= 0) 
         {
-            // リザルト画面に移行する
 
-            Application.Quit();
+            // ハンドの内部数値をゼロにする事で
+            // タイトル画面にとばしている
+            GameUtility.SetHandCount(0);
+            ResultUIManager.Instance.Active("敗北");
+
+
 
         }
 

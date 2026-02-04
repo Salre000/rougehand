@@ -17,8 +17,8 @@ public class ExplanationManager : MonoBehaviour
     /// 説明をまとめた配列
     /// </summary>
     private List<GameObject> _GameObjectPool = new List<GameObject>();
-    [SerializeField]private List<GameObject> _explanationInterface = new List<GameObject>();
-    [SerializeField]private List<Vector2> _offsets = new List<Vector2>();
+    [SerializeField] private List<GameObject> _explanationInterface = new List<GameObject>();
+    [SerializeField] private List<Vector2> _offsets = new List<Vector2>();
 
     private readonly Vector2 DEFAULT_SIZE = new Vector2(300, 20);
     private readonly Vector2 defaultSizeMini = new Vector2(130, 90);
@@ -83,10 +83,10 @@ public class ExplanationManager : MonoBehaviour
 
         gameObject.GetComponent<RectTransform>().sizeDelta = _uiSize;
 
-        ExplanationObject explanationObject=gameObject.GetComponent<ExplanationObject>();
+        ExplanationObject explanationObject = gameObject.GetComponent<ExplanationObject>();
 
         explanationObject.GetTextName().text = explanationInterface.GetName();
-        explanationObject.GetTextExplanation().text= GetLineString(explanationInterface.GetExplanation(), explanationInterface.GetExplanation2());
+        explanationObject.GetTextExplanation().text = GetLineString(explanationInterface.GetExplanation(), explanationInterface.GetExplanation2());
         // 諸事情ありこのタイミングで文字化けの可能性を作成
         explanationObject.GetTextRarityText().text = Extra.ErrorText(explanationInterface.GetTypes());
 
@@ -96,6 +96,13 @@ public class ExplanationManager : MonoBehaviour
         for (int i = 0; i < buff.Length; i++)
         {
             if (MasterData.instance.GetStringMaster(buff[i], true) == string.Empty) continue;
+            if (buff[i] == 0)
+            {
+                explanationObject.GetBuffText(i).transform.parent.gameObject.SetActive(false);
+                explanationObject.GetBuffColorIcon(i).gameObject.SetActive(false);
+
+                break;
+            }
             addCount++;
 
             // 名前検索以外に非アクティブオブジェクトに干渉できない為に
@@ -109,7 +116,7 @@ public class ExplanationManager : MonoBehaviour
             explanationObject.GetBuffName(i).text = Extra.ErrorText(MasterData.instance.GetStringMaster(buff[i]));
             // テキストボックス
             explanationObject.GetBuffText(i).text = MasterData.instance.GetStringMaster(buff[i] + 50);
-               
+
             explanationObject.GetBuffText(i).transform.parent.gameObject.GetComponent<RectTransform>().sizeDelta = _uiSizeMini;
             explanationObject.GetBuffColorIcon(i).gameObject.SetActive(true);
 
@@ -118,7 +125,7 @@ public class ExplanationManager : MonoBehaviour
         //初期値の定数分移動に補正をかける
         gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(_uiSize.x, DEFAULT_HEIGHT + ONE_BUFF_HEIGHT * addCount);
 
-        explanationObject.GetTextRarityColor().transform.parent.parent.localPosition = new Vector3(-((-_uiSizeMini.x+defaultSizeMini.x)+(-_uiSize.x+DEFAULT_SIZE.x)),gameObject.GetComponent<RectTransform>().sizeDelta.y/2, 0);
+        explanationObject.GetTextRarityColor().transform.parent.parent.localPosition = new Vector3(-((-_uiSizeMini.x + defaultSizeMini.x) + (-_uiSize.x + DEFAULT_SIZE.x)), gameObject.GetComponent<RectTransform>().sizeDelta.y / 2, 0);
 
         _offsets.Add(offset);
 
@@ -127,7 +134,7 @@ public class ExplanationManager : MonoBehaviour
         size.x = _uiSizeMini.x * 2;
 
         explanationObject.GetBuffParent().GetComponent<RectTransform>().sizeDelta = size;
-        explanationObject.GetBuffParent().GetComponent<RectTransform>().localPosition = new Vector2(-_uiSize.x/HALF, 0);
+        explanationObject.GetBuffParent().GetComponent<RectTransform>().localPosition = new Vector2(-_uiSize.x / HALF, 0);
 
         _uiSize = DEFAULT_SIZE;
         _uiSizeMini = defaultSizeMini;
@@ -221,7 +228,7 @@ public class ExplanationManager : MonoBehaviour
 
     }
 
-    private string GetLineString(string _string1,string _string2)
+    private string GetLineString(string _string1, string _string2)
     {
         StringBuilder stringBuilder = new StringBuilder();
 
