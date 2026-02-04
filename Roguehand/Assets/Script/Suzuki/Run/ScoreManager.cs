@@ -13,7 +13,7 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
 
-    // 場に出されたカードの上にスコアを出すためのText群
+    // 場に出されたカードの下にスコアを出すためのText群
     [SerializeField] private List<GameObject> score;
      private List<TextMeshProUGUI> scoreViewTexts= new List<TextMeshProUGUI>();
      private List<Transform> scoreViewTrans= new List<Transform>();
@@ -23,8 +23,11 @@ public class ScoreManager : MonoBehaviour
     private Color32 _pulsColor = new Color32(0, 147, 255, 255);
     private Color32 _magColor = new Color32(255, 23, 0, 255);
 
-    public void SetScoreViewText(string text,bool magnification=false) { scoreViewTexts[_scoreIndex].text = text; 
-        scoreViewTexts[_scoreIndex].color = (magnification)? _magColor : _pulsColor; _scoreIndex++; }
+    public void SetScoreViewText(string text,bool magnification=false) 
+    {
+            scoreViewTexts[_scoreIndex].text = text; 
+        scoreViewTexts[_scoreIndex].color = (magnification)? _magColor : _pulsColor; _scoreIndex++; 
+    }
     public void SetScoreViewTrans(Vector3 position) {position.y-=140f; scoreViewTrans[_scoreIndex].position = position; }
     public void SetViewIndex(int index) { _scoreIndex = index; }
 
