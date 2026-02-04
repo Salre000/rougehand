@@ -87,6 +87,11 @@ public class MasterData : MonoBehaviour
     /// <returns><ID‚É‘Î‰ž‚µ‚½•¶Žš—ñ/returns>
     public string GetStringMaster(int ID, bool backDoor = false)
     {
+        if (ID == -1) 
+        {
+            int stop = 0;
+        }
+
 
         string value = string.Empty;
         _masters.TryGetValue(ID, out value);

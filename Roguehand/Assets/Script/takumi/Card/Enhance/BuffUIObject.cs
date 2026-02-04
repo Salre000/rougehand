@@ -12,6 +12,7 @@ public class BuffUIObject : MonoBehaviour
     //—LŒø‚É‚È‚Á‚½Žž
     private void OnEnable()
     {
+        return;
         parent = transform.parent.gameObject;
 
 
@@ -20,6 +21,8 @@ public class BuffUIObject : MonoBehaviour
     }
     private void OnDisable()
     {
+
+        return;
         for(int i=0;i< buffUI.Count;i++)
             Destroy(buffUI[i]);
 
