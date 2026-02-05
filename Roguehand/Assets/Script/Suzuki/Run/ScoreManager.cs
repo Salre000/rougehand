@@ -17,48 +17,67 @@ public class ScoreManager : MonoBehaviour
 
     // 場に出されたカードの下にスコアを出すためのText群
     [SerializeField] private List<GameObject> score;
-     private List<TextMeshProUGUI> scoreViewTexts= new List<TextMeshProUGUI>();
-     private List<Transform> scoreViewTrans= new List<Transform>();
-     private List<int> scoreViewID= new List<int>();
-     private List<int> scoreViewValueBase= new List<int>();
-     private List<int> scoreViewValueMagnification = new List<int>();
+    private List<TextMeshProUGUI> scoreViewTexts = new List<TextMeshProUGUI>();
+    private List<Transform> scoreViewTrans = new List<Transform>();
+    private List<int> scoreViewID = new List<int>();
+    private List<int> scoreViewValueBase = new List<int>();
+    private List<int> scoreViewValueMagnification = new List<int>();
 
     private int _scoreIndex = 0;
     public int SCORE_INDEX_MAX = 5;
     private int _pulsColor = IDUtility.RICHTEXT_ID + 8;
     private int _magColor = IDUtility.RICHTEXT_ID + 9;
 
-    public void SetScoreViewID(int ID) 
+    public void SetScoreViewID(int ID)
     {
-        if (scoreViewID.Contains(ID)) 
+        Debug.Log("ID:" + ID);
+        if (scoreViewID.Contains(ID))
         {
             _scoreIndex--;
         }
-        else 
+        else
         {
             scoreViewID.Add(ID);
+            scoreViewValueMagnification.Add(0);
+            scoreViewValueBase.Add(0);
         }
-        
-    }
-    public void SetScoreViewText(int text,bool magnification=false) 
-    {
-            scoreViewTexts[_scoreIndex].text = GetConnectedText(text, magnification); 
-        //scoreViewTexts[_scoreIndex].color = (magnification)? _magColor : _pulsColor; _scoreIndex++; 
-    }
-    public void SetScoreViewTrans(Vector3 position) {position.y-=140f; scoreViewTrans[_scoreIndex].position = position; }
-    public void SetViewIndex(int index) { _scoreIndex = index; scoreViewID.Clear(); }
-    private string GetConnectedText(int baseText,bool magnification) 
-    {
-        return "";
-        if (magnification) scoreViewValueMagnification[_scoreIndex] = (baseText);
-        else scoreViewValueBase[_scoreIndex] = (baseText);
 
-        StringBuilder sb=new StringBuilder();
+    }
+    public void SetScoreViewText(int text, bool magnification = false)
+    {
+        Debug.Log(_scoreIndex + ":ID" + text);
+        scoreViewTexts[_scoreIndex].text = GetConnectedText(text, magnification);
+        _scoreIndex++;
+        //scoreViewTexts[_scoreIndex].color = (magnification)? _magColor : _pulsColor;
+    }
+    public void SetScoreViewTrans(Vector3 position)
+    {
+        position.y -= 140f;
+        scoreViewTrans[_scoreIndex].position = position;
+
+
+    }
+    public void SetViewIndex(int index) 
+    {
+        _scoreIndex = index; 
+        scoreViewID.Clear();
+
+        scoreViewValueMagnification.Clear();
+        scoreViewValueBase.Clear();
+    }
+    private string GetConnectedText(int baseText, bool magnification)
+    {
+        if (baseText <= 0) return"";
+
+        if (magnification) scoreViewValueMagnification[_scoreIndex] += (baseText);
+        else scoreViewValueBase[_scoreIndex] += (baseText);
+
+        StringBuilder sb = new StringBuilder();
         sb.Clear();
 
         if (scoreViewValueBase[_scoreIndex] > 0 && scoreViewValueMagnification[_scoreIndex] > 0)
             scoreViewTexts[_scoreIndex].fontSize = 30;
-        else scoreViewTexts[_scoreIndex].fontSize=60;
+        else scoreViewTexts[_scoreIndex].fontSize = 60;
 
         if (scoreViewValueBase[_scoreIndex] > 0)
         {
@@ -67,8 +86,9 @@ public class ScoreManager : MonoBehaviour
             sb.Append(scoreViewValueBase[_scoreIndex]);
 
         }
+        sb.Append(" ");
 
-        if (scoreViewValueMagnification[_scoreIndex] > 0) 
+        if (scoreViewValueMagnification[_scoreIndex] > 0)
         {
             sb.Append(MasterData.instance.GetStringMaster(_magColor));
             sb.Append("x");
@@ -122,7 +142,7 @@ public class ScoreManager : MonoBehaviour
         {
             scoreViewTexts.Add(score[i].GetComponent<TextMeshProUGUI>());
             scoreViewTrans.Add(score[i].GetComponent<Transform>());
-            scoreViewTexts[i].text="";
+            scoreViewTexts[i].text = "";
         }
 
     }
