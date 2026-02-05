@@ -17,9 +17,6 @@ public class GameRoot:MonoBehaviour
     bool clear=false;
     bool over=false;
 
-    private StringBuilder _builder = new StringBuilder();
-    float _Dtime = 0f;
-
     private int _resetRoundCount = 1;
 
     private void Awake()

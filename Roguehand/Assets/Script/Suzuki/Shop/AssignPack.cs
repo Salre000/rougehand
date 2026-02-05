@@ -183,7 +183,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
     }
 
-    private readonly int onlyMaterialCount = 4;
     private void GetTypeMaterial<T>(InstantiatePack.PackType type, T t,GameObject gameObject)
     {
 
