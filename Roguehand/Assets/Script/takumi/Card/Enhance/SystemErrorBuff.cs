@@ -154,18 +154,37 @@ public class SystemErrorBuff
 
         private void MouseMove()
         {
+            if (!Application.isFocused){ return; }
 
             float renge = 100;//UnityEngine.Random.Range(1,5*errorCount());
 
             float randomAngle = UnityEngine.Random.Range(1, 360) * Mathf.Deg2Rad;
 
-            SetCursorPos((int)(Mathf.Sin(randomAngle) * renge + _lostPos.x), (int)(Mathf.Cos(randomAngle) * renge + _lostPos.y));
+            Vector2 mousePos= new Vector2(Mathf.Sin(randomAngle) * renge + _lostPos.x,Mathf.Cos(randomAngle) * renge + _lostPos.y);
+
+            mousePos = MousePositionCheck(mousePos);
+
+            SetCursorPos(((int)mousePos.x),((int)mousePos.y));
 
             Start();
 
 
         }
 
+        private Vector2 MousePositionCheck(Vector2 mouse) 
+        {
+            mouse.x = Check(mouse.x, Screen.width);
+            mouse.y = Check(mouse.y, Screen.height);
+            return mouse;
+        }
+
+        private float Check(float point,float max) 
+        {
+            if (point > max) point = max;
+            if (point < 0) point = 0;
+
+            return point;
+        }
 
 
 

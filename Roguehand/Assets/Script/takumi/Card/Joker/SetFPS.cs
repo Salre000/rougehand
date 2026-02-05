@@ -18,5 +18,6 @@ public class SetFPS : MonoBehaviour
             setFPS = this;
         }
         Application.targetFrameRate = 120;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 }
