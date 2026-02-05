@@ -353,7 +353,7 @@ public class Memory
     /// <summary>
     /// カードの保存先
     /// </summary>
-    public List<Card.Trump> _trumps { private set; get; }
+    public List<Card.Trump> _trumps;
 
     /// <summary>
     /// ジョーカーの保存先

@@ -1153,7 +1153,7 @@ public class CardObjectManager : MonoBehaviour
     private void CreateCard()
     {
         _cardPool = new GameObject("CardPool");
-        for (int i = 0; i < (int)Card.suit.max * (int)Card.number.king; i++)
+        for (int i = 0; i < 52; i++)
         {
             _cardObjects.Add(Instantiate(_cardBase, _cardDeck.position, Quaternion.identity).AddComponent<CardObject>());
             _cardObjects[i].SetStatus(CardObject.status.deck);

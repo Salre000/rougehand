@@ -21,7 +21,7 @@ public class AlternativeBoss : BossBase
             if (alternativeIndexs.Exists(j => random == j)) { i--; continue; }
 
             alternativeIndexs.Add(random);
-
+            Debug.Log(random+"FF");
         }
 
 
