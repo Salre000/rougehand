@@ -12,9 +12,9 @@ public class PlayManager : MonoBehaviour
     // ディスカード回数
     private int _checkDiscardCount;
 
-    private float _roundScore = 0f;
-    // ラウンドスコアのリセット時に処理されないように使用する
-    private float _scoreZeroChecker = 1f;
+    //private float _roundScore = 0f;
+    //// ラウンドスコアのリセット時に処理されないように使用する
+    //private float _scoreZeroChecker = 1f;
     // ラウンドスコアに追加するタイミングを秒単位で遅らせる
     private const float _WAIT_TIME = 1f;
 
@@ -80,7 +80,7 @@ public class PlayManager : MonoBehaviour
         CardObjectUtility.PlayEnd();
 
 
-        _roundScore = ScoreManager.instance.GetRoundScore();
+        //_roundScore = ScoreManager.instance.GetRoundScore();
         // 増加の確認
         GameUtility.SetIsRoundScoreUp(true);
         // スコアが目標に達しているか確認

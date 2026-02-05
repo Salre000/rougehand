@@ -111,7 +111,7 @@ public class ScoreManager : MonoBehaviour
     private const int _RESET_NUM = 0;
 
     // ラウンドスコアが加算された時true
-    private bool _additionScore = false;
+    //private bool _additionScore = false;
 
     private void Awake()
     {
