@@ -48,9 +48,9 @@ public class RoleObject : MonoBehaviour
 
         _name.text = MasterData.instance.GetStringMaster(roleID);
 
-        int score = ScoreMaster.instance.GetBasicScore(roleID) + (ScoreMaster.instance.GetAddBasicScore(roleID) * level);
+        int score = ScoreMaster.instance.GetBasicScore(roleID) + (ScoreMaster.instance.GetAddBasicScore(roleID) * (level-1));
         _score.text = score.ToString();
-        int magnification = ScoreMaster.instance.GetBasicMagnification(roleID) + (ScoreMaster.instance.GetAddBasicMagnification(roleID) * level);
+        int magnification = ScoreMaster.instance.GetBasicMagnification(roleID) + (ScoreMaster.instance.GetAddBasicMagnification(roleID) * (level - 1));
         _magnification.text = magnification.ToString();
 
         // égópâÒêî
