@@ -20,8 +20,9 @@ public class AlternativeBoss : BossBase
 
             if (alternativeIndexs.Exists(j => random == j)) { i--; continue; }
 
+            random = 51 - random;
+
             alternativeIndexs.Add(random);
-            Debug.Log(random+"FF");
         }
 
 
@@ -57,6 +58,10 @@ public class AlternativeBoss : BossBase
             if (cardObject.GetStatus() != CardObject.status.playWait) continue;
 
             TextUIManager.instance.SetRoleText("????");
+            TextUIManager.instance.SetBasicScoreText("??");
+            TextUIManager.instance.SetMagnificationText("??");
+
+
 
 
         }
