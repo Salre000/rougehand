@@ -49,7 +49,7 @@ public class JokerManager : MonoBehaviour
     /// <summary>
     /// ジョーカーの最大数
     /// </summary>
-    private readonly int JOKER_MAX_COUNT = 30;
+    private readonly int JOKER_MAX_COUNT = 5;
 
 
     public void Awake()

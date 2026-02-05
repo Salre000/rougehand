@@ -256,13 +256,18 @@ public class BuffManager : MonoBehaviour
         switch (jokerbuff)
         {
             case Card.JokerBuff.Sepia:
+                int ID = JokerObjectUtility.GetJokerIndex(CardBuff.target.GetComponent<JokerObject>());
+                ID += IDUtility.JOKER_ID;
+
                 float copyValue = ScoreManager.instance.GetBasicScore();
                 ScoreManager.instance.SetBasic((int)ScoreManager.instance.GetMagnification());
 
+                ScoreManager.instance.SetScoreViewID(ID);
+                ScoreManager.instance.SetScoreViewTrans(CardBuff.target.transform.position);
                 ScoreManager.instance.SetScoreViewText((int)ScoreManager .instance.GetMagnification(), false);
-
                 //ScoreManager.instance.SetScoreViewText();
                 ScoreManager.instance.SetMagnification((int)copyValue);
+                ScoreManager.instance.SetScoreViewID(ID);
                 ScoreManager.instance.SetScoreViewText((int)copyValue, true);
 
                 break;

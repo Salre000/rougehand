@@ -114,6 +114,7 @@ public class CardObject : MonoBehaviour
             actions.Add(()=>
             {
                 TrumpBuff.target = gameObject;
+                TrumpBuff.targetID = id;
                 BuffUtility.GetActionPlayBuffDeck(trump.deckBuff)();
             });
 
@@ -121,6 +122,7 @@ public class CardObject : MonoBehaviour
             actions.Add(()=>
             {
                 TrumpBuff.target = gameObject;
+                TrumpBuff.targetID = id;
 
                 BuffUtility.GetActionPlayBuffCard(trump.cardBuff)();
             });

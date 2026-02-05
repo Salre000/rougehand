@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CardBuff 
+public class CardBuff
 {
     public static GameObject target;
+    public static int targetID;
 
     /// <summary>
     /// カードをプレイした時のバフ
@@ -46,11 +47,11 @@ public class CardBuff
         // Magnificationがtrueの時は倍率falseの時は基本スコア
         // valueが０の時は出さない
         if (value <= 0) return;
+
+        ScoreManager.instance.SetScoreViewID(targetID);
         ScoreManager.instance.SetScoreViewTrans(target.transform.position);
-        if (Magnification)
-            ScoreManager.instance.SetScoreViewText(value,Magnification);
-        else
-            ScoreManager.instance.SetScoreViewText(value,Magnification);
+
+        ScoreManager.instance.SetScoreViewText(value, Magnification);
     }
 
     /// <summary>
