@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Text;
 using TMPro;
 using Unity.VisualScripting;
@@ -17,19 +19,68 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private List<GameObject> score;
      private List<TextMeshProUGUI> scoreViewTexts= new List<TextMeshProUGUI>();
      private List<Transform> scoreViewTrans= new List<Transform>();
+     private List<int> scoreViewID= new List<int>();
+     private List<int> scoreViewValueBase= new List<int>();
+     private List<int> scoreViewValueMagnification = new List<int>();
 
     private int _scoreIndex = 0;
     public int SCORE_INDEX_MAX = 5;
-    private Color32 _pulsColor = new Color32(0, 147, 255, 255);
-    private Color32 _magColor = new Color32(255, 23, 0, 255);
+    private int _pulsColor = IDUtility.RICHTEXT_ID + 8;
+    private int _magColor = IDUtility.RICHTEXT_ID + 9;
 
-    public void SetScoreViewText(string text,bool magnification=false) 
+    public void SetScoreViewID(int ID) 
     {
-            scoreViewTexts[_scoreIndex].text = text; 
-        scoreViewTexts[_scoreIndex].color = (magnification)? _magColor : _pulsColor; _scoreIndex++; 
+        if (scoreViewID.Contains(ID)) 
+        {
+            _scoreIndex--;
+        }
+        else 
+        {
+            scoreViewID.Add(ID);
+        }
+        
+    }
+    public void SetScoreViewText(int text,bool magnification=false) 
+    {
+            scoreViewTexts[_scoreIndex].text = GetConnectedText(text, magnification); 
+        //scoreViewTexts[_scoreIndex].color = (magnification)? _magColor : _pulsColor; _scoreIndex++; 
     }
     public void SetScoreViewTrans(Vector3 position) {position.y-=140f; scoreViewTrans[_scoreIndex].position = position; }
-    public void SetViewIndex(int index) { _scoreIndex = index; }
+    public void SetViewIndex(int index) { _scoreIndex = index; scoreViewID.Clear(); }
+    private string GetConnectedText(int baseText,bool magnification) 
+    {
+        return "";
+        if (magnification) scoreViewValueMagnification[_scoreIndex] = (baseText);
+        else scoreViewValueBase[_scoreIndex] = (baseText);
+
+        StringBuilder sb=new StringBuilder();
+        sb.Clear();
+
+        if (scoreViewValueBase[_scoreIndex] > 0 && scoreViewValueMagnification[_scoreIndex] > 0)
+            scoreViewTexts[_scoreIndex].fontSize = 30;
+        else scoreViewTexts[_scoreIndex].fontSize=60;
+
+        if (scoreViewValueBase[_scoreIndex] > 0)
+        {
+            sb.Append(MasterData.instance.GetStringMaster(_pulsColor));
+            sb.Append("+");
+            sb.Append(scoreViewValueBase[_scoreIndex]);
+
+        }
+
+        if (scoreViewValueMagnification[_scoreIndex] > 0) 
+        {
+            sb.Append(MasterData.instance.GetStringMaster(_magColor));
+            sb.Append("x");
+            sb.Append(scoreViewValueMagnification[_scoreIndex]);
+
+        }
+
+        return sb.ToString();
+
+
+
+    }
 
 
     // 基本スコア

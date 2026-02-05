@@ -23,7 +23,7 @@ public class ScoreViewControle : MonoBehaviour
     {
         ScoreManager.instance.SetViewIndex(0);
         for (int i = 0; i < ScoreManager.instance.SCORE_INDEX_MAX; i++)
-            ScoreManager.instance.SetScoreViewText("");
+            ScoreManager.instance.SetScoreViewText(0);
         ScoreManager.instance.SetViewIndex(0);
     }
 }

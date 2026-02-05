@@ -259,10 +259,11 @@ public class BuffManager : MonoBehaviour
                 float copyValue = ScoreManager.instance.GetBasicScore();
                 ScoreManager.instance.SetBasic((int)ScoreManager.instance.GetMagnification());
 
-                ScoreManager.instance.SetScoreViewText("x" + (int)ScoreManager .instance.GetMagnification(), false);
+                ScoreManager.instance.SetScoreViewText((int)ScoreManager .instance.GetMagnification(), false);
 
+                //ScoreManager.instance.SetScoreViewText();
                 ScoreManager.instance.SetMagnification((int)copyValue);
-                ScoreManager.instance.SetScoreViewText("x" + copyValue, true);
+                ScoreManager.instance.SetScoreViewText((int)copyValue, true);
 
                 break;
             case Card.JokerBuff.Negative:

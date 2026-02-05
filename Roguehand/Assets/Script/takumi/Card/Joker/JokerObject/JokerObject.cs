@@ -109,7 +109,7 @@ public class JokerObject : MonoBehaviour
               // gameObject.transform.position 座標
               //基本スコア
               ScoreManager.instance.SetScoreViewTrans(gameObject.transform.position);
-              ScoreManager.instance.SetScoreViewText("+" + _base.Trun(), false);
+              ScoreManager.instance.SetScoreViewText((int)_base.Trun(), false);
           });
         else if (_base.Trun() > 0) actions.Add(
             () =>
@@ -120,7 +120,7 @@ public class JokerObject : MonoBehaviour
                 // gameObject.transform.position 座標
                 //　倍率
                 ScoreManager.instance.SetScoreViewTrans(gameObject.transform.position);
-                ScoreManager.instance.SetScoreViewText("x" + _base.Trun(), true);
+                ScoreManager.instance.SetScoreViewText((int)_base.Trun(), true);
             });
         if (_base.GetCardBuff().BuffAction()) actions.Add(() =>
         {

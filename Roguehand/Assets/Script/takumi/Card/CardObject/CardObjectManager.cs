@@ -451,14 +451,14 @@ public class CardObjectManager : MonoBehaviour
     /// デッキのカードを増やす関数
     /// </summary>
     /// <param name="trump"></param>
-    public void AddTrump(Card.Trump trump) 
+    public void AddTrump(Card.Trump trump)
     {
         List<Card.Trump> deck = CardManager.instance.GetDeck();
         deck.Add(trump);
         CardManager.instance.SetDeck(deck);
 
         _cardObjects.Add(Instantiate(_cardBase, _cardDeck.position, Quaternion.identity).AddComponent<CardObject>());
-        _cardObjects[_cardObjects.Count-1].SetStatus(CardObject.status.deck);
+        _cardObjects[_cardObjects.Count - 1].SetStatus(CardObject.status.deck);
         _cardObjects[_cardObjects.Count - 1].transform.eulerAngles = _BACK_SIDE;
         _cardObjects[_cardObjects.Count - 1].transform.parent = _cardPool.transform;
 
@@ -468,16 +468,16 @@ public class CardObjectManager : MonoBehaviour
     /// カードを減らす関数
     /// </summary>
     /// <param name="trump"></param>
-    public void RemoveTrump(Card.Trump trump) 
+    public void RemoveTrump(Card.Trump trump)
     {
-       CardManager.instance.GetDeck().IndexOf(trump);
+        CardManager.instance.GetDeck().IndexOf(trump);
 
         int index = CardManager.instance.GetHand().IndexOf(trump);
 
         CardManager.instance.hand.Remove(trump);
         CardManager.instance.pick.Remove(trump);
         CardManager.instance.deck.Remove(trump);
-        CardObject dommy= _cardObjectHands[index];
+        CardObject dommy = _cardObjectHands[index];
         _cardObjects.Remove(dommy);
         _cardObjectHands.Remove(dommy);
         ExplanationManager.instance.Remove();
@@ -487,7 +487,7 @@ public class CardObjectManager : MonoBehaviour
 
     }
 
-    public void ShowExplanation(Card.Trump trump, GameObject _object,Vector2 offset)
+    public void ShowExplanation(Card.Trump trump, GameObject _object, Vector2 offset)
     {
         //説明を描画させるダミーのクラス
         DommyExplanation dommyExplanation = new DommyExplanation();
@@ -568,10 +568,10 @@ public class CardObjectManager : MonoBehaviour
     /// <param name="nexthand"></param>
     public void ObjectSort(List<Card.Trump> nowHand, List<Card.Trump> nexthand)
     {
-        
+
         List<CardObject> dommyObjectList = new List<CardObject>();
 
-         
+
 
         for (int i = 0; i < nexthand.Count; i++)
         {
@@ -620,11 +620,11 @@ public class CardObjectManager : MonoBehaviour
                 _cardObjectHands[i].SetGrab(false);
                 continue;
             }
-            else 
+            else
             {
-            
+
                 _cardObjectHands[i].SetStatus(CardObject.status.action);
-                _cardObjectHands[i].GetCheckBuff(trumps[i],TrunpScore,i);
+                _cardObjectHands[i].GetCheckBuff(trumps[i], TrunpScore, i);
             }
         }
     }
@@ -655,19 +655,19 @@ public class CardObjectManager : MonoBehaviour
 
     public List<CardObject> CardObjects() { return _cardObjects; }
 
-    public List<CardObject> CardHands() {return _cardObjectHands; }
+    public List<CardObject> CardHands() { return _cardObjectHands; }
 
     public void SetPlayCardCount(int value) { _playCardCount = value; }
     public int GetPlayCardCountMemry() { return _playCardCount; }
     public void SetDiscardCardCount(int value) { _discardCardCount = value; }
     public int GetDiscardCardCount() { return _discardCardCount; }
 
-    public bool checkCardMove() 
+    public bool checkCardMove()
     {
-        bool flag = false;  
-        for(int i = 0; i < _cardObjectHands.Count; i++) 
+        bool flag = false;
+        for (int i = 0; i < _cardObjectHands.Count; i++)
         {
-            if (_cardObjectHands[i].IsMovable())flag = true;
+            if (_cardObjectHands[i].IsMovable()) flag = true;
 
         }
 
@@ -1059,7 +1059,7 @@ public class CardObjectManager : MonoBehaviour
     /// <param name="ID"></param>
     private void TrunpScore(int ID)
     {
-        float score = 0;
+        int score = 0;
 
         score = (int)CardManager.instance.GetHand()[ID].number;
 
@@ -1072,9 +1072,11 @@ public class CardObjectManager : MonoBehaviour
         // score
         //_cardObjectHands[ID].gameObject
         // 基本スコア
+        ScoreManager.instance.SetScoreViewID(ID);
         ScoreManager.instance.SetScoreViewTrans(_cardObjectHands[ID].gameObject.transform.position);
 
-            ScoreManager.instance.SetScoreViewText("+" + score);
+
+        ScoreManager.instance.SetScoreViewText(score);
 
 
     }
@@ -1085,7 +1087,7 @@ public class CardObjectManager : MonoBehaviour
     /// </summary>
     private void CardPaint(Card.Trump cardData, int id)
     {
-        Debug.Log(cardData.suit.ToString() + id+":"+ _cardObjectHands[id].name);
+        Debug.Log(cardData.suit.ToString() + id + ":" + _cardObjectHands[id].name);
 
 
         MeshRenderer meshRenderer = _cardObjectHands[id].transform.GetChild(0).GetComponent<MeshRenderer>();
