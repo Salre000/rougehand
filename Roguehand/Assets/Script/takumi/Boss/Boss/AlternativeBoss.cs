@@ -58,6 +58,10 @@ public class AlternativeBoss : BossBase
             if (cardObject.GetStatus() != CardObject.status.playWait) continue;
 
             TextUIManager.instance.SetRoleText("????");
+            TextUIManager.instance.SetBasicScoreText("??");
+            TextUIManager.instance.SetMagnificationText("??");
+
+
 
 
         }
