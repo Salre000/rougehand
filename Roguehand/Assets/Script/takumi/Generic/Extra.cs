@@ -218,9 +218,6 @@ public static class Extra
             count++;
         }
 
-        ////デバック用に固定
-        //count = 0;
-
         char[] chars = _string.ToCharArray();
 
         StringBuilder stringBuilder = new StringBuilder();
