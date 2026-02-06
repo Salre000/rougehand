@@ -150,15 +150,29 @@ public class ExplanationManager : MonoBehaviour
         {
             _GameObjectPool[i].GetComponent<RectTransform>().sizeDelta = DEFAULT_SIZE;
 
-            _GameObjectPool[i].transform.GetChild(1).transform.Find("BuffColor1").gameObject.SetActive(false);
-            _GameObjectPool[i].transform.GetChild(1).transform.Find("BuffColor2").gameObject.SetActive(false);
-            _GameObjectPool[i].transform.GetChild(1).transform.Find("BuffColor3").gameObject.SetActive(false);
-            _GameObjectPool[i].transform.GetChild(2).transform.Find("BuffUI1").GetComponent<RectTransform>().sizeDelta = defaultSizeMini;
-            _GameObjectPool[i].transform.GetChild(2).transform.Find("BuffUI2").GetComponent<RectTransform>().sizeDelta = defaultSizeMini;
-            _GameObjectPool[i].transform.GetChild(2).transform.Find("BuffUI3").GetComponent<RectTransform>().sizeDelta = defaultSizeMini;
-            _GameObjectPool[i].transform.GetChild(2).transform.Find("BuffUI1").gameObject.SetActive(false);
-            _GameObjectPool[i].transform.GetChild(2).transform.Find("BuffUI2").gameObject.SetActive(false);
-            _GameObjectPool[i].transform.GetChild(2).transform.Find("BuffUI3").gameObject.SetActive(false);
+            ExplanationObject explanation = _GameObjectPool[i].GetComponent<ExplanationObject>();
+
+            for (int j = 0; j < 3; j++) 
+            {
+                explanation.GetBuffColorIcon(j).gameObject.SetActive(false);
+
+                RectTransform rectTransform = explanation.GetBuffText(j).transform.parent.GetComponent<RectTransform>();
+
+                rectTransform.sizeDelta = defaultSizeMini;
+
+                rectTransform.gameObject.SetActive(false);
+
+            }
+
+            //_GameObjectPool[i].transform.GetChild(1).transform.GetChild(3).transform.Find("BuffColor1").gameObject.SetActive(false);
+            //_GameObjectPool[i].transform.GetChild(1).transform.GetChild(3).transform.Find("BuffColor2").gameObject.SetActive(false);
+            //_GameObjectPool[i].transform.GetChild(1).transform.GetChild(3).transform.Find("BuffColor3").gameObject.SetActive(false);
+            //_GameObjectPool[i].transform.GetChild(2).transform.Find("BuffUI1").GetComponent<RectTransform>().sizeDelta = defaultSizeMini;
+            //_GameObjectPool[i].transform.GetChild(2).transform.Find("BuffUI2").GetComponent<RectTransform>().sizeDelta = defaultSizeMini;
+            //_GameObjectPool[i].transform.GetChild(2).transform.Find("BuffUI3").GetComponent<RectTransform>().sizeDelta = defaultSizeMini;
+            //_GameObjectPool[i].transform.GetChild(2).transform.Find("BuffUI1").gameObject.SetActive(false);
+            //_GameObjectPool[i].transform.GetChild(2).transform.Find("BuffUI2").gameObject.SetActive(false);
+            //_GameObjectPool[i].transform.GetChild(2).transform.Find("BuffUI3").gameObject.SetActive(false);
             _GameObjectPool[i].SetActive(false);
 
 
