@@ -164,7 +164,8 @@ public class ScoreManager : MonoBehaviour
         // 目標スコアの再設定
         _builder.Clear();
         int id = IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount();
-        _builder.Append(MasterData.instance.GetIntMaster(id));
+        //_builder.Append(MasterData.instance.GetIntMaster(id));
+        _builder.AppendFormat("{0:#}", MasterData.instance.GetIntMaster(id).ToString("N0"));
         TextUIManager.instance.SetLowestScoreText(_builder.ToString());
 
         //リワードが最大になるラウンド数でそれ以上に行かないようにする
