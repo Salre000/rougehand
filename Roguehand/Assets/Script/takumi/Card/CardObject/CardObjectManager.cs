@@ -627,6 +627,17 @@ public class CardObjectManager : MonoBehaviour
                 _cardObjectHands[i].GetCheckBuff(trumps[i], TrunpScore, i);
             }
         }
+
+        for(int i=0;i < _cardObjectHands.Count; i++) 
+        {
+           // if (CardManager.instance.hand[i].deckBuff)
+
+
+
+        }
+
+
+
     }
 
     public int GetActionCount() { return _cardObjectHands.GetCount(card => card.GetStatus() == CardObject.status.action); }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TrumpBuff
@@ -43,6 +44,14 @@ public class TrumpBuff
             case Card.deckBuff.Lucky:
 
                 if (Random.Range(0, 10) != 1) return;
+                value = 20;
+                Magnification = true;
+                ScoreManager.instance.MagnificationPlus(value);
+
+                if (Random.Range(0, 10) != 1) return;
+
+                GameUtility.SetMyMoney(GameUtility.GetMyMoney() + 3);
+
 
 
 
@@ -102,6 +111,8 @@ public class TrumpBuff
         {
             case Card.deckBuff.Steel:
                 //î{ó¶Ç…ÇPÅDÇTî{
+
+                Debug.Log("í Ç¡ÇƒÇÈ"+"SSSD");
                 break;
         }
     }

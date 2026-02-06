@@ -12,7 +12,7 @@ public class BuffManager : MonoBehaviour
     /// <summary>
     /// デフォルト時に使われる透明なマテリアル
     /// </summary>
-    [SerializeField]private Material dommyMaterial;
+    [SerializeField] private Material dommyMaterial;
 
     /// <summary>
     /// シール属性のバフ内容
@@ -87,9 +87,9 @@ public class BuffManager : MonoBehaviour
         _errorBuff.CreateErrorBuff();
 
         sealMaterial = materialLists.sealBuff;
-        cardMaterial=materialLists.cardBuff;
-        trumpMaterial=materialLists.deckBuff;
-        jokerMaterial=materialLists.jokerBuff;
+        cardMaterial = materialLists.cardBuff;
+        trumpMaterial = materialLists.deckBuff;
+        jokerMaterial = materialLists.jokerBuff;
 
     }
 
@@ -143,9 +143,9 @@ public class BuffManager : MonoBehaviour
 
 
     }
-    public bool CheckPlayBuffCard(Card.cardBuff cardBuff) 
+    public bool CheckPlayBuffCard(Card.cardBuff cardBuff)
     {
-        bool flag=false;
+        bool flag = false;
 
         switch (cardBuff)
         {
@@ -167,11 +167,11 @@ public class BuffManager : MonoBehaviour
     /// <returns></returns>
     public System.Action GetActionPlayBuffCard(Card.cardBuff cardBuff)
     {
-        return ()=> _cardBuff.Play(cardBuff);
+        return () => _cardBuff.Play(cardBuff);
     }
-    public bool CheckPlayBuffDeck(Card.deckBuff cardBuff) 
+    public bool CheckPlayBuffDeck(Card.deckBuff cardBuff)
     {
-        bool flag=false;
+        bool flag = false;
 
         switch (cardBuff)
         {
@@ -188,13 +188,35 @@ public class BuffManager : MonoBehaviour
 
     }
     /// <summary>
+    /// 手札で発動するバフが存在するかどうかを判断
+    /// </summary>
+    /// <param name="deck"></param>
+    /// <returns></returns>
+    public bool CheckHandTraps(Card.deckBuff deck)
+    {
+        bool flag = false;
+
+        switch (deck)
+        {
+            case Card.deckBuff.Steel:
+            case Card.deckBuff.Gold:
+                flag = true;
+                break;
+        }
+
+        return flag;
+
+
+
+    }
+    /// <summary>
     ///  カードのバフの関数自体を返す
     /// </summary>
     /// <param name="deckBuff"></param>
     /// <returns></returns>
     public System.Action GetActionPlayBuffDeck(Card.deckBuff deckBuff)
     {
-        return ()=> _trumpBuff.Play(deckBuff); ;
+        return () => _trumpBuff.Play(deckBuff); ;
     }
 
 
@@ -272,12 +294,12 @@ public class BuffManager : MonoBehaviour
 
                 ScoreManager.instance.SetScoreViewID(ID);
                 ScoreManager.instance.SetScoreViewTrans(CardBuff.target.transform.position);
-                ScoreManager.instance.SetScoreViewText((int)ScoreManager .instance.GetBasicScore(), false);
+                ScoreManager.instance.SetScoreViewText((int)ScoreManager.instance.GetBasicScore(), false);
                 //ScoreManager.instance.SetScoreViewText();
                 ScoreManager.instance.SetScoreViewID(ID);
                 ScoreManager.instance.SetScoreViewText((int)ScoreManager.instance.GetMagnification(), true);
 
-                
+
                 break;
             case Card.JokerBuff.Negative:
                 break;

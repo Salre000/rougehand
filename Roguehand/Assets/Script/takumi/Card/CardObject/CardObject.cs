@@ -132,6 +132,8 @@ public class CardObject : MonoBehaviour
 
     public int GetActionsCount() {  return actions.Count; }
 
+    public void AddAction(System.Action action) {  actions.Add(action); }
+
     public void PlayAction() 
     {
         actions[0]();

@@ -34,7 +34,7 @@ public class AllDeckDetails : DetailsBase
 
     private GameObject _pool;
     private List<UICardObject> _pollList = new List<UICardObject>();
-    private float _poolCount = 52;
+    private float _poolCount = 100;
 
     private readonly Color USE_COLOR = new Color(0.1f, 0.1f, 0.1f, 0.95f);
 

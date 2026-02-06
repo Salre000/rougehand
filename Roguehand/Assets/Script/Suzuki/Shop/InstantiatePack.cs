@@ -302,7 +302,7 @@ public class InstantiatePack : MonoBehaviour
             // 基本的にコンてにゅーで返すから上昇無し
             for (int j = 0; j < buffCount;)
             {
-                int buffNum = 2;//UnityEngine.Random.Range(0, 4);
+                int buffNum = UnityEngine.Random.Range(0, 4);
 
                 switch (buffNum)
                 {
@@ -323,8 +323,8 @@ public class InstantiatePack : MonoBehaviour
                     case 2:
                         if (trump.deckBuff == Card.deckBuff.None)
                         {
-                            j+=10;
-                            trump.deckBuff = Card.deckBuff.Bonus;//(Card.deckBuff)UnityEngine.Random.Range(0, (int)Card.deckBuff.MAX);
+                            j++;
+                            trump.deckBuff = (Card.deckBuff)UnityEngine.Random.Range(0, (int)Card.deckBuff.MAX);
                         }
                         break;
                 }
