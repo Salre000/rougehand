@@ -15,15 +15,17 @@ public class InstantiatePack : MonoBehaviour
     [SerializeField] Transform _rightTargetPos;
     [SerializeField] Transform _packItemLeftTargetPos;
     [SerializeField] Transform _packItemRightTargetPos;
+    [SerializeField] Transform _packTrumpTargetPos;
     [SerializeField, Header("パック内のデフォルトオブジェクト")]
     GameObject card;
     /// <summary>
     /// パックのマテリアルを管理するクラス
     /// </summary>
-    [SerializeField]private PackMaterialManager materialManager;
+    [SerializeField] private PackMaterialManager materialManager;
     private float distance = 0;
-    private int MAX_PACK = 3;
+    private const int MAX_PACK = 3;
     private List<GameObject> _packs = new();
+    private GameObject trumpPack;
     private bool _isInstantiate = false;
 
     public enum PackType
@@ -41,7 +43,9 @@ public class InstantiatePack : MonoBehaviour
 
         CheckNotShop();
         if (!ShopManager.instance.IsShop()) return;
+        PackCreateTrump();
         PackCreate();
+
 
 
     }
@@ -53,12 +57,73 @@ public class InstantiatePack : MonoBehaviour
 
         _packs.Clear();
 
+
+
         _isInstantiate = false;
     }
     /// <summary>
     /// ショップ入場時にパックが作成される
     /// </summary>
-    private void PackCreate()
+    private void PackCreateTrump()
+    {
+        if (_isInstantiate) return;
+
+
+        // 置けるパック分生成
+
+        PackType pack = PackType.trump;
+
+        // 生成
+        trumpPack=(Instantiate(_pack, _packZone));
+        // クラスの付与
+        trumpPack.AddComponent<AssignPack>();
+        // このキャッシュは必須
+        AssignPack obj = trumpPack.GetComponent<AssignPack>();
+        obj.Initialize();
+        obj.SetDefaultObject(card);
+        // 今は固定値で作成数と選択数を置いている
+        obj.Create(pack, 5, 2);
+
+
+        materialManager.SetPackPaint(trumpPack, pack, 5);
+
+        // 目標座標をセット
+        SaleObjectManager.instance.ProductExplantion(obj.GetSaleValue());
+        SaleObjectManager.instance.AddProducts(trumpPack,
+            () => { obj.ShopSale(); },
+            () => { obj.ShopExplantion(); },
+            () =>
+            {
+
+                Debug.Log("パックを購入したよー");
+                // パックの購入時の処理を描く
+                PackManager.instance.SetIsBuyPack(true);
+                GameObject domyy = trumpPack;
+                // 選択されたパックオブジェクトをマネージャーに保存
+                PackManager.instance.SetPickPack(domyy);
+                SaleObjectManager.instance.Remove(domyy);
+
+
+                switch (pack)
+                {
+                    case PackType.joker:
+                        obj.Use(GetRandomJoker(5), GetPos(5));
+                        break;
+                    case PackType.item:
+                        obj.Use(GetRandomItem(5), GetPos(5));
+                        break;
+                    case PackType.trump:
+                        obj.Use(GetRandomTrump(5), GetPos(5));
+                        break;
+                }
+
+
+            }
+            , true
+            );
+        TrumpPackTrans();
+    }
+    private void PackCreate(PackType type = PackType.none, int count = MAX_PACK)
     {
         if (_isInstantiate) return;
 
@@ -67,7 +132,9 @@ public class InstantiatePack : MonoBehaviour
         for (int i = 0; i < MAX_PACK; i++)
         {
 
-            PackType pack = (PackType)UnityEngine.Random.Range(0, (int)PackType.max-1);
+            PackType pack = type == PackType.none ?
+                (PackType)UnityEngine.Random.Range(0, (int)PackType.max - 1)
+                : type;
 
             // 生成
             _packs.Add(Instantiate(_pack, _packZone));
@@ -87,7 +154,7 @@ public class InstantiatePack : MonoBehaviour
             // 目標座標をセット
             SaleObjectManager.instance.ProductExplantion(obj.GetSaleValue());
             SaleObjectManager.instance.AddProducts(_packs[i],
-                () => {obj.ShopSale(); },
+                () => { obj.ShopSale(); },
                 () => { obj.ShopExplantion(); },
                 () =>
                 {
@@ -126,6 +193,7 @@ public class InstantiatePack : MonoBehaviour
         _isInstantiate = true;
     }
 
+
     /// <summary>
     /// 並び替え
     /// </summary>
@@ -153,6 +221,14 @@ public class InstantiatePack : MonoBehaviour
             float dis = (float)(i - minus + 1) / num;
             _packs[i].transform.position = Vector3.Lerp(_leftTargetPos.position, _rightTargetPos.position, dis);
         }
+    }
+
+    private void TrumpPackTrans() 
+    {
+        if (trumpPack == null) return;
+
+        trumpPack.transform.position = _packTrumpTargetPos.position;
+
     }
 
     /// <summary>
@@ -230,11 +306,13 @@ public class InstantiatePack : MonoBehaviour
 
                 switch (buffNum)
                 {
-                    case 0:if (trump.sealBuff == Card.sealBuff.None) 
+                    case 0:
+                        if (trump.sealBuff == Card.sealBuff.None)
                         {
                             j++;
                             trump.sealBuff = (Card.sealBuff)UnityEngine.Random.Range(0, (int)Card.sealBuff.MAX);
-                        } break;
+                        }
+                        break;
                     case 1:
                         if (trump.cardBuff == Card.cardBuff.None)
                         {
@@ -273,7 +351,7 @@ public class InstantiatePack : MonoBehaviour
         distance = Vector3.Distance(_packItemLeftTargetPos.position, _packItemRightTargetPos.position) / (createCount + 1);
 
         for (int i = 0; i < createCount; i++)
-            poss.Add(_packItemLeftTargetPos.position + new Vector3(distance * (i + 1), -10,0));
+            poss.Add(_packItemLeftTargetPos.position + new Vector3(distance * (i + 1), -10, 0));
 
         return poss;
 

@@ -107,8 +107,9 @@ public class JokerObject : MonoBehaviour
               // TODO: 文字を出す
               //_base.Trun() 値
               // gameObject.transform.position 座標
+              int ID = JokerObjectUtility.GetJokerIndex(this);
               //基本スコア
-              ScoreManager.instance.SetScoreViewID(_base.GetID() + IDUtility.JOKER_ID);
+              ScoreManager.instance.SetScoreViewID(ID + IDUtility.JOKER_ID);
               ScoreManager.instance.SetScoreViewTrans(gameObject.transform.position);
               ScoreManager.instance.SetScoreViewText((int)_base.Trun(), false);
           });
@@ -120,21 +121,22 @@ public class JokerObject : MonoBehaviour
                 //_base.Trun() 値
                 // gameObject.transform.position 座標
                 //　倍率
-                ScoreManager.instance.SetScoreViewID(_base.GetID() + IDUtility.JOKER_ID);
+              int ID = JokerObjectUtility.GetJokerIndex(this);
+                ScoreManager.instance.SetScoreViewID(ID + IDUtility.JOKER_ID);
                 ScoreManager.instance.SetScoreViewTrans(gameObject.transform.position);
                 ScoreManager.instance.SetScoreViewText((int)_base.Trun(), true);
             });
         if (_base.GetCardBuff().BuffAction()) actions.Add(() =>
         {
             CardBuff.target = gameObject;
-            CardBuff.targetID = _base.GetID() + IDUtility.JOKER_ID;
+            CardBuff.targetID = JokerObjectUtility.GetJokerIndex(this) + IDUtility.JOKER_ID;
             BuffUtility.PlayBuff(_base.GetCardBuff());
 
         });
         if (_base.GetJokerBuff().BuffAction()) actions.Add(() =>
         {
             CardBuff.target = gameObject;
-            CardBuff.targetID = _base.GetID() + IDUtility.JOKER_ID;
+            CardBuff.targetID = JokerObjectUtility.GetJokerIndex(this)+IDUtility.JOKER_ID;
 
             BuffUtility.PlayBuff(_base.GetJokerBuff());
         });

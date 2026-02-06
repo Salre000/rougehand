@@ -7,10 +7,12 @@ public class DeckStartButton : MonoBehaviour
 {
     [SerializeField] Button _startButton;
     [SerializeField] DeckMove _deckMove;
+    private int defaultValue = -1;
 
     private void Awake()
     {
         _startButton.onClick.AddListener(OnStart);
+        TitleStatic.SetDeckNumber(defaultValue);
     }
 
     void OnStart()

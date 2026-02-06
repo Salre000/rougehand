@@ -47,6 +47,8 @@ public class MemoryManager
     /// </summary>
     public static bool LoodLostData() 
     {
+        if (instantMemory != null) { Debug.Log("データがすでにある"); return true; }
+
         string path = Application.dataPath + FILE_PASS + FILE_NAME_KD + FILR_EXTENSION;
         if (!File.Exists(path)) return false;
 
@@ -134,6 +136,8 @@ public class MemoryManager
         }
 
         instantMemory=new Memory();
+
+        Debug.Log("データの保存");
 
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.dataPath + FILE_PASS + FILE_NAME_KD + FILR_EXTENSION;

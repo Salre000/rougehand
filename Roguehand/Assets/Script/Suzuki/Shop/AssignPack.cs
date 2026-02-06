@@ -199,6 +199,12 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                 ItemBase item = t as ItemBase;
                 ItemUtility.PaintItemObject(item, gameObject);
                 break;
+            case InstantiatePack.PackType.trump:
+                Card.TrumpClass trump = t as Card.TrumpClass;
+                CardObjectUtility.CardPaint(trump.trump, gameObject);
+                break;
+
+
         }
 
 
