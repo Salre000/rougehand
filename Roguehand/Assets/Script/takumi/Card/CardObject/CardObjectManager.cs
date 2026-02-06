@@ -1085,6 +1085,47 @@ public class CardObjectManager : MonoBehaviour
     /// <summary>
     /// カードの情報を元にカードのマテリアルをセットする関数
     /// </summary>
+    public void CardPaint(Card.Trump cardData, GameObject gameObject)
+    {
+
+
+        MeshRenderer meshRenderer = gameObject.transform.GetChild(0).GetComponent<MeshRenderer>();
+        Material[] materials = meshRenderer.materials;
+        // トランプのエフェクトマテリアルをセット
+        if (Card.deckBuff.None != cardData.deckBuff) materials[(int)cardMaterialType.effect] = BuffUtility.GetTrumpMaterial((int)cardData.deckBuff);
+        else materials[(int)cardMaterialType.effect] = BuffUtility.GetDommyMaterial();
+        if (Card.cardBuff.None != cardData.cardBuff) materials[(int)cardMaterialType.effect] = BuffUtility.GetCardMaterial((int)cardData.cardBuff);
+        if (Card.sealBuff.None != cardData.sealBuff) materials[(int)cardMaterialType.sael] = BuffUtility.GetSealMaterial((int)cardData.sealBuff);
+        else materials[(int)cardMaterialType.sael] = BuffUtility.GetDommyMaterial();
+
+        // トランプのソーツとナンバーを含んだマテリアルをセット
+        materials[(int)cardMaterialType.main] = _materialManager.GetMaterial((int)cardData.suit, (int)cardData.number);
+
+        if (cardData.deckBuff == Card.deckBuff.Glass)
+        {
+            //グラズのマテリアルのときだけベースのマテリアルのレンダリングモードをFadeに変更する
+            materials[(int)cardMaterialType.main].SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            materials[(int)cardMaterialType.main].SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            materials[(int)cardMaterialType.main].SetInt("_ZWrite", 1);
+            materials[(int)cardMaterialType.main].DisableKeyword("_ALPHATEST_ON");
+            materials[(int)cardMaterialType.main].EnableKeyword("_ALPHABLEND_ON");
+            materials[(int)cardMaterialType.main].DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            materials[(int)cardMaterialType.main].renderQueue = 3000;
+        }
+        else
+        {
+            materials[(int)cardMaterialType.main].SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+            materials[(int)cardMaterialType.main].SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+            materials[(int)cardMaterialType.main].SetInt("_ZWrite", 1);
+            materials[(int)cardMaterialType.main].DisableKeyword("_ALPHATEST_ON");
+            materials[(int)cardMaterialType.main].DisableKeyword("_ALPHABLEND_ON");
+            materials[(int)cardMaterialType.main].DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            materials[(int)cardMaterialType.main].renderQueue = -1;
+        }
+
+
+        meshRenderer.materials = materials;
+    }
     private void CardPaint(Card.Trump cardData, int id)
     {
         Debug.Log(cardData.suit.ToString() + id + ":" + _cardObjectHands[id].name);

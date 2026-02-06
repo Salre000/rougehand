@@ -53,4 +53,9 @@ public static class CardObjectUtility
     public static int GetDiscardCardCount() {return CardObjectManager.GetDiscardCardCount(); }
 
     public static bool CheckCardMove() { return CardObjectManager.checkCardMove(); }
+
+    public static void CardPaint(Card.Trump cardData, GameObject gameObject) 
+    {
+        CardObjectManager.CardPaint(cardData,gameObject);
+    }
 }
