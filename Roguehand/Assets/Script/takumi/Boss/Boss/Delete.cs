@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class Delete : BossBase
 {
-    private int handSizeLost=4;
+    private int handSizeLost=6;
     int handSize = 0;
     public override void Initializ()
     {

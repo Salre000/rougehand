@@ -60,21 +60,29 @@ public class BuffJoker : JokerBase
                 index = deck.IndexOf(card);
             }
 
+            int indexHand = CardManager.instance.GetHand().IndexOf(card);
+            if (indexHand < 0) 
+            {
+                //‘I‘ð’†‚¾‚Æˆê’v‚Éˆø‚Á‚©‚©‚ç‚È‚¢ˆ×
+                card.isSelect = !card.isSelect;
+
+                indexHand = CardManager.instance.GetHand().IndexOf(card);
+            }
+
 
 
             card.sealBuff = (Card.sealBuff)Random.Range(0, (int)Card.sealBuff.MAX);
             card.deckBuff = (Card.deckBuff)Random.Range(0, (int)Card.deckBuff.MAX);
             card.cardBuff = (Card.cardBuff)Random.Range(0, (int)Card.cardBuff.MAX);
 
-            CardManager.instance.Chenge(deck[index], card);
-
-
-
+            CardManager.instance.Chenge(index, indexHand, card);
             CardObjectUtility.SetChengeCard(i, card);
 
 
 
         }
+
+        CardManager.instance.ResetPick();
     }
 
 }

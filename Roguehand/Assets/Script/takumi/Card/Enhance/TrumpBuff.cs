@@ -20,7 +20,7 @@ public class TrumpBuff
         switch (deckBuff)
         {
             case Card.deckBuff.Bonus:
-                value = 30;
+                value = 20;
                 ScoreManager.instance.BasicPlus(value);
                 break;
             case Card.deckBuff.Magnification:
@@ -28,14 +28,12 @@ public class TrumpBuff
                 Magnification = true;
                 ScoreManager.instance.MagnificationPlus(value);
                 break;
-            case Card.deckBuff.Wild:
-                break;
             case Card.deckBuff.Glass:
 
                 //Å@è\ï™ÇÃàÍÇ≈î≠ìÆ
                 if (Random.Range(0, 10) != 1) return;
 
-                value =(int)ScoreManager.instance.GetMagnification();
+                value =(int)ScoreManager.instance.GetMagnification()/2;
                 Magnification = true;
                 ScoreManager.instance.MagnificationPlus(value);
 
@@ -43,6 +41,30 @@ public class TrumpBuff
 
                 break;
             case Card.deckBuff.Lucky:
+
+                if (Random.Range(0, 10) != 1) return;
+
+
+
+                break;
+
+            case Card.deckBuff.BlindScore:
+                int count = 0;
+
+                List<Card.Trump> trumps = CardManager.instance.GetDeck();
+
+
+                for (int i = 0; i < trumps.Count; i++)
+                {
+                    if (trumps[i].deckBuff != Card.deckBuff.BlindScore) continue;
+                    count++;
+                }
+
+                value =count;
+                Magnification = true;
+                ScoreManager.instance.MagnificationPlus(value);
+
+
                 break;
         }
 

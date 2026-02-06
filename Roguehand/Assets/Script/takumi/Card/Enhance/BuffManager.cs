@@ -152,6 +152,7 @@ public class BuffManager : MonoBehaviour
             case Card.cardBuff.Foil:
             case Card.cardBuff.Hologram:
             case Card.cardBuff.Polychrome:
+            case Card.cardBuff.MouseJammer:
                 flag = true;
                 break;
         }
@@ -166,7 +167,7 @@ public class BuffManager : MonoBehaviour
     /// <returns></returns>
     public System.Action GetActionPlayBuffCard(Card.cardBuff cardBuff)
     {
-        return ()=> _cardBuff.Hand(cardBuff);
+        return ()=> _cardBuff.Play(cardBuff);
     }
     public bool CheckPlayBuffDeck(Card.deckBuff cardBuff) 
     {
@@ -176,6 +177,9 @@ public class BuffManager : MonoBehaviour
         {
             case Card.deckBuff.Glass:
             case Card.deckBuff.Lucky:
+            case Card.deckBuff.Bonus:
+            case Card.deckBuff.Magnification:
+            case Card.deckBuff.BlindScore:
                 flag = true;
                 break;
         }

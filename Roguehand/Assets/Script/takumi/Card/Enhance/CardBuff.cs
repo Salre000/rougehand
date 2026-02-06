@@ -34,6 +34,36 @@ public class CardBuff
                 value = (int)(ScoreManager.instance.GetMagnification() / 2f);
                 Magnification = true;
                 ScoreManager.instance.MagnificationPlus(value);
+                break;
+
+            case Card.cardBuff.MouseJammer:
+
+                int count = 0;
+
+                List<Card.Trump> trumps = CardManager.instance.GetDeck();
+
+
+                for (int i = 0; i < trumps.Count; i++)
+                {
+                    if (trumps[i].cardBuff != Card.cardBuff.MouseJammer) continue;
+                    count++;
+                }
+
+
+                //ジョーカーの分もカウント
+                JokerUtility.JokerALLAction(joker =>
+                {
+
+                    if (joker.GetCardBuff() != Card.cardBuff.MouseJammer) return;
+                    count++;
+
+                });
+
+
+
+                value = 5 * count;
+                Magnification = true;
+                ScoreManager.instance.MagnificationPlus(value);
 
                 break;
             default:

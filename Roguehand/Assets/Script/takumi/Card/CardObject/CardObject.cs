@@ -121,8 +121,8 @@ public class CardObject : MonoBehaviour
         if (BuffUtility.CheckPlayBuffCard(trump.cardBuff))
             actions.Add(()=>
             {
-                TrumpBuff.target = gameObject;
-                TrumpBuff.targetID = id;
+                CardBuff.target = gameObject;
+                CardBuff.targetID = id;
 
                 BuffUtility.GetActionPlayBuffCard(trump.cardBuff)();
             });
