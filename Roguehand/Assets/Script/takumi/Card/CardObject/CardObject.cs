@@ -35,7 +35,7 @@ public class CardObject : MonoBehaviour
     /// </summary>
     [SerializeField] private status _lostStatus = status.none;
 
-    private float _moveTime = 0;
+    [SerializeField]private float _moveTime = 0;
 
     /// <summary>
     /// 移動を開始する前の座標
@@ -125,6 +125,14 @@ public class CardObject : MonoBehaviour
                 CardBuff.targetID = id;
 
                 BuffUtility.GetActionPlayBuffCard(trump.cardBuff)();
+            });
+        if (BuffUtility.CheckPlayBuffSeal(trump.sealBuff))
+            actions.Add(()=>
+            {
+                SealBuff.target = gameObject;
+                SealBuff.targetID = id;
+
+                BuffUtility.GetActionPlayBuffSeal(trump.sealBuff)();
             });
 
         actions.Add(()=>action(id));

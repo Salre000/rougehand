@@ -432,6 +432,7 @@ public class SaleObjectManager : MonoBehaviour
     {
         dynamicAction.RemoveAt(index);
     }
+    public int GetDynamicActionCount() {  return dynamicAction.Count; } 
 
 
     public void ALLActive() { _products.GetAction(product => { product.SetActive(true); return product; }); }

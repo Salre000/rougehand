@@ -160,14 +160,35 @@ public class BuffManager : MonoBehaviour
         return flag;
 
     }
-    /// <summary>
-    ///  カードのバフの関数自体を返す
-    /// </summary>
-    /// <param name="cardBuff"></param>
-    /// <returns></returns>
-    public System.Action GetActionPlayBuffCard(Card.cardBuff cardBuff)
+    public bool CheckPlayBuffSeal(Card.sealBuff sealBuff)
     {
-        return () => _cardBuff.Play(cardBuff);
+        bool flag = false;
+
+        switch (sealBuff)
+        {
+            case Card.sealBuff.Red:
+            case Card.sealBuff.Green:
+            case Card.sealBuff.Orange:
+            case Card.sealBuff.Black:
+                flag = true;
+                break;
+        }
+
+        return flag;
+
+    }
+
+    /// <summary>
+    ///  トランプを手札に持っている時に効果が発動するかどうか
+    /// </summary>
+    /// <param name="trump"></param>
+    /// <returns></returns>
+    public bool CheckHandBuffs(Card.Trump trump) 
+    {
+        bool flag = false;
+
+
+        return flag;
     }
     public bool CheckPlayBuffDeck(Card.deckBuff cardBuff)
     {
@@ -219,6 +240,24 @@ public class BuffManager : MonoBehaviour
         return () => _trumpBuff.Play(deckBuff); ;
     }
 
+    /// <summary>
+    ///  カードのバフの関数自体を返す
+    /// </summary>
+    /// <param name="cardBuff"></param>
+    /// <returns></returns>
+    public System.Action GetActionPlayBuffCard(Card.cardBuff cardBuff)
+    {
+        return () => _cardBuff.Play(cardBuff);
+    }
+    /// <summary>
+    ///  シールのバフの関数自体を返す
+    /// </summary>
+    /// <param name="cardBuff"></param>
+    /// <returns></returns>
+    public System.Action GetActionPlayBuffSeal(Card.sealBuff sealBuff)
+    {
+        return () => _sealBuff.Play(sealBuff);
+    }
 
 
     /// <summary>

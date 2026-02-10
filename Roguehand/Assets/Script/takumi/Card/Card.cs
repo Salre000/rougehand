@@ -1,6 +1,7 @@
 [System.Serializable]
 public class Card
 {
+    public static int maxID=0;
 
     public enum suit
     {
@@ -117,6 +118,7 @@ public class Card
         public State state;
         public bool isFeice;
         public bool isSelect;
+        public int id;
 
         public Trump(suit suit,number number, State state, bool isFeice = false, sealBuff sealBuff=sealBuff.None,
             cardBuff cardBuff=cardBuff.None,deckBuff deckBuff=deckBuff.None, bool isSelect=false)
@@ -129,6 +131,9 @@ public class Card
             this.deckBuff = deckBuff;
             this.isFeice=isFeice;
             this.isSelect=isSelect;
+            this.id = Card.maxID;
+            Card.maxID++;
+
             return;
         }
 

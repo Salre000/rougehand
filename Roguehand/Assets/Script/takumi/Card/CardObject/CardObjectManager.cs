@@ -223,8 +223,12 @@ public class CardObjectManager : MonoBehaviour
     /// </summary>
     public void StartHandMove()
     {
-        for (int i = 0; i < _cardObjectHands.Count; i++)
+        for (int i = 0; i < _cardObjectHands.Count; i++) 
+        {
+            if (_cardObjectHands[i] == null) continue;
+
             _cardObjectHands[i].ResetMoveTime();
+        }
 
     }
 
@@ -284,6 +288,8 @@ public class CardObjectManager : MonoBehaviour
 
         for (int i = 0; i < _cardObjectHands.Count; i++)
         {
+            if (_cardObjectHands[i] == null) continue;
+
             if (_cardObjectHands[i].GetStatus() != CardObject.status.playWait) continue;
             _cardObjectHands[i].SetStatus(CardObject.status.play);
             _cardObjectHands[i].ResetMoveTime();
@@ -294,6 +300,8 @@ public class CardObjectManager : MonoBehaviour
     {
         for (int i = 0; i < _cardObjectHands.Count; i++)
         {
+            if (_cardObjectHands[i] == null) continue;
+
             if (_cardObjectHands[i].GetStatus() != CardObject.status.play) continue;
             _cardObjectHands[i].SetStatus(CardObject.status.discard);
             _cardObjectHands[i].ResetMoveTime();
@@ -310,6 +318,8 @@ public class CardObjectManager : MonoBehaviour
 
         for (int i = 0; i < _cardObjectHands.Count; i++)
         {
+            if (_cardObjectHands[i] == null) continue;
+
             if (_cardObjectHands[i].GetStatus() != CardObject.status.playWait) continue;
             _cardObjectHands[i].SetStatus(CardObject.status.discard);
             _cardObjectHands[i].ResetMoveTime();
@@ -327,6 +337,7 @@ public class CardObjectManager : MonoBehaviour
     {
         for (int i = 0; i < _cardObjectHands.Count; i++)
         {
+            if (_cardObjectHands[i] == null) continue;
             _cardObjectHands[i].SetStatus(CardObject.status.discard);
             _cardObjectHands[i].ResetMoveTime();
         }
@@ -630,9 +641,16 @@ public class CardObjectManager : MonoBehaviour
 
         for(int i=0;i < _cardObjectHands.Count; i++) 
         {
-           // if (CardManager.instance.hand[i].deckBuff)
+            if (_cardObjectHands[i].GetStatus() != CardObject.status.hand) continue;
 
+            int cash = i;
+            if (BuffUtility.CheckHandBuffs(CardManager.instance.GetHand()[cash])) continue;
+            _cardObjectHands[i].AddAction(() =>
+            {
+                BuffUtility.HandBuff(CardManager.instance.GetHand()[cash]);
 
+            });
+            
 
         }
 
@@ -1068,7 +1086,7 @@ public class CardObjectManager : MonoBehaviour
     /// ‰¼‘g‚Ý
     /// </summary>
     /// <param name="ID"></param>
-    private void TrunpScore(int ID)
+    public void TrunpScore(int ID)
     {
         int score = 0;
 

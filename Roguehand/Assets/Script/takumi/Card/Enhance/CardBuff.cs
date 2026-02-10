@@ -106,8 +106,6 @@ public class CardBuff
         //対応したバフを記述
         switch (cardBuff)
         {
-            case Card.cardBuff.None:
-                break;
             default:
                 break;
         }

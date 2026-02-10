@@ -34,7 +34,7 @@ public class TrumpBuff
                 //　十分の一で発動
                 if (Random.Range(0, 10) != 1) return;
 
-                value =(int)ScoreManager.instance.GetMagnification()/2;
+                value = (int)ScoreManager.instance.GetMagnification() / 2;
                 Magnification = true;
                 ScoreManager.instance.MagnificationPlus(value);
 
@@ -69,7 +69,7 @@ public class TrumpBuff
                     count++;
                 }
 
-                value =count;
+                value = count;
                 Magnification = true;
                 ScoreManager.instance.MagnificationPlus(value);
 
@@ -82,10 +82,10 @@ public class TrumpBuff
         // target.transform.position 座標
         // Magnification このフラグがtrueの時は倍率falseの時は基本スコア
         //　valueが０の時は出さない
-        if(value <= 0) return;
+        if (value <= 0) return;
         ScoreManager.instance.SetScoreViewID(targetID);
         ScoreManager.instance.SetScoreViewTrans(target.transform.position);
-            ScoreManager.instance.SetScoreViewText(value, Magnification);
+        ScoreManager.instance.SetScoreViewText(value, Magnification);
     }
 
     /// <summary>
@@ -110,9 +110,17 @@ public class TrumpBuff
         switch (deckBuff)
         {
             case Card.deckBuff.Steel:
-                //倍率に１．５倍
 
-                Debug.Log("通ってる"+"SSSD");
+                bool Magnification = true;
+                int value = (int)(ScoreManager.instance.GetMagnification() / 2f);
+
+                ScoreManager.instance.SetScoreViewID(targetID);
+                ScoreManager.instance.SetScoreViewTrans(target.transform.position);
+                ScoreManager.instance.SetScoreViewText(value, Magnification);
+
+
+
+
                 break;
         }
     }

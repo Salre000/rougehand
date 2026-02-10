@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class CardObjectUtility 
 {
-    public static CardObjectManager CardObjectManager { set; private get; }
+    public static CardObjectManager CardObjectManager { set; get; }
 
     public static void HandToCard(List<Card.Trump> cardDatas) { CardObjectManager.HandToCard(cardDatas); }
 
