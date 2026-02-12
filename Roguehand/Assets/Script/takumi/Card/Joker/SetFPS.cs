@@ -16,6 +16,7 @@ public class SetFPS : MonoBehaviour
         {
             DontDestroyOnLoad(this.gameObject);
             setFPS = this;
+            Screen.SetResolution(1920,1080,true);
         }
         Application.targetFrameRate = 120;
         Cursor.lockState = CursorLockMode.Confined;
