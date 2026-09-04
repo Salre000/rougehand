@@ -6,12 +6,12 @@ public class CardObject : MonoBehaviour
 {
 
     /// <summary>
-    /// ˆê“x‚ÌˆÚ“®‚ÉŠ|‚©‚éŠÔ‚Ì’è”
+    /// ä¸€åº¦ã®ç§»å‹•ã«æ›ã‹ã‚‹æ™‚é–“ã®å®šæ•°
     /// </summary>
     private const float MOVE_TIME = 0.2f;
 
     /// <summary>
-    /// ‚±‚ÌƒJ[ƒh‚Ìó‘Ô
+    /// ã“ã®ã‚«ãƒ¼ãƒ‰ã®çŠ¶æ…‹
     /// </summary>
     public enum status
     {
@@ -26,38 +26,38 @@ public class CardObject : MonoBehaviour
     }
 
     /// <summary>
-    /// Œ»İ‚Ìó‘Ô
+    /// ç¾åœ¨ã®çŠ¶æ…‹
     /// </summary>
     [SerializeField] private status _status = status.none;
 
     /// <summary>
-    /// ‚Ğ‚Æ‚Â‘O‚Ìó‘Ô
+    /// ã²ã¨ã¤å‰ã®çŠ¶æ…‹
     /// </summary>
     [SerializeField] private status _lostStatus = status.none;
 
     [SerializeField]private float _moveTime = 0;
 
     /// <summary>
-    /// ˆÚ“®‚ğŠJn‚·‚é‘O‚ÌÀ•W
+    /// ç§»å‹•ã‚’é–‹å§‹ã™ã‚‹å‰ã®åº§æ¨™
     /// </summary>
     private Vector3 _beforePosition = Vector3.zero;
     /// <summary>
-    /// ˆÚ“®‚ğŠJn‚·‚é‘O‚ÌŠp“x
+    /// ç§»å‹•ã‚’é–‹å§‹ã™ã‚‹å‰ã®è§’åº¦
     /// </summary>
     private Vector3 _beforeAngle = Vector3.zero;
 
     /// <summary>
-    /// ‚±‚ÌƒIƒuƒWƒFƒNƒg‚ÌƒŠƒMƒbƒhƒ{ƒfƒB
+    /// ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒªã‚®ãƒƒãƒ‰ãƒœãƒ‡ã‚£
     /// </summary>
     private Rigidbody _rigidbody;
 
     /// <summary>
-    /// Œ»İ‚Â‚©‚Ü‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
+    /// ç¾åœ¨ã¤ã‹ã¾ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹
     /// </summary>
     [SerializeField] private bool _isGrab = false;
 
     /// <summary>
-    /// Œ»İ‚Â‚©‚Ş‚±‚Æ‚ª‰Â”\‚©‚Ç‚¤‚©
+    /// ç¾åœ¨ã¤ã‹ã‚€ã“ã¨ãŒå¯èƒ½ã‹ã©ã†ã‹
     /// </summary>
     [SerializeField] private bool _grab = true;
 
@@ -86,7 +86,7 @@ public class CardObject : MonoBehaviour
     }
 
     /// <summary>
-    /// d—Í‚ğ‘€ì‰Â”\ó‘Ô‚É•ÏX
+    /// é‡åŠ›ã‚’æ“ä½œå¯èƒ½çŠ¶æ…‹ã«å¤‰æ›´
     /// </summary>
     public void GravityStart()
     {
@@ -97,7 +97,7 @@ public class CardObject : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒJ[ƒh‚ÌƒŠƒZƒbƒg‚Ég‚¤ŠÖ”
+    /// ã‚«ãƒ¼ãƒ‰ã®ãƒªã‚»ãƒƒãƒˆã«ä½¿ã†é–¢æ•°
     /// </summary>
     public void ResetCard()
     {
@@ -105,6 +105,8 @@ public class CardObject : MonoBehaviour
         ResetMoveTime();
         GravityStart();
         _isGrab = false;
+        // ãƒ—ãƒ¼ãƒ«ã§ä½¿ã„å›ã—ãŸéš›ã€å‰å›åˆ†ã®æœªæ¶ˆåŒ–ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãŒæ®‹ã‚‰ãªã„ã‚ˆã†ã«ã™ã‚‹
+        actions.Clear();
 
     }
 
@@ -159,8 +161,8 @@ public class CardObject : MonoBehaviour
     public status GetLostStatus() { return _lostStatus; }
 
     /// <summary>
-    /// ˆÚ“®‰Â”\ŠÔ‚ğƒŠƒZƒbƒg
-    /// ˆÚ“®‚ğ‰Â”\‚É•ÏX
+    /// ç§»å‹•å¯èƒ½æ™‚é–“ã‚’ãƒªã‚»ãƒƒãƒˆ
+    /// ç§»å‹•ã‚’å¯èƒ½ã«å¤‰æ›´
     /// </summary>
     public void ResetMoveTime()
     {
@@ -170,11 +172,11 @@ public class CardObject : MonoBehaviour
     }
 
     /// <summary>
-    /// ŠÔŒo‰ß‚ÌŠÖ”
+    /// æ™‚é–“çµŒéã®é–¢æ•°
     /// </summary>
     public void CountDown()
     {
-        //‚Â‚©‚Ü‚ê‚Ä‚¢‚éŠÔƒJƒEƒ“ƒg‚µ‚È‚¢
+        //ã¤ã‹ã¾ã‚Œã¦ã„ã‚‹é–“ã‚«ã‚¦ãƒ³ãƒˆã—ãªã„
         if (_isGrab) return;
         _moveTime -= Time.deltaTime * GameConfig.GetGameSpeed();
         if (IsMovable()) return;
@@ -182,7 +184,7 @@ public class CardObject : MonoBehaviour
     }
 
     /// <summary>
-    /// ˆÚ“®‰Â”\‚©‚Ç‚¤‚©‚Ì”»’è
+    /// ç§»å‹•å¯èƒ½ã‹ã©ã†ã‹ã®åˆ¤å®š
     /// </summary>
     /// <returns></returns>
     public bool IsMovable() { return _moveTime > 0; }
@@ -199,14 +201,14 @@ public class CardObject : MonoBehaviour
     public void SetGrab(bool flag) { _isGrab = flag; }
 
     /// <summary>
-    /// ‚Â‚©‚Ş‚±‚Æ‚ª‰Â”\‚©‚Ç‚¤‚©‚ğ•Ô‚·ŠÖ”
+    /// ã¤ã‹ã‚€ã“ã¨ãŒå¯èƒ½ã‹ã©ã†ã‹ã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <returns></returns>
     public bool GetGrabFlag() { return _grab; }
 
     /// <summary>
-    /// ‚Â‚©‚Ş‚±‚Æ‚ğo—ˆ‚È‚­•ÏX
-    /// ƒJ[ƒh‚ª–Ú“I’n‚É’…‚¢‚½‚ç‰ğœ
+    /// ã¤ã‹ã‚€ã“ã¨ã‚’å‡ºæ¥ãªãå¤‰æ›´
+    /// ã‚«ãƒ¼ãƒ‰ãŒç›®çš„åœ°ã«ç€ã„ãŸã‚‰è§£é™¤
     /// </summary>
     public void NotGrab() { _grab = false; }
 

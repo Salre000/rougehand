@@ -10,21 +10,21 @@ using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 public class CardObjectManager : MonoBehaviour
 {
     /// <summary>
-    /// ƒgƒ‰ƒ“ƒv‚Ìƒ}ƒeƒŠƒAƒ‹”Ô†‚Ì—ñ‹“‘Ì
+    /// ãƒˆãƒ©ãƒ³ãƒ—ã®ãƒãƒ†ãƒªã‚¢ãƒ«ç•ªå·ã®åˆ—æŒ™ä½“
     /// </summary>
     public enum cardMaterialType
     {
         /// <summary>
-        /// ƒgƒ‰ƒ“ƒv‚Ìƒoƒt“à—e‚ÅŒˆ‚Ü‚é
+        /// ãƒˆãƒ©ãƒ³ãƒ—ã®ãƒãƒ•å†…å®¹ã§æ±ºã¾ã‚‹
         /// </summary>
         effect,
 
         /// <summary>
-        /// ƒgƒ‰ƒ“ƒv‚Ì— –Ê
+        /// ãƒˆãƒ©ãƒ³ãƒ—ã®è£é¢
         /// </summary>
         back,
         /// <summary>
-        /// ƒgƒ‰ƒ“ƒv‚ÌƒX[ƒg‚Æƒiƒ“ƒo[‚ÅŒˆ‚Ü‚é
+        /// ãƒˆãƒ©ãƒ³ãƒ—ã®ã‚¹ãƒ¼ãƒˆã¨ãƒŠãƒ³ãƒãƒ¼ã§æ±ºã¾ã‚‹
         /// </summary>
         main,
 
@@ -36,59 +36,59 @@ public class CardObjectManager : MonoBehaviour
 
 
     /// <summary>
-    /// ƒJ[ƒh‚ÌƒIƒuƒWƒFƒNƒg‚Ìƒx[ƒX
+    /// ã‚«ãƒ¼ãƒ‰ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ™ãƒ¼ã‚¹
     /// </summary>
     [SerializeField] private GameObject _cardBase;
 
     /// <summary>
-    /// èD‚ÌƒJ[ƒh‚ÌÀ•W‚Ìˆê”Ô¶‘¤
+    /// æ‰‹æœ­ã®ã‚«ãƒ¼ãƒ‰ã®åº§æ¨™ã®ä¸€ç•ªå·¦å´
     /// </summary>
-    [SerializeField, Header("èD‚ÌƒJ[ƒh‚ÌÀ•W‚Ìˆê”Ô¶‘¤")] private Transform _handPositionLeft;
+    [SerializeField, Header("æ‰‹æœ­ã®ã‚«ãƒ¼ãƒ‰ã®åº§æ¨™ã®ä¸€ç•ªå·¦å´")] private Transform _handPositionLeft;
     /// <summary>
-    /// èD‚ÌƒJ[ƒh‚ÌÀ•W‚Ìˆê”Ô‰E‘¤
+    /// æ‰‹æœ­ã®ã‚«ãƒ¼ãƒ‰ã®åº§æ¨™ã®ä¸€ç•ªå³å´
     /// </summary>
-    [SerializeField, Header("èD‚ÌƒJ[ƒh‚ÌÀ•W‚Ìˆê”Ô‰E‘¤")] private Transform _handPositionRight;
+    [SerializeField, Header("æ‰‹æœ­ã®ã‚«ãƒ¼ãƒ‰ã®åº§æ¨™ã®ä¸€ç•ªå³å´")] private Transform _handPositionRight;
     /// <summary>
-    /// ƒvƒŒƒC‚ÌÀ•W‚Ìˆê”Ô¶‘¤
+    /// ãƒ—ãƒ¬ã‚¤ã®åº§æ¨™ã®ä¸€ç•ªå·¦å´
     /// </summary>
-    [SerializeField, Header("ƒvƒŒƒC‚ÌÀ•W‚Ìˆê”Ô¶‘¤")] private Transform _playPositionLeft;
+    [SerializeField, Header("ãƒ—ãƒ¬ã‚¤ã®åº§æ¨™ã®ä¸€ç•ªå·¦å´")] private Transform _playPositionLeft;
     /// <summary>
-    /// ƒvƒŒƒC‚ÌÀ•W‚Ìˆê”Ô‰E‘¤
+    /// ãƒ—ãƒ¬ã‚¤ã®åº§æ¨™ã®ä¸€ç•ªå³å´
     /// </summary>
-    [SerializeField, Header("ƒvƒŒƒC‚ÌÀ•W‚Ìˆê”Ô‰E‘¤")] private Transform _playPositionRight;
+    [SerializeField, Header("ãƒ—ãƒ¬ã‚¤ã®åº§æ¨™ã®ä¸€ç•ªå³å´")] private Transform _playPositionRight;
 
     /// <summary>
-    /// ƒ‰ƒEƒ“ƒh’†g‚í‚ê‚È‚¢”jŠü‚³‚ê‚éƒJ[ƒh‚ÌÀ•W
+    /// ãƒ©ã‚¦ãƒ³ãƒ‰ä¸­ä½¿ã‚ã‚Œãªã„ç ´æ£„ã•ã‚Œã‚‹ã‚«ãƒ¼ãƒ‰ã®åº§æ¨™
     /// </summary>
-    [SerializeField, Header("ƒ‰ƒEƒ“ƒh’†g‚í‚ê‚È‚¢”jŠü‚³‚ê‚éƒJ[ƒh‚ÌÀ•W")] private Transform _handTrash;
+    [SerializeField, Header("ãƒ©ã‚¦ãƒ³ãƒ‰ä¸­ä½¿ã‚ã‚Œãªã„ç ´æ£„ã•ã‚Œã‚‹ã‚«ãƒ¼ãƒ‰ã®åº§æ¨™")] private Transform _handTrash;
     /// <summary>
-    /// ƒJ[ƒhƒIƒuƒWƒFƒNƒg‚ğ’u‚¢‚Ä‚¢‚­ƒfƒbƒL‚ÌŠî€À•W
+    /// ã‚«ãƒ¼ãƒ‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç½®ã„ã¦ã„ããƒ‡ãƒƒã‚­ã®åŸºæº–åº§æ¨™
     /// </summary>
-    [SerializeField, Header("ƒfƒbƒL‚ÌŠî€À•W")] private Transform _cardDeck;
+    [SerializeField, Header("ãƒ‡ãƒƒã‚­ã®åŸºæº–åº§æ¨™")] private Transform _cardDeck;
 
     /// <summary>
-    /// ƒgƒ‰ƒbƒVƒ…‚ÉˆÚ“®’†‚ÌƒJ[ƒh‚ÌŠp“x‚Ì’è”
+    /// ãƒˆãƒ©ãƒƒã‚·ãƒ¥ã«ç§»å‹•ä¸­ã®ã‚«ãƒ¼ãƒ‰ã®è§’åº¦ã®å®šæ•°
     /// </summary>
     private readonly Vector3 _TRASH_ANGLE = new Vector3(-90, 90, 90);
 
     /// <summary>
-    /// ƒJ[ƒh‚ÌŠî–{ó‘Ô‚ÌŠp“x
+    /// ã‚«ãƒ¼ãƒ‰ã®åŸºæœ¬çŠ¶æ…‹ã®è§’åº¦
     /// </summary>
     private readonly Vector3 _NORMALl_ANGLE = new Vector3(0, -3, 0);
 
     /// <summary>
-    /// ƒJ[ƒh‚Ì— –Êó‘Ô‚ÌŠp“x
+    /// ã‚«ãƒ¼ãƒ‰ã®è£é¢çŠ¶æ…‹ã®è§’åº¦
     /// </summary>
     private readonly Vector3 _BACK_SIDE = new Vector3(0, 183, 0);
 
     /// <summary>
-    /// ƒvƒŒƒC‘Ò‹@ó‘Ô‚Ì‚Æ‚«‚ÉˆÚ“®‚·‚é‘Š‘ÎˆÚ“®—Ê
+    /// ãƒ—ãƒ¬ã‚¤å¾…æ©ŸçŠ¶æ…‹ã®ã¨ãã«ç§»å‹•ã™ã‚‹ç›¸å¯¾ç§»å‹•é‡
     /// </summary>
     private readonly Vector3 _PLAY_WAIT = new Vector3(0, 50, 0);
 
 
     /// <summary>
-    /// èD‚ÌƒJ[ƒh‚ÌÀ•W‚Ìˆê”Ô¶‘¤‚©‚ç‰E‘¤‚Ü‚Å‚Ì‹——£
+    /// æ‰‹æœ­ã®ã‚«ãƒ¼ãƒ‰ã®åº§æ¨™ã®ä¸€ç•ªå·¦å´ã‹ã‚‰å³å´ã¾ã§ã®è·é›¢
     /// </summary>
     private float _handPositionRange = 0;
 
@@ -96,42 +96,42 @@ public class CardObjectManager : MonoBehaviour
 
 
     /// <summary>
-    /// ‘S‚Ä‚ÌƒJ[ƒh‚ğ¶¬‚·‚é•K—v‚ª‚È‚¢‚©‚à‚µ‚ê‚È‚¢
+    /// å…¨ã¦ã®ã‚«ãƒ¼ãƒ‰ã‚’ç”Ÿæˆã™ã‚‹å¿…è¦ãŒãªã„ã‹ã‚‚ã—ã‚Œãªã„
     /// </summary>
     private List<CardObject> _cardObjects = new List<CardObject>((int)Card.suit.max * (int)Card.number.king);
 
     /// <summary>
-    /// ‚»‚Ì‚ÌèD‚ÌƒJ[ƒh
+    /// ãã®æ™‚ã®æ‰‹æœ­ã®ã‚«ãƒ¼ãƒ‰
     /// </summary>
     [SerializeField] private List<CardObject> _cardObjectHands = new List<CardObject>();
 
     /// <summary>
-    /// ƒJ[ƒh‚Ì“à—e‚ğ•Ï‰»‚·‚é‚Ég—p‚·‚éID‚Ì“ü‚Á‚½ƒŠƒXƒg
+    /// ã‚«ãƒ¼ãƒ‰ã®å†…å®¹ã‚’å¤‰åŒ–ã™ã‚‹æ™‚ã«ä½¿ç”¨ã™ã‚‹IDã®å…¥ã£ãŸãƒªã‚¹ãƒˆ
     /// </summary>
     [SerializeField] private List<int> _chengeCardID = new List<int>();
     /// <summary>
-    /// ƒJ[ƒh‚Ì“à—e‚ğ•Ï‰»‚·‚é‚Ég—p‚·‚é“à—e‚Ì“ü‚Á‚½ƒŠƒXƒg
+    /// ã‚«ãƒ¼ãƒ‰ã®å†…å®¹ã‚’å¤‰åŒ–ã™ã‚‹æ™‚ã«ä½¿ç”¨ã™ã‚‹å†…å®¹ã®å…¥ã£ãŸãƒªã‚¹ãƒˆ
     /// </summary>
     private List<Card.Trump> _chengeCardTrump = new List<Card.Trump>();
 
     /// <summary>
-    /// ƒgƒ‰ƒ“ƒv‚Ìƒ}ƒeƒŠƒAƒ‹‚ğ‚Ü‚Æ‚ß‚½ƒNƒ‰ƒX
+    /// ãƒˆãƒ©ãƒ³ãƒ—ã®ãƒãƒ†ãƒªã‚¢ãƒ«ã‚’ã¾ã¨ã‚ãŸã‚¯ãƒ©ã‚¹
     /// </summary>
     private TrumpMaterialManager _materialManager;
 
     /// <summary>
-    /// ƒvƒŒƒC‚µ‚½ƒJ[ƒh‚Ì–‡”‚ğ‹L‰¯‚·‚é•Ï”
+    /// ãƒ—ãƒ¬ã‚¤ã—ãŸã‚«ãƒ¼ãƒ‰ã®æšæ•°ã‚’è¨˜æ†¶ã™ã‚‹å¤‰æ•°
     /// </summary>
     private int _playCardCount = 0;
 
     /// <summary>
-    /// ƒfƒBƒXƒJ[ƒh‚µ‚½ƒJ[ƒh‚Ì–‡”‚ğ‹L‰¯‚·‚é•Ï”
+    /// ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰ã—ãŸã‚«ãƒ¼ãƒ‰ã®æšæ•°ã‚’è¨˜æ†¶ã™ã‚‹å¤‰æ•°
     /// </summary>
     private int _discardCardCount = 0;
 
 
     /// <summary>
-    /// ƒJ[ƒhƒIƒuƒWƒFƒNƒg‚ğ“Z‚ß‚éƒv[ƒ‹
+    /// ã‚«ãƒ¼ãƒ‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’çºã‚ã‚‹ãƒ—ãƒ¼ãƒ«
     /// </summary>
     private GameObject _cardPool;
 
@@ -152,10 +152,10 @@ public class CardObjectManager : MonoBehaviour
 
     public void Initialize()
     {
-        // ƒgƒ‰ƒ“ƒv‚Ìƒ}ƒeƒŠƒAƒ‹‚ğ‚Ü‚Æ‚ß‚½ƒNƒ‰ƒX‚ğæ“¾
+        // ãƒˆãƒ©ãƒ³ãƒ—ã®ãƒãƒ†ãƒªã‚¢ãƒ«ã‚’ã¾ã¨ã‚ãŸã‚¯ãƒ©ã‚¹ã‚’å–å¾—
         _materialManager = GetComponent<TrumpMaterialManager>();
 
-        // Utility‚É“o˜^
+        // Utilityã«ç™»éŒ²
         CardObjectUtility.CardObjectManager = this;
 
         _materialManager = GetComponent<TrumpMaterialManager>();
@@ -164,7 +164,7 @@ public class CardObjectManager : MonoBehaviour
 
         CreateCard();
 
-        // èD‚Ì•‚ğŒvZ
+        // æ‰‹æœ­ã®å¹…ã‚’è¨ˆç®—
         _handPositionRange = Vector3.Distance(_handPositionLeft.position, _handPositionRight.position);
 
 
@@ -175,30 +175,30 @@ public class CardObjectManager : MonoBehaviour
 
 
     /// <summary>
-    /// ƒfƒbƒL‚©‚çèD‚Ö‚ÌˆÚ“®ŠÖ”
+    /// ãƒ‡ãƒƒã‚­ã‹ã‚‰æ‰‹æœ­ã¸ã®ç§»å‹•é–¢æ•°
     /// </summary>
     /// <param name="carDatas"><s/param>
     public void HandToCard(List<Card.Trump> cardDatas)
     {
-        //‘I‘ğ’†‚ğƒŠƒZƒbƒg
+        //é¸æŠä¸­ã‚’ãƒªã‚»ãƒƒãƒˆ
         CardManager.instance.ResetPick();
 
-        //cardDatas‚Ì’†g‚ğŠm”F‚µ‚Äæ“¾
+        //cardDatasã®ä¸­èº«ã‚’ç¢ºèªã—ã¦å–å¾—
         for (int i = 0; i < cardDatas.Count; i++)
         {
-            // g—p‰Â”\‚ÈƒJ[ƒh‚©‚ğŠm”F
+            // ä½¿ç”¨å¯èƒ½ãªã‚«ãƒ¼ãƒ‰ã‹ã‚’ç¢ºèª
             CardObject cardObject = GetUseCardObject();
             if (cardObject == null) continue;
 
             cardObject.SetStatus(CardObject.status.hand);
 
 
-            // èD‚É’Ç‰Á
+            // æ‰‹æœ­ã«è¿½åŠ 
             _cardObjectHands.Add(cardObject);
 
             Debug.Log(cardDatas[i].suit.ToString() + i);
 
-            // èD‚É’Ç‰Á‚³‚ê‚½ƒJ[ƒh‚Éƒ}ƒeƒŠƒAƒ‹‚ğƒZƒbƒg
+            // æ‰‹æœ­ã«è¿½åŠ ã•ã‚ŒãŸã‚«ãƒ¼ãƒ‰ã«ãƒãƒ†ãƒªã‚¢ãƒ«ã‚’ã‚»ãƒƒãƒˆ
             CardPaint(cardDatas[i], _cardObjectHands.Count - 1);
 
             int index = CardManager.instance.GetHand().IndexOf(cardDatas[i]);
@@ -219,7 +219,7 @@ public class CardObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒnƒ“ƒh‚ÌˆÚ“®‚ğŠJn‚·‚éŠÖ”
+    /// ãƒãƒ³ãƒ‰ã®ç§»å‹•ã‚’é–‹å§‹ã™ã‚‹é–¢æ•°
     /// </summary>
     public void StartHandMove()
     {
@@ -233,12 +233,12 @@ public class CardObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒvƒŒƒC€”õó‘Ô‚ÆèD‚É‚ ‚éó‘Ô‚ğØ‚è‘Ö‚¦‚éŠÖ”
+    /// ãƒ—ãƒ¬ã‚¤æº–å‚™çŠ¶æ…‹ã¨æ‰‹æœ­ã«ã‚ã‚‹çŠ¶æ…‹ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹é–¢æ•°
     /// </summary>
     /// <param name="id"></param>
     public void ChengeStandby(int id, bool isSelect)
     {
-        // “®ì‚Ì“r’†‚Å‚ÌŠ„‚è‚İ‚ğ§ŒÀ
+        // å‹•ä½œã®é€”ä¸­ã§ã®å‰²ã‚Šè¾¼ã¿ã‚’åˆ¶é™
         if (_cardObjectHands[id].IsMovable()) return;
 
 
@@ -258,18 +258,18 @@ public class CardObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Šù‚É•\‚É‚È‚Á‚Ä‚¢‚éƒJ[ƒh‚É•ÏX‚ğ‰Á‚¦‚éŠÖ”
+    /// æ—¢ã«è¡¨ã«ãªã£ã¦ã„ã‚‹ã‚«ãƒ¼ãƒ‰ã«å¤‰æ›´ã‚’åŠ ãˆã‚‹é–¢æ•°
     /// </summary>
     /// <param name="id"></param>
     /// <param name="trump"></param>
     public void SetChengeCard(int id, Card.Trump trump)
     {
-        // “®ì‚Ì“r’†‚Å‚ÌŠ„‚è‚İ‚ğ§ŒÀ
+        // å‹•ä½œã®é€”ä¸­ã§ã®å‰²ã‚Šè¾¼ã¿ã‚’åˆ¶é™
         if (_cardObjectHands[id].IsMovable()) return;
 
 
         if (_chengeCardID.Contains(id)) return;
-        // •ÏŠ·‚ğ‚³‚¹‚é“à—e‚ğ‹L˜^
+        // å¤‰æ›ã‚’ã•ã›ã‚‹å†…å®¹ã‚’è¨˜éŒ²
         _chengeCardID.Add(id);
         _chengeCardTrump.Add(trump);
 
@@ -279,7 +279,7 @@ public class CardObjectManager : MonoBehaviour
 
 
     /// <summary>
-    /// ƒvƒŒƒC€”õó‘Ô‚©‚çƒvƒŒƒC‚ÉˆÚs‚·‚éŠÖ”
+    /// ãƒ—ãƒ¬ã‚¤æº–å‚™çŠ¶æ…‹ã‹ã‚‰ãƒ—ãƒ¬ã‚¤ã«ç§»è¡Œã™ã‚‹é–¢æ•°
     /// </summary>
     /// <returns></returns>
     public void Play()
@@ -310,7 +310,7 @@ public class CardObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒvƒŒƒC€”õó‘Ô‚©‚ç”jŠüó‘Ô‚ÉˆÚs‚·‚éŠÖ”
+    /// ãƒ—ãƒ¬ã‚¤æº–å‚™çŠ¶æ…‹ã‹ã‚‰ç ´æ£„çŠ¶æ…‹ã«ç§»è¡Œã™ã‚‹é–¢æ•°
     /// </summary>
     public void Discard()
     {
@@ -331,7 +331,7 @@ public class CardObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒvƒŒƒC‚ªI‚í‚Á‚ÄèD‚ÆƒvƒŒƒCƒJ[ƒh‚ğ”jŠüó‘Ô‚É‚·‚éŠÖ”
+    /// ãƒ—ãƒ¬ã‚¤ãŒçµ‚ã‚ã£ã¦æ‰‹æœ­ã¨ãƒ—ãƒ¬ã‚¤ã‚«ãƒ¼ãƒ‰ã‚’ç ´æ£„çŠ¶æ…‹ã«ã™ã‚‹é–¢æ•°
     /// </summary>
     public void End()
     {
@@ -346,7 +346,7 @@ public class CardObjectManager : MonoBehaviour
 
 
     /// <summary>
-    /// ’Í‚İ‚Ìˆ—‚Ég—p‚·‚é”Ô†‚ğ•Ô‚·ŠÖ”
+    /// æ´ã¿ã®å‡¦ç†ã«ä½¿ç”¨ã™ã‚‹ç•ªå·ã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <param name="cardObject"></param>
     /// <returns></returns>
@@ -356,16 +356,16 @@ public class CardObjectManager : MonoBehaviour
 
         if (index < 0) return -1;
 
-        // ‚Â‚©‚Ş‚±‚Æ‚Ìo—ˆ‚é‘ÎÛ‚©‚Ç‚¤‚©‚ğ”»’f
+        // ã¤ã‹ã‚€ã“ã¨ã®å‡ºæ¥ã‚‹å¯¾è±¡ã‹ã©ã†ã‹ã‚’åˆ¤æ–­
         bool returnFlag = true;
 
-        //“®‚¢‚Ä‚¢‚é‚É•s³’l
+        //å‹•ã„ã¦ã„ã‚‹æ™‚ã«ä¸æ­£å€¤
         if (cardObject.IsMovable()) returnFlag = false;
 
-        // “®‚¢‚Ä‚¢‚Ä‚à•ß‚Ü‚ê‚Ä‚¢‚½‚ç³í’l
+        // å‹•ã„ã¦ã„ã¦ã‚‚æ•ã¾ã‚Œã¦ã„ãŸã‚‰æ­£å¸¸å€¤
         if (cardObject.IsGrab()) returnFlag = true;
 
-        // ƒvƒŒƒC’†‚¾‚Æ–â“š–³—p‚Å•s³’l
+        // ãƒ—ãƒ¬ã‚¤ä¸­ã ã¨å•ç­”ç„¡ç”¨ã§ä¸æ­£å€¤
         if (cardObject.GetStatus() == CardObject.status.play) returnFlag = false;
 
         return returnFlag ? index : -1;
@@ -392,7 +392,7 @@ public class CardObjectManager : MonoBehaviour
     {
         _cardObjectHands = Extra.ChengeOrder(_cardObjectHands, lostID, nextID);
 
-        //ƒ\[ƒg‚Ì‰e‹¿‚ÅˆÚ“®‚·‚éƒIƒuƒWƒFƒNƒg‚ğˆÚ“®‚³‚¹‚é
+        //ã‚½ãƒ¼ãƒˆã®å½±éŸ¿ã§ç§»å‹•ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç§»å‹•ã•ã›ã‚‹
 
         for (int i = 0; i < _cardObjectHands.Count; i++) _cardObjectHands[i].ResetMoveTime();
 
@@ -402,40 +402,40 @@ public class CardObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒJ[ƒh‚ÌˆÚ“®ŠÔ‚ğƒ[ƒ‚É‚·‚é
+    /// ã‚«ãƒ¼ãƒ‰ã®ç§»å‹•æ™‚é–“ã‚’ã‚¼ãƒ­ã«ã™ã‚‹
     /// </summary>
     /// <param name="ID"></param>
     public void StopMoveCardObject(int ID) { _cardObjectHands[ID].StopMove(); }
 
     /// <summary>
-    /// ƒJ[ƒh‚Ìî•ñ‚ğ•`‰æó‘Ô‚É•ÏX‚·‚é
+    /// ã‚«ãƒ¼ãƒ‰ã®æƒ…å ±ã‚’æç”»çŠ¶æ…‹ã«å¤‰æ›´ã™ã‚‹
     /// </summary>
     /// <param name="trump"></param>
     /// <param name="ID"></param>
     public void ShowExplanation(Card.Trump trump, int ID)
     {
-        //à–¾‚ğ•`‰æ‚³‚¹‚éƒ_ƒ~[‚ÌƒNƒ‰ƒX
+        //èª¬æ˜ã‚’æç”»ã•ã›ã‚‹ãƒ€ãƒŸãƒ¼ã®ã‚¯ãƒ©ã‚¹
         DommyExplanation dommyExplanation = new DommyExplanation();
 
-        //–¼‘O‚Ì•¶š
+        //åå‰ã®æ–‡å­—
         dommyExplanation.dommyName = () =>
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(MasterData.instance.GetStringMaster((int)trump.suit + 10, true));
             sb.Append(MasterData.instance.GetStringMaster((int)trump.suit));
             sb.Append(MasterData.instance.GetStringMaster(-10, true));
-            sb.Append(Extra.ErrorText("‚Ì"));
+            sb.Append(Extra.ErrorText("ã®"));
             sb.Append(Extra.ErrorText(((int)trump.number).ToString()));
 
             return sb.ToString();
         };
 
-        // à–¾‚Ì•¶š
+        // èª¬æ˜ã®æ–‡å­—
         dommyExplanation.dommyExplanation = () =>
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(Extra.ErrorText("Šî–{ƒXƒRƒA"));
+            sb.Append(Extra.ErrorText("åŸºæœ¬ã‚¹ã‚³ã‚¢"));
             if ((int)trump.number > 10 || (int)trump.number == 1) sb.Append(Extra.ErrorText(Extra.GetBlueString("+11")));
             else sb.Append(Extra.ErrorText(Extra.GetBlueString("+" + ((int)trump.number).ToString())));
             sb.Append("\n");
@@ -451,7 +451,7 @@ public class CardObjectManager : MonoBehaviour
 
         int[] buff = { 6200 + (int)trump.deckBuff, 6100 + (int)trump.cardBuff, 6000 + (int)trump.sealBuff };
 
-        //UI‚Ì‘å‚«‚³‚ğ’²®
+        //UIã®å¤§ãã•ã‚’èª¿æ•´
         ExplanationManager.instance._uiSize = new Vector2(200, 150);
         ExplanationManager.instance._uiSizeMini = new Vector2(200, 90);
 
@@ -459,7 +459,7 @@ public class CardObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒfƒbƒL‚ÌƒJ[ƒh‚ğ‘‚â‚·ŠÖ”
+    /// ãƒ‡ãƒƒã‚­ã®ã‚«ãƒ¼ãƒ‰ã‚’å¢—ã‚„ã™é–¢æ•°
     /// </summary>
     /// <param name="trump"></param>
     public void AddTrump(Card.Trump trump)
@@ -476,7 +476,7 @@ public class CardObjectManager : MonoBehaviour
 
     }
     /// <summary>
-    /// ƒJ[ƒh‚ğŒ¸‚ç‚·ŠÖ”
+    /// ã‚«ãƒ¼ãƒ‰ã‚’æ¸›ã‚‰ã™é–¢æ•°
     /// </summary>
     /// <param name="trump"></param>
     public void RemoveTrump(Card.Trump trump)
@@ -500,28 +500,28 @@ public class CardObjectManager : MonoBehaviour
 
     public void ShowExplanation(Card.Trump trump, GameObject _object, Vector2 offset)
     {
-        //à–¾‚ğ•`‰æ‚³‚¹‚éƒ_ƒ~[‚ÌƒNƒ‰ƒX
+        //èª¬æ˜ã‚’æç”»ã•ã›ã‚‹ãƒ€ãƒŸãƒ¼ã®ã‚¯ãƒ©ã‚¹
         DommyExplanation dommyExplanation = new DommyExplanation();
 
-        //–¼‘O‚Ì•¶š
+        //åå‰ã®æ–‡å­—
         dommyExplanation.dommyName = () =>
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(MasterData.instance.GetStringMaster((int)trump.suit + 10, true));
             sb.Append(MasterData.instance.GetStringMaster((int)trump.suit));
             sb.Append(MasterData.instance.GetStringMaster(-10, true));
-            sb.Append(Extra.ErrorText("‚Ì"));
+            sb.Append(Extra.ErrorText("ã®"));
             sb.Append(Extra.ErrorText(((int)trump.number).ToString()));
 
             return sb.ToString();
         };
 
-        // à–¾‚Ì•¶š
+        // èª¬æ˜ã®æ–‡å­—
         dommyExplanation.dommyExplanation = () =>
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(Extra.ErrorText("Šî–{ƒXƒRƒA"));
+            sb.Append(Extra.ErrorText("åŸºæœ¬ã‚¹ã‚³ã‚¢"));
             if ((int)trump.number > 10 || (int)trump.number == 1) sb.Append(Extra.ErrorText(Extra.GetBlueString("+11")));
             else sb.Append(Extra.ErrorText(Extra.GetBlueString("+" + ((int)trump.number).ToString())));
             sb.Append("\n");
@@ -537,7 +537,7 @@ public class CardObjectManager : MonoBehaviour
 
         int[] buff = { 6200 + (int)trump.deckBuff, 6100 + (int)trump.cardBuff, 6000 + (int)trump.sealBuff };
 
-        //UI‚Ì‘å‚«‚³‚ğ’²®
+        //UIã®å¤§ãã•ã‚’èª¿æ•´
         ExplanationManager.instance._uiSize = new Vector2(200, 150);
         ExplanationManager.instance._uiSizeMini = new Vector2(200, 90);
 
@@ -546,20 +546,20 @@ public class CardObjectManager : MonoBehaviour
 
 
     /// <summary>
-    /// ƒ‰ƒEƒ“ƒh‚ÌÄİ’è‚ÌŠÖ”
+    /// ãƒ©ã‚¦ãƒ³ãƒ‰ã®å†è¨­å®šæ™‚ã®é–¢æ•°
     /// </summary>
     public void RoundReset()
     {
 
         _cardObjects.GetAction(card =>
         {
-            // Šp“x‚ğƒŠƒZƒbƒg
+            // è§’åº¦ã‚’ãƒªã‚»ãƒƒãƒˆ
             card.transform.eulerAngles = _BACK_SIDE;
 
-            // À•W‚ğƒŠƒZƒbƒg
+            // åº§æ¨™ã‚’ãƒªã‚»ãƒƒãƒˆ
             card.transform.position = _cardDeck.position;
 
-            // ƒJ[ƒhƒIƒuƒWƒFƒNƒg‚ÌƒŠƒZƒbƒg‚ğ‚·‚é
+            // ã‚«ãƒ¼ãƒ‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒªã‚»ãƒƒãƒˆã‚’ã™ã‚‹
             card.ResetCard();
 
             return card;
@@ -571,9 +571,9 @@ public class CardObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// –â‘è‚ ‚è@C³‚µ‚È‚¢‚Æ‚¢‚¯‚È‚¢
-    /// ƒJ[ƒh‚ÌƒIƒuƒWƒFƒNƒg‚ğ•À‚Ñ•Ï‚¦‚éŠÖ”
-    /// èD‚ÌƒIƒuƒWƒFƒNƒg‚Æ“à—e‚ª‚¸‚ê‚Ä‚¢‚È‚¢‘O’ñ
+    /// å•é¡Œã‚ã‚Šã€€ä¿®æ­£ã—ãªã„ã¨ã„ã‘ãªã„
+    /// ã‚«ãƒ¼ãƒ‰ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä¸¦ã³å¤‰ãˆã‚‹é–¢æ•°
+    /// æ‰‹æœ­ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨å†…å®¹ãŒãšã‚Œã¦ã„ãªã„å‰æ
     /// </summary>
     /// <param name="nowHand"></param>
     /// <param name="nexthand"></param>
@@ -610,13 +610,13 @@ public class CardObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒvƒŒƒC‚ğŠJn‚·‚éŠÖ”
+    /// ãƒ—ãƒ¬ã‚¤ã‚’é–‹å§‹ã™ã‚‹é–¢æ•°
     /// </summary>
     public void PlayStart()
     {
         List<Card.Trump> trumps = CardManager.instance.GetHand();
 
-        // ƒXƒRƒA‚Ì‰ÁZ‚ğ‚µ‚È‚¢ƒJ[ƒh‚Ìê‡‚Í•Ô‚·ŠÖ”
+        // ã‚¹ã‚³ã‚¢ã®åŠ ç®—ã‚’ã—ãªã„ã‚«ãƒ¼ãƒ‰ã®å ´åˆã¯è¿”ã™é–¢æ•°
         List<int> index = CardManager.instance.GetPlayRoleIndexs();
 
         for (int i = 0; i < _cardObjectHands.Count; i++)
@@ -661,24 +661,24 @@ public class CardObjectManager : MonoBehaviour
     public int GetActionCount() { return _cardObjectHands.GetCount(card => card.GetStatus() == CardObject.status.action); }
 
     /// <summary>
-    /// Œ»İƒvƒŒƒC‚Ì“r’†‚©‚Ç‚¤‚©‚ğ”»’f‚·‚éŠÖ”
+    /// ç¾åœ¨ãƒ—ãƒ¬ã‚¤ã®é€”ä¸­ã‹ã©ã†ã‹ã‚’åˆ¤æ–­ã™ã‚‹é–¢æ•°
     /// </summary>
     /// <returns></returns>
     public bool IsPlaying()
     {
         int count = 0;
 
-        // ƒAƒNƒVƒ‡ƒ“’†‚Ì–‡”
+        // ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ä¸­ã®æšæ•°
         count += _cardObjectHands.GetCount(card => card.GetStatus() == CardObject.status.action);
-        // ƒvƒŒƒC’†‚Ì–‡”
+        // ãƒ—ãƒ¬ã‚¤ä¸­ã®æšæ•°
         count += _cardObjectHands.GetCount(card => card.GetStatus() == CardObject.status.play);
-        // ƒfƒBƒXƒJ[ƒh’†‚Ì–‡”
+        // ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰ä¸­ã®æšæ•°
         count += _cardObjectHands.GetCount(card => card.GetStatus() == CardObject.status.discard);
 
-        // ã‹L‚Ì–‡”‚ªˆê–‡‚Å‚à‚ ‚Á‚½‚çƒvƒŒƒC“r’†‚Æ”»’è
+        // ä¸Šè¨˜ã®æšæ•°ãŒä¸€æšã§ã‚‚ã‚ã£ãŸã‚‰ãƒ—ãƒ¬ã‚¤é€”ä¸­ã¨åˆ¤å®š
 
 
-        // ƒJƒEƒ“ƒg‚ª‘‚¦‚Ä‚¢‚½‚çƒvƒŒƒC‚Ì“r’†
+        // ã‚«ã‚¦ãƒ³ãƒˆãŒå¢—ãˆã¦ã„ãŸã‚‰ãƒ—ãƒ¬ã‚¤ã®é€”ä¸­
         return count > 0 ? true : false;
     }
 
@@ -704,30 +704,30 @@ public class CardObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ‚Â‚Ü‚ñ‚Å‚¢‚éƒJ[ƒh‚ÌˆÚ“®‚ğ‚·‚éŠÖ”
+    /// ã¤ã¾ã‚“ã§ã„ã‚‹ã‚«ãƒ¼ãƒ‰ã®ç§»å‹•ã‚’ã™ã‚‹é–¢æ•°
     /// </summary>
     private void MovingCard()
     {
         if (!_isGrab) return;
 
 
-        //ƒWƒ‡[ƒJ[“¯m‚Ì‹——£
+        //ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼åŒå£«ã®è·é›¢
         float renge = Vector3.Distance(_handPositionLeft.transform.position, _handPositionRight.transform.position) / (_cardObjectHands.Count + 1);
 
 
         float Cardrenge = (_handPositionLeft.transform.position.x + renge * (_isGrabID + 1)) - _cardObjectHands[_isGrabID].transform.position.x;
 
 
-        //‰¡•ûŒü‚Ö‚ÌˆÚ“®‹——£‚ª¬‚³‚©‚Á‚½‚ç‡”Ô‚Ì•ÏX‚ğ‰Á‚¦‚È‚¢
+        //æ¨ªæ–¹å‘ã¸ã®ç§»å‹•è·é›¢ãŒå°ã•ã‹ã£ãŸã‚‰é †ç•ªã®å¤‰æ›´ã‚’åŠ ãˆãªã„
         if (Mathf.Abs(Cardrenge) + 30 < renge) return;
 
-        //ˆÚ“®•ûŒü‚ğ’²®
+        //ç§»å‹•æ–¹å‘ã‚’èª¿æ•´
         int count = 1;
         if (Cardrenge > 1) count = -1;
 
         if (_isGrabID + count >= _cardObjectHands.Count || _isGrabID + count < 0) return;
 
-        //ƒWƒ‡[ƒJ[‚Ì‡”Ô‚ğ“ü‚ê‘Ö‚¦‚éŠÖ”‚ğŒÄ‚Ô
+        //ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®é †ç•ªã‚’å…¥ã‚Œæ›¿ãˆã‚‹é–¢æ•°ã‚’å‘¼ã¶
         CardObjectUtility.ChengeOrder(_isGrabID, _isGrabID + count);
 
 
@@ -740,17 +740,17 @@ public class CardObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒnƒ“ƒhƒJ[ƒhƒIƒuƒWƒFƒNƒg‚ÌÀ•W‚ğˆÚ“®‚³‚¹‚Ä’èˆÊ’u‚ÉˆÚ“®‚³‚¹‚éŠÖ”
+    /// ãƒãƒ³ãƒ‰ã‚«ãƒ¼ãƒ‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åº§æ¨™ã‚’ç§»å‹•ã•ã›ã¦å®šä½ç½®ã«ç§»å‹•ã•ã›ã‚‹é–¢æ•°
     /// </summary>
     private void HandCardSetPosition()
     {
-        //ƒnƒ“ƒh‚Ì–‡”
+        //ãƒãƒ³ãƒ‰ã®æšæ•°
         int handCardCount = _cardObjectHands.Count;
 
-        //ƒJ[ƒh‚ÆƒJ[ƒh‚ÌŠÔ
+        //ã‚«ãƒ¼ãƒ‰ã¨ã‚«ãƒ¼ãƒ‰ã®é–“
         float handCardRange = _handPositionRange / (float)(handCardCount + 1f);
 
-        //ƒvƒŒƒC€”õ‚ÌƒJƒEƒ“ƒ^[
+        //ãƒ—ãƒ¬ã‚¤æº–å‚™ã®ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼
         int playCounter = 0;
 
         MovingCard();
@@ -758,12 +758,12 @@ public class CardObjectManager : MonoBehaviour
 
         for (int i = 0; i < _cardObjectHands.Count; i++)
         {
-            //ˆÚ“®‰Â”\‚©‚Ç‚¤‚©‚ğŠm”F
+            //ç§»å‹•å¯èƒ½ã‹ã©ã†ã‹ã‚’ç¢ºèª
             if (!_cardObjectHands[i].IsMovable()) continue;
             _cardObjectHands[i].CountDown();
 
 
-            //ƒJ[ƒh‚Ìó‘Ô‚²‚Æ‚ÌˆÚ“®ˆ—
+            //ã‚«ãƒ¼ãƒ‰ã®çŠ¶æ…‹ã”ã¨ã®ç§»å‹•å‡¦ç†
             switch (_cardObjectHands[i].GetStatus())
             {
                 case CardObject.status.none:
@@ -771,7 +771,7 @@ public class CardObjectManager : MonoBehaviour
                 case CardObject.status.deck:
                     break;
 
-                //ƒJ[ƒh‚ªèD‚Ö‚ÌˆÚ“®‚Ì‚Ìˆ—
+                //ã‚«ãƒ¼ãƒ‰ãŒæ‰‹æœ­ã¸ã®ç§»å‹•ã®æ™‚ã®å‡¦ç†
                 case CardObject.status.hand:
                     CardMoveHand(_cardObjectHands[i], handCardRange * (i + 1));
                     break;
@@ -785,7 +785,7 @@ public class CardObjectManager : MonoBehaviour
                 case CardObject.status.discard:
                     CardMoveDiscard(_cardObjectHands[i]);
                     break;
-                //Šù‚É•\‚É‚È‚Á‚Ä‚¢‚éƒJ[ƒh‚É•ÏX‚ğ‰Á‚¦‚éó‘Ô
+                //æ—¢ã«è¡¨ã«ãªã£ã¦ã„ã‚‹ã‚«ãƒ¼ãƒ‰ã«å¤‰æ›´ã‚’åŠ ãˆã‚‹çŠ¶æ…‹
                 case CardObject.status.change:
                     HandCardChengeTrump(_cardObjectHands[i], i);
                     break;
@@ -802,7 +802,7 @@ public class CardObjectManager : MonoBehaviour
 
 
     /// <summary>
-    /// ƒfƒbƒL‚©‚çèD‚Ö‚ÌˆÚ“®
+    /// ãƒ‡ãƒƒã‚­ã‹ã‚‰æ‰‹æœ­ã¸ã®ç§»å‹•
     /// </summary>
     /// <param name="cardObjectHand"></param>
     /// <param name="handCardRange"></param>
@@ -810,12 +810,12 @@ public class CardObjectManager : MonoBehaviour
     {
 
 
-        // ˆÚ“®–Ú•W’n“_‚ğŠm”F
+        // ç§»å‹•ç›®æ¨™åœ°ç‚¹ã‚’ç¢ºèª
         Vector3 goalPos = _handPositionLeft.position + new Vector3(handCardRange, 0, 0);
 
-        // ˆÚ“®—Ê‚ÆÀ•W‚ğ‡Œv‚ğZo
+        // ç§»å‹•é‡ã¨åº§æ¨™ã‚’åˆè¨ˆã‚’ç®—å‡º
         Vector3 moveVec = Vector3.Lerp(cardObjectHand.GetBeforePosition(), goalPos, cardObjectHand.GetMoveTimeRata());
-        // Šp“x‚ÌZo
+        // è§’åº¦ã®ç®—å‡º
         Vector3 angle = Vector3.Lerp(cardObjectHand.GetBeforeAngle(), _NORMALl_ANGLE, cardObjectHand.GetMoveTimeRata());
 
         if (cardObjectHand.IsGrab())
@@ -827,15 +827,15 @@ public class CardObjectManager : MonoBehaviour
         }
 
 
-        // ˆÚ“®
+        // ç§»å‹•
         cardObjectHand.transform.position = moveVec;
-        // ƒfƒbƒL‚©‚ço‚½‚Æ‚«‚¾‚¯Šp“x‚Ì‘ã“ü
+        // ãƒ‡ãƒƒã‚­ã‹ã‚‰å‡ºãŸã¨ãã ã‘è§’åº¦ã®ä»£å…¥
         if (cardObjectHand.GetLostStatus() == CardObject.status.deck) cardObjectHand.transform.eulerAngles = angle;
 
 
         if (cardObjectHand.IsMovable()) return;
 
-        //‚»‚ÌŒã‚ÌdŠ|‚¯‚Ìˆ×‚É•K—v
+        //ãã®å¾Œã®ä»•æ›ã‘ã®ç‚ºã«å¿…è¦
         cardObjectHand.SetStatus(CardObject.status.hand);
         cardObjectHand.GravityStart();
 
@@ -844,24 +844,24 @@ public class CardObjectManager : MonoBehaviour
 
     }
     /// <summary>
-    /// èD‚©‚çƒvƒŒƒC€”õó‘Ô‚Ö‚ÌˆÚ“®
+    /// æ‰‹æœ­ã‹ã‚‰ãƒ—ãƒ¬ã‚¤æº–å‚™çŠ¶æ…‹ã¸ã®ç§»å‹•
     /// </summary>
     /// <param name="cardObjectHand"></param>
     /// <param name="handCardRange"></param>
     private void CardMovePlayWait(CardObject cardObjectHand, float handCardRange)
     {
-        // ˆÚ“®–Ú•W’n“_‚ğŠm”F
+        // ç§»å‹•ç›®æ¨™åœ°ç‚¹ã‚’ç¢ºèª
         Vector3 goalPos = _handPositionLeft.position + new Vector3(handCardRange, 0, 0) + _PLAY_WAIT;
 
-        // ˆÚ“®—Ê‚ÆÀ•W‚ğ‡Œv‚ğZo
+        // ç§»å‹•é‡ã¨åº§æ¨™ã‚’åˆè¨ˆã‚’ç®—å‡º
         Vector3 moveVec = Vector3.Lerp(cardObjectHand.GetBeforePosition(), goalPos, cardObjectHand.GetMoveTimeRata());
 
-        // ˆÚ“®
+        // ç§»å‹•
         cardObjectHand.transform.position = moveVec;
 
     }
     /// <summary>
-    /// èD‚©‚çƒvƒŒƒCó‘Ô‚Ö‚ÌˆÚ“®
+    /// æ‰‹æœ­ã‹ã‚‰ãƒ—ãƒ¬ã‚¤çŠ¶æ…‹ã¸ã®ç§»å‹•
     /// </summary>
     /// <param name="cardObjectHand"></param>
     /// <param name="handCardRange"></param>
@@ -871,13 +871,13 @@ public class CardObjectManager : MonoBehaviour
         float vec = (Vector3.Distance(_playPositionLeft.position, _playPositionRight.position) / (GetPlayCardCount() + 1)) * (counter + 1);
 
 
-        // ˆÚ“®–Ú•W’n“_‚ğŠm”F
+        // ç§»å‹•ç›®æ¨™åœ°ç‚¹ã‚’ç¢ºèª
         Vector3 goalPos = _playPositionLeft.position + new Vector3(vec, 0, 0);
 
-        // ˆÚ“®—Ê‚ÆÀ•W‚ğ‡Œv‚ğZo
+        // ç§»å‹•é‡ã¨åº§æ¨™ã‚’åˆè¨ˆã‚’ç®—å‡º
         Vector3 moveVec = Vector3.Lerp(cardObjectHand.GetBeforePosition(), goalPos, cardObjectHand.GetMoveTimeRata());
 
-        // ˆÚ“®
+        // ç§»å‹•
         cardObjectHand.transform.position = moveVec;
 
         if (cardObjectHand.GetMoveTimeRata() < 1) return;
@@ -893,24 +893,24 @@ public class CardObjectManager : MonoBehaviour
                     if (hand.GetMoveTimeRata() < 1) return false;
                     return true;
 
-                    //ˆês‚Ìƒ‰ƒ€ƒ_®
+                    //ä¸€è¡Œã®ãƒ©ãƒ ãƒ€å¼
                     //hand.GetStatus() != CardObject.status.play ? false : hand.GetMoveTimeRata() < 1 ? false : true
                 })) return;
 
 
-        // “’…
+        // åˆ°ç€
         PlayManager.instance.SetCardTransComp(true);
 
         PlayStart();
     }
 
     /// <summary>
-    /// ‘I‘ğó‘Ô‚ÌƒJ[ƒh‚ğ‘S‚Äƒgƒ‰ƒbƒVƒ…‚É‘—‚é
+    /// é¸æŠçŠ¶æ…‹ã®ã‚«ãƒ¼ãƒ‰ã‚’å…¨ã¦ãƒˆãƒ©ãƒƒã‚·ãƒ¥ã«é€ã‚‹
     /// </summary>
     private void IsSelectTrash()
     {
 
-        // ƒvƒŒƒC‚ğs‚Á‚½ƒJ[ƒh‚ğƒgƒ‰ƒbƒVƒ…‚ÉˆÚs
+        // ãƒ—ãƒ¬ã‚¤ã‚’è¡Œã£ãŸã‚«ãƒ¼ãƒ‰ã‚’ãƒˆãƒ©ãƒƒã‚·ãƒ¥ã«ç§»è¡Œ
         List<Card.Trump> hands = CardManager.instance.GetHand();
 
         hands.GetAction(hands =>
@@ -947,22 +947,22 @@ public class CardObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒJ[ƒh‚ğƒgƒ‰ƒbƒVƒ…‚ÉˆÚ“®‚³‚¹‚éŠÖ”
+    /// ã‚«ãƒ¼ãƒ‰ã‚’ãƒˆãƒ©ãƒƒã‚·ãƒ¥ã«ç§»å‹•ã•ã›ã‚‹é–¢æ•°
     /// </summary>
     /// <param name="cardObjectHand"></param>
     private void CardMoveDiscard(CardObject cardObjectHand)
     {
 
-        // ˆÚ“®–Ú•W’n“_‚ğŠm”F
+        // ç§»å‹•ç›®æ¨™åœ°ç‚¹ã‚’ç¢ºèª
         Vector3 goalPos = _handTrash.position;
 
-        // ˆÚ“®—Ê‚ÆÀ•W‚ğ‡Œv‚ğZo
+        // ç§»å‹•é‡ã¨åº§æ¨™ã‚’åˆè¨ˆã‚’ç®—å‡º
         Vector3 moveVec = Vector3.Lerp(cardObjectHand.GetBeforePosition(), goalPos, cardObjectHand.GetMoveTimeRata());
 
-        // ˆÚ“®
+        // ç§»å‹•
         cardObjectHand.transform.position = moveVec;
 
-        // Šp“x‚Ì•ÏX
+        // è§’åº¦ã®å¤‰æ›´
         cardObjectHand.transform.eulerAngles = Vector3.Lerp(_NORMALl_ANGLE, _TRASH_ANGLE,
             (cardObjectHand.GetMoveTimeRata() * _ANGLE_CHANGE_SPEED) > 1 ? 1 : cardObjectHand.GetMoveTimeRata() * _ANGLE_CHANGE_SPEED);
 
@@ -973,12 +973,12 @@ public class CardObjectManager : MonoBehaviour
 
         if (_cardObjectHands.GetCount(card => card.GetStatus() == CardObject.status.discard) != 0) return;
 
-        // ‘I‘ğó‘Ô‚ÌƒJ[ƒh‚ğ‘S‚Äƒgƒ‰ƒbƒVƒ…‚É‘—‚é
+        // é¸æŠçŠ¶æ…‹ã®ã‚«ãƒ¼ãƒ‰ã‚’å…¨ã¦ãƒˆãƒ©ãƒƒã‚·ãƒ¥ã«é€ã‚‹
         IsSelectTrash();
 
 
 
-        //ƒ‰ƒEƒ“ƒh‚ÌI—¹€”õ‚ğ‚·‚é
+        //ãƒ©ã‚¦ãƒ³ãƒ‰ã®çµ‚äº†æº–å‚™ã‚’ã™ã‚‹
         RoundObserver.Instance.StartRoundEnd();
 
 
@@ -986,15 +986,15 @@ public class CardObjectManager : MonoBehaviour
 
     }
     /// <summary>
-    /// Šù‚É•\‚É‚È‚Á‚Ä‚¢‚éƒJ[ƒh‚É•ÏX‚ğ‰Á‚¦‚é
+    /// æ—¢ã«è¡¨ã«ãªã£ã¦ã„ã‚‹ã‚«ãƒ¼ãƒ‰ã«å¤‰æ›´ã‚’åŠ ãˆã‚‹
     /// </summary>
     private void HandCardChengeTrump(CardObject cardObjectHand, int id)
     {
 
-        // –Ú•WŠp“x‚ğİ’è
+        // ç›®æ¨™è§’åº¦ã‚’è¨­å®š
         Vector3 goal = _chengeCardID.Contains(id) ? _BACK_SIDE : _NORMALl_ANGLE;
 
-        // ‰ŠúŠp“x‚ğİ’è
+        // åˆæœŸè§’åº¦ã‚’è¨­å®š
         Vector3 start = _chengeCardID.Contains(id) ? _NORMALl_ANGLE : _BACK_SIDE;
 
 
@@ -1002,13 +1002,13 @@ public class CardObjectManager : MonoBehaviour
             (cardObjectHand.GetMoveTimeRata() * _ANGLE_CHANGE_SPEED) > 1 ? 1 : cardObjectHand.GetMoveTimeRata() * _ANGLE_CHANGE_SPEED);
 
 
-        // Œ»İ“®‚¯‚éó‘Ô‚©‚ğŠm”F
+        // ç¾åœ¨å‹•ã‘ã‚‹çŠ¶æ…‹ã‹ã‚’ç¢ºèª
         if (cardObjectHand.IsMovable()) return;
 
-        // ‚à‚¤ˆê“x“®‚¯‚é‚æ‚¤‚É•ÏX
+        // ã‚‚ã†ä¸€åº¦å‹•ã‘ã‚‹ã‚ˆã†ã«å¤‰æ›´
         cardObjectHand.ResetMoveTime();
 
-        // •ÏX‚ğ‚µ‚Ä‚¢‚éƒJ[ƒh‚ª”z—ñ‚Ì‰½”Ô‚©‚ğŠm”F
+        // å¤‰æ›´ã‚’ã—ã¦ã„ã‚‹ã‚«ãƒ¼ãƒ‰ãŒé…åˆ—ã®ä½•ç•ªã‹ã‚’ç¢ºèª
         int targetID = _chengeCardID.FindIndex(n => n == id);
 
         if (!_chengeCardID.Contains(id) && cardObjectHand.GetStatus() != CardObject.status.hand)
@@ -1024,7 +1024,7 @@ public class CardObjectManager : MonoBehaviour
 
         if (targetID < 0) return;
 
-        // Šm”F‚µ‚½”Ô†‚Ì”z—ñ‚ğœŠO
+        // ç¢ºèªã—ãŸç•ªå·ã®é…åˆ—ã‚’é™¤å¤–
         _chengeCardID.RemoveAt(targetID);
 
 
@@ -1034,14 +1034,14 @@ public class CardObjectManager : MonoBehaviour
     private int reta = 1;
     private Vector3 _lostAngle = Vector3.zero;
     /// <summary>
-    /// ƒJ[ƒh‚ÌƒAƒNƒVƒ‡ƒ“‚ğs‚¤ƒNƒ‰ƒX
+    /// ã‚«ãƒ¼ãƒ‰ã®ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’è¡Œã†ã‚¯ãƒ©ã‚¹
     /// </summary>
     /// <param name="cardObjectHand"></param>
     /// <param name="ID"></param>
     private void HandCardActionTrump(CardObject cardObjectHand, int ID)
     {
 
-        // ƒAƒNƒVƒ‡ƒ“‘Ò‹@‚Ì’†‚Åˆê”Ôá‚¢ƒIƒuƒWƒFƒNƒg‚Ì‚Æ‚«‚¾‚¯’Ê‚·
+        // ã‚¢ã‚¯ã‚·ãƒ§ãƒ³å¾…æ©Ÿã®ä¸­ã§ä¸€ç•ªè‹¥ã„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã¨ãã ã‘é€šã™
         if (ID != _cardObjectHands.FindIndex(hand => hand.GetStatus() == CardObject.status.action)) return;
 
 
@@ -1052,9 +1052,13 @@ public class CardObjectManager : MonoBehaviour
         if (_time < 1) return;
 
         _time = 0;
+        int completedReta = reta;
         if (reta == 0) reta = -1;
         if (reta == 1) reta = 0;
-        _lostAngle = cardObjectHand.transform.eulerAngles;
+        // transform.eulerAngles ã¯ 0ã€œ360 ã§æ­£è¦åŒ–ã•ã‚Œã¦è¿”ã£ã¦ãã‚‹ãŸã‚ã€
+        // ãã®ã¾ã¾æ¬¡ã® Lerp ã®é–‹å§‹è§’åº¦ã«ä½¿ã†ã¨(ä¾‹:359.99Â°ãªã©)å¤§ããå›ã‚Šè¾¼ã‚“ã§ã—ã¾ã†ã“ã¨ãŒã‚ã‚‹ã€‚
+        // ç›´å‰ã®ãƒ•ã‚§ãƒ¼ã‚ºã®ç›®æ¨™è§’åº¦ã‚’ãã®ã¾ã¾ä½¿ã†ã“ã¨ã§ã€ã“ã®å›ã‚Šè¾¼ã¿ã‚’é˜²ãã€‚
+        _lostAngle = new Vector3(0, 0, 45 * completedReta);
 
         if (reta != -1) return;
         _cardObjectHands[ID].PlayAction();
@@ -1064,8 +1068,8 @@ public class CardObjectManager : MonoBehaviour
 
         if (_cardObjectHands[ID].GetActionsCount() > 0) return;
 
-        //‰¼‘g‚İ@ƒXƒRƒA‚Ì‰ÁZ Œã‚Å•ÏX‚·‚é
-        // ƒAƒNƒVƒ‡ƒ“‚ğ’Ç‰Á‚µ‚½–‚É‚ ‚½‚è•ÏX‚µ‚½’l‚ğ–ß‚µ‚Ä‚¢‚é
+        //ä»®çµ„ã¿ã€€ã‚¹ã‚³ã‚¢ã®åŠ ç®— å¾Œã§å¤‰æ›´ã™ã‚‹
+        // ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’è¿½åŠ ã—ãŸäº‹ã«ã‚ãŸã‚Šå¤‰æ›´ã—ãŸå€¤ã‚’æˆ»ã—ã¦ã„ã‚‹
         _cardObjectHands[ID].SetStatus(_cardObjectHands[ID].GetLostStatus());
         _cardObjectHands[ID].SetGrab(false);
         _cardObjectHands[ID].StopMove();
@@ -1074,7 +1078,7 @@ public class CardObjectManager : MonoBehaviour
 
 
 
-        //ƒAƒNƒVƒ‡ƒ“‘Ò‹@‚ª‘¶İ‚µ‚Ä‚¢‚é
+        //ã‚¢ã‚¯ã‚·ãƒ§ãƒ³å¾…æ©ŸãŒå­˜åœ¨ã—ã¦ã„ã‚‹
         if (_cardObjectHands.GetCount(hand => hand.GetStatus() == CardObject.status.action) > 0) return;
 
         JokerUtility.JokerPlayStart();
@@ -1083,7 +1087,7 @@ public class CardObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ‰¼‘g‚İ
+    /// ä»®çµ„ã¿
     /// </summary>
     /// <param name="ID"></param>
     public void TrunpScore(int ID)
@@ -1097,10 +1101,10 @@ public class CardObjectManager : MonoBehaviour
 
         ScoreManager.instance.BasicPlus(score);
         GameConfig.AccelerateGameSpeed();
-        // TODO:•¶š‚ğo‚·@ƒ}ƒW‚ÅŒã–Æ
+        // TODO:æ–‡å­—ã‚’å‡ºã™ã€€ãƒã‚¸ã§å¾Œå…
         // score
         //_cardObjectHands[ID].gameObject
-        // Šî–{ƒXƒRƒA
+        // åŸºæœ¬ã‚¹ã‚³ã‚¢
         ScoreManager.instance.SetScoreViewID(ID);
         ScoreManager.instance.SetScoreViewTrans(_cardObjectHands[ID].gameObject.transform.position);
 
@@ -1112,7 +1116,7 @@ public class CardObjectManager : MonoBehaviour
 
 
     /// <summary>
-    /// ƒJ[ƒh‚Ìî•ñ‚ğŒ³‚ÉƒJ[ƒh‚Ìƒ}ƒeƒŠƒAƒ‹‚ğƒZƒbƒg‚·‚éŠÖ”
+    /// ã‚«ãƒ¼ãƒ‰ã®æƒ…å ±ã‚’å…ƒã«ã‚«ãƒ¼ãƒ‰ã®ãƒãƒ†ãƒªã‚¢ãƒ«ã‚’ã‚»ãƒƒãƒˆã™ã‚‹é–¢æ•°
     /// </summary>
     public void CardPaint(Card.Trump cardData, GameObject gameObject)
     {
@@ -1120,19 +1124,19 @@ public class CardObjectManager : MonoBehaviour
 
         MeshRenderer meshRenderer = gameObject.transform.GetChild(0).GetComponent<MeshRenderer>();
         Material[] materials = meshRenderer.materials;
-        // ƒgƒ‰ƒ“ƒv‚ÌƒGƒtƒFƒNƒgƒ}ƒeƒŠƒAƒ‹‚ğƒZƒbƒg
+        // ãƒˆãƒ©ãƒ³ãƒ—ã®ã‚¨ãƒ•ã‚§ã‚¯ãƒˆãƒãƒ†ãƒªã‚¢ãƒ«ã‚’ã‚»ãƒƒãƒˆ
         if (Card.deckBuff.None != cardData.deckBuff) materials[(int)cardMaterialType.effect] = BuffUtility.GetTrumpMaterial((int)cardData.deckBuff);
         else materials[(int)cardMaterialType.effect] = BuffUtility.GetDommyMaterial();
         if (Card.cardBuff.None != cardData.cardBuff) materials[(int)cardMaterialType.effect] = BuffUtility.GetCardMaterial((int)cardData.cardBuff);
         if (Card.sealBuff.None != cardData.sealBuff) materials[(int)cardMaterialType.sael] = BuffUtility.GetSealMaterial((int)cardData.sealBuff);
         else materials[(int)cardMaterialType.sael] = BuffUtility.GetDommyMaterial();
 
-        // ƒgƒ‰ƒ“ƒv‚Ìƒ\[ƒc‚Æƒiƒ“ƒo[‚ğŠÜ‚ñ‚¾ƒ}ƒeƒŠƒAƒ‹‚ğƒZƒbƒg
+        // ãƒˆãƒ©ãƒ³ãƒ—ã®ã‚½ãƒ¼ãƒ„ã¨ãƒŠãƒ³ãƒãƒ¼ã‚’å«ã‚“ã ãƒãƒ†ãƒªã‚¢ãƒ«ã‚’ã‚»ãƒƒãƒˆ
         materials[(int)cardMaterialType.main] = _materialManager.GetMaterial((int)cardData.suit, (int)cardData.number);
 
         if (cardData.deckBuff == Card.deckBuff.Glass)
         {
-            //ƒOƒ‰ƒY‚Ìƒ}ƒeƒŠƒAƒ‹‚Ì‚Æ‚«‚¾‚¯ƒx[ƒX‚Ìƒ}ƒeƒŠƒAƒ‹‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ‚[ƒh‚ğFade‚É•ÏX‚·‚é
+            //ã‚°ãƒ©ã‚ºã®ãƒãƒ†ãƒªã‚¢ãƒ«ã®ã¨ãã ã‘ãƒ™ãƒ¼ã‚¹ã®ãƒãƒ†ãƒªã‚¢ãƒ«ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ãƒ¢ãƒ¼ãƒ‰ã‚’Fadeã«å¤‰æ›´ã™ã‚‹
             materials[(int)cardMaterialType.main].SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
             materials[(int)cardMaterialType.main].SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
             materials[(int)cardMaterialType.main].SetInt("_ZWrite", 1);
@@ -1162,19 +1166,19 @@ public class CardObjectManager : MonoBehaviour
 
         MeshRenderer meshRenderer = _cardObjectHands[id].transform.GetChild(0).GetComponent<MeshRenderer>();
         Material[] materials = meshRenderer.materials;
-        // ƒgƒ‰ƒ“ƒv‚ÌƒGƒtƒFƒNƒgƒ}ƒeƒŠƒAƒ‹‚ğƒZƒbƒg
+        // ãƒˆãƒ©ãƒ³ãƒ—ã®ã‚¨ãƒ•ã‚§ã‚¯ãƒˆãƒãƒ†ãƒªã‚¢ãƒ«ã‚’ã‚»ãƒƒãƒˆ
         if (Card.deckBuff.None != cardData.deckBuff) materials[(int)cardMaterialType.effect] = BuffUtility.GetTrumpMaterial((int)cardData.deckBuff);
         else materials[(int)cardMaterialType.effect] = BuffUtility.GetDommyMaterial();
         if (Card.cardBuff.None != cardData.cardBuff) materials[(int)cardMaterialType.effect] = BuffUtility.GetCardMaterial((int)cardData.cardBuff);
         if (Card.sealBuff.None != cardData.sealBuff) materials[(int)cardMaterialType.sael] = BuffUtility.GetSealMaterial((int)cardData.sealBuff);
         else materials[(int)cardMaterialType.sael] = BuffUtility.GetDommyMaterial();
 
-        // ƒgƒ‰ƒ“ƒv‚Ìƒ\[ƒc‚Æƒiƒ“ƒo[‚ğŠÜ‚ñ‚¾ƒ}ƒeƒŠƒAƒ‹‚ğƒZƒbƒg
+        // ãƒˆãƒ©ãƒ³ãƒ—ã®ã‚½ãƒ¼ãƒ„ã¨ãƒŠãƒ³ãƒãƒ¼ã‚’å«ã‚“ã ãƒãƒ†ãƒªã‚¢ãƒ«ã‚’ã‚»ãƒƒãƒˆ
         materials[(int)cardMaterialType.main] = _materialManager.GetMaterial((int)cardData.suit, (int)cardData.number);
 
         if (cardData.deckBuff == Card.deckBuff.Glass)
         {
-            //ƒOƒ‰ƒY‚Ìƒ}ƒeƒŠƒAƒ‹‚Ì‚Æ‚«‚¾‚¯ƒx[ƒX‚Ìƒ}ƒeƒŠƒAƒ‹‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒOƒ‚[ƒh‚ğFade‚É•ÏX‚·‚é
+            //ã‚°ãƒ©ã‚ºã®ãƒãƒ†ãƒªã‚¢ãƒ«ã®ã¨ãã ã‘ãƒ™ãƒ¼ã‚¹ã®ãƒãƒ†ãƒªã‚¢ãƒ«ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ãƒ¢ãƒ¼ãƒ‰ã‚’Fadeã«å¤‰æ›´ã™ã‚‹
             materials[(int)cardMaterialType.main].SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
             materials[(int)cardMaterialType.main].SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
             materials[(int)cardMaterialType.main].SetInt("_ZWrite", 1);
@@ -1199,26 +1203,26 @@ public class CardObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// g—p‰Â”\‚ÈƒJ[ƒh‚ğ•Ô‚·ŠÖ”
+    /// ä½¿ç”¨å¯èƒ½ãªã‚«ãƒ¼ãƒ‰ã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <returns></returns>
     private CardObject GetUseCardObject()
     {
         for (int i = _cardObjects.Count - 1; i >= 0; i--)
         {
-            // ƒJ[ƒh‚ªdeck‚É‚È‚©‚Á‚½‚ç‚à‚¤ˆê“x
+            // ã‚«ãƒ¼ãƒ‰ãŒdeckã«ãªã‹ã£ãŸã‚‰ã‚‚ã†ä¸€åº¦
             if (_cardObjects[i].GetStatus() != CardObject.status.deck) continue;
 
             return _cardObjects[i];
         }
-        // ‰½‚à•Ô‚¹‚é•¨‚ª‚È‚¢
+        // ä½•ã‚‚è¿”ã›ã‚‹ç‰©ãŒãªã„
         return null;
 
     }
 
 
     /// <summary>
-    /// 52–‡¶¬‚·‚éŠÖ”
+    /// 52æšç”Ÿæˆã™ã‚‹é–¢æ•°
     /// </summary>
     private void CreateCard()
     {
@@ -1237,7 +1241,7 @@ public class CardObjectManager : MonoBehaviour
 
 
     /// <summary>
-    /// ƒvƒŒƒCó‘Ô‚ÌƒJ[ƒh‚Ì”‚ğƒJƒEƒ“ƒg‚·‚éŠÖ”
+    /// ãƒ—ãƒ¬ã‚¤çŠ¶æ…‹ã®ã‚«ãƒ¼ãƒ‰ã®æ•°ã‚’ã‚«ã‚¦ãƒ³ãƒˆã™ã‚‹é–¢æ•°
     /// </summary>
     /// <returns></returns>
     private int GetPlayCardCount()
