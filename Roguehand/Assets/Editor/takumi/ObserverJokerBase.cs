@@ -1,4 +1,4 @@
-using System.IO;
+ï»¿using System.IO;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
@@ -16,7 +16,7 @@ public class ObserverJokerBase : AssetPostprocessor
         {
             if (!filename.Equals(asset))
                 continue;
-            Debug.Log("ƒWƒ‡[ƒJ[‚Ì—ñ‹“‘Ì‚Ì¶¬ŠJn");
+            Debug.Log("ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®åˆ—æŒ™ä½“ã®ç”Ÿæˆé–‹å§‹");
 
             CreateCS(filePath + filePath2);
 
@@ -40,7 +40,6 @@ public class ObserverJokerBase : AssetPostprocessor
         builder.Clear();
         builder.Append("public  static class JokerBaseEnum {");
         builder.AppendLine();
-
 
         builder.Append("public enum JokerEnum {");
         builder.AppendLine();
@@ -66,7 +65,6 @@ public class ObserverJokerBase : AssetPostprocessor
         builder.Append("MAX");
         builder.AppendLine();
 
-
         builder.Append("}");
 
         builder.AppendLine();
@@ -76,9 +74,8 @@ public class ObserverJokerBase : AssetPostprocessor
         sw.Write(builder.ToString());
 
         sw.Close();
-        Debug.Log("ƒWƒ‡[ƒJ[‚Ì—ñ‹“‘Ì‚Ì¶¬Š®—¹");
+        Debug.Log("ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®åˆ—æŒ™ä½“ã®ç”Ÿæˆå®Œäº†");
     }
 
-
-
 }
+

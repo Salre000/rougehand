@@ -1,67 +1,65 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ƒoƒt‚Ìƒ}ƒl[ƒWƒƒ[
+/// ãƒãƒ•ã®ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
 /// </summary>
 public class BuffManager : MonoBehaviour
 {
     [SerializeField] BuffMaterialLists materialLists;
 
     /// <summary>
-    /// ƒfƒtƒHƒ‹ƒg‚Ég‚í‚ê‚é“§–¾‚Èƒ}ƒeƒŠƒAƒ‹
+    /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆæ™‚ã«ä½¿ã‚ã‚Œã‚‹é€æ˜ãªãƒãƒ†ãƒªã‚¢ãƒ«
     /// </summary>
     [SerializeField] private Material dommyMaterial;
 
     /// <summary>
-    /// ƒV[ƒ‹‘®«‚Ìƒoƒt“à—e
+    /// ã‚·ãƒ¼ãƒ«å±æ€§ã®ãƒãƒ•å†…å®¹
     /// </summary>
     private SealBuff _sealBuff;
     [SerializeField] List<Material> sealMaterial = new List<Material>();
 
     /// <summary>
-    /// ƒJ[ƒh‘®«‚Ìƒoƒt“à—e
+    /// ã‚«ãƒ¼ãƒ‰å±æ€§ã®ãƒãƒ•å†…å®¹
     /// </summary>
     private CardBuff _cardBuff;
     [SerializeField] List<Material> cardMaterial = new List<Material>();
 
     /// <summary>
-    /// ƒgƒ‰ƒ“ƒv‘®«‚Ìƒoƒt“à—e
+    /// ãƒˆãƒ©ãƒ³ãƒ—å±æ€§ã®ãƒãƒ•å†…å®¹
     /// </summary>
     private TrumpBuff _trumpBuff;
     [SerializeField] List<Material> trumpMaterial = new List<Material>();
 
-
     [SerializeField] List<Material> jokerMaterial = new List<Material>();
     /// <summary>
-    /// ƒVƒXƒeƒ€‚ÉŠ±Â‚·‚é‰Â”\«‚Ì‚ ‚éƒoƒt‚ÌƒNƒ‰ƒX
+    /// ã‚·ã‚¹ãƒ†ãƒ ã«å¹²æ¸‰ã™ã‚‹å¯èƒ½æ€§ã®ã‚ã‚‹ãƒãƒ•ã®ã‚¯ãƒ©ã‚¹
     /// </summary>
     private SystemErrorBuff _errorBuff;
 
     /// <summary>
-    /// ƒGƒ‰[ƒoƒt‚ÌƒXƒRƒAã¸‚È‚Ç‚ÌƒŠƒXƒg
+    /// ã‚¨ãƒ©ãƒ¼ãƒãƒ•ã®ã‚¹ã‚³ã‚¢ä¸Šæ˜‡ãªã©ã®ãƒªã‚¹ãƒˆ
     /// </summary>
     private List<System.Func<float>> errorBuffAction = new List<System.Func<float>>();
 
     /// <summary>
-    /// ƒuƒ‰ƒbƒNƒV[ƒ‹‚Ég‚¤”{—¦
+    /// ãƒ–ãƒ©ãƒƒã‚¯ã‚·ãƒ¼ãƒ«ã«ä½¿ã†å€ç‡
     /// </summary>
     private readonly float BLACK_ERROR_BUFF_MAGNIFICATION = 2f;
     /// <summary>
-    /// ƒ}ƒEƒXƒWƒƒƒ}[‚Ég‚¤”{—¦
+    /// ãƒã‚¦ã‚¹ã‚¸ãƒ£ãƒãƒ¼ã«ä½¿ã†å€ç‡
     /// </summary>
     private readonly float MOUSEJAMMER_ERROR_BUFF_MAGNIFICATION = 5f;
     /// <summary>
-    /// ƒuƒ‰ƒCƒ“ƒhƒXƒRƒA‚Ég‚¤”{—¦
+    /// ãƒ–ãƒ©ã‚¤ãƒ³ãƒ‰ã‚¹ã‚³ã‚¢ã«ä½¿ã†å€ç‡
     /// </summary>
     private readonly float BLINDSCORE_ERROR_BUFF_MAGNIFICATION = 1f;
 
     /// <summary>
-    /// ƒIƒuƒWƒFƒNƒgƒ€[ƒu‚Ég‚¤”{—¦
+    /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ ãƒ¼ãƒ–ã«ä½¿ã†å€ç‡
     /// </summary>
     private readonly float OBJECTMOVES_BUFF_MAGNIFICATION = 1f;
-
 
     public void Awake()
     {
@@ -71,13 +69,10 @@ public class BuffManager : MonoBehaviour
     {
         _errorBuff?.UpData();
 
-
-
-
     }
     private void Initializ()
     {
-        // ƒNƒ‰ƒX‚Ì¶¬
+        // ã‚¯ãƒ©ã‚¹ã®ç”Ÿæˆ
         _sealBuff = new SealBuff();
         _cardBuff = new CardBuff();
         _trumpBuff = new TrumpBuff();
@@ -94,53 +89,48 @@ public class BuffManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒVƒXƒeƒ€ƒGƒ‰[ƒoƒt‚É•ª—Ş‚³‚ê‚éƒXƒRƒA‚È‚Ç‚Ìã¸‚ğs‚¤ŠÖ”
+    /// ã‚·ã‚¹ãƒ†ãƒ ã‚¨ãƒ©ãƒ¼ãƒãƒ•ã«åˆ†é¡ã•ã‚Œã‚‹ã‚¹ã‚³ã‚¢ãªã©ã®ä¸Šæ˜‡ã‚’è¡Œã†é–¢æ•°
     /// </summary>
     public void SystemErrorBuff()
     {
-        //‘O‰ñ‚Ì‚ğ‰Šú‰»
+        //å‰å›ã®ã‚’åˆæœŸåŒ–
         errorBuffAction.Clear();
 
-        // ƒuƒ‰ƒbƒNƒV[ƒ‹
+        // ãƒ–ãƒ©ãƒƒã‚¯ã‚·ãƒ¼ãƒ«
         errorBuffAction.Add(() => CardManager.instance.GetDeck().GetCount(card => card.sealBuff == Card.sealBuff.Black) * 2);
 
-        // ƒIƒuƒWƒFƒNƒgƒ€[ƒu
+        // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ ãƒ¼ãƒ–
         errorBuffAction.Add(() => JokerUtility.GetJokers().GetCount(joker => joker.GetJokerBuff() == Card.JokerBuff.ObjectMoves));
-        // ƒuƒ‰ƒCƒ“ƒh
+        // ãƒ–ãƒ©ã‚¤ãƒ³ãƒ‰
         errorBuffAction.Add(() => CardManager.instance.GetDeck().GetCount(card => card.deckBuff == Card.deckBuff.BlindScore));
 
-        // ƒ}ƒEƒXƒWƒƒƒ}[
+        // ãƒã‚¦ã‚¹ã‚¸ãƒ£ãƒãƒ¼
         errorBuffAction.Add(() =>
         {
             float counter = MOUSEJAMMER_ERROR_BUFF_MAGNIFICATION;
 
-            // ‘¼‚ÌƒGƒ‰[ƒoƒt‚Ì’iŠK‚ğ‰ÁZ
+            // ä»–ã®ã‚¨ãƒ©ãƒ¼ãƒãƒ•ã®æ®µéšã‚’åŠ ç®—
             counter += CardManager.instance.GetDeck().GetCount(card => card.sealBuff == Card.sealBuff.Black);
             counter += JokerUtility.GetJokers().GetCount(joker => joker.GetJokerBuff() == Card.JokerBuff.ObjectMoves);
             counter += CardManager.instance.GetDeck().GetCount(card => card.deckBuff == Card.deckBuff.BlindScore);
-
-
 
             return counter;
         });
     }
 
-
-
     /// <summary>
-    /// ƒJ[ƒh‚ğƒvƒŒƒC‚µ‚½‚É”­“®‚·‚éƒoƒt
+    /// ã‚«ãƒ¼ãƒ‰ã‚’ãƒ—ãƒ¬ã‚¤ã—ãŸæ™‚ã«ç™ºå‹•ã™ã‚‹ãƒãƒ•
     /// </summary>
     public void PlayBuff(Card.Trump trump)
     {
-        //ƒV[ƒ‹‚ÌŒø‰Ê‚ğ”­“®‚·‚é
+        //ã‚·ãƒ¼ãƒ«ã®åŠ¹æœã‚’ç™ºå‹•ã™ã‚‹
         _sealBuff.Play(trump.sealBuff);
 
-        //ƒJ[ƒh‚Ìƒoƒt‚ğ”­“®
+        //ã‚«ãƒ¼ãƒ‰ã®ãƒãƒ•ã‚’ç™ºå‹•
         _cardBuff.Hand(trump.cardBuff);
 
-        //ƒfƒbƒLƒJ[ƒh‚Ìƒoƒt‚ğ”­“®
+        //ãƒ‡ãƒƒã‚­ã‚«ãƒ¼ãƒ‰ã®ãƒãƒ•ã‚’ç™ºå‹•
         _trumpBuff.Play(trump.deckBuff);
-
 
     }
     public bool CheckPlayBuffCard(Card.cardBuff cardBuff)
@@ -179,14 +169,13 @@ public class BuffManager : MonoBehaviour
     }
 
     /// <summary>
-    ///  ƒgƒ‰ƒ“ƒv‚ğèD‚É‚Á‚Ä‚¢‚é‚ÉŒø‰Ê‚ª”­“®‚·‚é‚©‚Ç‚¤‚©
+    ///  ãƒˆãƒ©ãƒ³ãƒ—ã‚’æ‰‹æœ­ã«æŒã£ã¦ã„ã‚‹æ™‚ã«åŠ¹æœãŒç™ºå‹•ã™ã‚‹ã‹ã©ã†ã‹
     /// </summary>
     /// <param name="trump"></param>
     /// <returns></returns>
-    public bool CheckHandBuffs(Card.Trump trump) 
+    public bool CheckHandBuffs(Card.Trump trump)
     {
         bool flag = false;
-
 
         return flag;
     }
@@ -209,7 +198,7 @@ public class BuffManager : MonoBehaviour
 
     }
     /// <summary>
-    /// èD‚Å”­“®‚·‚éƒoƒt‚ª‘¶İ‚·‚é‚©‚Ç‚¤‚©‚ğ”»’f
+    /// æ‰‹æœ­ã§ç™ºå‹•ã™ã‚‹ãƒãƒ•ãŒå­˜åœ¨ã™ã‚‹ã‹ã©ã†ã‹ã‚’åˆ¤æ–­
     /// </summary>
     /// <param name="deck"></param>
     /// <returns></returns>
@@ -227,11 +216,9 @@ public class BuffManager : MonoBehaviour
 
         return flag;
 
-
-
     }
     /// <summary>
-    ///  ƒJ[ƒh‚Ìƒoƒt‚ÌŠÖ”©‘Ì‚ğ•Ô‚·
+    ///  ã‚«ãƒ¼ãƒ‰ã®ãƒãƒ•ã®é–¢æ•°è‡ªä½“ã‚’è¿”ã™
     /// </summary>
     /// <param name="deckBuff"></param>
     /// <returns></returns>
@@ -241,7 +228,7 @@ public class BuffManager : MonoBehaviour
     }
 
     /// <summary>
-    ///  ƒJ[ƒh‚Ìƒoƒt‚ÌŠÖ”©‘Ì‚ğ•Ô‚·
+    ///  ã‚«ãƒ¼ãƒ‰ã®ãƒãƒ•ã®é–¢æ•°è‡ªä½“ã‚’è¿”ã™
     /// </summary>
     /// <param name="cardBuff"></param>
     /// <returns></returns>
@@ -250,7 +237,7 @@ public class BuffManager : MonoBehaviour
         return () => _cardBuff.Play(cardBuff);
     }
     /// <summary>
-    ///  ƒV[ƒ‹‚Ìƒoƒt‚ÌŠÖ”©‘Ì‚ğ•Ô‚·
+    ///  ã‚·ãƒ¼ãƒ«ã®ãƒãƒ•ã®é–¢æ•°è‡ªä½“ã‚’è¿”ã™
     /// </summary>
     /// <param name="cardBuff"></param>
     /// <returns></returns>
@@ -259,54 +246,51 @@ public class BuffManager : MonoBehaviour
         return () => _sealBuff.Play(sealBuff);
     }
 
-
     /// <summary>
-    /// ƒJ[ƒh‚ğƒvƒŒƒC‚µ‚½‚ÉèD‚Å”­“®‚·‚éƒoƒt
+    /// ã‚«ãƒ¼ãƒ‰ã‚’ãƒ—ãƒ¬ã‚¤ã—ãŸæ™‚ã«æ‰‹æœ­ã§ç™ºå‹•ã™ã‚‹ãƒãƒ•
     /// </summary>
     /// <param name="trump"></param>
     public void HandBuff(Card.Trump trump)
     {
-        //ƒV[ƒ‹‚ÌŒø‰Ê‚ğ”­“®‚·‚é
+        //ã‚·ãƒ¼ãƒ«ã®åŠ¹æœã‚’ç™ºå‹•ã™ã‚‹
         _sealBuff.Hand(trump.sealBuff);
 
-        //ƒJ[ƒh‚Ìƒoƒt‚ğ”­“®
+        //ã‚«ãƒ¼ãƒ‰ã®ãƒãƒ•ã‚’ç™ºå‹•
         _cardBuff.Hand(trump.cardBuff);
 
-        //ƒfƒbƒLƒJ[ƒh‚Ìƒoƒt‚ğ”­“®
+        //ãƒ‡ãƒƒã‚­ã‚«ãƒ¼ãƒ‰ã®ãƒãƒ•ã‚’ç™ºå‹•
         _trumpBuff.Hand(trump.deckBuff);
-
 
     }
     /// <summary>
-    /// ƒJ[ƒh‚ğƒfƒBƒXƒJ[ƒh‚µ‚½‚É”­“®‚·‚éƒoƒt
+    /// ã‚«ãƒ¼ãƒ‰ã‚’ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰ã—ãŸæ™‚ã«ç™ºå‹•ã™ã‚‹ãƒãƒ•
     /// </summary>
     /// <param name="trump"></param>
     public void DiscardBuff(Card.Trump trump)
     {
-        //ƒV[ƒ‹‚ÌŒø‰Ê‚ğ”­“®‚·‚é
+        //ã‚·ãƒ¼ãƒ«ã®åŠ¹æœã‚’ç™ºå‹•ã™ã‚‹
         _sealBuff.Discard(trump.sealBuff);
 
-        //ƒJ[ƒh‚Ìƒoƒt‚ğ”­“®
+        //ã‚«ãƒ¼ãƒ‰ã®ãƒãƒ•ã‚’ç™ºå‹•
         _cardBuff.Discard(trump.cardBuff);
 
-        //ƒfƒbƒLƒJ[ƒh‚Ìƒoƒt‚ğ”­“®
+        //ãƒ‡ãƒƒã‚­ã‚«ãƒ¼ãƒ‰ã®ãƒãƒ•ã‚’ç™ºå‹•
         _trumpBuff.Discard(trump.deckBuff);
-
 
     }
 
     /// <summary>
-    /// ƒ‰ƒEƒ“ƒh‚ÌI—¹‚ÉèD‚É‚ ‚é‚Æ”­“®‚·‚éƒoƒt
+    /// ãƒ©ã‚¦ãƒ³ãƒ‰ã®çµ‚äº†æ™‚ã«æ‰‹æœ­ã«ã‚ã‚‹ã¨ç™ºå‹•ã™ã‚‹ãƒãƒ•
     /// </summary>
     public void RoundEndBuff(Card.Trump trump)
     {
-        //ƒV[ƒ‹‚ÌŒø‰Ê‚ğ”­“®‚·‚é
+        //ã‚·ãƒ¼ãƒ«ã®åŠ¹æœã‚’ç™ºå‹•ã™ã‚‹
         _sealBuff.RoundEnd(trump.sealBuff);
 
-        //ƒJ[ƒh‚Ìƒoƒt‚ğ”­“®
+        //ã‚«ãƒ¼ãƒ‰ã®ãƒãƒ•ã‚’ç™ºå‹•
         _cardBuff.RoundEnd(trump.cardBuff);
 
-        //ƒfƒbƒLƒJ[ƒh‚Ìƒoƒt‚ğ”­“®
+        //ãƒ‡ãƒƒã‚­ã‚«ãƒ¼ãƒ‰ã®ãƒãƒ•ã‚’ç™ºå‹•
         _trumpBuff.RoundEnd(trump.deckBuff);
 
     }
@@ -338,7 +322,6 @@ public class BuffManager : MonoBehaviour
                 ScoreManager.instance.SetScoreViewID(ID);
                 ScoreManager.instance.SetScoreViewText((int)ScoreManager.instance.GetMagnification(), true);
 
-
                 break;
             case Card.JokerBuff.Negative:
                 break;
@@ -346,7 +329,6 @@ public class BuffManager : MonoBehaviour
 
                 break;
         }
-
 
     }
 
@@ -357,3 +339,4 @@ public class BuffManager : MonoBehaviour
 
     public Material GetDommyMaterial() { return dommyMaterial; }
 }
+

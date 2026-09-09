@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -13,7 +13,6 @@ public class BanArt : BossBase
 
     Card.suit suit;
 
-
     public override void Initializ()
     {
 
@@ -23,16 +22,10 @@ public class BanArt : BossBase
 
         TextUIManager.instance.SetRoundExceptionText(GetBossException()+MasterData.instance.GetStringMaster((int)suit)+")");
 
-
-
-
-
     }
 
     public override void Update()
     {
-
-
 
     }
 
@@ -43,23 +36,21 @@ public class BanArt : BossBase
 
         if (!flag) return;
 
-        Debug.Log("í Ç¡ÇƒÇ¢ÇÈ");
+        Debug.Log("ÈÄö„Å£„Å¶„ÅÑ„Çã");
 
         List<int> indexs = RoleManager.instance.GetIndex();
 
-        for (int i=0;i< CardManager.instance.GetPick().Count; i++) 
+        for (int i=0;i< CardManager.instance.GetPick().Count; i++)
         {
             if (CardManager.instance.GetPick()[i].suit != suit) continue;
 
             if (indexs.FindIndex(index=>index==i)<0) continue;
-
 
             indexs.Remove(i);
 
         }
 
         RoleManager.instance.SetIndex(indexs);
-
 
     }
 
@@ -68,13 +59,5 @@ public class BanArt : BossBase
         base.End();
     }
 
-
-
-
-
-
-
-
-
-
 }
+

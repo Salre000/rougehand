@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +8,12 @@ public class JokerBase : SaleInterface, ExplanationInterface
 {
 
     /// <summary>
-    /// ”„‹pŠz‚ğŒˆ‚ß‚éŠî€‚Ì”{—¦
+    /// å£²å´é¡ã‚’æ±ºã‚ã‚‹åŸºæº–ã®å€ç‡
     /// </summary>
     private readonly int SALE_VALUE_RATE = 2;
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ÌƒIƒuƒWƒFƒNƒg‚Ì“®‚«•û
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å‹•ãæ–¹
     /// </summary>
     protected int jokerObjecttype = 0;
 
@@ -21,16 +21,15 @@ public class JokerBase : SaleInterface, ExplanationInterface
 
     private int explanationID;
 
-    public bool baseScoreFlag = false;  
-
+    public bool baseScoreFlag = false;
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚Ìƒoƒt“à—e
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ãƒãƒ•å†…å®¹
     /// </summary>
     Card.JokerBuff _jokerBuff=Card.JokerBuff.None;
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[ˆÈŠO‚É‚à’…‚­‰Â”\«‚Ì‚ ‚éƒoƒt‚Ì“à—e
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ä»¥å¤–ã«ã‚‚ç€ãå¯èƒ½æ€§ã®ã‚ã‚‹ãƒãƒ•ã®å†…å®¹
     /// </summary>
     Card.cardBuff _cardBuff=Card.cardBuff.None;
 
@@ -46,71 +45,68 @@ public class JokerBase : SaleInterface, ExplanationInterface
     public virtual string Get() { return MasterData.instance.GetStringMaster(explanationID); }
 
     /// <summary>
-    /// ‰Šús“®
+    /// åˆæœŸè¡Œå‹•
     /// </summary>
     public virtual void Initializ() { }
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ÌƒIƒuƒWƒFƒNƒg‚Ì“®‚«•û‚ğ•Ô‚·ŠÖ”
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å‹•ãæ–¹ã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <returns></returns>
     public int GetJokerObjectType() { return jokerObjecttype; }
     /// <summary>
-    /// ƒ‰ƒEƒ“ƒh‚ÌŠJn‚ÌƒWƒ‡[ƒJ[‚Ì‹““®
+    /// ãƒ©ã‚¦ãƒ³ãƒ‰ã®é–‹å§‹æ™‚ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®æŒ™å‹•
     /// </summary>
     public virtual void RoundStart() { }
 
     /// <summary>
-    /// í‚É‰ñ‚·ƒWƒ‡[ƒJ[‚Ì‹““®iŠî–{“I‚É’¼‚®‚ÉƒŠƒ^[ƒ“‚Å•Ô‚·ŠÖ”j
+    /// å¸¸ã«å›ã™ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®æŒ™å‹•ï¼ˆåŸºæœ¬çš„ã«ç›´ãã«ãƒªã‚¿ãƒ¼ãƒ³ã§è¿”ã™é–¢æ•°ï¼‰
     /// </summary>
     public virtual void UpData() { }
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚Ìƒ^[ƒ“‚ª‰ñ‚Á‚Ä—ˆ‚½‚É“®‚­‹““®
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚¿ãƒ¼ãƒ³ãŒå›ã£ã¦æ¥ãŸæ™‚ã«å‹•ãæŒ™å‹•
     /// </summary>
-    /// <returns><Šî–{ƒ[ƒ‚¾‚¯‚Ç‚±‚ê‚ª”{—¦‘‰Á—Ê/returns>
+    /// <returns><åŸºæœ¬ã‚¼ãƒ­ã ã‘ã©ã“ã‚ŒãŒå€ç‡å¢—åŠ é‡/returns>
     public virtual float Trun() { return 0; }
 
     /// <summary>
-    /// ƒ‰ƒEƒ“ƒh‚ÌI—¹‚ÌƒWƒ‡[ƒJ[‚Ì‹““®
+    /// ãƒ©ã‚¦ãƒ³ãƒ‰ã®çµ‚äº†æ™‚ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®æŒ™å‹•
     /// </summary>
     public virtual void RoundEnd() { }
 
     /// <summary>
-    /// ƒ^[ƒ“–‚Ìˆ—‚ğ‚·‚é‚½‚ß‚É‹²‚ŞƒŠƒZƒbƒg‚Ìˆ—
+    /// ã‚¿ãƒ¼ãƒ³äº‹ã®å‡¦ç†ã‚’ã™ã‚‹ãŸã‚ã«æŒŸã‚€ãƒªã‚»ãƒƒãƒˆã®å‡¦ç†
     /// </summary>
     public virtual void TrunReset() { }
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ÌƒŒƒAƒŠƒeƒB‚ğ•Ô‚·ŠÖ”
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ãƒ¬ã‚¢ãƒªãƒ†ã‚£ã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <returns></returns>
     public virtual JokerActionUseEnum.JokerRarity GetRarity() { return JokerActionUseEnum.JokerRarity.Common; }
 
     /// <summary>
-    /// ”„‹pŠz‚ğ•Ô‚·ŠÖ”
+    /// å£²å´é¡ã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <returns></returns>
     public int GetSaleValue() { return _saleValue + ((int)GetRarity()+1)* SALE_VALUE_RATE; }
 
     public void AddSaleValue(int add) { _saleValue += add; }
 
-
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚Ì”{—¦‚Ìã¸•û–@‚ª‰ÁZ‚È‚Ì‚©æZ‚È‚Ì‚©‚ğ•\‚·ŠÖ”
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®å€ç‡ã®ä¸Šæ˜‡æ–¹æ³•ãŒåŠ ç®—ãªã®ã‹ä¹—ç®—ãªã®ã‹ã‚’è¡¨ã™é–¢æ•°
     /// </summary>
     /// <returns></returns>
     public virtual bool GetAddType() { return true; }
 
-
     /// <summary>
-    /// ”„‹p‚³‚ê‚½‚Æ‚«‚Ì‹““®
+    /// å£²å´ã•ã‚ŒãŸã¨ãã®æŒ™å‹•
     /// </summary>
     public virtual void SaleAction() { }
 
-
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ÌŒø‰Ê‚ğ”­“®‰Â”\‚©‚Ç‚¤‚©
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®åŠ¹æœã‚’ç™ºå‹•å¯èƒ½ã‹ã©ã†ã‹
     /// </summary>
     /// <returns></returns>
     public virtual bool IsActionCheck() {  return false; }
@@ -149,7 +145,6 @@ public class JokerBase : SaleInterface, ExplanationInterface
 
     }
 
-
     bool SaleInterface.AddFlag()
     {
         return JokerUtility.JokerAddCheck();
@@ -161,12 +156,12 @@ public class JokerBase : SaleInterface, ExplanationInterface
         int BUY_WIDHT = 250;
 
         if (GUI.Button(new Rect(ButtonPos.x - BUY_WIDHT / HALF, Screen.height - ButtonPos.y + 100, BUY_WIDHT, 60),
-            ("<size=20><color=#ffffff>" + Extra.ErrorText("ƒWƒ‡[ƒJ[‚Ì˜g‚ª‚¢‚Á‚Ï‚¢") + "</color></size>"), SaleUtility.GetStyle()))
+            ("<size=20><color=#ffffff>" + Extra.ErrorText("ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®æ ãŒã„ã£ã±ã„") + "</color></size>"), SaleUtility.GetStyle()))
         {
 
         }
 
     }
 
-
 }
+

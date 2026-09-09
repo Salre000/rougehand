@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static ScriptCountNumber;
 /// <summary>
-/// ƒVƒ‡ƒbƒv‚Ìw“ü”„‹p‚È‚Ç‚ğs‚¤ƒNƒ‰ƒX
+/// ã‚·ãƒ§ãƒƒãƒ—æ™‚ã®è³¼å…¥å£²å´ãªã©ã‚’è¡Œã†ã‚¯ãƒ©ã‚¹
 /// </summary>
 public class SaleObjectManager : MonoBehaviour
 {
@@ -19,11 +19,11 @@ public class SaleObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ‚à‚¤‚±‚ê‚Å‚¢‚¢‚â
+    /// ã‚‚ã†ã“ã‚Œã§ã„ã„ã‚„
     /// </summary>
     public static SaleObjectManager instance;
     /// <summary>
-    /// w“ü‰Â”\‚ÈƒIƒuƒWƒFƒNƒg‚ÌƒŠƒXƒg
+    /// è³¼å…¥å¯èƒ½ãªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒªã‚¹ãƒˆ
     /// </summary>
     [SerializeField] private List<GameObject> _products = new List<GameObject>();
     [SerializeField] private List<System.Action> _productsSaleShow = new List<System.Action>();
@@ -42,8 +42,8 @@ public class SaleObjectManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _reroolText;
     [SerializeField] private Button _packModeButton;
 
-    [SerializeField, Header("ƒfƒoƒbƒN")] private bool _isPackMode = false;
-    [SerializeField, Header("ƒfƒoƒbƒN")] private int _packSelectCount = 0;
+    [SerializeField, Header("ãƒ‡ãƒãƒƒã‚¯")] private bool _isPackMode = false;
+    [SerializeField, Header("ãƒ‡ãƒãƒƒã‚¯")] private int _packSelectCount = 0;
     private readonly Vector3 _SHOP_ANGLE = new Vector3(-90, 0, 0);
     private readonly Vector3 UI_VALUE_OFFSET = new Vector3(0, 130, 0);
     float RENGE = 916;
@@ -53,18 +53,15 @@ public class SaleObjectManager : MonoBehaviour
     private int nowRerool = 0;
     private int reroolCount = 0;
 
-
     /// <summary>
-    /// ƒJ[ƒh‚ğw“ü‚µ‚½‰ñ”
+    /// ã‚«ãƒ¼ãƒ‰ã‚’è³¼å…¥ã—ãŸå›æ•°
     /// </summary>
     private int _cardBuyCount = 0;
 
-
     /// <summary>
-    /// ƒQ[ƒ€’†‚É‰Á‚í‚éˆ—‚ÌƒŠƒXƒg
+    /// ã‚²ãƒ¼ãƒ ä¸­ã«åŠ ã‚ã‚‹å‡¦ç†ã®ãƒªã‚¹ãƒˆ
     /// </summary>
     private List<System.Action> dynamicAction = new();
-
 
     public void Awake()
     {
@@ -99,7 +96,7 @@ public class SaleObjectManager : MonoBehaviour
         SetShopObjectPos();
         ReroolSet();
 
-        // “®“I‚ÉÀ‘•‚³‚ê‚éŠÖ”‚ğÀs
+        // å‹•çš„ã«å®Ÿè£…ã•ã‚Œã‚‹é–¢æ•°ã‚’å®Ÿè¡Œ
         for (int i = 0; i < dynamicAction.Count; i++) dynamicAction[i]();
     }
 
@@ -121,7 +118,7 @@ public class SaleObjectManager : MonoBehaviour
     }
     private void SetShopObjectPos()
     {
-        // ƒpƒbƒNƒ‚[ƒh‚Ì‚Æ‚«‚Í•`‰æ‚µ‚È‚¢
+        // ãƒ‘ãƒƒã‚¯ãƒ¢ãƒ¼ãƒ‰ã®ã¨ãã¯æç”»ã—ãªã„
         if (_isPackMode) { return; }
 
         ValueUISetActiveFalse();
@@ -134,7 +131,7 @@ public class SaleObjectManager : MonoBehaviour
         {
             if (!_products[i].activeSelf) continue;
 
-            // UI‚ğ•`‰æ‚·‚é
+            // UIã‚’æç”»ã™ã‚‹
             UISaleValueObject uISale = GetValue();
 
             uISale.SetValue(_productsSaleValue[i]);
@@ -148,22 +145,19 @@ public class SaleObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒpƒbƒNƒ‚[ƒh‚ğI‚í‚é‚©‚Ç‚¤‚©‚ğŠm”F‚·‚éŠÖ”
+    /// ãƒ‘ãƒƒã‚¯ãƒ¢ãƒ¼ãƒ‰ã‚’çµ‚ã‚ã‚‹ã‹ã©ã†ã‹ã‚’ç¢ºèªã™ã‚‹é–¢æ•°
     /// </summary>
     private void CheckPackModeEnd()
     {
-        // ƒpƒbƒNƒ‚[ƒh‚Å‚È‚¯‚ê‚Î•Ô‚·
+        // ãƒ‘ãƒƒã‚¯ãƒ¢ãƒ¼ãƒ‰ã§ãªã‘ã‚Œã°è¿”ã™
         if (!_isPackMode) return;
-
 
         if (_packSelectCount > 0) return;
 
-
-
-        // ƒpƒbƒNƒ‚[ƒh‚ğI—¹
+        // ãƒ‘ãƒƒã‚¯ãƒ¢ãƒ¼ãƒ‰ã‚’çµ‚äº†
         ChengePackMode(false);
         PackManager.instance.SetIsBuyPack(false);
-        // ƒpƒbƒNƒ‚[ƒh‚Ì‚É•`‰æ‚µ‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚ğíœ
+        // ãƒ‘ãƒƒã‚¯ãƒ¢ãƒ¼ãƒ‰ã®æ™‚ã«æç”»ã—ã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å‰Šé™¤
         for (int i = 0; i < _products.Count; i++)
         {
             if (!_products[i].activeSelf) continue;
@@ -193,12 +187,11 @@ public class SaleObjectManager : MonoBehaviour
 
     }
 
-    private void ReroolSet() 
+    private void ReroolSet()
     {
 
         _reroolText.text = nowRerool.ToString();
     }
-
 
     private void ValueUISetActiveFalse()
     {
@@ -218,7 +211,7 @@ public class SaleObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ‰ƒ“ƒ_ƒ€‚Éˆø”‚Ì”‚¾‚¯ƒVƒ‡ƒbƒv‚ÉƒIƒuƒWƒFƒNƒg‚ğ•À‚×‚é
+    /// ãƒ©ãƒ³ãƒ€ãƒ ã«å¼•æ•°ã®æ•°ã ã‘ã‚·ãƒ§ãƒƒãƒ—ã«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä¸¦ã¹ã‚‹
     /// </summary>
     /// <param name="count"></param>
     public void CreateRondom(int count = 2)
@@ -235,18 +228,16 @@ public class SaleObjectManager : MonoBehaviour
                     CreateItem();
                     break;
                 case shoptype.trump:
-                    // ƒoƒEƒ“ƒ`ƒƒ[‚ğæ‚Á‚Ä‚¢‚È‚¯‚ê‚Î–ß‚·
+                    // ãƒã‚¦ãƒ³ãƒãƒ£ãƒ¼ã‚’å–ã£ã¦ã„ãªã‘ã‚Œã°æˆ»ã™
                     if (true) { i--; continue; }
-                    // ƒgƒ‰ƒ“ƒv‚Ì¶¬
+                    // ãƒˆãƒ©ãƒ³ãƒ—ã®ç”Ÿæˆ
 
                     break;
             }
 
-
         }
 
-
-        // ˆÊ’u‚ğC³
+        // ä½ç½®ã‚’ä¿®æ­£
         SetShopObjectPos();
 
     }
@@ -268,29 +259,25 @@ public class SaleObjectManager : MonoBehaviour
                     CreateItem();
                     break;
                 case shoptype.trump:
-                    // ƒoƒEƒ“ƒ`ƒƒ[‚ğæ‚Á‚Ä‚¢‚È‚¯‚ê‚Î–ß‚·
+                    // ãƒã‚¦ãƒ³ãƒãƒ£ãƒ¼ã‚’å–ã£ã¦ã„ãªã‘ã‚Œã°æˆ»ã™
                     if (true) { i--; continue; }
-                    // ƒgƒ‰ƒ“ƒv‚Ì¶¬
+                    // ãƒˆãƒ©ãƒ³ãƒ—ã®ç”Ÿæˆ
 
                     break;
             }
 
-
         }
 
-
-        // ˆÊ’u‚ğC³
+        // ä½ç½®ã‚’ä¿®æ­£
         SetShopObjectPos();
 
     }
-
 
     public void CreateItem(int ID = -1)
     {
         if (ID < 0) ID = Random.Range(0, (int)ALLItem.ALLItemEnum._MAX);
 
         ItemUtility.ShopItem(() => ALLItem.GetItem((ALLItem.ALLItemEnum)ID));
-
 
     }
 
@@ -332,7 +319,7 @@ public class SaleObjectManager : MonoBehaviour
 
         SaleUtility.Claer();
 
-        //‚©‚È‚è”ñŒø—¦‚È–‚É‚ğ‚µ‚Ä‚¢‚é‚ª‘¼‚Ì•û–@‚ğ¡‚Ìè‚¿‚Å‚Ís‚¦‚È‚¢
+        //ã‹ãªã‚ŠéåŠ¹ç‡ãªäº‹ã«ã‚’ã—ã¦ã„ã‚‹ãŒä»–ã®æ–¹æ³•ã‚’ä»Šã®æ‰‹æŒã¡ã§ã¯è¡Œãˆãªã„
         _products.GetAction(product =>
         {
             if (Vector3.Distance(product.transform.position, gameObject.transform.position) < EPSILON) index = ID;
@@ -371,7 +358,6 @@ public class SaleObjectManager : MonoBehaviour
     {
         _productsSaleShow[index]();
 
-
     }
     public void Explantion(int index)
     {
@@ -379,7 +365,7 @@ public class SaleObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// •Û‘¶‚µ‚½ƒŠƒXƒg‚ğ‘S‚Ä‰Šú‰»
+    /// ä¿å­˜ã—ãŸãƒªã‚¹ãƒˆã‚’å…¨ã¦åˆæœŸåŒ–
     /// </summary>
     public void Clear()
     {
@@ -399,7 +385,7 @@ public class SaleObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// •Û‘¶‚µ‚½ƒŠƒXƒg‚ÌƒpƒbƒN‚ğÁ‚³‚¸‚Éc‚è‚ğÁ‚·
+    /// ä¿å­˜ã—ãŸãƒªã‚¹ãƒˆã®ãƒ‘ãƒƒã‚¯ã‚’æ¶ˆã•ãšã«æ®‹ã‚Šã‚’æ¶ˆã™
     /// </summary>
     public void ClearCard()
     {
@@ -419,7 +405,6 @@ public class SaleObjectManager : MonoBehaviour
 
         }
 
-
     }
 
     public System.Func<int> AddDynamicAction(System.Action action)
@@ -432,8 +417,7 @@ public class SaleObjectManager : MonoBehaviour
     {
         dynamicAction.RemoveAt(index);
     }
-    public int GetDynamicActionCount() {  return dynamicAction.Count; } 
-
+    public int GetDynamicActionCount() {  return dynamicAction.Count; }
 
     public void ALLActive() { _products.GetAction(product => { product.SetActive(true); return product; }); }
 
@@ -441,7 +425,7 @@ public class SaleObjectManager : MonoBehaviour
 
     public void ChengePackMode(bool flag)
     {
-        _isPackMode = flag; 
+        _isPackMode = flag;
         ValueUISetActiveFalse();
         _packModeButton.gameObject.SetActive(_isPackMode);
 
@@ -460,3 +444,4 @@ public class SaleObjectManager : MonoBehaviour
     }
 
 }
+

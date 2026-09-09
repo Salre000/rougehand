@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,16 +6,16 @@ public class PlayManager : MonoBehaviour
 {
     public static PlayManager instance;
     private bool _isSetCard = false;
-    // ƒnƒ“ƒh‰ñ”
+    // ãƒãƒ³ãƒ‰å›æ•°
     private int _checkCount;
 
-    // ƒfƒBƒXƒJ[ƒh‰ñ”
+    // ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰å›æ•°
     private int _checkDiscardCount;
 
     //private float _roundScore = 0f;
-    //// ƒ‰ƒEƒ“ƒhƒXƒRƒA‚ÌƒŠƒZƒbƒg‚Éˆ—‚³‚ê‚È‚¢‚æ‚¤‚Ég—p‚·‚é
+    //// ãƒ©ã‚¦ãƒ³ãƒ‰ã‚¹ã‚³ã‚¢ã®ãƒªã‚»ãƒƒãƒˆæ™‚ã«å‡¦ç†ã•ã‚Œãªã„ã‚ˆã†ã«ä½¿ç”¨ã™ã‚‹
     //private float _scoreZeroChecker = 1f;
-    // ƒ‰ƒEƒ“ƒhƒXƒRƒA‚É’Ç‰Á‚·‚éƒ^ƒCƒ~ƒ“ƒO‚ğ•b’PˆÊ‚Å’x‚ç‚¹‚é
+    // ãƒ©ã‚¦ãƒ³ãƒ‰ã‚¹ã‚³ã‚¢ã«è¿½åŠ ã™ã‚‹ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã‚’ç§’å˜ä½ã§é…ã‚‰ã›ã‚‹
     private const float _WAIT_TIME = 1f;
 
     private bool _isFluctuation = false;
@@ -30,10 +30,10 @@ public class PlayManager : MonoBehaviour
     private void Start()
     {
         _checkCount = GameUtility.GetHandCount();
-        // ƒnƒ“ƒh”‚ğ”½‰f
+        // ãƒãƒ³ãƒ‰æ•°ã‚’åæ˜ 
         TextUIManager.instance.SetHandText(_checkCount.ToString());
 
-        // ƒfƒBƒXƒJ[ƒh”‚ğ”½‰f
+        // ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰æ•°ã‚’åæ˜ 
         _checkDiscardCount = GameUtility.GetDiscardCount();
         TextUIManager.instance.SetDiscardText(_checkCount.ToString());
     }
@@ -51,13 +51,13 @@ public class PlayManager : MonoBehaviour
     {
         if (!_isSetCard) return;
 
-        // ƒgƒ‰ƒ“ƒv‚Ìs“®‘Ò‚¿
+        // ãƒˆãƒ©ãƒ³ãƒ—ã®è¡Œå‹•å¾…ã¡
         if (CardObjectUtility.GetActionCount() > 0) return;
 
-        // ƒWƒ‡[ƒJ[‚ÌŒvZ‘Ò‹@
+        // ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®è¨ˆç®—å¾…æ©Ÿ
         if (JokerObjectUtility.PlayCheck()) return;
 
-        // ƒXƒRƒA‚ª–ğ‚Ì•”•ª‚É•\¦‚³‚ê‚é
+        // ã‚¹ã‚³ã‚¢ãŒå½¹ã®éƒ¨åˆ†ã«è¡¨ç¤ºã•ã‚Œã‚‹
         ScoreManager.instance.PlayScoreResult();
         if (!_isShack)
             ShakeCamera.Instance.Shake(5, 0.2f);
@@ -65,8 +65,7 @@ public class PlayManager : MonoBehaviour
         StartCoroutine(RoundScorePlus());
     }
 
-
-    // ƒnƒ“ƒhƒXƒRƒA‚ğƒ[ƒ‚É‚µ‚Äƒ‰ƒEƒ“ƒhƒXƒRƒA‚ğ‰ÁZ
+    // ãƒãƒ³ãƒ‰ã‚¹ã‚³ã‚¢ã‚’ã‚¼ãƒ­ã«ã—ã¦ãƒ©ã‚¦ãƒ³ãƒ‰ã‚¹ã‚³ã‚¢ã‚’åŠ ç®—
     IEnumerator RoundScorePlus()
     {
 
@@ -76,20 +75,15 @@ public class PlayManager : MonoBehaviour
         ScoreManager.instance.RoundScorePlus();
         _isSetCard = false;
 
-        // èD‚¾‚¯‚·‚×‚Äíœ
+        // æ‰‹æœ­ã ã‘ã™ã¹ã¦å‰Šé™¤
         CardObjectUtility.PlayEnd();
 
-
         //_roundScore = ScoreManager.instance.GetRoundScore();
-        // ‘‰Á‚ÌŠm”F
+        // å¢—åŠ ã®ç¢ºèª
         GameUtility.SetIsRoundScoreUp(true);
-        // ƒXƒRƒA‚ª–Ú•W‚É’B‚µ‚Ä‚¢‚é‚©Šm”F
+        // ã‚¹ã‚³ã‚¢ãŒç›®æ¨™ã«é”ã—ã¦ã„ã‚‹ã‹ç¢ºèª
         ScoreManager.instance.RoundCheck();
         _isShack = false;
-
-
-
-
 
     }
 
@@ -108,9 +102,10 @@ public class PlayManager : MonoBehaviour
         TextUIManager.instance.SetDiscardText(_checkDiscardCount.ToString());
     }
 
-    // ƒvƒŒƒC‚ğ‰Ÿ‚µ‚½Œã‚ÌƒJ[ƒh‚ÌˆÊ’u‚ª’èˆÊ’u‚É•t‚¢‚½‚©‚ğƒZƒbƒg‚·‚é
+    // ãƒ—ãƒ¬ã‚¤ã‚’æŠ¼ã—ãŸå¾Œã®ã‚«ãƒ¼ãƒ‰ã®ä½ç½®ãŒå®šä½ç½®ã«ä»˜ã„ãŸã‹ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
     public void SetCardTransComp(bool flag) { _isSetCard = flag; }
 
     public void SetIsFluctuation(bool flag) { _isFluctuation = flag; }
     public bool IsFluctuation() { return _isFluctuation; }
 }
+

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
@@ -12,12 +12,12 @@ public class Equality : BossBase
 
         ScoreMaster.score equalityScore=new ScoreMaster.score();
 
-        for (int i = 0; i < (int)RoleManager.Role.max; i++) 
+        for (int i = 0; i < (int)RoleManager.Role.max; i++)
         {
             BaseScores.Add(ScoreMaster.instance.GetScore(i + IDUtility.SCORE_ID));
         }
 
-        for (int i = 0; i < (int)RoleManager.Role.max; i++) 
+        for (int i = 0; i < (int)RoleManager.Role.max; i++)
         {
             equalityScore.BasicScore += BaseScores[i].BasicScore;
             equalityScore.AddBasicScore += BaseScores[i].AddBasicScore;
@@ -34,7 +34,6 @@ public class Equality : BossBase
         {
             ScoreMaster.instance.SetScore(i + IDUtility.SCORE_ID,equalityScore);
         }
-
 
     }
 
@@ -58,3 +57,4 @@ public class Equality : BossBase
 
     }
 }
+

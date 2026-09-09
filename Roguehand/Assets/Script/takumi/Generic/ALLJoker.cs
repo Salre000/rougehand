@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
@@ -37,9 +37,8 @@ public static class ALLJoker
         }
 
         jokerBase?.SetID((int)joker + 1 + 2000);
-        
+
         return jokerBase;
     }
-
 
 }

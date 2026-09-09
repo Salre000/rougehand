@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+ï»¿using Unity.VisualScripting;
 using UnityEngine;
 
 public class JokerObjectAnime : MonoBehaviour
@@ -19,7 +19,7 @@ public class JokerObjectAnime : MonoBehaviour
     {
         if (!jokerObject.IsEnd() || isFlag) return;
 
-        //ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì•K—v‚Ì‚È‚¢•¨‚Ìê‡‚Í’¼‚®‚Éíœ
+        //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®å¿…è¦ã®ãªã„ç‰©ã®å ´åˆã¯ç›´ãã«å‰Šé™¤
         if (animator == null)
         {
             BreakUtility.StartBreak(gameObject);
@@ -39,12 +39,11 @@ public class JokerObjectAnime : MonoBehaviour
 
     public void End()
     {
-        //ƒIƒuƒWƒFƒNƒg‚Ìíœ‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+        //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å‰Šé™¤æ™‚ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
         BreakUtility.StartBreak(transform.parent.gameObject);
         Destroy(transform.parent.gameObject);
 
-
     }
 
-
 }
+

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
@@ -7,14 +7,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// à–¾‚È‚Ç‚Ég‚¤GUI‚ğ“Z‚ß‚éƒ}ƒl[ƒWƒƒ[
+/// èª¬æ˜ãªã©ã«ä½¿ã†GUIã‚’çºã‚ã‚‹ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
 /// </summary>
 public class ExplanationManager : MonoBehaviour
 {
     [SerializeField] GameObject Prefab;
 
     /// <summary>
-    /// à–¾‚ğ‚Ü‚Æ‚ß‚½”z—ñ
+    /// èª¬æ˜ã‚’ã¾ã¨ã‚ãŸé…åˆ—
     /// </summary>
     private List<GameObject> _GameObjectPool = new List<GameObject>();
     [SerializeField] private List<GameObject> _explanationInterface = new List<GameObject>();
@@ -32,7 +32,7 @@ public class ExplanationManager : MonoBehaviour
     public Vector2 _uiSizeMini { private get; set; }
 
     /// <summary>
-    /// instance‚ğƒVƒ“ƒOƒ‹ƒgƒ“‚Å¶¬
+    /// instanceã‚’ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ã§ç”Ÿæˆ
     /// </summary>
     public static ExplanationManager instance;
 
@@ -60,13 +60,11 @@ public class ExplanationManager : MonoBehaviour
 
             _GameObjectPool[i].GetComponent<RectTransform>().localPosition = pos;
 
-
-
         }
     }
 
     /// <summary>
-    /// à–¾‚ğ•`‰æ‰Â”\‚É•ÏX‚·‚éŠÖ”
+    /// èª¬æ˜ã‚’æç”»å¯èƒ½ã«å¤‰æ›´ã™ã‚‹é–¢æ•°
     /// </summary>
     /// <param name="traget"></param>
     /// <param name="explanationInterface"></param>
@@ -87,7 +85,7 @@ public class ExplanationManager : MonoBehaviour
 
         explanationObject.GetTextName().text = explanationInterface.GetName();
         explanationObject.GetTextExplanation().text = GetLineString(explanationInterface.GetExplanation(), explanationInterface.GetExplanation2());
-        // ”–î‚ ‚è‚±‚Ìƒ^ƒCƒ~ƒ“ƒO‚Å•¶š‰»‚¯‚Ì‰Â”\«‚ğì¬
+        // è«¸äº‹æƒ…ã‚ã‚Šã“ã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§æ–‡å­—åŒ–ã‘ã®å¯èƒ½æ€§ã‚’ä½œæˆ
         explanationObject.GetTextRarityText().text = Extra.ErrorText(explanationInterface.GetTypes());
 
         explanationObject.GetTextRarityColor().color = explanationInterface.GetTypes().GetJokerRarityColor();
@@ -105,16 +103,16 @@ public class ExplanationManager : MonoBehaviour
             }
             addCount++;
 
-            // –¼‘OŒŸõˆÈŠO‚É”ñƒAƒNƒeƒBƒuƒIƒuƒWƒFƒNƒg‚ÉŠ±Â‚Å‚«‚È‚¢ˆ×‚É
-            // ‹êa‚Ì‘I‘ğ‚Å–¼‘OŒŸõ‚É‚µ‚Ä‚¢‚é
-            // ƒIƒuƒWƒFƒNƒgw’è‚©‚ç‚Ì–¼‘OŒŸõ‚È‚Ì‚Å•‰‰×‚ÍÅ¬ŒÀ‚É‚È‚Á‚Ä‚¢‚é
+            // åå‰æ¤œç´¢ä»¥å¤–ã«éã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å¹²æ¸‰ã§ããªã„ç‚ºã«
+            // è‹¦æ¸‹ã®é¸æŠã§åå‰æ¤œç´¢ã«ã—ã¦ã„ã‚‹
+            // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæŒ‡å®šã‹ã‚‰ã®åå‰æ¤œç´¢ãªã®ã§è² è·ã¯æœ€å°é™ã«ãªã£ã¦ã„ã‚‹
             explanationObject.GetBuffTextIcon(i).text = MasterData.instance.GetStringMaster(buff[i]);
             explanationObject.GetBuffColorIcon(i).color = MasterData.instance.GetStringMaster(buff[i], true).GetBuffColor();
 
             explanationObject.GetBuffText(i).transform.parent.gameObject.SetActive(true);
 
             explanationObject.GetBuffName(i).text = Extra.ErrorText(MasterData.instance.GetStringMaster(buff[i]));
-            // ƒeƒLƒXƒgƒ{ƒbƒNƒX
+            // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹
             explanationObject.GetBuffText(i).text = MasterData.instance.GetStringMaster(buff[i] + 50);
 
             explanationObject.GetBuffText(i).transform.parent.gameObject.GetComponent<RectTransform>().sizeDelta = _uiSizeMini;
@@ -122,7 +120,7 @@ public class ExplanationManager : MonoBehaviour
 
         }
 
-        //‰Šú’l‚Ì’è”•ªˆÚ“®‚É•â³‚ğ‚©‚¯‚é
+        //åˆæœŸå€¤ã®å®šæ•°åˆ†ç§»å‹•ã«è£œæ­£ã‚’ã‹ã‘ã‚‹
         gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(_uiSize.x, DEFAULT_HEIGHT + ONE_BUFF_HEIGHT * addCount);
 
         explanationObject.GetTextRarityColor().transform.parent.parent.localPosition = new Vector3(-((-_uiSizeMini.x + defaultSizeMini.x) + (-_uiSize.x + DEFAULT_SIZE.x)), gameObject.GetComponent<RectTransform>().sizeDelta.y / 2, 0);
@@ -152,7 +150,7 @@ public class ExplanationManager : MonoBehaviour
 
             ExplanationObject explanation = _GameObjectPool[i].GetComponent<ExplanationObject>();
 
-            for (int j = 0; j < 3; j++) 
+            for (int j = 0; j < 3; j++)
             {
                 explanation.GetBuffColorIcon(j).gameObject.SetActive(false);
 
@@ -175,14 +173,12 @@ public class ExplanationManager : MonoBehaviour
             //_GameObjectPool[i].transform.GetChild(2).transform.Find("BuffUI3").gameObject.SetActive(false);
             _GameObjectPool[i].SetActive(false);
 
-
         }
-
 
     }
 
     /// <summary>
-    /// ˆø”‚ÌƒIƒuƒWƒFƒNƒg‚ÉŠÖŒW‚·‚éƒIƒuƒWƒFƒNƒg‚ğ•Ô‚·ŠÖ”
+    /// å¼•æ•°ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«é–¢ä¿‚ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <param name="gameObject"></param>
     /// <returns></returns>
@@ -194,11 +190,11 @@ public class ExplanationManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒIƒuƒWƒFƒNƒgƒv[ƒ‹‚ğì¬
+    /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ—ãƒ¼ãƒ«ã‚’ä½œæˆ
     /// </summary>
     private void CreateObject()
     {
-        //ƒLƒƒƒ“ƒoƒX‚ğŒŸõ
+        //ã‚­ãƒ£ãƒ³ãƒã‚¹ã‚’æ¤œç´¢
         GameObject cav = GameObject.Find("UICanvas");
 
         GameObject Object = new GameObject("ExplanationObjects");
@@ -214,15 +210,9 @@ public class ExplanationManager : MonoBehaviour
 
             _GameObjectPool.Add(image);
 
-
-
         }
 
-
-
     }
-
-
 
     private GameObject GetGameObject()
     {
@@ -234,11 +224,9 @@ public class ExplanationManager : MonoBehaviour
 
             return _GameObjectPool[i];
 
-
         }
 
         return null;
-
 
     }
 
@@ -254,3 +242,4 @@ public class ExplanationManager : MonoBehaviour
     }
 
 }
+

@@ -1,9 +1,8 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
-
 
 public class PlayHnad : MonoBehaviour
 {
@@ -11,7 +10,6 @@ public class PlayHnad : MonoBehaviour
     [SerializeField] private Button _discardButton;
     private StringBuilder _builder=new StringBuilder();
     private int _RESET_NUM = 0;
-
 
     // Start is called before the first frame update
     void Start()
@@ -22,68 +20,69 @@ public class PlayHnad : MonoBehaviour
     }
 
     /// <summary>
-    /// Â‚¢‚Ù‚¤‚Ìƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚Æ‚«
+    /// é’ã„ã»ã†ã®ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã¨ã
     /// </summary>
     public void OnHandPlay()
     {
-        // ƒ{ƒ^ƒ“ó•t‚Ì’â~’†
+        // ãƒœã‚¿ãƒ³å—ä»˜ã®åœæ­¢ä¸­
         if (!GameUtility.IsPushButton()) return;
         if (GameUtility.IsPlay())return ;
-        // ƒnƒ“ƒh‚Ì”‚ğŒ¸‚ç‚·
+        // ãƒãƒ³ãƒ‰ã®æ•°ã‚’æ¸›ã‚‰ã™
         int handCount =GameUtility.GetHandCount();
         if (handCount <= 0) return;
         handCount--;
-        // ‚È‚ñ‚ÌƒJ[ƒh‚à‘I‘ğ‚³‚ê‚Ä‚¢‚È‚¯‚ê‚Îreturn
+        // ãªã‚“ã®ã‚«ãƒ¼ãƒ‰ã‚‚é¸æŠã•ã‚Œã¦ã„ãªã‘ã‚Œã°return
         if (CardManager.instance.GetPick().Count<=0) return;
-        // ƒJ[ƒh‚Ì–ğ‚Ì”»’èŒ‹‰Ê‚ğ‚à‚ç‚¤
+        // ã‚«ãƒ¼ãƒ‰ã®å½¹ã®åˆ¤å®šçµæœã‚’ã‚‚ã‚‰ã†
         RoleManager.Role role=RoleManager.instance.GetRole();
-        // ‰½‚Ì–ğ‚à‚È‚¯‚ê‚Îreturn
+        // ä½•ã®å½¹ã‚‚ãªã‘ã‚Œã°return
         if(role==RoleManager.Role.None)return;
         GameUtility.SetHandCount(handCount);
-        // ƒJ[ƒh‚ªã‚És‚­
+        // ã‚«ãƒ¼ãƒ‰ãŒä¸Šã«è¡Œã
         CardObjectUtility.Play();
 
-        // –ğ‚ğƒvƒŒƒC‚µ‚½‰ñ”‚ğ’Ç‰Á
+        // å½¹ã‚’ãƒ—ãƒ¬ã‚¤ã—ãŸå›æ•°ã‚’è¿½åŠ 
         RoleManager.instance.AddRolePlayCountList(role);
 
-        // ƒvƒŒƒCƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚±‚Æ‚ğ’m‚ç‚¹‚é
+        // ãƒ—ãƒ¬ã‚¤ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã“ã¨ã‚’çŸ¥ã‚‰ã›ã‚‹
         GameUtility.SetIsPlay(true);
         if (handCount <= 1) VolumeManager.instance.UpBGM();
     }
 
     /// <summary>
-    /// Ô‚¢•û‚Ìƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚Æ‚«
+    /// èµ¤ã„æ–¹ã®ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã¨ã
     /// </summary>
-    public void OnHandDiscard() 
+    public void OnHandDiscard()
     {
-        // ƒ{ƒ^ƒ“ó•t‚Ì’â~’†
+        // ãƒœã‚¿ãƒ³å—ä»˜ã®åœæ­¢ä¸­
         if (!GameUtility.IsPushButton()) return;
         if (GameUtility.IsDiscard()) return;
 
-        // ƒfƒBƒXƒJ[ƒh‚Ì”‚ğŒ¸‚ç‚·
+        // ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰ã®æ•°ã‚’æ¸›ã‚‰ã™
         int handCount = GameUtility.GetDiscardCount();
         if (handCount <= 0) return;
         handCount--;
-        // ‚È‚ñ‚ÌƒJ[ƒh‚à‘I‘ğ‚³‚ê‚Ä‚¢‚È‚¯‚ê‚Îreturn
+        // ãªã‚“ã®ã‚«ãƒ¼ãƒ‰ã‚‚é¸æŠã•ã‚Œã¦ã„ãªã‘ã‚Œã°return
         if (CardManager.instance.GetPick().Count <= 0) return;
 
         GameUtility.SetDiscardCount(handCount);
-        // ƒJ[ƒh‚ªã‚És‚­
+        // ã‚«ãƒ¼ãƒ‰ãŒä¸Šã«è¡Œã
         CardObjectUtility.Discard();
 
-        // ‹ó”’‚É‚·‚é
+        // ç©ºç™½ã«ã™ã‚‹
         _builder.Clear();
         _builder.Append("");
         TextUIManager.instance.SetRoleText(_builder.ToString());
-        // ƒ[ƒ‚É‚·‚é
+        // ã‚¼ãƒ­ã«ã™ã‚‹
         _builder.Clear();
         _builder.Append(_RESET_NUM);
         TextUIManager.instance.SetBasicScoreText(_builder.ToString());
         TextUIManager.instance.SetMagnificationText(_builder.ToString());
 
-        // èD‚¾‚¯‚·‚×‚Äíœ
+        // æ‰‹æœ­ã ã‘ã™ã¹ã¦å‰Šé™¤
         CardObjectUtility.PlayEnd();
         GameUtility.SetIsDiscard(true);
     }
 
 }
+

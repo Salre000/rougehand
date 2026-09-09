@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -7,39 +7,37 @@ using UnityEngine;
 public class RoleObject : MonoBehaviour
 {
     /// <summary>
-    /// ƒŒƒxƒ‹‚ğ“ü‚ê‚éƒeƒLƒXƒg
+    /// ãƒ¬ãƒ™ãƒ«ã‚’å…¥ã‚Œã‚‹ãƒ†ã‚­ã‚¹ãƒˆ
     /// </summary>
     [SerializeField] TextMeshProUGUI _level;
     /// <summary>
-    /// –¼‘O‚ğ“ü‚ê‚éƒeƒLƒXƒg
+    /// åå‰ã‚’å…¥ã‚Œã‚‹ãƒ†ã‚­ã‚¹ãƒˆ
     /// </summary>
     [SerializeField] TextMeshProUGUI _name;
     /// <summary>
-    /// Šî–{ƒXƒRƒA‚ğ“ü‚ê‚éƒeƒLƒXƒg
+    /// åŸºæœ¬ã‚¹ã‚³ã‚¢ã‚’å…¥ã‚Œã‚‹ãƒ†ã‚­ã‚¹ãƒˆ
     /// </summary>
     [SerializeField] TextMeshProUGUI _score;
     /// <summary>
-    /// ”{—¦‚ğ“ü‚ê‚éƒeƒLƒXƒg
+    /// å€ç‡ã‚’å…¥ã‚Œã‚‹ãƒ†ã‚­ã‚¹ãƒˆ
     /// </summary>
     [SerializeField] TextMeshProUGUI _magnification;
     /// <summary>
-    /// g—p‰ñ”‚ğ“ü‚ê‚éƒeƒLƒXƒg
+    /// ä½¿ç”¨å›æ•°ã‚’å…¥ã‚Œã‚‹ãƒ†ã‚­ã‚¹ãƒˆ
     /// </summary>
     [SerializeField] TextMeshProUGUI _playCount;
 
     /// <summary>
-    /// ƒfƒoƒbƒN‚æ‚¤‚ÉŒ©‚¦‚é‰»
-    /// ‚±‚ÌƒIƒuƒWƒFƒNƒg‚ª‚İ‚¹‚Ä‚¢‚éƒ[ƒ‹
+    /// ãƒ‡ãƒãƒƒã‚¯ã‚ˆã†ã«è¦‹ãˆã‚‹åŒ–
+    /// ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒã¿ã›ã¦ã„ã‚‹ãƒ­ãƒ¼ãƒ«
     /// </summary>
     [SerializeField] RoleManager.Role _role;
-
-
 
     public void Show(RoleManager.Role role)
     {
         _role = role;
 
-        // ‚±‚Ì•Ï”‚ÍƒfƒoƒbƒN‚æ‚¤‚ÉƒŒƒxƒ‹‚ğŒÅ’è‚·‚é•¨
+        // ã“ã®å¤‰æ•°ã¯ãƒ‡ãƒãƒƒã‚¯ã‚ˆã†ã«ãƒ¬ãƒ™ãƒ«ã‚’å›ºå®šã™ã‚‹ç‰©
         int level = RoleManager.instance.GetRoleLevel(role);
 
         int roleID = IDUtility.ROLE_ID + (int)_role;
@@ -53,8 +51,9 @@ public class RoleObject : MonoBehaviour
         int magnification = ScoreMaster.instance.GetBasicMagnification(roleID) + (ScoreMaster.instance.GetAddBasicMagnification(roleID) * (level - 1));
         _magnification.text = magnification.ToString();
 
-        // g—p‰ñ”
+        // ä½¿ç”¨å›æ•°
         _playCount.text = RoleManager.instance.GetRolePlayCountList()[(int)_role].ToString();
 
     }
 }
+

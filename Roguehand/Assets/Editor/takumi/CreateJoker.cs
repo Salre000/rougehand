@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -10,12 +10,9 @@ using UnityEngine;
 public class CreateJoker : EditorWindow
 {
     /// <summary>
-    /// ƒNƒ‰ƒX‚Ì¶¬ˆÊ’u
+    /// ã‚¯ãƒ©ã‚¹ã®ç”Ÿæˆä½ç½®
     /// </summary>
     private static readonly string _classFilePass = "/Script/takumi/Card/Joker/JokerBody/";
-
-
-
 
     [MenuItem("Assets/CreateJoker")]
     static void Open()
@@ -48,57 +45,55 @@ public class CreateJoker : EditorWindow
     static JokerActionUseEnum.JokerRarity rarity = JokerActionUseEnum.JokerRarity.Common;
 
     /// <Summary>
-    /// ƒEƒBƒ“ƒhƒE‚Ìƒp[ƒc‚ğ•\¦‚µ‚Ü‚·B
+    /// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ãƒ‘ãƒ¼ãƒ„ã‚’è¡¨ç¤ºã—ã¾ã™ã€‚
     /// </Summary>
     void OnGUI()
     {
         EditorGUILayout.BeginVertical("Box");
 
-        if (GUILayout.Button("¶¬‚·‚é"))
+        if (GUILayout.Button("ç”Ÿæˆã™ã‚‹"))
         {
-            // “¯–¼ƒXƒvƒŠƒNƒg‚Ì¶¬‚ğ–WŠQ
+            // åŒåã‚¹ãƒ—ãƒªã‚¯ãƒˆã®ç”Ÿæˆã‚’å¦¨å®³
             if (jolerListObject._className.Contains(className)) return;
 
-            // ‚±‚±‚Éƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚Ìˆ—‚ğ‘‚«‚Ü‚·
+            // ã“ã“ã«ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸæ™‚ã®å‡¦ç†ã‚’æ›¸ãã¾ã™
             CreateCS();
 
             CreateAddClass();
         }
-        if (GUILayout.Button("ƒŠƒ[ƒh"))
+        if (GUILayout.Button("ãƒªãƒ­ãƒ¼ãƒ‰"))
         {
             className = string.Empty;
 
             CreateAddClass();
         }
 
-
         EditorGUILayout.Space();
 
-        EditorGUILayout.LabelField("ƒWƒ‡[ƒJ[‚ÌƒNƒ‰ƒX‚Ì–¼‘O");
+        EditorGUILayout.LabelField("ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚¯ãƒ©ã‚¹ã®åå‰");
         className = EditorGUILayout.TextField(className);
 
         EditorGUILayout.Space();
 
-        // ‚Ç‚ñ‚ÈƒWƒ‡[ƒJ[‚ğ¶¬‚·‚é‚©‚ğŒˆ’è
+        // ã©ã‚“ãªã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã‚’ç”Ÿæˆã™ã‚‹ã‹ã‚’æ±ºå®š
         jokerEnum = (JokerBaseEnum.JokerEnum)EditorGUILayout.EnumPopup((JokerBaseEnum.JokerEnum)jokerEnum);
 
-        // Œ»İ‚ÌƒWƒ‡[ƒJ[‚Ìd—l‚ğŒ©‚¦‚é‚æ‚¤‚É•ÏX
+        // ç¾åœ¨ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ä»•æ§˜ã‚’è¦‹ãˆã‚‹ã‚ˆã†ã«å¤‰æ›´
         string jokerEX = jokerEnum == JokerBaseEnum.JokerEnum.MAX ? "" : stringList._expansion[(int)jokerEnum];
-        EditorGUILayout.LabelField(jokerEX + ":" + "Œ»İ‚ÌƒWƒ‡[ƒJ[‚Ìd—l");
+        EditorGUILayout.LabelField(jokerEX + ":" + "ç¾åœ¨ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ä»•æ§˜");
         //EditorGUILayout.LabelField(jokerEX);
 
         EditorGUILayout.Space();
 
         rarity = (JokerActionUseEnum.JokerRarity)EditorGUILayout.EnumPopup((JokerActionUseEnum.JokerRarity)rarity);
-        EditorGUILayout.LabelField("ƒWƒ‡[ƒJ[‚ÌƒŒƒAƒŠƒeƒB");
-
+        EditorGUILayout.LabelField("ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ãƒ¬ã‚¢ãƒªãƒ†ã‚£");
 
         SwitchJoker(jokerEnum);
         EditorGUILayout.EndVertical();
     }
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚Ìí—Ş‚²‚Æ‚É•K—v‚Èî•ñ‚ªˆá‚¤‚©‚ç‚»‚ê‚ğ‚¤‚ß‚Ä‚¢‚­
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ç¨®é¡ã”ã¨ã«å¿…è¦ãªæƒ…å ±ãŒé•ã†ã‹ã‚‰ãã‚Œã‚’ã†ã‚ã¦ã„ã
     /// </summary>
     /// <param name="jokerEnum"></param>
     static void SwitchJoker(JokerBaseEnum.JokerEnum jokerEnum)
@@ -108,53 +103,50 @@ public class CreateJoker : EditorWindow
         {
             case JokerBaseEnum.JokerEnum._ProbabilityDestruction:
 
-
-                EditorGUILayout.LabelField("Šm—§‚Ì•ªq");
+                EditorGUILayout.LabelField("ç¢ºç«‹ã®åˆ†å­");
                 num2 = EditorGUILayout.IntField(num2);
 
                 EditorGUILayout.Space();
 
-                EditorGUILayout.LabelField("Šm—§‚Ì•ª•ê");
+                EditorGUILayout.LabelField("ç¢ºç«‹ã®åˆ†æ¯");
                 num1 = EditorGUILayout.IntField(num1);
                 if (num1 < num2) num2 = num1;
 
-                answer = num1.ToString() + "•ª‚Ì" + num2.ToString() + "‚ÌŠm—§‚Å”j‰ó‚³‚ê‚Ü‚·";
+                answer = num1.ToString() + "åˆ†ã®" + num2.ToString() + "ã®ç¢ºç«‹ã§ç ´å£Šã•ã‚Œã¾ã™";
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField(answer);
                 EditorGUILayout.Space();
 
-                EditorGUILayout.LabelField("‚Á‚Ä‚¢‚é‚¾‚¯‚Å”{—¦‚É‰ÁZ‚·‚é’l");
+                EditorGUILayout.LabelField("æŒã£ã¦ã„ã‚‹ã ã‘ã§å€ç‡ã«åŠ ç®—ã™ã‚‹å€¤");
                 num3 = EditorGUILayout.IntField(num3);
 
-                answer = num3.ToString() + "‚ğ”{—¦‚É‰ÁZ‚·‚é";
+                answer = num3.ToString() + "ã‚’å€ç‡ã«åŠ ç®—ã™ã‚‹";
 
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField(answer);
-
-
 
                 break;
             case JokerBaseEnum.JokerEnum._AnyDoneWhen:
 
-                EditorGUILayout.LabelField("‰½‚ğ‚µ‚½");
+                EditorGUILayout.LabelField("ä½•ã‚’ã—ãŸæ™‚");
                 target = (JokerActionUseEnum.JokerActionTarget)EditorGUILayout.EnumPopup((JokerActionUseEnum.JokerActionTarget)target);
                 EditorGUILayout.LabelField(JokerActionUseEnum.JokerActionTargetExplanation[(int)target]);
 
                 EditorGUILayout.Space();
 
-                EditorGUILayout.LabelField("‚Ç‚Ìƒ^ƒCƒ~ƒ“ƒO‚ÅŒvZ‚ª“ü‚é‚©");
+                EditorGUILayout.LabelField("ã©ã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§è¨ˆç®—ãŒå…¥ã‚‹ã‹");
                 timing = (JokerActionUseEnum.Timing)EditorGUILayout.EnumPopup((JokerActionUseEnum.Timing)timing);
                 EditorGUILayout.LabelField(JokerActionUseEnum.JokerActionTimingExplanation[(int)timing]);
 
                 EditorGUILayout.Space();
 
-                EditorGUILayout.LabelField("‰ÁZ‚©æZ‚©");
+                EditorGUILayout.LabelField("åŠ ç®—ã‹ä¹—ç®—ã‹");
                 addType = (JokerActionUseEnum.AddType)EditorGUILayout.EnumPopup((JokerActionUseEnum.AddType)addType);
-                EditorGUILayout.LabelField(addType == JokerActionUseEnum.AddType.addition ? "‰ÁZ" : "æZ");
+                EditorGUILayout.LabelField(addType == JokerActionUseEnum.AddType.addition ? "åŠ ç®—" : "ä¹—ç®—");
 
                 EditorGUILayout.Space();
 
-                EditorGUILayout.LabelField("ˆê‰ñ‚Ì”­¶‚Å‚Ç‚ê‚­‚ç‚¢‚Ì—Ê‚©");
+                EditorGUILayout.LabelField("ä¸€å›ã®ç™ºç”Ÿã§ã©ã‚Œãã‚‰ã„ã®é‡ã‹");
                 float1 = EditorGUILayout.FloatField(float1);
 
                 break;
@@ -162,11 +154,9 @@ public class CreateJoker : EditorWindow
                 break;
         }
 
-
     }
     static void CreateCS()
     {
-
 
         StringBuilder builder = new StringBuilder();
         builder.Clear();
@@ -189,7 +179,6 @@ public class CreateJoker : EditorWindow
         builder.Append("{");
         builder.AppendLine();
 
-
         builder.Append("    public override JokerActionUseEnum.JokerRarity GetRarity() { ");
         builder.AppendFormat("return JokerActionUseEnum.JokerRarity.{0};", rarity.ToString());
         builder.Append("}");
@@ -201,7 +190,6 @@ public class CreateJoker : EditorWindow
             builder.Append("    public override bool GetAddType() {return false; ");
             builder.Append("}");
             builder.AppendLine();
-
 
         }
 
@@ -237,8 +225,6 @@ public class CreateJoker : EditorWindow
                 builder.Append("float _magnification=0;");
                 builder.AppendLine();
 
-
-
                 builder.Append("public override void UpData(){");
                 builder.AppendFormat("if(JokerUtility.GetTarget()!=JokerActionUseEnum.JokerActionTarget.{0})return;", target.ToString());
                 builder.AppendLine();
@@ -259,8 +245,6 @@ public class CreateJoker : EditorWindow
 
                 builder.Append("}");
 
-
-
                 break;
             case JokerActionUseEnum.Timing.now:
 
@@ -271,13 +255,10 @@ public class CreateJoker : EditorWindow
                 builder.AppendFormat("JokerUtility.{0}({1});", addType == JokerActionUseEnum.AddType.addition ? "AddMagnification" : "", float1.ToString());
                 builder.Append("}");
 
-
                 break;
             case JokerActionUseEnum.Timing.never:
                 builder.Append("float _magnification=0;");
                 builder.AppendLine();
-
-
 
                 builder.Append("public override void UpData(){");
                 builder.AppendFormat("if(JokerUtility.GetTarget()!=JokerActionUseEnum.JokerActionTarget.{0})return;", target.ToString());
@@ -294,7 +275,6 @@ public class CreateJoker : EditorWindow
                 builder.AppendLine();
 
                 builder.Append("}");
-
 
                 break;
         }
@@ -334,7 +314,6 @@ public class CreateJoker : EditorWindow
 
         StringBuilder builder = new StringBuilder();
 
-
         builder.Clear();
         builder.Append(Application.dataPath);
         builder.Append("/Script/takumi/Generic/");
@@ -347,7 +326,6 @@ public class CreateJoker : EditorWindow
 
         sw = new StreamWriter(filePass, false);
 
-
         builder.Clear();
 
         builder.Append("using System.IO;");
@@ -358,7 +336,6 @@ public class CreateJoker : EditorWindow
         builder.AppendLine();
         builder.Append("using UnityEngine;");
         builder.AppendLine();
-
 
         builder.AppendFormat("public static class ALLJoker");
         builder.AppendLine();
@@ -404,15 +381,13 @@ public class CreateJoker : EditorWindow
 
         builder.AppendLine();
 
-
         builder.Append("}");
 
         sw.Write(builder.ToString());
 
         sw.Close();
 
-
-
     }
 
 }
+

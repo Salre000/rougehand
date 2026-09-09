@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,14 +10,14 @@ public class TrumpBuff
     public static int targetID;
 
     /// <summary>
-    /// ƒJ[ƒh‚ğƒvƒŒƒC‚µ‚½‚Ìƒoƒt
+    /// ã‚«ãƒ¼ãƒ‰ã‚’ãƒ—ãƒ¬ã‚¤ã—ãŸæ™‚ã®ãƒãƒ•
     /// </summary>
     public void Play(Card.deckBuff deckBuff)
     {
         bool Magnification = false;
         int value = 0;
 
-        //‘Î‰‚µ‚½ƒoƒt‚ğ‹Lq
+        //å¯¾å¿œã—ãŸãƒãƒ•ã‚’è¨˜è¿°
         switch (deckBuff)
         {
             case Card.deckBuff.Bonus:
@@ -31,14 +31,12 @@ public class TrumpBuff
                 break;
             case Card.deckBuff.Glass:
 
-                //@\•ª‚Ìˆê‚Å”­“®
+                //ã€€ååˆ†ã®ä¸€ã§ç™ºå‹•
                 if (Random.Range(0, 10) != 1) return;
 
                 value = (int)ScoreManager.instance.GetMagnification() / 2;
                 Magnification = true;
                 ScoreManager.instance.MagnificationPlus(value);
-
-
 
                 break;
             case Card.deckBuff.Lucky:
@@ -52,16 +50,12 @@ public class TrumpBuff
 
                 GameUtility.SetMyMoney(GameUtility.GetMyMoney() + 3);
 
-
-
-
                 break;
 
             case Card.deckBuff.BlindScore:
                 int count = 0;
 
                 List<Card.Trump> trumps = CardManager.instance.GetDeck();
-
 
                 for (int i = 0; i < trumps.Count; i++)
                 {
@@ -73,15 +67,14 @@ public class TrumpBuff
                 Magnification = true;
                 ScoreManager.instance.MagnificationPlus(value);
 
-
                 break;
         }
 
-        // TODO: •¶š‚ğo‚·
-        //value ’l
-        // target.transform.position À•W
-        // Magnification ‚±‚Ìƒtƒ‰ƒO‚ªtrue‚Ì‚Í”{—¦false‚Ì‚ÍŠî–{ƒXƒRƒA
-        //@value‚ª‚O‚Ì‚Ío‚³‚È‚¢
+        // TODO: æ–‡å­—ã‚’å‡ºã™
+        //value å€¤
+        // target.transform.position åº§æ¨™
+        // Magnification ã“ã®ãƒ•ãƒ©ã‚°ãŒtrueã®æ™‚ã¯å€ç‡falseã®æ™‚ã¯åŸºæœ¬ã‚¹ã‚³ã‚¢
+        //ã€€valueãŒï¼ã®æ™‚ã¯å‡ºã•ãªã„
         if (value <= 0) return;
         ScoreManager.instance.SetScoreViewID(targetID);
         ScoreManager.instance.SetScoreViewTrans(target.transform.position);
@@ -89,24 +82,24 @@ public class TrumpBuff
     }
 
     /// <summary>
-    /// ƒJ[ƒh‚ğƒfƒBƒXƒJ[ƒh‚µ‚½‚Ìƒoƒt
+    /// ã‚«ãƒ¼ãƒ‰ã‚’ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰ã—ãŸæ™‚ã®ãƒãƒ•
     /// </summary>
     public void Discard(Card.deckBuff deckBuff)
     {
 
-        //‘Î‰‚µ‚½ƒoƒt‚ğ‹Lq
+        //å¯¾å¿œã—ãŸãƒãƒ•ã‚’è¨˜è¿°
         switch (deckBuff)
         {
         }
     }
 
     /// <summary>
-    /// ƒJ[ƒh‚ğƒvƒŒƒC‚µ‚½‚Éƒnƒ“ƒh‚É‚ ‚é‚Ìƒoƒt
+    /// ã‚«ãƒ¼ãƒ‰ã‚’ãƒ—ãƒ¬ã‚¤ã—ãŸæ™‚ã«ãƒãƒ³ãƒ‰ã«ã‚ã‚‹æ™‚ã®ãƒãƒ•
     /// </summary>
     public void Hand(Card.deckBuff deckBuff)
     {
 
-        //‘Î‰‚µ‚½ƒoƒt‚ğ‹Lq
+        //å¯¾å¿œã—ãŸãƒãƒ•ã‚’è¨˜è¿°
         switch (deckBuff)
         {
             case Card.deckBuff.Steel:
@@ -118,29 +111,23 @@ public class TrumpBuff
                 ScoreManager.instance.SetScoreViewTrans(target.transform.position);
                 ScoreManager.instance.SetScoreViewText(value, Magnification);
 
-
-
-
                 break;
         }
     }
     /// <summary>
-    /// ƒ‰ƒEƒ“ƒh‚ÌI—¹‚ÉèD‚É‚ ‚é‚Æ‚«‚É”­“®‚·‚éƒoƒt
+    /// ãƒ©ã‚¦ãƒ³ãƒ‰ã®çµ‚äº†æ™‚ã«æ‰‹æœ­ã«ã‚ã‚‹ã¨ãã«ç™ºå‹•ã™ã‚‹ãƒãƒ•
     /// </summary>
     /// <param name="deckBuff"></param>
     public void RoundEnd(Card.deckBuff deckBuff)
     {
 
-        //‘Î‰‚µ‚½ƒoƒt‚ğ‹Lq
+        //å¯¾å¿œã—ãŸãƒãƒ•ã‚’è¨˜è¿°
         switch (deckBuff)
         {
             case Card.deckBuff.Gold:
-                //ŒÅ’è’l‚Ì‚¨‹à‚ğã¸
+                //å›ºå®šå€¤ã®ãŠé‡‘ã‚’ä¸Šæ˜‡
                 break;
         }
     }
-
-
-
 
 }

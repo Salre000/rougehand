@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,7 +6,7 @@ using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 /// <summary>
-/// ƒAƒCƒeƒ€‚ğ“Z‚ß‚éƒNƒ‰ƒX
+/// ã‚¢ã‚¤ãƒ†ãƒ ã‚’çºã‚ã‚‹ã‚¯ãƒ©ã‚¹
 /// </summary>
 public class ItemManager : MonoBehaviour
 {
@@ -16,31 +16,30 @@ public class ItemManager : MonoBehaviour
     private readonly Vector3 _SHOP_ANGLE = new Vector3(-90, 0, 0);
     private readonly Vector3 _NORMAL_ANGLE = new Vector3(0, 0, 0);
 
-
     /// <summary>
-    /// ƒAƒCƒeƒ€‚Ì–{‘Ì
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã®æœ¬ä½“
     /// </summary>
     private List<ItemBase> _itemList = new List<ItemBase>();
 
     /// <summary>
-    /// ƒAƒCƒeƒ€‚ÌƒIƒuƒWƒFƒNƒg
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     /// </summary>
     [SerializeField] private List<ItemObject> _itemObjectList = new List<ItemObject>();
 
     /// <summary>
-    /// ƒAƒCƒeƒ€‚Ì¶’[‚ÌÀ•W
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã®å·¦ç«¯ã®åº§æ¨™
     /// </summary>
     [SerializeField] private Transform _leftTransform;
     /// <summary>
-    /// ƒAƒCƒeƒ€‚Ì‰E’[‚ÌÀ•W
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã®å³ç«¯ã®åº§æ¨™
     /// </summary>
     [SerializeField] private Transform _rightTransform;
     /// <summary>
-    /// ƒVƒ‡ƒbƒv‚ÌƒAƒCƒeƒ€‚Ì¶’[‚ÌÀ•W
+    /// ã‚·ãƒ§ãƒƒãƒ—æ™‚ã®ã‚¢ã‚¤ãƒ†ãƒ ã®å·¦ç«¯ã®åº§æ¨™
     /// </summary>
     [SerializeField] private Transform _leftShopTransform;
     /// <summary>
-    /// ƒVƒ‡ƒbƒv‚ÌƒAƒCƒeƒ€‚Ì‰E’[‚ÌÀ•W
+    /// ã‚·ãƒ§ãƒƒãƒ—æ™‚ã®ã‚¢ã‚¤ãƒ†ãƒ ã®å³ç«¯ã®åº§æ¨™
     /// </summary>
     [SerializeField] private Transform _rightShopTransform;
 
@@ -62,7 +61,7 @@ public class ItemManager : MonoBehaviour
 
     public void Update()
     {
-        // ƒVƒ‡ƒbƒv‚Ìˆ—
+        // ã‚·ãƒ§ãƒƒãƒ—æ™‚ã®å‡¦ç†
         if (ShopManager.instance.IsShop())
         {
             SetShopPosition();
@@ -77,18 +76,17 @@ public class ItemManager : MonoBehaviour
     public void ItemALLAction(System.Func<ItemObject,ItemObject> func) { _itemObjectList.GetAction(func); }
 
     /// <summary>
-    /// ‰½‚©‚µ‚ç‚ÌŒø‰Ê‚É‚æ‚Á‚ÄƒAƒCƒeƒ€‚ÌÅ‘å’l‚ğ•ÏX‚·‚é’l
+    /// ä½•ã‹ã—ã‚‰ã®åŠ¹æœã«ã‚ˆã£ã¦ã‚¢ã‚¤ãƒ†ãƒ ã®æœ€å¤§å€¤ã‚’å¤‰æ›´ã™ã‚‹å€¤
     /// </summary>
     private int negativeItemCounter = 0;
     /// <summary>
-    /// ƒAƒCƒeƒ€‚ğ’Ç‰Á‚·‚éŠÖ”
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã‚’è¿½åŠ ã™ã‚‹é–¢æ•°
     /// </summary>
     /// <param name="ID"></param>
     public void AddItem(int ID)
     {
 
         if (_itemList.Count >= ITEM_MAX_COUNT+ negativeItemCounter) return;
-
 
         _itemList.Add(ALLItem.GetItem((ALLItem.ALLItemEnum)ID));
         _itemList[_itemList.Count-1].Initializ();
@@ -99,7 +97,7 @@ public class ItemManager : MonoBehaviour
             _materialList._material[_itemList[_itemList.Count - 1].GetID()]);
     }
 
-    public void AddItem(ItemBase itemBase) 
+    public void AddItem(ItemBase itemBase)
     {
 
         _itemList.Add(itemBase);
@@ -119,10 +117,10 @@ public class ItemManager : MonoBehaviour
 
         _itemList.Remove(itemBase);
 
-        //@ƒIƒuƒWƒFƒNƒg‚ğƒLƒƒƒbƒVƒ…
+        //ã€€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ã‚­ãƒ£ãƒƒã‚·ãƒ¥
         GameObject gameObject = _itemObjectList[index].gameObject;
 
-        // ƒIƒuƒWƒFƒNƒg‚ğ”z—ñ‚©‚çÁ‹
+        // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’é…åˆ—ã‹ã‚‰æ¶ˆå»
         _itemObjectList.RemoveAt(index);
 
         BreakUtility.StartBreak(gameObject);
@@ -133,10 +131,10 @@ public class ItemManager : MonoBehaviour
 
         _itemList.RemoveAt(itemBase);
 
-        //@ƒIƒuƒWƒFƒNƒg‚ğƒLƒƒƒbƒVƒ…
+        //ã€€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ã‚­ãƒ£ãƒƒã‚·ãƒ¥
         GameObject gameObject = _itemObjectList[itemBase].gameObject;
 
-        // ƒIƒuƒWƒFƒNƒg‚ğ”z—ñ‚©‚çÁ‹
+        // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’é…åˆ—ã‹ã‚‰æ¶ˆå»
         _itemObjectList.RemoveAt(itemBase);
 
         BreakUtility.StartBreak(gameObject);
@@ -169,8 +167,6 @@ public class ItemManager : MonoBehaviour
 
         SaleUtility.SetSale(_itemList[ID], _itemObjectList[ID].gameObject, _itemList[ID].ReturnMoney());
 
-
-
     }
 
     public void ShowExplanation(int ID)
@@ -178,24 +174,20 @@ public class ItemManager : MonoBehaviour
         int[] test = new int[0];
         ExplanationManager.instance.AddExplanation(_itemObjectList[ID].gameObject, _itemList[ID], test, new Vector2(0, 1));
 
-
-
     }
     public void ShowExplanation(GameObject gameObject,ItemBase itemBase,Vector2 offset)
     {
         int[] test = new int[0];
         ExplanationManager.instance.AddExplanation(gameObject, itemBase, test, offset);
 
-
-
     }
 
-    public void PaintItemObject(ItemBase itemBase, GameObject gameObject) 
+    public void PaintItemObject(ItemBase itemBase, GameObject gameObject)
     {
         SetPaint(gameObject, _materialList._material[itemBase.GetID()]);
     }
 
-    public void ShopItemAdd(System.Func<ItemBase> func=null) 
+    public void ShopItemAdd(System.Func<ItemBase> func=null)
     {
         if (func == null) func = () => ALLItem.GetItem((ALLItem.ALLItemEnum)UnityEngine.Random.Range(0, (int)ALLItem.ALLItemEnum._MAX));
 
@@ -206,12 +198,10 @@ public class ItemManager : MonoBehaviour
 
         item.Initializ();
 
-        //ƒIƒuƒWƒFƒNƒg‚Ì•¨—‰‰Z‚ğ’â~
+        //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç‰©ç†æ¼”ç®—ã‚’åœæ­¢
         saleObjecet.GetComponent<Rigidbody>().isKinematic = true;
 
         SetPaint(saleObjecet,_materialList._material[item.GetID()]);
-
-
 
         SaleObjectManager.instance.ProductExplantion(item.ReturnMoney());
         SaleObjectManager.instance.AddProducts(saleObjecet,
@@ -225,15 +215,12 @@ public class ItemManager : MonoBehaviour
                 SetPaint(_itemObjectList[_itemObjectList.Count - 1].gameObject,
                     _materialList._material[_itemList[_itemList.Count - 1].GetID()]);
 
-
                 GameObject domyy = saleObjecet;
                 SaleObjectManager.instance.Remove(domyy);
-
 
             }
 
             );
-
 
     }
 
@@ -257,31 +244,24 @@ public class ItemManager : MonoBehaviour
 
         if (!_isGrab) return;
 
-
-        //ƒWƒ‡[ƒJ[“¯m‚Ì‹——£
+        //ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼åŒå£«ã®è·é›¢
         float renge = Vector3.Distance(_leftTransform.transform.position, _rightTransform.transform.position) / (_itemObjectList.Count + 1);
-
 
         float Cardrenge = (_leftTransform.transform.position.x + renge * (_isGrabID + 1)) - _itemObjectList[_isGrabID].transform.position.x;
 
-
-        //‰¡•ûŒü‚Ö‚ÌˆÚ“®‹——£‚ª¬‚³‚©‚Á‚½‚ç‡”Ô‚Ì•ÏX‚ğ‰Á‚¦‚È‚¢
+        //æ¨ªæ–¹å‘ã¸ã®ç§»å‹•è·é›¢ãŒå°ã•ã‹ã£ãŸã‚‰é †ç•ªã®å¤‰æ›´ã‚’åŠ ãˆãªã„
         if (Mathf.Abs(Cardrenge) + 30 < renge) return;
 
-        //ˆÚ“®•ûŒü‚ğ’²®
+        //ç§»å‹•æ–¹å‘ã‚’èª¿æ•´
         int count = 1;
         if (Cardrenge > 1) count = -1;
 
         if (_isGrabID + count >= _itemObjectList.Count || _isGrabID + count < 0) return;
 
-        //ƒWƒ‡[ƒJ[‚Ì‡”Ô‚ğ“ü‚ê‘Ö‚¦‚éŠÖ”‚ğŒÄ‚Ô
+        //ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®é †ç•ªã‚’å…¥ã‚Œæ›¿ãˆã‚‹é–¢æ•°ã‚’å‘¼ã¶
         ItemUtility.ChengeOrder(_isGrabID, _isGrabID + count);
 
         _isGrabID = _isGrabID + count;
-
-
-
-
 
     }
     public int GetItemIndex(ItemObject itemObject)
@@ -290,17 +270,14 @@ public class ItemManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒAƒCƒeƒ€‚ÌˆÊ’u‚ğŒ³‚ÌêŠ‚É–ß‚·ˆ—
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã®ä½ç½®ã‚’å…ƒã®å ´æ‰€ã«æˆ»ã™å‡¦ç†
     /// </summary>
     private void SetPosition()
     {
 
         float renge = Vector3.Distance(_leftTransform.position, _rightTransform.position) / (_itemObjectList.Count + 1);
 
-
-
-
-        for (int i = 0; i < _itemObjectList.Count; i++) 
+        for (int i = 0; i < _itemObjectList.Count; i++)
         {
             _itemObjectList[i].MovePos(_leftTransform.position + new Vector3(renge * (i + 1), 0, 0));
 
@@ -309,17 +286,14 @@ public class ItemManager : MonoBehaviour
 
     }
     /// <summary>
-    /// ƒVƒ‡ƒbƒv‚Ì‚Æ‚«‚ÌƒAƒCƒeƒ€‚ÌˆÊ’u‚ğŒ³‚ÌêŠ‚É–ß‚·ˆ—
+    /// ã‚·ãƒ§ãƒƒãƒ—ã®ã¨ãã®ã‚¢ã‚¤ãƒ†ãƒ ã®ä½ç½®ã‚’å…ƒã®å ´æ‰€ã«æˆ»ã™å‡¦ç†
     /// </summary>
     private void SetShopPosition()
     {
 
         float renge = Vector3.Distance(_leftShopTransform.position, _rightShopTransform.position) / (_itemObjectList.Count + 1);
 
-
-
-
-        for (int i = 0; i < _itemObjectList.Count; i++) 
+        for (int i = 0; i < _itemObjectList.Count; i++)
         {
             _itemObjectList[i].MovePos(_leftShopTransform.position + new Vector3(renge * (i + 1), 0, 0));
 
@@ -329,13 +303,11 @@ public class ItemManager : MonoBehaviour
 
     }
 
-
     private void SetPaint(GameObject item, Texture ID)
     {
         MeshRenderer meshRenderer = item.transform.GetChild(0).GetComponent<MeshRenderer>();
 
         Material[] materials = meshRenderer.materials;
-
 
         Material materialCopy = new Material(dommyMaterial);
 
@@ -345,8 +317,7 @@ public class ItemManager : MonoBehaviour
 
         meshRenderer.materials = materials;
 
-
     }
 
-
 }
+

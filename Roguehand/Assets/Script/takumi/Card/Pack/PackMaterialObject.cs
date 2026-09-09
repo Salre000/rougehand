@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,11 +11,11 @@ public class PackMaterialObject : MonoBehaviour
     private readonly int SBU_MATERIAL_INDEX = 0;
 
     /// <summary>
-    /// ƒIƒuƒWƒFƒNƒg‚Ìƒ}ƒeƒŠƒAƒ‹‚ğ“\‚è•t‚¯‚éŠÖ”
+    /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒãƒ†ãƒªã‚¢ãƒ«ã‚’è²¼ã‚Šä»˜ã‘ã‚‹é–¢æ•°
     /// </summary>
-    /// <param name="main"><Œ©o‚µ‚Ìƒ}ƒeƒŠƒAƒ‹/param>
-    /// <param name="sbu"><•\–ÊˆÈŠO/param>
-    public void SetMaterial(Material main,Material sbu) 
+    /// <param name="main"><è¦‹å‡ºã—ã®ãƒãƒ†ãƒªã‚¢ãƒ«/param>
+    /// <param name="sbu"><è¡¨é¢ä»¥å¤–/param>
+    public void SetMaterial(Material main,Material sbu)
     {
 
         Material[] materials = _main.materials;
@@ -25,6 +25,6 @@ public class PackMaterialObject : MonoBehaviour
 
         _upObject.material = sbu;
 
-
     }
 }
+

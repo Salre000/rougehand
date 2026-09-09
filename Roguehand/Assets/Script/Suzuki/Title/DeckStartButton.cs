@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,13 +17,14 @@ public class DeckStartButton : MonoBehaviour
 
     void OnStart()
     {
-        // ‘O‰ñ‚ÌƒZ[ƒuƒf[ƒ^‚ğÁ‹
+        // å‰å›ã®ã‚»ãƒ¼ãƒ–ãƒ‡ãƒ¼ã‚¿ã‚’æ¶ˆå»
         MemoryManager.Lost();
 
         VolumeManager.instance.PlaySystemSE();
 
-        // ƒfƒbƒL”Ô†‚ğƒV[ƒ“‰z‚µ
+        // ãƒ‡ãƒƒã‚­ç•ªå·ã‚’ã‚·ãƒ¼ãƒ³æŒè¶Šã—
         TitleStatic.SetDeckNumber(_deckMove.selectIndex);
         GameSceneManager.LoadScene(GameSceneManager.mainScene);
     }
 }
+

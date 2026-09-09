@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using Unity.VisualScripting.Antlr3.Runtime;
@@ -6,19 +6,19 @@ using UnityEngine;
 using static Extra;
 using static ScriptCountNumber;
 /// <summary>
-/// ƒpƒbƒNˆê‚Âˆê‚Â‚É•t—^‚³‚ê‚éƒNƒ‰ƒX
+/// ãƒ‘ãƒƒã‚¯ä¸€ã¤ä¸€ã¤ã«ä»˜ä¸ã•ã‚Œã‚‹ã‚¯ãƒ©ã‚¹
 /// </summary>
 public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 {
     /// <summary>
-    /// ƒpƒbƒN‚Ìw“ü‚É‚©‚©‚é‚¨‹à‚Ì—Ê
+    /// ãƒ‘ãƒƒã‚¯ã®è³¼å…¥ã«ã‹ã‹ã‚‹ãŠé‡‘ã®é‡
     /// </summary>
     private int saleValue = 0;
 
     private readonly Vector2 SHOP_UI_OFFSET = new Vector2(0.8f, 0);
 
     /// <summary>
-    /// ƒpƒbƒN‚Ìæ“¾‰Â”\‚ÈƒJ[ƒh‚Ìí—Ş
+    /// ãƒ‘ãƒƒã‚¯ã®å–å¾—å¯èƒ½ãªã‚«ãƒ¼ãƒ‰ã®ç¨®é¡
     /// </summary>
     private InstantiatePack.PackType _type;
 
@@ -30,9 +30,8 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
     private GameObject defaultObject;
 
-
     /// <summary>s
-    /// ‰Šú‰»ˆ—
+    /// åˆæœŸåŒ–å‡¦ç†
     /// </summary>
     public void Initialize()
     {
@@ -40,35 +39,34 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
     public int GetSaleValue() { return saleValue; }
 
-    public void SetDefaultObject(GameObject gameObject) 
+    public void SetDefaultObject(GameObject gameObject)
     {
         defaultObject = gameObject;
     }
 
     /// <summary>
-    /// à–¾‚ğ•`‰æ‚·‚éŠÖ”
+    /// èª¬æ˜ã‚’æç”»ã™ã‚‹é–¢æ•°
     /// </summary>
     public void ShopExplantion()
     {
 
-        // ƒoƒt‚ª‚È‚¢‚©‚ç‚±‚ê‚Åéx‚·
+        // ãƒãƒ•ãŒãªã„ã‹ã‚‰ã“ã‚Œã§é¨™ã™
         int[] dommyBuff = new int[0];
 
         ExplanationManager.instance.AddExplanation(gameObject, this, dommyBuff, SHOP_UI_OFFSET);
 
     }
 
-    public void ShopSale() 
+    public void ShopSale()
     {
         SaleUtility.SetSale(this, gameObject, 10, false);
     }
 
-
     /// <summary>
-    /// ƒpƒbƒN‚ğ¶¬‚µ‚½‚Ìˆ— initializ‚Æ“¯‚¶‚æ‚¤‚Èˆµ‚¢
+    /// ãƒ‘ãƒƒã‚¯ã‚’ç”Ÿæˆã—ãŸæ™‚ã®å‡¦ç† initializã¨åŒã˜ã‚ˆã†ãªæ‰±ã„
     /// </summary>
-    /// <param name="createCount"><‰½–‡¶¬‚·‚é‚©‚Ç‚¤‚©/param>
-    /// <param name="getCount"><‰½–‡Šl“¾‚Å‚«‚é‚©‚Ç‚¤‚©/param>
+    /// <param name="createCount"><ä½•æšç”Ÿæˆã™ã‚‹ã‹ã©ã†ã‹/param>
+    /// <param name="getCount"><ä½•æšç²å¾—ã§ãã‚‹ã‹ã©ã†ã‹/param>
     public void Create(InstantiatePack.PackType packType, int createCount, int getCount)
     {
         _type = packType;
@@ -79,17 +77,17 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
     }
 
     /// <summary>
-    /// ƒpƒbƒN‚ğŠJ‚¯‚½‚Æ‚«‚Ìˆ—
+    /// ãƒ‘ãƒƒã‚¯ã‚’é–‹ã‘ãŸã¨ãã®å‡¦ç†
     /// </summary>
     public void Use<T>(List<T> values,List<Vector3>poss)
     {
-        // ƒpƒbƒN‚Ì’†g‚ğ‘I‘ğ’†‚Í‘¼‚ÌƒVƒ‡ƒbƒv‚ÌƒJ[ƒh‚ğíœ
+        // ãƒ‘ãƒƒã‚¯ã®ä¸­èº«ã‚’é¸æŠä¸­ã¯ä»–ã®ã‚·ãƒ§ãƒƒãƒ—ã®ã‚«ãƒ¼ãƒ‰ã‚’å‰Šé™¤
         SaleObjectManager.instance.AllInactive();
         SaleObjectManager.instance.SetPackSelectCount(_packGetCount);
         SaleObjectManager.instance.ChengePackMode(true);
 
         List<GameObject> cards = new();
-        // w“ü‚ÌƒAƒNƒVƒ‡ƒ“
+        // è³¼å…¥æ™‚ã®ã‚¢ã‚¯ã‚·ãƒ§ãƒ³
 
         for (int i = 0; i < values.Count; i++)
         {
@@ -97,15 +95,13 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
             card.GetComponent<Rigidbody>().useGravity = false;
 
-
-            card.GetComponent<Rigidbody>().constraints = 
-                RigidbodyConstraints.FreezePosition| 
+            card.GetComponent<Rigidbody>().constraints =
+                RigidbodyConstraints.FreezePosition|
                 RigidbodyConstraints.FreezeRotation;
-
 
             card.AddComponent<PackInObject>().SetTragetPos(poss[i]);
 
-            // ƒ}ƒeƒŠƒAƒ‹‚Ì“\‚è•t‚¯
+            // ãƒãƒ†ãƒªã‚¢ãƒ«ã®è²¼ã‚Šä»˜ã‘
             GetTypeMaterial(_type, values[i],card);
 
             cards.Add(card);
@@ -123,24 +119,24 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                 false);
         }
 
-        // ƒJ[ƒh‚ÌƒIƒuƒWƒFƒNƒg‚ÌÀ•W‚ğˆÚ“®‚³‚¹‚éŠÖ”‚ğ
-        //saleObjectmanager‚É“n‚·
+        // ã‚«ãƒ¼ãƒ‰ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åº§æ¨™ã‚’ç§»å‹•ã•ã›ã‚‹é–¢æ•°ã‚’
+        //saleObjectmanagerã«æ¸¡ã™
 
-        Debug.Log("ƒpƒbƒN‚Ìg—p");
+        Debug.Log("ãƒ‘ãƒƒã‚¯ã®ä½¿ç”¨");
 
     }
 
     public string GetName()
     {
-        StringBuilder@sb = new StringBuilder();
+        StringBuilderã€€sb = new StringBuilder();
 
-        // +‚P‚ªƒƒK‚Ì•¶š
+        // +ï¼‘ãŒãƒ¡ã‚¬ã®æ–‡å­—
         if (_packCardCount > 4) sb.Append(MasterData.instance.GetStringMaster( IDUtility.PACK_ID + 1));
 
-        // +2‚ª‚©‚ç‚ªí—Ş‚Ì•¶š
+        // +2ãŒã‹ã‚‰ãŒç¨®é¡ã®æ–‡å­—
         sb.Append(MasterData.instance.GetStringMaster(IDUtility.PACK_ID + 2+(int)_type));
 
-        // ƒpƒbƒN‚Ì–¼‘O
+        // ãƒ‘ãƒƒã‚¯ã®åå‰
         sb.Append(MasterData.instance.GetStringMaster(IDUtility.PACK_ID));
 
         return sb.ToString();
@@ -150,9 +146,8 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
     {
         StringBuilder sb = new StringBuilder();
         int ExplanationRate = 500;
-        
 
-        // +‚P‚ªƒƒK‚Ì•¶š
+        // +ï¼‘ãŒãƒ¡ã‚¬ã®æ–‡å­—
         if (_packCardCount > 4) sb.Append(MasterData.instance.GetStringMaster(IDUtility.PACK_ID + 1+ ExplanationRate));
         else sb.Append(MasterData.instance.GetStringMaster(IDUtility.PACK_ID+ ExplanationRate));
 
@@ -166,7 +161,7 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
         int ExplanationRate = 10;
 
-        // +2‚ª‚©‚ç‚ªí—Ş‚Ì•¶š
+        // +2ãŒã‹ã‚‰ãŒç¨®é¡ã®æ–‡å­—
         sb.Append(MasterData.instance.GetStringMaster(IDUtility.PACK_ID + 2 + (int)_type+ ExplanationRate));
         return sb.ToString();
     }
@@ -180,12 +175,10 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
     {
         if (!isPack) return;
 
-
     }
 
     private void GetTypeMaterial<T>(InstantiatePack.PackType type, T t,GameObject gameObject)
     {
-
 
         switch (type)
         {
@@ -204,24 +197,19 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                 CardObjectUtility.CardPaint(trump.trump, gameObject);
                 break;
 
-
         }
-
-
-
-
 
         return ;
     }
 
     private System.Action TypeBay<T>(T t,GameObject card)
     {
-       
+
         switch (_type)
         {
             case InstantiatePack.PackType.joker:
                 JokerBase joker = t as JokerBase;
-                return () => 
+                return () =>
                 {
                     JokerUtility.AddJoker(joker.GetID()-IDUtility.JOKER_ID-1);
 
@@ -230,11 +218,10 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                     JokerObjectUtility.JokerObjectALLAction(
                         joker => { joker.gameObject.SetActive(false); return joker; });
 
-
                 };
             case InstantiatePack.PackType.item:
                 ItemBase itemBase = t as ItemBase;
-                return () => 
+                return () =>
                 {
 
                     ItemUtility.AddItem(
@@ -246,7 +233,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                     ItemUtility.ItemALLAction(
                         item => { item.gameObject.SetActive(false); return item; });
 
-
                 };
             case InstantiatePack.PackType.trump:
                 Card.TrumpClass trumpClass= t as Card.TrumpClass;
@@ -257,13 +243,11 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
                 };
 
-
         }
-
 
         return () => { };
     }
-    // ‚Ü‚¾‚¶‚å[‚©‚É‚µ‚©‘Î‰‚µ‚Ä‚¢‚È‚¢
+    // ã¾ã ã˜ã‚‡ãƒ¼ã‹ã«ã—ã‹å¯¾å¿œã—ã¦ã„ãªã„
     private System.Action ShopSaleShow<T>(GameObject gameObject, T t)
     {
         List<System.Action> actions = new List<System.Action>();
@@ -274,7 +258,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
                 JokerBase joker = t as JokerBase;
                 actions.Add(() => { SaleUtility.SetSale(joker, gameObject, 0, false); });
-
 
                 break;
             case InstantiatePack.PackType.item:
@@ -288,7 +271,7 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                 DommySaleObject doomy = new DommySaleObject();
                 actions.Add(() => { SaleUtility.SetSale(doomy, gameObject, 0, false); });
 
-                break;  
+                break;
         }
 
         return () => { for (int i = 0; i < actions.Count; i++) actions[i](); };
@@ -305,7 +288,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                 JokerBase joker = t as JokerBase;
                 actions.Add(() => { JokerUtility.ShowExplanation(gameObject, joker, SHOP_UI_OFFSET); });
 
-
                 break;
             case InstantiatePack.PackType.item:
                 ItemBase itemBase =t as ItemBase;
@@ -318,7 +300,7 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                 DommySaleObject doomy = new DommySaleObject();
                 actions.Add(() => { CardObjectUtility.ShowExplanation(trumpClass.trump, gameObject, SHOP_UI_OFFSET); });
 
-                break;  
+                break;
         }
 
         return () => { for (int i = 0; i < actions.Count; i++) actions[i](); };
@@ -341,3 +323,4 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
     }
 
 }
+

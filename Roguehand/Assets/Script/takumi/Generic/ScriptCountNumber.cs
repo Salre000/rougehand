@@ -1,40 +1,38 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ScriptCountNumber 
+public static class ScriptCountNumber
 {
 
     /// <summary>
-    /// ”¼•ª‚É‚µ‚½‚è‚·‚é‚Æ‚«‚Ég‚¤’è”
+    /// åŠåˆ†ã«ã—ãŸã‚Šã™ã‚‹ã¨ãã«ä½¿ã†å®šæ•°
     /// </summary>
     public const float HALF = 2f;
 
     /// <summary>
-    /// ‚Q”{‚É‚·‚é‚Æ‚«‚Ég‚¤’è”
+    /// ï¼’å€ã«ã™ã‚‹ã¨ãã«ä½¿ã†å®šæ•°
     /// </summary>
     public const float DOUBLE = 2f;
 
     /// <summary>
-    /// “x”•\¦‚ÌÅ‘åŠp
+    /// åº¦æ•°è¡¨ç¤ºã®æœ€å¤§è§’
     /// </summary>
     public const float FULL_ROTATION = 360f;
 
     /// <summary>
-    /// “x”•\¦‚ÌÅ‘åŠp‚Ì”¼•ª 
+    /// åº¦æ•°è¡¨ç¤ºã®æœ€å¤§è§’ã®åŠåˆ†
     /// </summary>
     public const float HALF_ROTATION = FULL_ROTATION / HALF;
 
     /// <summary>
-    /// ³‚Ì”š‚Æ•‰‚Ì”š‚ğ“ü‚ê‘Ö‚¦‚éÛ‚Ég‚¤’è”
+    /// æ­£ã®æ•°å­—ã¨è² ã®æ•°å­—ã‚’å…¥ã‚Œæ›¿ãˆã‚‹éš›ã«ä½¿ã†å®šæ•°
     /// </summary>
     public const float ALTERNATIVE = -1f;
 
     /// <summary>
-    /// Œë·‚ğ”F‚ß‚éÛ‚Ég—p‚·‚é
+    /// èª¤å·®ã‚’èªã‚ã‚‹éš›ã«ä½¿ç”¨ã™ã‚‹
     /// </summary>
     public const float EPSILON = 0.01f;
-
-
 
 }

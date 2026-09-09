@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
@@ -29,6 +29,6 @@ public class Delete : BossBase
         base.End();
         CardManager.instance.SetHandSize(handSize);
 
-
     }
 }
+

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,20 +7,16 @@ using UnityEngine;
 public class Seraph : JokerBase
 {
 
-
-    public override void SaleAction() 
+    public override void SaleAction()
     {
 
         //JokerUtility.AddMagnification(100f);
 
-
-        //ƒnƒ“ƒh‚Ìc‚è‰ñ”‚ğƒ[ƒ‚É‚·‚é
-
+        //ãƒãƒ³ãƒ‰ã®æ®‹ã‚Šå›æ•°ã‚’ã‚¼ãƒ­ã«ã™ã‚‹
 
     }
-
-
 
     public override JokerActionUseEnum.JokerRarity GetRarity() { return JokerActionUseEnum.JokerRarity.Rare;}
 
 }
+

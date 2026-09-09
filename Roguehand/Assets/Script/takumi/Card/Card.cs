@@ -1,4 +1,4 @@
-[System.Serializable]
+﻿[System.Serializable]
 public class Card
 {
     public static int maxID=0;
@@ -32,7 +32,7 @@ public class Card
         max=14,
     }
     /// <summary>
-    /// �J�[�h�̏�Ԃ�����
+    /// カードの状態を示す
     /// </summary>
     public enum State
     {
@@ -43,57 +43,57 @@ public class Card
     }
 
     /// <summary>
-    /// ���̃o�t�Ƌ������Ȃ��o�t��type
+    /// 他のバフと競合しないバフなtype
     /// </summary>
     public enum sealBuff
     {
-        None = -1,//�o�t����
-        Red,   // �Ĕ���
-        Bule,�@//���E���h�̏I�����Ɏ�D�ɂ����
-        Purple,//�f�B�X�J�[�h�������ɔ�������
-        Green, //�v���C�������ɔ�������@��D���烉���_���ɔj��
-        Orange,//�v���C�������ɔ�������@�W���[�J�[�̔��l���{�Q
-        Black,//���������@�i���@�{���~�@�i�K�~�Q�i�i�K�T�j
+        None = -1,//バフ無し
+        Red,   // 再発動
+        Bule,　//ラウンドの終了時に手札にあると
+        Purple,//ディスカードした時に発動する
+        Green, //プレイした時に発動する　手札からランダムに破壊
+        Orange,//プレイした時に発動する　ジョーカーの売値を＋２
+        Black,//文字化け　永続　倍率×　段階×２（段階５）
         MAX
     }
     /// <summary>
-    /// ������J�[�h�Ƀo�t���\��type
+    /// あらゆるカードにバフが可能なtype
     /// </summary>
     public enum cardBuff
     {
         None = -1,
-        Foil,//��{�X�R�A�ɒǉ��T�O
-        Hologram,//�{���ɒǉ��P�O
-        Polychrome,//�{���Ɂ~1.5
-        MouseJammer,// �}�E�X�̊��@�}�E�X�����̋������ړ�����ƃ}�E�X�̍��W�������@�@�i���@�{���@�T�{�S�Ă̒i�K�𑫂����l�@�i�i�K�T�j�@
+        Foil,//基本スコアに追加５０
+        Hologram,//倍率に追加１０
+        Polychrome,//倍率に×1.5
+        MouseJammer,// マウスの干渉　マウスが一定の距離を移動するとマウスの座標がずれる　　永続　倍率　５＋全ての段階を足した値　（段階５）
         MAX
     }
     /// <summary>
-    /// �f�b�L�̃J�[�h�Ƀo�t���\��type
+    /// デッキのカードにバフが可能なtype
     /// </summary>
     public enum deckBuff
     {
         None = -1,
-        Bonus,//��{�X�R�A�ɒǉ��Q�O
-        Magnification,//�{���ɒǉ��Q�O
-        Wild,//�X�[�g�𖳎�
-        Glass,//�m���j��
-        Steel,//��D�ɂ���Ɣ{���Ɂ~1.5
-        Gold,//��D�ɂ���Ƃ����{�R
-        Lucky,//�m���ł������{���ǉ�
-        Random,//�@��D�ɗ������ɃX�[�g�ƃi���o�[���m�肷��@��D�ɗ������Ɂ@�c��Q�̂΂ӂ������_���ɂ�
-        BlindScore,//�l������j��܂ł̊ԁ@��ʍ��̐������W�Q�Ō��ɂ��� �W���[�J�[�̑O�ɔ��� �{���~�i�K (�i�K�T)
+        Bonus,//基本スコアに追加２０
+        Magnification,//倍率に追加２０
+        Wild,//スートを無視
+        Glass,//確率破壊
+        Steel,//手札にあると倍率に×1.5
+        Gold,//手札にあるとお金＋３
+        Lucky,//確立でお金か倍率追加
+        Random,//　手札に来た時にスートとナンバーが確定する　手札に来た時に　残り２つのばふがランダムにつく
+        BlindScore,//獲得から破壊までの間　画面左の数字が妨害で見にくい ジョーカーの前に発動 倍率×段階 (段階５)
         MAX
     }
     /// <summary>
-    /// �W���[�J�[�݂̂Ƀo�t���\��type
+    /// ジョーカーのみにバフが可能なtype
     /// </summary>
     public enum JokerBuff
     {
         None = -1,
-        Negative,//�W���[�J�[�̘g��ǉ��P
-        Sepia,//��{�X�R�A�Ɣ{�������ւ���@�Z�s�A�[���R�E�C�J�[���C�J�T�}�[������ւ�
-        ObjectMoves,�@//�I�u�W�F�N�g�̈ʒu���ς��@�@�{���~�i�K�@�i�i�K�T�j
+        Negative,//ジョーカーの枠を追加１
+        Sepia,//基本スコアと倍率を入れ替える　セピアー＞コウイカー＞イカサマー＞入れ替え
+        ObjectMoves,　//オブジェクトの位置が変わる　　倍率×段階　（段階５）
             MAX
     }
     public enum trumpMaterial
@@ -105,7 +105,7 @@ public class Card
     }
 
     /// <summary>
-    /// �ꖇ�̃J�[�h�̏��
+    /// 一枚のカードの情報
     /// </summary>
    [System.Serializable]
     public struct Trump
@@ -144,14 +144,15 @@ public class Card
     }
 
     /// <summary>
-    /// �g�����v�̏����N���X�Ɏ����������̍�
+    /// トランプの情報をクラスに持たせる苦肉の策
     /// </summary>
-    public class TrumpClass 
+    public class TrumpClass
     {
-        public TrumpClass(Card.Trump trump) { this.trump = trump; } 
+        public TrumpClass(Card.Trump trump) { this.trump = trump; }
 
        public Card.Trump trump;
 
     }
 
 }
+

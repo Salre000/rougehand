@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ƒpƒbƒNw“üê—p”wŒi‚ªˆÚ“®AƒpƒbƒNI—¹‚É‚àˆÚ“®
+/// ãƒ‘ãƒƒã‚¯è³¼å…¥æ™‚å°‚ç”¨èƒŒæ™¯ãŒç§»å‹•ã€ãƒ‘ãƒƒã‚¯çµ‚äº†æ™‚ã«ã‚‚ç§»å‹•
 /// </summary>
 public class PackBackMove : MonoBehaviour
 {
@@ -26,7 +26,7 @@ public class PackBackMove : MonoBehaviour
     }
 
     /// <summary>
-    /// w“ü”wŒi‚ª—ˆ‚é
+    /// è³¼å…¥æ™‚èƒŒæ™¯ãŒæ¥ã‚‹
     /// </summary>
     private void BuyPackBackMove()
     {
@@ -34,10 +34,10 @@ public class PackBackMove : MonoBehaviour
         if ((_packBack.transform.localPosition - _originPos).sqrMagnitude < 0.001f) return;
         _packBack.SetActive(true);
         _packBack.transform.localPosition = Vector3.Lerp(_packBack.transform.localPosition, _originPos, _time);
-        
+
     }
     /// <summary>
-    /// ƒpƒbƒNI—¹”wŒi‚ª‹A‚é
+    /// ãƒ‘ãƒƒã‚¯çµ‚äº†æ™‚èƒŒæ™¯ãŒå¸°ã‚‹
     /// </summary>
     private void EndPack()
     {
@@ -52,3 +52,4 @@ public class PackBackMove : MonoBehaviour
 
     }
 }
+

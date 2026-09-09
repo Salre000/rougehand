@@ -1,10 +1,10 @@
-
+ï»¿
 using System.Collections.Generic;
 
 /// <summary>
-/// Šî–{“I‚È52–‡\¬‚ÌƒfƒbƒL‚ğì‚è‚Ü‚·
+/// åŸºæœ¬çš„ãª52æšæ§‹æˆã®ãƒ‡ãƒƒã‚­ã‚’ä½œã‚Šã¾ã™
 /// </summary>
-public class TrumpCard 
+public class TrumpCard
 {
 
     private Card.suit _suit;
@@ -14,12 +14,12 @@ public class TrumpCard
     private int _index = 0;
 
     /// <summary>
-    /// ƒfƒbƒL‚Ìì¬Às
+    /// ãƒ‡ãƒƒã‚­ã®ä½œæˆå®Ÿè¡Œ
     /// </summary>
     public void CreateDeck()
     {
-        
-        // 4í—Ş‚Ì
+
+        // 4ç¨®é¡ã®
         for(int i = 0; i < (int)Card.suit.max; i++)
         {
             _suit = (Card.suit)i;
@@ -41,12 +41,12 @@ public class TrumpCard
     }
 
     /// <summary>
-    ///  CSVŠî€‚ÅƒfƒbƒL‚ğì¬‚·‚éŠÖ”
+    ///  CSVåŸºæº–ã§ãƒ‡ãƒƒã‚­ã‚’ä½œæˆã™ã‚‹é–¢æ•°
     /// </summary>
     public void CreateDeck(List<List<int>> deckBlueprint)
     {
 
-        // 4í—Ş‚Ì
+        // 4ç¨®é¡ã®
         for (int i = 0; i < (int)Card.suit.max; i++)
         {
             _suit = (Card.suit)i;
@@ -70,5 +70,5 @@ public class TrumpCard
         CardManager.instance.SetDeck(deck);
     }
 
-
 }
+

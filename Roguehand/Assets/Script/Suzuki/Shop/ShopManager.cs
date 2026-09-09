@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,11 +6,10 @@ public class ShopManager : MonoBehaviour
 {
     public static ShopManager instance;
 
-    // ƒVƒ‡ƒbƒvó‘Ôƒtƒ‰ƒO
+    // ã‚·ãƒ§ãƒƒãƒ—çŠ¶æ…‹ãƒ•ãƒ©ã‚°
     private bool _isShop = false;
-    // ƒVƒ‡ƒbƒvI—¹ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚©
+    // ã‚·ãƒ§ãƒƒãƒ—çµ‚äº†ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã‹
     private bool _isPushEndShop = false;
-
 
     private void Awake()
     {
@@ -24,17 +23,14 @@ public class ShopManager : MonoBehaviour
 
     }
 
-
-
-
-
-    // ƒVƒ‡ƒbƒvó‘Ô‚ğ•ÏX
+    // ã‚·ãƒ§ãƒƒãƒ—çŠ¶æ…‹ã‚’å¤‰æ›´
     public void SetIsShop(bool flag) { _isShop = flag; }
-    // ƒVƒ‡ƒbƒvó‘Ô‚ğæ“¾
+    // ã‚·ãƒ§ãƒƒãƒ—çŠ¶æ…‹ã‚’å–å¾—
     public bool IsShop() { return _isShop; }
-    // ƒVƒ‡ƒbƒv‚ÌI—¹ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚©ƒZƒbƒg
+    // ã‚·ãƒ§ãƒƒãƒ—ã®çµ‚äº†ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã‹ã‚»ãƒƒãƒˆ
     public void SetPushEndShop(bool flag) { _isPushEndShop = flag; }
-    // I—¹ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚©‚ğæ“¾
+    // çµ‚äº†ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã‹ã‚’å–å¾—
     public bool IsPushEndShop() { return _isPushEndShop; }
 
 }
+

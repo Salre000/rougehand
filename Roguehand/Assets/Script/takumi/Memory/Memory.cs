@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -13,49 +13,49 @@ public class Memory
     private readonly string BASE_DECK = "BaseDeck";
     private readonly string extension = ".csv";
     /// <summary>
-    /// ƒNƒ‰ƒXì¬‚ÌŠî–{ƒRƒ“ƒXƒgƒ‰ƒNƒ^[
+    /// ã‚¯ãƒ©ã‚¹ä½œæˆæ™‚ã®åŸºæœ¬ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ¼
     /// </summary>
     public Memory()
     {
         System.Diagnostics.Debug.WriteLine(Environment.StackTrace);
 
-        //@Œ»İ‚ÌƒfƒbƒLƒf[ƒ^‚ğæ“¾
+        //ã€€ç¾åœ¨ã®ãƒ‡ãƒƒã‚­ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
         _trumps = CardManager.instance.deck;
 
-        //  Œ»İ‚ÌƒWƒ‡[ƒJ[‚Ìƒf[ƒ^‚ğæ“¾
+        //  ç¾åœ¨ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
         _jokers = JokerUtility.GetJokers();
 
-        //@Œ»İ‚ÌƒAƒCƒeƒ€‚Ìƒf[ƒ^‚ğæ“¾
+        //ã€€ç¾åœ¨ã®ã‚¢ã‚¤ãƒ†ãƒ ã®ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
         _items = ItemUtility.GetItemBase();
 
-        //  Œ»İ‚Ì‚¨‹à‚Ìƒf[ƒ^‚ğæ“¾
+        //  ç¾åœ¨ã®ãŠé‡‘ã®ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
         _money = GameUtility.GetMyMoney();
 
-        // @Œ»İ‚Ìƒ‰ƒEƒ“ƒh‚ÌƒJƒEƒ“ƒg‚ğæ“¾
+        // ã€€ç¾åœ¨ã®ãƒ©ã‚¦ãƒ³ãƒ‰ã®ã‚«ã‚¦ãƒ³ãƒˆã‚’å–å¾—
         _round = GameUtility.GetRoundCount();
 
-        // @Œ»İ‚ÌƒAƒ“ƒeƒB‚ÌƒJƒEƒ“ƒg‚ğæ“¾
+        // ã€€ç¾åœ¨ã®ã‚¢ãƒ³ãƒ†ã‚£ã®ã‚«ã‚¦ãƒ³ãƒˆã‚’å–å¾—
         _ante = GameUtility.GetAnteCount();
 
-        //  Œ»İ‚Ì–ğ‚Ìg—p”‚ğæ“¾
+        //  ç¾åœ¨ã®å½¹ã®ä½¿ç”¨æ•°ã‚’å–å¾—
         _roleCount = RoleManager.instance.GetRolePlayCountList();
 
-        //  Œ»İ‚Ì–ğ‚ÌƒŒƒxƒ‹‚ğæ“¾
+        //  ç¾åœ¨ã®å½¹ã®ãƒ¬ãƒ™ãƒ«ã‚’å–å¾—
         _roleLevelCount = RoleManager.instance.GetRoleLevels();
 
-        //  Œ»İ‚ÌƒvƒŒƒC‰Â”\‰ñ”‚ğæ“¾
+        //  ç¾åœ¨ã®ãƒ—ãƒ¬ã‚¤å¯èƒ½å›æ•°ã‚’å–å¾—
         _handCount = GameUtility.GetHandCount();
 
-        //  Œ»İ‚ÌƒfƒBƒXƒJ[ƒh‚Ì‰Â”\‰ñ”‚ğæ“¾
+        //  ç¾åœ¨ã®ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰ã®å¯èƒ½å›æ•°ã‚’å–å¾—
         _discardCount = GameUtility.GetDiscardCount();
 
-        // Œ»İ‚Ìƒ‰ƒEƒ“ƒh‚ÌƒXƒRƒA‚ğæ“¾
+        // ç¾åœ¨ã®ãƒ©ã‚¦ãƒ³ãƒ‰ã®ã‚¹ã‚³ã‚¢ã‚’å–å¾—
         _score = ScoreManager.instance.GetRoundScore();
 
-        // Œ»İƒVƒ‡ƒbƒv‚É‚¢‚é‚©‚Ç‚¤‚©‚ğINT‚É•ÏŠ·‚µ‚Äæ“¾
+        // ç¾åœ¨ã‚·ãƒ§ãƒƒãƒ—ã«ã„ã‚‹ã‹ã©ã†ã‹ã‚’INTã«å¤‰æ›ã—ã¦å–å¾—
         _isShop = ShopManager.instance.IsShop() ? 1 : 0;
 
-        // ƒŠƒ[ƒ‹‚Ì‰ñ”‚ğæ“¾
+        // ãƒªãƒ­ãƒ¼ãƒ«ã®å›æ•°ã‚’å–å¾—
         _reroolCount = SaleObjectManager.instance.GetReroolCount();
 
         _playCardCount = CardObjectUtility.GetPlayCardCount();
@@ -68,8 +68,6 @@ public class Memory
 
         theSeed = MemoryManager.seed;
 
-
-
         lowstRoundScore = MasterData.instance.GetIntMaster(7000 + GameUtility.GetAllRoundCount());
 
         _boss = BossUtility.GetBossBase();
@@ -80,33 +78,31 @@ public class Memory
     {
         if (fileName == string.Empty) fileName = BASE_DECK;
 
-        //“Ç‚İ‚ñ‚¾CSVƒtƒ@ƒCƒ‹‚ğŠi”[
+        //èª­ã¿è¾¼ã‚“ã CSVãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ ¼ç´
         List<string[]> csvDatas = new List<string[]>();
 
-        //CSVƒtƒ@ƒCƒ‹‚Ìs”‚ğŠi”[
+        //CSVãƒ•ã‚¡ã‚¤ãƒ«ã®è¡Œæ•°ã‚’æ ¼ç´
         int height = 0;
 
-        //ƒtƒ@ƒCƒ‹ƒpƒX‚Æƒtƒ@ƒCƒ‹‚Ì–¼‘O‚ğŒq‚°‚é
+        //ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã¨ãƒ•ã‚¡ã‚¤ãƒ«ã®åå‰ã‚’ç¹‹ã’ã‚‹
         StringBuilder builder = new StringBuilder();
         builder.Clear();
         builder.Append(FREE_PASS);
         builder.Append(BASE_FILE);
         builder.Append(fileName);
 
-
-        //Œq‚°‚½ƒtƒ@ƒCƒ‹ƒpƒX‚ğg‚¢ƒtƒ@ƒCƒ‹‚Ìƒ[ƒh‚ğs‚¤
+        //ç¹‹ã’ãŸãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚’ä½¿ã„ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ­ãƒ¼ãƒ‰ã‚’è¡Œã†
         TextAsset textAsset = Resources.Load<TextAsset>(builder.ToString());
 
-        //“Ç‚İ‚ñ‚¾ƒeƒLƒXƒg‚ğStringŒ^‚É‚µ‚ÄŠi”[
+        //èª­ã¿è¾¼ã‚“ã ãƒ†ã‚­ã‚¹ãƒˆã‚’Stringå‹ã«ã—ã¦æ ¼ç´
         StringReader reader = new StringReader(textAsset.text);
 
         while (reader.Peek() > -1)
         {
             string line = reader.ReadLine();
-            // ,‚Å‹æØ‚Á‚ÄCSV‚ÉŠi”[
+            // ,ã§åŒºåˆ‡ã£ã¦CSVã«æ ¼ç´
             csvDatas.Add(line.Split(','));
         }
-
 
         CreateDeck(csvDatas);
         height += (int)Card.suit.max;
@@ -133,31 +129,29 @@ public class Memory
     }
 
     /// <summary>
-    /// ‚±‚Ì•Û‘¶ƒf[ƒ^‚ğg—p‚·‚éŠÖ”
+    /// ã“ã®ä¿å­˜ãƒ‡ãƒ¼ã‚¿ã‚’ä½¿ç”¨ã™ã‚‹é–¢æ•°
     /// </summary>
     public void Use()
     {
 
-
-
-        //@Œ»İ‚ÌƒfƒbƒLƒf[ƒ^‚ğæ“¾
+        //ã€€ç¾åœ¨ã®ãƒ‡ãƒƒã‚­ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
         CardManager.instance.deck = _trumps;
 
-        //  Œ»İ‚ÌƒWƒ‡[ƒJ[‚Ìƒf[ƒ^‚ğæ“¾
+        //  ç¾åœ¨ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
         for (int i = 0; i < _jokers.Count; i++) JokerUtility.AddJoker(_jokers[i]);
 
-        //@Œ»İ‚ÌƒAƒCƒeƒ€‚Ìƒf[ƒ^‚ğæ“¾
+        //ã€€ç¾åœ¨ã®ã‚¢ã‚¤ãƒ†ãƒ ã®ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
         for (int i = 0; i < _items.Count; i++) ItemUtility.AddItem(_items[i]);
 
-        //  Œ»İ‚Ì‚¨‹à‚Ìƒf[ƒ^‚ğæ“¾
+        //  ç¾åœ¨ã®ãŠé‡‘ã®ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
         GameUtility.SetMyMoney(_money);
         TextUIManager.instance.SetMoneyText(_money.ToString());
 
-        // @Œ»İ‚Ìƒ‰ƒEƒ“ƒh‚ÌƒJƒEƒ“ƒg‚ğæ“¾
+        // ã€€ç¾åœ¨ã®ãƒ©ã‚¦ãƒ³ãƒ‰ã®ã‚«ã‚¦ãƒ³ãƒˆã‚’å–å¾—
         GameUtility.SetRoundCount(_round);
         TextUIManager.instance.SetRoundText(_round.ToString());
 
-        // @Œ»İ‚ÌƒAƒ“ƒeƒB‚ÌƒJƒEƒ“ƒg‚ğæ“¾
+        // ã€€ç¾åœ¨ã®ã‚¢ãƒ³ãƒ†ã‚£ã®ã‚«ã‚¦ãƒ³ãƒˆã‚’å–å¾—
         GameUtility.SetAnteCount(_ante);
         TextUIManager.instance.SetAnteText(_ante.ToString());
         GameUtility.SetAllRoundCount(_round + ((_ante - 1) * 3));
@@ -168,7 +162,7 @@ public class Memory
             MasterData.instance.AddStringMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount()
             , lowstRoundScore.ToString());
 
-            // Ÿ‚Ìƒ^[ƒQƒbƒgƒXƒRƒA‚ğì‚é‹@”\‚ğ•t—^
+            // æ¬¡ã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚¹ã‚³ã‚¢ã‚’ä½œã‚‹æ©Ÿèƒ½ã‚’ä»˜ä¸
             ResultUIManager.Instance.SetNextScoreCreate();
 
             if (_isShop > 0)
@@ -177,7 +171,6 @@ public class Memory
 
                 float reta = 1 + (UnityEngine.Random.Range(1, 6) / 10f);
 
-
                 MasterData.instance.AddStringMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount() + 1,
                     ((int)(baseScore * reta)).ToString());
 
@@ -185,22 +178,19 @@ public class Memory
         }
         TextUIManager.instance.SetLowestScoreText(lowstRoundScore.ToString());
 
-
-        //  Œ»İ‚Ì–ğ‚Ìg—p”‚ğæ“¾
+        //  ç¾åœ¨ã®å½¹ã®ä½¿ç”¨æ•°ã‚’å–å¾—
         RoleManager.instance.SetRoleCount(_roleCount);
 
-        //  Œ»İ‚Ì–ğ‚ÌƒŒƒxƒ‹‚ğæ“¾
+        //  ç¾åœ¨ã®å½¹ã®ãƒ¬ãƒ™ãƒ«ã‚’å–å¾—
         RoleManager.instance.SetRoleLevel(_roleLevelCount);
 
-        //  Œ»İ‚ÌƒvƒŒƒC‰Â”\‰ñ”‚ğæ“¾
+        //  ç¾åœ¨ã®ãƒ—ãƒ¬ã‚¤å¯èƒ½å›æ•°ã‚’å–å¾—
         GameUtility.SetHandCount(_handCount);
         TextUIManager.instance.SetHandText(_handCount.ToString());
 
-
-        //  Œ»İ‚ÌƒfƒBƒXƒJ[ƒh‚Ì‰Â”\‰ñ”‚ğæ“¾
+        //  ç¾åœ¨ã®ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰ã®å¯èƒ½å›æ•°ã‚’å–å¾—
         GameUtility.SetDiscardCount(_discardCount);
         TextUIManager.instance.SetDiscardText(_discardCount.ToString());
-
 
         ScoreManager.instance.SetRoundScore(_score);
         ScoreManager.instance.RoundScorePlus();
@@ -236,8 +226,6 @@ public class Memory
         TrumpCard trumpCard = new TrumpCard();
 
         trumpCard.CreateDeck(dommy);
-
-
 
     }
 
@@ -276,7 +264,6 @@ public class Memory
         GameUtility.SetAnteCount(tryInt);
         TextUIManager.instance.SetAnteText(tryInt.ToString());
 
-
     }
     private void CreateRound(string[] data)
     {
@@ -284,7 +271,6 @@ public class Memory
         if (!int.TryParse(data[roundPoint], out int tryInt)) return;
         GameUtility.SetRoundCount(tryInt);
         TextUIManager.instance.SetRoundText(tryInt.ToString());
-
 
     }
 
@@ -351,96 +337,95 @@ public class Memory
     }
 
     /// <summary>
-    /// ƒJ[ƒh‚Ì•Û‘¶æ
+    /// ã‚«ãƒ¼ãƒ‰ã®ä¿å­˜å…ˆ
     /// </summary>
     public List<Card.Trump> _trumps;
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚Ì•Û‘¶æ
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ä¿å­˜å…ˆ
     /// </summary>
     public List<JokerBase> _jokers { private set; get; }
 
     /// <summary>
-    /// ƒAƒCƒeƒ€‚Ì•Û‘¶æ
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã®ä¿å­˜å…ˆ
     /// </summary>
     public List<ItemBase> _items { private set; get; }
 
     /// <summary>
-    /// ‚¨‹à‚Ì•Û‘¶æ
+    /// ãŠé‡‘ã®ä¿å­˜å…ˆ
     /// </summary>
     public int _money { private set; get; }
 
     /// <summary>
-    /// ƒAƒ“ƒeƒB‚Ì•Û‘¶æ
+    /// ã‚¢ãƒ³ãƒ†ã‚£ã®ä¿å­˜å…ˆ
     /// </summary>
     public int _ante { private set; get; }
     /// <summary>
-    /// ƒ‰ƒEƒ“ƒh‚Ì•Û‘¶æ
+    /// ãƒ©ã‚¦ãƒ³ãƒ‰ã®ä¿å­˜å…ˆ
     /// </summary>
     public int _round { private set; get; }
 
     /// <summary>
-    /// –ğ‚Ìg—p‰ñ”‚Ì•Û‘¶æ
+    /// å½¹ã®ä½¿ç”¨å›æ•°ã®ä¿å­˜å…ˆ
     /// </summary>
     public List<int> _roleCount { private set; get; }
     /// <summary>
-    /// –ğ‚ÌƒŒƒxƒ‹‚Ì•Û‘¶æ
+    /// å½¹ã®ãƒ¬ãƒ™ãƒ«ã®ä¿å­˜å…ˆ
     /// </summary>
     public List<int> _roleLevelCount { private set; get; }
 
     /// <summary>
-    /// ƒvƒŒƒC‰ñ”‚Ì•Û‘¶æ
+    /// ãƒ—ãƒ¬ã‚¤å›æ•°ã®ä¿å­˜å…ˆ
     /// </summary>
     public int _handCount { private set; get; }
 
     /// <summary>
-    /// ƒfƒBƒXƒJ[ƒh‚Ì‰ñ”
+    /// ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰ã®å›æ•°
     /// </summary>
     public int _discardCount { private set; get; }
 
     /// <summary>
-    /// Œ»İ‚ÌƒXƒRƒA
+    /// ç¾åœ¨ã®ã‚¹ã‚³ã‚¢
     /// </summary>
     public float _score { private set; get; }
 
-
     /// <summary>
-    /// ƒVƒ‡ƒbƒv‚É‚¢‚é‚©‚Ç‚¤‚©
+    /// ã‚·ãƒ§ãƒƒãƒ—ã«ã„ã‚‹ã‹ã©ã†ã‹
     /// </summary>
     public int _isShop { private set; get; }
 
     /// <summary>
-    /// ƒ‰ƒ““à‚Åˆê”Ô‚‚¢ƒ‰ƒEƒ“ƒh‚ÌƒXƒRƒA
+    /// ãƒ©ãƒ³å†…ã§ä¸€ç•ªé«˜ã„ãƒ©ã‚¦ãƒ³ãƒ‰ã®ã‚¹ã‚³ã‚¢
     /// </summary>
     public int _highScore { private set; get; }
 
     /// <summary>
-    /// ƒvƒŒƒC‚µ‚½ƒJ[ƒh‚Ì‘”
+    /// ãƒ—ãƒ¬ã‚¤ã—ãŸã‚«ãƒ¼ãƒ‰ã®ç·æ•°
     /// </summary>
     public int _playCardCount { private set; get; }
 
     /// <summary>
-    /// ƒfƒBƒXƒJ[ƒh‚µ‚½ƒJ[ƒh‚Ì‘”
+    /// ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰ã—ãŸã‚«ãƒ¼ãƒ‰ã®ç·æ•°
     /// </summary>
     public int _discardCardCount { private set; get; }
 
     /// <summary>
-    /// w“ü‚µ‚½ƒJ[ƒh‚Ì‘”
+    /// è³¼å…¥ã—ãŸã‚«ãƒ¼ãƒ‰ã®ç·æ•°
     /// </summary>
     public int _buyCardCount { private set; get; }
 
     /// <summary>
-    /// ƒŠƒ[ƒ‹‚µ‚½ƒJ[ƒh‚Ì‘”
+    /// ãƒªãƒ­ãƒ¼ãƒ«ã—ãŸã‚«ãƒ¼ãƒ‰ã®ç·æ•°
     /// </summary>
     public int _reroolCount { private set; get; }
 
     /// <summary>
-    /// V”­”„‚µ‚½‚©‚¢‚·‚¤
+    /// æ–°ç™ºå£²ã—ãŸã‹ã„ã™ã†
     /// </summary>
     public int newDiscoveryCount { private set; get; }
 
     /// <summary>
-    /// ¢ŠE‚Ìíq
+    /// ä¸–ç•Œã®ç¨®å­
     /// </summary>
     public int theSeed = -1;
 
@@ -448,5 +433,5 @@ public class Memory
 
     private BossBase _boss;
 
-
 }
+

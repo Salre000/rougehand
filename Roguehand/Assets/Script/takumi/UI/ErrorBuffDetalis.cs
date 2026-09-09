@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -68,30 +68,29 @@ public class ErrorBuffDetalis : DommyDetalis
 
             List<JokerBase> jokers=new List<JokerBase>();
 
-            // ‚»‚ê‚¼‚ê‚Ìƒoƒt‚Ì‘ÎÛ‚Ì”‚ðŽæ“¾
+            // ãã‚Œãžã‚Œã®ãƒãƒ•ã®å¯¾è±¡ã®æ•°ã‚’å–å¾—
             switch ((systemBuff)i)
             {
                 case systemBuff.Mouse:
-                    // ƒWƒ‡[ƒJ[‚Ìƒ}ƒEƒXƒWƒƒƒ}[‚Ì”‚ð’Ç‰Á
-                    count += JokerUtility.GetJokers().GetCount(joker => 
+                    // ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ãƒžã‚¦ã‚¹ã‚¸ãƒ£ãƒžãƒ¼ã®æ•°ã‚’è¿½åŠ 
+                    count += JokerUtility.GetJokers().GetCount(joker =>
                     { if (joker.GetCardBuff() == Card.cardBuff.MouseJammer) { jokers.Add(joker); return true; }return false; });
-                    // ƒfƒbƒL‚Ìƒ}ƒEƒXƒWƒƒƒ}[‚Ì”‚ð’Ç‰Á
+                    // ãƒ‡ãƒƒã‚­ã®ãƒžã‚¦ã‚¹ã‚¸ãƒ£ãƒžãƒ¼ã®æ•°ã‚’è¿½åŠ 
                     count += CardManager.instance.GetDeck().GetCount(card =>
                     { if (card.cardBuff == Card.cardBuff.MouseJammer) { trumps.Add(card); return true; }return false; });
                     break;
                 case systemBuff.Brack:
-                    // ƒfƒbƒL‚Ìƒuƒ‰ƒbƒNƒV[ƒ‹‚Ì”‚ð’Ç‰Á
+                    // ãƒ‡ãƒƒã‚­ã®ãƒ–ãƒ©ãƒƒã‚¯ã‚·ãƒ¼ãƒ«ã®æ•°ã‚’è¿½åŠ 
                     count += CardManager.instance.GetDeck().GetCount(card => card.sealBuff == Card.sealBuff.Black);
 
                     break;
                 case systemBuff.ObujectMove:
-                    // ƒWƒ‡[ƒJ[‚ÌƒIƒuƒWƒFƒNƒgƒ€[ƒu‚Ì”‚ð’Ç‰Á
+                    // ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ ãƒ¼ãƒ–ã®æ•°ã‚’è¿½åŠ 
                     count += JokerUtility.GetJokers().GetCount(Joker => Joker.GetJokerBuff() == Card.JokerBuff.ObjectMoves);
-
 
                     break;
                 case systemBuff.Number:
-                    // ƒfƒbƒL‚Ìƒuƒ‰ƒCƒ“ƒhƒXƒRƒA‚Ì”‚ð’Ç‰Á
+                    // ãƒ‡ãƒƒã‚­ã®ãƒ–ãƒ©ã‚¤ãƒ³ãƒ‰ã‚¹ã‚³ã‚¢ã®æ•°ã‚’è¿½åŠ 
                     count += CardManager.instance.GetDeck().GetCount(card => card.deckBuff == Card.deckBuff.BlindScore);
                     break;
             }
@@ -99,7 +98,6 @@ public class ErrorBuffDetalis : DommyDetalis
             uIErrorBuffs[i].SetCard(GetActiveObject(count, trumps, jokers));
 
         }
-
 
     }
 
@@ -114,3 +112,4 @@ public class ErrorBuffDetalis : DommyDetalis
         }
     }
 }
+

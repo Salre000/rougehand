@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -24,7 +24,6 @@ public class LostColor : JokerBase
 
         if (postEffect.sepia == null) postEffect.sepia = sepia;
 
-
     }
     public override void RoundStart()
     {
@@ -34,7 +33,6 @@ public class LostColor : JokerBase
     {
         return 10f;
     }
-
 
     public override void SaleAction()
     {
@@ -50,5 +48,5 @@ public class LostColor : JokerBase
         return Trun() < 1 ? string.Empty : MasterData.instance.GetStringMaster(1999) + Trun().ToString().GetRedString();
     }
 
-
 }
+

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,95 +6,96 @@ public static class GameUtility
 {
 
     private const int _MAX_REWARD = 13;
-    // ƒx[ƒX‚É‚È‚éƒnƒ“ƒh‰ñ”
+    // ãƒ™ãƒ¼ã‚¹ã«ãªã‚‹ãƒãƒ³ãƒ‰å›æ•°
     private static int _baseHandCount = 5;
-    // ƒx[ƒX‚É‚È‚éƒfƒBƒXƒJ[ƒh‰ñ”
+    // ãƒ™ãƒ¼ã‚¹ã«ãªã‚‹ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰å›æ•°
     private static int _baseDiscardCount = 5;
-    // •Ï“®‚·‚éƒnƒ“ƒh‰ñ”
+    // å¤‰å‹•ã™ã‚‹ãƒãƒ³ãƒ‰å›æ•°
     private static int _handCount = 5;
-    // •Ï“®‚·‚éƒfƒBƒXƒJ[ƒh‰ñ”
+    // å¤‰å‹•ã™ã‚‹ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰å›æ•°
     private static int _discardCount = 5;
-    // —İŒvƒ‰ƒEƒ“ƒh
+    // ç´¯è¨ˆãƒ©ã‚¦ãƒ³ãƒ‰
     private static int _allRoundCount = 1;
-    // Œ»ƒ‰ƒEƒ“ƒh
+    // ç¾ãƒ©ã‚¦ãƒ³ãƒ‰
     private static int _roundCount = 1;
-    // Œ»ƒAƒ“ƒeƒB
+    // ç¾ã‚¢ãƒ³ãƒ†ã‚£
     private static int _anteCount = 1;
 
-    // Š‹à
+    // æ‰€æŒé‡‘
     private static int _myMoney = 0;
-    // ƒ{ƒ^ƒ“‚Ì”½‰‚Ì‰‘Î
+    // ãƒœã‚¿ãƒ³ã®åå¿œã®å¿œå¯¾
     private static bool _isPushButton = true;
-    // ƒvƒŒƒCƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚©
+    // ãƒ—ãƒ¬ã‚¤ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã‹
     private static bool _isPlay = false;
-    // ƒfƒBƒXƒJ[ƒh‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
+    // ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
     private static bool _isDiscard = false;
-    // ƒ‰ƒEƒ“ƒhƒXƒRƒA‚Ì‘‰Á‚ğŒŸ’m
+    // ãƒ©ã‚¦ãƒ³ãƒ‰ã‚¹ã‚³ã‚¢ã®å¢—åŠ ã‚’æ¤œçŸ¥
     private static bool _isRoundScoreUp = false;
-    // Ÿ‚Ìƒ‰ƒEƒ“ƒh‚ÖˆÚ“®
+    // æ¬¡ã®ãƒ©ã‚¦ãƒ³ãƒ‰ã¸ç§»å‹•
     private static bool _isNextRound = false;
-    // ƒ‰ƒEƒ“ƒhƒNƒŠƒA‚ÌƒŠƒUƒ‹ƒgó‘Ô
+    // ãƒ©ã‚¦ãƒ³ãƒ‰ã‚¯ãƒªã‚¢ã®ãƒªã‚¶ãƒ«ãƒˆçŠ¶æ…‹
     private static bool _isRoundResult = false;
 
-    // ƒnƒ“ƒh‰ñ”‚ÌÅ‘å’l‚Ìİ’è
+    // ãƒãƒ³ãƒ‰å›æ•°ã®æœ€å¤§å€¤ã®è¨­å®š
     public static void SetBaseHandCount(int value) {  _baseHandCount = value; }
-    // ƒnƒ“ƒh‰ñ”‚ÌÅ‘å’l‚Ìæ“¾
+    // ãƒãƒ³ãƒ‰å›æ•°ã®æœ€å¤§å€¤ã®å–å¾—
     public static int GetBaseHandCound() {  return _baseHandCount; }
-    // ƒnƒ“ƒh”‚ğ•Ï“®
+    // ãƒãƒ³ãƒ‰æ•°ã‚’å¤‰å‹•
     public static void SetHandCount(int value) { _handCount = value; }
-    // Œ»İ‚Ìƒnƒ“ƒh”‚ğæ“¾
+    // ç¾åœ¨ã®ãƒãƒ³ãƒ‰æ•°ã‚’å–å¾—
     public static int GetHandCount() { return _handCount; }
-    // ƒfƒBƒXƒJ[ƒh‰ñ”‚ÌÅ‘å’l‚Ìİ’è
+    // ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰å›æ•°ã®æœ€å¤§å€¤ã®è¨­å®š
     public static void SetBaseDiscardCount(int value) { _baseDiscardCount = value; }
-    // ƒfƒBƒXƒJ[ƒh‰ñ”‚ÌÅ‘å’l‚Ìæ“¾
+    // ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰å›æ•°ã®æœ€å¤§å€¤ã®å–å¾—
     public static int GetBaseDiscardCound() {  return _baseDiscardCount; }
-    // ƒfƒBƒXƒJ[ƒh”‚ğ•Ï“®
+    // ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰æ•°ã‚’å¤‰å‹•
     public static void SetDiscardCount(int value) { _discardCount = value; }
-    // Œ»İ‚ÌƒfƒBƒXƒJ[ƒh”‚ğæ“¾
+    // ç¾åœ¨ã®ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰æ•°ã‚’å–å¾—
     public static int GetDiscardCount() { return _discardCount; }
-    // —İŒvƒ‰ƒEƒ“ƒh”‚ğİ’è
+    // ç´¯è¨ˆãƒ©ã‚¦ãƒ³ãƒ‰æ•°ã‚’è¨­å®š
     public static void SetAllRoundCount(int value) { _allRoundCount = value; }
-    // —İŒvƒ‰ƒEƒ“ƒh”‚ğæ“¾
+    // ç´¯è¨ˆãƒ©ã‚¦ãƒ³ãƒ‰æ•°ã‚’å–å¾—
     public static int GetAllRoundCount() { return _allRoundCount; }
 
     public static int GetRewardMaxCount() {
         return GameUtility.GetAllRoundCount() < _MAX_REWARD ? GameUtility.GetAllRoundCount() : _MAX_REWARD;
     }
-    // ƒ‰ƒEƒ“ƒh”‚ğİ’è
+    // ãƒ©ã‚¦ãƒ³ãƒ‰æ•°ã‚’è¨­å®š
     public static void SetRoundCount(int value) { _roundCount = value; }
-    // ƒ‰ƒEƒ“ƒh”‚ğæ“¾
+    // ãƒ©ã‚¦ãƒ³ãƒ‰æ•°ã‚’å–å¾—
     public static int GetRoundCount() { return _roundCount; }
-    // ƒAƒ“ƒeƒB”‚ğİ’è
+    // ã‚¢ãƒ³ãƒ†ã‚£æ•°ã‚’è¨­å®š
     public static void SetAnteCount(int value) { _anteCount = value; }
-    // ƒAƒ“ƒeƒB”‚ğæ“¾
+    // ã‚¢ãƒ³ãƒ†ã‚£æ•°ã‚’å–å¾—
     public static int GetAnteCount() { return _anteCount; }
-    // Š‹à‚Ìİ’è
+    // æ‰€æŒé‡‘ã®è¨­å®š
     public static void SetMyMoney(int value) { _myMoney = value;TextUIManager.instance.SetMoneyText("$"+_myMoney.ToString()); }
-    // Š‹à‚Ìæ“¾
+    // æ‰€æŒé‡‘ã®å–å¾—
     public static int GetMyMoney() { return _myMoney; }
-    // ƒ{ƒ^ƒ“ó•tƒtƒ‰ƒO‚ÌƒZƒbƒg
+    // ãƒœã‚¿ãƒ³å—ä»˜ãƒ•ãƒ©ã‚°ã®ã‚»ãƒƒãƒˆ
     public static void SetIsPushButton(bool value) { _isPushButton = value; }
-    // ƒ{ƒ^ƒ“ó•tƒtƒ‰ƒO‚Ìæ“¾
+    // ãƒœã‚¿ãƒ³å—ä»˜ãƒ•ãƒ©ã‚°ã®å–å¾—
     public static bool IsPushButton() { return _isPushButton; }
-    // ƒvƒŒƒCƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚©‚ğƒZƒbƒg
+    // ãƒ—ãƒ¬ã‚¤ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã‹ã‚’ã‚»ãƒƒãƒˆ
     public static void SetIsPlay(bool value) { _isPlay = value;}
-    // ƒvƒŒƒCƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚©‚ğæ“¾
+    // ãƒ—ãƒ¬ã‚¤ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã‹ã‚’å–å¾—
     public static bool IsPlay() { return _isPlay; }
-    // ƒfƒBƒXƒJ[ƒhƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚©‚ğƒZƒbƒg
+    // ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã‹ã‚’ã‚»ãƒƒãƒˆ
     public static void SetIsDiscard(bool value) { _isDiscard = value;}
-    // ƒfƒBƒXƒJ[ƒhƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚©‚ğæ“¾
+    // ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã‹ã‚’å–å¾—
     public static bool IsDiscard() { return _isDiscard; }
-    // ‡ŒvƒXƒRƒA‚ª‘‰Á‚³‚ê‚½‚©‚ğƒZƒbƒg
+    // åˆè¨ˆã‚¹ã‚³ã‚¢ãŒå¢—åŠ ã•ã‚ŒãŸã‹ã‚’ã‚»ãƒƒãƒˆ
     public static void SetIsRoundScoreUp(bool value) { _isRoundScoreUp = value; }
-    // ‡ŒvƒXƒRƒA‚ª‘‰Á‚³‚ê‚½‚©‚ğæ“¾
+    // åˆè¨ˆã‚¹ã‚³ã‚¢ãŒå¢—åŠ ã•ã‚ŒãŸã‹ã‚’å–å¾—
     public static bool IsRoundScoreUp() { return _isRoundScoreUp; }
-    // ƒ‰ƒEƒ“ƒhˆÚs‚ÌƒZƒbƒg
+    // ãƒ©ã‚¦ãƒ³ãƒ‰ç§»è¡Œã®ã‚»ãƒƒãƒˆ
     public static void SetIsNextRound(bool value) { _isNextRound = value; }
-    // ƒ‰ƒEƒ“ƒhˆÚs‚Ìæ“¾
+    // ãƒ©ã‚¦ãƒ³ãƒ‰ç§»è¡Œã®å–å¾—
     public static bool IsNextRound() {  return _isNextRound; }
-    // ƒ‰ƒEƒ“ƒhƒNƒŠƒA‚Ìó‘Ô‚ğƒZƒbƒg
+    // ãƒ©ã‚¦ãƒ³ãƒ‰ã‚¯ãƒªã‚¢ã®çŠ¶æ…‹ã‚’ã‚»ãƒƒãƒˆ
     public static void SetIsRoundResult(bool value) { _isRoundResult = value; }
-    // ƒ‰ƒEƒ“ƒhƒNƒŠƒA‚Ìó‘Ô‚ğæ“¾
+    // ãƒ©ã‚¦ãƒ³ãƒ‰ã‚¯ãƒªã‚¢ã®çŠ¶æ…‹ã‚’å–å¾—
     public static bool IsRoundResult() {  return _isRoundResult; }
 
 }
+

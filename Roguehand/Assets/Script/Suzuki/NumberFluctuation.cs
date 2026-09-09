@@ -1,30 +1,29 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ’l‚Ì•Ï“®ƒAƒjƒ[ƒVƒ‡ƒ“
+/// å€¤ã®å¤‰å‹•ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
 /// </summary>
 public static class NumberFluctuation
-{ 
+{
     /// <summary>
-    /// ƒAƒjƒ[ƒVƒ‡ƒ“
+    /// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
     /// </summary>
-    /// <param name="nowNumber">‘Œ¸‚·‚é’l</param>
-    /// <param name="targetNumber">‘Œ¸Œã‚Ì’l</param>
-    /// <param name="isPlus">‘‚â‚·‚©”Û‚©</param>
+    /// <param name="nowNumber">å¢—æ¸›ã™ã‚‹å€¤</param>
+    /// <param name="targetNumber">å¢—æ¸›å¾Œã®å€¤</param>
+    /// <param name="isPlus">å¢—ã‚„ã™ã‹å¦ã‹</param>
     public static void FluctuationAnim(ref int nowNumber,int targetNumber,bool isPlus)
     {
-        // •Ï“®ƒtƒ‰ƒO‚ªƒIƒt‚É‚È‚Á‚½‚ç
+        // å¤‰å‹•ãƒ•ãƒ©ã‚°ãŒã‚ªãƒ•ã«ãªã£ãŸã‚‰
 
-        // ‚±‚±‚É•Ï“®’†ƒtƒ‰ƒO
-
+        // ã“ã“ã«å¤‰å‹•ä¸­ãƒ•ãƒ©ã‚°
 
         int distance=nowNumber-targetNumber;
 
         if (distance == 0)
         {
-            // •Ï“®’†ƒtƒ‰ƒO‚ğƒIƒt
+            // å¤‰å‹•ä¸­ãƒ•ãƒ©ã‚°ã‚’ã‚ªãƒ•
             PlayManager.instance.SetIsFluctuation(false);
 
             return;
@@ -32,13 +31,14 @@ public static class NumberFluctuation
         else
             PlayManager.instance.SetIsFluctuation(true);
 
-        // ‘‚â‚·‚©”Û‚©
+        // å¢—ã‚„ã™ã‹å¦ã‹
         if(isPlus)
             nowNumber++;
         else
             nowNumber--;
 
-        // ƒeƒLƒXƒg”½‰f‚Í‚±‚ÌŠÖ”‚ğˆø—p‚·‚é‘¤‚Ås‚¤
+        // ãƒ†ã‚­ã‚¹ãƒˆåæ˜ ã¯ã“ã®é–¢æ•°ã‚’å¼•ç”¨ã™ã‚‹å´ã§è¡Œã†
     }
 }
+
 

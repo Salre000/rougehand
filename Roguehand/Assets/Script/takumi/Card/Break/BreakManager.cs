@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,12 +6,12 @@ public class BreakManager : MonoBehaviour
 {
 
     /// <summary>
-    /// ƒJ[ƒh‚Ì”j‰ó‚Ég‚¤ƒvƒŒƒnƒu
+    /// ã‚«ãƒ¼ãƒ‰ã®ç ´å£Šæ™‚ã«ä½¿ã†ãƒ—ãƒ¬ãƒãƒ–
     /// </summary>
     [SerializeField] GameObject _breakCardPrefab;
 
     /// <summary>
-    /// ƒJ[ƒh‚Ì”j‰ó‚Ég‚¤ƒIƒuƒWƒFƒNƒg‚Ìƒv[ƒ‹
+    /// ã‚«ãƒ¼ãƒ‰ã®ç ´å£Šã«ä½¿ã†ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ—ãƒ¼ãƒ«
     /// </summary>
     private List<GameObject> _gameObjects = new List<GameObject>();
 
@@ -23,20 +23,18 @@ public class BreakManager : MonoBehaviour
     {
         BreakUtility.instance = this;
         for (int i = 0; i < 10; i++)
-        { 
+        {
             _gameObjects.Add(Instantiate(_breakCardPrefab, transform));
 
             _gameObjects[_gameObjects.Count-1].SetActive(false);
         }
     }
 
-
-
     /// <summary>
-    /// ƒJ[ƒh‚Ì”j‰ó‚ğs‚¤ŠÖ”
+    /// ã‚«ãƒ¼ãƒ‰ã®ç ´å£Šã‚’è¡Œã†é–¢æ•°
     /// </summary>
     /// <param name="gameObject"></param>
-    public void StartBreak(GameObject gameObject) 
+    public void StartBreak(GameObject gameObject)
     {
         GameObject breakObject= GetObject();
 
@@ -52,21 +50,20 @@ public class BreakManager : MonoBehaviour
 
     }
 
-    private GameObject GetObject() 
+    private GameObject GetObject()
     {
 
-        for(int i = 0; i < _gameObjects.Count; i++) 
+        for(int i = 0; i < _gameObjects.Count; i++)
         {
             if (_gameObjects[i].activeSelf) continue;
             _gameObjects[i].SetActive(true);
 
             return _gameObjects[i];
 
-
         }
         return null;
 
     }
 
-
 }
+

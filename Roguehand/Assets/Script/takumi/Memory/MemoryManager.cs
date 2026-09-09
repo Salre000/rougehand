@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -14,7 +14,6 @@ public class MemoryManager
 
     private static readonly string FILR_EXTENSION = ".txt";
 
-
     private static readonly string Tutorial = "TutorialDeck";
 
     private static bool tutorialFlag=false;
@@ -22,10 +21,10 @@ public class MemoryManager
     public static int seed = -1;
 
     /// <summary>
-    ///  ƒZ[ƒuƒf[ƒ^‚ª‚ ‚é‚Ç‚¤‚©‚ğ”»’f‚·‚éŠÖ”
+    ///  ã‚»ãƒ¼ãƒ–ãƒ‡ãƒ¼ã‚¿ãŒã‚ã‚‹ã©ã†ã‹ã‚’åˆ¤æ–­ã™ã‚‹é–¢æ•°
     /// </summary>
     /// <returns></returns>
-    public static bool CheckSaveDeta() 
+    public static bool CheckSaveDeta()
     {
 
         string path = Application.dataPath + FILE_PASS + FILE_NAME_KD + FILR_EXTENSION;
@@ -33,9 +32,7 @@ public class MemoryManager
 
         return true;
 
-
     }
-
 
     public static void CreateMemory()
     {
@@ -43,15 +40,14 @@ public class MemoryManager
     }
 
     /// <summary>
-    /// ‰ß‹‚Ìƒf[ƒ^‚ğ“Ç‚İ‚Ş
+    /// éå»ã®ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã‚€
     /// </summary>
-    public static bool LoodLostData() 
+    public static bool LoodLostData()
     {
-        if (instantMemory != null) { Debug.Log("ƒf[ƒ^‚ª‚·‚Å‚É‚ ‚é"); return true; }
+        if (instantMemory != null) { Debug.Log("ãƒ‡ãƒ¼ã‚¿ãŒã™ã§ã«ã‚ã‚‹"); return true; }
 
         string path = Application.dataPath + FILE_PASS + FILE_NAME_KD + FILR_EXTENSION;
         if (!File.Exists(path)) return false;
-
 
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(path, FileMode.Open);
@@ -67,14 +63,10 @@ public class MemoryManager
     }
 
     /// <summary>
-    /// ƒf[ƒ^‚ğg‚¢ƒQ[ƒ€‚ğ\’z‚·‚é
+    /// ãƒ‡ãƒ¼ã‚¿ã‚’ä½¿ã„ã‚²ãƒ¼ãƒ ã‚’æ§‹ç¯‰ã™ã‚‹
     /// </summary>
     public static void Use(string flieName="")
     {
-
-        
-         
-
 
         if (flieName==string.Empty)
         {
@@ -85,11 +77,10 @@ public class MemoryManager
         {
             instantMemory = new Memory(flieName);
 
-            if (Tutorial == flieName) 
+            if (Tutorial == flieName)
             {
-                // TODO: ƒ`ƒ…[ƒgƒŠƒAƒ‹‚Ìê—pˆ—‚ğ‚©‚­
+                // TODO: ãƒãƒ¥ãƒ¼ãƒˆãƒªã‚¢ãƒ«ã®å°‚ç”¨å‡¦ç†ã‚’ã‹ã
                 BossUtility.CreateBoss(0);
-
 
                 tutorialFlag = true;
 
@@ -105,22 +96,22 @@ public class MemoryManager
 
     }
     /// <summary>
-    /// ‰ß‹‚Ìƒf[ƒ^‚ğÁ‹‚·‚é
+    /// éå»ã®ãƒ‡ãƒ¼ã‚¿ã‚’æ¶ˆå»ã™ã‚‹
     /// </summary>
-    public static void Lost() 
+    public static void Lost()
     {
         instantMemory = null;
     }
 
     /// <summary>
-    /// ‰ß‹‚Ìƒf[ƒ^‚ğì¬‚·‚é
+    /// éå»ã®ãƒ‡ãƒ¼ã‚¿ã‚’ä½œæˆã™ã‚‹
     /// </summary>
-    public static void Keep() 
+    public static void Keep()
     {
         if (GameRoot.instance.GetGameOver()) return;
 
-        // ƒŠƒUƒ‹ƒg‚ªŒÄ‚Ño‚³‚ê‚Ä‚¢‚é‚È‚ç‚Î
-        if (GameUtility.IsRoundResult()) 
+        // ãƒªã‚¶ãƒ«ãƒˆãŒå‘¼ã³å‡ºã•ã‚Œã¦ã„ã‚‹ãªã‚‰ã°
+        if (GameUtility.IsRoundResult())
         {
             ShopManager.instance.SetIsShop(true);
 
@@ -132,12 +123,11 @@ public class MemoryManager
 
             GameUtility.SetMyMoney(GameUtility.GetMyMoney() + addMoney);
 
-
         }
 
         instantMemory=new Memory();
 
-        Debug.Log("ƒf[ƒ^‚Ì•Û‘¶");
+        Debug.Log("ãƒ‡ãƒ¼ã‚¿ã®ä¿å­˜");
 
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.dataPath + FILE_PASS + FILE_NAME_KD + FILR_EXTENSION;
@@ -147,12 +137,12 @@ public class MemoryManager
     }
 
     /// <summary>
-    /// ƒ`ƒ…[ƒgƒŠƒAƒ‹‚©‚Ç‚¤‚©‚ğ”»’f
+    /// ãƒãƒ¥ãƒ¼ãƒˆãƒªã‚¢ãƒ«ã‹ã©ã†ã‹ã‚’åˆ¤æ–­
     /// </summary>
     /// <returns></returns>
     public static bool GetTutorialFlag() {return tutorialFlag;}
 
-    private static int SetSeed() 
+    private static int SetSeed()
     {
         int seed = 0;
         seed += Random.RandomRange(1, 9) * 10000;
@@ -166,3 +156,4 @@ public class MemoryManager
     }
 
 }
+

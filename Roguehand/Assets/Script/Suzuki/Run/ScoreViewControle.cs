@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,12 +13,12 @@ public class ScoreViewControle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // ƒ‰ƒEƒ“ƒhƒXƒRƒA‚ª‰ÁZ‚³‚ê‚½ƒ^ƒCƒ~ƒ“ƒO
+        // ãƒ©ã‚¦ãƒ³ãƒ‰ã‚¹ã‚³ã‚¢ãŒåŠ ç®—ã•ã‚ŒãŸã‚¿ã‚¤ãƒŸãƒ³ã‚°
         if (!GameUtility.IsRoundScoreUp()) return;
         ClearScoreViewText();
     }
 
-    // ƒrƒ…[ƒeƒLƒXƒg‚ğ‹ó‚É‚·‚é
+    // ãƒ“ãƒ¥ãƒ¼ãƒ†ã‚­ã‚¹ãƒˆã‚’ç©ºã«ã™ã‚‹
     public void ClearScoreViewText()
     {
         ScoreManager.instance.SetViewIndex(0);
@@ -27,3 +27,4 @@ public class ScoreViewControle : MonoBehaviour
         ScoreManager.instance.SetViewIndex(0);
     }
 }
+

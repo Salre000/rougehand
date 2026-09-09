@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,14 +11,14 @@ public class SealBuff
     private List<int> cashIndexs=new List<int>();
 
     /// <summary>
-    /// ƒJ[ƒh‚ğƒvƒŒƒC‚µ‚½‚Ìƒoƒt
+    /// ã‚«ãƒ¼ãƒ‰ã‚’ãƒ—ãƒ¬ã‚¤ã—ãŸæ™‚ã®ãƒãƒ•
     /// </summary>
     public void Play(Card.sealBuff sealBuff)
     {
         bool Magnification = false;
         int value = 0;
 
-        //‘Î‰‚µ‚½ƒoƒt‚ÌŒø‰Ê‚ğ‹Lq
+        //å¯¾å¿œã—ãŸãƒãƒ•ã®åŠ¹æœã‚’è¨˜è¿°
         switch (sealBuff)
         {
             case Card.sealBuff.Red:
@@ -34,7 +34,7 @@ public class SealBuff
                 int dommyCount = SaleObjectManager.instance.GetDynamicActionCount();
                 int dommyCountCash = dommyCount;
 
-                // í‚ÉŒŸ’m‰Â”\‚ÈƒAƒNƒVƒ‡ƒ“ƒŠƒXƒg‚ª‚±‚ê‚¾‚¯‚È‚Ì‚Å—˜—p
+                // å¸¸ã«æ¤œçŸ¥å¯èƒ½ãªã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒªã‚¹ãƒˆãŒã“ã‚Œã ã‘ãªã®ã§åˆ©ç”¨
                 SaleObjectManager.instance.AddDynamicAction(() =>
                 {
                     if (CardObjectUtility.GetCardHands()[cashIndex].
@@ -52,9 +52,7 @@ public class SealBuff
 
                     SaleObjectManager.instance.RemoveDynamicAction(dommyCountCash);
 
-
                 });
-
 
                 break;
             case Card.sealBuff.Green:
@@ -62,7 +60,7 @@ public class SealBuff
                 int youngId = -1;
                 int index = 0;
 
-                // í‚ÉŒŸ’m‰Â”\‚ÈƒAƒNƒVƒ‡ƒ“ƒŠƒXƒg‚ª‚±‚ê‚¾‚¯‚È‚Ì‚Å—˜—p
+                // å¸¸ã«æ¤œçŸ¥å¯èƒ½ãªã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒªã‚¹ãƒˆãŒã“ã‚Œã ã‘ãªã®ã§åˆ©ç”¨
                 SaleObjectManager.instance.AddDynamicAction(() =>
                 {
 
@@ -85,7 +83,6 @@ public class SealBuff
                         return card;
                     });
 
-
                     SaleObjectManager.instance.RemoveDynamicAction(0);
 
                 });
@@ -102,14 +99,12 @@ public class SealBuff
 
                 });
 
-
                 break;
             case Card.sealBuff.Black:
 
                 int count = 0;
 
                 List<Card.Trump> trumps = CardManager.instance.GetDeck();
-
 
                 for (int i = 0; i < trumps.Count; i++)
                 {
@@ -119,8 +114,6 @@ public class SealBuff
                 value = count;
                 Magnification = true;
                 ScoreManager.instance.MagnificationPlus(value);
-
-
 
                 break;
             default:
@@ -133,65 +126,57 @@ public class SealBuff
         ScoreManager.instance.SetScoreViewText(value, Magnification);
     }
     /// <summary>
-    /// ƒJ[ƒh‚ğƒvƒŒƒC‚µ‚½‚ÉèD‚É‚ ‚é‚Æ”­“®‚·‚éƒoƒt
+    /// ã‚«ãƒ¼ãƒ‰ã‚’ãƒ—ãƒ¬ã‚¤ã—ãŸæ™‚ã«æ‰‹æœ­ã«ã‚ã‚‹ã¨ç™ºå‹•ã™ã‚‹ãƒãƒ•
     /// </summary>
     /// <param name="sealBuff"></param>
     public void Hand(Card.sealBuff sealBuff)
     {
-        //‘Î‰‚µ‚½ƒoƒt‚ÌŒø‰Ê‚ğ‹Lq
+        //å¯¾å¿œã—ãŸãƒãƒ•ã®åŠ¹æœã‚’è¨˜è¿°
         switch (sealBuff)
         {
 
         }
 
-
-
     }
 
     /// <summary>
-    /// ƒJ[ƒh‚ğƒfƒBƒXƒJ[ƒh‚µ‚½‚Ìƒoƒt
+    /// ã‚«ãƒ¼ãƒ‰ã‚’ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰ã—ãŸæ™‚ã®ãƒãƒ•
     /// </summary>
     public void Discard(Card.sealBuff sealBuff)
     {
-        //‘Î‰‚µ‚½ƒoƒt‚ÌŒø‰Ê‚ğ‹Lq
+        //å¯¾å¿œã—ãŸãƒãƒ•ã®åŠ¹æœã‚’è¨˜è¿°
         switch (sealBuff)
         {
             case Card.sealBuff.Purple:
 
-                // ƒAƒCƒeƒ€‚ğƒ‰ƒ“ƒ_ƒ€¶¬
+                // ã‚¢ã‚¤ãƒ†ãƒ ã‚’ãƒ©ãƒ³ãƒ€ãƒ ç”Ÿæˆ
                 ItemUtility.AddItem(Random.Range(0, (int)ALLItem.ALLItemEnum._MAX));
 
                 break;
         }
 
-
-
     }
     /// <summary>
-    /// ƒ‰ƒEƒ“ƒh‚ÌI—¹‚ÉèD‚É‚ ‚é‚Æ‚«‚Ìƒoƒt
+    /// ãƒ©ã‚¦ãƒ³ãƒ‰ã®çµ‚äº†æ™‚ã«æ‰‹æœ­ã«ã‚ã‚‹ã¨ãã®ãƒãƒ•
     /// </summary>
     /// <param name="sealBuff"></param>
     public void RoundEnd(Card.sealBuff sealBuff)
     {
-        //‘Î‰‚µ‚½ƒoƒt‚ÌŒø‰Ê‚ğ‹Lq
+        //å¯¾å¿œã—ãŸãƒãƒ•ã®åŠ¹æœã‚’è¨˜è¿°
         switch (sealBuff)
         {
             case Card.sealBuff.Bule:
-                // ¯ÀƒJ[ƒh‚ğ¶¬
+                // æ˜Ÿåº§ã‚«ãƒ¼ãƒ‰ã‚’ç”Ÿæˆ
                 ItemUtility.AddItem(0);
                 break;
         }
 
-
         Reset();
     }
 
-    private void Reset() 
+    private void Reset()
     {
         cashIndexs.Clear();
     }
-
-
-
 
 }

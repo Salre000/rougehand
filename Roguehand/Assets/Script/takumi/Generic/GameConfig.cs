@@ -1,29 +1,29 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ƒQ[ƒ€‚Ìİ’è‚ğŠÇ—‚·‚éƒNƒ‰ƒX
+/// ã‚²ãƒ¼ãƒ ã®è¨­å®šã‚’ç®¡ç†ã™ã‚‹ã‚¯ãƒ©ã‚¹
 /// </summary>
 public class GameConfig
 {
 
-
     /// <summary>
-    /// ƒQ[ƒ€‚Ì‘¬“x‚ğŠÇ—‚·‚é•Ï”
+    /// ã‚²ãƒ¼ãƒ ã®é€Ÿåº¦ã‚’ç®¡ç†ã™ã‚‹å¤‰æ•°
     /// </summary>
     static float _gameSpeed = 1;
 
     static float _accelerateSpeed = 0.02f;
 
     /// <summary>
-    /// ƒQ[ƒ€‚ÌƒXƒs[ƒh‚ğŠÇ—‚·‚é•Ï”‚ğ•Ô‚·ŠÖ”
+    /// ã‚²ãƒ¼ãƒ ã®ã‚¹ãƒ”ãƒ¼ãƒ‰ã‚’ç®¡ç†ã™ã‚‹å¤‰æ•°ã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <returns></returns>
     public static float GetGameSpeed() {return _gameSpeed; }
-    
+
     public static void AccelerateGameSpeed() { _gameSpeed += _accelerateSpeed; }
 
      public static void ResetGameSpeed() {  _gameSpeed = 1; }
 
 }
+

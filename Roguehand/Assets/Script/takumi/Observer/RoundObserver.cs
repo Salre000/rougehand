@@ -1,10 +1,10 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ƒ‰ƒEƒ“ƒh‚ÌŠÄ‹‚ğ‚·‚éƒNƒ‰ƒX
+/// ãƒ©ã‚¦ãƒ³ãƒ‰ã®ç›£è¦–ã‚’ã™ã‚‹ã‚¯ãƒ©ã‚¹
 /// </summary>
 public class RoundObserver : MonoBehaviour
 {
@@ -13,37 +13,34 @@ public class RoundObserver : MonoBehaviour
 
     private bool _roundEnd = false;
 
-    private List<Action> _roundEndActions=new List<Action>();   
-    private List<Action> _roundStartActions=new List<Action>();   
+    private List<Action> _roundEndActions=new List<Action>();
+    private List<Action> _roundStartActions=new List<Action>();
 
     public void Awake()
     {
         Instance = this;
     }
 
-
     public void LateUpdate()
     {
         if (JokerObjectUtility.PlayCheck() == false && _roundEnd == true)
         {
 
-            // ƒ‰ƒEƒ“ƒhI—¹‚ÌƒAƒNƒVƒ‡ƒ“
+            // ãƒ©ã‚¦ãƒ³ãƒ‰çµ‚äº†ã®ã‚¢ã‚¯ã‚·ãƒ§ãƒ³
             for (int i = 0; i<_roundEndActions.Count; i++) _roundEndActions[i]();
 
             _roundEnd = false;
         }
 
-
-        
     }
 
     /// <summary>
-    /// ƒ‰ƒEƒ“ƒh‚ÌI—¹‚ğŠJn‚·‚éŠÖ”
+    /// ãƒ©ã‚¦ãƒ³ãƒ‰ã®çµ‚äº†ã‚’é–‹å§‹ã™ã‚‹é–¢æ•°
     /// </summary>
     public void StartRoundEnd() { _roundEnd=true; }
 
     /// <summary>
-    /// ƒ‰ƒEƒ“ƒhI—¹‚ÌƒAƒNƒVƒ‡ƒ“‚ğ’Ç‰Á
+    /// ãƒ©ã‚¦ãƒ³ãƒ‰çµ‚äº†æ™‚ã®ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’è¿½åŠ 
     /// </summary>
     /// <param name="action"></param>
     public void AddRoundEndAction(System.Action action) {  _roundEndActions.Add(action); }
@@ -52,3 +49,4 @@ public class RoundObserver : MonoBehaviour
     public void RoundStartActions() { for (int i = 0; i < _roundStartActions.Count; i++) _roundStartActions[i](); }
 
 }
+

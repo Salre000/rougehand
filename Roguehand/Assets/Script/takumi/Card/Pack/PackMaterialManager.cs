@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,8 +10,7 @@ public class PackMaterialManager : MonoBehaviour
 
     private readonly string _PACK_MATERIAL_FILE_NAME = "takumi/PackMaterialList";
 
-
-    private enum packSizeType 
+    private enum packSizeType
     {
         None=-1,
         normal,
@@ -21,57 +20,53 @@ public class PackMaterialManager : MonoBehaviour
 
     private Material[][] materialArray=new Material[(int)packSizeType.max][];
 
-
-
     private void Awake()
     {
         _packMaterialList = Resources.Load<MaterialstringList>(_PACK_MATERIAL_FILE_NAME);
 
-        // ÉpÉbÉNÇÃÉ}ÉeÉäÉAÉãÇó\Çﬂê∂ê¨
-        for(int i = 0; i < (int)packSizeType.max; i++) 
+        // „Éë„ÉÉ„ÇØ„ÅÆ„Éû„ÉÜ„É™„Ç¢„É´„Çí‰∫à„ÇÅÁîüÊàê
+        for(int i = 0; i < (int)packSizeType.max; i++)
         {
             materialArray[i]=new Material[(int)InstantiatePack.PackType.max];
 
-            for(int j=0;j< (int)InstantiatePack.PackType.max; j++) 
+            for(int j=0;j< (int)InstantiatePack.PackType.max; j++)
             {
-                // ÉVÉãÉoÅ[Çå¥å^Ç…ÉRÉsÅ[ÇçÏê¨
+                // „Ç∑„É´„Éê„Éº„ÇíÂéüÂûã„Å´„Ç≥„Éî„Éº„Çí‰ΩúÊàê
                 Material dommy = new Material(_silver);
                 dommy.SetTexture("_MainTex", _packMaterialList._material[(i*(int)InstantiatePack.PackType.max)+j]);
-                
-                // îzóÒÇ…í«â¡ÇµÇƒÇ¢Ç≠
+
+                // ÈÖçÂàó„Å´ËøΩÂä†„Åó„Å¶„ÅÑ„Åè
                 materialArray[i][j] = dommy;
             }
         }
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
-    /// <param name="packObject"><ÉpÉbÉNÇÃÉIÉuÉWÉFÉNÉgé©ëÃ/param>
-    /// <param name="type"><ÉpÉbÉNÇÃéÌóﬁ/param>
-    /// <param name="packCount"><ÉpÉbÉNÇÃëÂÇ´Ç≥/param>
-    public void SetPackPaint(GameObject packObject,InstantiatePack.PackType type,int packCount) 
+    /// <param name="packObject"><„Éë„ÉÉ„ÇØ„ÅÆ„Ç™„Éñ„Ç∏„Çß„ÇØ„ÉàËá™‰Ωì/param>
+    /// <param name="type"><„Éë„ÉÉ„ÇØ„ÅÆÁ®ÆÈ°û/param>
+    /// <param name="packCount"><„Éë„ÉÉ„ÇØ„ÅÆÂ§ß„Åç„Åï/param>
+    public void SetPackPaint(GameObject packObject,InstantiatePack.PackType type,int packCount)
     {
         PackMaterialObject pack=packObject.GetComponent<PackMaterialObject>();
 
         pack.SetMaterial(GetMaterial(type,packCount), _silver);
 
-
     }
 
-    private Material GetMaterial(InstantiatePack.PackType type,int packCount) 
+    private Material GetMaterial(InstantiatePack.PackType type,int packCount)
     {
         return materialArray[PackSize(packCount)][(int)type];
     }
 
-    private int PackSize(int packSize) 
+    private int PackSize(int packSize)
     {
         if (packSize < 5) return (int)packSizeType.normal;
 
         return (int)packSizeType.mega;
 
-
-
     }
 
 }
+

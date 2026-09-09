@@ -1,13 +1,13 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using static TextUIManager;
 
 /// <summary>
-/// ƒQ[ƒ€‚Ìis
+/// ã‚²ãƒ¼ãƒ ã®é€²è¡Œ
 /// </summary>
-public class GameRoot:MonoBehaviour 
+public class GameRoot:MonoBehaviour
 {
 
     public static GameRoot instance;
@@ -22,7 +22,7 @@ public class GameRoot:MonoBehaviour
     private void Awake()
     {
         instance = this;
-        // ƒ‰ƒEƒ“ƒh‚ÌƒJƒEƒ“ƒg‚ğ‰Šú’l‚Éİ’è
+        // ãƒ©ã‚¦ãƒ³ãƒ‰ã®ã‚«ã‚¦ãƒ³ãƒˆã‚’åˆæœŸå€¤ã«è¨­å®š
         GameUtility .SetAllRoundCount(_resetRoundCount);
     }
 
@@ -36,7 +36,7 @@ public class GameRoot:MonoBehaviour
         if(_next) return;
     }
 
-    // ƒNƒŠƒA‚µ‚½‚©‚Ç‚¤‚©
+    // ã‚¯ãƒªã‚¢ã—ãŸã‹ã©ã†ã‹
     public void GameClearCheck()
     {
         if (over) return;
@@ -45,35 +45,34 @@ public class GameRoot:MonoBehaviour
         if(GameUtility.GetRoundCount() != 3) return;
         clear = true;
 
-        // ƒŠƒUƒ‹ƒg‰æ–Ê‚ğŠJ‚­
-        ResultUIManager.Instance.Active("Ÿ—˜!");
+        // ãƒªã‚¶ãƒ«ãƒˆç”»é¢ã‚’é–‹ã
+        ResultUIManager.Instance.Active("å‹åˆ©!");
 
     }
-    // ƒnƒ“ƒh‚ªƒ[ƒ‚©
+    // ãƒãƒ³ãƒ‰ãŒã‚¼ãƒ­ã‹
     private void GameOver()
     {
-        // ƒ‰ƒEƒ“ƒhƒXƒRƒA‚ª‰ÁZ‚³‚ê‚½ƒ^ƒCƒ~ƒ“ƒO
+        // ãƒ©ã‚¦ãƒ³ãƒ‰ã‚¹ã‚³ã‚¢ãŒåŠ ç®—ã•ã‚ŒãŸã‚¿ã‚¤ãƒŸãƒ³ã‚°
         if (!GameUtility.IsRoundScoreUp()) return;
-        // ‡ŒvƒXƒRƒA‚Ì‘‰Áƒtƒ‰ƒO‚ğƒŠƒZƒbƒg
+        // åˆè¨ˆã‚¹ã‚³ã‚¢ã®å¢—åŠ ãƒ•ãƒ©ã‚°ã‚’ãƒªã‚»ãƒƒãƒˆ
         GameUtility.SetIsRoundScoreUp(false);
-        // ƒNƒŠƒAƒ`ƒFƒbƒN
+        // ã‚¯ãƒªã‚¢ãƒã‚§ãƒƒã‚¯
         if (clear) return;
-        // ƒnƒ“ƒhƒJƒEƒ“ƒgƒ`ƒFƒbƒN
+        // ãƒãƒ³ãƒ‰ã‚«ã‚¦ãƒ³ãƒˆãƒã‚§ãƒƒã‚¯
         if (0 < GameUtility.GetHandCount())    return;
 
-        // ‡ŒvƒXƒRƒA‚Æ”äŠr
+        // åˆè¨ˆã‚¹ã‚³ã‚¢ã¨æ¯”è¼ƒ
         float roundScore = ScoreManager.instance.GetRoundScore();
         roundScore = ScoreManager.instance.Rounding(roundScore, 1f);
         int _targetScore = MasterData.instance.GetIntMaster(7000 + GameUtility.GetAllRoundCount());
 
         if (_targetScore < roundScore) return;
         over =true;
-        
-        // ƒŠƒUƒ‹ƒg‰æ–Ê‚ğŠJ‚­
-        ResultUIManager.Instance.Active("”s–k ");
+
+        // ãƒªã‚¶ãƒ«ãƒˆç”»é¢ã‚’é–‹ã
+        ResultUIManager.Instance.Active("æ•—åŒ— ");
 
     }
-
 
     IEnumerator NextRound()
     {
@@ -86,3 +85,4 @@ public class GameRoot:MonoBehaviour
     public bool GetGameOver() { return over;}
 
 }
+

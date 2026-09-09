@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Unity.VisualScripting;
@@ -7,22 +7,22 @@ using UnityEngine;
 public class SaleManager : MonoBehaviour
 {
     /// <summary>
-    /// ”„”ƒ‚Ìinterface‚ÌƒŠƒXƒg
+    /// å£²è²·ã®interfaceã®ãƒªã‚¹ãƒˆ
     /// </summary>
     private List<SaleInterface> _saleInterfaces = new List<SaleInterface>();
 
     /// <summary>
-    /// ”„”ƒ‚Ì‘ÎÛ‚ÌƒIƒuƒWƒFƒNƒg
+    /// å£²è²·ã®å¯¾è±¡ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     /// </summary>
     private List<GameObject> _saleObject = new List<GameObject>();
 
     /// <summary>
-    /// ”„”ƒ‚Ì’l’i
+    /// å£²è²·ã®å€¤æ®µ
     /// </summary>
     private List<int> _saleValue = new List<int>();
 
     /// <summary>
-    /// w“ü‚È‚Ì‚©”„‹p‚È‚Ì‚©
+    /// è³¼å…¥ãªã®ã‹å£²å´ãªã®ã‹
     /// </summary>
     private List<bool> _saletype = new List<bool>();
 
@@ -32,17 +32,11 @@ public class SaleManager : MonoBehaviour
     {
         SaleUtility.instance = this;
 
-
-
-
-
     }
-
-
 
     public void OnGUI()
     {
-        Debug.Log(_saleInterfaces.Count + "”");
+        Debug.Log(_saleInterfaces.Count + "æ•°");
         if (style == null)
         {
             style = new GUIStyle(GUI.skin.button);
@@ -55,11 +49,10 @@ public class SaleManager : MonoBehaviour
         {
             if (_saleInterfaces[i] == null) continue;
 
-            //‚±‚ÌƒLƒƒƒbƒVƒ…‚Í•K{
-            //‚±‚Ì“_‚Ånum‚Ì’†g‚ğŒˆ’è‚·‚é•K—v‚ ‚è
+            //ã“ã®ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã¯å¿…é ˆ
+            //ã“ã®æ™‚ç‚¹ã§numã®ä¸­èº«ã‚’æ±ºå®šã™ã‚‹å¿…è¦ã‚ã‚Š
             int num = i;
             GameObject cashObject = _saleObject[num];
-
 
             if (_saletype[i])
             {
@@ -72,7 +65,7 @@ public class SaleManager : MonoBehaviour
 
                         Remove(index);
 
-                        //”„‹p‚ğ‚µ‚½–‚ğƒWƒ‡[ƒJ[‚É’m‚ç‚¹‚é
+                        //å£²å´ã‚’ã—ãŸäº‹ã‚’ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã«çŸ¥ã‚‰ã›ã‚‹
                         JokerUtility.SetTraget(JokerActionUseEnum.JokerActionTarget.sale);
 
                         i=_saleInterfaces.Count;
@@ -87,15 +80,12 @@ public class SaleManager : MonoBehaviour
                     int index = _saleObject.IndexOf(cashObject);
 
                     SaleObjectManager.instance.AddCardBuyCount();
-                    //w“üˆ—‚ğ‘‚­
+                    //è³¼å…¥å‡¦ç†ã‚’æ›¸ã
                     int saleIndex = SaleObjectManager.instance.GetIndex(cashObject);
 
                     SaleObjectManager.instance.IndexBuy(saleIndex);
 
-
-
                     i = _saleInterfaces.Count;
-
 
                 });
 
@@ -103,9 +93,8 @@ public class SaleManager : MonoBehaviour
         }
     }
 
-
     /// <summary>
-    /// ƒZ[ƒ‹‚Ì’Ç‰Á‚·‚éŠÖ”
+    /// ã‚»ãƒ¼ãƒ«ã®è¿½åŠ ã™ã‚‹é–¢æ•°
     /// </summary>
     /// <param name="saleInterface"></param>
     /// <param name="saleObject"></param>
@@ -121,16 +110,16 @@ public class SaleManager : MonoBehaviour
 
     public GUIStyle GetStyle() { return style; }
     /// <summary>
-    /// ƒŠƒXƒg‚Ì‘SÁ‹
-    /// ƒoƒbƒNƒhƒA—L
-    /// ƒoƒbƒNƒhƒA‚ªtrue‚Ì‚Í–â“š–³—p‚Å‘SÁ‹
+    /// ãƒªã‚¹ãƒˆã®å…¨æ¶ˆå»
+    /// ãƒãƒƒã‚¯ãƒ‰ã‚¢æœ‰
+    /// ãƒãƒƒã‚¯ãƒ‰ã‚¢ãŒtrueã®ã¯å•ç­”ç„¡ç”¨ã§å…¨æ¶ˆå»
     /// </summary>
     public void Clear(bool backdoor = false)
     {
-        //int index = 0;  
+        //int index = 0;
         //for (int i = 0; i < _saleInterfaces.Count; i++)
         //{
-        //    // •K—v–³‚­‚È‚Á‚½
+        //    // å¿…è¦ç„¡ããªã£ãŸ
         // //   if (!backdoor && !_saletype[index] && ShopManager.instance.IsShop()) { index++; continue; }
         //    _saleInterfaces.RemoveAt(index);
         //    _saleObject.RemoveAt(index);
@@ -143,10 +132,8 @@ public class SaleManager : MonoBehaviour
         _saletype.Clear();
     }
 
-
-
     /// <summary>
-    /// ‰½‚Ìî•ñ‚ğŠJ¦‚µ‚Ä‚¢‚é‚©‚ğ•Ô‚·ŠÖ”
+    /// ä½•ã®æƒ…å ±ã‚’é–‹ç¤ºã—ã¦ã„ã‚‹ã‹ã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <param name="gameObject"></param>
     /// <returns></returns>
@@ -154,12 +141,12 @@ public class SaleManager : MonoBehaviour
     {
         GrabManager.status _status = GrabManager.status.None;
 
-        //ƒJ[ƒh‚Ì‰Â”\«‚ğ”»•Ê
+        //ã‚«ãƒ¼ãƒ‰ã®å¯èƒ½æ€§ã‚’åˆ¤åˆ¥
         CardObject cardObject = gameObject.GetComponent<CardObject>();
 
         if (cardObject != null) _status = GrabManager.status.Card;
 
-        //ƒWƒ‡[ƒJ[‚Ì‰Â”\«‚ğ”»•Ê
+        //ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®å¯èƒ½æ€§ã‚’åˆ¤åˆ¥
         JokerObject jokerObject = gameObject.GetComponent<JokerObject>();
 
         if (jokerObject != null) _status = GrabManager.status.Joker;
@@ -168,18 +155,13 @@ public class SaleManager : MonoBehaviour
 
         if (itemObject != null) _status = GrabManager.status.Item;
 
-
-
         switch (_status)
         {
             case GrabManager.status.Joker:
 
-
                 JokerUtility.SaleAction(JokerObjectUtility.GetJokerIndex(jokerObject));
 
                 JokerUtility.Remove(JokerObjectUtility.GetJokerIndex(jokerObject));
-
-
 
                 break;
             case GrabManager.status.Item:
@@ -188,13 +170,12 @@ public class SaleManager : MonoBehaviour
                 break;
         }
 
-
         return _status;
 
     }
 
     /// <summary>
-    /// w“ü‚µ‚½‚Ìˆ—
+    /// è³¼å…¥ã—ãŸæ™‚ã®å‡¦ç†
     /// </summary>
     /// <param name="gameObject"></param>
     private void Buy(GameObject gameObject)
@@ -212,3 +193,4 @@ public class SaleManager : MonoBehaviour
     }
 
 }
+

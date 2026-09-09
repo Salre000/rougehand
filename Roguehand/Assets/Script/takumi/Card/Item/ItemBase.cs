@@ -1,22 +1,22 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static ScriptCountNumber;
 /// <summary>
-/// ƒAƒCƒeƒ€‚Ì’ŠÛƒNƒ‰ƒX
+/// ã‚¢ã‚¤ãƒ†ãƒ ã®æŠ½è±¡ã‚¯ãƒ©ã‚¹
 /// </summary>
  [System.Serializable]
 public abstract class ItemBase : SaleInterface,ExplanationInterface
 {
 
     /// <summary>
-    /// ƒAƒCƒeƒ€‚ÌID
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã®ID
     /// </summary>
     private int itemID = -1;
 
     /// <summary>
-    /// ”„‹pŠz‚Ì•Ï”  
+    /// å£²å´é¡ã®å¤‰æ•°
     /// </summary>
     protected int _returnMoney = BASE_MONEY;
 
@@ -24,14 +24,13 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
 
     private readonly int ITEM_EXPLANTION_ID = 1500;
 
-
     /// <summary>
-    /// ƒNƒ‰ƒX‚Ì‰Šú‰»ˆ—
+    /// ã‚¯ãƒ©ã‚¹ã®åˆæœŸåŒ–å‡¦ç†
     /// </summary>
     public abstract void Initializ();
 
     /// <summary>
-    /// ”„‹p‚Ég‚¤ŠÖ”‚É•ÏX‚ğ‰Á‚¦‚Äg—p‚ğ‰Â”\‚É‚µ‚½
+    /// å£²å´ã«ä½¿ã†é–¢æ•°ã«å¤‰æ›´ã‚’åŠ ãˆã¦ä½¿ç”¨ã‚’å¯èƒ½ã«ã—ãŸ
     /// </summary>
     /// <param name="pos"></param>
     /// <param name="saleValue"></param>
@@ -41,12 +40,12 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
 
         Vector2 ButtonPos = Camera.main.WorldToScreenPoint(pos);
         if (GUI.Button(new Rect(ButtonPos.x + 75, Screen.height - ButtonPos.y - 90, 60, 90),
-            ("<size=25><color=#ffffff>”„‹p\n$" + saleValue.ToString() + "</color></size>"), SaleUtility.GetStyle()))
+            ("<size=25><color=#ffffff>å£²å´\n$" + saleValue.ToString() + "</color></size>"), SaleUtility.GetStyle()))
         {
 
             action();
 
-            //‚¨‹à‚ğ‘‚â‚·ˆ—
+            //ãŠé‡‘ã‚’å¢—ã‚„ã™å‡¦ç†
             GameUtility.SetMyMoney(GameUtility.GetMyMoney() + saleValue);
 
             VolumeManager.instance.PlayMoneySE();
@@ -54,10 +53,10 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
         }
 
         if (GUI.Button(new Rect(ButtonPos.x + 75, Screen.height - ButtonPos.y, 60, 90),
-            ("<size=25><color=#ffffff>g—p\n</color></size>"), SaleUtility.GetStyle()))
+            ("<size=25><color=#ffffff>ä½¿ç”¨\n</color></size>"), SaleUtility.GetStyle()))
         {
             action();
-            //ƒWƒ‡[ƒJ[‚ÉƒAƒCƒeƒ€‚Ìg—p‚ğ’m‚ç‚¹‚é
+            //ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã«ã‚¢ã‚¤ãƒ†ãƒ ã®ä½¿ç”¨ã‚’çŸ¥ã‚‰ã›ã‚‹
             JokerUtility.SetTraget(JokerActionUseEnum.JokerActionTarget.item);
             Use();
             VolumeManager.instance.PlayUseSE();
@@ -65,21 +64,19 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
         }
     }
 
-
     /// <summary>
-    /// ƒAƒCƒeƒ€‚Ìg—p‚ÌŠÖ”
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã®ä½¿ç”¨æ™‚ã®é–¢æ•°
     /// </summary>
     public abstract void Use();
 
-
     /// <summary>
-    /// ”„‹p‚Ì‚¨‹à‚Ì—Ê‚ğ•Ô‚·ŠÖ”
+    /// å£²å´æ™‚ã®ãŠé‡‘ã®é‡ã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <returns></returns>
     public int ReturnMoney() { return _returnMoney; }
 
     /// <summary>
-    /// ”„‹p‚Ì‚¨‹à‚Ì—Ê‚ğ‘‚â‚·ŠÖ”
+    /// å£²å´æ™‚ã®ãŠé‡‘ã®é‡ã‚’å¢—ã‚„ã™é–¢æ•°
     /// </summary>
     /// <param name="add"></param>
     public void AddReturnMoney(int add) { _returnMoney += add; }
@@ -89,13 +86,13 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
 
     public string GetName()
     {
-        //ƒAƒCƒeƒ€ŒW”1000
+        //ã‚¢ã‚¤ãƒ†ãƒ ä¿‚æ•°1000
         return MasterData.instance.GetStringMaster(IDUtility.ITEM_ID+itemID);
     }
 
     public string GetExplanation()
     {
-        // ƒAƒCƒeƒ€‚Ìà–¾ŒW”1500
+        // ã‚¢ã‚¤ãƒ†ãƒ ã®èª¬æ˜ä¿‚æ•°1500
         return MasterData.instance.GetStringMaster(ITEM_EXPLANTION_ID + itemID);
     }
 
@@ -106,8 +103,8 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
 
     public virtual string GetTypes()
     {
-        // —\’è‚Í–¢’è
-        return Extra.ErrorText("ƒAƒCƒeƒ€");
+        // äºˆå®šã¯æœªå®š
+        return Extra.ErrorText("ã‚¢ã‚¤ãƒ†ãƒ ");
     }
 
     bool SaleInterface.AddFlag()
@@ -121,7 +118,7 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
         int BUY_WIDHT = 250;
 
         if (GUI.Button(new Rect(ButtonPos.x - BUY_WIDHT / HALF, Screen.height - ButtonPos.y + 100, BUY_WIDHT, 60),
-            ("<size=20><color=#ffffff>" + Extra.ErrorText("ƒAƒCƒeƒ€‚Ì˜g‚ª‚¢‚Á‚Ï‚¢") + "</color></size>"), SaleUtility.GetStyle()))
+            ("<size=20><color=#ffffff>" + Extra.ErrorText("ã‚¢ã‚¤ãƒ†ãƒ ã®æ ãŒã„ã£ã±ã„") + "</color></size>"), SaleUtility.GetStyle()))
         {
 
         }
@@ -129,3 +126,4 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
     }
 
 }
+

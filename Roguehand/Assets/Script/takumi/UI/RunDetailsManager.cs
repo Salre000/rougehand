@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -19,70 +19,68 @@ public class RunDetailsManager : MonoBehaviour
     public static RunDetailsManager instance;
 
     /// <summary>
-    /// Œ»İ‚Ìƒ^ƒCƒv‚Ìó‘Ô
+    /// ç¾åœ¨ã®ã‚¿ã‚¤ãƒ—ã®çŠ¶æ…‹
     /// </summary>
     [SerializeField] private RunDetailsType _nowDetailsType = RunDetailsType.role;
 
     /// <summary>
-    /// Ú×UI‚ÌŠî‘b‚É‚ ‚é”wŒi‚ÌRectTransform
+    /// è©³ç´°UIã®åŸºç¤ã«ã‚ã‚‹èƒŒæ™¯ã®RectTransform
     /// </summary>
     [SerializeField] private RectTransform _backImageRectTransform;
 
     /// <summary>
-    /// ƒzƒ‰ƒCƒ]ƒ“ƒOƒ‹[ƒv‚Ì•t‚¢‚Ä‚¢‚éƒ{ƒ^ƒ“‚ğ‚Ü‚Æ‚ß‚½•Ï”
+    /// ãƒ›ãƒ©ã‚¤ã‚¾ãƒ³ã‚°ãƒ«ãƒ¼ãƒ—ã®ä»˜ã„ã¦ã„ã‚‹ãƒœã‚¿ãƒ³ã‚’ã¾ã¨ã‚ãŸå¤‰æ•°
     /// </summary>
     [SerializeField]private List<Button> _runDetailsTypeButtons=new List<Button>((int)RunDetailsType.max);
 
     /// <summary>
-    /// •`‰æ‰Â”\‚ÈƒIƒuƒWƒFƒNƒg‚ğ‚Ü‚Æ‚ß‚½”z—ñ
-    /// Å‘å”‚Íƒ^ƒCƒv‚Ìí—Ş
+    /// æç”»å¯èƒ½ãªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ã¾ã¨ã‚ãŸé…åˆ—
+    /// æœ€å¤§æ•°ã¯ã‚¿ã‚¤ãƒ—ã®ç¨®é¡
     /// </summary>
     [SerializeField] private List<Transform> _runDetailsTypeParents = new List<Transform>((int)RunDetailsType.max);
 
     /// <summary>
-    /// Ú×‚Èî•ñ‚ÌUI‚ğ•`‰æ‚·‚éŠÖ”‚ğ‚½‚¹‚éƒ{ƒ^ƒ“
+    /// è©³ç´°ãªæƒ…å ±ã®UIã‚’æç”»ã™ã‚‹é–¢æ•°ã‚’æŒãŸã›ã‚‹ãƒœã‚¿ãƒ³
     /// </summary>
-    [SerializeField, Header("‚±‚Ìƒ{ƒ^ƒ“‚ÍƒvƒŒƒnƒu“à‚Å‚Í‚È‚­ƒV[ƒ“ã‚É‘¶İ‚µ‚Ä‚¢‚é")]private Button _runInfo;
+    [SerializeField, Header("ã“ã®ãƒœã‚¿ãƒ³ã¯ãƒ—ãƒ¬ãƒãƒ–å†…ã§ã¯ãªãã‚·ãƒ¼ãƒ³ä¸Šã«å­˜åœ¨ã—ã¦ã„ã‚‹")]private Button _runInfo;
 
     /// <summary>
-    /// Ú×î•ñ‚ÌUI‚ğ•Â‚¶‚éŠÖ”‚ğ‚½‚¹‚éƒ{ƒ^ƒ“
+    /// è©³ç´°æƒ…å ±ã®UIã‚’é–‰ã˜ã‚‹é–¢æ•°ã‚’æŒãŸã›ã‚‹ãƒœã‚¿ãƒ³
     /// </summary>
     [SerializeField]private Button _endrRunInfo;
 
     /// <summary>
-    /// Ú×î•ñ‚ÌUI‚ğ•`‰æŠÖ”‚ğ‚½‚¹‚éƒ{ƒ^ƒ“
+    /// è©³ç´°æƒ…å ±ã®UIã‚’æç”»é–¢æ•°ã‚’æŒãŸã›ã‚‹ãƒœã‚¿ãƒ³
     /// </summary>
     [SerializeField]private Button _runInfoShop;
 
-
     /// <summary>
-    /// “à—e‚²‚Æ‚ÌUI‚Ì•`‰æ‚ğs‚¤ŠÖ”
+    /// å†…å®¹ã”ã¨ã®UIã®æç”»ã‚’è¡Œã†é–¢æ•°
     /// </summary>
     private List<DetailsBase> _detailsTypeAction=new List<DetailsBase>((int)RunDetailsType.max);
 
     /// <summary>
-    /// ƒ‰ƒ“‚ÌÚ×‚ªŒ©‚¦‚é‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
+    /// ãƒ©ãƒ³ã®è©³ç´°ãŒè¦‹ãˆã‚‹ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
     /// </summary>
-    private bool IsRunDetailsOpen = false;  
+    private bool IsRunDetailsOpen = false;
 
-    #region ’è”
-
+    #region å®šæ•°
 
     /// <summary>
-    /// ƒfƒtƒHƒ‹ƒg‚Ìƒ{ƒ^ƒ“‚Ì‰¡•
+    /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆæ™‚ã®ãƒœã‚¿ãƒ³ã®æ¨ªå¹…
     /// </summary>
     readonly private Vector2 _typeButtonDefaultSizeX = new Vector2(200, 100);
     /// <summary>
-    /// ƒfƒbƒLˆê——‚Ìƒ{ƒ^ƒ“‚Ì‰¡•
+    /// ãƒ‡ãƒƒã‚­ä¸€è¦§æ™‚ã®ãƒœã‚¿ãƒ³ã®æ¨ªå¹…
     /// </summary>
     readonly private Vector2 _typeButtonDeckSizeX = new Vector2(350, 100);
 
     /// <summary>
-    /// ƒfƒtƒHƒ‹ƒg‚ÌUI‚Ì‰¡•
+    /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆæ™‚ã®UIã®æ¨ªå¹…
     /// </summary>
     readonly private float _backImageDefaultSizeX = 920;
     /// <summary>
-    /// ƒfƒbƒLˆê——‚ÌUI‚Ì‰¡•
+    /// ãƒ‡ãƒƒã‚­ä¸€è¦§æ™‚ã®UIã®æ¨ªå¹…
     /// </summary>
     readonly private float _backImageDeckSizeX = 1520;
 
@@ -93,85 +91,82 @@ public class RunDetailsManager : MonoBehaviour
         Initializ();
     }
 
-    // ‰Šú‰»ŠÖ”
+    // åˆæœŸåŒ–é–¢æ•°
     private void Initializ()
     {
-        // Ú×UI‚ğŠJ‚­ƒ{ƒ_ƒ“‚ÉŠJ‚­ŠÖ”‚ğ‚í‚½‚·
+        // è©³ç´°UIã‚’é–‹ããƒœãƒ€ãƒ³ã«é–‹ãé–¢æ•°ã‚’ã‚ãŸã™
         _runInfo.onClick.AddListener(Show);
         _runInfoShop.onClick.AddListener(Show);
-        // Ú×UI‚ğ•Â‚¶‚éƒ{ƒ_ƒ“‚É•Â‚¶‚éŠÖ”‚ğ‚í‚½‚·
+        // è©³ç´°UIã‚’é–‰ã˜ã‚‹ãƒœãƒ€ãƒ³ã«é–‰ã˜ã‚‹é–¢æ•°ã‚’ã‚ãŸã™
         _endrRunInfo.onClick.AddListener(End);
 
-        // “à—e‚²‚Æ‚ÌƒAƒNƒVƒ‡ƒ“‚ğ•Û‘¶
+        // å†…å®¹ã”ã¨ã®ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’ä¿å­˜
         SetShows();
-        // •`‰æ“à—e‚ğ•Ï‚¦‚éŠÖ”‚ğ‚í‚½‚·ŠÖ”
+        // æç”»å†…å®¹ã‚’å¤‰ãˆã‚‹é–¢æ•°ã‚’ã‚ãŸã™é–¢æ•°
         SetChengeType();
 
-        // ‚à‚µ‚àŒ»İ‚Ìƒ^ƒCƒv‚ª•s³’l‚¾‚Á‚½‚çƒ[ƒ‹‚Åã‘‚«‚·‚é
+        // ã‚‚ã—ã‚‚ç¾åœ¨ã®ã‚¿ã‚¤ãƒ—ãŒä¸æ­£å€¤ã ã£ãŸã‚‰ãƒ­ãƒ¼ãƒ«ã§ä¸Šæ›¸ãã™ã‚‹
         if (_nowDetailsType == RunDetailsType.none) ChengeType(RunDetailsType.role);
 
-
-        // ”ñƒAƒNƒeƒBƒuó‘Ô‚ÉˆÚs
+        // éã‚¢ã‚¯ãƒ†ã‚£ãƒ–çŠ¶æ…‹ã«ç§»è¡Œ
         End();
         instance = this;
 
     }
 
     /// <summary>
-    ///  •`‰æ‚ğŠJn‚·‚éŠÖ”
+    ///  æç”»ã‚’é–‹å§‹ã™ã‚‹é–¢æ•°
     /// </summary>
     private void Show()
     {
         IsRunDetailsOpen = true;
 
-        // ƒAƒNƒeƒBƒuó‘Ô‚ÉˆÚs
+        // ã‚¢ã‚¯ãƒ†ã‚£ãƒ–çŠ¶æ…‹ã«ç§»è¡Œ
         gameObject.SetActive(true);
 
-
-        // Œ»İ‘I‘ğ’†‚Ìƒ^ƒCƒv‚ÌƒIƒuƒWƒFƒNƒg‚¾‚¯ƒAƒNƒeƒBƒuó‘Ô‚ÉˆÚs
+        // ç¾åœ¨é¸æŠä¸­ã®ã‚¿ã‚¤ãƒ—ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã ã‘ã‚¢ã‚¯ãƒ†ã‚£ãƒ–çŠ¶æ…‹ã«ç§»è¡Œ
         _runDetailsTypeParents[(int)_nowDetailsType].gameObject.SetActive(true);
 
         _detailsTypeAction[(int)_nowDetailsType].Show();
 
         VolumeManager.instance.PlaySystemSE();
 
-
     }
     /// <summary>
-    ///  •`‰æ‚ğI—¹‚·‚éŠÖ”
+    ///  æç”»ã‚’çµ‚äº†ã™ã‚‹é–¢æ•°
     /// </summary>
     private void End()
     {
         VolumeManager.instance.PlaySystemSE();
 
         IsRunDetailsOpen = false;
-        // ‚·‚×‚Ä‚Ì—v‘f‚ÌƒIƒuƒWƒFƒNƒg‚ğ”ñƒAƒNƒeƒBƒuó‘Ô‚ÉˆÚs
-        for (int i=0;i< _runDetailsTypeParents.Count; i++) 
+        // ã™ã¹ã¦ã®è¦ç´ ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’éã‚¢ã‚¯ãƒ†ã‚£ãƒ–çŠ¶æ…‹ã«ç§»è¡Œ
+        for (int i=0;i< _runDetailsTypeParents.Count; i++)
         {
             _detailsTypeAction[i].Hide();
             _runDetailsTypeParents[i].gameObject.SetActive(false);
         }
 
-        // ”ñƒAƒNƒeƒBƒuó‘Ô‚ÉˆÚs
+        // éã‚¢ã‚¯ãƒ†ã‚£ãƒ–çŠ¶æ…‹ã«ç§»è¡Œ
         gameObject.SetActive(false);
     }
 
     /// <summary>
-    /// ƒ{ƒ^ƒ“‚ÉChengeTypeŠÖ”‚ğ‚½‚¹‚éƒ{ƒ^ƒ“
+    /// ãƒœã‚¿ãƒ³ã«ChengeTypeé–¢æ•°ã‚’æŒãŸã›ã‚‹ãƒœã‚¿ãƒ³
     /// </summary>
     private void SetChengeType()
     {
-        // q‹Ÿ‚Ì”‚¾‚¯‰ñ‚·
+        // å­ä¾›ã®æ•°ã ã‘å›ã™
         for (int i = 0; i < _runDetailsTypeButtons.Count; i++)
         {
-            // ƒLƒƒƒbƒVƒ…‚·‚é•K—v—L
+            // ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã™ã‚‹å¿…è¦æœ‰
             int dommyNumber = i;
 
             Button button = _runDetailsTypeButtons[i];
 
             if (button == null) continue;
 
-            // ƒ‰ƒ€ƒ_®  
+            // ãƒ©ãƒ ãƒ€å¼
             button.onClick.AddListener(() =>
             {
                 ChengeType((RunDetailsType)dommyNumber);
@@ -182,7 +177,7 @@ public class RunDetailsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// •`‰æ“à—e‚ğ•ÏX‚·‚éŠÖ”
+    /// æç”»å†…å®¹ã‚’å¤‰æ›´ã™ã‚‹é–¢æ•°
     /// </summary>
     private void ChengeType(RunDetailsType type)
     {
@@ -190,17 +185,15 @@ public class RunDetailsManager : MonoBehaviour
 
         VolumeManager.instance.PlaySystemSE();
 
-        // ‘O‰ñ‘I‘ğ’†‚Ìƒ^ƒCƒv‚ÌƒIƒuƒWƒFƒNƒg‚¾‚¯”ñƒAƒNƒeƒBƒuó‘Ô‚ÉˆÚs
-        // —áŠO‚Æ‚µ‚Ä‘O‰ñ‚Ì‘I‘ğ‚ªnone‚¾‚Á‚½‚çØ‚è‘Ö‚¦‚ğs‚í‚È‚¢
+        // å‰å›é¸æŠä¸­ã®ã‚¿ã‚¤ãƒ—ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã ã‘éã‚¢ã‚¯ãƒ†ã‚£ãƒ–çŠ¶æ…‹ã«ç§»è¡Œ
+        // ä¾‹å¤–ã¨ã—ã¦å‰å›ã®é¸æŠãŒnoneã ã£ãŸã‚‰åˆ‡ã‚Šæ›¿ãˆã‚’è¡Œã‚ãªã„
         if (_nowDetailsType!=RunDetailsType.none) _runDetailsTypeParents[(int)_nowDetailsType].gameObject.SetActive(false);
 
-         // ‘I‘ğ’†‚ğ•ÏX
+         // é¸æŠä¸­ã‚’å¤‰æ›´
         _nowDetailsType = type;
 
-        // Œ»İ‘I‘ğ’†‚Ìƒ^ƒCƒv‚ÌƒIƒuƒWƒFƒNƒg‚¾‚¯ƒAƒNƒeƒBƒuó‘Ô‚ÉˆÚs
+        // ç¾åœ¨é¸æŠä¸­ã®ã‚¿ã‚¤ãƒ—ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã ã‘ã‚¢ã‚¯ãƒ†ã‚£ãƒ–çŠ¶æ…‹ã«ç§»è¡Œ
         _runDetailsTypeParents[(int)_nowDetailsType].gameObject.SetActive(true);
-
-
 
         Vector2 backImageSize = _backImageRectTransform.sizeDelta;
 
@@ -219,7 +212,7 @@ public class RunDetailsManager : MonoBehaviour
 
         }
 
-        // ”wŒi‚Ì‘å‚«‚³‚ğİ’è
+        // èƒŒæ™¯ã®å¤§ãã•ã‚’è¨­å®š
         _backImageRectTransform.sizeDelta = backImageSize;
 
         for(int i=0;i< _runDetailsTypeButtons.Count; i++)
@@ -229,17 +222,16 @@ public class RunDetailsManager : MonoBehaviour
             _runDetailsTypeButtons[i].GetComponent<RectTransform>().sizeDelta = buttonSize;
         }
 
-        // “à—e‚ğ•`‰æ
+        // å†…å®¹ã‚’æç”»
         _detailsTypeAction[(int)_nowDetailsType].Show();
     }
 
-
     /// <summary>
-    ///  “à—e‚²‚Æ‚ÌŠÖ”‚ğ‘ã“ü‚·‚é
+    ///  å†…å®¹ã”ã¨ã®é–¢æ•°ã‚’ä»£å…¥ã™ã‚‹
     /// </summary>
-    private void SetShows() 
+    private void SetShows()
     {
-        for (int i = 0; i < _runDetailsTypeParents.Count; i++) 
+        for (int i = 0; i < _runDetailsTypeParents.Count; i++)
         {
             _detailsTypeAction.Add( _runDetailsTypeParents[i].GetComponent<DetailsBase>());
             _detailsTypeAction[i].Initializ();
@@ -249,3 +241,4 @@ public class RunDetailsManager : MonoBehaviour
 
     public bool IsOpen() { return IsRunDetailsOpen; }
 }
+

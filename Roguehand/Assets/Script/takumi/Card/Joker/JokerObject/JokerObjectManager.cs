@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
@@ -8,7 +8,7 @@ public class JokerObjectManager : MonoBehaviour
 {
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚Ìó‘Ô
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®çŠ¶æ…‹
     /// </summary>
     public enum JokerStatus
     {
@@ -19,62 +19,61 @@ public class JokerObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ÌƒIƒuƒWƒFƒNƒg‚ÌŠî’êƒIƒuƒWƒFƒNƒg
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åŸºåº•ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     /// </summary>
     [SerializeField] private GameObject _prefab;
 
-    [SerializeField, Header("ƒWƒ‡[ƒJ[‚ÌƒIƒuƒWƒFƒNƒg‚Ìˆê”Ô¶‘¤")] private Transform LeftPos;
-    [SerializeField, Header("ƒWƒ‡[ƒJ[‚ÌƒIƒuƒWƒFƒNƒg‚Ìˆê”Ô‰E‘¤")] private Transform RightPos;
-    [SerializeField, Header("ƒWƒ‡[ƒJ[‚ÌƒIƒuƒWƒFƒNƒg‚ÌƒVƒ‡ƒbƒvˆê”Ô¶‘¤")] private Transform _shopLeftPos;
-    [SerializeField, Header("ƒWƒ‡[ƒJ[‚ÌƒIƒuƒWƒFƒNƒg‚ÌƒVƒ‡ƒbƒvˆê”Ô‰E‘¤")] private Transform _shopRightPos;
+    [SerializeField, Header("ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä¸€ç•ªå·¦å´")] private Transform LeftPos;
+    [SerializeField, Header("ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä¸€ç•ªå³å´")] private Transform RightPos;
+    [SerializeField, Header("ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚·ãƒ§ãƒƒãƒ—ä¸€ç•ªå·¦å´")] private Transform _shopLeftPos;
+    [SerializeField, Header("ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚·ãƒ§ãƒƒãƒ—ä¸€ç•ªå³å´")] private Transform _shopRightPos;
 
-    private readonly Vector3 _SHOP_ANGLE = new Vector3(-90, 0, 0); 
-    private readonly Vector3 _NORMAL_ANGLE = new Vector3(0, 0, 0); 
+    private readonly Vector3 _SHOP_ANGLE = new Vector3(-90, 0, 0);
+    private readonly Vector3 _NORMAL_ANGLE = new Vector3(0, 0, 0);
 
     /// <summary>
-    ///Œ»İ‚ÌƒWƒ‡[ƒJ[‚Ìó‹µ
+    ///ç¾åœ¨ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®çŠ¶æ³
     /// </summary>
     private JokerStatus _status = JokerStatus.wait;
 
     /// <summary>
-    /// ‚Ğ‚Æ‚Â‘O‚Ìó‘Ô
+    /// ã²ã¨ã¤å‰ã®çŠ¶æ…‹
     /// </summary>
     private JokerStatus _lostStatus = JokerStatus.wait;
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚Ì”{—¦‚È‚Ç‚ğ•`‰æ‚·‚éÀ•W
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®å€ç‡ãªã©ã‚’æç”»ã™ã‚‹åº§æ¨™
     /// </summary>
     private Vector2 _numPos = Vector2.zero;
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ÌƒIƒuƒWƒFƒNƒgƒŠƒXƒg
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒªã‚¹ãƒˆ
     /// </summary>
     [SerializeField] private List<JokerObject> _jokerObjects = new List<JokerObject>();
 
     /// <summary>
-    /// ƒ_ƒ~[ƒWƒ‡[ƒJ[‚ÌƒIƒuƒWƒFƒNƒgƒŠƒXƒg
+    /// ãƒ€ãƒŸãƒ¼ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒªã‚¹ãƒˆ
     /// </summary>
     [SerializeField] private List<JokerObject> _domyyJokerObjects = new List<JokerObject>();
 
     /// <summary>
-    /// ƒ}ƒeƒŠƒAƒ‹‚Ì”z—ñ‚ğ‚Á‚½ƒNƒ‰ƒX
+    /// ãƒãƒ†ãƒªã‚¢ãƒ«ã®é…åˆ—ã‚’æŒã£ãŸã‚¯ãƒ©ã‚¹
     /// </summary>
     private MaterialstringList materialList;
 
     /// <summary>
-    /// ƒ}ƒeƒŠƒAƒ‹•¡»‚·‚éˆ×‚Ìƒx[ƒX‚É‚È‚éƒ}ƒeƒŠƒAƒ‹
+    /// ãƒãƒ†ãƒªã‚¢ãƒ«è¤‡è£½ã™ã‚‹ç‚ºã®ãƒ™ãƒ¼ã‚¹ã«ãªã‚‹ãƒãƒ†ãƒªã‚¢ãƒ«
     /// </summary>
     private Material dommyMaterial;
 
     /// <summary>
-    /// Œ»İ‚Â‚©‚Ü‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
+    /// ç¾åœ¨ã¤ã‹ã¾ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹
     /// </summary>
     private bool _isGrab = false;
     /// <summary>
-    /// Œ»İ‚Â‚©‚Ü‚ê‚Ä‚¢‚éƒCƒ“ƒfƒbƒNƒX”Ô†
+    /// ç¾åœ¨ã¤ã‹ã¾ã‚Œã¦ã„ã‚‹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ç•ªå·
     /// /// </summary>
     private int _isGrabID = -1;
-
 
     public void Awake()
     {
@@ -84,12 +83,10 @@ public class JokerObjectManager : MonoBehaviour
 
     }
 
-
-
     public void Update()
     {
-        // ƒVƒ‡ƒbƒv‚Ì
-        if (ShopManager.instance.IsShop()) 
+        // ã‚·ãƒ§ãƒƒãƒ—ã®æ™‚
+        if (ShopManager.instance.IsShop())
         {
             ObjectMovePosShop();
 
@@ -100,7 +97,7 @@ public class JokerObjectManager : MonoBehaviour
         Play();
         ObjectMovePos();
         Action();
-        //ƒWƒ‡[ƒJ[‚Ìˆ—‚ªI‚í‚Á‚½‚©‚Ç‚¤‚©
+        //ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®å‡¦ç†ãŒçµ‚ã‚ã£ãŸã‹ã©ã†ã‹
         if (_status != JokerStatus.end) return;
         TrunEnd();
         _lostStatus = _status;
@@ -109,7 +106,7 @@ public class JokerObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒJ[ƒh‚ÌƒvƒŒƒC‚É”½‰‚µ‚ÄƒWƒ‡[ƒJ[‚Ìˆ—‚ğ‚·‚éŠÖ”
+    /// ã‚«ãƒ¼ãƒ‰ã®ãƒ—ãƒ¬ã‚¤ã«åå¿œã—ã¦ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®å‡¦ç†ã‚’ã™ã‚‹é–¢æ•°
     /// </summary>
     private void Play()
     {
@@ -120,12 +117,11 @@ public class JokerObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒJ[ƒh‚ÌƒAƒNƒVƒ‡ƒ“‚É‰‚¶‚½“®‚«‚ÌŠÖ”
+    /// ã‚«ãƒ¼ãƒ‰ã®ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã«å¿œã˜ãŸå‹•ãã®é–¢æ•°
     /// </summary>
     private void Action()
     {
         if (_status != JokerStatus.action) return;
-
 
         for (int i = 0; i < _jokerObjects.Count; i++) _jokerObjects[i].Action();
 
@@ -134,13 +130,13 @@ public class JokerObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ªƒvƒŒƒC‚³‚ê‚Ä‚¢‚È‚¢‚ÉƒWƒ‡[ƒJ[‚ÌˆÊ’u‚ğC³‚·‚éŠÖ”
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ãŒãƒ—ãƒ¬ã‚¤ã•ã‚Œã¦ã„ãªã„æ™‚ã«ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ä½ç½®ã‚’ä¿®æ­£ã™ã‚‹é–¢æ•°
     /// </summary>
     private void ObjectMovePos()
     {
         if (_status != JokerStatus.wait) return;
 
-        //ƒWƒ‡[ƒJ[“¯m‚Ì‹——£‚ğì¬
+        //ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼åŒå£«ã®è·é›¢ã‚’ä½œæˆ
         float renge = Vector3.Distance(LeftPos.transform.position, RightPos.transform.position) / (_jokerObjects.Count + 1);
 
         for (int i = 0; i < _jokerObjects.Count; i++)
@@ -150,19 +146,18 @@ public class JokerObjectManager : MonoBehaviour
             _jokerObjects[i].transform.eulerAngles = _NORMAL_ANGLE;
         }
 
-        //è“®‚ÌˆÚ“®‚É‚æ‚Á‚Ä‡”Ô‚ª“ü‚ê‘Ö‚í‚éŠÖ”
+        //æ‰‹å‹•ã®ç§»å‹•ã«ã‚ˆã£ã¦é †ç•ªãŒå…¥ã‚Œæ›¿ã‚ã‚‹é–¢æ•°
         CheckOrder();
-
 
     }
 
     /// <summary>
-    /// ƒVƒ‡ƒbƒv‚Å‚Ì®—ñˆ—
+    /// ã‚·ãƒ§ãƒƒãƒ—ã§ã®æ•´åˆ—å‡¦ç†
     /// </summary>
-    private void ObjectMovePosShop() 
+    private void ObjectMovePosShop()
     {
 
-        //ƒWƒ‡[ƒJ[“¯m‚Ì‹——£‚ğì¬
+        //ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼åŒå£«ã®è·é›¢ã‚’ä½œæˆ
         float renge = Vector3.Distance(_shopLeftPos.transform.position, _shopRightPos.transform.position) / (_jokerObjects.Count + 1);
 
         for (int i = 0; i < _jokerObjects.Count; i++)
@@ -171,21 +166,17 @@ public class JokerObjectManager : MonoBehaviour
 
             _jokerObjects[i].transform.eulerAngles = _SHOP_ANGLE;
         }
-        //è“®‚ÌˆÚ“®‚É‚æ‚Á‚Ä‡”Ô‚ª“ü‚ê‘Ö‚í‚éŠÖ”
+        //æ‰‹å‹•ã®ç§»å‹•ã«ã‚ˆã£ã¦é †ç•ªãŒå…¥ã‚Œæ›¿ã‚ã‚‹é–¢æ•°
         CheckOrder();
-
-
-
 
     }
 
     /// <summary>
-    /// ƒJ[ƒh‚ÌƒAƒNƒVƒ‡ƒ“‚É‰‚¶‚½“®‚«‚ÌŠÖ”
+    /// ã‚«ãƒ¼ãƒ‰ã®ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã«å¿œã˜ãŸå‹•ãã®é–¢æ•°
     /// </summary>
     private void ShopAction()
     {
         if (_status != JokerStatus.action) return;
-
 
         for (int i = 0; i < _jokerObjects.Count; i++) _jokerObjects[i].Action();
 
@@ -194,7 +185,7 @@ public class JokerObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ^[ƒ“‚ÌI—¹‚ÉŒÄ‚ÔŠÖ”
+    /// ã‚¿ãƒ¼ãƒ³ã®çµ‚äº†æ™‚ã«å‘¼ã¶é–¢æ•°
     /// </summary>
     private void TrunEnd()
     {
@@ -202,17 +193,15 @@ public class JokerObjectManager : MonoBehaviour
 
     }
 
-
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚Éƒ}ƒeƒŠƒAƒ‹‚ğ“\‚è•t‚¯‚éŠÖ”
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã«ãƒãƒ†ãƒªã‚¢ãƒ«ã‚’è²¼ã‚Šä»˜ã‘ã‚‹é–¢æ•°
     /// </summary>
     /// <param name="joker"></param>
-    private void PaintJoker(GameObject joker,Texture ID) 
+    private void PaintJoker(GameObject joker,Texture ID)
     {
         MeshRenderer meshRenderer = joker.transform.GetChild(0).GetComponent<MeshRenderer>();
 
         Material[] materials= meshRenderer.materials;
-
 
         Material materialCopy = new Material(dommyMaterial);
 
@@ -222,58 +211,50 @@ public class JokerObjectManager : MonoBehaviour
 
         meshRenderer.materials = materials;
 
-
     }
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚Ì‡”Ô‚ª³‚µ‚­‚È‚¨‚·ŠÖ”
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®é †ç•ªãŒæ­£ã—ããªãŠã™é–¢æ•°
     /// </summary>
     private void CheckOrder()
     {
 
         if (!_isGrab) return;
 
-
-        //ƒWƒ‡[ƒJ[“¯m‚Ì‹——£
+        //ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼åŒå£«ã®è·é›¢
         float renge = Vector3.Distance(LeftPos.transform.position, RightPos.transform.position) / (_jokerObjects.Count + 1);
-
 
         float Cardrenge = (LeftPos.transform.position.x + renge * (_isGrabID + 1)) - _jokerObjects[_isGrabID].transform.position.x;
 
-
-        //‰¡•ûŒü‚Ö‚ÌˆÚ“®‹——£‚ª¬‚³‚©‚Á‚½‚ç‡”Ô‚Ì•ÏX‚ğ‰Á‚¦‚È‚¢
+        //æ¨ªæ–¹å‘ã¸ã®ç§»å‹•è·é›¢ãŒå°ã•ã‹ã£ãŸã‚‰é †ç•ªã®å¤‰æ›´ã‚’åŠ ãˆãªã„
         if (Mathf.Abs(Cardrenge) + 30 < renge) return;
 
-        //ˆÚ“®•ûŒü‚ğ’²®
+        //ç§»å‹•æ–¹å‘ã‚’èª¿æ•´
         int count = 1;
         if (Cardrenge > 1) count = -1;
 
         if (_isGrabID + count >= _jokerObjects.Count || _isGrabID + count < 0) return;
 
-        //ƒWƒ‡[ƒJ[‚Ì‡”Ô‚ğ“ü‚ê‘Ö‚¦‚éŠÖ”‚ğŒÄ‚Ô
+        //ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®é †ç•ªã‚’å…¥ã‚Œæ›¿ãˆã‚‹é–¢æ•°ã‚’å‘¼ã¶
         JokerUtility.ChengeOrder(_isGrabID, _isGrabID + count);
 
         _isGrabID = _isGrabID + count;
-
-
-
-
 
     }
 
     private readonly Vector2 SHOP_UI_OFFSET = new Vector2(1, 0);
     /// <summary>
-    /// ƒVƒ‡ƒbƒv“à‚ÌƒWƒ‡[ƒJ[‚Ìà–¾‚ğ•`‰æ‚·‚éŠÖ”
+    /// ã‚·ãƒ§ãƒƒãƒ—å†…ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®èª¬æ˜ã‚’æç”»ã™ã‚‹é–¢æ•°
     /// </summary>
     /// <param name="gameObject"></param>
     /// <param name="jokerBase"></param>
-    private void ShopExplamtion(GameObject gameObject,JokerBase jokerBase) 
+    private void ShopExplamtion(GameObject gameObject,JokerBase jokerBase)
     {
 
         ExplanationManager.instance.AddExplanation(gameObject,jokerBase,jokerBase.JokerBuffs(), SHOP_UI_OFFSET);
 
     }
-    private void ShopSale(GameObject gameObject,JokerBase jokerBase) 
+    private void ShopSale(GameObject gameObject,JokerBase jokerBase)
     {
         SaleUtility.SetSale(jokerBase, gameObject, jokerBase.GetSaleValue(), false);
 
@@ -282,62 +263,60 @@ public class JokerObjectManager : MonoBehaviour
     public void JokerObjectALLAction(System.Func<JokerObject, JokerObject> funk) { _jokerObjects.GetAction(funk); }
 
     /// <summary>
-    /// Ÿ‚ÌƒWƒ‡[ƒJ[‚ğƒvƒŒƒCó‘Ô‚É•ÏX‚·‚é
+    /// æ¬¡ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã‚’ãƒ—ãƒ¬ã‚¤çŠ¶æ…‹ã«å¤‰æ›´ã™ã‚‹
     /// </summary>
     public void NestJokerPlay(JokerObject jokerObject)
     {
-        //ˆø”‚ÌƒWƒ‡[ƒJ[‚Ì”z—ñ”Ô†‚ğæ“¾
+        //å¼•æ•°ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®é…åˆ—ç•ªå·ã‚’å–å¾—
         int count = GetJokerIndex(jokerObject);
 
-        //”z—ñ”Ô†‚ğˆê‚Âæ‚É‚·‚é
+        //é…åˆ—ç•ªå·ã‚’ä¸€ã¤å…ˆã«ã™ã‚‹
         count++;
 
-        //Ÿ‚ÌƒWƒ‡[ƒJ[‚ª‘¶İ‚µ‚È‚¢‚Æ‚«
-        
+        //æ¬¡ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ãŒå­˜åœ¨ã—ãªã„ã¨ã
+
         if (_jokerObjects.Count <= count) { _lostStatus = _status; _status = JokerStatus.end; return; }
 
-        //ƒWƒ‡[ƒJ[‚ğƒvƒŒƒCó‘Ô‚É•ÏX‚·‚é
+        //ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã‚’ãƒ—ãƒ¬ã‚¤çŠ¶æ…‹ã«å¤‰æ›´ã™ã‚‹
         _jokerObjects[count].SetStatus(JokerStatus.play);
-
 
     }
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ÌƒvƒŒƒC‚ğŠJn‚·‚é
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ãƒ—ãƒ¬ã‚¤ã‚’é–‹å§‹ã™ã‚‹
     /// </summary>
     public void StartJokerPlay()
     {
-        //ƒWƒ‡[ƒJ[‚ªˆê‚Â‚à‚È‚¢
+        //ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ãŒä¸€ã¤ã‚‚ãªã„æ™‚
         if (_jokerObjects.Count <= 0) return;
 
-        //Å‰‚ÌƒWƒ‡[ƒJ[‚ğƒvƒŒƒCó‘Ô‚É•ÏX‚·‚é
+        //æœ€åˆã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã‚’ãƒ—ãƒ¬ã‚¤çŠ¶æ…‹ã«å¤‰æ›´ã™ã‚‹
         _jokerObjects[0].SetStatus(JokerStatus.play);
         for (int i = 0; i < _jokerObjects.Count; i++) _jokerObjects[i].PreparationPlay();
         _lostStatus = _status;
         _status = JokerStatus.play;
 
-
     }
 
     /// <summary>
-    /// Œ»İƒvƒŒƒC’†‚©‚Ç‚¤‚©‚Ì”»’è
+    /// ç¾åœ¨ãƒ—ãƒ¬ã‚¤ä¸­ã‹ã©ã†ã‹ã®åˆ¤å®š
     /// </summary>
     /// <returns></returns>
     public bool PlayCheck() { return _status == JokerStatus.play; }
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚Ì’Ç‰Á‚ÉŒÄ‚Î‚ê‚éƒIƒuƒWƒFƒNƒg‚Ì’Ç‰Á
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®è¿½åŠ æ™‚ã«å‘¼ã°ã‚Œã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®è¿½åŠ 
     /// </summary>
     /// <param name="jokerBase"></param>
     public void AddJoker(JokerBase jokerBase)
     {
-        //ƒIƒuƒWƒFƒNƒg‚Ì¶¬
+        //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç”Ÿæˆ
         _jokerObjects.Add(GameObject.Instantiate(_prefab, transform).AddComponent<JokerObject>());
 
-        //ƒIƒuƒWƒFƒNƒg‚Ì•¨—‰‰Z‚ğ’â~
+        //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç‰©ç†æ¼”ç®—ã‚’åœæ­¢
         _jokerObjects[_jokerObjects.Count - 1].GetComponent<Rigidbody>().isKinematic = true;
 
-        //ƒIƒuƒWƒFƒNƒg‚Ì‰Šú‰»ˆ—
+        //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åˆæœŸåŒ–å‡¦ç†
         _jokerObjects[_jokerObjects.Count - 1].Initializ(jokerBase);
 
         _jokerObjects[_jokerObjects.Count - 1].name = "JokerID" + (_jokerObjects.Count - 1).ToString();
@@ -348,17 +327,16 @@ public class JokerObjectManager : MonoBehaviour
     }
     public void AddDommyJoker(JokerBase jokerBase)
     {
-        //ƒIƒuƒWƒFƒNƒg‚Ì¶¬
+        //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç”Ÿæˆ
         GameObject dommyObject=GameObject.Instantiate(_prefab, transform);
 
-        // ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì’Ç‰Á‚Æ‰Šú‰»ˆ—
+        // ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®è¿½åŠ ã¨åˆæœŸåŒ–å‡¦ç†
         JokerObject dommyJoker=  dommyObject.AddComponent<JokerObject>();
 
         dommyJoker.Initializ(jokerBase);
 
-        //ƒIƒuƒWƒFƒNƒg‚Ì•¨—‰‰Z‚ğ’â~
+        //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç‰©ç†æ¼”ç®—ã‚’åœæ­¢
         dommyObject.GetComponent<Rigidbody>().isKinematic = true;
-
 
         PaintJoker(dommyObject, materialList._material[dommyJoker.GetJokerID() - 2001]);
 
@@ -366,50 +344,43 @@ public class JokerObjectManager : MonoBehaviour
         SaleObjectManager.instance.AddProducts(dommyObject,
             () => { ShopSale(dommyObject, jokerBase); },
             () => { ShopExplamtion(dommyObject, jokerBase); },
-            () => 
+            () =>
             {
                 JokerUtility.AddJoker(jokerBase.GetID()-IDUtility.JOKER_ID-1);
 
                 GameObject domyy = dommyObject;
                 SaleObjectManager.instance.Remove(domyy);
 
-
             }
-            
-            );
 
+            );
 
     }
 
-    public void DommyDestroy() 
+    public void DommyDestroy()
     {
 
-        for(int i = 0; i < _domyyJokerObjects.Count; i++) 
+        for(int i = 0; i < _domyyJokerObjects.Count; i++)
         {
 
-            //ƒUEƒGƒ“ƒh‚Á‚Ä‚Ë
+            //ã‚¶ãƒ»ã‚¨ãƒ³ãƒ‰ã£ã¦ã­
             _domyyJokerObjects[i].THEEnd();
 
-
             _domyyJokerObjects.RemoveAt(i);
-
-
-
 
         }
 
     }
 
     /// <summary>
-    /// IDw’è‚ÌƒWƒ‡[ƒJ[‚ÌƒIƒuƒWƒFƒNƒg‚Ìíœ
+    /// IDæŒ‡å®šã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å‰Šé™¤
     /// </summary>
     /// <param name="ID"></param>
     public void RemoveJoker(int ID)
     {
 
-        //ƒUEƒGƒ“ƒh‚Á‚Ä‚Ë
+        //ã‚¶ãƒ»ã‚¨ãƒ³ãƒ‰ã£ã¦ã­
         _jokerObjects[ID].THEEnd();
-
 
         _jokerObjects.RemoveAt(ID);
 
@@ -418,10 +389,8 @@ public class JokerObjectManager : MonoBehaviour
         _isGrab = false;
         _isGrabID = -1;
 
-
-
     }
-    public void GetJokerMaterials(JokerBase jokerBase, GameObject gameObject) 
+    public void GetJokerMaterials(JokerBase jokerBase, GameObject gameObject)
     {
         PaintJoker(gameObject, materialList._material[jokerBase.GetID() - 2001]);
 
@@ -430,7 +399,7 @@ public class JokerObjectManager : MonoBehaviour
     public JokerObject GetIDJokerObject(int ID) { return _jokerObjects[ID]; }
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[ƒIƒuƒWƒFƒNƒg‚©‚çID‚ğæ“¾
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰IDã‚’å–å¾—
     /// </summary>
     /// <param name="jokerObject"></param>
     /// <returns></returns>
@@ -450,7 +419,7 @@ public class JokerObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ‡”Ô‚ğ“ü‚ê‘Ö‚¦‚éŠÖ”
+    /// é †ç•ªã‚’å…¥ã‚Œæ›¿ãˆã‚‹é–¢æ•°
     /// </summary>
     /// <param name="lostID"></param>
     /// <param name="nextID"></param>
@@ -464,20 +433,20 @@ public class JokerObjectManager : MonoBehaviour
         _lostStatus = _status;
         _status = JokerStatus.action;
 
-        //Œˆ‚ß‚ç‚ê‚½ƒRƒ}ƒ“ƒh
+        //æ±ºã‚ã‚‰ã‚ŒãŸã‚³ãƒãƒ³ãƒ‰
         if (AddNum == -2) return;
 
         _jokerObjects[ID].CardAddPlay(AddNum);
     }
 
     /// <summary>
-    /// UI‚ÌÀ•W‚ğ•Ô‚·ŠÖ”
+    /// UIã®åº§æ¨™ã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <returns></returns>
     public Vector2 GetNumPos() { return _numPos; }
     public void SetNumPos(Vector2 vector) { _numPos = vector; }
     /// <summary>
-    /// Œ»İƒWƒ‡[ƒJ[‚ªƒAƒNƒVƒ‡ƒ“‚ğs‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ğ”»’è
+    /// ç¾åœ¨ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ãŒã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’è¡Œã£ã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’åˆ¤å®š
     /// </summary>
     /// <returns></returns>
     public int ActionCount()
@@ -493,31 +462,31 @@ public class JokerObjectManager : MonoBehaviour
         return count;
     }
 
-    public void NextAction(JokerObject jokerObject) 
+    public void NextAction(JokerObject jokerObject)
     {
-        //ˆø”‚ÌƒWƒ‡[ƒJ[‚Ì”z—ñ”Ô†‚ğæ“¾
+        //å¼•æ•°ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®é…åˆ—ç•ªå·ã‚’å–å¾—
         int count = GetJokerIndex(jokerObject);
 
-        //”z—ñ”Ô†‚ğˆê‚Âæ‚É‚·‚é
+        //é…åˆ—ç•ªå·ã‚’ä¸€ã¤å…ˆã«ã™ã‚‹
         count++;
 
-        //Ÿ‚ÌƒWƒ‡[ƒJ[‚ª‘¶İ‚µ‚È‚¢‚Æ‚«
+        //æ¬¡ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ãŒå­˜åœ¨ã—ãªã„ã¨ã
         if (_jokerObjects.Count <= count) { _status = _lostStatus; return; }
 
-
-        for(int i = count; i < _jokerObjects.Count; i++) 
+        for(int i = count; i < _jokerObjects.Count; i++)
         {
 
             if (!_jokerObjects[i].GetAction()) continue;
-            //ƒWƒ‡[ƒJ[‚ğƒAƒNƒVƒ‡ƒ“ó‘Ô‚É•ÏX‚·‚é
+            //ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã‚’ã‚¢ã‚¯ã‚·ãƒ§ãƒ³çŠ¶æ…‹ã«å¤‰æ›´ã™ã‚‹
             _jokerObjects[i].SetStatus(JokerStatus.action);
 
-            //‚Ğ‚Æ‚Â‚¾‚¯‹N“®‚·‚é
+            //ã²ã¨ã¤ã ã‘èµ·å‹•ã™ã‚‹
             return;
 
         }
-        //‚Ğ‚Æ‚Â‚à‚È‚¢‚Æ‚«
+        //ã²ã¨ã¤ã‚‚ãªã„ã¨ã
         _status = _lostStatus; return;
     }
 
 }
+

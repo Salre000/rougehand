@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class DeckMove : MonoBehaviour
 {
-    // ƒfƒbƒL‘I‘ð‚ðƒ[ƒe[ƒVƒ‡ƒ“‚³‚¹‚é
+    // ãƒ‡ãƒƒã‚­é¸æŠžã‚’ãƒ­ãƒ¼ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ã•ã›ã‚‹
 
     [SerializeField] Button _leftButton;
     [SerializeField] Button _rightButton;
@@ -33,8 +33,8 @@ public class DeckMove : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI _deckName;
     StringBuilder _builder = new StringBuilder();
-    string _deckDefault = "››››";
-    string _deckTutorial = "ƒ`ƒ…[ƒgƒŠƒAƒ‹";
+    string _deckDefault = "â—‹â—‹â—‹â—‹";
+    string _deckTutorial = "ãƒãƒ¥ãƒ¼ãƒˆãƒªã‚¢ãƒ«";
 
     // Start is called before the first frame update
     void Start()
@@ -62,7 +62,7 @@ public class DeckMove : MonoBehaviour
         _leftF = true;
         _deckIndex += _default;
         selectIndex++;
-        if( selectIndex > _selectMax) 
+        if( selectIndex > _selectMax)
             selectIndex = 0;
         if (_deckIndex > _deckMaxIndex) _deckIndex = _reset;
         DeckName();
@@ -85,7 +85,6 @@ public class DeckMove : MonoBehaviour
         VolumeManager.instance.PlaySystemSE();
 
     }
-
 
     private void LeftLoopMove()
     {
@@ -127,3 +126,4 @@ public class DeckMove : MonoBehaviour
         _deckName.text = _builder.ToString();
     }
 }
+

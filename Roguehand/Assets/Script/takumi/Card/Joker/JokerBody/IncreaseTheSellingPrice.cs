@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ public class IncreaseTheSellingPrice : JokerBase
 
     public override void RoundEnd()
     {
-        //ƒ‰ƒEƒ“ƒh‚ÌI—¹Žž‚ÉƒWƒ‡[ƒJ[‚Ì‹àŠz‚ð‚Q‘‚â‚·
+        //ãƒ©ã‚¦ãƒ³ãƒ‰ã®çµ‚äº†æ™‚ã«ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®é‡‘é¡ã‚’ï¼’å¢—ã‚„ã™
         JokerUtility.JokerALLAction(jokerBase =>
         {
 
@@ -19,5 +19,5 @@ public class IncreaseTheSellingPrice : JokerBase
 
     }
 
-
 }
+

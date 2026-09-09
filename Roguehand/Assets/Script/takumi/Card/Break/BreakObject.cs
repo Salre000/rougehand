@@ -1,33 +1,33 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BreakObject : MonoBehaviour
 {
     /// <summary>
-    /// ‚±‚ÌƒIƒuƒWƒFƒNƒg‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
+    /// ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
     /// </summary>
     private Animator _animator;
 
     /// <summary>
-    /// ‚±‚ÌƒIƒuƒWƒFƒNƒg‚ÌŠÔŒo‰ß
+    /// ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ™‚é–“çµŒé
     /// </summary>
     private float _time = 0;
 
     /// <summary>
-    /// ‚±‚ÌƒIƒuƒWƒFƒNƒg‚Ìƒ}ƒeƒŠƒAƒ‹
+    /// ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒãƒ†ãƒªã‚¢ãƒ«
     /// </summary>
     [SerializeField] private Material _materialBase;
 
     /// <summary>
-    /// ‚±‚ÌƒIƒuƒWƒFƒNƒg‚Ìƒ}ƒeƒŠƒAƒ‹
+    /// ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒãƒ†ãƒªã‚¢ãƒ«
     /// </summary>
     private Material _material;
 
     /// <summary>
-    /// Å‘å‚ÌŠÔ
+    /// æœ€å¤§ã®æ™‚é–“
     /// </summary>
-    private readonly float MAX_TIME = 5; 
+    private readonly float MAX_TIME = 5;
 
     public void Awake()
     {
@@ -35,7 +35,7 @@ public class BreakObject : MonoBehaviour
 
         _material=new Material( _materialBase );
 
-        for(int i = 0; i < transform.childCount; i++) 
+        for(int i = 0; i < transform.childCount; i++)
         {
 
             MeshRenderer meshRenderer=transform.GetChild(i).GetComponent<MeshRenderer>();
@@ -43,7 +43,6 @@ public class BreakObject : MonoBehaviour
             meshRenderer.material = _material;
 
         }
-
 
     }
     public void OnEnable()
@@ -69,9 +68,9 @@ public class BreakObject : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒAƒ‹ƒtƒ@’l‚ğ•ÏX‚·‚éŠÖ”
+    /// ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã‚’å¤‰æ›´ã™ã‚‹é–¢æ•°
     /// </summary>
-    private void LowAlpha() 
+    private void LowAlpha()
     {
         Color color= _material.color;
 
@@ -81,3 +80,4 @@ public class BreakObject : MonoBehaviour
 
     }
 }
+

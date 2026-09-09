@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -14,7 +14,6 @@ public class VolumeManager : MonoBehaviour
 
     private static readonly string FILR_EXTENSION = ".txt";
 
-
     public static VolumeManager instance;
     [SerializeField] private AudioMixer master;
 
@@ -27,7 +26,6 @@ public class VolumeManager : MonoBehaviour
     [SerializeField] private AudioClip levelUpSE;
     [SerializeField] private AudioClip breckSE;
     [SerializeField] private AudioClip useSE;
-    
 
     private AudioSource BGMsource;
     private AudioSource SESource;
@@ -73,21 +71,21 @@ public class VolumeManager : MonoBehaviour
 
     }
 
-    public void ChengeMaster(float value) 
+    public void ChengeMaster(float value)
     {
         masterVolume = value- MixerRate;
 
         master.SetFloat("MasterVolume", masterVolume);
 
     }
-    public void ChengeBGM(float value) 
+    public void ChengeBGM(float value)
     {
         BGMVolume = value- MixerRate;
 
         master.SetFloat("BGMVolume", BGMVolume);
 
     }
-    public void ChengeSE(float value) 
+    public void ChengeSE(float value)
     {
         SEVolume = value- MixerRate;
 
@@ -98,82 +96,82 @@ public class VolumeManager : MonoBehaviour
     public float GetMaster() {  return masterVolume+ MixerRate; }
     public float GetBGM() {  return BGMVolume+ MixerRate; }
     public float GetSE() {  return SEVolume+ MixerRate; }
-    public void PlayScoreSE() 
+    public void PlayScoreSE()
     {
         SESource.pitch = GameConfig.GetGameSpeed();
         SESource.PlayOneShot(TestSE,1);
     }
-    public void PlayMoneySE() 
+    public void PlayMoneySE()
     {
         SESource.pitch = 5f;
         SESource.PlayOneShot(moneySE);
 
     }
-    public void StartMoneySE() 
+    public void StartMoneySE()
     {
         SESource.pitch =5f;
         SESource.clip = moneySE;
         SESource.Play();
     }
-    public void PlayMoneyShop() 
+    public void PlayMoneyShop()
     {
         SESource.pitch = 0.5f;
         SESource.PlayOneShot(moneySE);
 
     }
-    public void PlayCardMoveSE() 
+    public void PlayCardMoveSE()
     {
         SESource.pitch = 1f;
         SESource.PlayOneShot(cardMoveSE);
 
     }
-    public void PlaySystemSE() 
+    public void PlaySystemSE()
     {
         SESource.pitch = 1f;
         SESource.PlayOneShot(systemSE);
 
     }
-    public void PlayrerollSE() 
+    public void PlayrerollSE()
     {
         SESource.pitch = 10f;
         SESource.PlayOneShot(rerollSE);
 
     }
-    public void PlayLevelUpSE() 
+    public void PlayLevelUpSE()
     {
         SESource.pitch = 2f;
         SESource.PlayOneShot(levelUpSE);
 
     }
-    public void PlayBreckSE() 
+    public void PlayBreckSE()
     {
         SESource.pitch = 1f;
         SESource.PlayOneShot(breckSE);
 
     }
-    public void PlayUseSE() 
+    public void PlayUseSE()
     {
         SESource.pitch = 1f;
         SESource.PlayOneShot(useSE);
 
     }
-    public void EndSE() 
+    public void EndSE()
     {
 
         SESource.Stop();
 
     }
 
-    public void UpBGM() 
+    public void UpBGM()
     {
         BGMsource.pitch = 2f;
     }
-    public void ResetBGM() 
+    public void ResetBGM()
     {
         BGMsource.pitch = 1;
     }
 
-    public void Save() 
+    public void Save()
     {
 
         VolumeMemory volume = new VolumeMemory();
@@ -182,7 +180,6 @@ public class VolumeManager : MonoBehaviour
         volume.masterVolume = masterVolume;
         volume.SEVolume = SEVolume;
 
-
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.dataPath + FILE_PASS + FILE_NAME_KD + FILR_EXTENSION;
         FileStream stream = new FileStream(path, FileMode.OpenOrCreate);
@@ -190,7 +187,7 @@ public class VolumeManager : MonoBehaviour
         stream.Close();
 
     }
-    public void Lood() 
+    public void Lood()
     {
 
         string path = Application.dataPath + FILE_PASS + FILE_NAME_KD + FILR_EXTENSION;
@@ -208,13 +205,13 @@ public class VolumeManager : MonoBehaviour
 
         Debug.Log(BGMVolume);
 
-
     }
 
     private void OnApplicationQuit()
     {
-        // Ç±Ç±Ç…ÉZÅ[ÉuèàóùÇãLèqÇµÇ‹Ç∑ÅB
+        // „Åì„Åì„Å´„Çª„Éº„ÉñÂá¶ÁêÜ„ÇíË®òËø∞„Åó„Åæ„Åô„ÄÇ
         Save();
     }
 
 }
+

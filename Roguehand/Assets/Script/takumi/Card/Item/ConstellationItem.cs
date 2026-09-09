@@ -1,17 +1,17 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ¯ÀƒJ[ƒh‚ğ“Z‚ß‚Ä‚±‚ÌƒNƒ‰ƒX  
+/// æ˜Ÿåº§ã‚«ãƒ¼ãƒ‰ã‚’çºã‚ã¦ã“ã®ã‚¯ãƒ©ã‚¹
 /// </summary>
-/// 
+///
 [System.Serializable]
 
 public class ConstellationItem : ItemBase
 {
     /// <summary>
-    /// ‚Ç‚ñ‚È¯À‚È‚Ì‚©‚ğ•\‚·•Ï”
+    /// ã©ã‚“ãªæ˜Ÿåº§ãªã®ã‹ã‚’è¡¨ã™å¤‰æ•°
     /// </summary>
     private int _constellationID = -1;
 
@@ -21,38 +21,37 @@ public class ConstellationItem : ItemBase
         _constellationID = ID;
     }
     /// <summary>
-    /// ¯À‚Ìí—Ş‚Ì—ñ‹“‘Ì
+    /// æ˜Ÿåº§ã®ç¨®é¡ã®åˆ—æŒ™ä½“
     /// </summary>
     public enum ConstellationType
     {
-        None=-1,//•s³’l
-        Ophiuchus,//ƒwƒrg‚¢À
-        Andromeda,//ƒAƒ“ƒhƒƒƒ_À
-        Lupus,//ƒIƒIƒJƒ~À
-        Cetus,//‚­‚¶‚çÀ
-        Pavo,//EÀ
-        Aries,//‰²—rÀ
-        Taurus,//‰²‹À
-        Gemini,//‘oqÀ
-        Cancer,//ŠIÀ
-        Leo,//‚qÀ
-        Virgo,//‰³—À
-        Libra,//“V”‰À
-        Scorpius,//‚³‚»‚èÀ
-        Sagittarius,//ËèÀ
-        Capricornus,//R—rÀ
-        Aquarius,//…•rÀ
-        Pisces,//‹›À
-        MAX,//Å‘å’l
+        None=-1,//ä¸æ­£å€¤
+        Ophiuchus,//ãƒ˜ãƒ“ä½¿ã„åº§
+        Andromeda,//ã‚¢ãƒ³ãƒ‰ãƒ­ãƒ¡ãƒ€åº§
+        Lupus,//ã‚ªã‚ªã‚«ãƒŸåº§
+        Cetus,//ãã˜ã‚‰åº§
+        Pavo,//å­”é›€åº§
+        Aries,//ç‰¡ç¾Šåº§
+        Taurus,//ç‰¡ç‰›åº§
+        Gemini,//åŒå­åº§
+        Cancer,//èŸ¹åº§
+        Leo,//ç…å­åº§
+        Virgo,//ä¹™å¥³åº§
+        Libra,//å¤©ç§¤åº§
+        Scorpius,//ã•ãã‚Šåº§
+        Sagittarius,//å°„æ‰‹åº§
+        Capricornus,//å±±ç¾Šåº§
+        Aquarius,//æ°´ç“¶åº§
+        Pisces,//é­šåº§
+        MAX,//æœ€å¤§å€¤
     }
-
 
     public override void Initializ()
     {
-        // “Áê–ğ‚Íˆê“xg—p‚·‚é‚Ü‚Å¯ÀƒJ[ƒh‚ÉŒ»‚ê‚È‚¢‚½‚ß‚É‚±‚Ì‚æ‚¤‚Èˆ—
+        // ç‰¹æ®Šå½¹ã¯ä¸€åº¦ä½¿ç”¨ã™ã‚‹ã¾ã§æ˜Ÿåº§ã‚«ãƒ¼ãƒ‰ã«ç¾ã‚Œãªã„ãŸã‚ã«ã“ã®ã‚ˆã†ãªå‡¦ç†
         List<int> constellationIDList = new();
         List<int> roleCount = RoleManager.instance.GetRolePlayCountList();
-        for (int i=0;i< (int)ConstellationType.MAX; i++) 
+        for (int i=0;i< (int)ConstellationType.MAX; i++)
         {
             if (i<(int)RoleManager.Role.royalFlush&& roleCount[i]<=0) continue;
             constellationIDList.Add(i);
@@ -63,29 +62,28 @@ public class ConstellationItem : ItemBase
 
         SetItemID(_constellationID);
 
-
     }
 
     public override void Use()
     {
 
-        Debug.Log("¯ÀƒJ[ƒh‚ªg—p‚³‚ê‚½‚æ");
+        Debug.Log("æ˜Ÿåº§ã‚«ãƒ¼ãƒ‰ãŒä½¿ç”¨ã•ã‚ŒãŸã‚ˆ");
 
         VolumeManager.instance.PlayLevelUpSE();
 
-        // ID‚ğg—p‚µ‚Ä¯À‚ÌƒŒƒxƒ‹‚ğã¸‚³‚¹‚éˆ—‚ğ‚©‚­
+        // IDã‚’ä½¿ç”¨ã—ã¦æ˜Ÿåº§ã®ãƒ¬ãƒ™ãƒ«ã‚’ä¸Šæ˜‡ã•ã›ã‚‹å‡¦ç†ã‚’ã‹ã
         RoleManager.instance.AddRoleLevel((RoleManager.Role)_constellationID);
 
-        //¯ÀƒJ[ƒh‚ğg—p‚µ‚½–‚ğJoker‚É’m‚ç‚¹‚é
+        //æ˜Ÿåº§ã‚«ãƒ¼ãƒ‰ã‚’ä½¿ç”¨ã—ãŸäº‹ã‚’Jokerã«çŸ¥ã‚‰ã›ã‚‹
         JokerUtility.SetTraget(JokerActionUseEnum.JokerActionTarget.constellation);
 
     }
-    // ¯ÀƒJ[ƒh‚Ì•¶š‚ÌID
+    // æ˜Ÿåº§ã‚«ãƒ¼ãƒ‰ã®æ–‡å­—ã®ID
     private readonly int ConstellationID = 1901;
     public override string GetTypes()
     {
         return MasterData.instance.GetStringMaster(ConstellationID);
     }
-    
 
 }
+

@@ -1,22 +1,22 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// ƒVƒ‡ƒbƒvó‘Ô‚ªtrue‚É‚È‚Á‚Ä‚¢‚é‚Æ‚«‚Ìˆ—
+// ã‚·ãƒ§ãƒƒãƒ—çŠ¶æ…‹ãŒtrueã«ãªã£ã¦ã„ã‚‹ã¨ãã®å‡¦ç†
 public class Shoping : MonoBehaviour
 {
-    // ƒVƒ‡ƒbƒv‚ÉƒJƒƒ‰‚ğŒü‚¯‚³‚¹‚é‚½‚ß‚É•K—v
+    // ã‚·ãƒ§ãƒƒãƒ—ã«ã‚«ãƒ¡ãƒ©ã‚’å‘ã‘ã•ã›ã‚‹ãŸã‚ã«å¿…è¦
     [SerializeField] private Transform _vcam;
     private float _distance = 0.5f;
-    // ƒVƒ‡ƒbƒv‚Ö‚ÌŒü‚«
+    // ã‚·ãƒ§ãƒƒãƒ—ã¸ã®å‘ã
     private const float _TARGET_SHOP_CAM_ROTATE = 270;
-    // ƒ‰ƒ“‚Ö‚ÌŒü‚«
+    // ãƒ©ãƒ³ã¸ã®å‘ã
     private const float _TARGET_RUN_CAM_ROTATE = 0.0f;
     float angle = 0f;
-    // ƒJƒƒ‰‚Ì•âŠÔˆÚ“®ŠÔ
+    // ã‚«ãƒ¡ãƒ©ã®è£œé–“ç§»å‹•æ™‚é–“
     private float _camTime = 8f;
-    // ƒVƒ‡ƒbƒvI—¹ƒ{ƒ^ƒ“
+    // ã‚·ãƒ§ãƒƒãƒ—çµ‚äº†ãƒœã‚¿ãƒ³
     [SerializeField] private Button _shopEndButton;
     private bool _shopCompFlag=false;
 
@@ -32,14 +32,14 @@ public class Shoping : MonoBehaviour
         ShopEnd();
     }
     /// <summary>
-    /// ƒJƒƒ‰‚ÌŒü‚«‚ğƒVƒ‡ƒbƒv‚ÉƒXƒ€[ƒY‚ÉŒü‚©‚¹‚Ü‚·
+    /// ã‚«ãƒ¡ãƒ©ã®å‘ãã‚’ã‚·ãƒ§ãƒƒãƒ—ã«ã‚¹ãƒ ãƒ¼ã‚ºã«å‘ã‹ã›ã¾ã™
     /// </summary>
     private void CamMove()
     {
         if (!ShopManager.instance.IsShop()) return;
         _vcam.rotation = Quaternion.Slerp(_vcam.rotation, Quaternion.Euler(_TARGET_SHOP_CAM_ROTATE, 0, 0), Time.deltaTime * _camTime);
         angle = NormalizeAngle(_vcam.eulerAngles.x);
-        // Š®‘S‚ÉƒVƒ‡ƒbƒv‚ğŒü‚¢‚Ä‚©‚çŸ‚Ö‚ğ‰Ÿ‚¹‚é‚æ‚¤‚É‚·‚é
+        // å®Œå…¨ã«ã‚·ãƒ§ãƒƒãƒ—ã‚’å‘ã„ã¦ã‹ã‚‰æ¬¡ã¸ã‚’æŠ¼ã›ã‚‹ã‚ˆã†ã«ã™ã‚‹
         if (angle - _TARGET_SHOP_CAM_ROTATE < 0.01f)
         {
             _shopCompFlag = true;
@@ -50,17 +50,17 @@ public class Shoping : MonoBehaviour
     private void ShopEnd()
     {
         if (ShopManager.instance.IsShop()) return;
-        // ‚Ù‚Æ‚ñ‚Ç0ƒ[ƒ‚È‚çreturn
+        // ã»ã¨ã‚“ã©0ã‚¼ãƒ­ãªã‚‰return
         angle = NormalizeAngle(_vcam.eulerAngles.x);
         if ((angle - _TARGET_RUN_CAM_ROTATE) < _distance)
         {
-            // ƒ‰ƒ“‰æ–Ê‚ÉŒü‚«‚«‚Á‚½‚çI—¹‚¨’m‚ç‚¹ƒtƒ‰ƒO‚ğƒŠƒZƒbƒg 
+            // ãƒ©ãƒ³ç”»é¢ã«å‘ããã£ãŸã‚‰çµ‚äº†ãŠçŸ¥ã‚‰ã›ãƒ•ãƒ©ã‚°ã‚’ãƒªã‚»ãƒƒãƒˆ
             ShopManager.instance.SetPushEndShop(false);
             _shopCompFlag = false;
             return;
         }
 
-        // ƒ‰ƒ“‰æ–Ê‚ÖŒü‚­
+        // ãƒ©ãƒ³ç”»é¢ã¸å‘ã
         _vcam.rotation = Quaternion.Lerp(_vcam.rotation, Quaternion.Euler(_TARGET_RUN_CAM_ROTATE, 0, 0), Time.deltaTime * _camTime);
 
     }
@@ -70,12 +70,12 @@ public class Shoping : MonoBehaviour
         if(!ShopManager.instance.IsShop()) return;
         if(!_shopCompFlag)return;
 
-        // Ÿƒ‰ƒEƒ“ƒh‚Ö‚ğ‰Ÿ‚µ‚ÄƒVƒ‡ƒbƒv‚ğI—¹‚µ‚½
+        // æ¬¡ãƒ©ã‚¦ãƒ³ãƒ‰ã¸ã‚’æŠ¼ã—ã¦ã‚·ãƒ§ãƒƒãƒ—ã‚’çµ‚äº†ã—ãŸ
         ShopManager.instance.SetPushEndShop(true);
         ShopManager.instance.SetIsShop(false);
         VolumeManager.instance.PlaySystemSE();
 
-        // ƒ‰ƒEƒ“ƒh‚ÌƒJƒEƒ“ƒg‚ª3‚Ìê‡‚ÉƒAƒ“ƒeƒB‚ÌƒJƒEƒ“ƒg‚ğã‚°‚é
+        // ãƒ©ã‚¦ãƒ³ãƒ‰ã®ã‚«ã‚¦ãƒ³ãƒˆãŒ3ã®å ´åˆã«ã‚¢ãƒ³ãƒ†ã‚£ã®ã‚«ã‚¦ãƒ³ãƒˆã‚’ä¸Šã’ã‚‹
         int roundCount =GameUtility.GetRoundCount();
         if (roundCount >= 3)
         {
@@ -85,33 +85,33 @@ public class Shoping : MonoBehaviour
             TextUIManager.instance.SetAnteText(ante.ToString());
             roundCount = 0;
         }
-        // ƒ{ƒX‚Å‚ ‚Á‚½‚çƒ{ƒX‚ğÁ‚·
+        // ãƒœã‚¹ã§ã‚ã£ãŸã‚‰ãƒœã‚¹ã‚’æ¶ˆã™
         BossUtility.BossEnd();
 
-        // ƒ{ƒXí‚ğŠJn‚·‚é
-        if (roundCount == 2) 
+        // ãƒœã‚¹æˆ¦ã‚’é–‹å§‹ã™ã‚‹
+        if (roundCount == 2)
         {
 
             BossUtility.RandomCreateBoss();
 
         }
 
-        // ƒ‰ƒEƒ“ƒh‚ÌƒJƒEƒ“ƒg”‚ğ‘‚â‚·
+        // ãƒ©ã‚¦ãƒ³ãƒ‰ã®ã‚«ã‚¦ãƒ³ãƒˆæ•°ã‚’å¢—ã‚„ã™
         roundCount++;
         GameUtility.SetRoundCount(roundCount);
-        // ƒ‰ƒEƒ“ƒh”‚Ì”½‰f
+        // ãƒ©ã‚¦ãƒ³ãƒ‰æ•°ã®åæ˜ 
         TextUIManager.instance.SetRoundText(roundCount.ToString());
 
-        // —İŒvƒ‰ƒEƒ“ƒh”‚Ì‘‰Á
+        // ç´¯è¨ˆãƒ©ã‚¦ãƒ³ãƒ‰æ•°ã®å¢—åŠ 
         int allRoundCount=GameUtility.GetAllRoundCount();
         allRoundCount++;
         GameUtility .SetAllRoundCount(allRoundCount);
-        
-        // TODO:‘¼‚É‚àƒŠƒZƒbƒg‚ğd‚Ş•K—v‚ª‚ ‚é
-        // èD‚Ì“à•”‚ğƒŠƒZƒbƒg@
+
+        // TODO:ä»–ã«ã‚‚ãƒªã‚»ãƒƒãƒˆã‚’ä»•è¾¼ã‚€å¿…è¦ãŒã‚ã‚‹
+        // æ‰‹æœ­ã®å†…éƒ¨ã‚’ãƒªã‚»ãƒƒãƒˆ
         CardManager.instance.ResetHand();
         SaleObjectManager.instance.Clear();
-        // ƒfƒbƒL‚Ì“à•”‚ğƒŠƒZƒbƒg
+        // ãƒ‡ãƒƒã‚­ã®å†…éƒ¨ã‚’ãƒªã‚»ãƒƒãƒˆ
         List<Card.Trump> dommyDeck = CardManager.instance.GetDeck();
         dommyDeck.GetAction(card=>
         {
@@ -121,22 +121,19 @@ public class Shoping : MonoBehaviour
 
         });
 
-        // ƒfƒbƒL‚ÌƒIƒuƒWƒFƒNƒg‚ğƒŠƒZƒbƒg
+        // ãƒ‡ãƒƒã‚­ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ãƒªã‚»ãƒƒãƒˆ
         CardObjectUtility.ResetCard();
 
-
-        // ƒhƒ[‚Ìˆ—‚ğƒŠƒZƒbƒg
+        // ãƒ‰ãƒ­ãƒ¼ã®å‡¦ç†ã‚’ãƒªã‚»ãƒƒãƒˆ
         RoundObserver.Instance.RoundStartActions();
-        // w“ü‚â”„‹p‚Ì•\¦‚ğ‘S‚Äíœ
+        // è³¼å…¥ã‚„å£²å´ã®è¡¨ç¤ºã‚’å…¨ã¦å‰Šé™¤
         SaleUtility.Claer(true);
-
-
 
     }
 
     private float _radius = 180f;
     private float _circumference = 360f;
-    // ‰~ü‚Ì³‹K‰»
+    // å††å‘¨ã®æ­£è¦åŒ–
     private float NormalizeAngle(float angle)
     {
         if (angle < _radius)
@@ -145,3 +142,4 @@ public class Shoping : MonoBehaviour
     }
 
 }
+

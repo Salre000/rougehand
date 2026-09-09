@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,8 +7,7 @@ public class TextUIManager : MonoBehaviour
 {
     public static TextUIManager instance;
 
-
-    [Header("ƒ‰ƒ“‰æ–Ê‚ÌTextUI")]
+    [Header("ãƒ©ãƒ³ç”»é¢ã®TextUI")]
     [SerializeField] private TextMeshProUGUI _roundNameText;
     [SerializeField] private TextMeshProUGUI _roundExceptionText;
     [SerializeField] private TextMeshProUGUI _lowestScoreText;
@@ -28,7 +27,7 @@ public class TextUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _resultClearMoneyText;
     [SerializeField] private TextMeshProUGUI _clearMoneyText;
 
-    [Header("ƒVƒ‡ƒbƒv‰æ–Ê‚ÌTextUI")]
+    [Header("ã‚·ãƒ§ãƒƒãƒ—ç”»é¢ã®TextUI")]
     [SerializeField] private TextMeshProUGUI _shopHandText;
     [SerializeField] private TextMeshProUGUI _shopDiscardText;
     [SerializeField] private TextMeshProUGUI _shopRoundText;
@@ -46,26 +45,25 @@ public class TextUIManager : MonoBehaviour
     private void Start()
     {
         int roundCount = GameUtility.GetRewardMaxCount();
-        // ƒ‰ƒEƒ“ƒhƒNƒŠƒA•ñV‹à
+        // ãƒ©ã‚¦ãƒ³ãƒ‰ã‚¯ãƒªã‚¢å ±é…¬é‡‘
         int reward = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID + roundCount);
         SetRewardCountText(UIUtility.instance.RewardConversion(reward));
     }
 
-
     public struct UITexts
     {
-        public string roundname;        // ƒ‰ƒEƒ“ƒh‚Ì–¼‘O
-        public string lowestscore;      // Å’áƒXƒRƒA
-        public string rewardCount;      // •ñV‹à
-        public string roundscore;       // ƒ‰ƒEƒ“ƒh“à‚Å“¾‚½‡ŒvƒXƒRƒA
-        public string role;             // –ğ‚Ì–¼‘O‚ÆƒŒƒxƒ‹
-        public string basicscore;       // Šî‘b“_
-        public string magnification;    // ”{—¦
-        public string hand;             // ƒnƒ“ƒh‚Ì‰ñ”
-        public string discard;          // ƒfƒBƒXƒJ[ƒh‚Ì‰ñ”
-        public string money;            // Š‹à
-        public string ante;             // “ïˆÕ“x
-        public string round;            // ƒNƒŠƒA‚µ‚½ƒ‰ƒEƒ“ƒh‰ñ”
+        public string roundname;        // ãƒ©ã‚¦ãƒ³ãƒ‰ã®åå‰
+        public string lowestscore;      // æœ€ä½ã‚¹ã‚³ã‚¢
+        public string rewardCount;      // å ±é…¬é‡‘
+        public string roundscore;       // ãƒ©ã‚¦ãƒ³ãƒ‰å†…ã§å¾—ãŸåˆè¨ˆã‚¹ã‚³ã‚¢
+        public string role;             // å½¹ã®åå‰ã¨ãƒ¬ãƒ™ãƒ«
+        public string basicscore;       // åŸºç¤ç‚¹
+        public string magnification;    // å€ç‡
+        public string hand;             // ãƒãƒ³ãƒ‰ã®å›æ•°
+        public string discard;          // ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰ã®å›æ•°
+        public string money;            // æ‰€æŒé‡‘
+        public string ante;             // é›£æ˜“åº¦
+        public string round;            // ã‚¯ãƒªã‚¢ã—ãŸãƒ©ã‚¦ãƒ³ãƒ‰å›æ•°
     }
 
     public void Initialize()
@@ -84,7 +82,7 @@ public class TextUIManager : MonoBehaviour
         texts.ante = "1";
         texts.round = "0";
 
-        #region ƒeƒLƒXƒg‚Ì‰Šú‰»
+        #region ãƒ†ã‚­ã‚¹ãƒˆã®åˆæœŸåŒ–
         SetRoundNameText(texts.roundname);
         SetLowestScoreText(texts.lowestscore);
         SetRewardCountText(texts.rewardCount);
@@ -100,7 +98,7 @@ public class TextUIManager : MonoBehaviour
         #endregion
     }
 
-    #region ƒQƒbƒ^[
+    #region ã‚²ãƒƒã‚¿ãƒ¼
 
     public TextMeshProUGUI GetRoundNameText() { return _roundNameText; }
     public TextMeshProUGUI GetRoundExceptionText() { return _roundExceptionText; }
@@ -123,7 +121,7 @@ public class TextUIManager : MonoBehaviour
 
     #endregion
 
-    #region ƒZƒbƒ^[
+    #region ã‚»ãƒƒã‚¿ãƒ¼
 
     public void SetRoundNameText(string value) { _roundNameText.text = value; }
     public void SetRoundExceptionText(string value) { _roundExceptionText.text = value; }
@@ -146,5 +144,5 @@ public class TextUIManager : MonoBehaviour
 
     #endregion
 
-
 }
+

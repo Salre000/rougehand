@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,11 +8,10 @@ public class SortHand : MonoBehaviour
     public static SortHand instance;
 
     /// <summary>
-    /// ƒ\[ƒg‚Ég—p‚·‚éƒ{ƒ^ƒ“
+    /// ã‚½ãƒ¼ãƒˆæ™‚ã«ä½¿ç”¨ã™ã‚‹ãƒœã‚¿ãƒ³
     /// </summary>
     [SerializeField] Button siutButton;
     [SerializeField] Button numberButton;
-
 
     public void Start()
     {
@@ -21,45 +20,41 @@ public class SortHand : MonoBehaviour
         numberButton.onClick.AddListener(OnSortNumberButton);
     }
 
-
     /// <summary>
-    /// ƒ{ƒ^ƒ“‚ğ‰Ÿ‚³‚ê‚½‚Ìˆ—
+    /// ãƒœã‚¿ãƒ³ã‚’æŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
     /// </summary>
-    private void OnSortSuitButton() 
+    private void OnSortSuitButton()
     {
 
         List <Card.Trump> nowHand=CardManager.instance.GetHand();
 
-        
         List <Card.Trump> nextHand=CardManager.instance.GetHand();
 
         nextHand = CardManager.instance.SuitSort(nextHand);
 
-        // ƒ\[ƒgŒã‚ÌƒŠƒXƒg‚ğì¬
+        // ã‚½ãƒ¼ãƒˆå¾Œã®ãƒªã‚¹ãƒˆã‚’ä½œæˆ
         CardManager.instance.SetHand(nextHand);
 
-
-        // ƒ\[ƒgŒã‚ÌƒIƒuƒWƒFƒNƒg‚Ì•À‚Ñ‚É•ÏX
+        // ã‚½ãƒ¼ãƒˆå¾Œã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä¸¦ã³ã«å¤‰æ›´
         CardObjectUtility.ObjectSort(nowHand, nextHand);
 
     }
-    public void OnSortNumberButton() 
+    public void OnSortNumberButton()
     {
 
         List <Card.Trump> nowHand=CardManager.instance.GetHand();
 
-        
         List <Card.Trump> nextHand=CardManager.instance.GetHand();
 
         nextHand = CardManager.instance.NumberSort(nextHand);
 
-        // ƒ\[ƒgŒã‚ÌƒŠƒXƒg‚ğì¬
+        // ã‚½ãƒ¼ãƒˆå¾Œã®ãƒªã‚¹ãƒˆã‚’ä½œæˆ
         CardManager.instance.SetHand(nextHand);
 
-
-        // ƒ\[ƒgŒã‚ÌƒIƒuƒWƒFƒNƒg‚Ì•À‚Ñ‚É•ÏX
+        // ã‚½ãƒ¼ãƒˆå¾Œã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä¸¦ã³ã«å¤‰æ›´
         CardObjectUtility.ObjectSort(nowHand, nextHand);
 
     }
 
 }
+

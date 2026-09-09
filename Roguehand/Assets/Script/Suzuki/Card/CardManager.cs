@@ -35,7 +35,7 @@ public class CardManager : MonoBehaviour
     private void Start()
     {
         //trumpCard.CreateDeck();
-        if (TitleStatic.GetDeckNumber() != -1) 
+        if (TitleStatic.GetDeckNumber() != -1)
             MemoryManager.Use(deckLists._enumName[TitleStatic.GetDeckNumber()]);
         else MemoryManager.Use();
 
@@ -130,7 +130,6 @@ public class CardManager : MonoBehaviour
 
         this.hand = hand;
 
-
         List<Card.Trump> pick = GetPick();
 
         if (hand[ID].isSelect) pick.Add(hand[ID]);
@@ -149,7 +148,6 @@ public class CardManager : MonoBehaviour
 
         CardObjectUtility.StopCardObject(ID);
         CardObjectUtility.ChengeStandby(ID, hand[ID].isSelect);
-
 
     }
 
@@ -180,12 +178,11 @@ public class CardManager : MonoBehaviour
     /// <param name="ChengeCard"><変更後のトランプ/param>
     public void Chenge(int deckIndex,int handIndex, Card.Trump ChengeCard)
     {
-        if (deckIndex > 0) 
+        if (deckIndex > 0)
             deck[deckIndex] = ChengeCard;
-        if (handIndex > 0) 
+        if (handIndex > 0)
             hand[handIndex] = ChengeCard;
     }
-
 
     public void SetDeck(List<Card.Trump> _deck) { this.deck = _deck; }
     public List<Card.Trump> GetDeck() { return deck; }
@@ -198,7 +195,6 @@ public class CardManager : MonoBehaviour
     public void SetHand(List<Card.Trump> _hand) { hand = _hand; }
     public List<Card.Trump> GetHand() { return hand; }
     public void ResetHand() { hand.Clear(); }
-
 
     public void SetPick(List<Card.Trump> _pick) { pick = _pick; }
     public void ResetPick() { pick.Clear(); }
@@ -234,5 +230,5 @@ public class CardManager : MonoBehaviour
 
     }
 
-
 }
+

@@ -1,4 +1,4 @@
-
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -11,4 +11,5 @@ public class MaterialList : ScriptableObject
     public List<Texture> _materialD = new List<Texture>();
     public List<Texture> _materialC = new List<Texture>();
 }
+
 

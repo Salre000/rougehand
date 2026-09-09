@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -13,14 +13,14 @@ public class MasterData : MonoBehaviour
     [SerializeField] TextMeshProUGUI proUGUI;
 
     /// <summary>
-    /// ƒ}ƒXƒ^[‚©‚çˆø‚«o‚µ‚½•¶š—ñ‚ÌŠi”[æ
+    /// ãƒã‚¹ã‚¿ãƒ¼ã‹ã‚‰å¼•ãå‡ºã—ãŸæ–‡å­—åˆ—ã®æ ¼ç´å…ˆ
     /// </summary>
     private Dictionary<int, string> _masters = new Dictionary<int, string>();
 
     public void Awake()
     {
         instance = this;
-        // ƒV[ƒ“‚ÌˆÚs‚Å”j‰ó‚³‚ê‚È‚¢—p‚É•ÏX
+        // ã‚·ãƒ¼ãƒ³ã®ç§»è¡Œã§ç ´å£Šã•ã‚Œãªã„ç”¨ã«å¤‰æ›´
         DontDestroyOnLoad(this.gameObject);
 
         Lood();
@@ -32,39 +32,39 @@ public class MasterData : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ}ƒXƒ^[‚©‚çˆø‚«o‚·ŠÖ”
+    /// ãƒã‚¹ã‚¿ãƒ¼ã‹ã‚‰å¼•ãå‡ºã™é–¢æ•°
     /// </summary>
     private void Lood()
     {
         List<string> list = new List<string>();
 
-        //“Ç‚İ‚ñ‚¾CSVƒtƒ@ƒCƒ‹‚ğŠi”[
+        //èª­ã¿è¾¼ã‚“ã CSVãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ ¼ç´
         List<string[]> csvDatas = new List<string[]>();
 
-        //CSVƒtƒ@ƒCƒ‹‚Ìs”‚ğŠi”[
+        //CSVãƒ•ã‚¡ã‚¤ãƒ«ã®è¡Œæ•°ã‚’æ ¼ç´
         int height = 0;
 
-        //ƒtƒ@ƒCƒ‹ƒpƒX‚Æƒtƒ@ƒCƒ‹‚Ì–¼‘O‚ğŒq‚°‚é
+        //ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã¨ãƒ•ã‚¡ã‚¤ãƒ«ã®åå‰ã‚’ç¹‹ã’ã‚‹
         StringBuilder builder = new StringBuilder();
 
         builder.Clear();
         builder.Append("takumi/StringMaster");
 
-        //Œq‚°‚½ƒtƒ@ƒCƒ‹ƒpƒX‚ğg‚¢ƒtƒ@ƒCƒ‹‚Ìƒ[ƒh‚ğs‚¤
+        //ç¹‹ã’ãŸãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚’ä½¿ã„ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ­ãƒ¼ãƒ‰ã‚’è¡Œã†
         TextAsset[] textAsset = Resources.LoadAll<TextAsset>(builder.ToString());
 
         for (int i = 0; i < textAsset.Length; i++)
         {
 
-            //“Ç‚İ‚ñ‚¾ƒeƒLƒXƒg‚ğStringŒ^‚É‚µ‚ÄŠi”[
+            //èª­ã¿è¾¼ã‚“ã ãƒ†ã‚­ã‚¹ãƒˆã‚’Stringå‹ã«ã—ã¦æ ¼ç´
             StringReader reader = new StringReader(textAsset[i].text);
 
             while (reader.Peek() > -1)
             {
                 string line = reader.ReadLine();
-                // ,‚Å‹æØ‚Á‚ÄCSV‚ÉŠi”[
+                // ,ã§åŒºåˆ‡ã£ã¦CSVã«æ ¼ç´
                 csvDatas.Add(line.Split(','));
-                height++; // s”‰ÁZ
+                height++; // è¡Œæ•°åŠ ç®—
             }
 
             for (int j = 0; j < csvDatas.Count; j++)
@@ -78,20 +78,18 @@ public class MasterData : MonoBehaviour
 
     }
 
-
     /// <summary>
-    /// ƒ}ƒXƒ^[‚©‚çIDw’è‚Å•¶š—ñ‚Ìæ“¾
-    /// •¶š‰»‚¯‚ğd‚Ş‚È‚ç‚Î‚±‚Ìs‚É’Ç‰Á‚ğ‚·‚é
+    /// ãƒã‚¹ã‚¿ãƒ¼ã‹ã‚‰IDæŒ‡å®šã§æ–‡å­—åˆ—ã®å–å¾—
+    /// æ–‡å­—åŒ–ã‘ã‚’ä»•è¾¼ã‚€ãªã‚‰ã°ã“ã®è¡Œã«è¿½åŠ ã‚’ã™ã‚‹
     /// </summary>
-    /// <param name="ID"><•¶šID/param>
-    /// <returns><ID‚É‘Î‰‚µ‚½•¶š—ñ/returns>
+    /// <param name="ID"><æ–‡å­—ID/param>
+    /// <returns><IDã«å¯¾å¿œã—ãŸæ–‡å­—åˆ—/returns>
     public string GetStringMaster(int ID, bool backDoor = false)
     {
-        if (ID == -1) 
+        if (ID == -1)
         {
             int stop = 0;
         }
-
 
         string value = string.Empty;
         _masters.TryGetValue(ID, out value);
@@ -101,11 +99,11 @@ public class MasterData : MonoBehaviour
         return value.ErrorText(backDoor);
 
     }
-    public void SetStringMaster(int ID,string value) 
+    public void SetStringMaster(int ID,string value)
     {
         _masters[ID]=value;
     }
-    public void AddStringMaster(int key,string value) 
+    public void AddStringMaster(int key,string value)
     {
         _masters.Add(key,value);
     }
@@ -128,3 +126,4 @@ public class MasterData : MonoBehaviour
 
     }
 }
+

@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static ScriptCountNumber;
 public class UICardManager : MonoBehaviour
 {
-    [SerializeField, Header("•À‚×‚éƒX[ƒg")] Card.suit suit = Card.suit.Spade;
+    [SerializeField, Header("ä¸¦ã¹ã‚‹ã‚¹ãƒ¼ãƒˆ")] Card.suit suit = Card.suit.Spade;
 
     [SerializeField]private float WIDE_SIZE = 910;
 
@@ -20,7 +20,7 @@ public class UICardManager : MonoBehaviour
     {
         RectTransform thisRect=GetComponent<RectTransform>();
 
-        // ŒÂ\‘¢‚Ì”‚ğæ“¾
+        // å€‹æ§‹é€ ã®æ•°ã‚’å–å¾—
         int count = transform.childCount;
 
         float renge = WIDE_SIZE / (count + 1);
@@ -30,7 +30,6 @@ public class UICardManager : MonoBehaviour
             RectTransform rectTransform = transform.GetChild(i).GetComponent<RectTransform>();
 
             Vector3 pos = Vector3.zero;
-
 
             float angleRange = renge * (i + 1) / WIDE_SIZE;
 
@@ -46,17 +45,11 @@ public class UICardManager : MonoBehaviour
 
             Vector2 vec= rectTransform.localPosition-new Vector3(0, centerPointY, 0);
 
-
             angle.z =HALF_ROTATION-( Mathf.Atan2(vec.x,vec.y)*Mathf.Rad2Deg)*ALTERNATIVE;
             rectTransform.eulerAngles = angle;
 
-
         }
-
-
-
-
-
 
     }
 }
+

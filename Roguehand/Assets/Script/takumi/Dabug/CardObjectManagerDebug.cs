@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using UnityEngine;
@@ -22,10 +22,7 @@ public class CardObjectManagerDebug : MonoBehaviour
 
         for (int i = 0; i < 8; i++) ss.Add(trump);
 
-
-             
     }
-
 
     public void Update()
     {
@@ -44,3 +41,4 @@ public class CardObjectManagerDebug : MonoBehaviour
     }
 
 }
+

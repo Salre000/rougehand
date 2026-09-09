@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,16 +12,16 @@ public class ItemObject : MonoBehaviour
     private bool _isGrab = false;
 
     /// <summary>
-    /// ŠÔŒo‰ß‚Ì•Ï”
+    /// æ™‚é–“çµŒéã®å¤‰æ•°
     /// </summary>
     private float _time = 0;
 
-    public void MovePos(Vector3 goal) 
+    public void MovePos(Vector3 goal)
     {
 
-        if (_isGrab) 
+        if (_isGrab)
         {
-            //ƒ}ƒEƒXƒ|ƒCƒ“ƒgˆË‘¶‚ÅÀ•W‚ğŒˆ’è‚·‚é
+            //ãƒã‚¦ã‚¹ãƒã‚¤ãƒ³ãƒˆä¾å­˜ã§åº§æ¨™ã‚’æ±ºå®šã™ã‚‹
             Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z);
             transform.position = Camera.main.ScreenToWorldPoint(mousePos);
 
@@ -30,18 +30,14 @@ public class ItemObject : MonoBehaviour
 
         if (Vector3.Distance(goal,transform.position)< EPSILON) { _time = 0; _lostPos = transform.position;  return; }
 
-
         _time += Time.deltaTime;
         transform.position = Vector3.Lerp(_lostPos, goal, _time);
-
-
-
 
     }
 
     public void ResetTime() {_time = 0; _lostPos = transform.position; }
 
-
     public void SetGrab(bool flag) {  _isGrab = flag; _lostPos = transform.position; }
 
 }
+

@@ -1,17 +1,17 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// ƒ‰ƒEƒ“ƒhƒNƒŠƒAŒã‚ÌƒŠƒUƒ‹ƒg•\¦
+/// ãƒ©ã‚¦ãƒ³ãƒ‰ã‚¯ãƒªã‚¢å¾Œã®ãƒªã‚¶ãƒ«ãƒˆè¡¨ç¤º
 /// </summary>
 public class ClearResult : MonoBehaviour
 {
     private StringBuilder _builder = new StringBuilder();
 
-    // ƒŠƒUƒ‹ƒgŠÖ˜A
+    // ãƒªã‚¶ãƒ«ãƒˆé–¢é€£
     [SerializeField] GameObject _clearResult;
     [SerializeField] Transform _targetcClearResult;
     private float _transTime = 8f;
@@ -23,12 +23,12 @@ public class ClearResult : MonoBehaviour
     private bool _isComp = false;
     int allReward;
     float _resetTime = 0f;
-    // ´Z‚µI‚í‚Á‚Ä‚©‚çƒVƒ‡ƒbƒv‚É‰æ–Ê‚ªŒü‚­‚Ü‚Å‚ÌŠÔ
+    // æ¸…ç®—ã—çµ‚ã‚ã£ã¦ã‹ã‚‰ã‚·ãƒ§ãƒƒãƒ—ã«ç”»é¢ãŒå‘ãã¾ã§ã®æ™‚é–“
     float _variableTime = 0f;
     float _endTime = 0.2f;
     float _flucSpeedTime = 0f;
     /// <summary>
-    ///  •ñV‚©‚çŠ‹à‚ÉˆÚ‚éŠÔ‘¬“x
+    ///  å ±é…¬ã‹ã‚‰æ‰€æŒé‡‘ã«ç§»ã‚‹æ™‚é–“é€Ÿåº¦
     /// </summary>
     float _flucEndTime = 0.1f;
 
@@ -49,7 +49,7 @@ public class ClearResult : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒŠƒUƒ‹ƒg‚ğ’èˆÊ’u‚É
+    /// ãƒªã‚¶ãƒ«ãƒˆã‚’å®šä½ç½®ã«
     /// </summary>
     void RoundClearCheck()
     {
@@ -57,10 +57,10 @@ public class ClearResult : MonoBehaviour
         if (_isPush) return;
         _clearResult.SetActive(true);
         Vector3 resultPosition = _clearResult.transform.localPosition;
-        // ˆÚ“®
+        // ç§»å‹•
         resultPosition = Vector3.Lerp(resultPosition, _targetcClearResult.localPosition, Time.deltaTime * _transTime);
         _clearResult.transform.localPosition = resultPosition;
-        // Š®—¹’Ê’m
+        // å®Œäº†é€šçŸ¥
         if ((resultPosition - _targetcClearResult.localPosition).sqrMagnitude < _okLine)
         {
             _isResultArrival=true;
@@ -69,11 +69,11 @@ public class ClearResult : MonoBehaviour
     }
 
     /// <summary>
-    /// ´Zƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚Æ‚«
+    /// æ¸…ç®—ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã¨ã
     /// </summary>
     private void OnLiquidation()
     {
-        // ’èˆÊ’u‚É‚Â‚­‚Ü‚Åƒ{ƒ^ƒ“‚Ì”­‰Î‚ğ–h‚®
+        // å®šä½ç½®ã«ã¤ãã¾ã§ãƒœã‚¿ãƒ³ã®ç™ºç«ã‚’é˜²ã
         if (!_isResultArrival) return;
         _isPush = true;
         _isComp = false;
@@ -88,7 +88,7 @@ public class ClearResult : MonoBehaviour
 
         MoneyFluctuation();
 
-        // •Ï“®’†‚È‚ç’Ê‚³‚È‚¢
+        // å¤‰å‹•ä¸­ãªã‚‰é€šã•ãªã„
         if (PlayManager.instance.IsFluctuation()) return;
 
         VolumeManager.instance.EndSE();
@@ -99,19 +99,19 @@ public class ClearResult : MonoBehaviour
             return;
         }
 
-        // ƒVƒ‡ƒbƒv‰æ–Ê‚ÖŒü‚©‚¹‚é
+        // ã‚·ãƒ§ãƒƒãƒ—ç”»é¢ã¸å‘ã‹ã›ã‚‹
         ShopManager.instance.SetIsShop(true);
         ResetHandDis();
 
         GameUtility.SetIsRoundResult(false);
 
-        // Œ³‚ÌˆÊ’u‚É–ß‚·
+        // å…ƒã®ä½ç½®ã«æˆ»ã™
         Vector3 resultPosition = _clearResult.transform.localPosition;
-        // ˆÚ“®
+        // ç§»å‹•
         resultPosition = Vector3.Lerp(resultPosition, _resetLocalPosition, Time.deltaTime * _transTime);
         _clearResult.transform.localPosition = resultPosition;
 
-        // Š®—¹’Ê’m
+        // å®Œäº†é€šçŸ¥
         if ((resultPosition - _resetLocalPosition).sqrMagnitude < _okLine)
         {
             _variableTime = _resetTime;
@@ -122,17 +122,17 @@ public class ClearResult : MonoBehaviour
     }
 
     /// <summary>
-    /// Š‹à‚Æ•ñV‹à‚Ì•Ï“®
+    /// æ‰€æŒé‡‘ã¨å ±é…¬é‡‘ã®å¤‰å‹•
     /// </summary>
     private void MoneyFluctuation()
     {
-        // ˆê“x‚¾‚¯’Ê‚·
+        // ä¸€åº¦ã ã‘é€šã™
         if (!_isComp)
         {
             int maxReward= GameUtility.GetRewardMaxCount();
-            // •ñV‹à‚Ìæ“¾
+            // å ±é…¬é‡‘ã®å–å¾—
             int reward = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID + maxReward);
-            // —]‚Á‚½è”‚Æ‡‚í‚¹‚Ä‡Œv‹à‚ğZo
+            // ä½™ã£ãŸæ‰‹æ•°ã¨åˆã‚ã›ã¦åˆè¨ˆé‡‘ã‚’ç®—å‡º
             allReward = GameUtility.GetHandCount() + reward;
             _isComp = true;
             PlayManager.instance.SetIsFluctuation(true);
@@ -145,19 +145,19 @@ public class ClearResult : MonoBehaviour
         }
         _flucSpeedTime = _resetTime;
 
-        // Œ»İ‚ÌŠ‹à‚ğæ“¾
+        // ç¾åœ¨ã®æ‰€æŒé‡‘ã‚’å–å¾—
         int myMoney = GameUtility.GetMyMoney();
-        // Œ»İ‚ÌŠ‹à‚ğallReward‚Æ‡‚í‚¹‚½”‚É‚·‚é
+        // ç¾åœ¨ã®æ‰€æŒé‡‘ã‚’allRewardã¨åˆã‚ã›ãŸæ•°ã«ã™ã‚‹
         NumberFluctuation.FluctuationAnim(ref myMoney, myMoney + allReward, true);
-        // •Ï“®‚µ‚½Š‹à‚Í‚µ‚Á‚©‚èó‚¯æ‚èŒ³‚É•Ô‚·
+        // å¤‰å‹•ã—ãŸæ‰€æŒé‡‘ã¯ã—ã£ã‹ã‚Šå—ã‘å–ã‚Šå…ƒã«è¿”ã™
         GameUtility.SetMyMoney(myMoney);
-        // ƒeƒLƒXƒg‚É”½‰f
+        // ãƒ†ã‚­ã‚¹ãƒˆã«åæ˜ 
         _builder.Clear();
         _builder.Append("$");
         _builder.Append(myMoney);
         TextUIManager.instance.SetMoneyText(_builder.ToString());
 
-        // •ñV‹à‚Ì•Ï“® ƒ[ƒ‚É‚·‚é
+        // å ±é…¬é‡‘ã®å¤‰å‹• ã‚¼ãƒ­ã«ã™ã‚‹
         int reset = 0;
         NumberFluctuation.FluctuationAnim(ref allReward, reset, false);
         _builder.Clear();
@@ -165,17 +165,17 @@ public class ClearResult : MonoBehaviour
         _builder.Append(allReward);
         TextUIManager.instance.SetClearMoneyText(_builder.ToString());
 
-        //‚¨‹à‚ğó‚¯æ‚Á‚Ä‚¢‚é‰¹‚ğ–Â‚ç‚·
+        //ãŠé‡‘ã‚’å—ã‘å–ã£ã¦ã„ã‚‹éŸ³ã‚’é³´ã‚‰ã™
         VolumeManager.instance.StartMoneySE();
         VolumeManager.instance.ResetBGM();
     }
 
     /// <summary>
-    /// ƒVƒ‡ƒbƒv‚ÉˆÚs‚ªŠ®—¹‚µ‚½ƒ^ƒCƒ~ƒ“ƒO‚Åƒ‰ƒ“‚Ì‚Ù‚¤‚ğƒŠƒZƒbƒg‚·‚é
+    /// ã‚·ãƒ§ãƒƒãƒ—ã«ç§»è¡ŒãŒå®Œäº†ã—ãŸã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§ãƒ©ãƒ³ã®ã»ã†ã‚’ãƒªã‚»ãƒƒãƒˆã™ã‚‹
     /// </summary>
     void ResetHandDis()
     {
-        // ƒnƒ“ƒh‚ÆƒfƒBƒXƒJ[ƒh‚Ì‰ñ”‚ğƒŠƒZƒbƒg
+        // ãƒãƒ³ãƒ‰ã¨ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰ã®å›æ•°ã‚’ãƒªã‚»ãƒƒãƒˆ
         GameUtility.SetHandCount(GameUtility.GetBaseHandCound());
         GameUtility.SetDiscardCount(GameUtility.GetBaseDiscardCound());
         _builder.Clear();
@@ -186,3 +186,4 @@ public class ClearResult : MonoBehaviour
         TextUIManager.instance.SetDiscardText(_builder.ToString());
     }
 }
+

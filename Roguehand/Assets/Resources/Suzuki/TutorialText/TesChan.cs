@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -18,7 +18,7 @@ public class TesChan : MonoBehaviour
         tutorial1 = MasterData.instance.GetStringMaster(20000);
         while(true)
         {
-            // ‹ó‚ÌƒJƒ‰ƒ€‚ªŒ©‚Â‚©‚é‚Ü‚Å‚Ü‚í‚·
+            // ç©ºã®ã‚«ãƒ©ãƒ ãŒè¦‹ã¤ã‹ã‚‹ã¾ã§ã¾ã‚ã™
             if(MasterData.instance.GetStringMaster(id+index)=="") break;
             tutorialText.Add(MasterData.instance.GetStringMaster(id+index));
             index++;
@@ -27,3 +27,4 @@ public class TesChan : MonoBehaviour
     }
 
 }
+

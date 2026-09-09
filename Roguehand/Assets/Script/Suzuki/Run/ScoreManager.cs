@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,13 +9,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
-/// Šî–{ƒXƒRƒA‚Æ”{—¦‚ÌƒeƒLƒXƒg‚ÆŒ‹‰Ê‚ğ‚¢‚¶‚é
+/// åŸºæœ¬ã‚¹ã‚³ã‚¢ã¨å€ç‡ã®ãƒ†ã‚­ã‚¹ãƒˆã¨çµæœã‚’ã„ã˜ã‚‹
 /// </summary>
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
 
-    // ê‚Éo‚³‚ê‚½ƒJ[ƒh‚Ì‰º‚ÉƒXƒRƒA‚ğo‚·‚½‚ß‚ÌTextŒQ
+    // å ´ã«å‡ºã•ã‚ŒãŸã‚«ãƒ¼ãƒ‰ã®ä¸‹ã«ã‚¹ã‚³ã‚¢ã‚’å‡ºã™ãŸã‚ã®Textç¾¤
     [SerializeField] private List<GameObject> score;
     private List<TextMeshProUGUI> scoreViewTexts = new List<TextMeshProUGUI>();
     private List<Transform> scoreViewTrans = new List<Transform>();
@@ -55,11 +55,10 @@ public class ScoreManager : MonoBehaviour
         position.y -= 140f;
         scoreViewTrans[_scoreIndex].position = position;
 
-
     }
-    public void SetViewIndex(int index) 
+    public void SetViewIndex(int index)
     {
-        _scoreIndex = index; 
+        _scoreIndex = index;
         scoreViewID.Clear();
 
         scoreViewValueMagnification.Clear();
@@ -98,39 +97,36 @@ public class ScoreManager : MonoBehaviour
 
         return sb.ToString();
 
-
-
     }
 
-
-    // Šî–{ƒXƒRƒA
+    // åŸºæœ¬ã‚¹ã‚³ã‚¢
     private float _basicScore;
-    // ”{—¦
+    // å€ç‡
     private float _magnification;
-    // ƒ‰ƒEƒ“ƒh‚Ì‡ŒvƒXƒRƒA
+    // ãƒ©ã‚¦ãƒ³ãƒ‰ã®åˆè¨ˆã‚¹ã‚³ã‚¢
     private float _roundScore;
-    // ƒvƒŒƒC‚µ‚½ƒnƒ“ƒh‚ÌƒXƒRƒA
+    // ãƒ—ãƒ¬ã‚¤ã—ãŸãƒãƒ³ãƒ‰ã®ã‚¹ã‚³ã‚¢
     private float _handScore;
-    // ‚±‚ê‚Ü‚Å‚ÌƒXƒRƒA‚Åˆê”Ô‚‚¢•¨
+    // ã“ã‚Œã¾ã§ã®ã‚¹ã‚³ã‚¢ã§ä¸€ç•ªé«˜ã„ç‰©
     private float _highScore = 0;
 
     private StringBuilder _builder = new StringBuilder();
-    // ƒ‰ƒEƒ“ƒhƒXƒRƒA‚Ì•¶š‚ª˜gŠO‚Éo‚é‚­‚ç‚¢‚Ì•¶š”‚ğŒŸ’m
+    // ãƒ©ã‚¦ãƒ³ãƒ‰ã‚¹ã‚³ã‚¢ã®æ–‡å­—ãŒæ å¤–ã«å‡ºã‚‹ãã‚‰ã„ã®æ–‡å­—æ•°ã‚’æ¤œçŸ¥
     private int _defaultRemit = 9;
-    // Œ¸‚ç‚·•¶šƒTƒCƒY
+    // æ¸›ã‚‰ã™æ–‡å­—ã‚µã‚¤ã‚º
     private const int _DOWNSIZE = 2;
-    // Œ³‚ÌƒtƒHƒ“ƒgƒTƒCƒY
+    // å…ƒã®ãƒ•ã‚©ãƒ³ãƒˆã‚µã‚¤ã‚º
     private const float _DEFAULT_OFFSET = 44.1f;
-    // ƒXƒRƒA‚Ì•¶š‚ª˜gŠO‚Éo‚é‚­‚ç‚¢‚Ì•¶š”‚ğŒŸ’m
+    // ã‚¹ã‚³ã‚¢æ™‚ã®æ–‡å­—ãŒæ å¤–ã«å‡ºã‚‹ãã‚‰ã„ã®æ–‡å­—æ•°ã‚’æ¤œçŸ¥
     private int _scoreRemitLength = 9;
-    // ƒXƒRƒA‚ÌƒtƒHƒ“ƒgƒTƒCƒY
+    // ã‚¹ã‚³ã‚¢æ™‚ã®ãƒ•ã‚©ãƒ³ãƒˆã‚µã‚¤ã‚º
     private const float _SCORE_OFFSET = 70f;
-    // •¶š”ŒŸ’m‚ÌƒŠƒZƒbƒg
+    // æ–‡å­—æ•°æ¤œçŸ¥ã®ãƒªã‚»ãƒƒãƒˆ
     private const int _RESET_REMIT_SIZE = 9;
-    // ƒ[ƒ‚É‚·‚é
+    // ã‚¼ãƒ­ã«ã™ã‚‹
     private const int _RESET_NUM = 0;
 
-    // ƒ‰ƒEƒ“ƒhƒXƒRƒA‚ª‰ÁZ‚³‚ê‚½true
+    // ãƒ©ã‚¦ãƒ³ãƒ‰ã‚¹ã‚³ã‚¢ãŒåŠ ç®—ã•ã‚ŒãŸæ™‚true
     //private bool _additionScore = false;
 
     private void Awake()
@@ -154,32 +150,31 @@ public class ScoreManager : MonoBehaviour
 
     private void NextRoundScoreReset()
     {
-        // ƒVƒ‡ƒbƒv‚ªI‚í‚èŸƒ‰ƒEƒ“ƒh‚ÉˆÚs‚·‚é‚Æ‚«‚ÉƒŠƒZƒbƒg
+        // ã‚·ãƒ§ãƒƒãƒ—ãŒçµ‚ã‚ã‚Šæ¬¡ãƒ©ã‚¦ãƒ³ãƒ‰ã«ç§»è¡Œã™ã‚‹ã¨ãã«ãƒªã‚»ãƒƒãƒˆ
         if (!ShopManager.instance.IsPushEndShop()) return;
 
-
-        // ‡ŒvƒXƒRƒA‚ÌƒŠƒZƒbƒg
+        // åˆè¨ˆã‚¹ã‚³ã‚¢ã®ãƒªã‚»ãƒƒãƒˆ
         ScoreManager.instance.ResetRoundScore();
 
-        // –Ú•WƒXƒRƒA‚ÌÄİ’è
+        // ç›®æ¨™ã‚¹ã‚³ã‚¢ã®å†è¨­å®š
         _builder.Clear();
         int id = IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount();
         //_builder.Append(MasterData.instance.GetIntMaster(id));
         _builder.AppendFormat("{0:#}", MasterData.instance.GetIntMaster(id).ToString("N0"));
         TextUIManager.instance.SetLowestScoreText(_builder.ToString());
 
-        //ƒŠƒ[ƒh‚ªÅ‘å‚É‚È‚éƒ‰ƒEƒ“ƒh”‚Å‚»‚êˆÈã‚És‚©‚È‚¢‚æ‚¤‚É‚·‚é
+        //ãƒªãƒ¯ãƒ¼ãƒ‰ãŒæœ€å¤§ã«ãªã‚‹ãƒ©ã‚¦ãƒ³ãƒ‰æ•°ã§ãã‚Œä»¥ä¸Šã«è¡Œã‹ãªã„ã‚ˆã†ã«ã™ã‚‹
         int roundCount = GameUtility.GetRewardMaxCount();
 
-        // •ñV‹à‚ÌÄİ’è
+        // å ±é…¬é‡‘ã®å†è¨­å®š
         int reward = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID + roundCount);
         TextUIManager.instance.SetRewardCountText(UIUtility.instance.RewardConversion(reward));
     }
 
     /// <summary>
-    /// Šî–{‚Ì‰ÁZ
+    /// åŸºæœ¬ã®åŠ ç®—
     /// </summary>
-    /// <param name="value">“ü‚ê‚½•ª‚¾‚¯‰ÁZ</param>
+    /// <param name="value">å…¥ã‚ŒãŸåˆ†ã ã‘åŠ ç®—</param>
     public void BasicPlus(float value)
     {
         _basicScore += value;
@@ -190,9 +185,9 @@ public class ScoreManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ”{—¦‚Ì‰ÁZ
+    /// å€ç‡ã®åŠ ç®—
     /// </summary>
-    /// <param name="value">“ü‚ê‚½•ª‚¾‚¯‰ÁZ</param>
+    /// <param name="value">å…¥ã‚ŒãŸåˆ†ã ã‘åŠ ç®—</param>
     public void MagnificationPlus(float value)
     {
         _magnification += value;
@@ -206,12 +201,12 @@ public class ScoreManager : MonoBehaviour
     }
 
     /// <summary>
-    /// “ñ‚Â‚ÌŒ‹‰Ê‚ğ‡Œvƒ‰ƒEƒ“ƒh‚É‚Ü‚Æ‚ß‚é
+    /// äºŒã¤ã®çµæœã‚’åˆè¨ˆãƒ©ã‚¦ãƒ³ãƒ‰ã«ã¾ã¨ã‚ã‚‹
     /// </summary>
     public void RoundScoreResult()
     {
         _roundScore += _handScore;
-        // lÌŒÜ“ü‚µ‚½’l‚ª•Ô‚é
+        // å››æ¨äº”å…¥ã—ãŸå€¤ãŒè¿”ã‚‹
         _roundScore = Rounding(_roundScore, 1f);
 
         _builder.Clear();
@@ -232,19 +227,19 @@ public class ScoreManager : MonoBehaviour
     }
 
     /// <summary>
-    /// “ñ‚Â‚ÌŒ‹‰Ê‚ğ•\¦
+    /// äºŒã¤ã®çµæœã‚’è¡¨ç¤º
     /// </summary>
     public void PlayScoreResult()
     {
 
         _handScore = _basicScore * _magnification;
-        // lÌŒÜ“ü‚µ‚½’l‚ª•Ô‚é
+        // å››æ¨äº”å…¥ã—ãŸå€¤ãŒè¿”ã‚‹
         _handScore = Rounding(_handScore, 1f);
 
         _builder.Clear();
         _builder.AppendFormat("{0:#}", _handScore.ToString("N0"));
 
-        // ƒtƒHƒ“ƒgƒTƒCƒY‚Ì’²®
+        // ãƒ•ã‚©ãƒ³ãƒˆã‚µã‚¤ã‚ºã®èª¿æ•´
         if (_builder.Length >= _scoreRemitLength)
         {
             TextUIManager.instance.GetRoleText().fontSize -= _DOWNSIZE;
@@ -259,11 +254,11 @@ public class ScoreManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Šî–{‚Æ”{—¦‚Ì•\¦‚ğƒ[ƒ‚É‚·‚é
+    /// åŸºæœ¬ã¨å€ç‡ã®è¡¨ç¤ºã‚’ã‚¼ãƒ­ã«ã™ã‚‹
     /// </summary>
     public void ScoreReset()
     {
-        // Šî–{‚Æ”{—¦‚ğƒ[ƒ‚É‚·‚é
+        // åŸºæœ¬ã¨å€ç‡ã‚’ã‚¼ãƒ­ã«ã™ã‚‹
         _builder.Clear();
         _builder.Append(_RESET_NUM);
         TextUIManager.instance.SetBasicScoreText(_builder.ToString());
@@ -271,7 +266,7 @@ public class ScoreManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ”{—¦‚ğæZ
+    /// å€ç‡ã‚’ä¹—ç®—
     /// </summary>
     /// <param name="value"></param>
     public void Multiplication(float value)
@@ -280,22 +275,21 @@ public class ScoreManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒnƒ“ƒhƒXƒRƒA‚ğƒ[ƒ‚É‚µ‚È‚ª‚çƒ‰ƒEƒ“ƒhƒXƒRƒA‚É‰ÁZ
+    /// ãƒãƒ³ãƒ‰ã‚¹ã‚³ã‚¢ã‚’ã‚¼ãƒ­ã«ã—ãªãŒã‚‰ãƒ©ã‚¦ãƒ³ãƒ‰ã‚¹ã‚³ã‚¢ã«åŠ ç®—
     /// </summary>
     public void RoundScorePlus()
     {
-        // ‡Œv‚É‰ÁZ
+        // åˆè¨ˆã«åŠ ç®—
         _roundScore += _handScore;
         if (_highScore < _handScore) _highScore = _handScore;
-        // 0‚É‚·‚é
+        // 0ã«ã™ã‚‹
         _handScore = 0;
-        // ‹ó”’‚É‚·‚é
+        // ç©ºç™½ã«ã™ã‚‹
         _builder.Clear();
         _builder.Append("");
         TextUIManager.instance.SetRoleText(_builder.ToString());
 
-
-        // ƒ‰ƒEƒ“ƒhƒXƒRƒA‚ğ•\¦
+        // ãƒ©ã‚¦ãƒ³ãƒ‰ã‚¹ã‚³ã‚¢ã‚’è¡¨ç¤º
         _builder.Clear();
         //_builder.Append(_roundScore);
         _builder.AppendFormat("{0:#}", _roundScore.ToString("N0"));
@@ -304,7 +298,7 @@ public class ScoreManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ‰ƒEƒ“ƒhƒXƒRƒA‚Æ–Ú•WƒXƒRƒA‚ÌƒŠƒZƒbƒg
+    /// ãƒ©ã‚¦ãƒ³ãƒ‰ã‚¹ã‚³ã‚¢ã¨ç›®æ¨™ã‚¹ã‚³ã‚¢ã®ãƒªã‚»ãƒƒãƒˆ
     /// </summary>
     public void ResetRoundScore()
     {
@@ -318,56 +312,53 @@ public class ScoreManager : MonoBehaviour
     }
 
     /// <summary>
-    /// lÌŒÜ“ü
+    /// å››æ¨äº”å…¥
     /// </summary>
-    /// <param name="value">‚µ‚½‚¢’l</param>
-    /// <param name="decPoint">¬”‘æZ‚ğw’è</param>
-    /// <returns>lÌŒÜ“ü‚µ‚½’l</returns>
+    /// <param name="value">ã—ãŸã„å€¤</param>
+    /// <param name="decPoint">å°æ•°ç¬¬ã€‡ã‚’æŒ‡å®š</param>
+    /// <returns>å››æ¨äº”å…¥ã—ãŸå€¤</returns>
     public float Rounding(float value, float decPoint)
     {
-        // ¬”•”•ª‚Ìæ‚èo‚µ
+        // å°æ•°éƒ¨åˆ†ã®å–ã‚Šå‡ºã—
         float num1 = value - Mathf.FloorToInt(value);
-        // lÌŒÜ“ü‚µ‚½‚¢ˆÊ‚ğˆê‚ÌˆÊ‚É‚Á‚Ä‚­‚é
+        // å››æ¨äº”å…¥ã—ãŸã„ä½ã‚’ä¸€ã®ä½ã«æŒã£ã¦ãã‚‹
         int num2 = Mathf.FloorToInt(num1 * Mathf.Pow(10, decPoint));
-        // \ˆÈã‚ÌˆÊ‚ğ‚È‚­‚·
+        // åä»¥ä¸Šã®ä½ã‚’ãªãã™
         int num3 = num2 - Mathf.FloorToInt(num2 / 10) * 10;
         if (num3 >= 5)
         {
-            // Ø‚èã‚°
-            // Ø‚èã‚°‚½‚¢ˆÊ‚Ü‚Å¬”“_‚ğˆÚ“®‚³‚¹‚ÄØ‚èã‚°
+            // åˆ‡ã‚Šä¸Šã’
+            // åˆ‡ã‚Šä¸Šã’ãŸã„ä½ã¾ã§å°æ•°ç‚¹ã‚’ç§»å‹•ã•ã›ã¦åˆ‡ã‚Šä¸Šã’
             num1 = Mathf.CeilToInt(value * Mathf.Pow(10, decPoint - 1));
-            // –ß‚·
+            // æˆ»ã™
             num1 /= Mathf.Pow(10, decPoint - 1);
         }
         else
         {
-            // Ø‚èÌ‚Ä
-            // “¯—l‚É
+            // åˆ‡ã‚Šæ¨ã¦
+            // åŒæ§˜ã«
             num1 = Mathf.FloorToInt(value * Mathf.Pow(10, decPoint - 1));
-            // –ß‚·
+            // æˆ»ã™
             num1 /= Mathf.Pow(10, decPoint - 1);
         }
 
         return num1;
     }
 
-    // ’B‚µ‚Ä‚¢‚é‚©Šm”F
+    // é”ã—ã¦ã„ã‚‹ã‹ç¢ºèª
     public void RoundCheck()
     {
-        // ˆê“I‚Éƒ{ƒ^ƒ“ó•t‚ğ’â~
+        // ä¸€æ™‚çš„ã«ãƒœã‚¿ãƒ³å—ä»˜ã‚’åœæ­¢
         GameUtility.SetIsPushButton(false);
 
-        // –Ú•WƒXƒRƒA‚ğ‰z‚µ‚Ä‚¢‚½‚çŸ‚Ìƒ‰ƒEƒ“ƒh‚Ö
+        // ç›®æ¨™ã‚¹ã‚³ã‚¢ã‚’è¶Šã—ã¦ã„ãŸã‚‰æ¬¡ã®ãƒ©ã‚¦ãƒ³ãƒ‰ã¸
         if (!RoundUtility.NextStartRound()) return;
 
-        // ƒQ[ƒ€‚Ì‘¬“x‚ğƒŠƒZƒbƒg
+        // ã‚²ãƒ¼ãƒ ã®é€Ÿåº¦ã‚’ãƒªã‚»ãƒƒãƒˆ
         GameConfig.ResetGameSpeed();
 
-
-        // ÅI“I‚ÉƒvƒŒƒCƒ{ƒ^ƒ“‚Ìƒtƒ‰ƒO‚ğƒŠƒZƒbƒg
+        // æœ€çµ‚çš„ã«ãƒ—ãƒ¬ã‚¤ãƒœã‚¿ãƒ³ã®ãƒ•ãƒ©ã‚°ã‚’ãƒªã‚»ãƒƒãƒˆ
         GameUtility.SetIsPlay(false);
-
-
 
     }
 
@@ -380,3 +371,4 @@ public class ScoreManager : MonoBehaviour
     public float GetHighScore() { return _highScore; }
     public void SetHighScore(float value) { _highScore = value; }
 }
+

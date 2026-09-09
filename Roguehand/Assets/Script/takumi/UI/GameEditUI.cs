@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +11,6 @@ public class GameEditUI : MonoBehaviour
 
     [SerializeField] private Button _endButton;
     [SerializeField] private GameObject onObjectedit;
-
 
     public void Awake()
     {
@@ -26,27 +25,24 @@ public class GameEditUI : MonoBehaviour
         _SE.onValueChanged.AddListener(ChengeVolumeSE);
     }
 
-    private void ChengeVolumeMaster(float value) 
+    private void ChengeVolumeMaster(float value)
     {
 
         VolumeManager.instance.ChengeMaster(value);
 
-
     }
-    private void ChengeVolumeBGM(float value) 
+    private void ChengeVolumeBGM(float value)
     {
 
         VolumeManager.instance.ChengeBGM(value);
 
-
     }
-    private void ChengeVolumeSE(float value) 
+    private void ChengeVolumeSE(float value)
     {
 
         VolumeManager.instance.ChengeSE(value);
 
-
     }
 
-
 }
+

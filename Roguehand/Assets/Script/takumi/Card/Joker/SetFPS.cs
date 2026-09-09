@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,11 +8,11 @@ public class SetFPS : MonoBehaviour
     public static SetFPS setFPS;
     public void Awake()
     {
-        if (setFPS != null) 
+        if (setFPS != null)
         {
             Destroy(this);
         }
-        else 
+        else
         {
             DontDestroyOnLoad(this.gameObject);
             setFPS = this;
@@ -22,3 +22,4 @@ public class SetFPS : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
     }
 }
+

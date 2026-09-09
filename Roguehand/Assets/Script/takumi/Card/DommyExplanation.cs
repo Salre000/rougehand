@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// à–¾‚ğì‚éƒCƒ“ƒ^[ƒtƒF[ƒX‚ğg‚¢‚½‚¢‚¯‚Ç–{‘Ì‚ª‚È‚¢‚È‚Ç‚Ì
-/// ——R‚©‚çg‚¦‚È‚¢ê‡‚Éƒ_ƒ~[‚Æ‚µ‚Äì‚éƒNƒ‰ƒX
+/// èª¬æ˜ã‚’ä½œã‚‹ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã‚’ä½¿ã„ãŸã„ã‘ã©æœ¬ä½“ãŒãªã„ãªã©ã®
+/// ç†ç”±ã‹ã‚‰ä½¿ãˆãªã„å ´åˆã«ãƒ€ãƒŸãƒ¼ã¨ã—ã¦ä½œã‚‹ã‚¯ãƒ©ã‚¹
 /// </summary>
 public class DommyExplanation : ExplanationInterface
 {
@@ -33,3 +33,4 @@ public class DommyExplanation : ExplanationInterface
         return dommyType();
     }
 }
+

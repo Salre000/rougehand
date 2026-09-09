@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static ScriptCountNumber;
@@ -6,29 +6,27 @@ public interface SaleInterface
 {
 
     /// <summary>
-    /// ”„‹pŠz‚Ì•`‰æ‚·‚éŠÖ”
+    /// å£²å´é¡ã®æç”»ã™ã‚‹é–¢æ•°
     /// </summary>
     public void SaleShow(Vector3 pos, int saleValue, System.Action action)
     {
         Vector2 ButtonPos = Camera.main.WorldToScreenPoint(pos);
         if (GUI.Button(new Rect(ButtonPos.x + 75, Screen.height - ButtonPos.y - 30, 70, 90),
-            ("<size=25><color=#ffffff>”„‹p\n$" + saleValue.ToString() + "</color></size>"), SaleUtility.GetStyle()))
+            ("<size=25><color=#ffffff>å£²å´\n$" + saleValue.ToString() + "</color></size>"), SaleUtility.GetStyle()))
         {
 
             action();
 
-            //‚¨‹à‚ğ‘‚â‚·ˆ—
+            //ãŠé‡‘ã‚’å¢—ã‚„ã™å‡¦ç†
             GameUtility.SetMyMoney(GameUtility.GetMyMoney() + saleValue);
 
             VolumeManager.instance.PlayMoneySE();
 
-
         }
     }
 
-
     /// <summary>
-    /// w“ü‚Ì•`‰æ‚ğ‚·‚éŠÖ”
+    /// è³¼å…¥æ™‚ã®æç”»ã‚’ã™ã‚‹é–¢æ•°
     /// </summary>
     public void BuyShow(Vector3 pos, int saleValue, System.Action action)
     {
@@ -36,7 +34,7 @@ public interface SaleInterface
 
         float BUY_WIDHT = 100;
 
-        if (!AddFlag()) 
+        if (!AddFlag())
         {
 
             NotAddButton(ButtonPos);
@@ -44,14 +42,13 @@ public interface SaleInterface
             return;
         }
 
-
         if (GUI.Button(new Rect(ButtonPos.x - BUY_WIDHT /HALF, Screen.height - ButtonPos.y + 100, BUY_WIDHT, 60),
-            ("<size=30><color=#ffffff>" + Extra.ErrorText("w“ü") + "</color></size>"), SaleUtility.GetStyle()))
+            ("<size=30><color=#ffffff>" + Extra.ErrorText("è³¼å…¥") + "</color></size>"), SaleUtility.GetStyle()))
         {
-            // ‚¨‹à‚ª‘«‚è‚Ä‚¢‚é‚©‚Ç‚¤‚©‚Ì”»’f
-            if (GameUtility.GetMyMoney() < saleValue) { Debug.Log("‚¨‹à‚ª‘«‚è‚È‚¢"); return; }
+            // ãŠé‡‘ãŒè¶³ã‚Šã¦ã„ã‚‹ã‹ã©ã†ã‹ã®åˆ¤æ–­
+            if (GameUtility.GetMyMoney() < saleValue) { Debug.Log("ãŠé‡‘ãŒè¶³ã‚Šãªã„"); return; }
 
-            // ‚¨‹à‚ğŒ¸‚ç‚·ˆ—
+            // ãŠé‡‘ã‚’æ¸›ã‚‰ã™å‡¦ç†
             GameUtility.SetMyMoney(GameUtility.GetMyMoney() - saleValue);
 
             action();
@@ -62,13 +59,13 @@ public interface SaleInterface
     }
 
     /// <summary>
-    /// ’Ç‰Á‚ª‰Â”\‚©‚Ç‚¤‚©‚ğ”»’f‚·‚éŠÖ”    
+    /// è¿½åŠ ãŒå¯èƒ½ã‹ã©ã†ã‹ã‚’åˆ¤æ–­ã™ã‚‹é–¢æ•°
     /// </summary>
     /// <returns></returns>
     public bool AddFlag() {  return true; }
 
     /// <summary>
-    /// ’Ç‰Á‚ğ‚Å‚«‚È‚¢‚Æ‚«‚Ìƒ{ƒ^ƒ“
+    /// è¿½åŠ ã‚’ã§ããªã„ã¨ãã®ãƒœã‚¿ãƒ³
     /// </summary>
     public void NotAddButton(Vector2 ButtonPos) { }
 }

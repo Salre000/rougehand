@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,6 @@ using UnityEngine;
 public class BuffJoker : JokerBase
 {
 
-
     public override void SaleAction()
     {
         int count = 0;
@@ -15,7 +14,7 @@ public class BuffJoker : JokerBase
         JokerUtility.JokerALLAction(joker =>
         {
             if (count >= 2) return;
-            JokerBase jokerBase= joker; 
+            JokerBase jokerBase= joker;
 
             joker.SetCardBuff((Card.cardBuff)Random.Range(0, (int)Card.cardBuff.MAX));
             joker.SetJokerBuff((Card.JokerBuff)Random.Range(0, (int)Card.JokerBuff.MAX));
@@ -23,27 +22,20 @@ public class BuffJoker : JokerBase
             JokerUtility.JokerChenge(JokerUtility.GetIndex(jokerBase));
             count++;
 
-
         });
 
         //ChengeCard();
 
-        //ƒAƒNƒVƒ‡ƒ“ó‘Ô‚É•ÏX‚·‚éƒRƒ}ƒ“ƒh
+        //ã‚¢ã‚¯ã‚·ãƒ§ãƒ³çŠ¶æ…‹ã«å¤‰æ›´ã™ã‚‹ã‚³ãƒãƒ³ãƒ‰
         JokerObjectUtility.CardAddAction(-1, -2);
 
-
-
-        
     }
     private void ChengeCard()
     {
         List<Card.Trump> trumps = CardManager.instance.GetPick();
         List<Card.Trump> deck = CardManager.instance.GetDeck();
 
-
         if (trumps.Count < 1) return;
-
-
 
         for (int i = 0; i < 2; i++)
         {
@@ -52,24 +44,22 @@ public class BuffJoker : JokerBase
             Card.Trump card = trumps[i];
 
             int index = deck.IndexOf(card);
-            if (index < 0) 
+            if (index < 0)
             {
-                //‘I‘ğ’†‚¾‚Æˆê’v‚Éˆø‚Á‚©‚©‚ç‚È‚¢ˆ×
+                //é¸æŠä¸­ã ã¨ä¸€è‡´ã«å¼•ã£ã‹ã‹ã‚‰ãªã„ç‚º
                 card.isSelect = !card.isSelect;
 
                 index = deck.IndexOf(card);
             }
 
             int indexHand = CardManager.instance.GetHand().IndexOf(card);
-            if (indexHand < 0) 
+            if (indexHand < 0)
             {
-                //‘I‘ğ’†‚¾‚Æˆê’v‚Éˆø‚Á‚©‚©‚ç‚È‚¢ˆ×
+                //é¸æŠä¸­ã ã¨ä¸€è‡´ã«å¼•ã£ã‹ã‹ã‚‰ãªã„ç‚º
                 card.isSelect = !card.isSelect;
 
                 indexHand = CardManager.instance.GetHand().IndexOf(card);
             }
-
-
 
             card.sealBuff = (Card.sealBuff)Random.Range(0, (int)Card.sealBuff.MAX);
             card.deckBuff = (Card.deckBuff)Random.Range(0, (int)Card.deckBuff.MAX);
@@ -78,11 +68,10 @@ public class BuffJoker : JokerBase
             CardManager.instance.Chenge(index, indexHand, card);
             CardObjectUtility.SetChengeCard(i, card);
 
-
-
         }
 
         CardManager.instance.ResetPick();
     }
 
 }
+

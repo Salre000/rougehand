@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// ƒIƒvƒVƒ‡ƒ“‚ğŠJ‚­•Â‚¶‚é
+// ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã‚’é–‹ãé–‰ã˜ã‚‹
 
 public class OptionOpen : MonoBehaviour
 {
@@ -35,7 +35,7 @@ public class OptionOpen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void Onclick()
@@ -92,10 +92,11 @@ public class OptionOpen : MonoBehaviour
         MemoryManager.Keep();
 
     }
-    private void OpenEdit() 
+    private void OpenEdit()
     {
         VolumeManager.instance.PlaySystemSE();
 
         _opObjectEdit.SetActive(true);
     }
 }
+

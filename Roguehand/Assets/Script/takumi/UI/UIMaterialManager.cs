@@ -1,10 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UIMaterialManager : MonoBehaviour
 {
-
 
     [SerializeField] private List<List<Material>> _trumpMaterial = new List<List<Material>>();
     [SerializeField] private List<Material> _deckBuffMaterial = new();
@@ -30,12 +29,11 @@ public class UIMaterialManager : MonoBehaviour
 
                 _trumpMaterial[i].Add(material);
 
-
             }
 
         }
 
-        // ƒV[ƒ‹‚Ìƒ}ƒeƒŠƒAƒ‹‚ğ’Ç‰Á
+        // ã‚·ãƒ¼ãƒ«ã®ãƒãƒ†ãƒªã‚¢ãƒ«ã‚’è¿½åŠ 
         for (int i = 0; i < (int)Card.sealBuff.MAX; i++)
         {
             Material material = new Material(BuffUtility.GetSealMaterial(i));
@@ -48,7 +46,7 @@ public class UIMaterialManager : MonoBehaviour
 
         }
 
-        // cardBuff‚Ìƒ}ƒeƒŠƒAƒ‹‚ğ’Ç‰Á
+        // cardBuffã®ãƒãƒ†ãƒªã‚¢ãƒ«ã‚’è¿½åŠ 
         for (int i = 0; i < (int)Card.cardBuff.MAX; i++)
         {
             Material material = new Material(BuffUtility.GetCardMaterial(i));
@@ -60,7 +58,7 @@ public class UIMaterialManager : MonoBehaviour
             _cardBuffMaterial.Add(material);
 
         }
-        // DeckBuff‚Ìƒ}ƒeƒŠƒAƒ‹‚ğ’Ç‰Á
+        // DeckBuffã®ãƒãƒ†ãƒªã‚¢ãƒ«ã‚’è¿½åŠ 
         for (int i = 0; i < (int)Card.deckBuff.MAX; i++)
         {
             Material material = new Material(BuffUtility.GetTrumpMaterial(i));
@@ -73,17 +71,12 @@ public class UIMaterialManager : MonoBehaviour
 
         }
 
-
-
-
     }
-
 
     public Material GetSealBuff(Card.sealBuff sealBuff)
     {
         if (sealBuff != Card.sealBuff.None) return _sealBuffMaterial[(int)sealBuff];
         return null;
-
 
     }
     public Material GetTrump(int suit,int number)
@@ -96,12 +89,9 @@ public class UIMaterialManager : MonoBehaviour
         if (buff.deckBuff != Card.deckBuff.None) return _deckBuffMaterial[(int)buff.deckBuff];
         if (buff.cardBuff != Card.cardBuff.None) return _cardBuffMaterial[(int)buff.cardBuff];
 
-
-
         return null;
-
 
     }
 
-
 }
+

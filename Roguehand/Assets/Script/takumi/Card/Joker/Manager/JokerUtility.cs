@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,8 +29,8 @@ public static class JokerUtility
 
     public static void ChengeOrder(int lostID,int nextID) { instance.ChengeOrder(lostID, nextID); }
 
-    public static int GetIndex() {  return instance.GetIndex(); }   
-    public static int GetIndex(JokerBase jokerBase) {  return instance.GetIndex(jokerBase); }   
+    public static int GetIndex() {  return instance.GetIndex(); }
+    public static int GetIndex(JokerBase jokerBase) {  return instance.GetIndex(jokerBase); }
 
     public static void SetTraget(JokerActionUseEnum.JokerActionTarget target) { instance.SetTarget(target); }
     public static void SetTragetSuit(Card.suit target) { instance.SetTarget(target); }
@@ -38,7 +38,7 @@ public static class JokerUtility
     public static void SetTragetRole(RoleManager.Role target) { instance.SetTarget(target); }
 
     /// <summary>
-    /// ƒgƒ‰ƒ“ƒv’PˆÊ‚Å¡g—p‚µ‚½‚à‚Ì‚ğ‚ÂŠÖ”
+    /// ãƒˆãƒ©ãƒ³ãƒ—å˜ä½ã§ä»Šä½¿ç”¨ã—ãŸã‚‚ã®ã‚’æŒã¤é–¢æ•°
     /// </summary>
     /// <param name="trump"></param>
     public static void SetNowCrad(Card.Trump trump) { SetTragetNumber(trump.number);SetTragetSuit(trump.suit); }
@@ -57,9 +57,9 @@ public static class JokerUtility
     public static void SetMaterial(int ID) { instance.SetMaterial(ID); }
 
     public static void ShowExplanation(int ID) { instance.ShowExplanation(ID);}
-    public static void ShowExplanation(GameObject gameObject,JokerBase jokerBase,Vector2 offset) 
+    public static void ShowExplanation(GameObject gameObject,JokerBase jokerBase,Vector2 offset)
     { instance.ShowExplanation(gameObject,jokerBase,offset);}
-     
+
     public static void ShopJoker(System.Func<JokerBase> func = null) { instance.ShopJokerAdd(func); }
 
     public static bool JokerAddCheck() {  return instance.JokerAddCheck(); }

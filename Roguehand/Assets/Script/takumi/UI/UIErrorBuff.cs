@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using static ErrorBuffDetalis;
@@ -7,8 +7,6 @@ public class UIErrorBuff : MonoBehaviour
     [SerializeField]UICardManager _managers;
 
     [SerializeField] systemBuff _thisBuff= systemBuff.None;
-
-
 
     [SerializeField] TextMeshProUGUI _name;
     [SerializeField] TextMeshProUGUI _explantion;
@@ -20,15 +18,15 @@ public class UIErrorBuff : MonoBehaviour
     private readonly int DLIND_SCORE_ID=IDUtility.BUFF_ID+208;
     private readonly int EXPLANTION_ID = 50;
 
-    public void SetCard(List<GameObject> objects) 
+    public void SetCard(List<GameObject> objects)
     {
         List<MeshRenderer> meshRenderers = new();
 
-        for (int i = 0; i < objects.Count; i++) 
+        for (int i = 0; i < objects.Count; i++)
         {
             objects[i].transform.parent = _managers.gameObject.transform;
 
-            // ƒ}ƒeƒŠƒAƒ‹‚ð‚Í‚é
+            // ãƒžãƒ†ãƒªã‚¢ãƒ«ã‚’ã¯ã‚‹
             switch (_thisBuff)
             {
                 case systemBuff.Mouse:
@@ -51,8 +49,7 @@ public class UIErrorBuff : MonoBehaviour
 
     }
 
-
-    private string GetEXPLANTION() 
+    private string GetEXPLANTION()
     {
         string name=string.Empty;
         switch (_thisBuff)
@@ -75,7 +72,7 @@ public class UIErrorBuff : MonoBehaviour
         }
         return name;
     }
-    private string GetName() 
+    private string GetName()
     {
         string name=string.Empty;
 
@@ -102,7 +99,7 @@ public class UIErrorBuff : MonoBehaviour
 
         return name;
     }
-    private string GetLevel(int objectsCount) 
+    private string GetLevel(int objectsCount)
     {
         string name=string.Empty;
 
@@ -113,6 +110,5 @@ public class UIErrorBuff : MonoBehaviour
         return name;
     }
 
-
-
 }
+

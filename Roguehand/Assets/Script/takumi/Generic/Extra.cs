@@ -1,25 +1,25 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
 /// <summary>
-/// Šg’£ƒNƒ‰ƒX
+/// æ‹¡å¼µã‚¯ãƒ©ã‚¹
 /// </summary>
 public static class Extra
 {
 
     /// <summary>
-    /// Šg’£ŠÖ”
+    /// æ‹¡å¼µé–¢æ•°
     /// </summary>
-    /// <typeparam name="T"><ƒŠƒXƒg‚Ìˆê—v‘f/typeparam>
-    /// <param name="list"><ƒŠƒXƒg‚Ì–{‘Ì‚±‚ÌƒŠƒXƒg©‘Ì‚É•ÏX‚ğ“ü‚ê‚é‚í‚¯‚Å‚Í‚È‚¢/param>
-    /// <param name="lostID"><ˆÚ“®Œ³‚Ì—v‘f”Ô†/param>
-    /// <param name="nextID"><ˆÚ“®æ‚Ì—v‘f”Ô†/param>
+    /// <typeparam name="T"><ãƒªã‚¹ãƒˆã®ä¸€è¦ç´ /typeparam>
+    /// <param name="list"><ãƒªã‚¹ãƒˆã®æœ¬ä½“ã“ã®ãƒªã‚¹ãƒˆè‡ªä½“ã«å¤‰æ›´ã‚’å…¥ã‚Œã‚‹ã‚ã‘ã§ã¯ãªã„/param>
+    /// <param name="lostID"><ç§»å‹•å…ƒã®è¦ç´ ç•ªå·/param>
+    /// <param name="nextID"><ç§»å‹•å…ˆã®è¦ç´ ç•ªå·/param>
     public static List<T> ChengeOrder<T>(List<T> list, int lostID, int nextID)
     {
         List<T> dummyList = new List<T>();
-        //ƒlƒNƒXƒg‚ÌˆêŒÂ‘O‚Ü‚Å’Ç‰Á
+        //ãƒã‚¯ã‚¹ãƒˆã®ä¸€å€‹å‰ã¾ã§è¿½åŠ 
         for (int i = 0; i < nextID; i++) { dummyList.Add(list[i]); }
 
         int startPos = 0;
@@ -41,15 +41,12 @@ public static class Extra
 
         for (int i = startPos; i < list.Count; i++) { dummyList.Add(list[i]); }
 
-
         return dummyList;
-
 
     }
 
-
     /// <summary>
-    /// ƒŒƒAƒŠƒeƒB‚Ì•¶š—ñ‚ğ•Ô‚·ŠÖ”
+    /// ãƒ¬ã‚¢ãƒªãƒ†ã‚£ã®æ–‡å­—åˆ—ã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <param name="jokerRarity"></param>
     /// <returns></returns>
@@ -60,16 +57,16 @@ public static class Extra
         switch (jokerRarity)
         {
             case JokerActionUseEnum.JokerRarity.Common:
-                name = "ƒRƒ‚ƒ“";
+                name = "ã‚³ãƒ¢ãƒ³";
                 break;
             case JokerActionUseEnum.JokerRarity.Uncommon:
-                name = "ƒAƒ“ƒRƒ‚ƒ“";
+                name = "ã‚¢ãƒ³ã‚³ãƒ¢ãƒ³";
                 break;
             case JokerActionUseEnum.JokerRarity.Rare:
-                name = "ƒŒƒA";
+                name = "ãƒ¬ã‚¢";
                 break;
             case JokerActionUseEnum.JokerRarity.Legendary:
-                name = "ƒŒƒWƒFƒ“ƒ_ƒŠ[";
+                name = "ãƒ¬ã‚¸ã‚§ãƒ³ãƒ€ãƒªãƒ¼";
                 break;
         }
 
@@ -78,7 +75,7 @@ public static class Extra
     }
 
     /// <summary>
-    /// ’²®•K—v
+    /// èª¿æ•´å¿…è¦
     /// </summary>
     /// <param name="jokerRarity"></param>
     /// <returns></returns>
@@ -89,27 +86,26 @@ public static class Extra
 
         switch (jokerRarity)
         {
-            case "ƒRƒ‚ƒ“":
+            case "ã‚³ãƒ¢ãƒ³":
                 color = new Color(0, 255, 227);
                 break;
-            case "ƒAƒ“ƒRƒ‚ƒ“":
+            case "ã‚¢ãƒ³ã‚³ãƒ¢ãƒ³":
                 color = new Color(8, 192, 0);
                 break;
-            case "ƒŒƒA":
+            case "ãƒ¬ã‚¢":
                 color = new Color(0, 72, 255);
                 break;
-            case "ƒŒƒWƒFƒ“ƒ_ƒŠ[":
+            case "ãƒ¬ã‚¸ã‚§ãƒ³ãƒ€ãƒªãƒ¼":
                 color = new Color(255, 0, 25);
                 break;
         }
 
         return color;
 
-
     }
 
     /// <summary>
-    /// ƒoƒt‚Ì“à—e‚É‰‚¶‚½F‚ğ•Ô‚·ŠÖ”
+    /// ãƒãƒ•ã®å†…å®¹ã«å¿œã˜ãŸè‰²ã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <param name="jokerbuff"></param>
     /// <returns></returns>
@@ -118,31 +114,30 @@ public static class Extra
 
         Color color = new Color();
 
-        // •¶š‚ª’·‚¢ê‡‚Í•¶š‚ÌƒTƒCƒY‚ğ¬‚³‚­‚·‚é‚±‚Æ‘Î‰
+        // æ–‡å­—ãŒé•·ã„å ´åˆã¯æ–‡å­—ã®ã‚µã‚¤ã‚ºã‚’å°ã•ãã™ã‚‹ã“ã¨å¯¾å¿œ
         switch (jokerbuff)
         {
-            case "ƒtƒHƒCƒ‹": color = new Color(200, 200, 200); break;
-            case "ƒzƒƒOƒ‰ƒ€": color = new Color(200, 200, 200); break;
-            case "ƒ|ƒŠƒNƒ[ƒ€": color = new Color(200, 200, 200); break;
-            case "ƒ}ƒEƒXƒWƒƒƒ}[": color = new Color(200, 200, 200); break;
-            case "ƒ{[ƒiƒX": color = new Color(200, 200, 200); break;
-            case "”{—¦": color = new Color(200, 200, 200); break;
-            case "ƒƒCƒ‹ƒh": color = new Color(200, 200, 200); break;
-            case "ƒOƒ‰ƒY": color = new Color(200, 200, 200); break;
-            case "ƒXƒ`[ƒ‹": color = new Color(200, 200, 200); break;
-            case "ƒS[ƒ‹ƒh": color = new Color(200, 200, 200); break;
-            case "ƒ‰ƒbƒL[": color = new Color(200, 200, 200); break;
-            case "ƒ‰ƒ“ƒ_ƒ€": color = new Color(200, 200, 200); break;
-            case "ƒuƒ‰ƒCƒ“ƒh": color = new Color(200, 200, 200); break;
-            case "ƒlƒKƒeƒBƒu": color = new Color(200, 200, 200); break;
-            case "ƒZƒsƒA": color = new Color(200, 200, 200); break;
-            case "ƒIƒuƒWƒFƒNƒgƒ€[ƒu": color = new Color(200, 200, 200); break;
+            case "ãƒ•ã‚©ã‚¤ãƒ«": color = new Color(200, 200, 200); break;
+            case "ãƒ›ãƒ­ã‚°ãƒ©ãƒ ": color = new Color(200, 200, 200); break;
+            case "ãƒãƒªã‚¯ãƒ­ãƒ¼ãƒ ": color = new Color(200, 200, 200); break;
+            case "ãƒã‚¦ã‚¹ã‚¸ãƒ£ãƒãƒ¼": color = new Color(200, 200, 200); break;
+            case "ãƒœãƒ¼ãƒŠã‚¹": color = new Color(200, 200, 200); break;
+            case "å€ç‡": color = new Color(200, 200, 200); break;
+            case "ãƒ¯ã‚¤ãƒ«ãƒ‰": color = new Color(200, 200, 200); break;
+            case "ã‚°ãƒ©ã‚º": color = new Color(200, 200, 200); break;
+            case "ã‚¹ãƒãƒ¼ãƒ«": color = new Color(200, 200, 200); break;
+            case "ã‚´ãƒ¼ãƒ«ãƒ‰": color = new Color(200, 200, 200); break;
+            case "ãƒ©ãƒƒã‚­ãƒ¼": color = new Color(200, 200, 200); break;
+            case "ãƒ©ãƒ³ãƒ€ãƒ ": color = new Color(200, 200, 200); break;
+            case "ãƒ–ãƒ©ã‚¤ãƒ³ãƒ‰": color = new Color(200, 200, 200); break;
+            case "ãƒã‚¬ãƒ†ã‚£ãƒ–": color = new Color(200, 200, 200); break;
+            case "ã‚»ãƒ”ã‚¢": color = new Color(200, 200, 200); break;
+            case "ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ ãƒ¼ãƒ–": color = new Color(200, 200, 200); break;
 
             default: color = new Color(100, 100, 100); break;
         }
 
         return color;
-
 
     }
 
@@ -150,25 +145,25 @@ public static class Extra
     {
         int index = 0;
 
-        // •¶š‚ª’·‚¢ê‡‚Í•¶š‚ÌƒTƒCƒY‚ğ¬‚³‚­‚·‚é‚±‚Æ‘Î‰
+        // æ–‡å­—ãŒé•·ã„å ´åˆã¯æ–‡å­—ã®ã‚µã‚¤ã‚ºã‚’å°ã•ãã™ã‚‹ã“ã¨å¯¾å¿œ
         switch (buff)
         {
-            case "ƒtƒHƒCƒ‹": break;
-            case "ƒzƒƒOƒ‰ƒ€": break;
-            case "ƒ|ƒŠƒNƒ[ƒ€": break;
-            case "ƒ}ƒEƒXƒWƒƒƒ}[": break;
-            case "ƒ{[ƒiƒX": break;
-            case "”{—¦": break;
-            case "ƒƒCƒ‹ƒh": break;
-            case "ƒOƒ‰ƒY": break;
-            case "ƒXƒ`[ƒ‹": break;
-            case "ƒS[ƒ‹ƒh": break;
-            case "ƒ‰ƒbƒL[": break;
-            case "ƒ‰ƒ“ƒ_ƒ€": break;
-            case "ƒuƒ‰ƒCƒ“ƒh": break;
-            case "ƒlƒKƒeƒBƒu": break;
-            case "ƒZƒsƒA": break;
-            case "ƒIƒuƒWƒFƒNƒgƒ€[ƒu": break;
+            case "ãƒ•ã‚©ã‚¤ãƒ«": break;
+            case "ãƒ›ãƒ­ã‚°ãƒ©ãƒ ": break;
+            case "ãƒãƒªã‚¯ãƒ­ãƒ¼ãƒ ": break;
+            case "ãƒã‚¦ã‚¹ã‚¸ãƒ£ãƒãƒ¼": break;
+            case "ãƒœãƒ¼ãƒŠã‚¹": break;
+            case "å€ç‡": break;
+            case "ãƒ¯ã‚¤ãƒ«ãƒ‰": break;
+            case "ã‚°ãƒ©ã‚º": break;
+            case "ã‚¹ãƒãƒ¼ãƒ«": break;
+            case "ã‚´ãƒ¼ãƒ«ãƒ‰": break;
+            case "ãƒ©ãƒƒã‚­ãƒ¼": break;
+            case "ãƒ©ãƒ³ãƒ€ãƒ ": break;
+            case "ãƒ–ãƒ©ã‚¤ãƒ³ãƒ‰": break;
+            case "ãƒã‚¬ãƒ†ã‚£ãƒ–": break;
+            case "ã‚»ãƒ”ã‚¢": break;
+            case "ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ ãƒ¼ãƒ–": break;
         }
 
         return MasterData.instance.GetStringMaster(index);
@@ -198,14 +193,14 @@ public static class Extra
     }
 
     /// <summary>
-    /// •¶š‰»‚¯‚ğ‚·‚é‰Â”\«‚ğì¬
-    /// ƒoƒbƒNƒhƒA‚ğ’Ç‰Á
+    /// æ–‡å­—åŒ–ã‘ã‚’ã™ã‚‹å¯èƒ½æ€§ã‚’ä½œæˆ
+    /// ãƒãƒƒã‚¯ãƒ‰ã‚¢ã‚’è¿½åŠ 
     /// </summary>
     /// <param name="_string"></param>
     /// <returns></returns>
     public static string ErrorText(this string _string, bool backDoor = false)
     {
-        //ƒoƒbƒNƒhƒA‚ª—LŒø‚Ìê‡‚Í‰½‚à‚¹‚¸‚É•Ô‚·F‚È‚Ç‚àg‚¦‚È‚¢
+        //ãƒãƒƒã‚¯ãƒ‰ã‚¢ãŒæœ‰åŠ¹ã®å ´åˆã¯ä½•ã‚‚ã›ãšã«è¿”ã™è‰²ãªã©ã‚‚ä½¿ãˆãªã„
         if (backDoor) return _string;
 
         int count = 0;
@@ -226,7 +221,7 @@ public static class Extra
 
         for (int i = 0; i < chars.Length; i++)
         {
-            if (chars[i] == 'h')
+            if (chars[i] == 'â€')
             {
 
                 colorFlag = !colorFlag;
@@ -253,7 +248,7 @@ public static class Extra
     }
 
     /// <summary>
-    /// ƒvƒŒƒC‚É“®‚«‚ğs‚¤ƒoƒt‚©‚Ç‚¤‚©‚ğ”»’f
+    /// ãƒ—ãƒ¬ã‚¤æ™‚ã«å‹•ãã‚’è¡Œã†ãƒãƒ•ã‹ã©ã†ã‹ã‚’åˆ¤æ–­
     /// </summary>
     /// <param name="cardBuff"></param>
     /// <returns></returns>
@@ -269,7 +264,6 @@ public static class Extra
                 flag = true;
                 break;
 
-
             default: break;
         }
         return flag;
@@ -277,7 +271,7 @@ public static class Extra
     }
 
     /// <summary>
-    /// ƒvƒŒƒC‚É“®‚«‚ğs‚¤ƒoƒt‚©‚Ç‚¤‚©‚ğ”»’f
+    /// ãƒ—ãƒ¬ã‚¤æ™‚ã«å‹•ãã‚’è¡Œã†ãƒãƒ•ã‹ã©ã†ã‹ã‚’åˆ¤æ–­
     /// </summary>
     /// <param name="cardBuff"></param>
     /// <returns></returns>
@@ -297,19 +291,13 @@ public static class Extra
         return flag;
 
     }
-   // public static List<List<System.Action>> GetTrunpBuffs(Card.Trump trump) 
+   // public static List<List<System.Action>> GetTrunpBuffs(Card.Trump trump)
     //{
-
-
-
-
 
     //}
 
-
-
     /// <summary>
-    /// ƒŠƒXƒg‚Ì’†‚ÉğŒ‚ğ“ü‚ê‚Ä‚»‚ÌğŒ‚É‚ ‚Á‚½•¨‚ÌŒÂ”‚ğ•Ô‚·ŠÖ”
+    /// ãƒªã‚¹ãƒˆã®ä¸­ã«æ¡ä»¶ã‚’å…¥ã‚Œã¦ãã®æ¡ä»¶ã«ã‚ã£ãŸç‰©ã®å€‹æ•°ã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="values"></param>
@@ -328,18 +316,18 @@ public static class Extra
     }
 
     /// <summary>
-    /// ƒŠƒXƒg‚ğg‚¢‘¼‚ÌŒ^‚É•ÏX‚µ‚Ä•Ô‚·ŠÖ”
+    /// ãƒªã‚¹ãƒˆã‚’ä½¿ã„ä»–ã®å‹ã«å¤‰æ›´ã—ã¦è¿”ã™é–¢æ•°
     /// </summary>
-    /// <typeparam name="T"><•ÏX‘O‚ÌŒ^/typeparam>
-    /// <typeparam name="T2"><•ÏXŒã‚ÌŒ^/typeparam>
-    /// <param name="values"><g—p‚·‚éƒŠƒXƒg/param>
-    /// <param name="func"><•ÏXŒã‚ÌŒ^‚ğ•Ô‚·ŠÖ”/param>
+    /// <typeparam name="T"><å¤‰æ›´å‰ã®å‹/typeparam>
+    /// <typeparam name="T2"><å¤‰æ›´å¾Œã®å‹/typeparam>
+    /// <param name="values"><ä½¿ç”¨ã™ã‚‹ãƒªã‚¹ãƒˆ/param>
+    /// <param name="func"><å¤‰æ›´å¾Œã®å‹ã‚’è¿”ã™é–¢æ•°/param>
     /// <returns></returns>
-    public static List<T2> GetSeparateList<T,T2>(this List<T> values, System.Func<T,T2> func) 
+    public static List<T2> GetSeparateList<T,T2>(this List<T> values, System.Func<T,T2> func)
     {
         List<T2> list = new();
 
-        for(int i = 0; i < values.Count; i++) 
+        for(int i = 0; i < values.Count; i++)
         {
             list.Add(func(values[i]));
 
@@ -350,16 +338,16 @@ public static class Extra
     }
 
     /// <summary>
-    /// ƒŠƒXƒg‚Ìd•¡‚µ‚½’l‚ğíœ‚µ‚½ƒŠƒXƒg‚ğ•Ô‚·ŠÖ”
+    /// ãƒªã‚¹ãƒˆã®é‡è¤‡ã—ãŸå€¤ã‚’å‰Šé™¤ã—ãŸãƒªã‚¹ãƒˆã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="list"></param>
     /// <returns></returns>
-    public static List<int> GetDuplicateDelete(this List<int> list) 
+    public static List<int> GetDuplicateDelete(this List<int> list)
     {
         List<int> result = new();
         List<int> dommy = list;
-        for(int i = 0; i < dommy.Count; i++) 
+        for(int i = 0; i < dommy.Count; i++)
         {
 
             if (dommy.GetCount(value => value == dommy[i]) > 1)
@@ -370,9 +358,7 @@ public static class Extra
                 continue;
             }
 
-
             result.Add(dommy[i]);
-
 
         }
         return result;
@@ -380,35 +366,34 @@ public static class Extra
     }
 
     /// <summary>
-    /// ‘ÎÛ‚ÌƒŠƒXƒg‚©‚ç“¯‚¶’l‚ÌƒCƒ“ƒfƒbƒNƒX”Ô†‚ÌƒŠƒXƒg‚ğ•Ô‚·ŠÖ”
-    /// –ß‚è’l‚Ívalue‚ÌƒCƒ“ƒfƒbƒNƒX”Ô†‚Å-1‚ª“ü‚Á‚Ä‚¢‚é‚Ì‚ÍƒKƒbƒ`‚ª‚È‚¢
+    /// å¯¾è±¡ã®ãƒªã‚¹ãƒˆã‹ã‚‰åŒã˜å€¤ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ç•ªå·ã®ãƒªã‚¹ãƒˆã‚’è¿”ã™é–¢æ•°
+    /// æˆ»ã‚Šå€¤ã¯valueã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ç•ªå·ã§-1ãŒå…¥ã£ã¦ã„ã‚‹ã®ã¯ã‚¬ãƒƒãƒãŒãªã„
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="value"></param>
     /// <param name="traget"></param>
     /// <returns></returns>
-    public static List<int> SearchListIndex<T>(this List<T> value, List<T> traget) 
+    public static List<int> SearchListIndex<T>(this List<T> value, List<T> traget)
     {
         List<int> result=new();
 
-        for(int i = 0; i < traget.Count; i++) 
+        for(int i = 0; i < traget.Count; i++)
         {
-            for(int j = 0; j < value.Count; j++) 
+            for(int j = 0; j < value.Count; j++)
             {
                 if (!EqualityComparer<T>.Default.Equals(traget[i], value[j])) continue;
                 result.Add(j);
                 break;
             }
-            // result‚Ì”z—ñ”Ô†‚Ætarget‚Ì”Ô†‚ğ‡‚í‚¹‚é‚½‚ß‚É–„‚ß‚é
+            // resultã®é…åˆ—ç•ªå·ã¨targetã®ç•ªå·ã‚’åˆã‚ã›ã‚‹ãŸã‚ã«åŸ‹ã‚ã‚‹
             if ((i + 1) != result.Count) result.Add(-1);
-
 
         }
         return result;
     }
 
     /// <summary>
-    /// ˆø”‚Q‚ÌƒŠƒXƒg‚ÌƒCƒ“ƒfƒbƒNƒX”Ô†‚¾‚¯‚ğƒŠƒXƒg‚É‚Ü‚Æ‚ß‚Ä•Ô‚·ŠÖ”
+    /// å¼•æ•°ï¼’ã®ãƒªã‚¹ãƒˆã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ç•ªå·ã ã‘ã‚’ãƒªã‚¹ãƒˆã«ã¾ã¨ã‚ã¦è¿”ã™é–¢æ•°
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="value"></param>
@@ -424,7 +409,7 @@ public static class Extra
     }
 
     /// <summary>
-    /// ƒŠƒXƒg‚Ì‘S‚Ä‚É“¯‚¶ŠÖ”‚ğg—p‚·‚é
+    /// ãƒªã‚¹ãƒˆã®å…¨ã¦ã«åŒã˜é–¢æ•°ã‚’ä½¿ç”¨ã™ã‚‹
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="values"></param>
@@ -442,7 +427,6 @@ public static class Extra
     {
         switch (C)
         {
-
 
             case 'R': return "<color=#FF0000>";
             case 'B': return "<color=#0000FF>";

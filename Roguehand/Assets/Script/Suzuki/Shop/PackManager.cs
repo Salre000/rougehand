@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,21 +10,21 @@ public class PackManager : MonoBehaviour
     private bool _isArrival = false;
     private GameObject _pickPack;
 
-
     private void Awake()
     {
         if (instance == null)
             instance = this;
     }
 
-    // ƒpƒbƒN‚ğw“ü‚µ‚½‚©
+    // ãƒ‘ãƒƒã‚¯ã‚’è³¼å…¥ã—ãŸã‹
     public void SetIsBuyPack(bool flag) { _isBuyPack = flag; }
     public bool IsBuyPack() { return _isBuyPack; }
-    // ƒpƒbƒN‚ª–Ú“I’n‚É“’…‚µ‚½‚©
+    // ãƒ‘ãƒƒã‚¯ãŒç›®çš„åœ°ã«åˆ°ç€ã—ãŸã‹
     public void SetIsArrival(bool flag) { _isArrival = flag; }
     public bool IsArrival() { return _isArrival; }
-    // w“ü‚µ‚½ƒpƒbƒNƒIƒuƒWƒFƒNƒg
+    // è³¼å…¥ã—ãŸãƒ‘ãƒƒã‚¯ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     public void SetPickPack(GameObject transform) { _pickPack = transform; }
     public GameObject GetPickPack() { return _pickPack; }
 
 }
+

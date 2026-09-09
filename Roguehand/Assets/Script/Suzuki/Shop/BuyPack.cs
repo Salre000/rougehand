@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
-/// ƒpƒbƒNw“ü
+/// ãƒ‘ãƒƒã‚¯è³¼å…¥æ™‚
 /// </summary>
 public class BuyPack:MonoBehaviour
 {
@@ -27,7 +27,7 @@ public class BuyPack:MonoBehaviour
     }
 
     /// <summary>
-    /// ‘I‘ğ‚µ‚½ƒpƒbƒN‚ğ’†‰›‚ÉˆÚ“®‚³‚¹‚é
+    /// é¸æŠã—ãŸãƒ‘ãƒƒã‚¯ã‚’ä¸­å¤®ã«ç§»å‹•ã•ã›ã‚‹
     /// </summary>
     private void Move()
     {
@@ -35,13 +35,13 @@ public class BuyPack:MonoBehaviour
         value = Vector3.Lerp(value, _packMoveTarget.localPosition, _time);
         _pickPack.transform.localPosition = value;
 
-        // ƒpƒbƒN‚ª–Ú“I’n‚É‚ ‚é’ö“x‹ß‚Ã‚¢‚½‚©
+        // ãƒ‘ãƒƒã‚¯ãŒç›®çš„åœ°ã«ã‚ã‚‹ç¨‹åº¦è¿‘ã¥ã„ãŸã‹
         if ((_pickPack.transform.localPosition - _packMoveTarget.transform.localPosition).sqrMagnitude > _distance) return;
         PackManager.instance.SetIsArrival(true);
     }
 
     /// <summary>
-    /// ‘I‘ğ‚³‚ê‚½ƒpƒbƒN‚ğæ“¾
+    /// é¸æŠã•ã‚ŒãŸãƒ‘ãƒƒã‚¯ã‚’å–å¾—
     /// </summary>
     private void PickGet()
     {
@@ -49,3 +49,4 @@ public class BuyPack:MonoBehaviour
         _pickPack=PackManager.instance.GetPickPack();
     }
 }
+

@@ -1,14 +1,13 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ƒoƒt‚Ìƒ†[ƒeƒBƒŠƒeƒB
+/// ãƒãƒ•ã®ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£
 /// </summary>
-public static class BuffUtility 
+public static class BuffUtility
 {
     public static BuffManager BuffManager { set; private get; }
-
 
     public static void PlayBuff(Card.cardBuff card) { BuffManager.PlayBuff(card); }
     public static void PlayBuff(Card.JokerBuff card) { BuffManager.PlayBuff(card); }

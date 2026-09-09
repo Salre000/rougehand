@@ -1,24 +1,25 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// ƒV[ƒ“ŠÇ—
+// ã‚·ãƒ¼ãƒ³ç®¡ç†
 public static class GameSceneManager
 {
-    // ƒV[ƒ“‚Ì–¼‘O
+    // ã‚·ãƒ¼ãƒ³ã®åå‰
     public const string titleScene = "Title";
     public const string mainScene = "Main";
 
-    // •’Ê‚ÌƒV[ƒ“‘JˆÚ
+    // æ™®é€šã®ã‚·ãƒ¼ãƒ³é·ç§»
     public static void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
 
-    // ƒ‚[ƒh‚ğŠÜ‚ß‚½•’Ê‚ÌƒV[ƒ“‘JˆÚ
+    // ãƒ¢ãƒ¼ãƒ‰ã‚’å«ã‚ãŸæ™®é€šã®ã‚·ãƒ¼ãƒ³é·ç§»
     public static void LoadScene(string sceneName, LoadSceneMode mode)
     {
         SceneManager.LoadScene(sceneName, mode);
     }
 }
+

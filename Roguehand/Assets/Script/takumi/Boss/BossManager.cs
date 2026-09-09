@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,7 +11,7 @@ public class BossManager : MonoBehaviour
 
     private List<BossBase> bossBases = new List<BossBase>();
 
-    IconList iconList;  
+    IconList iconList;
     public void Awake()
     {
         BossUtility.bossManager = this;
@@ -34,8 +34,6 @@ public class BossManager : MonoBehaviour
         for (int i = 0; i < bossBases.Count; i++) bossBases[i].LateUpdate();
     }
 
-
-
     public void BossEnd()
     {
         if (bossBases.Count < 1) return;
@@ -46,12 +44,9 @@ public class BossManager : MonoBehaviour
         EndIcon();
     }
 
-
-
     public void CreateBoss(int id)
     {
         int _id = id + IDUtility.BOSS_ID;
-
 
         BossBase bossBase = null;
 
@@ -75,7 +70,7 @@ public class BossManager : MonoBehaviour
 
     }
 
-    public void CreateBoss(BossBase bossBase) 
+    public void CreateBoss(BossBase bossBase)
     {
         bossBases.Add(bossBase);
         bossBase.BaseInitializ();
@@ -86,27 +81,26 @@ public class BossManager : MonoBehaviour
         CreateBoss(Random.Range(1, 6))
             ;
 
-
     }
 
-    public BossBase GetBossBase() 
+    public BossBase GetBossBase()
     {
 
         if(bossBases.Count<1)return null;
         return bossBases[0];
     }
 
-    private void SetBossIcon(int ID) 
+    private void SetBossIcon(int ID)
     {
         bossIcon.gameObject.SetActive(true);
         bossIcon.sprite = iconList._iconList[ID];
     }
 
-    private void EndIcon() 
+    private void EndIcon()
     {
         bossIcon.sprite = null;
         bossIcon.gameObject.SetActive(false);
     }
 
-
 }
+

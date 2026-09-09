@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
@@ -7,50 +7,45 @@ using UnityEngine.Scripting;
 public class JokerManager : MonoBehaviour
 {
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ğ‚Ü‚Æ‚ß‚½ƒŠƒXƒg
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã‚’ã¾ã¨ã‚ãŸãƒªã‚¹ãƒˆ
     /// </summary>
     private List<JokerBase> _jokers = new List<JokerBase>(5);
 
     /// <summary>
-    /// ˆê“I‚É‚à‚Á‚Ä‚¢‚éƒWƒ‡[ƒJ[
+    /// ä¸€æ™‚çš„ã«ã‚‚ã£ã¦ã„ã‚‹ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼
     /// </summary>
     private List<JokerBase> _dommyJoker = new List<JokerBase>(5);
 
-
-
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚Ìƒ^[ƒQƒbƒg‚É‚È‚è“¾‚é•¨‚ğƒLƒƒƒbƒVƒ…‚·‚é
-    /// ‡”Ô‚Éˆ—‚ğ‚·‚éˆ×‚ÉƒŠƒXƒg‚É‚µ‚½
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«ãªã‚Šå¾—ã‚‹ç‰©ã‚’ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã™ã‚‹
+    /// é †ç•ªã«å‡¦ç†ã‚’ã™ã‚‹ç‚ºã«ãƒªã‚¹ãƒˆã«ã—ãŸ
     /// </summary>
     private List<JokerActionUseEnum.JokerActionTarget> _target = new List<JokerActionUseEnum.JokerActionTarget>();
 
-
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚Ìƒ^[ƒQƒbƒg‚É‚È‚è“¾‚éƒX[ƒg
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«ãªã‚Šå¾—ã‚‹ã‚¹ãƒ¼ãƒˆ
     /// </summary>
     private Card.suit _targetSuit;
 
-
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚Ìƒ^[ƒQƒbƒg‚É‚È‚è“¾‚éƒiƒ“ƒo[
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«ãªã‚Šå¾—ã‚‹ãƒŠãƒ³ãƒãƒ¼
     /// </summary>
     private Card.number _targetNumer;
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚Ìƒ^[ƒQƒbƒg‚É‚È‚è“¾‚é–ğ
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«ãªã‚Šå¾—ã‚‹å½¹
     /// </summary>
     private RoleManager.Role _targetRole;
 
     /// <summary>
-    /// Œ»İ‚Ìƒ‹[ƒv’†‚ÌƒCƒ“ƒfƒbƒNƒX”Ô†
+    /// ç¾åœ¨ã®ãƒ«ãƒ¼ãƒ—ä¸­ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ç•ªå·
     /// </summary>
     private int useIndex = -1;
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ÌÅ‘å”
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®æœ€å¤§æ•°
     /// </summary>
     private readonly int JOKER_MAX_COUNT = 5;
-
 
     public void Awake()
     {
@@ -68,11 +63,8 @@ public class JokerManager : MonoBehaviour
         JokerUpData();
     }
 
-
-
-
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ğ”jŠü‚·‚éŠÖ”
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã‚’ç ´æ£„ã™ã‚‹é–¢æ•°
     /// </summary>
     /// <param name="joker"></param>
     /// <returns></returns>
@@ -85,8 +77,7 @@ public class JokerManager : MonoBehaviour
 
         _jokers.Remove(joker);
 
-
-        //ƒWƒ‡[ƒJ[‚ÌƒIƒuƒWƒFƒNƒg‚Ìíœˆ—
+        //ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å‰Šé™¤å‡¦ç†
         JokerObjectUtility.RemoveJoker(index);
 
         return flag;
@@ -98,24 +89,21 @@ public class JokerManager : MonoBehaviour
 
         _jokers.RemoveAt(index);
 
-
-        //ƒWƒ‡[ƒJ[‚ÌƒIƒuƒWƒFƒNƒg‚Ìíœˆ—
+        //ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å‰Šé™¤å‡¦ç†
         JokerObjectUtility.RemoveJoker(index);
 
         return true;
     }
 
-
-
     /// <summary>
-    /// ƒ‰ƒEƒ“ƒh‚ÌŠJn‚ÌƒWƒ‡[ƒJ[‚Ìˆ—
+    /// ãƒ©ã‚¦ãƒ³ãƒ‰ã®é–‹å§‹æ™‚ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®å‡¦ç†
     /// </summary>
     public void RoundStart()
     {
         for (int i = 0; i < _jokers.Count; i++) _jokers[i].RoundStart();
     }
     /// <summary>
-    /// ƒ‰ƒEƒ“ƒh‚ÌI—¹‚ÌƒWƒ‡[ƒJ[‚Ìˆ—
+    /// ãƒ©ã‚¦ãƒ³ãƒ‰ã®çµ‚äº†æ™‚ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®å‡¦ç†
     /// </summary>
     public void RoundEnd()
     {
@@ -123,14 +111,12 @@ public class JokerManager : MonoBehaviour
         for (int i = 0; i < _jokers.Count; i++) _jokers[i].RoundEnd();
     }
 
-
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ğ’Ç‰Á‚·‚éŠÖ”
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã‚’è¿½åŠ ã™ã‚‹é–¢æ•°
     /// </summary>
     /// <param name="ID"></param>
     public void AddJoker(int ID)
     {
-
 
         int jokerCount = 0;
         JokerUtility.JokerALLAction(joker => { if (joker.GetJokerBuff() != Card.JokerBuff.Negative) jokerCount++; });
@@ -143,7 +129,7 @@ public class JokerManager : MonoBehaviour
         JokerObjectUtility.AddJoker(joker);
 
     }
-    public void AddJoker(JokerBase jokerBase) 
+    public void AddJoker(JokerBase jokerBase)
     {
         _jokers.Add(jokerBase);
         JokerObjectUtility.AddJoker(jokerBase);
@@ -162,45 +148,35 @@ public class JokerManager : MonoBehaviour
 
         MeshRenderer meshRenderer = JokerObjectUtility.GetIDObject(ID).transform.GetChild(0).GetComponent<MeshRenderer>();
 
-        //ˆê“xƒLƒƒƒbƒVƒ…‚·‚é•K—v‚ ‚è
+        //ä¸€åº¦ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã™ã‚‹å¿…è¦ã‚ã‚Š
         Material[] materials = meshRenderer.materials;
 
         materials[0] = BuffUtility.GetJokerMaterial((int)jokerBase.GetJokerBuff());
 
         if (jokerBase.GetCardBuff() != Card.cardBuff.None) materials[0] = BuffUtility.GetCardMaterial((int)jokerBase.GetCardBuff());
 
-
         meshRenderer.materials = materials;
-
-
-
-
 
     }
 
-
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ğ‘I‘ğ‚Å‚«‚éó‘Ô‚É‚·‚éŠÖ”
-    /// ƒ‰ƒ“ƒ_ƒ€
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã‚’é¸æŠã§ãã‚‹çŠ¶æ…‹ã«ã™ã‚‹é–¢æ•°
+    /// ãƒ©ãƒ³ãƒ€ãƒ 
     /// </summary>
     public void ShopJokerAdd(System.Func<JokerBase> func = null)
     {
-        //@ƒWƒ‡[ƒJ[‘I‘ğğŒ‚ğ‰½‚à“ü‚ê‚È‚©‚Á‚½‚çƒ‰ƒ“ƒ_ƒ€‚Å¶¬‚·‚é
+        //ã€€ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼é¸æŠæ¡ä»¶ã‚’ä½•ã‚‚å…¥ã‚Œãªã‹ã£ãŸã‚‰ãƒ©ãƒ³ãƒ€ãƒ ã§ç”Ÿæˆã™ã‚‹
         if (func == null) func = GetRoundomJoker;
 
-        //ƒJ[ƒh‚ÆƒJ[ƒh‚ÌŠÔ
+        //ã‚«ãƒ¼ãƒ‰ã¨ã‚«ãƒ¼ãƒ‰ã®é–“
         JokerBase jokerBase = func();
 
         JokerObjectUtility.AddDomyyJoker(jokerBase);
 
-
-
     }
 
-
-
     /// <summary>
-    /// IDw’è‚Ì”„‚ç‚ê‚½‚Æ‚«‚Ì‹““®
+    /// IDæŒ‡å®šã®å£²ã‚‰ã‚ŒãŸã¨ãã®æŒ™å‹•
     /// </summary>
     /// <param name="ID"></param>
     public void SaleAction(int ID)
@@ -209,35 +185,34 @@ public class JokerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¡‚ÌƒtƒŒ[ƒ€‚È‚¢‚Ås‚í‚ê‚½ƒ^[ƒQƒbƒg‚Ì“®‚«
+    /// ä»Šã®ãƒ•ãƒ¬ãƒ¼ãƒ ãªã„ã§è¡Œã‚ã‚ŒãŸã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®å‹•ã
     /// </summary>
     /// <returns></returns>
     public JokerActionUseEnum.JokerActionTarget GetTarget() { return _target[0]; }
     /// <summary>
-    /// ¡‚ÌƒtƒŒ[ƒ€‚È‚¢‚Ås‚í‚ê‚½ƒ^[ƒQƒbƒg‚Ì“®‚«
+    /// ä»Šã®ãƒ•ãƒ¬ãƒ¼ãƒ ãªã„ã§è¡Œã‚ã‚ŒãŸã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®å‹•ã
     /// </summary>
     /// <returns></returns>
     public Card.suit GetTargetSuit() { return _targetSuit; }
     /// <summary>
-    /// ¡‚ÌƒtƒŒ[ƒ€‚È‚¢‚Ås‚í‚ê‚½ƒ^[ƒQƒbƒg‚Ì“®‚«
+    /// ä»Šã®ãƒ•ãƒ¬ãƒ¼ãƒ ãªã„ã§è¡Œã‚ã‚ŒãŸã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®å‹•ã
     /// </summary>
     /// <returns></returns>
     public Card.number GetTargetNumer() { return _targetNumer; }
     /// <summary>
-    /// ¡‚Ìƒ‰ƒEƒ“ƒh‚È‚¢‚Ås‚í‚ê‚½ƒ^[ƒQƒbƒg‚Ì“®‚«
+    /// ä»Šã®ãƒ©ã‚¦ãƒ³ãƒ‰ãªã„ã§è¡Œã‚ã‚ŒãŸã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®å‹•ã
     /// </summary>
     /// <returns></returns>
     public RoleManager.Role GetTargetRole() { return _targetRole; }
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚Ì’Ç‰Á‚ª‰Â”\‚©‚Ç‚¤‚©‚ğ”»’f‚·‚éŠÖ”
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®è¿½åŠ ãŒå¯èƒ½ã‹ã©ã†ã‹ã‚’åˆ¤æ–­ã™ã‚‹é–¢æ•°
     /// </summary>
     /// <returns></returns>
     public bool JokerAddCheck() { return _jokers.Count < JOKER_MAX_COUNT; }
 
-
     /// <summary>
-    /// ‡”Ô‚ğ“ü‚ê‘Ö‚¦‚éŠÖ”
+    /// é †ç•ªã‚’å…¥ã‚Œæ›¿ãˆã‚‹é–¢æ•°
     /// </summary>
     /// <param name="lostID"></param>
     /// <param name="nextID"></param>
@@ -250,7 +225,7 @@ public class JokerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚É‚æ‚Á‚Ä”{—¦‚ªã¸‚·‚éŠÖ”
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã«ã‚ˆã£ã¦å€ç‡ãŒä¸Šæ˜‡ã™ã‚‹é–¢æ•°
     /// </summary>
     /// <param name="magnification"></param>
     public void JokerAddMagnification(float magnification)
@@ -260,7 +235,7 @@ public class JokerManager : MonoBehaviour
 
     }
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚É‚æ‚Á‚ÄŠî‘b’l‚ªã¸‚·‚éŠÖ”
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã«ã‚ˆã£ã¦åŸºç¤å€¤ãŒä¸Šæ˜‡ã™ã‚‹é–¢æ•°
     /// </summary>
     /// <param name="baseValue"></param>
     public void JokerAddBaseValue(float baseValue)
@@ -272,35 +247,33 @@ public class JokerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ğŒ‚ª–‚½‚³‚ê‚½uŠÔ‚Éƒ^[ƒQƒbƒg‚Ì’†‚É‘ã“ü‚·‚éŠÖ”
+    /// æ¡ä»¶ãŒæº€ãŸã•ã‚ŒãŸç¬é–“ã«ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ä¸­ã«ä»£å…¥ã™ã‚‹é–¢æ•°
     /// </summary>
     public void SetTarget(JokerActionUseEnum.JokerActionTarget target)
     {
         _target.Add(target);
     }
     /// <summary>
-    /// ğŒ‚ª–‚½‚³‚ê‚½uŠÔ‚Éƒ^[ƒQƒbƒg‚Ì’†‚É‘ã“ü‚·‚éŠÖ”
+    /// æ¡ä»¶ãŒæº€ãŸã•ã‚ŒãŸç¬é–“ã«ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ä¸­ã«ä»£å…¥ã™ã‚‹é–¢æ•°
     /// </summary>
     public void SetTarget(Card.suit target)
     {
         _targetSuit = target;
     }
     /// <summary>
-    /// ğŒ‚ª–‚½‚³‚ê‚½uŠÔ‚Éƒ^[ƒQƒbƒg‚Ì’†‚É‘ã“ü‚·‚éŠÖ”
+    /// æ¡ä»¶ãŒæº€ãŸã•ã‚ŒãŸç¬é–“ã«ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ä¸­ã«ä»£å…¥ã™ã‚‹é–¢æ•°
     /// </summary>
     public void SetTarget(Card.number target)
     {
         _targetNumer = target;
     }
     /// <summary>
-    /// ğŒ‚ª–‚½‚³‚ê‚½uŠÔ‚Éƒ^[ƒQƒbƒg‚Ì’†‚É‘ã“ü‚·‚éŠÖ”
+    /// æ¡ä»¶ãŒæº€ãŸã•ã‚ŒãŸç¬é–“ã«ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ä¸­ã«ä»£å…¥ã™ã‚‹é–¢æ•°
     /// </summary>
     public void SetTarget(RoleManager.Role target)
     {
         _targetRole = target;
     }
-
-
 
     public int GetIndex() { return useIndex; }
     public int GetIndex(JokerBase jokerBase) { return _jokers.IndexOf(jokerBase); }
@@ -317,7 +290,6 @@ public class JokerManager : MonoBehaviour
 
         SaleUtility.SetSale(_jokers[ID], joker, _jokers[ID].GetSaleValue());
 
-
     }
     public void ShowExplanation(int ID)
     {
@@ -330,7 +302,7 @@ public class JokerManager : MonoBehaviour
 
     }
     /// <summary>
-    /// ‘S‚Ä‚ÌƒWƒ‡[ƒJ[‚É‰½‚©‚·‚éŠÖ”
+    /// å…¨ã¦ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã«ä½•ã‹ã™ã‚‹é–¢æ•°
     /// </summary>
     public void JokerALLAction(System.Action<JokerBase> action)
     {
@@ -340,9 +312,8 @@ public class JokerManager : MonoBehaviour
 
     public List<JokerBase> GetJoker() { return _jokers; }
 
-
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ÌƒAƒbƒvƒf[ƒgˆ—‚ğ‰ñ‚·ŠÖ”
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆå‡¦ç†ã‚’å›ã™é–¢æ•°
     /// </summary>
     private void JokerUpData()
     {
@@ -353,17 +324,16 @@ public class JokerManager : MonoBehaviour
             _jokers[i].UpData();
         }
 
-        //ƒ^[ƒQƒbƒg‚Ì‰Šú‰»
+        //ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®åˆæœŸåŒ–
         if (_target.Count <= 1) _target[0] = JokerActionUseEnum.JokerActionTarget.None; else _target.RemoveAt(0);
         _targetSuit = Card.suit.None;
         _targetNumer = Card.number.None;
         _targetRole = RoleManager.Role.None;
 
-
         useIndex = -1;
     }
     /// <summary>
-    /// ƒ‰ƒEƒ“ƒhI—¹‚ÌƒWƒ‡[ƒJ[‚Ì‹““®
+    /// ãƒ©ã‚¦ãƒ³ãƒ‰çµ‚äº†æ™‚ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®æŒ™å‹•
     /// </summary>
     private void SetRoundEndAction()
     {
@@ -373,6 +343,5 @@ public class JokerManager : MonoBehaviour
 
     private JokerBase GetRoundomJoker() { return ALLJoker.GetJoker((ALLJoker._allJokerEnum)Random.Range(0, (int)ALLJoker._allJokerEnum.MAX)); }
 
-
-
 }
+

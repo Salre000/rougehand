@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +13,6 @@ public class FXAnime : MonoBehaviour
     [SerializeField] GameObject _fadePanel;
     Vector3 _position = Vector3.zero;
 
-
     float _h_fade1 = 1080.0f;
     float _w_fade1 = 2400.0f;
 
@@ -23,8 +22,6 @@ public class FXAnime : MonoBehaviour
     bool _startF = false;
     bool fade1F = false;
     bool fade2F = false;
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +57,7 @@ public class FXAnime : MonoBehaviour
         _fx.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 0);
         _fx.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 0);
         _time = 0;
-        _startF = false; 
+        _startF = false;
         fade1F = false;
     }
 
@@ -74,11 +71,10 @@ public class FXAnime : MonoBehaviour
     void Fade1()
     {
         if (fade1F) return;
-        // ‚’¼ƒTƒCƒY‚Ì•ÏX
+        // åž‚ç›´ã‚µã‚¤ã‚ºã®å¤‰æ›´
         _fx.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, Mathf.Lerp(_fx.rect.height, _h_fade1, _time));
-        // …•½ƒTƒCƒY‚Ì•ÏX
+        // æ°´å¹³ã‚µã‚¤ã‚ºã®å¤‰æ›´
         _fx.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Mathf.Lerp(_fx.rect.width, _w_fade1, _time));
-
 
         if (Mathf.Abs(_fx.rect.height - _h_fade1) > 0.1f) return;
         if (Mathf.Abs(_fx.rect.width - _w_fade1) > 0.1f) return;
@@ -90,14 +86,13 @@ public class FXAnime : MonoBehaviour
     {
         if (!fade1F || fade2F) return;
 
-        
         fade2F = true;
         _time = 0;
     }
-
 
     void PanelSavaTrans()
     {
         _panel.localPosition = _position;
     }
 }
+

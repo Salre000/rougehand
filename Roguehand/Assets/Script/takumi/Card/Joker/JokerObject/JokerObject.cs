@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Unity.VisualScripting;
@@ -7,80 +7,78 @@ using static JokerObjectManager;
 public class JokerObject : MonoBehaviour
 {
 
-
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ÌˆÚ“®‚Ég‚¤ˆÚ“®—Ê
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ç§»å‹•ã«ä½¿ã†ç§»å‹•é‡
     /// </summary>
     private readonly Vector3 _MOVE_VEC = new Vector3(0, 0, 100);
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ÌˆÚ“®‘O‚ÌÀ•W
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ç§»å‹•å‰ã®åº§æ¨™
     /// </summary>
     private Vector3 _lostpos = new Vector3(0, 0, 0);
 
     /// <summary>
-    /// ‘O‚ÌŠp“x
+    /// å‰ã®è§’åº¦
     /// </summary>
     private Vector3 _lostAngle = new Vector3(0, 0, 0);
 
     /// <summary>
-    /// ‚±‚ÌƒWƒ‡[ƒJ[‚ÌƒXƒe[ƒ^ƒX
+    /// ã“ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹
     /// </summary>
     [SerializeField] private JokerStatus _status = JokerStatus.wait;
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚Ì“à•”ˆ—
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®å†…éƒ¨å‡¦ç†
     /// </summary>
     private JokerBase _base;
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[ƒvƒŒƒC‚Ì“®‚«•û
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ãƒ—ãƒ¬ã‚¤æ™‚ã®å‹•ãæ–¹
     /// </summary>
     private System.Action _jokerPlayAction;
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[ƒvƒŒƒC‚Ì’†g
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ãƒ—ãƒ¬ã‚¤æ™‚ã®ä¸­èº«
     /// </summary>
     private System.Action _jokerActionProcess;
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ÌŒo‰ßŠÔ
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®çµŒéæ™‚é–“
     /// </summary>
     private float _time;
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ÌƒIƒuƒWƒFƒNƒg‚ª’Í‚ŞˆÚ“®’†‚©‚Ç‚¤‚©
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒæ´ã‚€ç§»å‹•ä¸­ã‹ã©ã†ã‹
     /// </summary>
     private bool _isGrab = false;
 
     /// <summary>
-    /// ˆêƒ^[ƒ“‚Éˆê“x‚¾‚¯‚É‚·‚éˆ×‚Ì•Ï”
+    /// ä¸€ã‚¿ãƒ¼ãƒ³ã«ä¸€åº¦ã ã‘ã«ã™ã‚‹ç‚ºã®å¤‰æ•°
     /// </summary>
     [SerializeField] private bool _isPlay = true;
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ÌƒIƒuƒWƒFƒN‚ÆˆÚ“®‚Åg—p‚·‚éŒë·
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ã¨ç§»å‹•ã§ä½¿ç”¨ã™ã‚‹èª¤å·®
     /// </summary>
     private readonly float EPSILON = 0.1f;
 
     /// <summary>
-    /// ƒQ[ƒ€’†‚Éã¸‚·‚é”{—¦‚Ì’l
+    /// ã‚²ãƒ¼ãƒ ä¸­ã«ä¸Šæ˜‡ã™ã‚‹å€ç‡ã®å€¤
     /// </summary>
     private float AddNum = 0;
 
     /// <summary>
-    /// ‚±‚ÌƒIƒuƒWƒFƒNƒg‚ğ”j‰ó‚·‚é‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
+    /// ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç ´å£Šã™ã‚‹ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
     /// </summary>
     private bool _isEnd = false;
 
     /// <summary>
-    /// ˆêƒ^[ƒ“‚Ìs“®‚Ì•Ï”
+    /// ä¸€ã‚¿ãƒ¼ãƒ³ã®è¡Œå‹•ã®å¤‰æ•°
     /// </summary>
     private List<System.Action> actions = new List<System.Action>();
 
-
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚Ì¶¬‚É“®‚­‰Šú‰»ˆ—
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ç”Ÿæˆæ™‚ã«å‹•ãåˆæœŸåŒ–å‡¦ç†
     /// </summary>
     /// <param name="jokerBase"></param>
     public void Initializ(JokerBase jokerBase)
@@ -95,7 +93,7 @@ public class JokerObject : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ÌƒvƒŒƒC‘O‚ÉƒWƒ‡[ƒJ[‚ÌƒvƒŒƒC‚Ì“à—e‚ğ‹L˜^
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ãƒ—ãƒ¬ã‚¤å‰ã«ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ãƒ—ãƒ¬ã‚¤æ™‚ã®å†…å®¹ã‚’è¨˜éŒ²
     /// </summary>
     public void PreparationPlay()
     {
@@ -104,11 +102,11 @@ public class JokerObject : MonoBehaviour
             () =>
           {
               JokerUtility.AddBaseValue(_base.Trun());
-              // TODO: •¶š‚ğo‚·
-              //_base.Trun() ’l
-              // gameObject.transform.position À•W
+              // TODO: æ–‡å­—ã‚’å‡ºã™
+              //_base.Trun() å€¤
+              // gameObject.transform.position åº§æ¨™
               int ID = JokerObjectUtility.GetJokerIndex(this);
-              //Šî–{ƒXƒRƒA
+              //åŸºæœ¬ã‚¹ã‚³ã‚¢
               ScoreManager.instance.SetScoreViewID(ID + IDUtility.JOKER_ID);
               ScoreManager.instance.SetScoreViewTrans(gameObject.transform.position);
               ScoreManager.instance.SetScoreViewText((int)_base.Trun(), false);
@@ -117,10 +115,10 @@ public class JokerObject : MonoBehaviour
             () =>
             {
                 JokerUtility.AddMagnification(_base.Trun());
-                // TODO: •¶š‚ğo‚·
-                //_base.Trun() ’l
-                // gameObject.transform.position À•W
-                //@”{—¦
+                // TODO: æ–‡å­—ã‚’å‡ºã™
+                //_base.Trun() å€¤
+                // gameObject.transform.position åº§æ¨™
+                //ã€€å€ç‡
               int ID = JokerObjectUtility.GetJokerIndex(this);
                 ScoreManager.instance.SetScoreViewID(ID + IDUtility.JOKER_ID);
                 ScoreManager.instance.SetScoreViewTrans(gameObject.transform.position);
@@ -141,21 +139,18 @@ public class JokerObject : MonoBehaviour
             BuffUtility.PlayBuff(_base.GetJokerBuff());
         });
 
-
     }
 
     /// <summary>
-    /// ƒJ[ƒh‚ÌƒvƒŒƒC‚É”½‰‚·‚éƒWƒ‡[ƒJ[‚ÌƒvƒŒƒC
+    /// ã‚«ãƒ¼ãƒ‰ã®ãƒ—ãƒ¬ã‚¤ã«åå¿œã™ã‚‹ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ãƒ—ãƒ¬ã‚¤
     /// </summary>
     public void Play()
     {
-        //‚±‚ÌƒWƒ‡[ƒJ[‚ªƒvƒŒƒCó‘Ô‚¶‚á‚È‚¢
+        //ã“ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ãŒãƒ—ãƒ¬ã‚¤çŠ¶æ…‹ã˜ã‚ƒãªã„æ™‚
         if (_status != JokerStatus.play) return;
 
-        //ƒWƒ‡[ƒJ[‚ª‰½‚à‚Å‚«‚È‚¢
+        //ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ãŒä½•ã‚‚ã§ããªã„æ™‚
         if (actions.Count < 1) { _status = JokerStatus.wait; JokerObjectUtility.NestJokerPlay(this); return; }
-
-
 
         _jokerPlayAction();
     }
@@ -164,23 +159,19 @@ public class JokerObject : MonoBehaviour
     {
         if (_status != JokerStatus.action) return;
 
-        //@ƒAƒNƒVƒ‡ƒ“‚ğŠJn‚ÉŠp“x‚ğ‹L‰¯‚·‚é
+        //ã€€ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’é–‹å§‹æ™‚ã«è§’åº¦ã‚’è¨˜æ†¶ã™ã‚‹
         LostAngle = transform.eulerAngles;
-
 
         _jokerPlayAction();
 
-
-
     }
 
-
     /// <summary>
-    /// ‚±‚ÌƒWƒ‡[ƒJ[‚ÌƒIƒuƒWƒFƒNƒg‚ğIDˆË‘¶‚ÌˆÊ’u‚ÉˆÚ“®‚³‚¹‚é
+    /// ã“ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’IDä¾å­˜ã®ä½ç½®ã«ç§»å‹•ã•ã›ã‚‹
     /// </summary>
     public void MovePos(Vector3 nextpos)
     {
-        //’Í‚ŞˆÚ“®’†‚Í“Áê‚ÈˆÚ“®‚É•ÏX
+        //æ´ã‚€ç§»å‹•ä¸­ã¯ç‰¹æ®Šãªç§»å‹•ã«å¤‰æ›´
         if (_isGrab) { GrabMove(); return; }
 
         if (_status != JokerStatus.wait) return;
@@ -189,13 +180,12 @@ public class JokerObject : MonoBehaviour
 
         _time += Time.deltaTime * GameConfig.GetGameSpeed() * 2.5f;
 
-
         transform.position = Vector3.Lerp(_lostpos, nextpos, _time);
 
     }
 
     /// <summary>
-    /// ƒ^[ƒ“‚ÌI—¹‚ÉŒÄ‚Î‚ê‚é
+    /// ã‚¿ãƒ¼ãƒ³ã®çµ‚äº†æ™‚ã«å‘¼ã°ã‚Œã‚‹
     /// </summary>
     public void TrunEnd()
     {
@@ -205,25 +195,21 @@ public class JokerObject : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ‰ƒEƒ“ƒh‚ÌI—¹‚ÉŒÄ‚Î‚ê‚é
+    /// ãƒ©ã‚¦ãƒ³ãƒ‰ã®çµ‚äº†æ™‚ã«å‘¼ã°ã‚Œã‚‹
     /// </summary>
     public void RoundEnd()
     {
         _base.RoundEnd();
     }
 
-
-
-
-
     /// <summary>
-    /// ©g‚ÌƒXƒe[ƒ^ƒX‚Ìã‘‚«
+    /// è‡ªèº«ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã®ä¸Šæ›¸ã
     /// </summary>
     /// <param name="status"></param>
     public void SetStatus(JokerStatus status) { _status = status; }
 
     /// <summary>
-    /// ’Í‚İó‘Ô‚ÌØ‚è‘Ö‚¦ŠÖ”
+    /// æ´ã¿çŠ¶æ…‹ã®åˆ‡ã‚Šæ›¿ãˆé–¢æ•°
     /// </summary>
     /// <param name="flag"></param>
     public void SetGrab(bool flag)
@@ -234,7 +220,7 @@ public class JokerObject : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ª©•ª‚Ìƒ^[ƒ“ˆÈŠO‚É‹N‚±‚·‹““®‚ÌŠJn
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ãŒè‡ªåˆ†ã®ã‚¿ãƒ¼ãƒ³ä»¥å¤–ã«èµ·ã“ã™æŒ™å‹•ã®é–‹å§‹æ™‚
     /// </summary>
     public void CardAddPlay(float AddNum)
     {
@@ -246,7 +232,7 @@ public class JokerObject : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒAƒNƒVƒ‡ƒ“‚Ì‘Ò‹@‚ª‘¶İ‚·‚é‚Ì‚©‚Ç‚¤‚©
+    /// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã®å¾…æ©ŸãŒå­˜åœ¨ã™ã‚‹ã®ã‹ã©ã†ã‹
     /// </summary>
     /// <returns></returns>
     public bool GetAction() { return AddNum != 0; }
@@ -259,7 +245,6 @@ public class JokerObject : MonoBehaviour
     public void StartChenge()
     {
         _status = JokerStatus.action;
-
 
         _jokerPlayAction = ChengeAction;
         reta = 1;
@@ -280,7 +265,7 @@ public class JokerObject : MonoBehaviour
         if (_time > 1 && reta == 1)
         {
 
-            //ƒ}ƒeƒŠƒAƒ‹‚ğ•ÏX
+            //ãƒãƒ†ãƒªã‚¢ãƒ«ã‚’å¤‰æ›´
             JokerUtility.SetMaterial(JokerObjectUtility.GetJokerIndex(this));
 
             reta = -1;
@@ -308,11 +293,11 @@ public class JokerObject : MonoBehaviour
     }
 
     /// <summary>
-    /// ˆê‚Â‰º‚ÌŠÖ”“à‚Å‚µ‚©g‚í‚È‚¢•Ï”
+    /// ä¸€ã¤ä¸‹ã®é–¢æ•°å†…ã§ã—ã‹ä½¿ã‚ãªã„å¤‰æ•°
     /// </summary>
     private int reta = 1;
     /// <summary>
-    /// ƒJ[ƒhó‚ÌƒWƒ‡[ƒJ[‚ÌƒvƒŒƒC‚Ì‹““®
+    /// ã‚«ãƒ¼ãƒ‰çŠ¶ã®ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ãƒ—ãƒ¬ã‚¤æ™‚ã®æŒ™å‹•
     /// </summary>
     private void JokerCardAction()
     {
@@ -321,11 +306,10 @@ public class JokerObject : MonoBehaviour
 
         _jokerActionProcess();
 
-
     }
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚Ì“®‚«
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®å‹•ã
     /// </summary>
     private bool JokerAction()
     {
@@ -341,23 +325,19 @@ public class JokerObject : MonoBehaviour
         if (reta == 1) reta = 0;
         _lostAngle = transform.eulerAngles;
 
-        //ˆêƒ^[ƒ“‚Éˆê“x‚É§ŒÀ
+        //ä¸€ã‚¿ãƒ¼ãƒ³ã«ä¸€åº¦ã«åˆ¶é™
         if (!_isPlay || reta != -1) return false;
-
-
 
         return true;
 
     }
 
-
     private void NormalJokerActionProcess()
     {
 
-
         reta = 1;
-        //ƒvƒŒƒC‚ÌuŠÔ‚ÌƒAƒNƒVƒ‡ƒ“
-        //”{—¦‚É’Ç‰Á
+        //ãƒ—ãƒ¬ã‚¤ã®ç¬é–“ã®ã‚¢ã‚¯ã‚·ãƒ§ãƒ³
+        //å€ç‡ã«è¿½åŠ 
         actions[0]();
 
         actions.RemoveAt(0);
@@ -368,12 +348,10 @@ public class JokerObject : MonoBehaviour
         _status = JokerStatus.wait;
         _isPlay = false;
 
-
-
     }
     private void NeverAddJokerActionProcess()
     {
-        //ƒJ[ƒh‚Ì”{—¦‚Ìã¸‚µ‚½‚Á‚Ä‚¢‚¤ƒAƒjƒ[ƒVƒ‡ƒ“‚ğ“ü‚ê‚é
+        //ã‚«ãƒ¼ãƒ‰ã®å€ç‡ã®ä¸Šæ˜‡ã—ãŸã£ã¦ã„ã†ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å…¥ã‚Œã‚‹
 
         reta = 1;
         AddNum = 0;
@@ -384,20 +362,18 @@ public class JokerObject : MonoBehaviour
 
         JokerObjectUtility.NextAction(this);
 
-
-
     }
 
     /// <summary>
-    /// ’Í‚ñ‚Å‚¢‚éƒWƒ‡[ƒJ[‚ÌˆÚ“®ŠÖ”
+    /// æ´ã‚“ã§ã„ã‚‹ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ç§»å‹•é–¢æ•°
     /// </summary>
     private void GrabMove()
     {
-        //ƒ}ƒEƒXƒ|ƒCƒ“ƒgˆË‘¶‚ÅÀ•W‚ğŒˆ’è‚·‚é
+        //ãƒã‚¦ã‚¹ãƒã‚¤ãƒ³ãƒˆä¾å­˜ã§åº§æ¨™ã‚’æ±ºå®šã™ã‚‹
         Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z);
         transform.position = Camera.main.ScreenToWorldPoint(mousePos);
 
     }
 
-
 }
+

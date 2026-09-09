@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,9 +11,7 @@ public class PackInObject : MonoBehaviour
 
     private Vector3 _startPos;
 
-
     private float time = 0;
-
 
     public void Awake()
     {
@@ -34,3 +32,4 @@ public class PackInObject : MonoBehaviour
     public void SetTragetPos(Vector3 vector) { _tragetPos = vector; }
 
 }
+

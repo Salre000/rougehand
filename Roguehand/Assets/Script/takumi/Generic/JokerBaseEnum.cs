@@ -1,11 +1,11 @@
-public  static class JokerBaseEnum {
+﻿public  static class JokerBaseEnum {
 public enum JokerEnum {
 /// <summary>
-///確率で破壊させるジョーカー
+///遒ｺ邇・〒遐ｴ螢翫＆縺帙ｋ繧ｸ繝ｧ繝ｼ繧ｫ繝ｼ
 /// </summary>
 _ProbabilityDestruction,
 /// <summary>
-///何かをした時に倍率を加算するジョーカー
+///菴輔°繧偵＠縺滓凾縺ｫ蛟咲紫繧貞刈邂励☆繧九ず繝ｧ繝ｼ繧ｫ繝ｼ
 /// </summary>
 _AnyDoneWhen,
 MAX

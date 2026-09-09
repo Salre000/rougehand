@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,8 +8,7 @@ public class RoleManager : MonoBehaviour
 {
     public static RoleManager instance;
 
-
-    [SerializeField, Header("ƒfƒoƒbƒN‚æ‚¤‚ÉŠO‚©‚çŒ©‚¦‚é")] List<int> indexList = new();    // –ğ‚ÌğŒ‚É‚Í‚Ü‚Á‚Ä‚¢‚éƒJ[ƒh‚Ì—v‘f”‚ª“ü‚é
+    [SerializeField, Header("ãƒ‡ãƒãƒƒã‚¯ã‚ˆã†ã«å¤–ã‹ã‚‰è¦‹ãˆã‚‹")] List<int> indexList = new();    // å½¹ã®æ¡ä»¶ã«ã¯ã¾ã£ã¦ã„ã‚‹ã‚«ãƒ¼ãƒ‰ã®è¦ç´ æ•°ãŒå…¥ã‚‹
     private Role _role = Role.None;
     private bool _isCheck = false;
     private List<int> _roleLevelList = new(17);
@@ -51,12 +50,12 @@ public class RoleManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ‚»‚ë‚Á‚Ä‚¢‚é–ğ‚ª‚ ‚é‚©Šm”F‚·‚é
+    /// ãã‚ã£ã¦ã„ã‚‹å½¹ãŒã‚ã‚‹ã‹ç¢ºèªã™ã‚‹
     /// </summary>
     /// <returns></returns>
     public Role RoleCheck(List<Card.Trump> cards)
     {
-        // –ğ‚Ì‹­‚¢‡‚É”»’è
+        // å½¹ã®å¼·ã„é †ã«åˆ¤å®š
         if (Revolution(cards) != Role.None) return Role.revolution;
         else if (FlashFive(cards) != Role.None) return Role.flashFive;
         else if (flashHouse(cards) != Role.None) return Role.flashHouse;
@@ -77,9 +76,9 @@ public class RoleManager : MonoBehaviour
 
     }
 
-    #region –ğ
+    #region å½¹
 
-    // ¦Šv–½
+    // â€»é©å‘½
     private Role Revolution(List<Card.Trump> cards)
     {
         indexList.Clear();
@@ -95,33 +94,33 @@ public class RoleManager : MonoBehaviour
         return Role.None;
     }
 
-    // ¦ƒtƒ‰ƒbƒVƒ…ƒtƒ@ƒCƒu
+    // â€»ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ãƒ•ã‚¡ã‚¤ãƒ–
     private Role FlashFive(List<Card.Trump> cards)
     {
         indexList.Clear();
-        // “¯ƒX[ƒgƒ`ƒFƒbƒN
+        // åŒã‚¹ãƒ¼ãƒˆãƒã‚§ãƒƒã‚¯
         indexList = JastSuitCheck(cards);
         if (indexList == null) return Role.None;
         List<Card.Trump> checkList = new();
         for (int i = 0; i < indexList.Count; i++)
             checkList.Add(cards[indexList[i]]);
-        // “¯ƒiƒ“ƒo[ƒ`ƒFƒbƒN
+        // åŒãƒŠãƒ³ãƒãƒ¼ãƒã‚§ãƒƒã‚¯
         if (JastNumberCheck(checkList, 5) == null) return Role.None;
 
         return Role.flashFive;
     }
 
-    // ¦ƒtƒ‰ƒbƒVƒ…ƒnƒEƒX
+    // â€»ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ãƒã‚¦ã‚¹
     private Role flashHouse(List<Card.Trump> cards)
     {
-        // “¯ƒX[ƒgƒ`ƒFƒbƒN
+        // åŒã‚¹ãƒ¼ãƒˆãƒã‚§ãƒƒã‚¯
         indexList = JastSuitCheck(cards);
         if (indexList == null) return Role.None;
         List<Card.Trump> checkList = new();
         for (int i = 0; i < indexList.Count; i++)
             checkList.Add(cards[indexList[i]]);
 
-        // ƒtƒ‹ƒnƒEƒXƒ`ƒFƒbƒN
+        // ãƒ•ãƒ«ãƒã‚¦ã‚¹ãƒã‚§ãƒƒã‚¯
         List<Card.Trump> checkList2 = new();
         List<Card.Trump> checkList3 = new();
         for (int i = 0; i < checkList.Count; i++)
@@ -137,7 +136,7 @@ public class RoleManager : MonoBehaviour
             }
             if (checkList2.Count >= 2) break;
         }
-        //ƒtƒ‹ƒnƒEƒXƒ`ƒFƒbƒN
+        //ãƒ•ãƒ«ãƒã‚¦ã‚¹ãƒã‚§ãƒƒã‚¯
         if (checkList2.Count == 3)
         {
             if (JastNumberCheck(checkList2, 3) == null || JastNumberCheck(checkList3, 2) == null)
@@ -149,35 +148,34 @@ public class RoleManager : MonoBehaviour
                 return Role.None;
         }
 
-
         return Role.flashHouse;
     }
-    // ¦ƒtƒFƒCƒXƒtƒ@ƒCƒuƒJ[ƒh
+    // â€»ãƒ•ã‚§ã‚¤ã‚¹ãƒ•ã‚¡ã‚¤ãƒ–ã‚«ãƒ¼ãƒ‰
     private Role FaceFiveCard(List<Card.Trump> cards)
     {
-        // ƒtƒFƒCƒX‚Å‚»‚ë‚Á‚Ä‚¢‚½ƒJ[ƒh‚ªƒiƒ“ƒo[‚à‚»‚ë‚Á‚Ä‚¢‚é‚©Šm”F‚·‚é
+        // ãƒ•ã‚§ã‚¤ã‚¹ã§ãã‚ã£ã¦ã„ãŸã‚«ãƒ¼ãƒ‰ãŒãƒŠãƒ³ãƒãƒ¼ã‚‚ãã‚ã£ã¦ã„ã‚‹ã‹ç¢ºèªã™ã‚‹
         indexList = JastNumberCheck(cards);
         if (indexList == null) return Role.None;
-        // Šm”F‚Å‚«‚½ƒtƒFƒCƒXƒJ[ƒh‚ğŠm”F—pƒŠƒXƒg‚É“ü‚ê‚é
+        // ç¢ºèªã§ããŸãƒ•ã‚§ã‚¤ã‚¹ã‚«ãƒ¼ãƒ‰ã‚’ç¢ºèªç”¨ãƒªã‚¹ãƒˆã«å…¥ã‚Œã‚‹
         List<Card.Trump> checkList = new();
         for (int i = 0; i < indexList.Count; i++)
             checkList.Add(cards[indexList[i]]);
-        // ƒtƒFƒCƒXƒJ[ƒh‚ª‘µ‚Á‚Ä‚¢‚é‚©‚ğŠm”F
+        // ãƒ•ã‚§ã‚¤ã‚¹ã‚«ãƒ¼ãƒ‰ãŒæƒã£ã¦ã„ã‚‹ã‹ã‚’ç¢ºèª
         indexList = FaceCheck(checkList);
-        // ‘µ‚Á‚Ä‚¢‚È‚¯‚ê‚Î–ğ‚Í•s¬—§‚Æ‚È‚é
+        // æƒã£ã¦ã„ãªã‘ã‚Œã°å½¹ã¯ä¸æˆç«‹ã¨ãªã‚‹
         if (indexList == null) return Role.None;
 
         return Role.faceFive;
     }
 
-    // ¦ƒtƒ@ƒCƒuƒJ[ƒh
+    // â€»ãƒ•ã‚¡ã‚¤ãƒ–ã‚«ãƒ¼ãƒ‰
     private Role FiveCard(List<Card.Trump> cards)
     {
         indexList = JastNumberCheck(cards);
         if (indexList == null) return Role.None;
         return Role.faceFive;
     }
-    // ¦ƒtƒFƒCƒXƒtƒH[ƒJ[ƒh
+    // â€»ãƒ•ã‚§ã‚¤ã‚¹ãƒ•ã‚©ãƒ¼ã‚«ãƒ¼ãƒ‰
     private Role FaceFourCard(List<Card.Trump> cards)
     {
         indexList = JastNumberCheck(cards, 4);
@@ -189,63 +187,63 @@ public class RoleManager : MonoBehaviour
         if (indexList == null) return Role.None;
         return Role.faceFour;
     }
-    // ¦ƒtƒFƒCƒXƒXƒŠ[ƒJ[ƒh
+    // â€»ãƒ•ã‚§ã‚¤ã‚¹ã‚¹ãƒªãƒ¼ã‚«ãƒ¼ãƒ‰
     private Role FaceThreeCard(List<Card.Trump> cards)
     {
-        // ƒXƒŠ[ƒJ[ƒhƒ`ƒFƒbƒN
+        // ã‚¹ãƒªãƒ¼ã‚«ãƒ¼ãƒ‰ãƒã‚§ãƒƒã‚¯
         indexList = JastNumberCheck(cards, 3);
         if (indexList == null) return Role.None;
-        // ƒXƒŠ[ƒJ[ƒh”²‚«o‚µ
+        // ã‚¹ãƒªãƒ¼ã‚«ãƒ¼ãƒ‰æŠœãå‡ºã—
         List<Card.Trump> checkList = new();
         for (int i = 0; i < indexList.Count; i++)
             checkList.Add(cards[indexList[i]]);
-        // ƒtƒFƒCƒXƒ`ƒFƒbƒN
+        // ãƒ•ã‚§ã‚¤ã‚¹ãƒã‚§ãƒƒã‚¯
         indexList = FaceCheck(checkList, 3);
         if (indexList == null) return Role.None;
         return Role.faceThree;
     }
-    // ƒƒCƒ„ƒ‹ƒtƒ‰ƒbƒVƒ…
+    // ãƒ­ã‚¤ãƒ¤ãƒ«ãƒ•ãƒ©ãƒƒã‚·ãƒ¥
     private Role RoyalFlush(List<Card.Trump> cards)
     {
         List<Card.Trump> jastList = new();
 
-        // ƒX[ƒg‚ª‘µ‚Á‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+        // ã‚¹ãƒ¼ãƒˆãŒæƒã£ã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
         indexList = JastSuitCheck(cards);
-        // ‘µ‚Á‚Ä‚¢‚È‚¯‚ê‚Î–ğ‚Í•s¬—§‚Æ‚È‚é
+        // æƒã£ã¦ã„ãªã‘ã‚Œã°å½¹ã¯ä¸æˆç«‹ã¨ãªã‚‹
         if (indexList == null) return Role.None;
 
-        // ‘µ‚Á‚Ä‚¢‚éƒJ[ƒh‚ğjastList‚Éˆø‚«”²‚­
+        // æƒã£ã¦ã„ã‚‹ã‚«ãƒ¼ãƒ‰ã‚’jastListã«å¼•ãæŠœã
         for (int j = 0; j < indexList.Count; j++)
         {
-            // “¯ƒX[ƒgƒJ[ƒhî•ñ‚ªjastList‚Ì’†‚É“ü‚é
+            // åŒã‚¹ãƒ¼ãƒˆã‚«ãƒ¼ãƒ‰æƒ…å ±ãŒjastListã®ä¸­ã«å…¥ã‚‹
             jastList.Add(cards[indexList[j]]);
         }
 
-        //// ’†‚É“ü‚ê‚½ƒJ[ƒhî•ñ‚ÍƒX[ƒg‚ª‘µ‚Á‚Ä‚¢‚é‚±‚Æ‚ª•ª‚©‚Á‚Ä‚¢‚é‚Ì‚Å
-        //// ”š‚ÌÆ‚ç‚µ‡‚í‚¹‚ğs‚¢AŒ©–•À‚×‚ÎƒƒCƒ„ƒ‹ƒtƒ‰ƒbƒVƒ…‚ª”F‚ß‚ç‚ê‚é
+        //// ä¸­ã«å…¥ã‚ŒãŸã‚«ãƒ¼ãƒ‰æƒ…å ±ã¯ã‚¹ãƒ¼ãƒˆãŒæƒã£ã¦ã„ã‚‹ã“ã¨ãŒåˆ†ã‹ã£ã¦ã„ã‚‹ã®ã§
+        //// æ•°å­—ã®ç…§ã‚‰ã—åˆã‚ã›ã‚’è¡Œã„ã€è¦‹äº‹ä¸¦ã¹ã°ãƒ­ã‚¤ãƒ¤ãƒ«ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ãŒèªã‚ã‚‰ã‚Œã‚‹
         if (StraightCheck(jastList, 5, false, true) != null) return Role.royalFlush;
 
         return Role.None;
     }
 
-    // ƒXƒgƒŒ[ƒgƒtƒ‰ƒbƒVƒ…
+    // ã‚¹ãƒˆãƒ¬ãƒ¼ãƒˆãƒ•ãƒ©ãƒƒã‚·ãƒ¥
     private Role StraightFlash(List<Card.Trump> cards)
     {
-        // ƒX[ƒg‚ª‘µ‚Á‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+        // ã‚¹ãƒ¼ãƒˆãŒæƒã£ã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
         indexList = JastSuitCheck(cards);
-        // ‘µ‚Á‚Ä‚¢‚È‚¯‚ê‚Î–ğ‚Í•s¬—§‚Æ‚È‚é
+        // æƒã£ã¦ã„ãªã‘ã‚Œã°å½¹ã¯ä¸æˆç«‹ã¨ãªã‚‹
         if (indexList == null) return Role.None;
         List<Card.Trump> checkList = new();
         for (int i = 0; i < indexList.Count; i++)
             checkList.Add(cards[indexList[i]]);
-        // ƒXƒgƒŒ[ƒg‚©‚ğƒ`ƒFƒbƒN
+        // ã‚¹ãƒˆãƒ¬ãƒ¼ãƒˆã‹ã‚’ãƒã‚§ãƒƒã‚¯
         indexList = StraightCheck(checkList);
         if (indexList == null) return Role.None;
 
         return Role.straightFlush;
     }
 
-    // ƒtƒH[ƒJ[ƒh
+    // ãƒ•ã‚©ãƒ¼ã‚«ãƒ¼ãƒ‰
     private Role FourCard(List<Card.Trump> cards)
     {
         indexList = JastNumberCheck(cards, 4);
@@ -253,13 +251,12 @@ public class RoleManager : MonoBehaviour
         return Role.fourCard;
     }
 
-    // ƒtƒ‹ƒnƒEƒX
+    // ãƒ•ãƒ«ãƒã‚¦ã‚¹
     private Role FullHouse(List<Card.Trump> cards)
     {
-        // ƒtƒ‹ƒnƒEƒXƒ`ƒFƒbƒN
+        // ãƒ•ãƒ«ãƒã‚¦ã‚¹ãƒã‚§ãƒƒã‚¯
         List<Card.Trump> checkList2 = new();
         List<Card.Trump> checkList3 = new();
-
 
         for (int i = 0; i < cards.Count; i++)
         {
@@ -291,11 +288,11 @@ public class RoleManager : MonoBehaviour
             if (JastNumberCheck(checkList2, 2) == null || JastNumberCheck(checkList3, 3) == null)
                 return Role.None;
         }
-        // indexList‚Éƒc[ƒyƒA‚Ìindex‚ğ‚Â‚Ş
+        // indexListã«ãƒ„ãƒ¼ãƒšã‚¢ã®indexã‚’ã¤ã‚€
 
         List<int> domyy = new List<int>(cards.SearchListIndex(checkList2.GetList(JastNumberCheck(checkList2, checkList2.Count))));
         List<int> domyy2 = new List<int>(cards.SearchListIndex(checkList3.GetList(JastNumberCheck(checkList3, count))));
-        // check‚É“ü‚Á‚Ä‚¢‚éƒŠƒXƒg‚ğg‚¢cards‚ÌƒCƒ“ƒfƒbƒNƒX”Ô†‚ÌƒŠƒXƒg‚ğ’Ç‰Á
+        // checkã«å…¥ã£ã¦ã„ã‚‹ãƒªã‚¹ãƒˆã‚’ä½¿ã„cardsã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ç•ªå·ã®ãƒªã‚¹ãƒˆã‚’è¿½åŠ 
         indexList.Clear();
         indexList.AddRange(domyy);
         indexList.AddRange(domyy2);
@@ -303,17 +300,17 @@ public class RoleManager : MonoBehaviour
         return Role.fullHouse;
     }
 
-    // ƒtƒ‰ƒbƒVƒ…
+    // ãƒ•ãƒ©ãƒƒã‚·ãƒ¥
     private Role Flash(List<Card.Trump> cards)
     {
-        // “¯ƒX[ƒgƒ`ƒFƒbƒN
+        // åŒã‚¹ãƒ¼ãƒˆãƒã‚§ãƒƒã‚¯
         indexList = JastSuitCheck(cards);
         if (indexList == null) return Role.None;
 
         return Role.flash;
     }
 
-    // ƒXƒgƒŒ[ƒg
+    // ã‚¹ãƒˆãƒ¬ãƒ¼ãƒˆ
     private Role Straight(List<Card.Trump> cards)
     {
         indexList = StraightCheck(cards);
@@ -321,7 +318,7 @@ public class RoleManager : MonoBehaviour
         return Role.straight;
     }
 
-    // ƒXƒŠ[ƒJ[ƒh
+    // ã‚¹ãƒªãƒ¼ã‚«ãƒ¼ãƒ‰
     private Role ThreeCard(List<Card.Trump> cards)
     {
         indexList = JastNumberCheck(cards, 3);
@@ -330,12 +327,11 @@ public class RoleManager : MonoBehaviour
         return Role.threeCard;
     }
 
-    // ƒc[ƒyƒA
+    // ãƒ„ãƒ¼ãƒšã‚¢
     private Role TwoPair(List<Card.Trump> cards)
     {
         List<Card.Trump> checkList2 = new();
         List<Card.Trump> checkList3 = new();
-
 
         for (int i = 0; i < cards.Count; i++)
         {
@@ -355,22 +351,22 @@ public class RoleManager : MonoBehaviour
         if (JastNumberCheck(checkList2, 2) == null || JastNumberCheck(checkList3, 2) == null)
             return Role.None;
 
-        // indexList‚Éƒc[ƒyƒA‚Ìindex‚ğ‚Â‚Ş
+        // indexListã«ãƒ„ãƒ¼ãƒšã‚¢ã®indexã‚’ã¤ã‚€
 
         List<int> domyy = new List<int>(cards.SearchListIndex(checkList2.GetList(JastNumberCheck(checkList2, 2))));
         List<int> domyy2 = new List<int>(cards.SearchListIndex(checkList3.GetList(JastNumberCheck(checkList3, 2))));
-        // check‚É“ü‚Á‚Ä‚¢‚éƒŠƒXƒg‚ğg‚¢cards‚ÌƒCƒ“ƒfƒbƒNƒX”Ô†‚ÌƒŠƒXƒg‚ğ’Ç‰Á
+        // checkã«å…¥ã£ã¦ã„ã‚‹ãƒªã‚¹ãƒˆã‚’ä½¿ã„cardsã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ç•ªå·ã®ãƒªã‚¹ãƒˆã‚’è¿½åŠ 
         indexList.Clear();
         indexList.AddRange(domyy);
         indexList.AddRange(domyy2);
 
-        // “¯‚¶’l‚ğÈ‚¢‚½ƒŠƒXƒg‚ğ•Ô‚·
+        // åŒã˜å€¤ã‚’çœã„ãŸãƒªã‚¹ãƒˆã‚’è¿”ã™
         indexList = indexList.GetDuplicateDelete();
 
         return Role.twoPair;
     }
 
-    // ƒƒ“ƒyƒA
+    // ãƒ¯ãƒ³ãƒšã‚¢
     private Role OnePair(List<Card.Trump> cards)
     {
         for (int i = 0; i < cards.Count; i++)
@@ -389,7 +385,7 @@ public class RoleManager : MonoBehaviour
         return Role.None;
     }
 
-    // ƒnƒCƒJ[ƒh
+    // ãƒã‚¤ã‚«ãƒ¼ãƒ‰
     private Role HighCard(List<Card.Trump> cards)
     {
         int num = -1;
@@ -409,51 +405,50 @@ public class RoleManager : MonoBehaviour
     #endregion
 
     /// <summary>
-    /// ƒX[ƒg‚ª‘µ‚Á‚Ä‚¢‚é‚©”»’è‚µ‚Ü‚·B
+    /// ã‚¹ãƒ¼ãƒˆãŒæƒã£ã¦ã„ã‚‹ã‹åˆ¤å®šã—ã¾ã™ã€‚
     /// </summary>
-    /// <param name="cards">ƒ`ƒFƒbƒN‚µ‚½‚¢ƒJ[ƒhƒŠƒXƒg</param>
-    /// <param name="jastSuitCount">‰½–‡‘µ‚Á‚Ä‚¢‚ê‚Î—Ç‚¢‚© ƒfƒtƒHƒ‹ƒg:5</param>
-    /// <param name="suit">w’è‚µ‚½‚¢ƒX[ƒg ƒfƒtƒHƒ‹ƒg:None</param>
-    /// <returns>‚Ç‚±‚Ì—v‘f”‚É‘µ‚Á‚Ä‚¢‚éƒX[ƒg‚ª‚ ‚é‚©‚ğLsit@int‚Å•Ô‚µ‚Ü‚·B‘µ‚Á‚Ä‚È‚©‚Á‚½‚çnull‚ğ•Ô‚µ‚Ü‚·B</returns>
+    /// <param name="cards">ãƒã‚§ãƒƒã‚¯ã—ãŸã„ã‚«ãƒ¼ãƒ‰ãƒªã‚¹ãƒˆ</param>
+    /// <param name="jastSuitCount">ä½•æšæƒã£ã¦ã„ã‚Œã°è‰¯ã„ã‹ ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ:5</param>
+    /// <param name="suit">æŒ‡å®šã—ãŸã„ã‚¹ãƒ¼ãƒˆ ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ:None</param>
+    /// <returns>ã©ã“ã®è¦ç´ æ•°ã«æƒã£ã¦ã„ã‚‹ã‚¹ãƒ¼ãƒˆãŒã‚ã‚‹ã‹ã‚’Lsitã€€intã§è¿”ã—ã¾ã™ã€‚æƒã£ã¦ãªã‹ã£ãŸã‚‰nullã‚’è¿”ã—ã¾ã™ã€‚</returns>
     private List<int> JastSuitCheck(List<Card.Trump> cards, int jastSuitCount = 5, Card.suit suit = Card.suit.None)
     {
-        // ó‚¯æ‚Á‚½cards‚Ì‰½”Ô‚ÉğŒ‚ğ–‚½‚·‚à‚Ì‚ª‚ ‚é‚©‚ªintList‚³‚ê‚é
+        // å—ã‘å–ã£ãŸcardsã®ä½•ç•ªã«æ¡ä»¶ã‚’æº€ãŸã™ã‚‚ã®ãŒã‚ã‚‹ã‹ãŒintListã•ã‚Œã‚‹
         List<int> jastNum = new List<int>();
         for (int i = 0; i < (int)Card.suit.max; i++)
         {
-            // w’èƒX[ƒg‚ª‚ ‚é‚ÍAw’è‚³‚ê‚½ƒX[ƒg‚Ì‚İ‚ğŒŸõ‚·‚é
+            // æŒ‡å®šã‚¹ãƒ¼ãƒˆãŒã‚ã‚‹æ™‚ã¯ã€æŒ‡å®šã•ã‚ŒãŸã‚¹ãƒ¼ãƒˆã®ã¿ã‚’æ¤œç´¢ã™ã‚‹
             if (suit != Card.suit.None)
                 if (suit != (Card.suit)i) continue;
 
             jastNum.Clear();
 
-            // “¯‚¶ƒX[ƒg‚ğ’T‚·
+            // åŒã˜ã‚¹ãƒ¼ãƒˆã‚’æ¢ã™
             for (int j = 0; j < cards.Count; j++)
             {
                 if (cards[j].suit != (Card.suit)i) continue;
                 jastNum.Add(j);
             }
 
-            // —~‚µ‚¢”‘µ‚Á‚Ä‚¢‚é‚È‚ç‚±‚±‚Å•Ô‚·
+            // æ¬²ã—ã„æ•°æƒã£ã¦ã„ã‚‹ãªã‚‰ã“ã“ã§è¿”ã™
             if (jastNum.Count >= jastSuitCount) return jastNum;
-
 
         }
         return null;
     }
 
     /// <summary>
-    /// ƒiƒ“ƒo[‚ª‘µ‚Á‚Ä‚¢‚é‚©‚ğ”»’è‚µ‚Ü‚·B
+    /// ãƒŠãƒ³ãƒãƒ¼ãŒæƒã£ã¦ã„ã‚‹ã‹ã‚’åˆ¤å®šã—ã¾ã™ã€‚
     /// </summary>
-    /// <param name="cards">ƒ`ƒFƒbƒN‚µ‚½‚¢ƒJ[ƒhƒŠƒXƒg</param>
-    /// <param name="jastNumberCount">‰½–‡‘µ‚Á‚Ä‚¢‚ê‚Î—Ç‚¢‚© ƒfƒtƒHƒ‹ƒg:5</param>
-    /// <param name="number">—~‚µ‚¢ƒiƒ“ƒo[‚ªŒˆ‚Ü‚Á‚Ä‚¢‚é‚È‚ç‘I‘ğ‚·‚é ƒfƒtƒHƒ‹ƒg:None</param>
-    /// <returns>‚Ç‚±‚Ì—v‘f”‚É‘µ‚Á‚Ä‚¢‚éƒX[ƒg‚ª‚ ‚é‚©‚ğ•Ô‚µ‚Ü‚·B‘µ‚Á‚Ä‚¢‚È‚¯‚ê‚Înull‚ğ•Ô‚µ‚Ü‚·B</returns>
+    /// <param name="cards">ãƒã‚§ãƒƒã‚¯ã—ãŸã„ã‚«ãƒ¼ãƒ‰ãƒªã‚¹ãƒˆ</param>
+    /// <param name="jastNumberCount">ä½•æšæƒã£ã¦ã„ã‚Œã°è‰¯ã„ã‹ ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ:5</param>
+    /// <param name="number">æ¬²ã—ã„ãƒŠãƒ³ãƒãƒ¼ãŒæ±ºã¾ã£ã¦ã„ã‚‹ãªã‚‰é¸æŠã™ã‚‹ ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ:None</param>
+    /// <returns>ã©ã“ã®è¦ç´ æ•°ã«æƒã£ã¦ã„ã‚‹ã‚¹ãƒ¼ãƒˆãŒã‚ã‚‹ã‹ã‚’è¿”ã—ã¾ã™ã€‚æƒã£ã¦ã„ãªã‘ã‚Œã°nullã‚’è¿”ã—ã¾ã™ã€‚</returns>
     private List<int> JastNumberCheck(List<Card.Trump> cards, int jastNumberCount = 5, Card.number number = Card.number.None)
     {
         indexList = new();
         int jastNumber = 1;
-        // ƒiƒ“ƒo[w’è‚ª‚ ‚éê‡‚»‚Ìƒiƒ“ƒo[‚Ì‚İ‚ğ’T‚·
+        // ãƒŠãƒ³ãƒãƒ¼æŒ‡å®šãŒã‚ã‚‹å ´åˆãã®ãƒŠãƒ³ãƒãƒ¼ã®ã¿ã‚’æ¢ã™
         if (number != Card.number.None)
             jastNumber = (int)number;
 
@@ -461,7 +456,7 @@ public class RoleManager : MonoBehaviour
         {
             indexList.Clear();
 
-            // “¯‚¶ƒiƒ“ƒo[‚ğ’T‚·
+            // åŒã˜ãƒŠãƒ³ãƒãƒ¼ã‚’æ¢ã™
             for (int j = 0; j < cards.Count; j++)
             {
                 if (cards[j].number != (Card.number)i) continue;
@@ -469,7 +464,7 @@ public class RoleManager : MonoBehaviour
                 if (indexList.Count >= jastNumberCount) return indexList;
             }
 
-            // ƒiƒ“ƒo[‚ğw’è‚µ‚Ä‚¢‚ÄA—~‚µ‚¢”‘µ‚Á‚Ä‚¢‚È‚¯‚ê‚Înull‚ğ•Ô‚·
+            // ãƒŠãƒ³ãƒãƒ¼ã‚’æŒ‡å®šã—ã¦ã„ã¦ã€æ¬²ã—ã„æ•°æƒã£ã¦ã„ãªã‘ã‚Œã°nullã‚’è¿”ã™
             if (number != Card.number.None)
                 return null;
         }
@@ -478,16 +473,16 @@ public class RoleManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ”š‚ª˜A‘±“I‚É•À‚ñ‚Å‚¢‚é‚©”»’è‚µ‚Ü‚·B
+    /// æ•°å­—ãŒé€£ç¶šçš„ã«ä¸¦ã‚“ã§ã„ã‚‹ã‹åˆ¤å®šã—ã¾ã™ã€‚
     /// </summary>
-    /// <param name="cards">ƒ`ƒFƒbƒN‚µ‚½‚¢ƒJ[ƒhƒŠƒXƒg</param>
-    /// <param name="straightCount">‰½–‡˜A‘±‚µ‚Ä‚¢‚ê‚Î‚¢‚¢‚© ƒfƒtƒHƒ‹ƒg:5</param>
-    /// <param name="oneSkipFlag">ƒXƒgƒŒ[ƒg‚ÌğŒ‚ªˆê‚Â”ò‚Î‚µ‚Å‚à—Ç‚¢ó‘Ô‚© ƒfƒtƒHƒ‹ƒg:false</param>
-    /// <param name="isRoyal">A~10‚Ì˜A‘±‚µ‚½’l‚©‚Ç‚¤‚©‚¾‚¯’²‚×‚½‚¢‚È‚çtrue‚ğˆø”‚É‰Á‚¦‚é ƒfƒtƒHƒ‹ƒg:false</param>
-    /// <returns>‚Ç‚±‚Ì—v‘f‚É˜A‘±‚µ‚½’l‚ª‚ ‚é‚©‚ğ•Ô‚µ‚Ü‚·B—~‚µ‚¢”‘µ‚Á‚Ä‚¢‚È‚¯‚ê‚Înull‚ğ•Ô‚µ‚Ü‚·B</returns>
+    /// <param name="cards">ãƒã‚§ãƒƒã‚¯ã—ãŸã„ã‚«ãƒ¼ãƒ‰ãƒªã‚¹ãƒˆ</param>
+    /// <param name="straightCount">ä½•æšé€£ç¶šã—ã¦ã„ã‚Œã°ã„ã„ã‹ ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ:5</param>
+    /// <param name="oneSkipFlag">ã‚¹ãƒˆãƒ¬ãƒ¼ãƒˆã®æ¡ä»¶ãŒä¸€ã¤é£›ã°ã—ã§ã‚‚è‰¯ã„çŠ¶æ…‹ã‹ ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ:false</param>
+    /// <param name="isRoyal">A~10ã®é€£ç¶šã—ãŸå€¤ã‹ã©ã†ã‹ã ã‘èª¿ã¹ãŸã„ãªã‚‰trueã‚’å¼•æ•°ã«åŠ ãˆã‚‹ ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ:false</param>
+    /// <returns>ã©ã“ã®è¦ç´ ã«é€£ç¶šã—ãŸå€¤ãŒã‚ã‚‹ã‹ã‚’è¿”ã—ã¾ã™ã€‚æ¬²ã—ã„æ•°æƒã£ã¦ã„ãªã‘ã‚Œã°nullã‚’è¿”ã—ã¾ã™ã€‚</returns>
     private List<int> StraightCheck(List<Card.Trump> cards, int straightCount = 5, bool oneSkipFlag = false, bool isRoyal = false)
     {
-        // ó‚¯æ‚Á‚½cards‚Ì‰½”Ô‚ÉğŒ‚ğ–‚½‚·‚à‚Ì‚ª‚ ‚é‚©‚ªintList‚³‚ê‚é
+        // å—ã‘å–ã£ãŸcardsã®ä½•ç•ªã«æ¡ä»¶ã‚’æº€ãŸã™ã‚‚ã®ãŒã‚ã‚‹ã‹ãŒintListã•ã‚Œã‚‹
         List<int> jastNum = new List<int>();
 
         bool ace = false;
@@ -496,7 +491,7 @@ public class RoleManager : MonoBehaviour
         bool jack = false;
         bool ten = false;
 
-        // A~10‚ÌƒXƒgƒŒ[ƒg‚Ìê‡‚¾‚¯æ‚É”»’è‚ğs‚¤
+        // A~10ã®ã‚¹ãƒˆãƒ¬ãƒ¼ãƒˆã®å ´åˆã ã‘å…ˆã«åˆ¤å®šã‚’è¡Œã†
         for (int i = 0; i < cards.Count; i++)
         {
             if (ace != true && Card.number.ace == cards[i].number)
@@ -527,58 +522,58 @@ public class RoleManager : MonoBehaviour
             if (jastNum.Count >= 5) return jastNum;
         }
 
-        // ‚±‚Ì–ğ‚ğ”»’è‚µ‚Ä‚¢‚é‚Ì‚ª A~10‚ÌƒXƒgƒŒ[ƒg‚Ìê‡‚¾‚¯‚İ‚½‚¢‚È‚çˆÈ~‚Ìˆ—‚Í‚µ‚È‚¢
+        // ã“ã®å½¹ã‚’åˆ¤å®šã—ã¦ã„ã‚‹ã®ãŒ A~10ã®ã‚¹ãƒˆãƒ¬ãƒ¼ãƒˆã®å ´åˆã ã‘ã¿ãŸã„ãªã‚‰ä»¥é™ã®å‡¦ç†ã¯ã—ãªã„
         if (isRoyal) return null;
 
-        // TODO:’Êí‚ÌƒXƒgƒŒ[ƒg‚ª”»’èæ‚ê‚Ä‚È‚¢‚Ì‚Å—vC³
+        // TODO:é€šå¸¸ã®ã‚¹ãƒˆãƒ¬ãƒ¼ãƒˆãŒåˆ¤å®šå–ã‚Œã¦ãªã„ã®ã§è¦ä¿®æ­£
 
-        // Number‡(13`1)‚É•À‚×‚È‚¨‚·
+        // Numberé †(13ï½1)ã«ä¸¦ã¹ãªãŠã™
         List<Card.Trump> jastCards = new(cards);
         cards = CardManager.instance.NumberSort(cards, true);
         jastNum.Clear();
         for (int i = 0; i < cards.Count; i++)
         {
 
-            // ÅŒã‚Ì1–‡‚ğ“ü‚ê‚é
+            // æœ€å¾Œã®1æšã‚’å…¥ã‚Œã‚‹
             if (cards.Count - 1 == i)
             {
-                // Œ³‚ÌƒJ[ƒhƒŠƒXƒg‚Æ“¯‚¶‚à‚Ì‚ğŒ©‚Â‚¯‚é
+                // å…ƒã®ã‚«ãƒ¼ãƒ‰ãƒªã‚¹ãƒˆã¨åŒã˜ã‚‚ã®ã‚’è¦‹ã¤ã‘ã‚‹
                 for (int j = 0; j < jastCards.Count; j++)
                 {
                     if (CardManager.instance.JastCardCheck(jastCards[j], cards[i]))
                     {
-                        // —v‘f‚Ì‚ ‚é’l‚ğ’Ç‰Á
+                        // è¦ç´ ã®ã‚ã‚‹å€¤ã‚’è¿½åŠ 
                         jastNum.Add(j);
                     }
                 }
 
-                // ˜A‘±‚µ‚½ƒJ[ƒh‚ª5–‡ˆÈãŒ©‚Â‚©‚Á‚Ä‚¢‚é‚È‚çreturn
+                // é€£ç¶šã—ãŸã‚«ãƒ¼ãƒ‰ãŒ5æšä»¥ä¸Šè¦‹ã¤ã‹ã£ã¦ã„ã‚‹ãªã‚‰return
                 if (jastNum.Count >= straightCount) return jastNum;
                 else return null;
             }
             if (cards.Count - 1 == i) break;
 
-            // ˆêŒÂã‚ª˜A‘±‚µ‚½”’l‚©‚Ç‚¤‚©
+            // ä¸€å€‹ä¸ŠãŒé€£ç¶šã—ãŸæ•°å€¤ã‹ã©ã†ã‹
             if (oneSkipFlag ? cards[i].number == cards[i + 1].number + 1 || cards[i].number == cards[i + 1].number + 2 : cards[i].number == cards[i + 1].number + 1)
             {
-                // Œ³‚ÌƒJ[ƒhƒŠƒXƒg‚Æ“¯‚¶‚à‚Ì‚ğŒ©‚Â‚¯‚é
+                // å…ƒã®ã‚«ãƒ¼ãƒ‰ãƒªã‚¹ãƒˆã¨åŒã˜ã‚‚ã®ã‚’è¦‹ã¤ã‘ã‚‹
                 for (int j = 0; j < jastCards.Count; j++)
                 {
                     if (CardManager.instance.JastCardCheck(jastCards[j], cards[i]))
                     {
-                        // —v‘f‚Ì‚ ‚é’l‚ğ’Ç‰Á
+                        // è¦ç´ ã®ã‚ã‚‹å€¤ã‚’è¿½åŠ 
                         jastNum.Add(j);
                     }
                 }
             }
-            // ©•ª‚ÆˆêŒÂã‚Ì”š‚ªˆê‚Ì
+            // è‡ªåˆ†ã¨ä¸€å€‹ä¸Šã®æ•°å­—ãŒä¸€ç·’ã®æ™‚
             else if (cards[i].number == cards[i + 1].number)
                 continue;
-            // ˜A‘±‚àˆê‚É‚à‚È‚Á‚Ä‚¢‚È‚¢‚Æ‚«
+            // é€£ç¶šã‚‚ä¸€ç·’ã«ã‚‚ãªã£ã¦ã„ãªã„ã¨ã
             else
                 jastNum.Clear();
 
-            // ˜A‘±‚µ‚½ƒJ[ƒh‚ª5–‡ˆÈãŒ©‚Â‚©‚Á‚Ä‚¢‚é‚È‚çreturn
+            // é€£ç¶šã—ãŸã‚«ãƒ¼ãƒ‰ãŒ5æšä»¥ä¸Šè¦‹ã¤ã‹ã£ã¦ã„ã‚‹ãªã‚‰return
             if (jastNum.Count >= straightCount) return jastNum;
         }
 
@@ -586,11 +581,11 @@ public class RoleManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒtƒFƒCƒXƒJ[ƒh‚©‚Ç‚¤‚©”»’è‚µ‚Ü‚·B
+    /// ãƒ•ã‚§ã‚¤ã‚¹ã‚«ãƒ¼ãƒ‰ã‹ã©ã†ã‹åˆ¤å®šã—ã¾ã™ã€‚
     /// </summary>
-    /// <param name="cards">ƒ`ƒFƒbƒN‚µ‚½‚¢ƒJ[ƒhƒŠƒXƒg</param>
-    /// <param name="faceCount">‰½–‡‘µ‚Á‚Ä‚¢‚ê‚Î‚¢‚¢‚© ƒfƒtƒHƒ‹ƒg:5</param>
-    /// <returns>‚Ç‚±‚Ì—v‘f”‚ÉƒtƒFƒCƒXƒJ[ƒh‚ª‚ ‚é‚©‚ğ•Ô‚µ‚Ü‚·B—~‚µ‚¢”‘µ‚Á‚Ä‚¢‚È‚¯‚ê‚Înull‚ğ•Ô‚µ‚Ü‚·B</returns>
+    /// <param name="cards">ãƒã‚§ãƒƒã‚¯ã—ãŸã„ã‚«ãƒ¼ãƒ‰ãƒªã‚¹ãƒˆ</param>
+    /// <param name="faceCount">ä½•æšæƒã£ã¦ã„ã‚Œã°ã„ã„ã‹ ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ:5</param>
+    /// <returns>ã©ã“ã®è¦ç´ æ•°ã«ãƒ•ã‚§ã‚¤ã‚¹ã‚«ãƒ¼ãƒ‰ãŒã‚ã‚‹ã‹ã‚’è¿”ã—ã¾ã™ã€‚æ¬²ã—ã„æ•°æƒã£ã¦ã„ãªã‘ã‚Œã°nullã‚’è¿”ã—ã¾ã™ã€‚</returns>
     private List<int> FaceCheck(List<Card.Trump> cards, int faceCount = 5)
     {
         List<int> indexLists = new List<int>();
@@ -604,48 +599,48 @@ public class RoleManager : MonoBehaviour
         return null;
     }
 
-    // –ğ‚Ì‹­‚³‡
-    // ¦‰B‚µ–ğ
+    // å½¹ã®å¼·ã•é †
+    // â€»éš ã—å½¹
 
-    // ¦Šv–½                       “¯‚¶ƒX[ƒg‚Q‚Ì”š‚ÌƒJ[ƒh‚ğ‚T–‡ƒvƒŒƒC‚·‚é
-    //                                ª ƒ‰ƒEƒ“ƒh’†–ğ‚Ì”{—¦‚ğ‹­‚¢‚Ì‚Æã‚¢‚Ì‚ğ“ü‚ê‘Ö‚¦‚é
-    // ¦ƒtƒ‰ƒbƒVƒ…ƒtƒ@ƒCƒu         “¯‚¶ƒX[ƒg‚Å“¯‚¶”š
-    // ¦ƒtƒ‰ƒbƒVƒ…ƒnƒEƒX           ƒtƒ‰ƒbƒVƒ…‚Æƒtƒ‹ƒnƒEƒX‚ÌğŒ‚ğ“¯‚É‘µ‚¦‚ÄƒvƒŒƒC‚·‚é
-    // ¦ƒtƒFƒCƒXƒtƒ@ƒCƒuƒJ[ƒh     “¯‚¶ƒtƒFƒCƒXƒJ[ƒh‚ğ‚T–‡ƒvƒŒƒC‚·‚é
-    // ¦ƒtƒ@ƒCƒuƒJ[ƒh             “¯‚¶”š‚ÌƒJ[ƒh‚ğ‚T–‡ƒvƒŒƒC‚·‚é
-    // ¦ƒtƒFƒCƒXƒtƒH[ƒJ[ƒh       “¯‚¶ƒtƒFƒCƒXƒJ[ƒh‚ğ‚S–‡ƒvƒŒƒC‚·‚é
-    // ¦ƒtƒFƒCƒXƒXƒŠ[ƒJ[ƒh       “¯‚¶ƒtƒFƒCƒXƒJ[ƒh‚ğ‚R–‡ƒvƒŒƒC‚·‚é
-    // @ƒƒCƒ„ƒ‹ƒtƒ‰ƒbƒVƒ…         “¯‚¶ƒX[ƒg‚Ì‚P`‚P‚O‚ğƒvƒŒƒC‚·‚é
-    // @ƒXƒgƒŒ[ƒgƒtƒ‰ƒbƒVƒ…       “¯‚¶ƒX[ƒg‚Ì˜A”Ô‚Ì‚T–‡‚ğƒvƒŒƒC‚·‚é
-    //@ ƒtƒH[ƒJ[ƒh               “¯‚¶”š‚ÌƒJ[ƒh‚ğ‚S–‡ƒvƒŒƒC‚·‚é
-    //@ ƒtƒ‹ƒnƒEƒX                 “¯‚¶”š‚ğ‚Q–‡‚Æ‚R–‡‚ÅƒvƒŒƒC‚·‚é
-    //@ ƒtƒ‰ƒbƒVƒ…                 “¯‚¶ƒX[ƒg‚ğ‚T–‡‚ÅƒvƒŒƒC‚·‚é
-    //@ ƒXƒgƒŒ[ƒg                 ˜A‘±‚µ‚½”š‚T–‡‚ÅƒvƒŒƒC‚·‚é
-    //@ ƒXƒŠ[ƒJ[ƒh               “¯‚¶”š‚ÌƒJ[ƒh‚ğ‚R–‡‚ÅƒvƒŒƒC‚·‚é
-    //@ ƒc[ƒyƒA                   “¯‚¶”š‚ÌƒJ[ƒh‚ğ‚Q–‡‚Æ‚¸‚ÂƒvƒŒƒC‚·‚é
-    //@ ƒƒ“ƒyƒA                   “¯‚¶”š‚ÌƒJ[ƒh‚ğ‚Q–‡‚ÅƒvƒŒƒC‚·‚é
-    //@ ƒnƒCƒJ[ƒh                 ˆÈã‚Ì–ğ‚ªˆê‚Â‚à¬—§‚µ‚È‚¢‚Æ‚«
+    // â€»é©å‘½                       åŒã˜ã‚¹ãƒ¼ãƒˆï¼’ã®æ•°å­—ã®ã‚«ãƒ¼ãƒ‰ã‚’ï¼•æšãƒ—ãƒ¬ã‚¤ã™ã‚‹
+    //                                â†‘ ãƒ©ã‚¦ãƒ³ãƒ‰ä¸­å½¹ã®å€ç‡ã‚’å¼·ã„ã®ã¨å¼±ã„ã®ã‚’å…¥ã‚Œæ›¿ãˆã‚‹
+    // â€»ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ãƒ•ã‚¡ã‚¤ãƒ–         åŒã˜ã‚¹ãƒ¼ãƒˆã§åŒã˜æ•°å­—
+    // â€»ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ãƒã‚¦ã‚¹           ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ã¨ãƒ•ãƒ«ãƒã‚¦ã‚¹ã®æ¡ä»¶ã‚’åŒæ™‚ã«æƒãˆã¦ãƒ—ãƒ¬ã‚¤ã™ã‚‹
+    // â€»ãƒ•ã‚§ã‚¤ã‚¹ãƒ•ã‚¡ã‚¤ãƒ–ã‚«ãƒ¼ãƒ‰     åŒã˜ãƒ•ã‚§ã‚¤ã‚¹ã‚«ãƒ¼ãƒ‰ã‚’ï¼•æšãƒ—ãƒ¬ã‚¤ã™ã‚‹
+    // â€»ãƒ•ã‚¡ã‚¤ãƒ–ã‚«ãƒ¼ãƒ‰             åŒã˜æ•°å­—ã®ã‚«ãƒ¼ãƒ‰ã‚’ï¼•æšãƒ—ãƒ¬ã‚¤ã™ã‚‹
+    // â€»ãƒ•ã‚§ã‚¤ã‚¹ãƒ•ã‚©ãƒ¼ã‚«ãƒ¼ãƒ‰       åŒã˜ãƒ•ã‚§ã‚¤ã‚¹ã‚«ãƒ¼ãƒ‰ã‚’ï¼”æšãƒ—ãƒ¬ã‚¤ã™ã‚‹
+    // â€»ãƒ•ã‚§ã‚¤ã‚¹ã‚¹ãƒªãƒ¼ã‚«ãƒ¼ãƒ‰       åŒã˜ãƒ•ã‚§ã‚¤ã‚¹ã‚«ãƒ¼ãƒ‰ã‚’ï¼“æšãƒ—ãƒ¬ã‚¤ã™ã‚‹
+    // ã€€ãƒ­ã‚¤ãƒ¤ãƒ«ãƒ•ãƒ©ãƒƒã‚·ãƒ¥         åŒã˜ã‚¹ãƒ¼ãƒˆã®ï¼‘ï½ï¼‘ï¼ã‚’ãƒ—ãƒ¬ã‚¤ã™ã‚‹
+    // ã€€ã‚¹ãƒˆãƒ¬ãƒ¼ãƒˆãƒ•ãƒ©ãƒƒã‚·ãƒ¥       åŒã˜ã‚¹ãƒ¼ãƒˆã®é€£ç•ªã®ï¼•æšã‚’ãƒ—ãƒ¬ã‚¤ã™ã‚‹
+    //ã€€ ãƒ•ã‚©ãƒ¼ã‚«ãƒ¼ãƒ‰               åŒã˜æ•°å­—ã®ã‚«ãƒ¼ãƒ‰ã‚’ï¼”æšãƒ—ãƒ¬ã‚¤ã™ã‚‹
+    //ã€€ ãƒ•ãƒ«ãƒã‚¦ã‚¹                 åŒã˜æ•°å­—ã‚’ï¼’æšã¨ï¼“æšã§ãƒ—ãƒ¬ã‚¤ã™ã‚‹
+    //ã€€ ãƒ•ãƒ©ãƒƒã‚·ãƒ¥                 åŒã˜ã‚¹ãƒ¼ãƒˆã‚’ï¼•æšã§ãƒ—ãƒ¬ã‚¤ã™ã‚‹
+    //ã€€ ã‚¹ãƒˆãƒ¬ãƒ¼ãƒˆ                 é€£ç¶šã—ãŸæ•°å­—ï¼•æšã§ãƒ—ãƒ¬ã‚¤ã™ã‚‹
+    //ã€€ ã‚¹ãƒªãƒ¼ã‚«ãƒ¼ãƒ‰               åŒã˜æ•°å­—ã®ã‚«ãƒ¼ãƒ‰ã‚’ï¼“æšã§ãƒ—ãƒ¬ã‚¤ã™ã‚‹
+    //ã€€ ãƒ„ãƒ¼ãƒšã‚¢                   åŒã˜æ•°å­—ã®ã‚«ãƒ¼ãƒ‰ã‚’ï¼’æšã¨ãšã¤ãƒ—ãƒ¬ã‚¤ã™ã‚‹
+    //ã€€ ãƒ¯ãƒ³ãƒšã‚¢                   åŒã˜æ•°å­—ã®ã‚«ãƒ¼ãƒ‰ã‚’ï¼’æšã§ãƒ—ãƒ¬ã‚¤ã™ã‚‹
+    //ã€€ ãƒã‚¤ã‚«ãƒ¼ãƒ‰                 ä»¥ä¸Šã®å½¹ãŒä¸€ã¤ã‚‚æˆç«‹ã—ãªã„ã¨ã
 
-    // Œ»İ‚Ì–ğ‚ğƒ[ƒJƒ‹•Ï”‚ÉƒZƒbƒg‚µ‚Ü‚·
+    // ç¾åœ¨ã®å½¹ã‚’ãƒ­ãƒ¼ã‚«ãƒ«å¤‰æ•°ã«ã‚»ãƒƒãƒˆã—ã¾ã™
     public void SetRole(Role role) { _role = role; }
-    // Œ»İ”»’è‚³‚ê‚Ä‚¢‚é–ğ‚ğ•Ô‚µ‚Ü‚·
+    // ç¾åœ¨åˆ¤å®šã•ã‚Œã¦ã„ã‚‹å½¹ã‚’è¿”ã—ã¾ã™
     public Role GetRole() { return _role; }
-    // —v‘f‚Ì‚Ç‚±‚É–ğ‚É‚È‚éƒJ[ƒh‚ª‚ ‚é‚©‚ğ“n‚µ‚Ü‚·
+    // è¦ç´ ã®ã©ã“ã«å½¹ã«ãªã‚‹ã‚«ãƒ¼ãƒ‰ãŒã‚ã‚‹ã‹ã‚’æ¸¡ã—ã¾ã™
     public List<int> GetIndex() { return indexList; }
     public void SetIndex(List<int>indexs) { indexList=indexs; }
-    // –ğ‚ğ”»’è‚µ‚½‚©‚ğƒ[ƒJƒ‹•Ï”‚ÉƒZƒbƒg‚µ‚Ü‚·
+    // å½¹ã‚’åˆ¤å®šã—ãŸã‹ã‚’ãƒ­ãƒ¼ã‚«ãƒ«å¤‰æ•°ã«ã‚»ãƒƒãƒˆã—ã¾ã™
     public void SetIsCheck(bool isCheck) { _isCheck = isCheck; }
-    // –ğ‚ª”»’èÏ‚İ‚©‚ğ•Ô‚µ‚Ü‚·
+    // å½¹ãŒåˆ¤å®šæ¸ˆã¿ã‹ã‚’è¿”ã—ã¾ã™
     public bool IsCheck() { return _isCheck; }
-    // ˆø”‚É‘Î‰‚µ‚½–ğ‚ÌƒŒƒxƒ‹‚ğ•Ô‚µ‚Ü‚·
+    // å¼•æ•°ã«å¯¾å¿œã—ãŸå½¹ã®ãƒ¬ãƒ™ãƒ«ã‚’è¿”ã—ã¾ã™
     public int GetRoleLevel(Role role) { return _roleLevelList[(int)role]; }
-    // –ğ‚ÌƒŒƒxƒ‹‚ğ•Ô‚µ‚Ü‚·
+    // å½¹ã®ãƒ¬ãƒ™ãƒ«ã‚’è¿”ã—ã¾ã™
     public List<int> GetRoleLevels() { return _roleLevelList; }
-    // ˆø”‚É‘Î‰‚µ‚½–ğ‚ÌƒŒƒxƒ‹‚ğã¸‚³‚¹‚Ü‚·
+    // å¼•æ•°ã«å¯¾å¿œã—ãŸå½¹ã®ãƒ¬ãƒ™ãƒ«ã‚’ä¸Šæ˜‡ã•ã›ã¾ã™
     public void AddRoleLevel(Role role) { _roleLevelList[(int)role]++; ; }
-    // ‚Ç‚Ì–ğ‚ª‰½‰ñƒvƒŒƒC‚³‚ê‚½‚©‚ğ•Ô‚·
+    // ã©ã®å½¹ãŒä½•å›ãƒ—ãƒ¬ã‚¤ã•ã‚ŒãŸã‹ã‚’è¿”ã™
     public List<int> GetRolePlayCountList() { return _rolePlayCountList; }
-    // –ğ‚ğw’è‚µ‚Ä‚»‚ÌƒvƒŒƒC‰ñ”‚ğ’Ç‰Á‚·‚é
+    // å½¹ã‚’æŒ‡å®šã—ã¦ãã®ãƒ—ãƒ¬ã‚¤å›æ•°ã‚’è¿½åŠ ã™ã‚‹
     public void AddRolePlayCountList(Role role) { _rolePlayCountList[(int)role]++; }
 
     public void SetRoleLevel(List<int> levels) { _roleLevelList = levels; }

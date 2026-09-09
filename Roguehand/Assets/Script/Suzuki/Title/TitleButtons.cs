@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -9,28 +9,24 @@ public class TitleButtons : MonoBehaviour
     [SerializeField] Button _continueButton;
     [SerializeField] Button _exitButton;
 
-
     private void Awake()
     {
         _exitButton.onClick.AddListener(OnExit);
 
-        // ƒZ[ƒuƒf[ƒ^‚ª‘¶İ‚µ‚Ä‚¢‚½‚ç•Ô‚·
+        // ã‚»ãƒ¼ãƒ–ãƒ‡ãƒ¼ã‚¿ãŒå­˜åœ¨ã—ã¦ã„ãŸã‚‰è¿”ã™
         if (MemoryManager.CheckSaveDeta())
         {
             _continueButton.onClick.AddListener(OnContinue);
             return;
         }
 
-        // F‚ğŠDF‚É•ÏX
+        // è‰²ã‚’ç°è‰²ã«å¤‰æ›´
 
         TextMeshProUGUI text= _continueButton.GetComponent<TextMeshProUGUI>();
 
         text.color = Color.gray;
 
-
-
     }
-
 
     void OnContinue()
     {
@@ -46,3 +42,4 @@ public class TitleButtons : MonoBehaviour
 
     }
 }
+

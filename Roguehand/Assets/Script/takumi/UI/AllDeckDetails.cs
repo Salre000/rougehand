@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -13,24 +13,22 @@ public class AllDeckDetails : DetailsBase
     [SerializeField] private List<TextMeshProUGUI> _cardNumberCounters = new List<TextMeshProUGUI>((int)Card.number.max);
 
     /// <summary>
-    /// A‚ÌƒJƒEƒ“ƒg‚ğ“ü‚ê‚éƒeƒLƒXƒg
+    /// Aã®ã‚«ã‚¦ãƒ³ãƒˆã‚’å…¥ã‚Œã‚‹ãƒ†ã‚­ã‚¹ãƒˆ
     /// </summary>
     [SerializeField] private TextMeshProUGUI _aseText;
     /// <summary>
-    /// Face‚ÌƒJƒEƒ“ƒg‚ğ“ü‚ê‚éƒeƒLƒXƒg
+    /// Faceã®ã‚«ã‚¦ãƒ³ãƒˆã‚’å…¥ã‚Œã‚‹ãƒ†ã‚­ã‚¹ãƒˆ
     /// </summary>
     [SerializeField] private TextMeshProUGUI _faceText;
     /// <summary>
-    /// Number‚ÌƒJƒEƒ“ƒg‚ğ“ü‚ê‚éƒeƒLƒXƒg
+    /// Numberã®ã‚«ã‚¦ãƒ³ãƒˆã‚’å…¥ã‚Œã‚‹ãƒ†ã‚­ã‚¹ãƒˆ
     /// </summary>
     [SerializeField] private TextMeshProUGUI _numberText;
 
     /// <summary>
-    /// ƒX[ƒg‚ÌƒJƒEƒ“ƒg‚ğ“ü‚ê‚éƒeƒLƒXƒg
+    /// ã‚¹ãƒ¼ãƒˆã®ã‚«ã‚¦ãƒ³ãƒˆã‚’å…¥ã‚Œã‚‹ãƒ†ã‚­ã‚¹ãƒˆ
     /// </summary>
     [SerializeField] private List<TextMeshProUGUI> _suitText = new List<TextMeshProUGUI>((int)Card.suit.max);
-
-
 
     private GameObject _pool;
     private List<UICardObject> _pollList = new List<UICardObject>();
@@ -65,11 +63,8 @@ public class AllDeckDetails : DetailsBase
         for (int i = 0; i < _poolCount; i++)
         {
 
-
             _pollList.Add(Instantiate(_cardPrefab, _pool.transform).GetComponent<UICardObject>());
             _pollList[i].gameObject.SetActive(false);
-
-
 
         }
 
@@ -89,9 +84,7 @@ public class AllDeckDetails : DetailsBase
 
             game.SetImage(instance.GetTrump((int)deckList[i].suit,(int)deckList[i].number - 1), instance.GetEffctBuff(deckList[i]), instance.GetSealBuff(deckList[i].sealBuff));
 
-
         }
-
 
     }
 
@@ -106,7 +99,6 @@ public class AllDeckDetails : DetailsBase
 
             return _pollList[i];
 
-
         }
         return null;
 
@@ -114,7 +106,7 @@ public class AllDeckDetails : DetailsBase
     private void SetCounter()
     {
 
-        // ”š‚ÉŠÖŒW‚·‚é’l‚ğ“ü‚ê‚é
+        // æ•°å­—ã«é–¢ä¿‚ã™ã‚‹å€¤ã‚’å…¥ã‚Œã‚‹
         _cardNumberCounters[0].text = CardManager.instance.GetDeck().GetCount(card => card.number == Card.number.ace).ToString();
         int counter = 1;
         for (int i = (int)Card.number.king; i > 1; i--)
@@ -124,22 +116,20 @@ public class AllDeckDetails : DetailsBase
             counter++;
         }
 
-        // A‚ÌƒJƒEƒ“ƒg
+        // Aã®ã‚«ã‚¦ãƒ³ãƒˆ
         _aseText.text = CardManager.instance.GetDeck().GetCount(card => card.number == Card.number.ace).ToString();
-        // ƒtƒFƒCƒX
+        // ãƒ•ã‚§ã‚¤ã‚¹
         _faceText.text = CardManager.instance.GetDeck().GetCount(card => card.isFeice).ToString();
         // number
         _numberText.text = CardManager.instance.GetDeck().GetCount(card => !card.isFeice).ToString();
 
-
-        // ƒX[ƒg‚ÌƒJƒEƒ“ƒg
+        // ã‚¹ãƒ¼ãƒˆã®ã‚«ã‚¦ãƒ³ãƒˆ
         for (int i = 0; i < (int)Card.suit.max; i++)
         {
             _suitText[i].text = CardManager.instance.GetDeck().GetCount(card => card.suit == (Card.suit)i).ToString();
         }
 
-
-
     }
 
 }
+

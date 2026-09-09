@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using Unity.VisualScripting;
@@ -14,18 +14,16 @@ public class UIUtility:MonoBehaviour
     {
         if (instance == null)
             instance=this;
-        
+
     }
 
     public void Initialize()
     {
 
-
-
     }
 
     /// <summary>
-    /// •ñV‹à‚Ì$‚ğˆø”•ª’Ç‰Á
+    /// å ±é…¬é‡‘ã®$ã‚’å¼•æ•°åˆ†è¿½åŠ 
     /// </summary>
     /// <param name="reward"></param>
     /// <returns></returns>
@@ -42,7 +40,7 @@ public class UIUtility:MonoBehaviour
         return dollStringBuilder.ToString();
     }
     /// <summary>
-    /// •¶š—ñ‚ğ®”‚É•ÏŠ·A¬Œ÷‚µ‚½‚È‚çout‚Éo—Í
+    /// æ–‡å­—åˆ—ã‚’æ•´æ•°ã«å¤‰æ›ã€æˆåŠŸã—ãŸãªã‚‰outã«å‡ºåŠ›
     /// </summary>
     /// <param name="value"></param>
     /// <returns></returns>
@@ -57,3 +55,4 @@ public class UIUtility:MonoBehaviour
         return result = -1;
     }
 }
+

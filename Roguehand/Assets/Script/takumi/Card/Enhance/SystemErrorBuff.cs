@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,7 +9,6 @@ using UnityEngine;
 public class SystemErrorBuff
 {
 
-
     private List<Errorbuff> _errorList = new List<Errorbuff>();
 
     [StructLayout(LayoutKind.Sequential)]
@@ -19,14 +18,13 @@ public class SystemErrorBuff
         public int Y;
     }
     /// <summary>
-    /// ƒ}ƒEƒXƒJ[ƒ\ƒ‹‚ğˆÚ“®‚³‚¹‚éƒEƒBƒ“ƒhƒEƒY‚ÌŠÖ”‚ğˆø‚Á’£‚Á‚Ä‚­‚é
+    /// ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ã‚’ç§»å‹•ã•ã›ã‚‹ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚ºã®é–¢æ•°ã‚’å¼•ã£å¼µã£ã¦ãã‚‹
     /// </summary>
     /// <param name="X"></param>
     /// <param name="Y"></param>
     /// <returns></returns>
     [DllImport("user32.dll")]
     static extern bool SetCursorPos(int X, int Y);
-
 
     [DllImport("user32.dll")]
     private static extern bool GetCursorPos(out POINT lpPoint);
@@ -36,11 +34,10 @@ public class SystemErrorBuff
         for (int i = 0; i < _errorList.Count; i++)
             _errorList[i].UpData();
 
-        //ƒfƒoƒbƒN—p
+        //ãƒ‡ãƒãƒƒã‚¯ç”¨
         return;
         if (Input.GetKeyDown(KeyCode.Y)) CreateErrorBuff();
         if (Input.GetKeyDown(KeyCode.H)) Clear();
-
 
     }
 
@@ -54,7 +51,7 @@ public class SystemErrorBuff
             _errorList[i].Start();
 
     }
-    public void Clear() 
+    public void Clear()
     {
         _errorList.Clear();
     }
@@ -67,14 +64,13 @@ public class SystemErrorBuff
         {
         }
         /// <summary>
-        /// ƒoƒt‚ÌŒÂ”‚ğƒJƒEƒ“ƒg‚·‚éŠÖ”
+        /// ãƒãƒ•ã®å€‹æ•°ã‚’ã‚«ã‚¦ãƒ³ãƒˆã™ã‚‹é–¢æ•°
         /// </summary>
         public System.Func<int> errorCount;
     }
 
-
     /// <summary>
-    /// ƒ}ƒEƒXƒWƒƒƒ}[‚ÌƒCƒ“ƒi[ƒNƒ‰ƒX
+    /// ãƒã‚¦ã‚¹ã‚¸ãƒ£ãƒãƒ¼ã®ã‚¤ãƒ³ãƒŠãƒ¼ã‚¯ãƒ©ã‚¹
     /// </summary>
     private class MouseJammer : Errorbuff
     {
@@ -82,7 +78,7 @@ public class SystemErrorBuff
         private Vector2 _lostPos = Vector2.zero;
 
         /// <summary>
-        /// ¡‚ÍŒˆ‚ß‘Å‚¿
+        /// ä»Šã¯æ±ºã‚æ‰“ã¡
         /// </summary>
         private float MaxRenge = 1000;
 
@@ -90,7 +86,6 @@ public class SystemErrorBuff
         {
             POINT pOINT = new POINT();
             GetCursorPos(out pOINT);
-
 
             _lostPos = new Vector2(pOINT.X, pOINT.Y);
             _renge = 0;
@@ -102,15 +97,13 @@ public class SystemErrorBuff
 
                 List<Card.Trump> trumps = CardManager.instance.GetDeck();
 
-
                 for (int i = 0; i < trumps.Count; i++)
                 {
                     if (trumps[i].cardBuff != Card.cardBuff.MouseJammer) continue;
                     count++;
                 }
 
-
-                //ƒWƒ‡[ƒJ[‚Ì•ª‚àƒJƒEƒ“ƒg
+                //ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®åˆ†ã‚‚ã‚«ã‚¦ãƒ³ãƒˆ
                 JokerUtility.JokerALLAction(joker =>
                 {
 
@@ -119,17 +112,13 @@ public class SystemErrorBuff
 
                 });
 
-
-                //ƒfƒoƒbƒN‚Ìˆ×‚ÉŒÂ”‚ğ‚R‚ÅŒÅ’è‚·‚é
+                //ãƒ‡ãƒãƒƒã‚¯ã®ç‚ºã«å€‹æ•°ã‚’ï¼“ã§å›ºå®šã™ã‚‹
 
                 //count = 3;
-
 
                 return count;
 
             };
-
-
 
         }
 
@@ -138,17 +127,14 @@ public class SystemErrorBuff
 
             if (errorCount() == 0) return;
 
-
             POINT pOINT = new POINT();
             GetCursorPos(out pOINT);
 
             _renge += Vector2.Distance(_lostPos, new Vector2(pOINT.X, pOINT.Y));
             _lostPos = new Vector2(pOINT.X, pOINT.Y);
 
-
             if (MaxRenge > _renge) return;
             MouseMove();
-
 
         }
 
@@ -168,26 +154,22 @@ public class SystemErrorBuff
 
             Start();
 
-
         }
 
-        private Vector2 MousePositionCheck(Vector2 mouse) 
+        private Vector2 MousePositionCheck(Vector2 mouse)
         {
             mouse.x = Check(mouse.x, Screen.width);
             mouse.y = Check(mouse.y, Screen.height);
             return mouse;
         }
 
-        private float Check(float point,float max) 
+        private float Check(float point,float max)
         {
             if (point > max) point = max;
             if (point < 0) point = 0;
 
             return point;
         }
-
-
-
 
     }
 

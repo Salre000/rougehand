@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -16,7 +16,6 @@ public class ShopTextManager:MonoBehaviour
     private float _posX = -200f;
     private float _plusX = 50f;
     [SerializeField]private TextMeshProUGUI _roleText;
-
 
     private void Awake()
     {
@@ -84,7 +83,7 @@ public class ShopTextManager:MonoBehaviour
         }
     }
 
-
     void SetRoleText(string value) { _roleText.text = value; }
 
 }
+

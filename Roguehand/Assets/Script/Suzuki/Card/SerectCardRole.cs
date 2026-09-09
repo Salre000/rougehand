@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -7,7 +7,7 @@ using static TextUIManager;
 using static IDUtility;
 
 /// <summary>
-/// ‘I‘ğ‚µ‚½ƒnƒ“ƒh‚Ì–ğ‚ğƒeƒLƒXƒg‚É”½‰f‚³‚¹‚é
+/// é¸æŠã—ãŸãƒãƒ³ãƒ‰ã®å½¹ã‚’ãƒ†ã‚­ã‚¹ãƒˆã«åæ˜ ã•ã›ã‚‹
 /// </summary>
 public class SerectCardRole : MonoBehaviour
 {
@@ -20,7 +20,7 @@ public class SerectCardRole : MonoBehaviour
     private const float _FONT_SIZE_TYPE3 = 41.1f;
     private const int _NOT_CARD_PICK_COUNT = 0;
     private const int _NO_SCORE = 0;
-    // –ğ
+    // å½¹
     RoleManager.Role role;
 
     private void Update()
@@ -31,26 +31,26 @@ public class SerectCardRole : MonoBehaviour
 
     private void CheckRole()
     {
-        // –ğ‚Ì–¼‘O‚ÆƒŒƒxƒ‹‚Ì”½‰f
+        // å½¹ã®åå‰ã¨ãƒ¬ãƒ™ãƒ«ã®åæ˜ 
         StringBuildRoleNameLevel();
-        // –ğ‚ÌƒXƒRƒA”{—¦‚Ì”½‰f
+        // å½¹ã®ã‚¹ã‚³ã‚¢å€ç‡ã®åæ˜ 
         StringBuildScore();
-        // –ğ‚ÌXV‚ÌI—¹‚ğ‚¨’m‚ç‚¹
+        // å½¹ã®æ›´æ–°ã®çµ‚äº†ã‚’ãŠçŸ¥ã‚‰ã›
         RoleManager.instance.SetIsCheck(false);
     }
 
     private void StringBuildRoleNameLevel()
     {
         _builder.Clear();
-        // ‘I‘ğƒJ[ƒh‚ª–³‚¢ê‡
+        // é¸æŠã‚«ãƒ¼ãƒ‰ãŒç„¡ã„å ´åˆ
         if (CardManager.instance.GetPick().Count <= _NOT_CARD_PICK_COUNT)
         {
             _builder.Append("");
-            // Text‚Ì•ÏX
+            // Textã®å¤‰æ›´
             instance.SetRoleText(_builder.ToString());
             return;
         }
-        // –ğ
+        // å½¹
         role = RoleManager.instance.GetRole();
         string name = MasterData.instance.GetStringMaster(ROLE_ID + (int)role);
         _builder.Append(name);
@@ -60,17 +60,17 @@ public class SerectCardRole : MonoBehaviour
             instance.GetRoleText().fontSize = _FONT_SIZE_TYPE2;
         else
             instance.GetRoleText().fontSize = _FONT_SIZE_TYPE3;
-        // •¶šƒTƒCƒY
+        // æ–‡å­—ã‚µã‚¤ã‚º
         name = MasterData.instance.GetStringMaster(RICHTEXT_ID);
         _builder.Append(name);
-        // ƒŒƒxƒ‹ƒJƒ‰[
+        // ãƒ¬ãƒ™ãƒ«ã‚«ãƒ©ãƒ¼
         int level = RoleManager.instance.GetRoleLevel(role);
         name = MasterData.instance.GetStringMaster(RICHTEXT_ID + level);
         _builder.Append(name);
-        // ƒŒƒxƒ‹
+        // ãƒ¬ãƒ™ãƒ«
         name= MasterData.instance.GetStringMaster(LEVEL_ID+level);
         _builder.Append(name);
-        // Text‚Ì•ÏX
+        // Textã®å¤‰æ›´
         instance.SetRoleText(_builder.ToString());
 
     }
@@ -78,18 +78,18 @@ public class SerectCardRole : MonoBehaviour
     private void StringBuildScore()
     {
         _builder.Clear();
-        // ‘I‘ğƒJ[ƒh‚ª–³‚¢ê‡
+        // é¸æŠã‚«ãƒ¼ãƒ‰ãŒç„¡ã„å ´åˆ
         if (CardManager.instance.GetPick().Count <= _NOT_CARD_PICK_COUNT)
         {
             _builder.Append(_NO_SCORE);
-            // Text‚Ì•ÏX
+            // Textã®å¤‰æ›´
             instance.SetBasicScoreText(_builder.ToString());
             instance.SetMagnificationText(_builder.ToString());
             return;
         }
 
         ////////////////////////
-        /// ƒnƒCƒJ[ƒhƒfƒoƒbƒO
+        /// ãƒã‚¤ã‚«ãƒ¼ãƒ‰ãƒ‡ãƒãƒƒã‚°
         //int num = 0;
         //if (role == RoleManager.Role.highCard)
         //    num = 9*999;
@@ -98,43 +98,41 @@ public class SerectCardRole : MonoBehaviour
         ///
         //    //////////////////////
 
-        // Šî–{ƒXƒRƒA‚Æ”{—¦
-        // Šî–{ƒXƒRƒA
+        // åŸºæœ¬ã‚¹ã‚³ã‚¢ã¨å€ç‡
+        // åŸºæœ¬ã‚¹ã‚³ã‚¢
         int basic = ScoreMaster.instance.GetBasicScore(SCORE_ID + (int)role);
 
-        // –ğ‚É‚æ‚Á‚Ä•Ï‚í‚éã¸•‚ğŠl“¾
+        // å½¹ã«ã‚ˆã£ã¦å¤‰ã‚ã‚‹ä¸Šæ˜‡å¹…ã‚’ç²å¾—
         int addBasicLevel= ScoreMaster.instance.GetAddBasicScore(SCORE_ID + (int)role);
-        // ƒvƒŒƒC‚³‚ê‚½–ğ‚ÌŒ»ƒŒƒxƒ‹‚ğŠl“¾
+        // ãƒ—ãƒ¬ã‚¤ã•ã‚ŒãŸå½¹ã®ç¾ãƒ¬ãƒ™ãƒ«ã‚’ç²å¾—
         int level = RoleManager.instance.GetRoleLevel(role);
-        // ƒŒƒxƒ‹‚É‰‚¶‚ÄƒXƒRƒA‚ğã¸
+        // ãƒ¬ãƒ™ãƒ«ã«å¿œã˜ã¦ã‚¹ã‚³ã‚¢ã‚’ä¸Šæ˜‡
         for (int i = 1; i < level; i++)
             basic += addBasicLevel;
 
-        // ‹¤—L
+        // å…±æœ‰
         ScoreManager.instance.SetBasic(basic);
         _builder.Append(basic);
-        // Text‚Ì•ÏX
+        // Textã®å¤‰æ›´
         instance.SetBasicScoreText(_builder.ToString());
 
-
-
         _builder.Clear();
-        // ”{—¦
+        // å€ç‡
         int magnifi = ScoreMaster.instance.GetBasicMagnification(SCORE_ID + (int)role)/*+num*/;
 
-        // –ğ‚É‚æ‚Á‚Ä•Ï‚í‚éã¸•‚ğŠl“¾
+        // å½¹ã«ã‚ˆã£ã¦å¤‰ã‚ã‚‹ä¸Šæ˜‡å¹…ã‚’ç²å¾—
         int addMagniLevel = ScoreMaster.instance.GetAddBasicMagnification( SCORE_ID + (int)role);
-        // ƒŒƒxƒ‹‚É‰‚¶‚ÄƒXƒRƒA‚ğã¸
+        // ãƒ¬ãƒ™ãƒ«ã«å¿œã˜ã¦ã‚¹ã‚³ã‚¢ã‚’ä¸Šæ˜‡
         for (int i = 1; i < level; i++)
             magnifi += addMagniLevel;
 
-        // ‹¤—L
+        // å…±æœ‰
         ScoreManager.instance.SetMagnification(magnifi);
         _builder.Append(magnifi);
-        // Text‚Ì•ÏX
+        // Textã®å¤‰æ›´
         instance.SetMagnificationText(_builder.ToString());
-
 
     }
 
 }
+

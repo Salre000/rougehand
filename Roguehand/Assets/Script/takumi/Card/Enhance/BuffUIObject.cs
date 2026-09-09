@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -9,12 +9,11 @@ public class BuffUIObject : MonoBehaviour
     [SerializeField] private GameObject uiObject;
     List<GameObject> buffUI = new List<GameObject>();
 
-    //—LŒø‚É‚È‚Á‚½
+    //æœ‰åŠ¹ã«ãªã£ãŸæ™‚
     private void OnEnable()
     {
         return;
         parent = transform.parent.gameObject;
-
 
         TypeJoker();
 
@@ -45,31 +44,23 @@ public class BuffUIObject : MonoBehaviour
         {
             if (JokerUtility.GetIndex(joker) != index) return;
 
-
             if (joker.GetCardBuff() != Card.cardBuff.None)
             {
                 buffUI.Add(CreateUI(-1,-1));
             }
-            if (joker.GetJokerBuff() != Card.JokerBuff.None) 
+            if (joker.GetJokerBuff() != Card.JokerBuff.None)
             {
 
                 buffUI.Add(CreateUI(-1,-1));
             }
 
-            for(int i = 0; i < buffUI.Count; i++) 
+            for(int i = 0; i < buffUI.Count; i++)
             {
                 buffUI[i].transform.parent = transform;
-
-
-
-
 
             }
 
         });
-
-
-
 
     }
 
@@ -83,7 +74,5 @@ public class BuffUIObject : MonoBehaviour
 
     }
 
-
-
-
 }
+

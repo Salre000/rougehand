@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
@@ -38,24 +38,18 @@ public class RandomRole : JokerBase
         sb.Append(base.GetExplanation());
         sb.Append("</size>");
 
-
         return sb.ToString();
     }
-
 
     public override string GetExplanation2()
     {
         return Trun() < 1 ? string.Empty : MasterData.instance.GetStringMaster(1999) + Trun().ToString().GetRedString();
     }
 
-
     public override float Trun()
     {
         return value;
     }
 
-
-
-
-
 }
+

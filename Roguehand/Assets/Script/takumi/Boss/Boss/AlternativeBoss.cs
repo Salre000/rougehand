@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
@@ -6,7 +6,6 @@ public class AlternativeBoss : BossBase
 {
 
     List<int> alternativeIndexs = new List<int>();
-
 
     private readonly int alternativeCount = 16;
 
@@ -24,9 +23,6 @@ public class AlternativeBoss : BossBase
 
             alternativeIndexs.Add(random);
         }
-
-
-
 
     }
 
@@ -61,11 +57,7 @@ public class AlternativeBoss : BossBase
             TextUIManager.instance.SetBasicScoreText("??");
             TextUIManager.instance.SetMagnificationText("??");
 
-
-
-
         }
-
 
     }
 
@@ -74,12 +66,5 @@ public class AlternativeBoss : BossBase
         base.End();
     }
 
-
-
-
-
-
-
-
-
 }
+

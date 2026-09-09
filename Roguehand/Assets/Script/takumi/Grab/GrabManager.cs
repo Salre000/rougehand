@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -12,12 +12,12 @@ public class GrabManager : MonoBehaviour
     private bool grabFlag = true;
 
     /// <summary>
-    /// ƒƒCƒ“ƒJƒƒ‰‚ÌƒIƒuƒWƒFƒNƒg
+    /// ãƒ¡ã‚¤ãƒ³ã‚«ãƒ¡ãƒ©ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     /// </summary>
     private GameObject _camera;
 
     /// <summary>
-    /// ’Í‚ñ‚Å‚¢‚éƒIƒuƒWƒFƒNƒg‚ÌID
+    /// æ´ã‚“ã§ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ID
     /// </summary>
     [SerializeField] private int _grabID = -1;
 
@@ -26,30 +26,29 @@ public class GrabManager : MonoBehaviour
     public enum status
     {
         None,
-        //‚±‚±‚©‚ç‰º‚Í‚Â‚©‚Ü‚ê‚Ä‚¢‚é‘ÎÛ
+        //ã“ã“ã‹ã‚‰ä¸‹ã¯ã¤ã‹ã¾ã‚Œã¦ã„ã‚‹å¯¾è±¡
         Card,
         Joker,
         Item,
-        // ƒVƒ‡ƒbƒv‚Ì•¨
+        // ã‚·ãƒ§ãƒƒãƒ—ã®ç‰©
         Sale,
-        //ƒfƒbƒL
+        //ãƒ‡ãƒƒã‚­
         Deck
     }
 
     /// <summary>
-    /// Œ»İ‚Ìó‘Ô
+    /// ç¾åœ¨ã®çŠ¶æ…‹
     /// </summary>
     [SerializeField]private status _status = status.None;
 
     /// <summary>
-    /// ŠÔŒv‘ª‚ğ‚·‚é•Ï”
+    /// æ™‚é–“è¨ˆæ¸¬ã‚’ã™ã‚‹å¤‰æ•°
     /// </summary>
     private float _time = 0;
 
-
     private void Awake()
     {
-        //ƒJƒƒ‰‚ÌƒIƒuƒWƒFƒNƒg‚ğæ“¾
+        //ã‚«ãƒ¡ãƒ©ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—
         _camera = Camera.main.gameObject;
         instance = this;
     }
@@ -58,13 +57,13 @@ public class GrabManager : MonoBehaviour
     {
         if (!grabFlag) return;
 
-        // ƒŠƒUƒ‹ƒg‰æ–Ê‚ªŠJ‚¢‚Ä‚¢‚½‚çG‚ê‚ç‚ê‚È‚­‚·‚é
+        // ãƒªã‚¶ãƒ«ãƒˆç”»é¢ãŒé–‹ã„ã¦ã„ãŸã‚‰è§¦ã‚Œã‚‰ã‚Œãªãã™ã‚‹
         if (ResultUIManager.Instance.resultFlag) return;
 
-        // ƒ‰ƒ“‚ÌÚ×‚ªŒ©‚¦‚é‚Æ‚«‚ÍG‚ê‚ç‚ê‚È‚­‚·‚é
+        // ãƒ©ãƒ³ã®è©³ç´°ãŒè¦‹ãˆã‚‹ã¨ãã¯è§¦ã‚Œã‚‰ã‚Œãªãã™ã‚‹
         if (RunDetailsManager.instance.IsOpen()) return;
 
-        // ƒvƒŒƒC“r’†‚ÅƒJ[ƒh‚È‚Ç‚ÉG‚ê‚È‚­‚·‚é
+        // ãƒ—ãƒ¬ã‚¤é€”ä¸­ã§ã‚«ãƒ¼ãƒ‰ãªã©ã«è§¦ã‚Œãªãã™ã‚‹
         if (CardObjectUtility.IsPlaying()) return;
 
         if (continuationAction != null) continuationAction();
@@ -74,26 +73,24 @@ public class GrabManager : MonoBehaviour
         Grab();
         Separate();
 
-
     }
 
     /// <summary>
-    /// ’Í‚İs“®‚ÌŠÖ”
+    /// æ´ã¿è¡Œå‹•ã®é–¢æ•°
     /// </summary>
     private void Grab()
     {
         if (_status != status.None) return;
-        //ƒNƒŠƒbƒN‚µ‚Ä‚¢‚È‚¢‚Æ•Ô‚·
+        //ã‚¯ãƒªãƒƒã‚¯ã—ã¦ã„ãªã„ã¨è¿”ã™
         if (!Input.GetMouseButton(0)) return;
 
         if (_grabID >= 0) return;
-        //ƒ}ƒEƒX‚ÌˆÊ’u‚Éray‚ğ”ò‚Î‚·
+        //ãƒã‚¦ã‚¹ã®ä½ç½®ã«rayã‚’é£›ã°ã™
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
             GetObjectType(hit.transform.gameObject);
-
 
         }
 
@@ -168,7 +165,6 @@ public class GrabManager : MonoBehaviour
             _status = status.None;
             _grabID = -1;
 
-
         }
         else
         {
@@ -177,9 +173,8 @@ public class GrabManager : MonoBehaviour
         }
     }
 
-
     /// <summary>
-    /// —£‚·ŠÖ”
+    /// é›¢ã™é–¢æ•°
     /// </summary>
     private void Separate()
     {
@@ -190,13 +185,12 @@ public class GrabManager : MonoBehaviour
 
         SaleUtility.Claer();
 
-        //ƒ}ƒEƒX‚ÌˆÊ’u‚Éray‚ğ”ò‚Î‚·
+        //ãƒã‚¦ã‚¹ã®ä½ç½®ã«rayã‚’é£›ã°ã™
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
             SetGrabID(hit.transform.gameObject);
-
 
         }
 
@@ -217,7 +211,6 @@ public class GrabManager : MonoBehaviour
                 break;
 
         }
-
 
         if (_time < 1)
         {
@@ -246,11 +239,9 @@ public class GrabManager : MonoBehaviour
 
         _grabID = -1;
 
-
-
     }
     /// <summary>
-    /// ray‚Ì‘ÎÛ‚ÌƒIƒuƒWƒFƒNƒg‚Ìí—Ş‚ğ”»•Ê
+    /// rayã®å¯¾è±¡ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç¨®é¡ã‚’åˆ¤åˆ¥
     /// </summary>
     /// <param name="gameObject"></param>
     private void GetObjectType(GameObject gameObject)
@@ -258,7 +249,7 @@ public class GrabManager : MonoBehaviour
 
         SetGrabID(gameObject);
 
-        //‰½‚©‚µ‚ç‚Ì‰Â”\«‚ÅID‚ğæ“¾o—ˆ‚È‚©‚Á‚½‚ÉƒŠƒZƒbƒg
+        //ä½•ã‹ã—ã‚‰ã®å¯èƒ½æ€§ã§IDã‚’å–å¾—å‡ºæ¥ãªã‹ã£ãŸæ™‚ã«ãƒªã‚»ãƒƒãƒˆ
         if (_grabID == -1) { _status = status.None; }
 
         VolumeManager.instance.PlayCardMoveSE();
@@ -266,7 +257,7 @@ public class GrabManager : MonoBehaviour
         {
             case status.Card:
                 CardObjectUtility.GrabChenge(_grabID, true);
-                // ƒJ[ƒh‚Ìî•ñ‚ğUI‚Æ‚µ‚Ä•`‰æ‚·‚é
+                // ã‚«ãƒ¼ãƒ‰ã®æƒ…å ±ã‚’UIã¨ã—ã¦æç”»ã™ã‚‹
 
                 if (gameObject.transform.localEulerAngles.y < 300) return;
                 //CardObjectUtility.ShowExplanation(CardManager.instance.GetHand()[_grabID], _grabID);
@@ -291,12 +282,12 @@ public class GrabManager : MonoBehaviour
     private void SetGrabID(GameObject gameObject)
     {
         _time = 0;
-        //ƒJ[ƒh‚Ì‰Â”\«‚ğ”»•Ê
+        //ã‚«ãƒ¼ãƒ‰ã®å¯èƒ½æ€§ã‚’åˆ¤åˆ¥
         CardObject cardObject = gameObject.GetComponent<CardObject>();
 
         if (cardObject != null) _status = status.Card;
 
-        //ƒWƒ‡[ƒJ[‚Ì‰Â”\«‚ğ”»•Ê
+        //ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®å¯èƒ½æ€§ã‚’åˆ¤åˆ¥
         JokerObject jokerObject = gameObject.GetComponent<JokerObject>();
 
         if (jokerObject != null) _status = status.Joker;
@@ -309,7 +300,7 @@ public class GrabManager : MonoBehaviour
 
         if (!(saleIndex < 0)) _status = status.Sale;
 
-        //’Í‚ñ‚¾ƒIƒuƒWƒFƒNƒg‚ÌID‚ğæ“¾
+        //æ´ã‚“ã ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®IDã‚’å–å¾—
         switch (_status)
         {
             case status.Card:

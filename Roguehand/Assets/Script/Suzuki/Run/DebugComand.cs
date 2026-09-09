@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +10,7 @@ public class DebugComand : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -20,12 +20,11 @@ public class DebugComand : MonoBehaviour
         HandAndDisReset();
     }
 
-
     private void CheckHand()
     {
         if (!Input.GetKeyDown(KeyCode.Return)) return;
-        // –ğ‚Ìƒ`ƒFƒbƒN
-        // ƒfƒoƒbƒNAŠm”F‚Æ‚µ‚Ä“Á’èƒL[‚ğ‰Ÿ‚µ‚½‚çŒ»İo‚¹‚é–ğ‚ğ•\¦‚·‚é
+        // å½¹ã®ãƒã‚§ãƒƒã‚¯
+        // ãƒ‡ãƒãƒƒã‚¯ã€ç¢ºèªã¨ã—ã¦ç‰¹å®šã‚­ãƒ¼ã‚’æŠ¼ã—ãŸã‚‰ç¾åœ¨å‡ºã›ã‚‹å½¹ã‚’è¡¨ç¤ºã™ã‚‹
         List<Card.Trump> roleCheck = CardManager.instance.GetHand();
         RoleManager.Role role = RoleManager.Role.None;
         role=RoleManager.instance.RoleCheck(roleCheck);
@@ -36,13 +35,14 @@ public class DebugComand : MonoBehaviour
 
     }
 
-    // ƒnƒ“ƒh‰ñ”‚ÆƒfƒBƒXƒJ[ƒh‰ñ”‚ÌƒŠƒZƒbƒg
+    // ãƒãƒ³ãƒ‰å›æ•°ã¨ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰å›æ•°ã®ãƒªã‚»ãƒƒãƒˆ
     private void HandAndDisReset()
     {
         if(!Input.GetKeyDown(KeyCode.Q)) return;
-        // ƒnƒ“ƒh‰ñ”‚ÌƒŠƒZƒbƒg
+        // ãƒãƒ³ãƒ‰å›æ•°ã®ãƒªã‚»ãƒƒãƒˆ
         GameUtility.SetHandCount(GameUtility.GetBaseHandCound());
-        // ƒfƒBƒXƒJ[ƒh‚ÌƒŠƒZƒbƒg
+        // ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰ã®ãƒªã‚»ãƒƒãƒˆ
         GameUtility.SetDiscardCount(GameUtility.GetBaseDiscardCound());
     }
 }
+

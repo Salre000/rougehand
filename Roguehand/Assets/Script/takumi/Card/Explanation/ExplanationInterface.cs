@@ -1,33 +1,32 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// à–¾•ª‚ğ•`‰æ‚·‚éinterface
+/// èª¬æ˜åˆ†ã‚’æç”»ã™ã‚‹interface
 /// </summary>
 public interface ExplanationInterface
 {
 
     /// <summary>
-    /// –¼‘O‚ğ•Ô‚·ŠÖ”
+    /// åå‰ã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <returns></returns>
     public string GetName();
     /// <summary>
-    /// à–¾‚ğ•Ô‚·ŠÖ”
+    /// èª¬æ˜ã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <returns></returns>
     public string GetExplanation();
     /// <summary>
-    /// ’Ç‰Á‚Ìà–¾‚ğ•Ô‚·ŠÖ”
+    /// è¿½åŠ ã®èª¬æ˜ã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <returns></returns>
     public string GetExplanation2();
     /// <summary>
-    /// í—Ş‚ğ•Ô‚·ŠÖ”
+    /// ç¨®é¡ã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <returns></returns>
     public string GetTypes();
-
 
 }

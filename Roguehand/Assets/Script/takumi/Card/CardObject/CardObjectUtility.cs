@@ -1,8 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class CardObjectUtility 
+public static class CardObjectUtility
 {
     public static CardObjectManager CardObjectManager { set; get; }
 
@@ -54,7 +54,7 @@ public static class CardObjectUtility
 
     public static bool CheckCardMove() { return CardObjectManager.checkCardMove(); }
 
-    public static void CardPaint(Card.Trump cardData, GameObject gameObject) 
+    public static void CardPaint(Card.Trump cardData, GameObject gameObject)
     {
         CardObjectManager.CardPaint(cardData,gameObject);
     }

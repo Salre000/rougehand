@@ -1,10 +1,10 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static ScriptCountNumber;
 
 /// <summary>
-/// ƒpƒbƒN‚Ì¶¬
+/// ãƒ‘ãƒƒã‚¯ã®ç”Ÿæˆ
 /// </summary>
 public class InstantiatePack : MonoBehaviour
 {
@@ -16,10 +16,10 @@ public class InstantiatePack : MonoBehaviour
     [SerializeField] Transform _packItemLeftTargetPos;
     [SerializeField] Transform _packItemRightTargetPos;
     [SerializeField] Transform _packTrumpTargetPos;
-    [SerializeField, Header("ƒpƒbƒN“à‚ÌƒfƒtƒHƒ‹ƒgƒIƒuƒWƒFƒNƒg")]
+    [SerializeField, Header("ãƒ‘ãƒƒã‚¯å†…ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ")]
     GameObject card;
     /// <summary>
-    /// ƒpƒbƒN‚Ìƒ}ƒeƒŠƒAƒ‹‚ğŠÇ—‚·‚éƒNƒ‰ƒX
+    /// ãƒ‘ãƒƒã‚¯ã®ãƒãƒ†ãƒªã‚¢ãƒ«ã‚’ç®¡ç†ã™ã‚‹ã‚¯ãƒ©ã‚¹
     /// </summary>
     [SerializeField] private PackMaterialManager materialManager;
     private float distance = 0;
@@ -39,14 +39,12 @@ public class InstantiatePack : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(_packs.Count + "ƒpƒbƒN‚Ì”");
+        Debug.Log(_packs.Count + "ãƒ‘ãƒƒã‚¯ã®æ•°");
 
         CheckNotShop();
         if (!ShopManager.instance.IsShop()) return;
         PackCreateTrump();
         PackCreate();
-
-
 
     }
 
@@ -57,37 +55,33 @@ public class InstantiatePack : MonoBehaviour
 
         _packs.Clear();
 
-
-
         _isInstantiate = false;
     }
     /// <summary>
-    /// ƒVƒ‡ƒbƒv“üê‚ÉƒpƒbƒN‚ªì¬‚³‚ê‚é
+    /// ã‚·ãƒ§ãƒƒãƒ—å…¥å ´æ™‚ã«ãƒ‘ãƒƒã‚¯ãŒä½œæˆã•ã‚Œã‚‹
     /// </summary>
     private void PackCreateTrump()
     {
         if (_isInstantiate) return;
 
-
-        // ’u‚¯‚éƒpƒbƒN•ª¶¬
+        // ç½®ã‘ã‚‹ãƒ‘ãƒƒã‚¯åˆ†ç”Ÿæˆ
 
         PackType pack = PackType.trump;
 
-        // ¶¬
+        // ç”Ÿæˆ
         trumpPack=(Instantiate(_pack, _packZone));
-        // ƒNƒ‰ƒX‚Ì•t—^
+        // ã‚¯ãƒ©ã‚¹ã®ä»˜ä¸
         trumpPack.AddComponent<AssignPack>();
-        // ‚±‚ÌƒLƒƒƒbƒVƒ…‚Í•K{
+        // ã“ã®ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã¯å¿…é ˆ
         AssignPack obj = trumpPack.GetComponent<AssignPack>();
         obj.Initialize();
         obj.SetDefaultObject(card);
-        // ¡‚ÍŒÅ’è’l‚Åì¬”‚Æ‘I‘ğ”‚ğ’u‚¢‚Ä‚¢‚é
+        // ä»Šã¯å›ºå®šå€¤ã§ä½œæˆæ•°ã¨é¸æŠæ•°ã‚’ç½®ã„ã¦ã„ã‚‹
         obj.Create(pack, 5, 2);
-
 
         materialManager.SetPackPaint(trumpPack, pack, 5);
 
-        // –Ú•WÀ•W‚ğƒZƒbƒg
+        // ç›®æ¨™åº§æ¨™ã‚’ã‚»ãƒƒãƒˆ
         SaleObjectManager.instance.ProductExplantion(obj.GetSaleValue());
         SaleObjectManager.instance.AddProducts(trumpPack,
             () => { obj.ShopSale(); },
@@ -95,14 +89,13 @@ public class InstantiatePack : MonoBehaviour
             () =>
             {
 
-                Debug.Log("ƒpƒbƒN‚ğw“ü‚µ‚½‚æ[");
-                // ƒpƒbƒN‚Ìw“ü‚Ìˆ—‚ğ•`‚­
+                Debug.Log("ãƒ‘ãƒƒã‚¯ã‚’è³¼å…¥ã—ãŸã‚ˆãƒ¼");
+                // ãƒ‘ãƒƒã‚¯ã®è³¼å…¥æ™‚ã®å‡¦ç†ã‚’æã
                 PackManager.instance.SetIsBuyPack(true);
                 GameObject domyy = trumpPack;
-                // ‘I‘ğ‚³‚ê‚½ƒpƒbƒNƒIƒuƒWƒFƒNƒg‚ğƒ}ƒl[ƒWƒƒ[‚É•Û‘¶
+                // é¸æŠã•ã‚ŒãŸãƒ‘ãƒƒã‚¯ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã«ä¿å­˜
                 PackManager.instance.SetPickPack(domyy);
                 SaleObjectManager.instance.Remove(domyy);
-
 
                 switch (pack)
                 {
@@ -117,7 +110,6 @@ public class InstantiatePack : MonoBehaviour
                         break;
                 }
 
-
             }
             , true
             );
@@ -127,8 +119,7 @@ public class InstantiatePack : MonoBehaviour
     {
         if (_isInstantiate) return;
 
-
-        // ’u‚¯‚éƒpƒbƒN•ª¶¬
+        // ç½®ã‘ã‚‹ãƒ‘ãƒƒã‚¯åˆ†ç”Ÿæˆ
         for (int i = 0; i < MAX_PACK; i++)
         {
 
@@ -136,22 +127,21 @@ public class InstantiatePack : MonoBehaviour
                 (PackType)UnityEngine.Random.Range(0, (int)PackType.max - 1)
                 : type;
 
-            // ¶¬
+            // ç”Ÿæˆ
             _packs.Add(Instantiate(_pack, _packZone));
-            // ƒNƒ‰ƒX‚Ì•t—^
+            // ã‚¯ãƒ©ã‚¹ã®ä»˜ä¸
             _packs[i].AddComponent<AssignPack>();
-            // ‚±‚ÌƒLƒƒƒbƒVƒ…‚Í•K{
+            // ã“ã®ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã¯å¿…é ˆ
             int cash = i;
             AssignPack obj = _packs[i].GetComponent<AssignPack>();
             obj.Initialize();
             obj.SetDefaultObject(card);
-            // ¡‚ÍŒÅ’è’l‚Åì¬”‚Æ‘I‘ğ”‚ğ’u‚¢‚Ä‚¢‚é
+            // ä»Šã¯å›ºå®šå€¤ã§ä½œæˆæ•°ã¨é¸æŠæ•°ã‚’ç½®ã„ã¦ã„ã‚‹
             obj.Create(pack, 5, 2);
-
 
             materialManager.SetPackPaint(_packs[i], pack, 5);
 
-            // –Ú•WÀ•W‚ğƒZƒbƒg
+            // ç›®æ¨™åº§æ¨™ã‚’ã‚»ãƒƒãƒˆ
             SaleObjectManager.instance.ProductExplantion(obj.GetSaleValue());
             SaleObjectManager.instance.AddProducts(_packs[i],
                 () => { obj.ShopSale(); },
@@ -159,15 +149,14 @@ public class InstantiatePack : MonoBehaviour
                 () =>
                 {
 
-                    Debug.Log("ƒpƒbƒN‚ğw“ü‚µ‚½‚æ[");
-                    // ƒpƒbƒN‚Ìw“ü‚Ìˆ—‚ğ•`‚­
+                    Debug.Log("ãƒ‘ãƒƒã‚¯ã‚’è³¼å…¥ã—ãŸã‚ˆãƒ¼");
+                    // ãƒ‘ãƒƒã‚¯ã®è³¼å…¥æ™‚ã®å‡¦ç†ã‚’æã
                     PackManager.instance.SetIsBuyPack(true);
                     GameObject domyy = _packs[cash];
-                    // ‘I‘ğ‚³‚ê‚½ƒpƒbƒNƒIƒuƒWƒFƒNƒg‚ğƒ}ƒl[ƒWƒƒ[‚É•Û‘¶
+                    // é¸æŠã•ã‚ŒãŸãƒ‘ãƒƒã‚¯ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã«ä¿å­˜
                     PackManager.instance.SetPickPack(domyy);
                     SaleObjectManager.instance.Remove(domyy);
                     BuyTrans(cash);
-
 
                     switch (pack)
                     {
@@ -182,25 +171,22 @@ public class InstantiatePack : MonoBehaviour
                             break;
                     }
 
-
                 }
                 , true
                 );
-
 
         }
         Trans();
         _isInstantiate = true;
     }
 
-
     /// <summary>
-    /// •À‚Ñ‘Ö‚¦
+    /// ä¸¦ã³æ›¿ãˆ
     /// </summary>
     private void Trans()
     {
-        // left‚Æright‚©‚ç’¼ü‚ğì‚èAü‚ğ•ªŠ„‚·‚é‚±‚Æ‚Å’†S“_‚ğo‚·
-        // I“_‚Éæ‚ç‚È‚¢‚æ‚¤‚É+1‚·‚é(Œã‚ë‚ğ‘‚â‚·)
+        // leftã¨rightã‹ã‚‰ç›´ç·šã‚’ä½œã‚Šã€ç·šã‚’åˆ†å‰²ã™ã‚‹ã“ã¨ã§ä¸­å¿ƒç‚¹ã‚’å‡ºã™
+        // çµ‚ç‚¹ã«ä¹—ã‚‰ãªã„ã‚ˆã†ã«+1ã™ã‚‹(å¾Œã‚ã‚’å¢—ã‚„ã™)
         int num = 0;
         for (int i = 0; i < _packs.Count; i++)
         {
@@ -216,14 +202,14 @@ public class InstantiatePack : MonoBehaviour
                 minus++;
                 continue;
             }
-            // n“_‚Éæ‚ç‚È‚¢‚æ‚¤‚É+1‚·‚é(‘O‚ğ‘‚â‚·)
-            // w“üÏ‚İƒpƒbƒN‚Íl—¶‚³‚¹‚È‚¢‚æ‚¤minus‚ğ‚Í‚³‚Ş
+            // å§‹ç‚¹ã«ä¹—ã‚‰ãªã„ã‚ˆã†ã«+1ã™ã‚‹(å‰ã‚’å¢—ã‚„ã™)
+            // è³¼å…¥æ¸ˆã¿ãƒ‘ãƒƒã‚¯ã¯è€ƒæ…®ã•ã›ãªã„ã‚ˆã†minusã‚’ã¯ã•ã‚€
             float dis = (float)(i - minus + 1) / num;
             _packs[i].transform.position = Vector3.Lerp(_leftTargetPos.position, _rightTargetPos.position, dis);
         }
     }
 
-    private void TrumpPackTrans() 
+    private void TrumpPackTrans()
     {
         if (trumpPack == null) return;
 
@@ -232,9 +218,9 @@ public class InstantiatePack : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒpƒbƒNw“ü•À‚Ñ‘Ö‚¦‚ğ‚·‚é
+    /// ãƒ‘ãƒƒã‚¯è³¼å…¥æ™‚ä¸¦ã³æ›¿ãˆã‚’ã™ã‚‹
     /// </summary>
-    /// <param name="ID">w“ü‚³‚ê‚½ƒpƒbƒN‚ÌID</param>
+    /// <param name="ID">è³¼å…¥ã•ã‚ŒãŸãƒ‘ãƒƒã‚¯ã®ID</param>
     private void BuyTrans(int ID)
     {
         _packs[ID] = null;
@@ -243,7 +229,7 @@ public class InstantiatePack : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ÌƒŠƒXƒg‚ğ•Ô‚·ŠÖ”
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ãƒªã‚¹ãƒˆã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <param name="createCount"></param>
     /// <returns></returns>
@@ -258,7 +244,7 @@ public class InstantiatePack : MonoBehaviour
 
     }
     /// <summary>
-    /// ƒAƒCƒeƒ€‚ÌƒŠƒXƒg‚ğ•Ô‚·ŠÖ”
+    /// ã‚¢ã‚¤ãƒ†ãƒ ã®ãƒªã‚¹ãƒˆã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <param name="createCount"></param>
     /// <returns></returns>
@@ -278,7 +264,7 @@ public class InstantiatePack : MonoBehaviour
 
     }
     /// <summary>
-    /// ƒgƒ‰ƒ“ƒv‚ÌƒŠƒXƒg‚ğ•Ô‚·ŠÖ”
+    /// ãƒˆãƒ©ãƒ³ãƒ—ã®ãƒªã‚¹ãƒˆã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <param name="createCount"></param>
     /// <returns></returns>
@@ -299,7 +285,7 @@ public class InstantiatePack : MonoBehaviour
             int buffCount = UnityEngine.Random.Range(0, 4);
 
             bool continueFlag = true;
-            // Šî–{“I‚ÉƒRƒ“‚Ä‚É‚ã[‚Å•Ô‚·‚©‚çã¸–³‚µ
+            // åŸºæœ¬çš„ã«ã‚³ãƒ³ã¦ã«ã‚…ãƒ¼ã§è¿”ã™ã‹ã‚‰ä¸Šæ˜‡ç„¡ã—
             for (int j = 0; j < buffCount;)
             {
                 int buffNum =UnityEngine.Random.Range(0, 4);
@@ -311,7 +297,7 @@ public class InstantiatePack : MonoBehaviour
                         {
                             j++;
                            // trump.sealBuff = Card.sealBuff.Red;
-                            
+
                             trump.sealBuff = (Card.sealBuff)UnityEngine.Random.Range(0, (int)Card.sealBuff.MAX);
                         }
                         break;
@@ -342,14 +328,14 @@ public class InstantiatePack : MonoBehaviour
     }
 
     /// <summary>
-    /// À•W‚ğ•Ô‚·ŠÖ”
+    /// åº§æ¨™ã‚’è¿”ã™é–¢æ•°
     /// </summary>
     /// <param name="createCount"></param>
     /// <returns></returns>
     private List<Vector3> GetPos(int createCount)
     {
         List<Vector3> poss = new List<Vector3>();
-        //@ƒpƒbƒN‚È’†g‚Ì‹——£‚ğæ“¾
+        //ã€€ãƒ‘ãƒƒã‚¯ãªä¸­èº«ã®è·é›¢ã‚’å–å¾—
         distance = Vector3.Distance(_packItemLeftTargetPos.position, _packItemRightTargetPos.position) / (createCount + 1);
 
         for (int i = 0; i < createCount; i++)
@@ -360,3 +346,4 @@ public class InstantiatePack : MonoBehaviour
     }
 
 }
+

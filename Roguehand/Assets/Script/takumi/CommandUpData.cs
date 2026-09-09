@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,30 +23,29 @@ public class CommandUpData : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R)) ResultUIManager.Instance.Active();
         if(Input.GetKeyDown(KeyCode.D))VolumeManager.instance.PlayScoreSE();
 
-
     }
 
-    private void Auto() 
+    private void Auto()
     {
 
-        // ƒ{ƒ^ƒ“ó•t‚Ì’â~’†
+        // ãƒœã‚¿ãƒ³å—ä»˜ã®åœæ­¢ä¸­
         if (!GameUtility.IsPushButton()) return;
         if (GameUtility.IsPlay()) return;
         if (CardObjectUtility.CheckCardMove()) return;
         if (CardManager.instance.GetPick().Count != 0) return;
 
-        for (int i=0;i< CardManager.instance.GetPick().Count; i++) 
+        for (int i=0;i< CardManager.instance.GetPick().Count; i++)
             CardManager.instance.SetIsSelect(CardManager.instance.GetHand().IndexOf(CardManager.instance.GetPick()[i]));
-     
+
         RoleManager.instance.RoleCheck(CardManager.instance.GetHand());
         List<int> indexs =new List<int>( RoleManager.instance.GetIndex());
-        for(int i = 0; i < indexs.Count; i++) 
+        for(int i = 0; i < indexs.Count; i++)
         {
             CardManager.instance.SetIsSelect(indexs[i]);
         }
         play();
 
-        // ‚±‚Ì•û–@‚¾‚ÆƒXƒRƒA‚Ì‰ÁZ‚ğs‚í‚¸‚És‚¯‚é
+        // ã“ã®æ–¹æ³•ã ã¨ã‚¹ã‚³ã‚¢ã®åŠ ç®—ã‚’è¡Œã‚ãšã«è¡Œã‘ã‚‹
         //CardManager.instance.ResetPick();
         //RoleManager.instance.RoleCheck(CardManager.instance.GetPick());
 
@@ -56,9 +55,10 @@ public class CommandUpData : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        // ‚±‚±‚ÉƒZ[ƒuˆ—‚ğ‹Lq‚µ‚Ü‚·B
-        // —á‚¦‚ÎAƒQ[ƒ€ƒf[ƒ^‚ğ•Û‘¶‚·‚éƒƒ\ƒbƒhB
+        // ã“ã“ã«ã‚»ãƒ¼ãƒ–å‡¦ç†ã‚’è¨˜è¿°ã—ã¾ã™ã€‚
+        // ä¾‹ãˆã°ã€ã‚²ãƒ¼ãƒ ãƒ‡ãƒ¼ã‚¿ã‚’ä¿å­˜ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰ã€‚
         MemoryManager.Keep();
 
     }
 }
+

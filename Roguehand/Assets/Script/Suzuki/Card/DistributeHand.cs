@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,12 +6,12 @@ using UnityEngine.XR;
 using static Card;
 
 /// <summary>
-/// èD‚ğ”z‚é
+/// æ‰‹æœ­ã‚’é…ã‚‹
 /// </summary>
 public class DistributeHand : MonoBehaviour
 {
     public static DistributeHand instanse=null;
-    // èDƒŠƒXƒg
+    // æ‰‹æœ­ãƒªã‚¹ãƒˆ
     private List<Card.Trump> deck = new List<Card.Trump>();
     private List<Card.Trump> hand = new List<Card.Trump>();
     private bool handDrawFlag = false;
@@ -26,27 +26,25 @@ public class DistributeHand : MonoBehaviour
         deck = CardManager.instance.GetDeck();
         hand.Capacity = CardManager.instance.GetHandSize();
 
-        // ƒ‰ƒEƒ“ƒh‚ÌI—¹‚Ìƒhƒ[‚Ìˆ—
+        // ãƒ©ã‚¦ãƒ³ãƒ‰ã®çµ‚äº†æ™‚ã®ãƒ‰ãƒ­ãƒ¼ã®å‡¦ç†
         RoundObserver.Instance.AddRoundEndAction(
             () =>
             {
 
-                //ƒVƒ‡ƒbƒv‚É“ü‚Á‚Ä‚¢‚½‚ç
-                if (GameUtility.IsRoundResult()) 
+                //ã‚·ãƒ§ãƒƒãƒ—ã«å…¥ã£ã¦ã„ãŸã‚‰
+                if (GameUtility.IsRoundResult())
                 {
-                    // èD‚ÌƒIƒuƒWƒFƒNƒg‚ğ‘S”jŠü
+                    // æ‰‹æœ­ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å…¨ç ´æ£„
                     CardObjectUtility.End();
                     return;
                 }
 
-
-
-                //ƒhƒ[‚ğ‰Â”\‚É‚·‚é
+                //ãƒ‰ãƒ­ãƒ¼ã‚’å¯èƒ½ã«ã™ã‚‹
                 handDrawFlag = false;
 
             });
 
-        //ƒ‰ƒEƒ“ƒhŠJn‚Ìƒhƒ[‚Ìˆ—
+        //ãƒ©ã‚¦ãƒ³ãƒ‰é–‹å§‹æ™‚ã®ãƒ‰ãƒ­ãƒ¼ã®å‡¦ç†
         RoundObserver.Instance.AddRoundStartAction(
             () => { handDrawFlag = false;}
             );
@@ -65,7 +63,7 @@ public class DistributeHand : MonoBehaviour
         handDrawFlag = true;
     }
 
-    // ƒ‰ƒ“ƒ_ƒ€‚Å”z‚è‚Ü‚·
+    // ãƒ©ãƒ³ãƒ€ãƒ ã§é…ã‚Šã¾ã™
     private void Distribute(int drawCount)
     {
 
@@ -74,29 +72,28 @@ public class DistributeHand : MonoBehaviour
         deck = CardManager.instance.GetDeck();
         hand.Capacity = CardManager.instance.GetHandSize();
         int index = deck.Count;
-        // ƒfƒbƒL•ª‚ÌƒLƒƒƒp‚ğŠl“¾
+        // ãƒ‡ãƒƒã‚­åˆ†ã®ã‚­ãƒ£ãƒ‘ã‚’ç²å¾—
         List<int> dammyDeckArray = new List<int>(index);
         for (int i = 0; i < index; i++)
             dammyDeckArray.Add(i);
 
-        // ƒnƒ“ƒh•ªŒJ‚è•Ô‚·
+        // ãƒãƒ³ãƒ‰åˆ†ç¹°ã‚Šè¿”ã™
         for (int i = 0; i < drawCount; i++)
         {
 
-
-            // ˆê‰ñŒJ‚è•Ô‚·‚²‚Æ‚Éƒ‰ƒ“ƒ_ƒ€‚Åo‚½”’l‚ğæ‚èœ‚¢‚ÄèD‚É“n‚·
+            // ä¸€å›ç¹°ã‚Šè¿”ã™ã”ã¨ã«ãƒ©ãƒ³ãƒ€ãƒ ã§å‡ºãŸæ•°å€¤ã‚’å–ã‚Šé™¤ã„ã¦æ‰‹æœ­ã«æ¸¡ã™
             index = Random.Range(0, dammyDeckArray.Count);
 
-            // ‚Ü‚¾g‚í‚ê‚Ä‚¢‚È‚¢ƒJ[ƒh‚Ì‚İ‚ğ‘ÎÛ‚É‚·‚é
+            // ã¾ã ä½¿ã‚ã‚Œã¦ã„ãªã„ã‚«ãƒ¼ãƒ‰ã®ã¿ã‚’å¯¾è±¡ã«ã™ã‚‹
             if (deck[dammyDeckArray[index]].state != Card.State.deck)
             {
-                //‚±‚Ì”Ô†‚Íg—p•s‰Â”\‚È‚Ì‚Å”pŠü
+                //ã“ã®ç•ªå·ã¯ä½¿ç”¨ä¸å¯èƒ½ãªã®ã§å»ƒæ£„
                 dammyDeckArray.RemoveAt(index);
 
                 i--;
 
-                //ƒfƒbƒLƒAƒEƒg
-                if (dammyDeckArray.Count < 1) 
+                //ãƒ‡ãƒƒã‚­ã‚¢ã‚¦ãƒˆ
+                if (dammyDeckArray.Count < 1)
                 {
                     int deckout = 0;
                     break;
@@ -104,28 +101,26 @@ public class DistributeHand : MonoBehaviour
                 continue;
             }
 
-            // ƒfƒbƒL‚Ìƒ_ƒ~[ƒfƒbƒL‚ÌêŠ‚É‚ ‚éî•ñ‚ğèD’Ç‰Á
+            // ãƒ‡ãƒƒã‚­ã®ãƒ€ãƒŸãƒ¼ãƒ‡ãƒƒã‚­ã®å ´æ‰€ã«ã‚ã‚‹æƒ…å ±ã‚’æ‰‹æœ­è¿½åŠ 
             Card.Trump trump = deck[dammyDeckArray[index]];
             trump.state = State.hand;
             deck[dammyDeckArray[index]] = trump;
 
             hand.Add(deck[dammyDeckArray[index]]);
             dommyHand.Add(deck[dammyDeckArray[index]]);
-            // ˆê“xo‚½êŠ‚Ì”’l‚Ío‚È‚¢‚æ‚¤‚É‚·‚é
+            // ä¸€åº¦å‡ºãŸå ´æ‰€ã®æ•°å€¤ã¯å‡ºãªã„ã‚ˆã†ã«ã™ã‚‹
             dammyDeckArray.RemoveAt(index);
 
         }
 
-        // ƒfƒbƒL‚Ì’†‚Ég—p‰Â”\‚ÈƒJ[ƒh‚ªˆê–‡‚à‚È‚¢ê‡
-        if (dommyHand.Count <= 0) 
+        // ãƒ‡ãƒƒã‚­ã®ä¸­ã«ä½¿ç”¨å¯èƒ½ãªã‚«ãƒ¼ãƒ‰ãŒä¸€æšã‚‚ãªã„å ´åˆ
+        if (dommyHand.Count <= 0)
         {
 
-            // ƒnƒ“ƒh‚Ì“à•””’l‚ğƒ[ƒ‚É‚·‚é–‚Å
-            // ƒ^ƒCƒgƒ‹‰æ–Ê‚É‚Æ‚Î‚µ‚Ä‚¢‚é
+            // ãƒãƒ³ãƒ‰ã®å†…éƒ¨æ•°å€¤ã‚’ã‚¼ãƒ­ã«ã™ã‚‹äº‹ã§
+            // ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ã«ã¨ã°ã—ã¦ã„ã‚‹
             GameUtility.SetHandCount(0);
-            ResultUIManager.Instance.Active("”s–k");
-
-
+            ResultUIManager.Instance.Active("æ•—åŒ—");
 
         }
 
@@ -134,13 +129,13 @@ public class DistributeHand : MonoBehaviour
         CardObjectUtility.StartHandMove();
         GameUtility.SetIsDiscard(false);
 
-        // ƒ\[ƒg
+        // ã‚½ãƒ¼ãƒˆ
         SortHand.instance.OnSortNumberButton();
 
     }
 
     /// <summary>
-    /// èD‚ÌƒJ[ƒh‚ğŒÅ’è‚·‚éŠÖ”
+    /// æ‰‹æœ­ã®ã‚«ãƒ¼ãƒ‰ã‚’å›ºå®šã™ã‚‹é–¢æ•°
     /// </summary>
     private void Test()
     {
@@ -150,7 +145,6 @@ public class DistributeHand : MonoBehaviour
         {
             Card.Trump trump = new Trump();
 
-           
             trump.state = State.hand;
             if (i % 3 == 0)
                 trump.suit = Card.suit.Spade;
@@ -162,11 +156,9 @@ public class DistributeHand : MonoBehaviour
             trump.isFeice = true;
             hand.Add(trump);
 
-
         }
 
         Card.Trump dommy = new Trump();
-
 
         dommy.state = State.hand;
         dommy.suit = Card.suit.club;
@@ -177,15 +169,13 @@ public class DistributeHand : MonoBehaviour
         hand.Add(dommy);
         hand = CardManager.instance.NumberSort(hand);
 
-
         CardObjectUtility.HandToCard(hand);
         CardManager.instance.SetHand(hand);
         CardObjectUtility.StartHandMove();
-
-
 
     }
 
     public void SetHandDrawFlag(bool flag) { handDrawFlag=flag; }
     public bool GetHandDrawFlag() { return handDrawFlag; }
 }
+

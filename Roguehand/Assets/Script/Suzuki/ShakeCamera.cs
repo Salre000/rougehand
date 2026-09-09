@@ -1,4 +1,4 @@
-
+ï»¿
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ public class ShakeCamera : MonoBehaviour
     private CinemachineVirtualCamera cam;
     private float shakeTimer;
 
-    //‚±‚ÌƒXƒNƒŠƒvƒg‚ğƒCƒ“ƒXƒ^ƒ“ƒX‰»
+    //ã“ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–
     private void Awake()
     {
         Instance = this;
@@ -19,17 +19,17 @@ public class ShakeCamera : MonoBehaviour
     }
 
     /// <summary>
-    /// vcam‚ğg—p‚µ‚ÄƒJƒƒ‰‚ğ—h‚ç‚·
+    /// vcamã‚’ä½¿ç”¨ã—ã¦ã‚«ãƒ¡ãƒ©ã‚’æºã‚‰ã™
     /// </summary>
-    /// <param name="intensity">—h‚ê“x</param>
-    /// <param name="time">—h‚ê‚Ä‚éŠÔ</param>
+    /// <param name="intensity">æºã‚Œåº¦</param>
+    /// <param name="time">æºã‚Œã¦ã‚‹æ™‚é–“</param>
     public void Shake(float intensity, float time)
     {
         cam = GetComponent<CinemachineVirtualCamera>();
 
         if (cam == null)
         {
-            Debug.Log("CinemachineVirtualCamera‚ªæ“¾‚Å‚«‚Ä‚¢‚Ü‚¹‚ñB");
+            Debug.Log("CinemachineVirtualCameraãŒå–å¾—ã§ãã¦ã„ã¾ã›ã‚“ã€‚");
             return;
         }
         CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
@@ -41,7 +41,7 @@ public class ShakeCamera : MonoBehaviour
 
     void Update()
     {
-        //—h‚êŠÔ‚ªI‚í‚Á‚½‚ç—h‚ê‚ğ~‚ß‚é
+        //æºã‚Œæ™‚é–“ãŒçµ‚ã‚ã£ãŸã‚‰æºã‚Œã‚’æ­¢ã‚ã‚‹
         if (shakeTimer > 0)
         {
             shakeTimer -= Time.deltaTime;

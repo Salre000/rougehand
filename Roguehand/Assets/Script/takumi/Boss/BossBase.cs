@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
@@ -11,12 +11,12 @@ public class BossBase
 
     public System.Action endAction = null;
 
-    public virtual void Initializ() 
+    public virtual void Initializ()
     {
         BaseInitializ();
     }
 
-    public void BaseInitializ() 
+    public void BaseInitializ()
     {
         TextUIManager.instance.SetRoundNameText(GetBossName());
 
@@ -27,17 +27,15 @@ public class BossBase
     public virtual void Update() { }
     public virtual void LateUpdate() { }
 
-
-    public virtual void End() 
+    public virtual void End()
     {
 
         TextUIManager.instance.SetRoundNameText(string.Empty);
 
         TextUIManager.instance.SetRoundExceptionText(string.Empty);
 
-
         //endAction();
-   
+
     }
 
     public void SetAction(System.Action action) {endAction = action;}
@@ -45,5 +43,5 @@ public class BossBase
     protected string GetBossName() { return  MasterData.instance.GetStringMaster(BOSS_NAME_RATE+ bossTextID); }
     protected string GetBossException() { return  MasterData.instance.GetStringMaster(bossTextID); }
 
-    
 }
+

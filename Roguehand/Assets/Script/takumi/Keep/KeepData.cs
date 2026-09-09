@@ -1,55 +1,46 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class KeepData
 {
 
-
     /// <summary>
-    /// ƒL[ƒvƒf[ƒ^‚Ìì¬
+    /// ã‚­ãƒ¼ãƒ—ãƒ‡ãƒ¼ã‚¿ã®ä½œæˆ
     /// </summary>
     public static void KeepDataBackup() { }
 
-
     /// <summary>
-    /// ƒL[ƒvƒf[ƒ^‚Ì“Ç‚İ‚İ
+    /// ã‚­ãƒ¼ãƒ—ãƒ‡ãƒ¼ã‚¿ã®èª­ã¿è¾¼ã¿
     /// </summary>
     public static void KeepDataLood() { }
 
     /// <summary>
-    /// ƒL[ƒvƒf[ƒ^‚Ì‰Šú‰»
+    /// ã‚­ãƒ¼ãƒ—ãƒ‡ãƒ¼ã‚¿ã®åˆæœŸåŒ–
     /// </summary>
     public static void KeepDataInitializ() { }
 
-
     /// <summary>
-    /// ƒf[ƒ^‚ğ•Û‚·‚éƒCƒ“ƒi[ƒNƒ‰ƒX
+    /// ãƒ‡ãƒ¼ã‚¿ã‚’ä¿æŒã™ã‚‹ã‚¤ãƒ³ãƒŠãƒ¼ã‚¯ãƒ©ã‚¹
     /// </summary>
-    
+
     private class Data
     {
         /// <summary>
-        /// •Û‘¶‚·‚éƒfƒbƒL
+        /// ä¿å­˜ã™ã‚‹ãƒ‡ãƒƒã‚­
         /// </summary>
         public List<Card.Trump> deck=new List<Card.Trump>();
 
         /// <summary>
-        /// •Û‘¶‚·‚éƒWƒ‡[ƒJ[
+        /// ä¿å­˜ã™ã‚‹ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼
         /// </summary>
         public List<JokerBase> jokers=new List<JokerBase>();
 
         /// <summary>
-        /// •Û‘¶‚·‚éƒAƒCƒeƒ€
+        /// ä¿å­˜ã™ã‚‹ã‚¢ã‚¤ãƒ†ãƒ 
         /// </summary>
         public List<ItemBase> items=new List<ItemBase>();
 
-
-
-
-
-
     }
-
 
 }

@@ -1,31 +1,31 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ƒWƒ‡[ƒJ[‚ÌƒAƒNƒVƒ‡ƒ“‚Ég‚¤—ñ‹“‘Ì‚ğ‚Ü‚Æ‚ß‚½ƒNƒ‰ƒX
+/// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã«ä½¿ã†åˆ—æŒ™ä½“ã‚’ã¾ã¨ã‚ãŸã‚¯ãƒ©ã‚¹
 /// </summary>
 public static class JokerActionUseEnum
 {
-    //‰½‚©‚ğ‚µ‚½‚Ì‰½‚©‚Ì—ñ‹“‘Ì
+    //ä½•ã‹ã‚’ã—ãŸæ™‚ã®ä½•ã‹ã®åˆ—æŒ™ä½“
     public enum JokerActionTarget
     {
         None = 0,
         /// <summary>
-        /// ¯ÀƒJ[ƒh‚Ìg—p
+        /// æ˜Ÿåº§ã‚«ãƒ¼ãƒ‰ã®ä½¿ç”¨æ™‚
         /// </summary>
         constellation,
         /// <summary>
-        /// ƒAƒCƒeƒ€‚Ìg—p
+        /// ã‚¢ã‚¤ãƒ†ãƒ ã®ä½¿ç”¨æ™‚
         /// </summary>
         item,
         /// <summary>
-        /// ‰½‚©‚µ‚ç‚Ì”„‹p
+        /// ä½•ã‹ã—ã‚‰ã®å£²å´æ™‚
         /// </summary>
         sale,
         /// <summary>
-        /// ƒnƒ“ƒh‚ª–ğ‚ğŒˆ‚ß‚½‚Æ‚«
+        /// ãƒãƒ³ãƒ‰ãŒå½¹ã‚’æ±ºã‚ãŸã¨ã
         /// </summary>
         role,
 
@@ -35,28 +35,27 @@ public static class JokerActionUseEnum
 
     public static readonly string[] JokerActionTargetExplanation = new string[(int)JokerActionTarget.max+1]
     {
-        "‰¼‚Ì’l",
-        "¯ÀƒJ[ƒh‚Ìg—p",
-        "ƒAƒCƒeƒ€‚Ìg—p",
-        "”„‹p‚Ìg—p",
-        "–ğ‚Ìg—p",
-        "–¢’è",
-        
+        "ä»®ã®å€¤",
+        "æ˜Ÿåº§ã‚«ãƒ¼ãƒ‰ã®ä½¿ç”¨æ™‚",
+        "ã‚¢ã‚¤ãƒ†ãƒ ã®ä½¿ç”¨æ™‚",
+        "å£²å´ã®ä½¿ç”¨æ™‚",
+        "å½¹ã®ä½¿ç”¨æ™‚",
+        "æœªå®š",
 
     };
 
     /// <summary>
-    /// ”{—¦‚ğ‚Ç‚Ì‚æ‚¤‚É’Ç‰Á‚·‚é‚©
+    /// å€ç‡ã‚’ã©ã®ã‚ˆã†ã«è¿½åŠ ã™ã‚‹ã‹
     /// </summary>
     public enum AddType
     {
         /// <summary>
-        /// ‰ÁZ
+        /// åŠ ç®—
         /// </summary>
         addition,
 
         /// <summary>
-        /// æZ
+        /// ä¹—ç®—
         /// </summary>
         Multiplication,
         max
@@ -64,22 +63,22 @@ public static class JokerActionUseEnum
     }
 
     /// <summary>
-    /// ‚Ç‚Ìƒ^ƒCƒ~ƒ“ƒO‚Å‰ÁZ‚ª“ü‚é‚©
+    /// ã©ã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§åŠ ç®—ãŒå…¥ã‚‹ã‹
     /// </summary>
     public enum Timing
     {
         /// <summary>
-        /// ƒWƒ‡[ƒJ[‚Ìƒ^[ƒ“‚É‰ÁZ
+        /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚¿ãƒ¼ãƒ³ã«åŠ ç®—
         /// </summary>
         trun,
 
         /// <summary>
-        /// ğŒ‚ª–‚½‚³‚ê‚½uŠÔ
+        /// æ¡ä»¶ãŒæº€ãŸã•ã‚ŒãŸç¬é–“
         /// </summary>
         now,
 
         /// <summary>
-        /// ¡Œã‚¸‚Á‚ÆƒWƒ‡[ƒJ[‚Ì”{—¦‚ª‘½‚­‚È‚é
+        /// ä»Šå¾Œãšã£ã¨ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®å€ç‡ãŒå¤šããªã‚‹
         /// </summary>
         never,
 
@@ -88,15 +87,15 @@ public static class JokerActionUseEnum
     }
     public static readonly string[] JokerActionTimingExplanation = new string[(int)Timing.max + 1]
 {
-        "ƒWƒ‡[ƒJ[‚Ìƒ^[ƒ“‚É",
-        "ğŒ‚ª–‚½‚³‚ê‚½uŠÔ",
-        "¡Œã‚¸‚Á‚Æ",
-        "–¢’è"
+        "ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ã‚¿ãƒ¼ãƒ³ã«",
+        "æ¡ä»¶ãŒæº€ãŸã•ã‚ŒãŸç¬é–“",
+        "ä»Šå¾Œãšã£ã¨",
+        "æœªå®š"
 
 };
 
     /// <summary>
-    /// ƒWƒ‡[ƒJ[‚ÌƒŒƒAƒŠƒeƒB‚ğ‚Ü‚Æ‚ß‚½—ñ‹“‘Ì
+    /// ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã®ãƒ¬ã‚¢ãƒªãƒ†ã‚£ã‚’ã¾ã¨ã‚ãŸåˆ—æŒ™ä½“
     /// </summary>
     public enum JokerRarity
     {
@@ -106,6 +105,5 @@ public static class JokerActionUseEnum
         Legendary,
     }
 
-
-
 }
+

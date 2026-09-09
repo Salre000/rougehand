@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -31,25 +31,24 @@ public class ScoreMaster : MonoBehaviour
     private void Lood()
     {
 
-        //“Ç‚İ‚ñ‚¾CSVƒtƒ@ƒCƒ‹‚ğŠi”[
+        //èª­ã¿è¾¼ã‚“ã CSVãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ ¼ç´
         List<string[]> csvDatas = new List<string[]>();
 
-        //CSVƒtƒ@ƒCƒ‹‚Ìs”‚ğŠi”[
+        //CSVãƒ•ã‚¡ã‚¤ãƒ«ã®è¡Œæ•°ã‚’æ ¼ç´
         int height = 0;
 
-
-        //Œq‚°‚½ƒtƒ@ƒCƒ‹ƒpƒX‚ğg‚¢ƒtƒ@ƒCƒ‹‚Ìƒ[ƒh‚ğs‚¤
+        //ç¹‹ã’ãŸãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚’ä½¿ã„ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ­ãƒ¼ãƒ‰ã‚’è¡Œã†
         TextAsset textAsset = scoreMaster;
 
-        //“Ç‚İ‚ñ‚¾ƒeƒLƒXƒg‚ğStringŒ^‚É‚µ‚ÄŠi”[
+        //èª­ã¿è¾¼ã‚“ã ãƒ†ã‚­ã‚¹ãƒˆã‚’Stringå‹ã«ã—ã¦æ ¼ç´
         StringReader reader = new StringReader(textAsset.text);
 
         while (reader.Peek() > -1)
         {
             string line = reader.ReadLine();
-            // ,‚Å‹æØ‚Á‚ÄCSV‚ÉŠi”[
+            // ,ã§åŒºåˆ‡ã£ã¦CSVã«æ ¼ç´
             csvDatas.Add(line.Split(','));
-            height++; // s”‰ÁZ
+            height++; // è¡Œæ•°åŠ ç®—
         }
 
         for (int j = 0; j < csvDatas.Count; j++)
@@ -83,3 +82,4 @@ public class ScoreMaster : MonoBehaviour
         public int AddBasicMagnification = -1;
     }
 }
+

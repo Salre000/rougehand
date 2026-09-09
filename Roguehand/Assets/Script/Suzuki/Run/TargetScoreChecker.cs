@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
 /// <summary>
-/// ƒXƒRƒA‚ª–Ú•WƒXƒRƒA‚É’B‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
-/// ’B‚µ‚Ä‚¢‚½‚ç‚»‚ÌƒQ[ƒ€‚ğI—¹
+/// ã‚¹ã‚³ã‚¢ãŒç›®æ¨™ã‚¹ã‚³ã‚¢ã«é”ã—ã¦ã„ã‚‹ã‹ã©ã†ã‹
+/// é”ã—ã¦ã„ãŸã‚‰ãã®ã‚²ãƒ¼ãƒ ã‚’çµ‚äº†
 /// </summary>
 public class TargetScoreChecker : MonoBehaviour
 {
@@ -15,7 +15,7 @@ public class TargetScoreChecker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // ƒ‰ƒEƒ“ƒh”‚Æ–Ú•WƒXƒRƒA‚Ìİ’è
+        // ãƒ©ã‚¦ãƒ³ãƒ‰æ•°ã¨ç›®æ¨™ã‚¹ã‚³ã‚¢ã®è¨­å®š
         RoundStart();
             _builder.Clear();
         _builder.Append(MasterData.instance.GetStringMaster(IDUtility.TARGET_SCORE_ID+ _roundCount));
@@ -25,7 +25,7 @@ public class TargetScoreChecker : MonoBehaviour
     private void RoundStart()
     {
         if( _roundCount ==GameUtility.GetRoundCount() )return;
-        // ƒ‰ƒEƒ“ƒhƒJƒEƒ“ƒg‚ÌƒZƒbƒg
+        // ãƒ©ã‚¦ãƒ³ãƒ‰ã‚«ã‚¦ãƒ³ãƒˆã®ã‚»ãƒƒãƒˆ
         _roundCount=GameUtility.GetRoundCount();
         GameUtility.SetRoundCount(_roundCount);
         _builder.Clear();
@@ -34,3 +34,4 @@ public class TargetScoreChecker : MonoBehaviour
     }
 
 }
+

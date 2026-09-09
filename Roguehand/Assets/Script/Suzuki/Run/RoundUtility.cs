@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -8,19 +8,18 @@ public static class RoundUtility
 
     private static StringBuilder _builder = new StringBuilder();
 
-
     /// <summary>
-    /// 
+    ///
     /// </summary>
-    /// <returns>false •s³’l:true ³í</returns>
+    /// <returns>false ä¸æ­£å€¤:true æ­£å¸¸</returns>
     public static bool NextStartRound()
     {
         int roundCount = GameUtility.GetAllRoundCount();
-        // –Ú•WƒXƒRƒA‚Ìæ“¾
+        // ç›®æ¨™ã‚¹ã‚³ã‚¢ã®å–å¾—
         int targetScore = MasterData.instance.GetIntMaster(IDUtility.TARGET_SCORE_ID + roundCount);
-        // •s³’l‚ª•Ô‚Á‚Ä‚«‚½‚È‚çreturn
+        // ä¸æ­£å€¤ãŒè¿”ã£ã¦ããŸãªã‚‰return
         if (targetScore < 0) return false;
-        // ‡ŒvƒXƒRƒA‚Æ”äŠr
+        // åˆè¨ˆã‚¹ã‚³ã‚¢ã¨æ¯”è¼ƒ
         float roundScore = ScoreManager.instance.GetRoundScore();
         roundScore = ScoreManager.instance.Rounding(roundScore, 1f);
         if (targetScore > roundScore)
@@ -30,9 +29,7 @@ public static class RoundUtility
 
         GameRoot.instance.GameClearCheck();
 
-
-
-        // ƒŠƒUƒ‹ƒg‚ÌƒXƒRƒA‚Æƒnƒ“ƒh‚Ìİ’è
+        // ãƒªã‚¶ãƒ«ãƒˆã®ã‚¹ã‚³ã‚¢ã¨ãƒãƒ³ãƒ‰ã®è¨­å®š
         _builder.Clear();
         _builder.Append(MasterData.instance.GetStringMaster(IDUtility.TARGET_SCORE_ID + roundCount));
         TextUIManager.instance.SetResultLowestScoreText(_builder.ToString());
@@ -41,20 +38,20 @@ public static class RoundUtility
         _builder.Append(GameUtility.GetHandCount());
         TextUIManager.instance.SetResultHandText(_builder.ToString());
 
-        // ƒnƒ“ƒh‚Ìc‚è‰ñ”‚É‚æ‚é‚¨‹à‚Ì•\¦
+        // ãƒãƒ³ãƒ‰ã®æ®‹ã‚Šå›æ•°ã«ã‚ˆã‚‹ãŠé‡‘ã®è¡¨ç¤º
         _builder.Clear();
         int count = GameUtility.GetHandCount();
         _builder.Append(UIUtility.instance.RewardConversion(count));
         TextUIManager.instance.SetResultMoneyText(_builder.ToString());
 
-        // ƒ‰ƒEƒ“ƒhƒNƒŠƒA•ñV‹à
+        // ãƒ©ã‚¦ãƒ³ãƒ‰ã‚¯ãƒªã‚¢å ±é…¬é‡‘
 
         int roundMax = GameUtility.GetRewardMaxCount();
 
         int reward = MasterData.instance.GetIntMaster(IDUtility.REWARD_ID + roundMax);
         TextUIManager.instance.SetResultClearMoneyText(UIUtility.instance.RewardConversion(reward));
 
-        // ´Zƒ{ƒ^ƒ“‚Ì‡Œv‹à•\¦
+        // æ¸…ç®—ãƒœã‚¿ãƒ³ã®åˆè¨ˆé‡‘è¡¨ç¤º
         int allReward = count + reward;
         _builder.Clear();
         _builder.Append("$");
@@ -62,9 +59,10 @@ public static class RoundUtility
         TextUIManager.instance.SetClearMoneyText(_builder.ToString());
 
         GameUtility.SetIsRoundResult(true);
-        // èD‚ÌƒŠƒZƒbƒg
+        // æ‰‹æœ­ã®ãƒªã‚»ãƒƒãƒˆ
         CardManager.instance.ResetHand();
 
         return true;
     }
 }
+

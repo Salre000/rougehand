@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -7,27 +7,26 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-
 public class ResultUIManager : MonoBehaviour
 {
     public static ResultUIManager Instance { get; private set; }
-    [SerializeField, Header("Ÿ—˜‚©”s–k‚©‚Ì‚à‚¶")] TextMeshProUGUI[] ResultAnswer = new TextMeshProUGUI[3];
-    [SerializeField, Header("ˆêƒ‰ƒEƒ“ƒh‚ÌÅ‚ƒXƒRƒA")] TextMeshProUGUI highScoreText;
-    [SerializeField, Header("ˆê”ÔƒvƒŒƒC‚µ‚½–ğ")] TextMeshProUGUI highRoleText;
-    [SerializeField, Header("ƒvƒŒƒC‚µ‚½ƒJ[ƒh‚Ì–‡”")] TextMeshProUGUI playCardCountText;
-    [SerializeField, Header("ƒfƒBƒXƒJ[ƒh‚µ‚½ƒJ[ƒh‚Ì–‡”")] TextMeshProUGUI discardCardCountText;
-    [SerializeField, Header("w“ü‚µ‚½ƒJ[ƒh‚Ì–‡”")] TextMeshProUGUI buyCardCountText;
-    [SerializeField, Header("ƒŠƒ[ƒ‹‚µ‚½‰ñ”")] TextMeshProUGUI reroolCountText;
-    [SerializeField, Header("V‚µ‚­Œ©‚Â‚¯‚½")] TextMeshProUGUI newDiscoveryCountText;
-    [SerializeField, Header("ƒV[ƒh’l")] TextMeshProUGUI seedText;
-    [SerializeField, Header("ƒAƒ“ƒeƒB‚Ì’l")] TextMeshProUGUI anteText;
-    [SerializeField, Header("ƒ‰ƒEƒ“ƒh‚Ì’l")] TextMeshProUGUI roundText;
-    [SerializeField, Header("ƒV[ƒh’l‚ğƒRƒs[‚·‚éƒ{ƒ^ƒ“")] Button seedCopy;
-    [SerializeField, Header("ƒGƒ“ƒhƒŒƒXƒ‚[ƒh‚ğ‹N“®‚·‚éƒ{ƒ^ƒ“")] Button endless;
-    [SerializeField, Header("V‚µ‚¢ƒ‰ƒ“")] Button newRun;
-    [SerializeField, Header("ƒƒCƒ“ƒƒjƒ…[")] Button mainMene;
+    [SerializeField, Header("å‹åˆ©ã‹æ•—åŒ—ã‹ã®ã‚‚ã˜")] TextMeshProUGUI[] ResultAnswer = new TextMeshProUGUI[3];
+    [SerializeField, Header("ä¸€ãƒ©ã‚¦ãƒ³ãƒ‰ã®æœ€é«˜ã‚¹ã‚³ã‚¢")] TextMeshProUGUI highScoreText;
+    [SerializeField, Header("ä¸€ç•ªãƒ—ãƒ¬ã‚¤ã—ãŸå½¹")] TextMeshProUGUI highRoleText;
+    [SerializeField, Header("ãƒ—ãƒ¬ã‚¤ã—ãŸã‚«ãƒ¼ãƒ‰ã®æšæ•°")] TextMeshProUGUI playCardCountText;
+    [SerializeField, Header("ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰ã—ãŸã‚«ãƒ¼ãƒ‰ã®æšæ•°")] TextMeshProUGUI discardCardCountText;
+    [SerializeField, Header("è³¼å…¥ã—ãŸã‚«ãƒ¼ãƒ‰ã®æšæ•°")] TextMeshProUGUI buyCardCountText;
+    [SerializeField, Header("ãƒªãƒ­ãƒ¼ãƒ«ã—ãŸå›æ•°")] TextMeshProUGUI reroolCountText;
+    [SerializeField, Header("æ–°ã—ãè¦‹ã¤ã‘ãŸ")] TextMeshProUGUI newDiscoveryCountText;
+    [SerializeField, Header("ã‚·ãƒ¼ãƒ‰å€¤")] TextMeshProUGUI seedText;
+    [SerializeField, Header("ã‚¢ãƒ³ãƒ†ã‚£ã®å€¤")] TextMeshProUGUI anteText;
+    [SerializeField, Header("ãƒ©ã‚¦ãƒ³ãƒ‰ã®å€¤")] TextMeshProUGUI roundText;
+    [SerializeField, Header("ã‚·ãƒ¼ãƒ‰å€¤ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹ãƒœã‚¿ãƒ³")] Button seedCopy;
+    [SerializeField, Header("ã‚¨ãƒ³ãƒ‰ãƒ¬ã‚¹ãƒ¢ãƒ¼ãƒ‰ã‚’èµ·å‹•ã™ã‚‹ãƒœã‚¿ãƒ³")] Button endless;
+    [SerializeField, Header("æ–°ã—ã„ãƒ©ãƒ³")] Button newRun;
+    [SerializeField, Header("ãƒ¡ã‚¤ãƒ³ãƒ¡ãƒ‹ãƒ¥ãƒ¼")] Button mainMene;
 
-    [SerializeField, Header("ƒVƒ‡ƒbƒv‚©‚ço‚½‚Æ‚«‚Ìƒ{ƒ^ƒ“")] Button shopEndButton;
+    [SerializeField, Header("ã‚·ãƒ§ãƒƒãƒ—ã‹ã‚‰å‡ºãŸã¨ãã®ãƒœã‚¿ãƒ³")] Button shopEndButton;
     public bool resultFlag { private set; get; }
 
     public void Awake()
@@ -44,11 +43,8 @@ public class ResultUIManager : MonoBehaviour
     }
     public void Update()
     {
-        
-
 
     }
-
 
     public void Active(string text = "")
     {
@@ -79,9 +75,6 @@ public class ResultUIManager : MonoBehaviour
             ResultAnswer[i].text = text[i].ToString();
 
         }
-
-
-
 
     }
 
@@ -155,19 +148,19 @@ public class ResultUIManager : MonoBehaviour
         seedText.text = resultMemory.theSeed.ToString();
     }
 
-    private void ReLoodScene() 
+    private void ReLoodScene()
     {
         GameSceneManager.LoadScene(GameSceneManager.mainScene);
     }
-    private void TitelScene() 
+    private void TitelScene()
     {
         GameSceneManager.LoadScene(GameSceneManager.titleScene);
     }
 
-    private void StartEndless() 
+    private void StartEndless()
     {
 
-        if (GameUtility.GetHandCount() < 1) 
+        if (GameUtility.GetHandCount() < 1)
         {
             TitelScene();
             return;
@@ -185,15 +178,9 @@ public class ResultUIManager : MonoBehaviour
         MasterData.instance.AddStringMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount() + 1,
             ((int)(baseScore * reta)).ToString());
 
-
-
-
-
-
-
     }
 
-    public void SetNextScoreCreate() 
+    public void SetNextScoreCreate()
     {
         shopEndButton.onClick.AddListener(NextTargetScoreCreate);
 
@@ -205,11 +192,8 @@ public class ResultUIManager : MonoBehaviour
 
         float reta = 1 + (Random.Range(0, 5) / 10f);
 
-
         MasterData.instance.AddStringMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount() + 1,
             ((int)(baseScore * reta)).ToString());
-
-
 
     }
 }

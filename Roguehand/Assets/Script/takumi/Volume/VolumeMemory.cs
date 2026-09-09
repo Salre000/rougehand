@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,3 +9,4 @@ public class VolumeMemory
     public float BGMVolume;
     public float SEVolume;
 }
+

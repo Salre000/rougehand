@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ALLItem 
+public static class ALLItem
 {
-    public enum ALLItemEnum 
+    public enum ALLItemEnum
     {
         _constellation,
         _shredderItem,
@@ -24,13 +24,12 @@ public static class ALLItem
         }
 
         int itemID = (int)item;
-        // ¯ÀƒJ[ƒh‚Ì•ª‚¾‚¯ID‚ğ‘O‚Éi‚ß‚é
+        // æ˜Ÿåº§ã‚«ãƒ¼ãƒ‰ã®åˆ†ã ã‘IDã‚’å‰ã«é€²ã‚ã‚‹
         if (itemID != 0) itemID += (int)ConstellationItem.ConstellationType.MAX-1;
 
         itemBase.SetItemID((int)itemID);
 
         return itemBase;
     }
-
 
 }

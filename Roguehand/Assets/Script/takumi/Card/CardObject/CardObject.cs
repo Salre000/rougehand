@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,12 +6,12 @@ public class CardObject : MonoBehaviour
 {
 
     /// <summary>
-    /// 一度の移動に掛かる時間の定数
+    /// 荳蠎ｦ縺ｮ遘ｻ蜍輔↓謗帙°繧区凾髢薙・螳壽焚
     /// </summary>
     private const float MOVE_TIME = 0.2f;
 
     /// <summary>
-    /// このカードの状態
+    /// 縺薙・繧ｫ繝ｼ繝峨・迥ｶ諷・
     /// </summary>
     public enum status
     {
@@ -26,43 +26,42 @@ public class CardObject : MonoBehaviour
     }
 
     /// <summary>
-    /// 現在の状態
+    /// 迴ｾ蝨ｨ縺ｮ迥ｶ諷・
     /// </summary>
     [SerializeField] private status _status = status.none;
 
     /// <summary>
-    /// ひとつ前の状態
+    /// 縺ｲ縺ｨ縺､蜑阪・迥ｶ諷・
     /// </summary>
     [SerializeField] private status _lostStatus = status.none;
 
     [SerializeField]private float _moveTime = 0;
 
     /// <summary>
-    /// 移動を開始する前の座標
+    /// 遘ｻ蜍輔ｒ髢句ｧ九☆繧句燕縺ｮ蠎ｧ讓・
     /// </summary>
     private Vector3 _beforePosition = Vector3.zero;
     /// <summary>
-    /// 移動を開始する前の角度
+    /// 遘ｻ蜍輔ｒ髢句ｧ九☆繧句燕縺ｮ隗貞ｺｦ
     /// </summary>
     private Vector3 _beforeAngle = Vector3.zero;
 
     /// <summary>
-    /// このオブジェクトのリギッドボディ
+    /// 縺薙・繧ｪ繝悶ず繧ｧ繧ｯ繝医・繝ｪ繧ｮ繝・ラ繝懊ョ繧｣
     /// </summary>
     private Rigidbody _rigidbody;
 
     /// <summary>
-    /// 現在つかまれているかどうか
+    /// 迴ｾ蝨ｨ縺､縺九∪繧後※縺・ｋ縺九←縺・°
     /// </summary>
     [SerializeField] private bool _isGrab = false;
 
     /// <summary>
-    /// 現在つかむことが可能かどうか
+    /// 迴ｾ蝨ｨ縺､縺九・縺薙→縺悟庄閭ｽ縺九←縺・°
     /// </summary>
     [SerializeField] private bool _grab = true;
 
     [SerializeField] private List<System.Action> actions = new List<System.Action>();
-
 
     public void OnCollisionEnter(Collision collision)
     {
@@ -86,7 +85,7 @@ public class CardObject : MonoBehaviour
     }
 
     /// <summary>
-    /// 重力を操作可能状態に変更
+    /// 驥榊鴨繧呈桃菴懷庄閭ｽ迥ｶ諷九↓螟画峩
     /// </summary>
     public void GravityStart()
     {
@@ -97,7 +96,7 @@ public class CardObject : MonoBehaviour
     }
 
     /// <summary>
-    /// カードのリセットに使う関数
+    /// 繧ｫ繝ｼ繝峨・繝ｪ繧ｻ繝・ヨ縺ｫ菴ｿ縺・未謨ｰ
     /// </summary>
     public void ResetCard()
     {
@@ -105,7 +104,7 @@ public class CardObject : MonoBehaviour
         ResetMoveTime();
         GravityStart();
         _isGrab = false;
-        // プールで使い回した際、前回分の未消化アクションが残らないようにする
+        // 繝励・繝ｫ縺ｧ菴ｿ縺・屓縺励◆髫帙∝燕蝗槫・縺ｮ譛ｪ豸亥喧繧｢繧ｯ繧ｷ繝ｧ繝ｳ縺梧ｮ九ｉ縺ｪ縺・ｈ縺・↓縺吶ｋ
         actions.Clear();
 
     }
@@ -144,13 +143,11 @@ public class CardObject : MonoBehaviour
 
     public void AddAction(System.Action action) {  actions.Add(action); }
 
-    public void PlayAction() 
+    public void PlayAction()
     {
         actions[0]();
 
         actions.RemoveAt(0);
-
-
 
     }
 
@@ -161,8 +158,8 @@ public class CardObject : MonoBehaviour
     public status GetLostStatus() { return _lostStatus; }
 
     /// <summary>
-    /// 移動可能時間をリセット
-    /// 移動を可能に変更
+    /// 遘ｻ蜍募庄閭ｽ譎る俣繧偵Μ繧ｻ繝・ヨ
+    /// 遘ｻ蜍輔ｒ蜿ｯ閭ｽ縺ｫ螟画峩
     /// </summary>
     public void ResetMoveTime()
     {
@@ -172,11 +169,11 @@ public class CardObject : MonoBehaviour
     }
 
     /// <summary>
-    /// 時間経過の関数
+    /// 譎る俣邨碁℃縺ｮ髢｢謨ｰ
     /// </summary>
     public void CountDown()
     {
-        //つかまれている間カウントしない
+        //縺､縺九∪繧後※縺・ｋ髢薙き繧ｦ繝ｳ繝医＠縺ｪ縺・
         if (_isGrab) return;
         _moveTime -= Time.deltaTime * GameConfig.GetGameSpeed();
         if (IsMovable()) return;
@@ -184,7 +181,7 @@ public class CardObject : MonoBehaviour
     }
 
     /// <summary>
-    /// 移動可能かどうかの判定
+    /// 遘ｻ蜍募庄閭ｽ縺九←縺・°縺ｮ蛻､螳・
     /// </summary>
     /// <returns></returns>
     public bool IsMovable() { return _moveTime > 0; }
@@ -197,18 +194,17 @@ public class CardObject : MonoBehaviour
     public Vector3 GetBeforePosition() { return _beforePosition; }
     public Vector3 GetBeforeAngle() { return _beforeAngle; }
 
-
     public void SetGrab(bool flag) { _isGrab = flag; }
 
     /// <summary>
-    /// つかむことが可能かどうかを返す関数
+    /// 縺､縺九・縺薙→縺悟庄閭ｽ縺九←縺・°繧定ｿ斐☆髢｢謨ｰ
     /// </summary>
     /// <returns></returns>
     public bool GetGrabFlag() { return _grab; }
 
     /// <summary>
-    /// つかむことを出来なく変更
-    /// カードが目的地に着いたら解除
+    /// 縺､縺九・縺薙→繧貞・譚･縺ｪ縺丞､画峩
+    /// 繧ｫ繝ｼ繝峨′逶ｮ逧・慍縺ｫ逹縺・◆繧芽ｧ｣髯､
     /// </summary>
     public void NotGrab() { _grab = false; }
 
@@ -222,8 +218,7 @@ public class CardObject : MonoBehaviour
             if (score <= 1 || 11 < score) score = 11;
         };
 
-
     }
 
-
 }
+

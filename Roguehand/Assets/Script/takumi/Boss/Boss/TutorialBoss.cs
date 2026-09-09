@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
@@ -15,7 +15,6 @@ public class TutorialBoss : BossBase
     {
         base.Initializ();
         //DistributeHand.instanse.SetHandDrawFlag(true);
-
 
     }
 
@@ -55,25 +54,24 @@ public class TutorialBoss : BossBase
         List<Card.Trump> deck = CardManager.instance.GetDeck();
         hand.Capacity = CardManager.instance.GetHandSize();
         int index = deck.Count;
-        // ƒfƒbƒL•ª‚ÌƒLƒƒƒp‚ğŠl“¾
+        // ãƒ‡ãƒƒã‚­åˆ†ã®ã‚­ãƒ£ãƒ‘ã‚’ç²å¾—
         List<int> dammyDeckArray = new List<int>(index);
         for (int i = 0; i < index; i++)
             dammyDeckArray.Add(i);
 
-        // ƒnƒ“ƒh•ªŒJ‚è•Ô‚·
+        // ãƒãƒ³ãƒ‰åˆ†ç¹°ã‚Šè¿”ã™
         for (int i = 0; i < drawCount; i++)
         {
 
-
-            // 
+            //
             index = cardIndexs[i];
 
-            // ‚Ü‚¾g‚í‚ê‚Ä‚¢‚È‚¢ƒJ[ƒh‚Ì‚İ‚ğ‘ÎÛ‚É‚·‚é
+            // ã¾ã ä½¿ã‚ã‚Œã¦ã„ãªã„ã‚«ãƒ¼ãƒ‰ã®ã¿ã‚’å¯¾è±¡ã«ã™ã‚‹
             if (deck[dammyDeckArray[index]].state != Card.State.deck)
             {
                 i--;
 
-                //ƒfƒbƒLƒAƒEƒg
+                //ãƒ‡ãƒƒã‚­ã‚¢ã‚¦ãƒˆ
                 if (dammyDeckArray.Count < 1)
                 {
                     int deckout = 0;
@@ -82,7 +80,7 @@ public class TutorialBoss : BossBase
                 continue;
             }
 
-            // ƒfƒbƒL‚Ìƒ_ƒ~[ƒfƒbƒL‚ÌêŠ‚É‚ ‚éî•ñ‚ğèD’Ç‰Á
+            // ãƒ‡ãƒƒã‚­ã®ãƒ€ãƒŸãƒ¼ãƒ‡ãƒƒã‚­ã®å ´æ‰€ã«ã‚ã‚‹æƒ…å ±ã‚’æ‰‹æœ­è¿½åŠ 
             Card.Trump trump = deck[dammyDeckArray[index]];
             trump.state = Card.State.hand;
             deck[dammyDeckArray[index]] = trump;
@@ -92,10 +90,10 @@ public class TutorialBoss : BossBase
 
         }
 
-        // ƒfƒbƒL‚Ì’†‚Ég—p‰Â”\‚ÈƒJ[ƒh‚ªˆê–‡‚à‚È‚¢ê‡
+        // ãƒ‡ãƒƒã‚­ã®ä¸­ã«ä½¿ç”¨å¯èƒ½ãªã‚«ãƒ¼ãƒ‰ãŒä¸€æšã‚‚ãªã„å ´åˆ
         if (dommyHand.Count <= 0)
         {
-            // ƒŠƒUƒ‹ƒg‰æ–Ê‚ÉˆÚs‚·‚é
+            // ãƒªã‚¶ãƒ«ãƒˆç”»é¢ã«ç§»è¡Œã™ã‚‹
 
             Application.Quit();
 
@@ -106,13 +104,10 @@ public class TutorialBoss : BossBase
         CardObjectUtility.StartHandMove();
         GameUtility.SetIsDiscard(false);
 
-        // ƒ\[ƒg
+        // ã‚½ãƒ¼ãƒˆ
         SortHand.instance.OnSortNumberButton();
 
     }
 
-
-
-
-
 }
+
