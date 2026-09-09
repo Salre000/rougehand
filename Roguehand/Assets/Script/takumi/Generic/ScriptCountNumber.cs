@@ -1,10 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class ScriptCountNumber
 {
-
     /// <summary>
     /// 半分にしたりするときに使う定数
     /// </summary>
@@ -34,5 +33,4 @@ public static class ScriptCountNumber
     /// 誤差を認める際に使用する
     /// </summary>
     public const float EPSILON = 0.01f;
-
 }

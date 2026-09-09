@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -71,7 +71,6 @@ public class Memory
         lowstRoundScore = MasterData.instance.GetIntMaster(7000 + GameUtility.GetAllRoundCount());
 
         _boss = BossUtility.GetBossBase();
-
     }
 
     public Memory(string fileName)
@@ -133,7 +132,6 @@ public class Memory
     /// </summary>
     public void Use()
     {
-
         //　現在のデッキデータを取得
         CardManager.instance.deck = _trumps;
 
@@ -158,7 +156,6 @@ public class Memory
 
         if (!(GameUtility.GetAllRoundCount() <= 24))
         {
-
             MasterData.instance.AddStringMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount()
             , lowstRoundScore.ToString());
 
@@ -173,7 +170,6 @@ public class Memory
 
                 MasterData.instance.AddStringMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount() + 1,
                     ((int)(baseScore * reta)).ToString());
-
             }
         }
         TextUIManager.instance.SetLowestScoreText(lowstRoundScore.ToString());
@@ -208,7 +204,6 @@ public class Memory
         SaleObjectManager.instance.SetCardBuyCount(_buyCardCount);
 
         if (_boss != null) BossUtility.CreateBoss(_boss);
-
     }
 
     private void CreateDeck(List<string[]> deta)
@@ -226,7 +221,6 @@ public class Memory
         TrumpCard trumpCard = new TrumpCard();
 
         trumpCard.CreateDeck(dommy);
-
     }
 
     private void CreateJoker(string[] data)
@@ -237,7 +231,6 @@ public class Memory
 
             JokerUtility.AddJoker(tryInt);
         }
-
     }
     private void CreateItem(string[] data)
     {
@@ -247,14 +240,12 @@ public class Memory
 
             ItemUtility.AddItem(tryInt);
         }
-
     }
     private void CreateMoney(string[] data)
     {
         int moneyPoint = 1;
         if (!int.TryParse(data[moneyPoint], out int tryInt)) return;
         GameUtility.SetMyMoney(tryInt);
-
     }
 
     private void CreateAnte(string[] data)
@@ -263,7 +254,6 @@ public class Memory
         if (!int.TryParse(data[antePoint], out int tryInt)) return;
         GameUtility.SetAnteCount(tryInt);
         TextUIManager.instance.SetAnteText(tryInt.ToString());
-
     }
     private void CreateRound(string[] data)
     {
@@ -271,20 +261,18 @@ public class Memory
         if (!int.TryParse(data[roundPoint], out int tryInt)) return;
         GameUtility.SetRoundCount(tryInt);
         TextUIManager.instance.SetRoundText(tryInt.ToString());
-
     }
 
     private void CreateScore()
     {
         int anteRate = 3;
 
-        GameUtility.SetAllRoundCount(GameUtility.GetRoundCount() + (GameUtility.GetAnteCount() - 1) * anteRate);
+        GameUtility.SetAllRoundCount(GameUtility.GetRoundCount() + ((GameUtility.GetAnteCount() - 1) * anteRate));
 
         StringBuilder _builder = new StringBuilder();
         int id = IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount();
         _builder.Append(MasterData.instance.GetIntMaster(id));
         TextUIManager.instance.SetLowestScoreText(_builder.ToString());
-
     }
     private void CreateRoleCount(string[] data)
     {
@@ -308,7 +296,6 @@ public class Memory
         }
 
         RoleManager.instance.SetRoleLevel(roleLevel);
-
     }
 
     private void CreateHandCount(string[] data)
@@ -317,7 +304,6 @@ public class Memory
         if (!int.TryParse(data[handCountPoint], out int tryInt)) return;
         GameUtility.SetHandCount(tryInt);
         TextUIManager.instance.SetHandText(tryInt.ToString());
-
     }
     private void CreateDiscard(string[] data)
     {
@@ -325,7 +311,6 @@ public class Memory
         if (!int.TryParse(data[discardPoint], out int tryInt)) return;
         GameUtility.SetDiscardCount(tryInt);
         TextUIManager.instance.SetDiscardText(tryInt.ToString());
-
     }
 
     private void CreateISShotp(string[] data)
@@ -432,6 +417,5 @@ public class Memory
     public int lowstRoundScore { private set; get; }
 
     private BossBase _boss;
-
 }
 

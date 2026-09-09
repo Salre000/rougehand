@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using Unity.VisualScripting.Antlr3.Runtime;
@@ -49,12 +49,10 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
     /// </summary>
     public void ShopExplantion()
     {
-
         // バフがないからこれで騙す
-        int[] dommyBuff = new int[0];
+        int[] dommyBuff = System.Array.Empty<int>();
 
         ExplanationManager.instance.AddExplanation(gameObject, this, dommyBuff, SHOP_UI_OFFSET);
-
     }
 
     public void ShopSale()
@@ -123,7 +121,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
         //saleObjectmanagerに渡す
 
         Debug.Log("パックの使用");
-
     }
 
     public string GetName()
@@ -152,7 +149,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
         else sb.Append(MasterData.instance.GetStringMaster(IDUtility.PACK_ID+ ExplanationRate));
 
         return sb.ToString();
-
     }
 
     public string GetExplanation2()
@@ -174,12 +170,10 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
     private void PackTime(List<GameObject> cards)
     {
         if (!isPack) return;
-
     }
 
     private void GetTypeMaterial<T>(InstantiatePack.PackType type, T t,GameObject gameObject)
     {
-
         switch (type)
         {
             case InstantiatePack.PackType.joker:
@@ -196,7 +190,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                 Card.TrumpClass trump = t as Card.TrumpClass;
                 CardObjectUtility.CardPaint(trump.trump, gameObject);
                 break;
-
         }
 
         return ;
@@ -204,7 +197,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
     private System.Action TypeBay<T>(T t,GameObject card)
     {
-
         switch (_type)
         {
             case InstantiatePack.PackType.joker:
@@ -217,13 +209,11 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
 
                     JokerObjectUtility.JokerObjectALLAction(
                         joker => { joker.gameObject.SetActive(false); return joker; });
-
                 };
             case InstantiatePack.PackType.item:
                 ItemBase itemBase = t as ItemBase;
                 return () =>
                 {
-
                     ItemUtility.AddItem(
                         itemBase.GetID()<(int)ConstellationItem.ConstellationType.MAX?0:itemBase.GetID()- ((int)ConstellationItem.ConstellationType.MAX-1));
 
@@ -232,7 +222,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                     SaleObjectManager.instance.PackSekect(card);
                     ItemUtility.ItemALLAction(
                         item => { item.gameObject.SetActive(false); return item; });
-
                 };
             case InstantiatePack.PackType.trump:
                 Card.TrumpClass trumpClass= t as Card.TrumpClass;
@@ -240,9 +229,7 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                 {
                     CardObjectUtility.AddTrump(trumpClass.trump);
                     SaleObjectManager.instance.PackSekect(card);
-
                 };
-
         }
 
         return () => { };
@@ -275,7 +262,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
         }
 
         return () => { for (int i = 0; i < actions.Count; i++) actions[i](); };
-
     }
     private System.Action ShopExplamtion<T>(GameObject gameObject, T t)
     {
@@ -304,7 +290,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
         }
 
         return () => { for (int i = 0; i < actions.Count; i++) actions[i](); };
-
     }
 
     private int[] GetBuffs<T>(T t)
@@ -315,12 +300,9 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                 JokerBase joker = t as JokerBase;
                 return joker.JokerBuffs();
                 //case TesPack.PackType.card:
-
         }
 
-        return new int[0];
-
+        return System.Array.Empty<int>();
     }
-
 }
 

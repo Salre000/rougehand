@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -25,12 +25,10 @@ public class ScoreMaster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     private void Lood()
     {
-
         //読み込んだCSVファイルを格納
         List<string[]> csvDatas = new List<string[]>();
 
@@ -61,7 +59,6 @@ public class ScoreMaster : MonoBehaviour
             _score.AddBasicMagnification = int.Parse(csvDatas[j][5]);
 
             scoreMap.Add(int.Parse(csvDatas[j][0]), _score);
-
         }
     }
 

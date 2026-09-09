@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -51,10 +51,8 @@ public class CardBuff
                 //ジョーカーの分もカウント
                 JokerUtility.JokerALLAction(joker =>
                 {
-
                     if (joker.GetCardBuff() != Card.cardBuff.MouseJammer) return;
                     count++;
-
                 });
 
                 value = 5 * count;
@@ -120,5 +118,4 @@ public class CardBuff
                 break;
         }
     }
-
 }

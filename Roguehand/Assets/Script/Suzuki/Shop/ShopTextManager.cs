@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -40,7 +40,6 @@ public class ShopTextManager:MonoBehaviour
 
     private void Initialize()
     {
-
         Vector3 pos;
         for(int i=0;i< _beltUpText.Count;i++)
         {
@@ -62,7 +61,6 @@ public class ShopTextManager:MonoBehaviour
     {
         for(int i=0;i< _beltUpText.Count;i++)
         {
-
             Vector3 vec = _beltUpText[i].localPosition;
             vec.x += _speed;
             _beltUpText[i].localPosition = vec;
@@ -74,7 +72,6 @@ public class ShopTextManager:MonoBehaviour
     {
         for (int i = 0; i < _beltDownText.Count; i++)
         {
-
             Vector3 vec = _beltDownText[i].localPosition;
             vec.x -= _speed;
             _beltDownText[i].localPosition = vec;
@@ -84,6 +81,5 @@ public class ShopTextManager:MonoBehaviour
     }
 
     void SetRoleText(string value) { _roleText.text = value; }
-
 }
 

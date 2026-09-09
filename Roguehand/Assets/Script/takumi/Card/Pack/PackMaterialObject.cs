@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,14 +17,12 @@ public class PackMaterialObject : MonoBehaviour
     /// <param name="sbu"><表面以外/param>
     public void SetMaterial(Material main,Material sbu)
     {
-
         Material[] materials = _main.materials;
         materials[MAIN_MATERIAL_INDEX] = main;
         materials[SBU_MATERIAL_INDEX] =sbu ;
         _main.materials = materials;
 
         _upObject.material = sbu;
-
     }
 }
 

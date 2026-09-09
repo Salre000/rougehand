@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,13 +17,11 @@ public class LostColor : JokerBase
 
     public override void Initializ()
     {
-
         if (postEffect == null) postEffect = Camera.main.AddComponent<PostEffect>();
 
         if (sepia == null) sepia = Resources.Load<Material>("takumi/SepiaMterial");
 
         if (postEffect.sepia == null) postEffect.sepia = sepia;
-
     }
     public override void RoundStart()
     {
@@ -41,12 +39,10 @@ public class LostColor : JokerBase
         JokerUtility.JokerALLAction(joker => { if (joker.GetID() == GetID()&&joker!=this) flag = true; });
 
         if(!flag)PostEffect.Destroy(postEffect);
-
     }
     public override string GetExplanation2()
     {
         return Trun() < 1 ? string.Empty : MasterData.instance.GetStringMaster(1999) + Trun().ToString().GetRedString();
     }
-
 }
 

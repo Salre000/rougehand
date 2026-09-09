@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
@@ -42,14 +42,12 @@ public class ExplanationManager : MonoBehaviour
         CreateObject();
         _uiSize = DEFAULT_SIZE;
         _uiSizeMini = defaultSizeMini;
-
     }
 
     public void Update()
     {
         for (int i = 0; i < _offsets.Count; i++)
         {
-
             Vector2 pos = Camera.main.WorldToScreenPoint(_explanationInterface[i].transform.position);
 
             pos.x -= Screen.width / HALF;
@@ -59,7 +57,6 @@ public class ExplanationManager : MonoBehaviour
             pos.x -= _GameObjectPool[i].GetComponent<RectTransform>().sizeDelta.x * _offsets[i].x;
 
             _GameObjectPool[i].GetComponent<RectTransform>().localPosition = pos;
-
         }
     }
 
@@ -71,7 +68,6 @@ public class ExplanationManager : MonoBehaviour
     /// <param name="buff"></param>
     public void AddExplanation(GameObject traget, ExplanationInterface explanationInterface, int[] buff, Vector2 offset)
     {
-
         if (explanationInterface == null) return;
 
         _explanationInterface.Add(traget);
@@ -117,11 +113,10 @@ public class ExplanationManager : MonoBehaviour
 
             explanationObject.GetBuffText(i).transform.parent.gameObject.GetComponent<RectTransform>().sizeDelta = _uiSizeMini;
             explanationObject.GetBuffColorIcon(i).gameObject.SetActive(true);
-
         }
 
         //初期値の定数分移動に補正をかける
-        gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(_uiSize.x, DEFAULT_HEIGHT + ONE_BUFF_HEIGHT * addCount);
+        gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(_uiSize.x, DEFAULT_HEIGHT + (ONE_BUFF_HEIGHT * addCount));
 
         explanationObject.GetTextRarityColor().transform.parent.parent.localPosition = new Vector3(-((-_uiSizeMini.x + defaultSizeMini.x) + (-_uiSize.x + DEFAULT_SIZE.x)), gameObject.GetComponent<RectTransform>().sizeDelta.y / 2, 0);
 
@@ -136,7 +131,6 @@ public class ExplanationManager : MonoBehaviour
 
         _uiSize = DEFAULT_SIZE;
         _uiSizeMini = defaultSizeMini;
-
     }
 
     public void Remove()
@@ -159,7 +153,6 @@ public class ExplanationManager : MonoBehaviour
                 rectTransform.sizeDelta = defaultSizeMini;
 
                 rectTransform.gameObject.SetActive(false);
-
             }
 
             //_GameObjectPool[i].transform.GetChild(1).transform.GetChild(3).transform.Find("BuffColor1").gameObject.SetActive(false);
@@ -172,9 +165,7 @@ public class ExplanationManager : MonoBehaviour
             //_GameObjectPool[i].transform.GetChild(2).transform.Find("BuffUI2").gameObject.SetActive(false);
             //_GameObjectPool[i].transform.GetChild(2).transform.Find("BuffUI3").gameObject.SetActive(false);
             _GameObjectPool[i].SetActive(false);
-
         }
-
     }
 
     /// <summary>
@@ -209,9 +200,7 @@ public class ExplanationManager : MonoBehaviour
             image.SetActive(false);
 
             _GameObjectPool.Add(image);
-
         }
-
     }
 
     private GameObject GetGameObject()
@@ -223,11 +212,9 @@ public class ExplanationManager : MonoBehaviour
             _GameObjectPool[i].SetActive(true);
 
             return _GameObjectPool[i];
-
         }
 
         return null;
-
     }
 
     private string GetLineString(string _string1, string _string2)
@@ -235,11 +222,10 @@ public class ExplanationManager : MonoBehaviour
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.Append(_string1);
-        stringBuilder.Append("\n");
+        stringBuilder.Append('\n');
         stringBuilder.Append(_string2);
 
         return stringBuilder.ToString();
     }
-
 }
 

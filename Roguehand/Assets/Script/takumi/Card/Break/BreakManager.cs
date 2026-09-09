@@ -1,10 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BreakManager : MonoBehaviour
 {
-
     /// <summary>
     /// カードの破壊時に使うプレハブ
     /// </summary>
@@ -47,23 +46,18 @@ public class BreakManager : MonoBehaviour
         breakObject.transform.parent = transform;
 
         VolumeManager.instance.PlayBreckSE();
-
     }
 
     private GameObject GetObject()
     {
-
         for(int i = 0; i < _gameObjects.Count; i++)
         {
             if (_gameObjects[i].activeSelf) continue;
             _gameObjects[i].SetActive(true);
 
             return _gameObjects[i];
-
         }
         return null;
-
     }
-
 }
 

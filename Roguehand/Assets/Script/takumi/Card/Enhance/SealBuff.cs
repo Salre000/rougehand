@@ -1,10 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SealBuff
 {
-
     public static GameObject target;
     public static int targetID;
 
@@ -51,7 +50,6 @@ public class SealBuff
                     CardObjectUtility.GetCardHands()[cashIndex].SetGrab(true);
 
                     SaleObjectManager.instance.RemoveDynamicAction(dommyCountCash);
-
                 });
 
                 break;
@@ -63,17 +61,14 @@ public class SealBuff
                 // 常に検知可能なアクションリストがこれだけなので利用
                 SaleObjectManager.instance.AddDynamicAction(() =>
                 {
-
                     if (CardObjectUtility.GetActionCount() > 0) return;
 
                     CardObjectUtility.GetCardHands().GetAction(card =>
                     {
-
                         if (youngId != -1) return card;
 
                         if (card.GetStatus() == CardObject.status.hand)
                         {
-
                             CardObjectUtility.RemoveTrump(
                                 CardManager.instance.GetHand()[index]);
                             youngId = 1;
@@ -84,7 +79,6 @@ public class SealBuff
                     });
 
                     SaleObjectManager.instance.RemoveDynamicAction(0);
-
                 });
 
                 break;
@@ -96,7 +90,6 @@ public class SealBuff
                     joker.AddSaleValue(upValue);
 
                     JokerUtility.JokerChenge(JokerUtility.GetIndex(joker));
-
                 });
 
                 break;
@@ -134,9 +127,7 @@ public class SealBuff
         //対応したバフの効果を記述
         switch (sealBuff)
         {
-
         }
-
     }
 
     /// <summary>
@@ -154,7 +145,6 @@ public class SealBuff
 
                 break;
         }
-
     }
     /// <summary>
     /// ラウンドの終了時に手札にあるときのバフ
@@ -178,5 +168,4 @@ public class SealBuff
     {
         cashIndexs.Clear();
     }
-
 }

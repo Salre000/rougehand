@@ -1,10 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SetFPS : MonoBehaviour
 {
-
     public static SetFPS setFPS;
     public void Awake()
     {

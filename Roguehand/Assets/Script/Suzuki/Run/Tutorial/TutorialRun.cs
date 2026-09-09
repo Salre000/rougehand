@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -109,7 +109,6 @@ public class TutorialRun : MonoBehaviour
             _clickCome.SetActive(false);
             Asist();
         }
-
     }
 
     void Asist()

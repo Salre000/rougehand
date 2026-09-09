@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,11 +6,9 @@ using static TextUIManager;
 
 public class DebugComand : MonoBehaviour
 {
-
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -32,7 +30,6 @@ public class DebugComand : MonoBehaviour
         List<int> indexList = new();
         indexList = RoleManager.instance.GetIndex();
         if(role==RoleManager.Role.highCard) return;
-
     }
 
     // ハンド回数とディスカード回数のリセット

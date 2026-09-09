@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +6,6 @@ using static ScriptCountNumber;
 [System.Serializable]
 public class JokerBase : SaleInterface, ExplanationInterface
 {
-
     /// <summary>
     /// 売却額を決める基準の倍率
     /// </summary>
@@ -90,7 +89,7 @@ public class JokerBase : SaleInterface, ExplanationInterface
     /// 売却額を返す関数
     /// </summary>
     /// <returns></returns>
-    public int GetSaleValue() { return _saleValue + ((int)GetRarity()+1)* SALE_VALUE_RATE; }
+    public int GetSaleValue() { return _saleValue + (((int)GetRarity()+1)* SALE_VALUE_RATE); }
 
     public void AddSaleValue(int add) { _saleValue += add; }
 
@@ -124,7 +123,6 @@ public class JokerBase : SaleInterface, ExplanationInterface
     public virtual string GetTypes()
     {
         return GetRarity().GetJokerRarityNema();
-
     }
 
     public virtual string GetExplanation2()
@@ -139,10 +137,8 @@ public class JokerBase : SaleInterface, ExplanationInterface
            (int)_jokerBuff+6300,
             (int)_cardBuff+6100,
             0
-
                     };
         return strings;
-
     }
 
     bool SaleInterface.AddFlag()
@@ -152,16 +148,12 @@ public class JokerBase : SaleInterface, ExplanationInterface
 
     void SaleInterface.NotAddButton(Vector2 ButtonPos)
     {
-
         int BUY_WIDHT = 250;
 
-        if (GUI.Button(new Rect(ButtonPos.x - BUY_WIDHT / HALF, Screen.height - ButtonPos.y + 100, BUY_WIDHT, 60),
+        if (GUI.Button(new Rect(ButtonPos.x - (BUY_WIDHT / HALF), Screen.height - ButtonPos.y + 100, BUY_WIDHT, 60),
             ("<size=20><color=#ffffff>" + Extra.ErrorText("ジョーカーの枠がいっぱい") + "</color></size>"), SaleUtility.GetStyle()))
         {
-
         }
-
     }
-
 }
 

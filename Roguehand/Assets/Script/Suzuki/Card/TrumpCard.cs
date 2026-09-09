@@ -1,4 +1,4 @@
-﻿
+
 using System.Collections.Generic;
 
 /// <summary>
@@ -6,7 +6,6 @@ using System.Collections.Generic;
 /// </summary>
 public class TrumpCard
 {
-
     private Card.suit _suit;
     private Card.number _number;
     private List<Card.Trump> deck = new List<Card.Trump>(52);
@@ -18,7 +17,6 @@ public class TrumpCard
     /// </summary>
     public void CreateDeck()
     {
-
         // 4種類の
         for(int i = 0; i < (int)Card.suit.max; i++)
         {
@@ -45,7 +43,6 @@ public class TrumpCard
     /// </summary>
     public void CreateDeck(List<List<int>> deckBlueprint)
     {
-
         // 4種類の
         for (int i = 0; i < (int)Card.suit.max; i++)
         {
@@ -69,6 +66,5 @@ public class TrumpCard
         }
         CardManager.instance.SetDeck(deck);
     }
-
 }
 

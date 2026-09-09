@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -41,7 +41,6 @@ public class ScoreManager : MonoBehaviour
             scoreViewValueMagnification.Add(0);
             scoreViewValueBase.Add(0);
         }
-
     }
     public void SetScoreViewText(int text, bool magnification = false)
     {
@@ -54,7 +53,6 @@ public class ScoreManager : MonoBehaviour
     {
         position.y -= 140f;
         scoreViewTrans[_scoreIndex].position = position;
-
     }
     public void SetViewIndex(int index)
     {
@@ -81,22 +79,19 @@ public class ScoreManager : MonoBehaviour
         if (scoreViewValueBase[_scoreIndex] > 0)
         {
             sb.Append(MasterData.instance.GetStringMaster(_pulsColor));
-            sb.Append("+");
+            sb.Append('+');
             sb.Append(scoreViewValueBase[_scoreIndex]);
-
         }
-        sb.Append(" ");
+        sb.Append(' ');
 
         if (scoreViewValueMagnification[_scoreIndex] > 0)
         {
             sb.Append(MasterData.instance.GetStringMaster(_magColor));
-            sb.Append("x");
+            sb.Append('x');
             sb.Append(scoreViewValueMagnification[_scoreIndex]);
-
         }
 
         return sb.ToString();
-
     }
 
     // 基本スコア
@@ -140,7 +135,6 @@ public class ScoreManager : MonoBehaviour
             scoreViewTrans.Add(score[i].GetComponent<Transform>());
             scoreViewTexts[i].text = "";
         }
-
     }
 
     private void Update()
@@ -197,7 +191,6 @@ public class ScoreManager : MonoBehaviour
         _builder.Append(_magnification);
         TextUIManager.instance.SetMagnificationText(_builder.ToString());
         VolumeManager.instance.PlayScoreSE();
-
     }
 
     /// <summary>
@@ -220,7 +213,6 @@ public class ScoreManager : MonoBehaviour
         else
         {
             _defaultRemit = _RESET_REMIT_SIZE;
-
         }
 
         TextUIManager.instance.SetRoundScoreText(_builder.ToString());
@@ -231,7 +223,6 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     public void PlayScoreResult()
     {
-
         _handScore = _basicScore * _magnification;
         // 四捨五入した値が返る
         _handScore = Rounding(_handScore, 1f);
@@ -294,7 +285,6 @@ public class ScoreManager : MonoBehaviour
         //_builder.Append(_roundScore);
         _builder.AppendFormat("{0:#}", _roundScore.ToString("N0"));
         TextUIManager.instance.SetRoundScoreText(_builder.ToString());
-
     }
 
     /// <summary>
@@ -324,7 +314,7 @@ public class ScoreManager : MonoBehaviour
         // 四捨五入したい位を一の位に持ってくる
         int num2 = Mathf.FloorToInt(num1 * Mathf.Pow(10, decPoint));
         // 十以上の位をなくす
-        int num3 = num2 - Mathf.FloorToInt(num2 / 10) * 10;
+        int num3 = num2 - (Mathf.FloorToInt(num2 / 10) * 10);
         if (num3 >= 5)
         {
             // 切り上げ
@@ -359,7 +349,6 @@ public class ScoreManager : MonoBehaviour
 
         // 最終的にプレイボタンのフラグをリセット
         GameUtility.SetIsPlay(false);
-
     }
 
     public float GetBasicScore() { return _basicScore; }

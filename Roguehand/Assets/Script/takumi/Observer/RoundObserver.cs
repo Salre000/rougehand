@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +8,6 @@ using UnityEngine;
 /// </summary>
 public class RoundObserver : MonoBehaviour
 {
-
     public static RoundObserver Instance { get; private set; }
 
     private bool _roundEnd = false;
@@ -25,13 +24,11 @@ public class RoundObserver : MonoBehaviour
     {
         if (JokerObjectUtility.PlayCheck() == false && _roundEnd == true)
         {
-
             // ラウンド終了のアクション
             for (int i = 0; i<_roundEndActions.Count; i++) _roundEndActions[i]();
 
             _roundEnd = false;
         }
-
     }
 
     /// <summary>
@@ -47,6 +44,5 @@ public class RoundObserver : MonoBehaviour
     public void AddRoundStartAction(System.Action action) {  _roundStartActions.Add(action); }
 
     public void RoundStartActions() { for (int i = 0; i < _roundStartActions.Count; i++) _roundStartActions[i](); }
-
 }
 

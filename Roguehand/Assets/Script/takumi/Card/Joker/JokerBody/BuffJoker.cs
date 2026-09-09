@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class BuffJoker : JokerBase
 {
-
     public override void SaleAction()
     {
         int count = 0;
@@ -21,14 +20,12 @@ public class BuffJoker : JokerBase
 
             JokerUtility.JokerChenge(JokerUtility.GetIndex(jokerBase));
             count++;
-
         });
 
         //ChengeCard();
 
         //アクション状態に変更するコマンド
         JokerObjectUtility.CardAddAction(-1, -2);
-
     }
     private void ChengeCard()
     {
@@ -67,11 +64,9 @@ public class BuffJoker : JokerBase
 
             CardManager.instance.Chenge(index, indexHand, card);
             CardObjectUtility.SetChengeCard(i, card);
-
         }
 
         CardManager.instance.ResetPick();
     }
-
 }
 

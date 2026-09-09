@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +20,6 @@ public class ShopManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // ショップ状態を変更
@@ -31,6 +30,5 @@ public class ShopManager : MonoBehaviour
     public void SetPushEndShop(bool flag) { _isPushEndShop = flag; }
     // 終了ボタンが押されたかを取得
     public bool IsPushEndShop() { return _isPushEndShop; }
-
 }
 

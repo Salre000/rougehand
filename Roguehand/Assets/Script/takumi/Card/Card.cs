@@ -1,4 +1,4 @@
-﻿[System.Serializable]
+[System.Serializable]
 public class Card
 {
     public static int maxID=0;
@@ -151,8 +151,6 @@ public class Card
         public TrumpClass(Card.Trump trump) { this.trump = trump; }
 
        public Card.Trump trump;
-
     }
-
 }
 

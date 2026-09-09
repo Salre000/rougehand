@@ -1,11 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 [System.Serializable]
 public class TutorialBoss : BossBase
 {
-
     private int[] cardIndexs = { 0, 13,7,20,33,9,22,35};
 
     private bool oneFlag = false;
@@ -15,7 +14,6 @@ public class TutorialBoss : BossBase
     {
         base.Initializ();
         //DistributeHand.instanse.SetHandDrawFlag(true);
-
     }
 
     public override void Update()
@@ -29,7 +27,6 @@ public class TutorialBoss : BossBase
         Distribute(cardIndexs.Length);
 
         oneFlag = true;
-
     }
 
     public override void LateUpdate()
@@ -39,7 +36,6 @@ public class TutorialBoss : BossBase
 
         SaleObjectManager.instance.CreateShop();
         oneShopFlag = true;
-
     }
 
     public override void End()
@@ -48,7 +44,6 @@ public class TutorialBoss : BossBase
     }
     private void Distribute(int drawCount)
     {
-
         List<Card.Trump> dommyHand = new List<Card.Trump>();
         List<Card.Trump>  hand = CardManager.instance.GetHand();
         List<Card.Trump> deck = CardManager.instance.GetDeck();
@@ -62,7 +57,6 @@ public class TutorialBoss : BossBase
         // ハンド分繰り返す
         for (int i = 0; i < drawCount; i++)
         {
-
             //
             index = cardIndexs[i];
 
@@ -87,7 +81,6 @@ public class TutorialBoss : BossBase
 
             hand.Add(deck[dammyDeckArray[index]]);
             dommyHand.Add(deck[dammyDeckArray[index]]);
-
         }
 
         // デッキの中に使用可能なカードが一枚もない場合
@@ -96,7 +89,6 @@ public class TutorialBoss : BossBase
             // リザルト画面に移行する
 
             Application.Quit();
-
         }
 
         CardManager.instance.SetHand(hand);
@@ -106,8 +98,6 @@ public class TutorialBoss : BossBase
 
         // ソート
         SortHand.instance.OnSortNumberButton();
-
     }
-
 }
 

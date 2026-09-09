@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,7 +44,6 @@ public class PlayManager : MonoBehaviour
         ScoreView();
         CheckHandCount();
         CheckDiscardCount();
-
     }
 
     private void ScoreView()
@@ -68,7 +67,6 @@ public class PlayManager : MonoBehaviour
     // ハンドスコアをゼロにしてラウンドスコアを加算
     IEnumerator RoundScorePlus()
     {
-
         yield return new WaitForSeconds(_WAIT_TIME);
         if (!_isSetCard) yield break;
 
@@ -84,7 +82,6 @@ public class PlayManager : MonoBehaviour
         // スコアが目標に達しているか確認
         ScoreManager.instance.RoundCheck();
         _isShack = false;
-
     }
 
     private void CheckHandCount()

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static ScriptCountNumber;
@@ -36,8 +36,8 @@ public class UICardManager : MonoBehaviour
             angleRange -= _HEIGHT_OFFSET;
             angleRange *= DOUBLE;
 
-            pos.x = renge * (i + 1)- WIDE_SIZE / HALF;
-            pos.y = -Mathf.Abs( Mathf.Sin(angleRange))* MAX_HEIGHT+OFFSET;
+            pos.x = (renge * (i + 1))- (WIDE_SIZE / HALF);
+            pos.y = (-Mathf.Abs( Mathf.Sin(angleRange))* MAX_HEIGHT)+OFFSET;
             pos.z = CARD_POS_Z;
 
             rectTransform.localPosition = pos;
@@ -45,11 +45,9 @@ public class UICardManager : MonoBehaviour
 
             Vector2 vec= rectTransform.localPosition-new Vector3(0, centerPointY, 0);
 
-            angle.z =HALF_ROTATION-( Mathf.Atan2(vec.x,vec.y)*Mathf.Rad2Deg)*ALTERNATIVE;
+            angle.z =HALF_ROTATION-(( Mathf.Atan2(vec.x,vec.y)*Mathf.Rad2Deg)*ALTERNATIVE);
             rectTransform.eulerAngles = angle;
-
         }
-
     }
 }
 

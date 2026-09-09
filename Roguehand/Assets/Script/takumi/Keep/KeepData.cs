@@ -1,10 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class KeepData
 {
-
     /// <summary>
     /// キープデータの作成
     /// </summary>
@@ -23,7 +22,6 @@ public static class KeepData
     /// <summary>
     /// データを保持するインナークラス
     /// </summary>
-
     private class Data
     {
         /// <summary>
@@ -40,7 +38,5 @@ public static class KeepData
         /// 保存するアイテム
         /// </summary>
         public List<ItemBase> items=new List<ItemBase>();
-
     }
-
 }

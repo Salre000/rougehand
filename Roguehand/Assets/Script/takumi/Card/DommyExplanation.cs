@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,6 @@ using UnityEngine;
 /// </summary>
 public class DommyExplanation : ExplanationInterface
 {
-
     public System.Func<string> dommyExplanation;
     public string GetExplanation()
     {

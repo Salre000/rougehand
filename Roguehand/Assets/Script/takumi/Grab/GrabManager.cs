@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class GrabManager : MonoBehaviour
 {
-
     public static GrabManager instance;
 
     private bool grabFlag = true;
@@ -72,7 +71,6 @@ public class GrabManager : MonoBehaviour
         MouseOver();
         Grab();
         Separate();
-
     }
 
     /// <summary>
@@ -91,15 +89,12 @@ public class GrabManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             GetObjectType(hit.transform.gameObject);
-
         }
-
     }
 
     GameObject mouseOverObject;
     private void MouseOver()
     {
-
         if (_status != status.None) return;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -145,7 +140,6 @@ public class GrabManager : MonoBehaviour
                                 continuationAction = null;
                                 ExplanationManager.instance.Remove();
                             }
-
                         }
                         else
                         {
@@ -159,16 +153,13 @@ public class GrabManager : MonoBehaviour
                 case status.None:
 
                     break;
-
             }
 
             _status = status.None;
             _grabID = -1;
-
         }
         else
         {
-
             ExplanationManager.instance.Remove();
         }
     }
@@ -178,7 +169,6 @@ public class GrabManager : MonoBehaviour
     /// </summary>
     private void Separate()
     {
-
         if (Input.GetMouseButton(0)) return;
 
         if (_status == status.None) return;
@@ -191,7 +181,6 @@ public class GrabManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             SetGrabID(hit.transform.gameObject);
-
         }
 
         if (_grabID < 0) _status = status.None;
@@ -209,7 +198,6 @@ public class GrabManager : MonoBehaviour
             case status.Item:
                 ItemUtility.GrabChange(_grabID, false);
                 break;
-
         }
 
         if (_time < 1)
@@ -230,15 +218,12 @@ public class GrabManager : MonoBehaviour
                 case status.Sale:
                     SaleObjectManager.instance.SetSale(_grabID);
                     break;
-
             }
-
         }
         _time = 0;
         _status = status.None;
 
         _grabID = -1;
-
     }
     /// <summary>
     /// rayの対象のオブジェクトの種類を判別
@@ -246,7 +231,6 @@ public class GrabManager : MonoBehaviour
     /// <param name="gameObject"></param>
     private void GetObjectType(GameObject gameObject)
     {
-
         SetGrabID(gameObject);
 
         //何かしらの可能性でIDを取得出来なかった時にリセット
@@ -274,9 +258,7 @@ public class GrabManager : MonoBehaviour
             case status.None:
 
                 break;
-
         }
-
     }
 
     private void SetGrabID(GameObject gameObject)
@@ -321,5 +303,4 @@ public class GrabManager : MonoBehaviour
 
     public void SetGrabFlag(bool flag) { grabFlag = flag; }
     public bool GetGrabFlag() { return grabFlag; }
-
 }

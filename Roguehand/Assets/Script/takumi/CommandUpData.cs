@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,12 +22,10 @@ public class CommandUpData : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R)) ResultUIManager.Instance.Active();
         if(Input.GetKeyDown(KeyCode.D))VolumeManager.instance.PlayScoreSE();
-
     }
 
     private void Auto()
     {
-
         // ボタン受付の停止中
         if (!GameUtility.IsPushButton()) return;
         if (GameUtility.IsPlay()) return;
@@ -48,7 +46,6 @@ public class CommandUpData : MonoBehaviour
         // この方法だとスコアの加算を行わずに行ける
         //CardManager.instance.ResetPick();
         //RoleManager.instance.RoleCheck(CardManager.instance.GetPick());
-
     }
 
     public void SetPlay(System.Action action) {  play = action; }
@@ -58,7 +55,6 @@ public class CommandUpData : MonoBehaviour
         // ここにセーブ処理を記述します。
         // 例えば、ゲームデータを保存するメソッド。
         MemoryManager.Keep();
-
     }
 }
 

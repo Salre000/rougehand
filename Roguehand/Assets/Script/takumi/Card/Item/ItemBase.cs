@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +9,6 @@ using static ScriptCountNumber;
  [System.Serializable]
 public abstract class ItemBase : SaleInterface,ExplanationInterface
 {
-
     /// <summary>
     /// アイテムのID
     /// </summary>
@@ -37,19 +36,16 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
     /// <param name="action"></param>
     void SaleInterface.SaleShow(Vector3 pos, int saleValue, Action action)
     {
-
         Vector2 ButtonPos = Camera.main.WorldToScreenPoint(pos);
         if (GUI.Button(new Rect(ButtonPos.x + 75, Screen.height - ButtonPos.y - 90, 60, 90),
             ("<size=25><color=#ffffff>売却\n$" + saleValue.ToString() + "</color></size>"), SaleUtility.GetStyle()))
         {
-
             action();
 
             //お金を増やす処理
             GameUtility.SetMyMoney(GameUtility.GetMyMoney() + saleValue);
 
             VolumeManager.instance.PlayMoneySE();
-
         }
 
         if (GUI.Button(new Rect(ButtonPos.x + 75, Screen.height - ButtonPos.y, 60, 90),
@@ -60,7 +56,6 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
             JokerUtility.SetTraget(JokerActionUseEnum.JokerActionTarget.item);
             Use();
             VolumeManager.instance.PlayUseSE();
-
         }
     }
 
@@ -114,16 +109,12 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
 
     void SaleInterface.NotAddButton(Vector2 ButtonPos)
     {
-
         int BUY_WIDHT = 250;
 
-        if (GUI.Button(new Rect(ButtonPos.x - BUY_WIDHT / HALF, Screen.height - ButtonPos.y + 100, BUY_WIDHT, 60),
+        if (GUI.Button(new Rect(ButtonPos.x - (BUY_WIDHT / HALF), Screen.height - ButtonPos.y + 100, BUY_WIDHT, 60),
             ("<size=20><color=#ffffff>" + Extra.ErrorText("アイテムの枠がいっぱい") + "</color></size>"), SaleUtility.GetStyle()))
         {
-
         }
-
     }
-
 }
 

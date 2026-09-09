@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,12 +29,9 @@ public class ErrorBuffDetalis : DommyDetalis
         _objectPoolParent.transform.parent = transform;
         for (int i = 0; i < MAX_SIZE; i++)
         {
-
             _objectPool.Add(Instantiate(prefab, _objectPoolParent.transform));
             _objectPool[i].SetActive(false);
-
         }
-
     }
     private List<GameObject> GetActiveObject(int count,List<Card.Trump> trumps,List<JokerBase> jokers)
     {
@@ -61,7 +58,6 @@ public class ErrorBuffDetalis : DommyDetalis
     {
         for (int i = 0; i < uIErrorBuffs.Count; i++)
         {
-
             int count = 0;
 
             List<Card.Trump> trumps=new List<Card.Trump>();
@@ -96,17 +92,13 @@ public class ErrorBuffDetalis : DommyDetalis
             }
 
             uIErrorBuffs[i].SetCard(GetActiveObject(count, trumps, jokers));
-
         }
-
     }
 
     public override void Hide()
     {
-
         for (int i = 0; i < MAX_SIZE; i++)
         {
-
             _objectPool[i].transform.SetParent(_objectPoolParent.transform);
             _objectPool[i].SetActive(false);
         }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,6 @@ using UnityEngine;
 /// </summary>
 public interface ExplanationInterface
 {
-
     /// <summary>
     /// 名前を返す関数
     /// </summary>
@@ -28,5 +27,4 @@ public interface ExplanationInterface
     /// </summary>
     /// <returns></returns>
     public string GetTypes();
-
 }

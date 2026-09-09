@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,6 @@ using UnityEngine;
 /// </summary>
 public class GameConfig
 {
-
     /// <summary>
     /// ゲームの速度を管理する変数
     /// </summary>
@@ -24,6 +23,5 @@ public class GameConfig
     public static void AccelerateGameSpeed() { _gameSpeed += _accelerateSpeed; }
 
      public static void ResetGameSpeed() {  _gameSpeed = 1; }
-
 }
 

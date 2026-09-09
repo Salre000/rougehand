@@ -1,10 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class ItemUtility
 {
-
     public static ItemManager instance { set; private get; }
 
     public static void AddItem(int iD) {  instance.AddItem(iD); }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,5 +25,4 @@ public static class BuffUtility
     public static bool CheckPlayBuffCard(Card.cardBuff cardBuff) { return BuffManager.CheckPlayBuffCard(cardBuff); }
     public static bool CheckPlayBuffSeal(Card.sealBuff sealBuff) { return BuffManager.CheckPlayBuffSeal(sealBuff); }
     public static bool CheckHandBuffs(Card.Trump trump) { return BuffManager.CheckHandBuffs(trump); }
-
 }

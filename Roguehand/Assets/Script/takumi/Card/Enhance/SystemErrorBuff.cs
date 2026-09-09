@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,7 +8,6 @@ using UnityEngine;
 
 public class SystemErrorBuff
 {
-
     private List<Errorbuff> _errorList = new List<Errorbuff>();
 
     [StructLayout(LayoutKind.Sequential)]
@@ -38,7 +37,6 @@ public class SystemErrorBuff
         return;
         if (Input.GetKeyDown(KeyCode.Y)) CreateErrorBuff();
         if (Input.GetKeyDown(KeyCode.H)) Clear();
-
     }
 
     public void CreateErrorBuff()
@@ -49,7 +47,6 @@ public class SystemErrorBuff
 
         for (int i = 0; i < _errorList.Count; i++)
             _errorList[i].Start();
-
     }
     public void Clear()
     {
@@ -92,7 +89,6 @@ public class SystemErrorBuff
 
             errorCount = () =>
             {
-
                 int count = 0;
 
                 List<Card.Trump> trumps = CardManager.instance.GetDeck();
@@ -106,10 +102,8 @@ public class SystemErrorBuff
                 //ジョーカーの分もカウント
                 JokerUtility.JokerALLAction(joker =>
                 {
-
                     if (joker.GetCardBuff() != Card.cardBuff.MouseJammer) return;
                     count++;
-
                 });
 
                 //デバックの為に個数を３で固定する
@@ -117,14 +111,11 @@ public class SystemErrorBuff
                 //count = 3;
 
                 return count;
-
             };
-
         }
 
         public override void UpData()
         {
-
             if (errorCount() == 0) return;
 
             POINT pOINT = new POINT();
@@ -135,7 +126,6 @@ public class SystemErrorBuff
 
             if (MaxRenge > _renge) return;
             MouseMove();
-
         }
 
         private void MouseMove()
@@ -146,14 +136,13 @@ public class SystemErrorBuff
 
             float randomAngle = UnityEngine.Random.Range(1, 360) * Mathf.Deg2Rad;
 
-            Vector2 mousePos= new Vector2(Mathf.Sin(randomAngle) * renge + _lostPos.x,Mathf.Cos(randomAngle) * renge + _lostPos.y);
+            Vector2 mousePos= new Vector2((Mathf.Sin(randomAngle) * renge) + _lostPos.x,(Mathf.Cos(randomAngle) * renge) + _lostPos.y);
 
             mousePos = MousePositionCheck(mousePos);
 
             SetCursorPos(((int)mousePos.x),((int)mousePos.y));
 
             Start();
-
         }
 
         private Vector2 MousePositionCheck(Vector2 mouse)
@@ -170,9 +159,7 @@ public class SystemErrorBuff
 
             return point;
         }
-
     }
-
 }
 
 

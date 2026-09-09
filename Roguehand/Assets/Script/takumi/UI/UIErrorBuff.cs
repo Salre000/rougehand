@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using static ErrorBuffDetalis;
@@ -46,7 +46,6 @@ public class UIErrorBuff : MonoBehaviour
         _explantion.text = GetEXPLANTION();
 
         _lavel.text = GetLevel(objects.Count);
-
     }
 
     private string GetEXPLANTION()
@@ -109,6 +108,5 @@ public class UIErrorBuff : MonoBehaviour
 
         return name;
     }
-
 }
 

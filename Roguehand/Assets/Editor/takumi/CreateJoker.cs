@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -17,13 +17,11 @@ public class CreateJoker : EditorWindow
     [MenuItem("Assets/CreateJoker")]
     static void Open()
     {
-
         This = ScriptableObject.CreateInstance<CreateJoker>();
         jolerListObject = Resources.Load<JokerListObject>("takumi/Observer/JolerLists");
 
         stringList = Resources.Load<StringList>(ObserverJokerBase.filePath2);
         This.Show();
-
     }
 
     private static JokerListObject jolerListObject;
@@ -153,11 +151,9 @@ public class CreateJoker : EditorWindow
             case JokerBaseEnum.JokerEnum.MAX:
                 break;
         }
-
     }
     static void CreateCS()
     {
-
         StringBuilder builder = new StringBuilder();
         builder.Clear();
         builder.Append(Application.dataPath);
@@ -176,21 +172,19 @@ public class CreateJoker : EditorWindow
         builder.Append(className);
         builder.Append(": JokerBase");
 
-        builder.Append("{");
+        builder.Append('{');
         builder.AppendLine();
 
         builder.Append("    public override JokerActionUseEnum.JokerRarity GetRarity() { ");
         builder.AppendFormat("return JokerActionUseEnum.JokerRarity.{0};", rarity.ToString());
-        builder.Append("}");
+        builder.Append('}');
         builder.AppendLine();
 
         if (addType == JokerActionUseEnum.AddType.Multiplication)
         {
-
             builder.Append("    public override bool GetAddType() {return false; ");
-            builder.Append("}");
+            builder.Append('}');
             builder.AppendLine();
-
         }
 
         switch (jokerEnum)
@@ -209,16 +203,14 @@ public class CreateJoker : EditorWindow
         builder.AppendLine();
         builder.AppendLine();
 
-        builder.Append("}");
+        builder.Append('}');
 
         sw.Write(builder.ToString());
 
         sw.Close();
-
     }
     static void CreateAnyDoneWhen(ref StringBuilder builder)
     {
-
         switch (timing)
         {
             case JokerActionUseEnum.Timing.trun:
@@ -230,20 +222,20 @@ public class CreateJoker : EditorWindow
                 builder.AppendLine();
 
                 builder.AppendFormat("_magnification+={0};", float1.ToString());
-                builder.Append("}");
+                builder.Append('}');
                 builder.AppendLine();
 
                 builder.Append("public override float Trun(){");
                 builder.Append("return _magnification;");
                 builder.AppendLine();
 
-                builder.Append("}");
+                builder.Append('}');
                 builder.AppendLine();
                 builder.Append("public override void TrunReset(){");
                 builder.Append(" _magnification=0;");
                 builder.AppendLine();
 
-                builder.Append("}");
+                builder.Append('}');
 
                 break;
             case JokerActionUseEnum.Timing.now:
@@ -253,7 +245,7 @@ public class CreateJoker : EditorWindow
                 builder.AppendLine();
 
                 builder.AppendFormat("JokerUtility.{0}({1});", addType == JokerActionUseEnum.AddType.addition ? "AddMagnification" : "", float1.ToString());
-                builder.Append("}");
+                builder.Append('}');
 
                 break;
             case JokerActionUseEnum.Timing.never:
@@ -267,25 +259,23 @@ public class CreateJoker : EditorWindow
                 builder.AppendLine();
 
                 builder.AppendFormat("_magnification+={0};", float1.ToString());
-                builder.Append("}");
+                builder.Append('}');
                 builder.AppendLine();
 
                 builder.Append("public override float Trun(){");
                 builder.Append("return _magnification;");
                 builder.AppendLine();
 
-                builder.Append("}");
+                builder.Append('}');
 
                 break;
         }
-
     }
     static void CreateProbabilityDestruction(ref StringBuilder builder)
     {
-
         builder.Append("public override float Trun(){");
         builder.AppendFormat("return {0};", num3);
-        builder.Append("}");
+        builder.Append('}');
         builder.AppendLine();
 
         builder.Append("public override void RoundStart(){");
@@ -294,22 +284,20 @@ public class CreateJoker : EditorWindow
         builder.AppendFormat("if((Random.Range(0,10000)%{0})<{1})", num1, num2);
         builder.AppendLine();
 
-        builder.Append("{");
+        builder.Append('{');
         builder.AppendLine();
 
         builder.Append("JokerUtility.Remove(this);");
 
         builder.AppendLine();
 
-        builder.Append("}");
+        builder.Append('}');
 
-        builder.Append("}");
-
+        builder.Append('}');
     }
 
     static void CreateAddClass()
     {
-
         if(className!=string.Empty)jolerListObject._className.Add(className);
 
         StringBuilder builder = new StringBuilder();
@@ -339,7 +327,7 @@ public class CreateJoker : EditorWindow
 
         builder.AppendFormat("public static class ALLJoker");
         builder.AppendLine();
-        builder.Append("{");
+        builder.Append('{');
 
         builder.Append("public enum _allJokerEnum{");
 
@@ -347,14 +335,13 @@ public class CreateJoker : EditorWindow
         {
             builder.AppendLine();
             builder.AppendFormat("_{0},", jolerListObject._className[i]);
-
         }
 
         builder.AppendLine();
         builder.Append("MAX");
 
         builder.AppendLine();
-        builder.Append("}");
+        builder.Append('}');
 
         builder.AppendLine();
 
@@ -368,26 +355,23 @@ public class CreateJoker : EditorWindow
         {
             builder.AppendLine();
             builder.AppendFormat("            case _allJokerEnum._{0}:jokerBase= new {0}();break;", jolerListObject._className[i]);
-
         }
         builder.AppendLine();
-        builder.Append("}");
+        builder.Append('}');
         builder.Append("        jokerBase?.SetID((int)joker + 1 + 2000);");
         builder.Append("return jokerBase;");
-        builder.Append("}");
+        builder.Append('}');
         builder.AppendLine();
 
         builder.AppendLine();
 
         builder.AppendLine();
 
-        builder.Append("}");
+        builder.Append('}');
 
         sw.Write(builder.ToString());
 
         sw.Close();
-
     }
-
 }
 

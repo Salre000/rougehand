@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,6 +25,5 @@ public class PackManager : MonoBehaviour
     // 購入したパックオブジェクト
     public void SetPickPack(GameObject transform) { _pickPack = transform; }
     public GameObject GetPickPack() { return _pickPack; }
-
 }
 

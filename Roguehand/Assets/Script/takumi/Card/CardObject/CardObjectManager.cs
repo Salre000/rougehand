@@ -1,4 +1,4 @@
-﻿using JetBrains.Annotations;
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,7 +31,6 @@ public class CardObjectManager : MonoBehaviour
         buff,
 
         sael
-
     }
 
     /// <summary>
@@ -137,7 +136,6 @@ public class CardObjectManager : MonoBehaviour
     public void Awake()
     {
         Initialize();
-
     }
     public void Update()
     {
@@ -159,7 +157,6 @@ public class CardObjectManager : MonoBehaviour
 
         // 謇区惆縺ｮ蟷・ｒ險育ｮ・
         _handPositionRange = Vector3.Distance(_handPositionLeft.position, _handPositionRight.position);
-
     }
 
     public Material GetTrunpMatarial(int suit, int number) { return _materialManager.GetMaterial(suit, number); }
@@ -195,13 +192,10 @@ public class CardObjectManager : MonoBehaviour
             for (int j = _cardObjectHands.Count - 1; j > index; j--)
             {
                 _cardObjectHands[j] = _cardObjectHands[j - 1];
-
             }
 
             _cardObjectHands[index] = cardObject;
-
         }
-
     }
 
     /// <summary>
@@ -215,7 +209,6 @@ public class CardObjectManager : MonoBehaviour
 
             _cardObjectHands[i].ResetMoveTime();
         }
-
     }
 
     /// <summary>
@@ -287,7 +280,6 @@ public class CardObjectManager : MonoBehaviour
             _cardObjectHands[i].SetStatus(CardObject.status.discard);
             _cardObjectHands[i].ResetMoveTime();
         }
-
     }
 
     /// <summary>
@@ -304,9 +296,7 @@ public class CardObjectManager : MonoBehaviour
             if (_cardObjectHands[i].GetStatus() != CardObject.status.playWait) continue;
             _cardObjectHands[i].SetStatus(CardObject.status.discard);
             _cardObjectHands[i].ResetMoveTime();
-
         }
-
     }
 
     /// <summary>
@@ -320,7 +310,6 @@ public class CardObjectManager : MonoBehaviour
             _cardObjectHands[i].SetStatus(CardObject.status.discard);
             _cardObjectHands[i].ResetMoveTime();
         }
-
     }
 
     /// <summary>
@@ -351,17 +340,14 @@ public class CardObjectManager : MonoBehaviour
 
     public void GrabChenge(int ID, bool flag)
     {
-
         _cardObjectHands[ID].SetGrab(flag);
         _isGrab = flag;
         _isGrabID = ID;
 
         if (flag) _cardObjectHands[ID].SetStatus(CardObject.status.hand);
-
         else if (_cardObjectHands[ID].GetLostStatus() == CardObject.status.playWait) _cardObjectHands[ID].SetStatus(CardObject.status.playWait);
 
         _cardObjectHands[ID].ResetMoveTime();
-
     }
 
     public void ChengeOrder(int lostID, int nextID)
@@ -373,7 +359,6 @@ public class CardObjectManager : MonoBehaviour
         for (int i = 0; i < _cardObjectHands.Count; i++) _cardObjectHands[i].ResetMoveTime();
 
         CardManager.instance.SetHand(Extra.ChengeOrder(CardManager.instance.GetHand(), lostID, nextID));
-
     }
 
     /// <summary>
@@ -413,7 +398,7 @@ public class CardObjectManager : MonoBehaviour
             sb.Append(Extra.ErrorText("蝓ｺ譛ｬ繧ｹ繧ｳ繧｢"));
             if ((int)trump.number > 10 || (int)trump.number == 1) sb.Append(Extra.ErrorText(Extra.GetBlueString("+11")));
             else sb.Append(Extra.ErrorText(Extra.GetBlueString("+" + ((int)trump.number).ToString())));
-            sb.Append("\n");
+            sb.Append('\n');
             if (trump.deckBuff != Card.deckBuff.None)
             {
                 sb.Append(MasterData.instance.GetStringMaster(6250 + (int)trump.deckBuff));
@@ -447,7 +432,6 @@ public class CardObjectManager : MonoBehaviour
         _cardObjects[_cardObjects.Count - 1].SetStatus(CardObject.status.deck);
         _cardObjects[_cardObjects.Count - 1].transform.eulerAngles = _BACK_SIDE;
         _cardObjects[_cardObjects.Count - 1].transform.parent = _cardPool.transform;
-
     }
     /// <summary>
     /// 繧ｫ繝ｼ繝峨ｒ貂帙ｉ縺咎未謨ｰ
@@ -468,7 +452,6 @@ public class CardObjectManager : MonoBehaviour
         ExplanationManager.instance.Remove();
         BreakUtility.StartBreak(dommy.gameObject);
         Destroy(dommy.gameObject);
-
     }
 
     public void ShowExplanation(Card.Trump trump, GameObject _object, Vector2 offset)
@@ -497,7 +480,7 @@ public class CardObjectManager : MonoBehaviour
             sb.Append(Extra.ErrorText("蝓ｺ譛ｬ繧ｹ繧ｳ繧｢"));
             if ((int)trump.number > 10 || (int)trump.number == 1) sb.Append(Extra.ErrorText(Extra.GetBlueString("+11")));
             else sb.Append(Extra.ErrorText(Extra.GetBlueString("+" + ((int)trump.number).ToString())));
-            sb.Append("\n");
+            sb.Append('\n');
             if (trump.deckBuff != Card.deckBuff.None)
             {
                 sb.Append(MasterData.instance.GetStringMaster(6250 + (int)trump.deckBuff));
@@ -522,7 +505,6 @@ public class CardObjectManager : MonoBehaviour
     /// </summary>
     public void RoundReset()
     {
-
         _cardObjects.GetAction(card =>
         {
             // 隗貞ｺｦ繧偵Μ繧ｻ繝・ヨ
@@ -535,11 +517,9 @@ public class CardObjectManager : MonoBehaviour
             card.ResetCard();
 
             return card;
-
         });
 
         _cardObjectHands.Clear();
-
     }
 
     /// <summary>
@@ -551,7 +531,6 @@ public class CardObjectManager : MonoBehaviour
     /// <param name="nexthand"></param>
     public void ObjectSort(List<Card.Trump> nowHand, List<Card.Trump> nexthand)
     {
-
         List<CardObject> dommyObjectList = new List<CardObject>();
 
         for (int i = 0; i < nexthand.Count; i++)
@@ -563,7 +542,6 @@ public class CardObjectManager : MonoBehaviour
             nowHand.RemoveAt(index);
 
             _cardObjectHands.RemoveAt(index);
-
         }
 
         _cardObjectHands = dommyObjectList;
@@ -571,9 +549,7 @@ public class CardObjectManager : MonoBehaviour
         for (int i = 0; i < _cardObjectHands.Count; i++)
         {
             _cardObjectHands[i].ResetMoveTime();
-
         }
-
     }
 
     /// <summary>
@@ -600,7 +576,6 @@ public class CardObjectManager : MonoBehaviour
             }
             else
             {
-
                 _cardObjectHands[i].SetStatus(CardObject.status.action);
                 _cardObjectHands[i].GetCheckBuff(trumps[i], TrunpScore, i);
             }
@@ -615,11 +590,8 @@ public class CardObjectManager : MonoBehaviour
             _cardObjectHands[i].AddAction(() =>
             {
                 BuffUtility.HandBuff(CardManager.instance.GetHand()[cash]);
-
             });
-
         }
-
     }
 
     public int GetActionCount() { return _cardObjectHands.GetCount(card => card.GetStatus() == CardObject.status.action); }
@@ -660,7 +632,6 @@ public class CardObjectManager : MonoBehaviour
         for (int i = 0; i < _cardObjectHands.Count; i++)
         {
             if (_cardObjectHands[i].IsMovable()) flag = true;
-
         }
 
         return flag;
@@ -676,7 +647,7 @@ public class CardObjectManager : MonoBehaviour
         //繧ｸ繝ｧ繝ｼ繧ｫ繝ｼ蜷悟｣ｫ縺ｮ霍晞屬
         float renge = Vector3.Distance(_handPositionLeft.transform.position, _handPositionRight.transform.position) / (_cardObjectHands.Count + 1);
 
-        float Cardrenge = (_handPositionLeft.transform.position.x + renge * (_isGrabID + 1)) - _cardObjectHands[_isGrabID].transform.position.x;
+        float Cardrenge = (_handPositionLeft.transform.position.x + (renge * (_isGrabID + 1))) - _cardObjectHands[_isGrabID].transform.position.x;
 
         //讓ｪ譁ｹ蜷代∈縺ｮ遘ｻ蜍戊ｷ晞屬縺悟ｰ上＆縺九▲縺溘ｉ鬆・分縺ｮ螟画峩繧貞刈縺医↑縺・
         if (Mathf.Abs(Cardrenge) + 30 < renge) return;
@@ -691,7 +662,6 @@ public class CardObjectManager : MonoBehaviour
         CardObjectUtility.ChengeOrder(_isGrabID, _isGrabID + count);
 
         _isGrabID = _isGrabID + count;
-
     }
 
     /// <summary>
@@ -746,9 +716,7 @@ public class CardObjectManager : MonoBehaviour
                     HandCardActionTrump(_cardObjectHands[i], i);
                     break;
             }
-
         }
-
     }
 
     /// <summary>
@@ -758,7 +726,6 @@ public class CardObjectManager : MonoBehaviour
     /// <param name="handCardRange"></param>
     private void CardMoveHand(CardObject cardObjectHand, float handCardRange)
     {
-
         // 遘ｻ蜍慕岼讓吝慍轤ｹ繧堤｢ｺ隱・
         Vector3 goalPos = _handPositionLeft.position + new Vector3(handCardRange, 0, 0);
 
@@ -787,7 +754,6 @@ public class CardObjectManager : MonoBehaviour
         cardObjectHand.GravityStart();
 
         GameUtility.SetIsPushButton(true);
-
     }
     /// <summary>
     /// 謇区惆縺九ｉ繝励Ξ繧､貅門ｙ迥ｶ諷九∈縺ｮ遘ｻ蜍・
@@ -804,7 +770,6 @@ public class CardObjectManager : MonoBehaviour
 
         // 遘ｻ蜍・
         cardObjectHand.transform.position = moveVec;
-
     }
     /// <summary>
     /// 謇区惆縺九ｉ繝励Ξ繧､迥ｶ諷九∈縺ｮ遘ｻ蜍・
@@ -813,7 +778,6 @@ public class CardObjectManager : MonoBehaviour
     /// <param name="handCardRange"></param>
     private void CardMovePlay(CardObject cardObjectHand, float handRange, int counter)
     {
-
         float vec = (Vector3.Distance(_playPositionLeft.position, _playPositionRight.position) / (GetPlayCardCount() + 1)) * (counter + 1);
 
         // 遘ｻ蜍慕岼讓吝慍轤ｹ繧堤｢ｺ隱・
@@ -831,7 +795,6 @@ public class CardObjectManager : MonoBehaviour
             _cardObjectHands.GetCount(
                 hand =>
                 {
-
                     if (hand.GetStatus() != CardObject.status.play) return false;
                     if (hand.GetMoveTimeRata() < 1) return false;
                     return true;
@@ -851,7 +814,6 @@ public class CardObjectManager : MonoBehaviour
     /// </summary>
     private void IsSelectTrash()
     {
-
         // 繝励Ξ繧､繧定｡後▲縺溘き繝ｼ繝峨ｒ繝医Λ繝・す繝･縺ｫ遘ｻ陦・
         List<Card.Trump> hands = CardManager.instance.GetHand();
 
@@ -870,12 +832,10 @@ public class CardObjectManager : MonoBehaviour
         {
             if (hands[i].isSelect)
             {
-
                 hands.RemoveAt(i);
                 i--;
                 flag = true;
             }
-
         }
 
         if (!flag)
@@ -884,7 +844,6 @@ public class CardObjectManager : MonoBehaviour
         }
 
         CardManager.instance.SetHand(hands);
-
     }
 
     /// <summary>
@@ -893,7 +852,6 @@ public class CardObjectManager : MonoBehaviour
     /// <param name="cardObjectHand"></param>
     private void CardMoveDiscard(CardObject cardObjectHand)
     {
-
         // 遘ｻ蜍慕岼讓吝慍轤ｹ繧堤｢ｺ隱・
         Vector3 goalPos = _handTrash.position;
 
@@ -918,14 +876,12 @@ public class CardObjectManager : MonoBehaviour
 
         //繝ｩ繧ｦ繝ｳ繝峨・邨ゆｺ・ｺ門ｙ繧偵☆繧・
         RoundObserver.Instance.StartRoundEnd();
-
     }
     /// <summary>
     /// 譌｢縺ｫ陦ｨ縺ｫ縺ｪ縺｣縺ｦ縺・ｋ繧ｫ繝ｼ繝峨↓螟画峩繧貞刈縺医ｋ
     /// </summary>
     private void HandCardChengeTrump(CardObject cardObjectHand, int id)
     {
-
         // 逶ｮ讓呵ｧ貞ｺｦ繧定ｨｭ螳・
         Vector3 goal = _chengeCardID.Contains(id) ? _BACK_SIDE : _NORMALl_ANGLE;
 
@@ -946,20 +902,17 @@ public class CardObjectManager : MonoBehaviour
 
         if (!_chengeCardID.Contains(id) && cardObjectHand.GetStatus() != CardObject.status.hand)
         {
-
             cardObjectHand.SetStatus(CardObject.status.hand);
 
             CardPaint(_chengeCardTrump[0], id);
 
             _chengeCardTrump.RemoveAt(0);
-
         }
 
         if (targetID < 0) return;
 
         // 遒ｺ隱阪＠縺溽分蜿ｷ縺ｮ驟榊・繧帝勁螟・
         _chengeCardID.RemoveAt(targetID);
-
     }
 
     private float _time = 0;
@@ -972,7 +925,6 @@ public class CardObjectManager : MonoBehaviour
     /// <param name="ID"></param>
     private void HandCardActionTrump(CardObject cardObjectHand, int ID)
     {
-
         // 繧｢繧ｯ繧ｷ繝ｧ繝ｳ蠕・ｩ溘・荳ｭ縺ｧ荳逡ｪ闍･縺・が繝悶ず繧ｧ繧ｯ繝医・縺ｨ縺阪□縺鷹壹☆
         if (ID != _cardObjectHands.FindIndex(hand => hand.GetStatus() == CardObject.status.action)) return;
 
@@ -1009,7 +961,6 @@ public class CardObjectManager : MonoBehaviour
         if (_cardObjectHands.GetCount(hand => hand.GetStatus() == CardObject.status.action) > 0) return;
 
         JokerUtility.JokerPlayStart();
-
     }
 
     /// <summary>
@@ -1034,7 +985,6 @@ public class CardObjectManager : MonoBehaviour
         ScoreManager.instance.SetScoreViewTrans(_cardObjectHands[ID].gameObject.transform.position);
 
         ScoreManager.instance.SetScoreViewText(score);
-
     }
 
     /// <summary>
@@ -1042,7 +992,6 @@ public class CardObjectManager : MonoBehaviour
     /// </summary>
     public void CardPaint(Card.Trump cardData, GameObject gameObject)
     {
-
         MeshRenderer meshRenderer = gameObject.transform.GetChild(0).GetComponent<MeshRenderer>();
         Material[] materials = meshRenderer.materials;
         // 繝医Λ繝ｳ繝励・繧ｨ繝輔ぉ繧ｯ繝医・繝・Μ繧｢繝ｫ繧偵そ繝・ヨ
@@ -1135,7 +1084,6 @@ public class CardObjectManager : MonoBehaviour
         }
         // 菴輔ｂ霑斐○繧狗黄縺後↑縺・
         return null;
-
     }
 
     /// <summary>
@@ -1165,10 +1113,8 @@ public class CardObjectManager : MonoBehaviour
         {
             if (_cardObjectHands[i].GetStatus() != CardObject.status.play) continue;
             count++;
-
         }
         return count;
     }
-
 }
 

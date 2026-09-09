@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -68,7 +68,6 @@ public class BuffManager : MonoBehaviour
     public void Update()
     {
         _errorBuff?.UpData();
-
     }
     private void Initializ()
     {
@@ -85,7 +84,6 @@ public class BuffManager : MonoBehaviour
         cardMaterial = materialLists.cardBuff;
         trumpMaterial = materialLists.deckBuff;
         jokerMaterial = materialLists.jokerBuff;
-
     }
 
     /// <summary>
@@ -131,7 +129,6 @@ public class BuffManager : MonoBehaviour
 
         //デッキカードのバフを発動
         _trumpBuff.Play(trump.deckBuff);
-
     }
     public bool CheckPlayBuffCard(Card.cardBuff cardBuff)
     {
@@ -148,7 +145,6 @@ public class BuffManager : MonoBehaviour
         }
 
         return flag;
-
     }
     public bool CheckPlayBuffSeal(Card.sealBuff sealBuff)
     {
@@ -165,7 +161,6 @@ public class BuffManager : MonoBehaviour
         }
 
         return flag;
-
     }
 
     /// <summary>
@@ -195,7 +190,6 @@ public class BuffManager : MonoBehaviour
         }
 
         return flag;
-
     }
     /// <summary>
     /// 手札で発動するバフが存在するかどうかを判断
@@ -215,7 +209,6 @@ public class BuffManager : MonoBehaviour
         }
 
         return flag;
-
     }
     /// <summary>
     ///  カードのバフの関数自体を返す
@@ -224,7 +217,7 @@ public class BuffManager : MonoBehaviour
     /// <returns></returns>
     public System.Action GetActionPlayBuffDeck(Card.deckBuff deckBuff)
     {
-        return () => _trumpBuff.Play(deckBuff); ;
+        return () => _trumpBuff.Play(deckBuff);
     }
 
     /// <summary>
@@ -260,7 +253,6 @@ public class BuffManager : MonoBehaviour
 
         //デッキカードのバフを発動
         _trumpBuff.Hand(trump.deckBuff);
-
     }
     /// <summary>
     /// カードをディスカードした時に発動するバフ
@@ -276,7 +268,6 @@ public class BuffManager : MonoBehaviour
 
         //デッキカードのバフを発動
         _trumpBuff.Discard(trump.deckBuff);
-
     }
 
     /// <summary>
@@ -292,7 +283,6 @@ public class BuffManager : MonoBehaviour
 
         //デッキカードのバフを発動
         _trumpBuff.RoundEnd(trump.deckBuff);
-
     }
 
     public void PlayBuff(Card.cardBuff cardBuff)
@@ -301,7 +291,6 @@ public class BuffManager : MonoBehaviour
     }
     public void PlayBuff(Card.JokerBuff jokerbuff)
     {
-
         switch (jokerbuff)
         {
             case Card.JokerBuff.Sepia:
@@ -329,7 +318,6 @@ public class BuffManager : MonoBehaviour
 
                 break;
         }
-
     }
 
     public Material GetCardMaterial(int ID) { return cardMaterial[ID]; }

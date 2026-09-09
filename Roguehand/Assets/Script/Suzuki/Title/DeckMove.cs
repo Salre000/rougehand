@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -46,7 +46,6 @@ public class DeckMove : MonoBehaviour
         _deckMaxIndex = _decks.Count - 1;
         _deckIndex = _deckMaxIndex;
         DeckName();
-
     }
 
     // Update is called once per frame
@@ -69,7 +68,6 @@ public class DeckMove : MonoBehaviour
         TitleDeckUI.instance.SetName(selectIndex);
 
         VolumeManager.instance.PlaySystemSE();
-
     }
     private void RightFlag()
     {
@@ -83,7 +81,6 @@ public class DeckMove : MonoBehaviour
         DeckName();
         TitleDeckUI.instance.SetName(selectIndex);
         VolumeManager.instance.PlaySystemSE();
-
     }
 
     private void LeftLoopMove()
@@ -96,7 +93,6 @@ public class DeckMove : MonoBehaviour
         if (_tageIndex > _deckMaxIndex) _tageIndex = _reset;
         if ((_decks[_deckMaxIndex].localPosition - _tagePos[_tageIndex].localPosition).sqrMagnitude < _magnitude)
             _leftF = false;
-
     }
     private void RightLoopMove()
     {
@@ -108,7 +104,6 @@ public class DeckMove : MonoBehaviour
         if (_tageIndex < _reset) _tageIndex = _deckMaxIndex;
         if ((_decks[_deckMaxIndex].localPosition - _tagePos[_tageIndex].localPosition).sqrMagnitude < _magnitude)
             _rightF = false;
-
     }
 
     private void DeckName()

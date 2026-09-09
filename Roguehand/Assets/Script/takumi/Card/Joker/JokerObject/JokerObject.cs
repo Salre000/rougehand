@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Unity.VisualScripting;
@@ -6,7 +6,6 @@ using UnityEngine;
 using static JokerObjectManager;
 public class JokerObject : MonoBehaviour
 {
-
     /// <summary>
     /// ジョーカーの移動に使う移動量
     /// </summary>
@@ -89,7 +88,6 @@ public class JokerObject : MonoBehaviour
         SetAction();
 
         transform.GetChild(0).AddComponent<JokerObjectAnime>();
-
     }
 
     /// <summary>
@@ -97,7 +95,6 @@ public class JokerObject : MonoBehaviour
     /// </summary>
     public void PreparationPlay()
     {
-
         if (_base.Trun() > 0 && _base.baseScoreFlag) actions.Add(
             () =>
           {
@@ -129,7 +126,6 @@ public class JokerObject : MonoBehaviour
             CardBuff.target = gameObject;
             CardBuff.targetID = JokerObjectUtility.GetJokerIndex(this) + IDUtility.JOKER_ID;
             BuffUtility.PlayBuff(_base.GetCardBuff());
-
         });
         if (_base.GetJokerBuff().BuffAction()) actions.Add(() =>
         {
@@ -138,7 +134,6 @@ public class JokerObject : MonoBehaviour
 
             BuffUtility.PlayBuff(_base.GetJokerBuff());
         });
-
     }
 
     /// <summary>
@@ -163,7 +158,6 @@ public class JokerObject : MonoBehaviour
         LostAngle = transform.eulerAngles;
 
         _jokerPlayAction();
-
     }
 
     /// <summary>
@@ -181,7 +175,6 @@ public class JokerObject : MonoBehaviour
         _time += Time.deltaTime * GameConfig.GetGameSpeed() * 2.5f;
 
         transform.position = Vector3.Lerp(_lostpos, nextpos, _time);
-
     }
 
     /// <summary>
@@ -189,7 +182,6 @@ public class JokerObject : MonoBehaviour
     /// </summary>
     public void TrunEnd()
     {
-
         _isPlay = true;
         _base.TrunReset();
     }
@@ -264,7 +256,6 @@ public class JokerObject : MonoBehaviour
 
         if (_time > 1 && reta == 1)
         {
-
             //マテリアルを変更
             JokerUtility.SetMaterial(JokerObjectUtility.GetJokerIndex(this));
 
@@ -282,7 +273,6 @@ public class JokerObject : MonoBehaviour
 
     private void SetAction()
     {
-
         switch (_base.GetJokerObjectType())
         {
             case 0: _jokerPlayAction = JokerCardAction; break;
@@ -301,11 +291,9 @@ public class JokerObject : MonoBehaviour
     /// </summary>
     private void JokerCardAction()
     {
-
         if (!JokerAction()) return;
 
         _jokerActionProcess();
-
     }
 
     /// <summary>
@@ -313,7 +301,6 @@ public class JokerObject : MonoBehaviour
     /// </summary>
     private bool JokerAction()
     {
-
         _time += Time.deltaTime * GameConfig.GetGameSpeed() * 10;
 
         transform.eulerAngles = Vector3.Lerp(_lostAngle, new Vector3(0, 0, 45 * reta), _time);
@@ -329,12 +316,10 @@ public class JokerObject : MonoBehaviour
         if (!_isPlay || reta != -1) return false;
 
         return true;
-
     }
 
     private void NormalJokerActionProcess()
     {
-
         reta = 1;
         //プレイの瞬間のアクション
         //倍率に追加
@@ -347,7 +332,6 @@ public class JokerObject : MonoBehaviour
         JokerObjectUtility.NestJokerPlay(this);
         _status = JokerStatus.wait;
         _isPlay = false;
-
     }
     private void NeverAddJokerActionProcess()
     {
@@ -361,7 +345,6 @@ public class JokerObject : MonoBehaviour
         _jokerActionProcess = NormalJokerActionProcess;
 
         JokerObjectUtility.NextAction(this);
-
     }
 
     /// <summary>
@@ -372,8 +355,6 @@ public class JokerObject : MonoBehaviour
         //マウスポイント依存で座標を決定する
         Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z);
         transform.position = Camera.main.ScreenToWorldPoint(mousePos);
-
     }
-
 }
 

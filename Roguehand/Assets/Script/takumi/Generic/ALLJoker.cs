@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
@@ -23,7 +23,6 @@ public static class ALLJoker
         JokerBase jokerBase = null;
         switch (joker)
         {
-
             case _allJokerEnum._ConstellationUseNeverJoker: jokerBase = new ConstellationUseNeverJoker(); break;
             case _allJokerEnum._Seraph: jokerBase = new Seraph(); break;
             case _allJokerEnum._ItemUseNeverJoker: jokerBase = new ItemUseNeverJoker(); break;
@@ -40,5 +39,4 @@ public static class ALLJoker
 
         return jokerBase;
     }
-
 }
