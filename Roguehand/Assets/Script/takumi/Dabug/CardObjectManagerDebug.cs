@@ -1,11 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using UnityEngine;
 
 public class CardObjectManagerDebug : MonoBehaviour
 {
-
     Card.Trump trump1 = new Card.Trump();
     List<Card.Trump> ss = new List<Card.Trump>();
 
@@ -21,7 +20,6 @@ public class CardObjectManagerDebug : MonoBehaviour
         trump.sealBuff = Card.sealBuff.None;
 
         for (int i = 0; i < 8; i++) ss.Add(trump);
-
     }
 
     public void Update()
@@ -36,9 +34,7 @@ public class CardObjectManagerDebug : MonoBehaviour
             CardObjectUtility.HandToCard(ss);
 
             CardObjectUtility.StartHandMove();
-
         }
     }
-
 }
 

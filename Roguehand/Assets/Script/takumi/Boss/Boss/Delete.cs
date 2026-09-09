@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
@@ -12,12 +12,10 @@ public class Delete : BossBase
         handSize = CardManager.instance.GetHandSize();
 
         CardManager.instance.SetHandSize(handSizeLost);
-
     }
 
     public override void Update()
     {
-
     }
 
     public override void LateUpdate()
@@ -28,7 +26,6 @@ public class Delete : BossBase
     {
         base.End();
         CardManager.instance.SetHandSize(handSize);
-
     }
 }
 

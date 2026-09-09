@@ -1,10 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class JokerObjectUtility
 {
-
     public static JokerObjectManager instance{ private get; set; }
 
     public static void NestJokerPlay(JokerObject  jokerObject) { instance.NestJokerPlay(jokerObject); }
@@ -36,5 +35,4 @@ public static class JokerObjectUtility
     public static void JokerObjectALLAction(System.Func<JokerObject, JokerObject> funk) {instance.JokerObjectALLAction(funk);}
 
     public static void PaintJokerObject(JokerBase jokerBase,GameObject gameObject) { instance.GetJokerMaterials(jokerBase, gameObject);}
-
 }

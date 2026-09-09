@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class JokerObjectManager : MonoBehaviour
 {
-
     /// <summary>
     /// ジョーカーの状態
     /// </summary>
@@ -80,7 +79,6 @@ public class JokerObjectManager : MonoBehaviour
         JokerObjectUtility.instance = this;
         materialList = Resources.Load<MaterialstringList>("takumi/JokerMaterial");
         dommyMaterial= Resources.Load<Material>("takumi/BaseMaterial");
-
     }
 
     public void Update()
@@ -102,7 +100,6 @@ public class JokerObjectManager : MonoBehaviour
         TrunEnd();
         _lostStatus = _status;
         _status = JokerStatus.wait;
-
     }
 
     /// <summary>
@@ -110,10 +107,8 @@ public class JokerObjectManager : MonoBehaviour
     /// </summary>
     private void Play()
     {
-
         if (_status != JokerStatus.play) return;
         for (int i = 0; i < _jokerObjects.Count; i++) _jokerObjects[i].Play();
-
     }
 
     /// <summary>
@@ -126,7 +121,6 @@ public class JokerObjectManager : MonoBehaviour
         for (int i = 0; i < _jokerObjects.Count; i++) _jokerObjects[i].Action();
 
         if(_jokerObjects.Find(joker=> joker.CheckAction())==null)_status = JokerStatus.wait;
-
     }
 
     /// <summary>
@@ -148,7 +142,6 @@ public class JokerObjectManager : MonoBehaviour
 
         //手動の移動によって順番が入れ替わる関数
         CheckOrder();
-
     }
 
     /// <summary>
@@ -156,7 +149,6 @@ public class JokerObjectManager : MonoBehaviour
     /// </summary>
     private void ObjectMovePosShop()
     {
-
         //ジョーカー同士の距離を作成
         float renge = Vector3.Distance(_shopLeftPos.transform.position, _shopRightPos.transform.position) / (_jokerObjects.Count + 1);
 
@@ -168,7 +160,6 @@ public class JokerObjectManager : MonoBehaviour
         }
         //手動の移動によって順番が入れ替わる関数
         CheckOrder();
-
     }
 
     /// <summary>
@@ -181,7 +172,6 @@ public class JokerObjectManager : MonoBehaviour
         for (int i = 0; i < _jokerObjects.Count; i++) _jokerObjects[i].Action();
 
         if (_jokerObjects.Find(joker => joker.CheckAction()) == null) _status = JokerStatus.wait;
-
     }
 
     /// <summary>
@@ -190,7 +180,6 @@ public class JokerObjectManager : MonoBehaviour
     private void TrunEnd()
     {
         for (int i = 0; i < _jokerObjects.Count; i++) _jokerObjects[i].TrunEnd();
-
     }
 
     /// <summary>
@@ -210,7 +199,6 @@ public class JokerObjectManager : MonoBehaviour
         materials[(int)CardObjectManager.cardMaterialType.main] = materialCopy;
 
         meshRenderer.materials = materials;
-
     }
 
     /// <summary>
@@ -218,13 +206,12 @@ public class JokerObjectManager : MonoBehaviour
     /// </summary>
     private void CheckOrder()
     {
-
         if (!_isGrab) return;
 
         //ジョーカー同士の距離
         float renge = Vector3.Distance(LeftPos.transform.position, RightPos.transform.position) / (_jokerObjects.Count + 1);
 
-        float Cardrenge = (LeftPos.transform.position.x + renge * (_isGrabID + 1)) - _jokerObjects[_isGrabID].transform.position.x;
+        float Cardrenge = (LeftPos.transform.position.x + (renge * (_isGrabID + 1))) - _jokerObjects[_isGrabID].transform.position.x;
 
         //横方向への移動距離が小さかったら順番の変更を加えない
         if (Mathf.Abs(Cardrenge) + 30 < renge) return;
@@ -239,7 +226,6 @@ public class JokerObjectManager : MonoBehaviour
         JokerUtility.ChengeOrder(_isGrabID, _isGrabID + count);
 
         _isGrabID = _isGrabID + count;
-
     }
 
     private readonly Vector2 SHOP_UI_OFFSET = new Vector2(1, 0);
@@ -250,14 +236,11 @@ public class JokerObjectManager : MonoBehaviour
     /// <param name="jokerBase"></param>
     private void ShopExplamtion(GameObject gameObject,JokerBase jokerBase)
     {
-
         ExplanationManager.instance.AddExplanation(gameObject,jokerBase,jokerBase.JokerBuffs(), SHOP_UI_OFFSET);
-
     }
     private void ShopSale(GameObject gameObject,JokerBase jokerBase)
     {
         SaleUtility.SetSale(jokerBase, gameObject, jokerBase.GetSaleValue(), false);
-
     }
 
     public void JokerObjectALLAction(System.Func<JokerObject, JokerObject> funk) { _jokerObjects.GetAction(funk); }
@@ -279,7 +262,6 @@ public class JokerObjectManager : MonoBehaviour
 
         //ジョーカーをプレイ状態に変更する
         _jokerObjects[count].SetStatus(JokerStatus.play);
-
     }
 
     /// <summary>
@@ -295,7 +277,6 @@ public class JokerObjectManager : MonoBehaviour
         for (int i = 0; i < _jokerObjects.Count; i++) _jokerObjects[i].PreparationPlay();
         _lostStatus = _status;
         _status = JokerStatus.play;
-
     }
 
     /// <summary>
@@ -323,7 +304,6 @@ public class JokerObjectManager : MonoBehaviour
         _jokerObjects[_jokerObjects.Count - 1].transform.eulerAngles = Vector3.zero;
         PaintJoker(_jokerObjects[_jokerObjects.Count - 1].gameObject,
             materialList._material[_jokerObjects[_jokerObjects.Count - 1].GetJokerID() - 2001]);
-
     }
     public void AddDommyJoker(JokerBase jokerBase)
     {
@@ -350,26 +330,20 @@ public class JokerObjectManager : MonoBehaviour
 
                 GameObject domyy = dommyObject;
                 SaleObjectManager.instance.Remove(domyy);
-
             }
 
             );
-
     }
 
     public void DommyDestroy()
     {
-
         for(int i = 0; i < _domyyJokerObjects.Count; i++)
         {
-
             //ザ・エンドってね
             _domyyJokerObjects[i].THEEnd();
 
             _domyyJokerObjects.RemoveAt(i);
-
         }
-
     }
 
     /// <summary>
@@ -378,7 +352,6 @@ public class JokerObjectManager : MonoBehaviour
     /// <param name="ID"></param>
     public void RemoveJoker(int ID)
     {
-
         //ザ・エンドってね
         _jokerObjects[ID].THEEnd();
 
@@ -388,12 +361,10 @@ public class JokerObjectManager : MonoBehaviour
         //GrabChange(_isGrabID, false);
         _isGrab = false;
         _isGrabID = -1;
-
     }
     public void GetJokerMaterials(JokerBase jokerBase, GameObject gameObject)
     {
         PaintJoker(gameObject, materialList._material[jokerBase.GetID() - 2001]);
-
     }
     public GameObject GetIDObject(int ID) { return _jokerObjects[ID].gameObject; }
     public JokerObject GetIDJokerObject(int ID) { return _jokerObjects[ID]; }
@@ -415,7 +386,6 @@ public class JokerObjectManager : MonoBehaviour
         _isGrab = flag;
         _isGrabID = ID;
         _jokerObjects[ID].SetGrab(flag);
-
     }
 
     /// <summary>
@@ -475,18 +445,15 @@ public class JokerObjectManager : MonoBehaviour
 
         for(int i = count; i < _jokerObjects.Count; i++)
         {
-
             if (!_jokerObjects[i].GetAction()) continue;
             //ジョーカーをアクション状態に変更する
             _jokerObjects[i].SetStatus(JokerStatus.action);
 
             //ひとつだけ起動する
             return;
-
         }
         //ひとつもないとき
         _status = _lostStatus; return;
     }
-
 }
 

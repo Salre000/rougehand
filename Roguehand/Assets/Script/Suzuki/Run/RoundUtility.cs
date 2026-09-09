@@ -1,11 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
 public static class RoundUtility
 {
-
     private static StringBuilder _builder = new StringBuilder();
 
     /// <summary>
@@ -54,7 +53,7 @@ public static class RoundUtility
         // 清算ボタンの合計金表示
         int allReward = count + reward;
         _builder.Clear();
-        _builder.Append("$");
+        _builder.Append('$');
         _builder.Append(allReward);
         TextUIManager.instance.SetClearMoneyText(_builder.ToString());
 

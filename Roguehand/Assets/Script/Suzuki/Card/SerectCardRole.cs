@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -72,7 +72,6 @@ public class SerectCardRole : MonoBehaviour
         _builder.Append(name);
         // Textの変更
         instance.SetRoleText(_builder.ToString());
-
     }
 
     private void StringBuildScore()
@@ -131,8 +130,6 @@ public class SerectCardRole : MonoBehaviour
         _builder.Append(magnifi);
         // Textの変更
         instance.SetMagnificationText(_builder.ToString());
-
     }
-
 }
 

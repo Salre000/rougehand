@@ -1,9 +1,8 @@
-﻿using Unity.VisualScripting;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class JokerObjectAnime : MonoBehaviour
 {
-
     private Animator animator;
     private JokerObject jokerObject;
 
@@ -29,12 +28,10 @@ public class JokerObjectAnime : MonoBehaviour
 
             isFlag = true;
             return;
-
         }
 
         isFlag = true;
         animator.SetTrigger("out");
-
     }
 
     public void End()
@@ -42,8 +39,6 @@ public class JokerObjectAnime : MonoBehaviour
         //オブジェクトの削除時のアニメーション
         BreakUtility.StartBreak(transform.parent.gameObject);
         Destroy(transform.parent.gameObject);
-
     }
-
 }
 

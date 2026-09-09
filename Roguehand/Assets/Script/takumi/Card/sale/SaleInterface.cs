@@ -1,10 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static ScriptCountNumber;
 public interface SaleInterface
 {
-
     /// <summary>
     /// 売却額の描画する関数
     /// </summary>
@@ -14,14 +13,12 @@ public interface SaleInterface
         if (GUI.Button(new Rect(ButtonPos.x + 75, Screen.height - ButtonPos.y - 30, 70, 90),
             ("<size=25><color=#ffffff>売却\n$" + saleValue.ToString() + "</color></size>"), SaleUtility.GetStyle()))
         {
-
             action();
 
             //お金を増やす処理
             GameUtility.SetMyMoney(GameUtility.GetMyMoney() + saleValue);
 
             VolumeManager.instance.PlayMoneySE();
-
         }
     }
 
@@ -36,13 +33,12 @@ public interface SaleInterface
 
         if (!AddFlag())
         {
-
             NotAddButton(ButtonPos);
 
             return;
         }
 
-        if (GUI.Button(new Rect(ButtonPos.x - BUY_WIDHT /HALF, Screen.height - ButtonPos.y + 100, BUY_WIDHT, 60),
+        if (GUI.Button(new Rect(ButtonPos.x - (BUY_WIDHT /HALF), Screen.height - ButtonPos.y + 100, BUY_WIDHT, 60),
             ("<size=30><color=#ffffff>" + Extra.ErrorText("購入") + "</color></size>"), SaleUtility.GetStyle()))
         {
             // お金が足りているかどうかの判断
@@ -54,7 +50,6 @@ public interface SaleInterface
             action();
 
             VolumeManager.instance.PlayMoneyShop();
-
         }
     }
 

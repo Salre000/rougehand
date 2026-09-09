@@ -1,11 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class TrumpBuff
 {
-
     public static GameObject target;
     public static int targetID;
 
@@ -86,7 +85,6 @@ public class TrumpBuff
     /// </summary>
     public void Discard(Card.deckBuff deckBuff)
     {
-
         //対応したバフを記述
         switch (deckBuff)
         {
@@ -98,7 +96,6 @@ public class TrumpBuff
     /// </summary>
     public void Hand(Card.deckBuff deckBuff)
     {
-
         //対応したバフを記述
         switch (deckBuff)
         {
@@ -120,7 +117,6 @@ public class TrumpBuff
     /// <param name="deckBuff"></param>
     public void RoundEnd(Card.deckBuff deckBuff)
     {
-
         //対応したバフを記述
         switch (deckBuff)
         {
@@ -129,5 +125,4 @@ public class TrumpBuff
                 break;
         }
     }
-
 }

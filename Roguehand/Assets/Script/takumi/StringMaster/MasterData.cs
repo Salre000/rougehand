@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -24,7 +24,6 @@ public class MasterData : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
 
         Lood();
-
     }
 
     public void Update()
@@ -55,7 +54,6 @@ public class MasterData : MonoBehaviour
 
         for (int i = 0; i < textAsset.Length; i++)
         {
-
             //読み込んだテキストをString型にして格納
             StringReader reader = new StringReader(textAsset[i].text);
 
@@ -75,7 +73,6 @@ public class MasterData : MonoBehaviour
             csvDatas.Clear();
         }
         GetStringMaster(-1);
-
     }
 
     /// <summary>
@@ -97,7 +94,6 @@ public class MasterData : MonoBehaviour
         if (value == null) value = string.Empty;
 
         return value.ErrorText(backDoor);
-
     }
     public void SetStringMaster(int ID,string value)
     {
@@ -109,7 +105,6 @@ public class MasterData : MonoBehaviour
     }
     public int GetIntMaster(int ID)
     {
-
         string value = string.Empty;
         _masters.TryGetValue(ID, out value);
 
@@ -123,7 +118,6 @@ public class MasterData : MonoBehaviour
         {
             return -1;
         }
-
     }
 }
 

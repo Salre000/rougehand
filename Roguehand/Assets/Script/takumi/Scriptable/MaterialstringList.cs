@@ -1,4 +1,4 @@
-﻿
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -7,7 +7,6 @@ using UnityEngine;
 public class MaterialstringList : ScriptableObject
 {
     public List<Texture> _material = new List<Texture>();
-
 }
 
 

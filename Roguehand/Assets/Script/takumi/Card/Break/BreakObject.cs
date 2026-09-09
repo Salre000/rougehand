@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,13 +37,10 @@ public class BreakObject : MonoBehaviour
 
         for(int i = 0; i < transform.childCount; i++)
         {
-
             MeshRenderer meshRenderer=transform.GetChild(i).GetComponent<MeshRenderer>();
 
             meshRenderer.material = _material;
-
         }
-
     }
     public void OnEnable()
     {
@@ -54,7 +51,6 @@ public class BreakObject : MonoBehaviour
         _material.color = color;
 
         _animator.SetTrigger("Break");
-
     }
 
     // Update is called once per frame
@@ -77,7 +73,6 @@ public class BreakObject : MonoBehaviour
         color.a = 1f-(_time / MAX_TIME);
 
         _material.color = color;
-
     }
 }
 

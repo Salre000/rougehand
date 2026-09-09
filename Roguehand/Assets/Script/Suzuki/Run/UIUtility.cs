@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using Unity.VisualScripting;
@@ -14,12 +14,10 @@ public class UIUtility:MonoBehaviour
     {
         if (instance == null)
             instance=this;
-
     }
 
     public void Initialize()
     {
-
     }
 
     /// <summary>
@@ -34,7 +32,7 @@ public class UIUtility:MonoBehaviour
             reward = 0;
         for(int i = 0;i<reward;i++)
         {
-            dollStringBuilder.Append("$");
+            dollStringBuilder.Append('$');
         }
 
         return dollStringBuilder.ToString();

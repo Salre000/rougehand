@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,19 +26,15 @@ public class TrumpMaterialManager : MonoBehaviour
             _cardMaterial.Add(new List<Material>());
             for (int j = 0; j < 13; j++)
             {
-
                 Material materialCopy = new Material(_baseMaterial);
 
                 materialCopy.SetTexture("_MainTex", material[i][j]);
 
                 _cardMaterial[i].Add(materialCopy);
             }
-
         }
-
     }
 
     public Material GetMaterial(int suit,int number) { return _cardMaterial[suit][number-1];}
-
 }
 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,9 +19,7 @@ public class RoleObjectManager : DetailsBase
             RoleObject obj = GetRoleObject();
 
             obj.Show((RoleManager.Role)i);
-
         }
-
     }
     public override void Hide()
     {
@@ -32,9 +30,7 @@ public class RoleObjectManager : DetailsBase
             obj.gameObject.SetActive(false);
 
             obj.transform.SetParent(_pollParent.transform);
-
         }
-
     }
     public override void Initializ()
     {
@@ -47,9 +43,7 @@ public class RoleObjectManager : DetailsBase
             _roleObjectPool.Add(roleObject.GetComponent<RoleObject>());
 
             roleObject.SetActive(false);
-
         }
-
     }
 
     private RoleObject GetRoleObject()
@@ -64,11 +58,9 @@ public class RoleObjectManager : DetailsBase
             roleObject.transform.SetParent(_scrollObject.transform);
 
             return roleObject;
-
         }
 
         return null;
     }
-
 }
 

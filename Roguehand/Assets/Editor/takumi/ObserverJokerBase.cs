@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
@@ -19,7 +19,6 @@ public class ObserverJokerBase : AssetPostprocessor
             Debug.Log("ジョーカーの列挙体の生成開始");
 
             CreateCS(filePath + filePath2);
-
         }
     }
     static Encoding encoding;
@@ -57,25 +56,23 @@ public class ObserverJokerBase : AssetPostprocessor
             builder.AppendLine();
 
             builder.AppendFormat("_{0}", achievementsAll._enumName[i]);
-            builder.Append(",");
+            builder.Append(',');
             builder.AppendLine();
-
         }
 
         builder.Append("MAX");
         builder.AppendLine();
 
-        builder.Append("}");
+        builder.Append('}');
 
         builder.AppendLine();
 
-        builder.Append("}");
+        builder.Append('}');
 
         sw.Write(builder.ToString());
 
         sw.Close();
         Debug.Log("ジョーカーの列挙体の生成完了");
     }
-
 }
 

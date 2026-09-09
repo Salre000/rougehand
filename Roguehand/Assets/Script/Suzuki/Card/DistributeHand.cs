@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -30,7 +30,6 @@ public class DistributeHand : MonoBehaviour
         RoundObserver.Instance.AddRoundEndAction(
             () =>
             {
-
                 //ショップに入っていたら
                 if (GameUtility.IsRoundResult())
                 {
@@ -41,14 +40,12 @@ public class DistributeHand : MonoBehaviour
 
                 //ドローを可能にする
                 handDrawFlag = false;
-
             });
 
         //ラウンド開始時のドローの処理
         RoundObserver.Instance.AddRoundStartAction(
             () => { handDrawFlag = false;}
             );
-
     }
 
     // Update is called once per frame
@@ -66,7 +63,6 @@ public class DistributeHand : MonoBehaviour
     // ランダムで配ります
     private void Distribute(int drawCount)
     {
-
         List<Card.Trump> dommyHand=new List<Card.Trump>();
         hand= CardManager.instance.GetHand();
         deck = CardManager.instance.GetDeck();
@@ -80,7 +76,6 @@ public class DistributeHand : MonoBehaviour
         // ハンド分繰り返す
         for (int i = 0; i < drawCount; i++)
         {
-
             // 一回繰り返すごとにランダムで出た数値を取り除いて手札に渡す
             index = Random.Range(0, dammyDeckArray.Count);
 
@@ -110,18 +105,15 @@ public class DistributeHand : MonoBehaviour
             dommyHand.Add(deck[dammyDeckArray[index]]);
             // 一度出た場所の数値は出ないようにする
             dammyDeckArray.RemoveAt(index);
-
         }
 
         // デッキの中に使用可能なカードが一枚もない場合
         if (dommyHand.Count <= 0)
         {
-
             // ハンドの内部数値をゼロにする事で
             // タイトル画面にとばしている
             GameUtility.SetHandCount(0);
             ResultUIManager.Instance.Active("敗北");
-
         }
 
         CardManager.instance.SetHand(hand);
@@ -131,7 +123,6 @@ public class DistributeHand : MonoBehaviour
 
         // ソート
         SortHand.instance.OnSortNumberButton();
-
     }
 
     /// <summary>
@@ -155,7 +146,6 @@ public class DistributeHand : MonoBehaviour
             //else trump.number = Card.number.ace;
             trump.isFeice = true;
             hand.Add(trump);
-
         }
 
         Card.Trump dommy = new Trump();
@@ -172,7 +162,6 @@ public class DistributeHand : MonoBehaviour
         CardObjectUtility.HandToCard(hand);
         CardManager.instance.SetHand(hand);
         CardObjectUtility.StartHandMove();
-
     }
 
     public void SetHandDrawFlag(bool flag) { handDrawFlag=flag; }

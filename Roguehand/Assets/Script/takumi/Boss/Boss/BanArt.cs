@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -8,25 +8,21 @@ using Random = UnityEngine.Random;
 
 public class BanArt : BossBase
 {
-
     bool OneFlag = false;
 
     Card.suit suit;
 
     public override void Initializ()
     {
-
         suit = (Card.suit)Random.Range(0, (int)Card.suit.max);
 
         TextUIManager.instance.SetRoundNameText(GetBossName());
 
         TextUIManager.instance.SetRoundExceptionText(GetBossException()+MasterData.instance.GetStringMaster((int)suit)+")");
-
     }
 
     public override void Update()
     {
-
     }
 
     public override void LateUpdate()
@@ -47,17 +43,14 @@ public class BanArt : BossBase
             if (indexs.FindIndex(index=>index==i)<0) continue;
 
             indexs.Remove(i);
-
         }
 
         RoleManager.instance.SetIndex(indexs);
-
     }
 
     public override void End()
     {
         base.End();
     }
-
 }
 

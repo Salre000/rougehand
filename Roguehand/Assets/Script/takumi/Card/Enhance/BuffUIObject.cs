@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -16,11 +16,9 @@ public class BuffUIObject : MonoBehaviour
         parent = transform.parent.gameObject;
 
         TypeJoker();
-
     }
     private void OnDisable()
     {
-
         return;
         for(int i=0;i< buffUI.Count;i++)
             Destroy(buffUI[i]);
@@ -30,7 +28,6 @@ public class BuffUIObject : MonoBehaviour
 
     private void TypeJoker()
     {
-
         GameObject Related = ExplanationManager.instance.RelatedObject(parent);
         if (Related == null) return;
 
@@ -50,18 +47,14 @@ public class BuffUIObject : MonoBehaviour
             }
             if (joker.GetJokerBuff() != Card.JokerBuff.None)
             {
-
                 buffUI.Add(CreateUI(-1,-1));
             }
 
             for(int i = 0; i < buffUI.Count; i++)
             {
                 buffUI[i].transform.parent = transform;
-
             }
-
         });
-
     }
 
     private GameObject CreateUI(int ID, int ID2)
@@ -71,8 +64,6 @@ public class BuffUIObject : MonoBehaviour
         game.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = MasterData.instance.GetStringMaster(ID);
         game.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = MasterData.instance.GetStringMaster(ID2);
         return game;
-
     }
-
 }
 

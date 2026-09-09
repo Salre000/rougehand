@@ -1,10 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class GameUtility
 {
-
     private const int _MAX_REWARD = 13;
     // ベースになるハンド回数
     private static int _baseHandCount = 5;
@@ -96,6 +95,5 @@ public static class GameUtility
     public static void SetIsRoundResult(bool value) { _isRoundResult = value; }
     // ラウンドクリアの状態を取得
     public static bool IsRoundResult() {  return _isRoundResult; }
-
 }
 

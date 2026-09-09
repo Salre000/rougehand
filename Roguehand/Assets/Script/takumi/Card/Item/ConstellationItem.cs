@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -55,18 +55,15 @@ public class ConstellationItem : ItemBase
         {
             if (i<(int)RoleManager.Role.royalFlush&& roleCount[i]<=0) continue;
             constellationIDList.Add(i);
-
         }
 
         _constellationID = constellationIDList[Random.Range(0, constellationIDList.Count)];
 
         SetItemID(_constellationID);
-
     }
 
     public override void Use()
     {
-
         Debug.Log("星座カードが使用されたよ");
 
         VolumeManager.instance.PlayLevelUpSE();
@@ -76,7 +73,6 @@ public class ConstellationItem : ItemBase
 
         //星座カードを使用した事をJokerに知らせる
         JokerUtility.SetTraget(JokerActionUseEnum.JokerActionTarget.constellation);
-
     }
     // 星座カードの文字のID
     private readonly int ConstellationID = 1901;
@@ -84,6 +80,5 @@ public class ConstellationItem : ItemBase
     {
         return MasterData.instance.GetStringMaster(ConstellationID);
     }
-
 }
 

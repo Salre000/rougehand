@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,7 +10,6 @@ public class UISaleValueObject : MonoBehaviour
     public void SetValue(float value)
     {
         _valueText.text = "$"+value.ToString();
-
     }
 }
 

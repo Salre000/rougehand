@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,7 +25,6 @@ public class SortHand : MonoBehaviour
     /// </summary>
     private void OnSortSuitButton()
     {
-
         List <Card.Trump> nowHand=CardManager.instance.GetHand();
 
         List <Card.Trump> nextHand=CardManager.instance.GetHand();
@@ -37,11 +36,9 @@ public class SortHand : MonoBehaviour
 
         // ソート後のオブジェクトの並びに変更
         CardObjectUtility.ObjectSort(nowHand, nextHand);
-
     }
     public void OnSortNumberButton()
     {
-
         List <Card.Trump> nowHand=CardManager.instance.GetHand();
 
         List <Card.Trump> nextHand=CardManager.instance.GetHand();
@@ -53,8 +50,6 @@ public class SortHand : MonoBehaviour
 
         // ソート後のオブジェクトの並びに変更
         CardObjectUtility.ObjectSort(nowHand, nextHand);
-
     }
-
 }
 

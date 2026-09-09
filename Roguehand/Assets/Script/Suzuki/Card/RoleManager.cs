@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -73,7 +73,6 @@ public class RoleManager : MonoBehaviour
         else if (TwoPair(cards) != Role.None) return Role.twoPair;
         else if (OnePair(cards) != Role.None) return Role.onePair;
         else return HighCard(cards);
-
     }
 
     #region 役
@@ -270,7 +269,6 @@ public class RoleManager : MonoBehaviour
                 }
                 else
                     checkList3.Add(cards[j]);
-
             }
             if (checkList2.Count >= 2) break;
         }
@@ -279,7 +277,6 @@ public class RoleManager : MonoBehaviour
 
         if (checkList2.Count == 3)
         {
-
             if (JastNumberCheck(checkList2, 3) == null || JastNumberCheck(checkList3, 2) == null)
                 return Role.None;
         }
@@ -432,7 +429,6 @@ public class RoleManager : MonoBehaviour
 
             // 欲しい数揃っているならここで返す
             if (jastNum.Count >= jastSuitCount) return jastNum;
-
         }
         return null;
     }
@@ -469,7 +465,6 @@ public class RoleManager : MonoBehaviour
                 return null;
         }
         return null;
-
     }
 
     /// <summary>
@@ -533,7 +528,6 @@ public class RoleManager : MonoBehaviour
         jastNum.Clear();
         for (int i = 0; i < cards.Count; i++)
         {
-
             // 最後の1枚を入れる
             if (cards.Count - 1 == i)
             {
@@ -637,7 +631,7 @@ public class RoleManager : MonoBehaviour
     // 役のレベルを返します
     public List<int> GetRoleLevels() { return _roleLevelList; }
     // 引数に対応した役のレベルを上昇させます
-    public void AddRoleLevel(Role role) { _roleLevelList[(int)role]++; ; }
+    public void AddRoleLevel(Role role) { _roleLevelList[(int)role]++; }
     // どの役が何回プレイされたかを返す
     public List<int> GetRolePlayCountList() { return _rolePlayCountList; }
     // 役を指定してそのプレイ回数を追加する

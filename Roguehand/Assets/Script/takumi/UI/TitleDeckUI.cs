@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -20,8 +20,6 @@ public class TitleDeckUI : MonoBehaviour
     public void SetName(int ID)
     {
         deckName.text = deckNamses._expansion[ID];
-
     }
-
 }
 

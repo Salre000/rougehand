@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -27,6 +27,5 @@ public class ExplanationObject : MonoBehaviour
     public TextMeshProUGUI GetBuffName(int ID) {  return _buffTextNameMini[ID]; }
 
     public GameObject GetBuffParent() { return buffParent; }
-
 }
 

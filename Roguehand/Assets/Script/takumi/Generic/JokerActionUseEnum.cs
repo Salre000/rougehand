@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,7 +30,6 @@ public static class JokerActionUseEnum
         role,
 
         max
-
     }
 
     public static readonly string[] JokerActionTargetExplanation = new string[(int)JokerActionTarget.max+1]
@@ -41,7 +40,6 @@ public static class JokerActionUseEnum
         "売却の使用時",
         "役の使用時",
         "未定",
-
     };
 
     /// <summary>
@@ -59,7 +57,6 @@ public static class JokerActionUseEnum
         /// </summary>
         Multiplication,
         max
-
     }
 
     /// <summary>
@@ -83,7 +80,6 @@ public static class JokerActionUseEnum
         never,
 
         max
-
     }
     public static readonly string[] JokerActionTimingExplanation = new string[(int)Timing.max + 1]
 {
@@ -91,7 +87,6 @@ public static class JokerActionUseEnum
         "条件が満たされた瞬間",
         "今後ずっと",
         "未定"
-
 };
 
     /// <summary>
@@ -104,6 +99,5 @@ public static class JokerActionUseEnum
         Rare,
         Legendary,
     }
-
 }
 

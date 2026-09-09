@@ -1,10 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemObject : MonoBehaviour
 {
-
     private Vector3 _lostPos= Vector3.zero;
 
     private readonly float EPSILON = 0.1f;
@@ -18,7 +17,6 @@ public class ItemObject : MonoBehaviour
 
     public void MovePos(Vector3 goal)
     {
-
         if (_isGrab)
         {
             //マウスポイント依存で座標を決定する
@@ -32,12 +30,10 @@ public class ItemObject : MonoBehaviour
 
         _time += Time.deltaTime;
         transform.position = Vector3.Lerp(_lostPos, goal, _time);
-
     }
 
     public void ResetTime() {_time = 0; _lostPos = transform.position; }
 
     public void SetGrab(bool flag) {  _isGrab = flag; _lostPos = transform.position; }
-
 }
 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class BossManager : MonoBehaviour
 {
-
     [SerializeField] Image bossIcon;
 
     private List<BossBase> bossBases = new List<BossBase>();
@@ -67,7 +66,6 @@ public class BossManager : MonoBehaviour
         SetBossIcon(id);
 
         bossBases.Add(bossBase);
-
     }
 
     public void CreateBoss(BossBase bossBase)
@@ -80,12 +78,10 @@ public class BossManager : MonoBehaviour
     {
         CreateBoss(Random.Range(1, 6))
             ;
-
     }
 
     public BossBase GetBossBase()
     {
-
         if(bossBases.Count<1)return null;
         return bossBases[0];
     }
@@ -101,6 +97,5 @@ public class BossManager : MonoBehaviour
         bossIcon.sprite = null;
         bossIcon.gameObject.SetActive(false);
     }
-
 }
 

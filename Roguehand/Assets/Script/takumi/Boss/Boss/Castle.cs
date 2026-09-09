@@ -1,11 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
 
 public class Castle : BossBase
 {
-
     private readonly float rate = 1.5f;
     float MaxScore = 0;
     public override void Initializ()
@@ -22,7 +21,6 @@ public class Castle : BossBase
 
     public override void Update()
     {
-
     }
 
     public override void LateUpdate()
@@ -33,6 +31,5 @@ public class Castle : BossBase
     {
         base.End();
     }
-
 }
 

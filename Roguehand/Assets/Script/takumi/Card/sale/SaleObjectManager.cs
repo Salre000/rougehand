@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -169,7 +169,6 @@ public class SaleObjectManager : MonoBehaviour
             Destroy(dommyObject);
 
             i--;
-
         }
         SaleUtility.Claer();
 
@@ -184,12 +183,10 @@ public class SaleObjectManager : MonoBehaviour
         oneFlag = true;
 
         CreateRondom();
-
     }
 
     private void ReroolSet()
     {
-
         _reroolText.text = nowRerool.ToString();
     }
 
@@ -234,12 +231,10 @@ public class SaleObjectManager : MonoBehaviour
 
                     break;
             }
-
         }
 
         // 位置を修正
         SetShopObjectPos();
-
     }
     public void CreateShop(int count = 2)
     {
@@ -265,12 +260,10 @@ public class SaleObjectManager : MonoBehaviour
 
                     break;
             }
-
         }
 
         // 位置を修正
         SetShopObjectPos();
-
     }
 
     public void CreateItem(int ID = -1)
@@ -278,7 +271,6 @@ public class SaleObjectManager : MonoBehaviour
         if (ID < 0) ID = Random.Range(0, (int)ALLItem.ALLItemEnum._MAX);
 
         ItemUtility.ShopItem(() => ALLItem.GetItem((ALLItem.ALLItemEnum)ID));
-
     }
 
     public void CreateJoker(int ID = -1)
@@ -286,7 +278,6 @@ public class SaleObjectManager : MonoBehaviour
         if (ID < 0) ID = Random.Range(0, (int)ALLJoker._allJokerEnum.MAX);
 
         JokerUtility.ShopJoker(() => ALLJoker.GetJoker((ALLJoker._allJokerEnum)ID));
-
     }
 
     public void AddProducts(GameObject product, System.Action action,System.Action Eaction, System.Action buy, bool isPack = false)
@@ -325,7 +316,6 @@ public class SaleObjectManager : MonoBehaviour
             if (Vector3.Distance(product.transform.position, gameObject.transform.position) < EPSILON) index = ID;
             ID++;
             return product;
-
         });
 
         if (index < 0) return;
@@ -348,7 +338,6 @@ public class SaleObjectManager : MonoBehaviour
             i++;
 
             return value;
-
         });
     }
 
@@ -357,7 +346,6 @@ public class SaleObjectManager : MonoBehaviour
     public void SetSale(int index)
     {
         _productsSaleShow[index]();
-
     }
     public void Explantion(int index)
     {
@@ -402,9 +390,7 @@ public class SaleObjectManager : MonoBehaviour
             Destroy(gameObject);
 
             i--;
-
         }
-
     }
 
     public System.Func<int> AddDynamicAction(System.Action action)
@@ -431,7 +417,6 @@ public class SaleObjectManager : MonoBehaviour
 
         JokerObjectUtility.JokerObjectALLAction(joker => { joker.gameObject.SetActive(!_isPackMode); return joker; });
         ItemUtility.ItemALLAction(item => { item.gameObject.SetActive(!_isPackMode); return item; });
-
     }
 
     public void SetPackSelectCount(int count) { _packSelectCount = count; }
@@ -442,6 +427,5 @@ public class SaleObjectManager : MonoBehaviour
 
         _packSelectCount--;
     }
-
 }
 
