@@ -1,0 +1,36 @@
+name: SonarQube Cloud Analysis
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Install SonarScanner
+        run: dotnet tool install --global dotnet-sonarscanner
+
+      - name: Begin analysis
+        run: dotnet-sonarscanner begin /k:"Salre000_rougehand" /o:"salre000" /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+
+      - name: Build
+        run: MSBuild.exe Roguehand.sln /t:Rebuild
+
+      - name: End analysis
+        run: dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
