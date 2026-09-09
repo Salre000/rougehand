@@ -16,7 +16,6 @@ public class BuffUIObject : MonoBehaviour
         parent = transform.parent.gameObject;
 
         TypeJoker();
-
     }
     private void OnDisable()
     {
@@ -57,11 +56,9 @@ public class BuffUIObject : MonoBehaviour
             for(int i = 0; i < buffUI.Count; i++)
             {
                 buffUI[i].transform.parent = transform;
-
             }
 
         });
-
     }
 
     private GameObject CreateUI(int ID, int ID2)
@@ -71,8 +68,6 @@ public class BuffUIObject : MonoBehaviour
         game.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = MasterData.instance.GetStringMaster(ID);
         game.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = MasterData.instance.GetStringMaster(ID2);
         return game;
-
     }
-
 }
 

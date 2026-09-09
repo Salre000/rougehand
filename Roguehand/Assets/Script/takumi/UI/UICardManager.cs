@@ -47,9 +47,7 @@ public class UICardManager : MonoBehaviour
 
             angle.z =HALF_ROTATION-( Mathf.Atan2(vec.x,vec.y)*Mathf.Rad2Deg)*ALTERNATIVE;
             rectTransform.eulerAngles = angle;
-
         }
-
     }
 }
 

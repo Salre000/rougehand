@@ -34,12 +34,10 @@ public class Equality : BossBase
         {
             ScoreMaster.instance.SetScore(i + IDUtility.SCORE_ID,equalityScore);
         }
-
     }
 
     public override void Update()
     {
-
     }
 
     public override void LateUpdate()
@@ -54,7 +52,6 @@ public class Equality : BossBase
         {
             ScoreMaster.instance.SetScore(i + IDUtility.SCORE_ID, BaseScores[i]);
         }
-
     }
 }
 

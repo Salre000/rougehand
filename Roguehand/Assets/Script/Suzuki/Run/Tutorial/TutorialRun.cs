@@ -109,7 +109,6 @@ public class TutorialRun : MonoBehaviour
             _clickCome.SetActive(false);
             Asist();
         }
-
     }
 
     void Asist()

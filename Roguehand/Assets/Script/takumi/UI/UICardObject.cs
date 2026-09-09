@@ -21,7 +21,6 @@ public class UICardObject : MonoBehaviour
         if (seal != null){ _seal.material = seal; _seal.color = Color.white; };
 
         _color.color = _nowColor;
-
     }
 
     public void ResetImage()
@@ -30,10 +29,8 @@ public class UICardObject : MonoBehaviour
         _effect.color = INITIALIZ_COLOR;
         _seal.color = INITIALIZ_COLOR;
         _color.color = INITIALIZ_COLOR;
-
     }
 
     public void SetNowColor(Color color) { _nowColor = color; }
-
 }
 

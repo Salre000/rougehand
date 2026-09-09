@@ -47,7 +47,6 @@ public class BreakManager : MonoBehaviour
         breakObject.transform.parent = transform;
 
         VolumeManager.instance.PlayBreckSE();
-
     }
 
     private GameObject GetObject()
@@ -59,11 +58,8 @@ public class BreakManager : MonoBehaviour
             _gameObjects[i].SetActive(true);
 
             return _gameObjects[i];
-
         }
         return null;
-
     }
-
 }
 

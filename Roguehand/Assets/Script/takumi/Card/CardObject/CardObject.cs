@@ -71,7 +71,6 @@ public class CardObject : MonoBehaviour
         _rigidbody.isKinematic = true;
 
         tag = collision.transform.tag;
-
     }
     public void Awake()
     {
@@ -81,7 +80,6 @@ public class CardObject : MonoBehaviour
     public void initialize()
     {
         _rigidbody = GetComponent<Rigidbody>();
-
     }
 
     /// <summary>
@@ -92,7 +90,6 @@ public class CardObject : MonoBehaviour
         tag = "Untagged";
         _rigidbody.useGravity = true;
         _rigidbody.isKinematic = false;
-
     }
 
     /// <summary>
@@ -106,7 +103,6 @@ public class CardObject : MonoBehaviour
         _isGrab = false;
         // 繝励・繝ｫ縺ｧ菴ｿ縺・屓縺励◆髫帙∝燕蝗槫・縺ｮ譛ｪ豸亥喧繧｢繧ｯ繧ｷ繝ｧ繝ｳ縺梧ｮ九ｉ縺ｪ縺・ｈ縺・↓縺吶ｋ
         actions.Clear();
-
     }
 
     public void GetCheckBuff(Card.Trump trump,System.Action<int> action,int id)
@@ -148,7 +144,6 @@ public class CardObject : MonoBehaviour
         actions[0]();
 
         actions.RemoveAt(0);
-
     }
 
     public void SetStatus(status status) { _lostStatus = _status; _status = status; }
@@ -217,8 +212,6 @@ public class CardObject : MonoBehaviour
             float score = (int)number;
             if (score <= 1 || 11 < score) score = 11;
         };
-
     }
-
 }
 

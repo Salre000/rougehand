@@ -16,7 +16,6 @@ public class RandomRole : JokerBase
     public override void RoundStart()
     {
         _role = (RoleManager.Role)Random.Range(0, (int)RoleManager.Role.highCard);
-
     }
     public override void UpData()
     {
@@ -24,7 +23,6 @@ public class RandomRole : JokerBase
         if (JokerUtility.GetTargetRole() != _role) return;
 
         value = 12;
-
     }
 
     public override string GetExplanation()
@@ -50,6 +48,5 @@ public class RandomRole : JokerBase
     {
         return value;
     }
-
 }
 

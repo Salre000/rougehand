@@ -9,13 +9,11 @@ public class MoneyJoker : JokerBase
     {
 
         baseScoreFlag = true;
-
     }
     public override JokerActionUseEnum.JokerRarity GetRarity() { return JokerActionUseEnum.JokerRarity.Rare; }
     public override float Trun()
     {
         return GameUtility.GetMyMoney();
-
     }
     public override string GetExplanation2()
     {

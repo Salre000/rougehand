@@ -16,6 +16,5 @@ public static class IDUtility
 
     public const int PACK_ID = 10000;
     public const int BOSS_ID = 11000;
-
 }
 

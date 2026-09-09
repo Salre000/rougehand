@@ -72,7 +72,6 @@ public class GrabManager : MonoBehaviour
         MouseOver();
         Grab();
         Separate();
-
     }
 
     /// <summary>
@@ -91,9 +90,7 @@ public class GrabManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             GetObjectType(hit.transform.gameObject);
-
         }
-
     }
 
     GameObject mouseOverObject;
@@ -145,7 +142,6 @@ public class GrabManager : MonoBehaviour
                                 continuationAction = null;
                                 ExplanationManager.instance.Remove();
                             }
-
                         }
                         else
                         {
@@ -159,12 +155,10 @@ public class GrabManager : MonoBehaviour
                 case status.None:
 
                     break;
-
             }
 
             _status = status.None;
             _grabID = -1;
-
         }
         else
         {
@@ -191,7 +185,6 @@ public class GrabManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             SetGrabID(hit.transform.gameObject);
-
         }
 
         if (_grabID < 0) _status = status.None;
@@ -209,7 +202,6 @@ public class GrabManager : MonoBehaviour
             case status.Item:
                 ItemUtility.GrabChange(_grabID, false);
                 break;
-
         }
 
         if (_time < 1)
@@ -230,15 +222,12 @@ public class GrabManager : MonoBehaviour
                 case status.Sale:
                     SaleObjectManager.instance.SetSale(_grabID);
                     break;
-
             }
-
         }
         _time = 0;
         _status = status.None;
 
         _grabID = -1;
-
     }
     /// <summary>
     /// rayの対象のオブジェクトの種類を判別
@@ -274,9 +263,7 @@ public class GrabManager : MonoBehaviour
             case status.None:
 
                 break;
-
         }
-
     }
 
     private void SetGrabID(GameObject gameObject)
@@ -321,5 +308,4 @@ public class GrabManager : MonoBehaviour
 
     public void SetGrabFlag(bool flag) { grabFlag = flag; }
     public bool GetGrabFlag() { return grabFlag; }
-
 }

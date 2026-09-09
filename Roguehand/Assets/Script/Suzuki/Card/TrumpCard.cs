@@ -69,6 +69,5 @@ public class TrumpCard
         }
         CardManager.instance.SetDeck(deck);
     }
-
 }
 

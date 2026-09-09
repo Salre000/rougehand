@@ -23,7 +23,6 @@ public class CreateJoker : EditorWindow
 
         stringList = Resources.Load<StringList>(ObserverJokerBase.filePath2);
         This.Show();
-
     }
 
     private static JokerListObject jolerListObject;
@@ -153,7 +152,6 @@ public class CreateJoker : EditorWindow
             case JokerBaseEnum.JokerEnum.MAX:
                 break;
         }
-
     }
     static void CreateCS()
     {
@@ -190,7 +188,6 @@ public class CreateJoker : EditorWindow
             builder.Append("    public override bool GetAddType() {return false; ");
             builder.Append("}");
             builder.AppendLine();
-
         }
 
         switch (jokerEnum)
@@ -214,7 +211,6 @@ public class CreateJoker : EditorWindow
         sw.Write(builder.ToString());
 
         sw.Close();
-
     }
     static void CreateAnyDoneWhen(ref StringBuilder builder)
     {
@@ -278,7 +274,6 @@ public class CreateJoker : EditorWindow
 
                 break;
         }
-
     }
     static void CreateProbabilityDestruction(ref StringBuilder builder)
     {
@@ -304,7 +299,6 @@ public class CreateJoker : EditorWindow
         builder.Append("}");
 
         builder.Append("}");
-
     }
 
     static void CreateAddClass()
@@ -347,7 +341,6 @@ public class CreateJoker : EditorWindow
         {
             builder.AppendLine();
             builder.AppendFormat("_{0},", jolerListObject._className[i]);
-
         }
 
         builder.AppendLine();
@@ -368,7 +361,6 @@ public class CreateJoker : EditorWindow
         {
             builder.AppendLine();
             builder.AppendFormat("            case _allJokerEnum._{0}:jokerBase= new {0}();break;", jolerListObject._className[i]);
-
         }
         builder.AppendLine();
         builder.Append("}");
@@ -386,8 +378,6 @@ public class CreateJoker : EditorWindow
         sw.Write(builder.ToString());
 
         sw.Close();
-
     }
-
 }
 

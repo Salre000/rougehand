@@ -31,7 +31,6 @@ public class RoundObserver : MonoBehaviour
 
             _roundEnd = false;
         }
-
     }
 
     /// <summary>
@@ -47,6 +46,5 @@ public class RoundObserver : MonoBehaviour
     public void AddRoundStartAction(System.Action action) {  _roundStartActions.Add(action); }
 
     public void RoundStartActions() { for (int i = 0; i < _roundStartActions.Count; i++) _roundStartActions[i](); }
-
 }
 

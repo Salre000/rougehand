@@ -33,12 +33,9 @@ public class TrumpMaterialManager : MonoBehaviour
 
                 _cardMaterial[i].Add(materialCopy);
             }
-
         }
-
     }
 
     public Material GetMaterial(int suit,int number) { return _cardMaterial[suit][number-1];}
-
 }
 

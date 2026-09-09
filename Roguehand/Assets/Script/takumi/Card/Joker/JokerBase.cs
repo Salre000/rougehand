@@ -124,7 +124,6 @@ public class JokerBase : SaleInterface, ExplanationInterface
     public virtual string GetTypes()
     {
         return GetRarity().GetJokerRarityNema();
-
     }
 
     public virtual string GetExplanation2()
@@ -142,7 +141,6 @@ public class JokerBase : SaleInterface, ExplanationInterface
 
                     };
         return strings;
-
     }
 
     bool SaleInterface.AddFlag()
@@ -158,10 +156,7 @@ public class JokerBase : SaleInterface, ExplanationInterface
         if (GUI.Button(new Rect(ButtonPos.x - BUY_WIDHT / HALF, Screen.height - ButtonPos.y + 100, BUY_WIDHT, 60),
             ("<size=20><color=#ffffff>" + Extra.ErrorText("ジョーカーの枠がいっぱい") + "</color></size>"), SaleUtility.GetStyle()))
         {
-
         }
-
     }
-
 }
 

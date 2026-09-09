@@ -44,7 +44,6 @@ public class PlayManager : MonoBehaviour
         ScoreView();
         CheckHandCount();
         CheckDiscardCount();
-
     }
 
     private void ScoreView()
@@ -84,7 +83,6 @@ public class PlayManager : MonoBehaviour
         // スコアが目標に達しているか確認
         ScoreManager.instance.RoundCheck();
         _isShack = false;
-
     }
 
     private void CheckHandCount()

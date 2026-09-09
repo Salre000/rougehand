@@ -89,7 +89,6 @@ public class JokerObject : MonoBehaviour
         SetAction();
 
         transform.GetChild(0).AddComponent<JokerObjectAnime>();
-
     }
 
     /// <summary>
@@ -138,7 +137,6 @@ public class JokerObject : MonoBehaviour
 
             BuffUtility.PlayBuff(_base.GetJokerBuff());
         });
-
     }
 
     /// <summary>
@@ -163,7 +161,6 @@ public class JokerObject : MonoBehaviour
         LostAngle = transform.eulerAngles;
 
         _jokerPlayAction();
-
     }
 
     /// <summary>
@@ -181,7 +178,6 @@ public class JokerObject : MonoBehaviour
         _time += Time.deltaTime * GameConfig.GetGameSpeed() * 2.5f;
 
         transform.position = Vector3.Lerp(_lostpos, nextpos, _time);
-
     }
 
     /// <summary>
@@ -305,7 +301,6 @@ public class JokerObject : MonoBehaviour
         if (!JokerAction()) return;
 
         _jokerActionProcess();
-
     }
 
     /// <summary>
@@ -329,7 +324,6 @@ public class JokerObject : MonoBehaviour
         if (!_isPlay || reta != -1) return false;
 
         return true;
-
     }
 
     private void NormalJokerActionProcess()
@@ -347,7 +341,6 @@ public class JokerObject : MonoBehaviour
         JokerObjectUtility.NestJokerPlay(this);
         _status = JokerStatus.wait;
         _isPlay = false;
-
     }
     private void NeverAddJokerActionProcess()
     {
@@ -361,7 +354,6 @@ public class JokerObject : MonoBehaviour
         _jokerActionProcess = NormalJokerActionProcess;
 
         JokerObjectUtility.NextAction(this);
-
     }
 
     /// <summary>
@@ -372,8 +364,6 @@ public class JokerObject : MonoBehaviour
         //マウスポイント依存で座標を決定する
         Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z);
         transform.position = Camera.main.ScreenToWorldPoint(mousePos);
-
     }
-
 }
 

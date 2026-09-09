@@ -39,11 +39,9 @@ public class ResultUIManager : MonoBehaviour
         newRun.onClick.AddListener(ReLoodScene);
         mainMene.onClick.AddListener(TitelScene);
         endless.onClick.AddListener(StartEndless);
-
     }
     public void Update()
     {
-
     }
 
     public void Active(string text = "")
@@ -73,16 +71,13 @@ public class ResultUIManager : MonoBehaviour
             if (i > ResultAnswer.Length) return;
 
             ResultAnswer[i].text = text[i].ToString();
-
         }
-
     }
 
     private void BestHand()
     {
         Memory resultMemory = MemoryManager.instantMemory;
         highScoreText.text = resultMemory._highScore.ToString();
-
     }
     private readonly int COLORID = 7;
 
@@ -177,13 +172,11 @@ public class ResultUIManager : MonoBehaviour
 
         MasterData.instance.AddStringMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount() + 1,
             ((int)(baseScore * reta)).ToString());
-
     }
 
     public void SetNextScoreCreate()
     {
         shopEndButton.onClick.AddListener(NextTargetScoreCreate);
-
     }
 
     public void NextTargetScoreCreate()
@@ -194,7 +187,6 @@ public class ResultUIManager : MonoBehaviour
 
         MasterData.instance.AddStringMaster(IDUtility.TARGET_SCORE_ID + GameUtility.GetAllRoundCount() + 1,
             ((int)(baseScore * reta)).ToString());
-
     }
 }
 

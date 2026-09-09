@@ -14,12 +14,10 @@ public class UIUtility:MonoBehaviour
     {
         if (instance == null)
             instance=this;
-
     }
 
     public void Initialize()
     {
-
     }
 
     /// <summary>

@@ -24,7 +24,6 @@ public class MasterData : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
 
         Lood();
-
     }
 
     public void Update()
@@ -75,7 +74,6 @@ public class MasterData : MonoBehaviour
             csvDatas.Clear();
         }
         GetStringMaster(-1);
-
     }
 
     /// <summary>
@@ -97,7 +95,6 @@ public class MasterData : MonoBehaviour
         if (value == null) value = string.Empty;
 
         return value.ErrorText(backDoor);
-
     }
     public void SetStringMaster(int ID,string value)
     {
@@ -123,7 +120,6 @@ public class MasterData : MonoBehaviour
         {
             return -1;
         }
-
     }
 }
 

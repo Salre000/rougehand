@@ -16,8 +16,6 @@ public class IncreaseTheSellingPrice : JokerBase
             jokerBase.AddSaleValue(2);
 
         });
-
     }
-
 }
 

@@ -73,7 +73,6 @@ public class RoleManager : MonoBehaviour
         else if (TwoPair(cards) != Role.None) return Role.twoPair;
         else if (OnePair(cards) != Role.None) return Role.onePair;
         else return HighCard(cards);
-
     }
 
     #region 役
@@ -270,7 +269,6 @@ public class RoleManager : MonoBehaviour
                 }
                 else
                     checkList3.Add(cards[j]);
-
             }
             if (checkList2.Count >= 2) break;
         }
@@ -432,7 +430,6 @@ public class RoleManager : MonoBehaviour
 
             // 欲しい数揃っているならここで返す
             if (jastNum.Count >= jastSuitCount) return jastNum;
-
         }
         return null;
     }
@@ -469,7 +466,6 @@ public class RoleManager : MonoBehaviour
                 return null;
         }
         return null;
-
     }
 
     /// <summary>

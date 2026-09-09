@@ -134,9 +134,7 @@ public class SealBuff
         //対応したバフの効果を記述
         switch (sealBuff)
         {
-
         }
-
     }
 
     /// <summary>
@@ -154,7 +152,6 @@ public class SealBuff
 
                 break;
         }
-
     }
     /// <summary>
     /// ラウンドの終了時に手札にあるときのバフ
@@ -178,5 +175,4 @@ public class SealBuff
     {
         cashIndexs.Clear();
     }
-
 }

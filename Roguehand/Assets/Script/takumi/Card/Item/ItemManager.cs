@@ -56,7 +56,6 @@ public class ItemManager : MonoBehaviour
 
         _materialList = Resources.Load<MaterialstringList>("takumi/ItemMaterial");
         dommyMaterial = Resources.Load<Material>("takumi/BaseMaterial");
-
     }
 
     public void Update()
@@ -105,7 +104,6 @@ public class ItemManager : MonoBehaviour
 
         SetPaint(_itemObjectList[_itemObjectList.Count - 1].gameObject,
             _materialList._material[_itemList[_itemList.Count - 1].GetID() -IDUtility.ITEM_ID]);
-
     }
     public void SetItemID(int ID) { _itemList[_itemList.Count - 1].SetItemID(ID); }
     public void Remove(ItemBase itemBase)
@@ -124,7 +122,6 @@ public class ItemManager : MonoBehaviour
         _itemObjectList.RemoveAt(index);
 
         BreakUtility.StartBreak(gameObject);
-
     }
     public void Remove(int itemBase)
     {
@@ -139,7 +136,6 @@ public class ItemManager : MonoBehaviour
 
         BreakUtility.StartBreak(gameObject);
         Destroy(gameObject);
-
     }
 
     public bool ItemAddCheck() {  return _itemList.Count<ITEM_MAX_COUNT; }
@@ -152,34 +148,29 @@ public class ItemManager : MonoBehaviour
 
         for (int i = 0; i < _itemObjectList.Count; i++)
             _itemObjectList[i].ResetTime();
-
     }
     public void GrabChange(int ID, bool flag)
     {
         _isGrab = flag;
         _isGrabID = ID;
         _itemObjectList[ID].SetGrab(flag);
-
     }
 
     public void SetSale(int ID)
     {
 
         SaleUtility.SetSale(_itemList[ID], _itemObjectList[ID].gameObject, _itemList[ID].ReturnMoney());
-
     }
 
     public void ShowExplanation(int ID)
     {
         int[] test = new int[0];
         ExplanationManager.instance.AddExplanation(_itemObjectList[ID].gameObject, _itemList[ID], test, new Vector2(0, 1));
-
     }
     public void ShowExplanation(GameObject gameObject,ItemBase itemBase,Vector2 offset)
     {
         int[] test = new int[0];
         ExplanationManager.instance.AddExplanation(gameObject, itemBase, test, offset);
-
     }
 
     public void PaintItemObject(ItemBase itemBase, GameObject gameObject)
@@ -217,11 +208,9 @@ public class ItemManager : MonoBehaviour
 
                 GameObject domyy = saleObjecet;
                 SaleObjectManager.instance.Remove(domyy);
-
             }
 
             );
-
     }
 
     public List<ItemBase> GetItemBases() { return _itemList; }
@@ -232,7 +221,6 @@ public class ItemManager : MonoBehaviour
     private void ShopExplamtion(GameObject gameObject, ItemBase itembase)
     {
         ExplanationManager.instance.AddExplanation(gameObject, itembase, SHOP_DOMMY_BUFF, SHOP_UI_OFFSET);
-
     }
 
     private void ShopSale(GameObject gameObject, ItemBase itembase)
@@ -262,7 +250,6 @@ public class ItemManager : MonoBehaviour
         ItemUtility.ChengeOrder(_isGrabID, _isGrabID + count);
 
         _isGrabID = _isGrabID + count;
-
     }
     public int GetItemIndex(ItemObject itemObject)
     {
@@ -283,7 +270,6 @@ public class ItemManager : MonoBehaviour
 
             _itemObjectList[i].transform.eulerAngles = _NORMAL_ANGLE;
         }
-
     }
     /// <summary>
     /// ショップのときのアイテムの位置を元の場所に戻す処理
@@ -298,9 +284,7 @@ public class ItemManager : MonoBehaviour
             _itemObjectList[i].MovePos(_leftShopTransform.position + new Vector3(renge * (i + 1), 0, 0));
 
             _itemObjectList[i].transform.eulerAngles = _SHOP_ANGLE;
-
         }
-
     }
 
     private void SetPaint(GameObject item, Texture ID)
@@ -316,8 +300,6 @@ public class ItemManager : MonoBehaviour
         materials[(int)CardObjectManager.cardMaterialType.main] = materialCopy;
 
         meshRenderer.materials = materials;
-
     }
-
 }
 

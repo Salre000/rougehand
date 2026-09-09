@@ -31,7 +31,6 @@ public class MemoryManager
         if (!File.Exists(path)) return false;
 
         return true;
-
     }
 
     public static void CreateMemory()
@@ -59,7 +58,6 @@ public class MemoryManager
         File.Delete(Application.dataPath + FILE_PASS + FILE_NAME_KD + FILR_EXTENSION);
 
         return true;
-
     }
 
     /// <summary>
@@ -83,9 +81,7 @@ public class MemoryManager
                 BossUtility.CreateBoss(0);
 
                 tutorialFlag = true;
-
             }
-
         }
 
         if (instantMemory.theSeed == -1) instantMemory.theSeed = SetSeed();
@@ -93,7 +89,6 @@ public class MemoryManager
         Random.InitState(instantMemory.theSeed);
 
         seed = instantMemory.theSeed;
-
     }
     /// <summary>
     /// 過去のデータを消去する
@@ -122,7 +117,6 @@ public class MemoryManager
             addMoney += GameUtility.GetHandCount();
 
             GameUtility.SetMyMoney(GameUtility.GetMyMoney() + addMoney);
-
         }
 
         instantMemory=new Memory();
@@ -152,8 +146,6 @@ public class MemoryManager
         seed += Random.RandomRange(0, 9);
 
         return seed;
-
     }
-
 }
 

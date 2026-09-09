@@ -44,7 +44,6 @@ public class AllDeckDetails : DetailsBase
             uICards[i].Show();
 
         SetCounter();
-
     }
     public override void Hide()
     {
@@ -53,7 +52,6 @@ public class AllDeckDetails : DetailsBase
             _pollList[i].gameObject.SetActive(false);
             _pollList[i].ResetImage();
         }
-
     }
     public override void Initializ()
     {
@@ -65,9 +63,7 @@ public class AllDeckDetails : DetailsBase
 
             _pollList.Add(Instantiate(_cardPrefab, _pool.transform).GetComponent<UICardObject>());
             _pollList[i].gameObject.SetActive(false);
-
         }
-
     }
 
     private void SetCard()
@@ -83,9 +79,7 @@ public class AllDeckDetails : DetailsBase
             if (deckList[i].state != Card.State.deck) game.SetNowColor(USE_COLOR);
 
             game.SetImage(instance.GetTrump((int)deckList[i].suit,(int)deckList[i].number - 1), instance.GetEffctBuff(deckList[i]), instance.GetSealBuff(deckList[i].sealBuff));
-
         }
-
     }
 
     private UICardObject GetActive()
@@ -98,10 +92,8 @@ public class AllDeckDetails : DetailsBase
             _pollList[i].gameObject.SetActive(true);
 
             return _pollList[i];
-
         }
         return null;
-
     }
     private void SetCounter()
     {
@@ -128,8 +120,6 @@ public class AllDeckDetails : DetailsBase
         {
             _suitText[i].text = CardManager.instance.GetDeck().GetCount(card => card.suit == (Card.suit)i).ToString();
         }
-
     }
-
 }
 

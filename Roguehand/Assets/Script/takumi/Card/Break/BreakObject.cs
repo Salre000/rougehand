@@ -41,9 +41,7 @@ public class BreakObject : MonoBehaviour
             MeshRenderer meshRenderer=transform.GetChild(i).GetComponent<MeshRenderer>();
 
             meshRenderer.material = _material;
-
         }
-
     }
     public void OnEnable()
     {
@@ -54,7 +52,6 @@ public class BreakObject : MonoBehaviour
         _material.color = color;
 
         _animator.SetTrigger("Break");
-
     }
 
     // Update is called once per frame
@@ -77,7 +74,6 @@ public class BreakObject : MonoBehaviour
         color.a = 1f-(_time / MAX_TIME);
 
         _material.color = color;
-
     }
 }
 

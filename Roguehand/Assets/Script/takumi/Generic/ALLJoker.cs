@@ -40,5 +40,4 @@ public static class ALLJoker
 
         return jokerBase;
     }
-
 }

@@ -21,7 +21,6 @@ public class BossBase
         TextUIManager.instance.SetRoundNameText(GetBossName());
 
         TextUIManager.instance.SetRoundExceptionText(GetBossException());
-
     }
 
     public virtual void Update() { }
@@ -35,13 +34,11 @@ public class BossBase
         TextUIManager.instance.SetRoundExceptionText(string.Empty);
 
         //endAction();
-
     }
 
     public void SetAction(System.Action action) {endAction = action;}
 
     protected string GetBossName() { return  MasterData.instance.GetStringMaster(BOSS_NAME_RATE+ bossTextID); }
     protected string GetBossException() { return  MasterData.instance.GetStringMaster(bossTextID); }
-
 }
 

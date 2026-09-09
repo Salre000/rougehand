@@ -34,5 +34,4 @@ public static class ScriptCountNumber
     /// 誤差を認める際に使用する
     /// </summary>
     public const float EPSILON = 0.01f;
-
 }

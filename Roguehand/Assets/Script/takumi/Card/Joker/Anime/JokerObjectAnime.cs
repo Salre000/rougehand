@@ -29,12 +29,10 @@ public class JokerObjectAnime : MonoBehaviour
 
             isFlag = true;
             return;
-
         }
 
         isFlag = true;
         animator.SetTrigger("out");
-
     }
 
     public void End()
@@ -42,8 +40,6 @@ public class JokerObjectAnime : MonoBehaviour
         //オブジェクトの削除時のアニメーション
         BreakUtility.StartBreak(transform.parent.gameObject);
         Destroy(transform.parent.gameObject);
-
     }
-
 }
 

@@ -96,6 +96,5 @@ public static class GameUtility
     public static void SetIsRoundResult(bool value) { _isRoundResult = value; }
     // ラウンドクリアの状態を取得
     public static bool IsRoundResult() {  return _isRoundResult; }
-
 }
 

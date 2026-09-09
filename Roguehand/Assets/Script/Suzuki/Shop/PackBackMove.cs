@@ -16,7 +16,6 @@ public class PackBackMove : MonoBehaviour
     {
         _originPos=Vector3.zero;
         _packBack.SetActive(false);
-
     }
 
     void Update()
@@ -34,7 +33,6 @@ public class PackBackMove : MonoBehaviour
         if ((_packBack.transform.localPosition - _originPos).sqrMagnitude < 0.001f) return;
         _packBack.SetActive(true);
         _packBack.transform.localPosition = Vector3.Lerp(_packBack.transform.localPosition, _originPos, _time);
-
     }
     /// <summary>
     /// パック終了時背景が帰る
@@ -49,7 +47,6 @@ public class PackBackMove : MonoBehaviour
             return;
         }
         _packBack.transform.localPosition = Vector3.Lerp(_packBack.transform.localPosition, _targetPos.localPosition, _time);
-
     }
 }
 

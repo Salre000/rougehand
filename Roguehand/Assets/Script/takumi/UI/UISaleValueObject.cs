@@ -10,7 +10,6 @@ public class UISaleValueObject : MonoBehaviour
     public void SetValue(float value)
     {
         _valueText.text = "$"+value.ToString();
-
     }
 }
 

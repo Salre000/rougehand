@@ -21,7 +21,6 @@ public interface SaleInterface
             GameUtility.SetMyMoney(GameUtility.GetMyMoney() + saleValue);
 
             VolumeManager.instance.PlayMoneySE();
-
         }
     }
 
@@ -54,7 +53,6 @@ public interface SaleInterface
             action();
 
             VolumeManager.instance.PlayMoneyShop();
-
         }
     }
 

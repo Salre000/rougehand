@@ -29,20 +29,16 @@ public class GameEditUI : MonoBehaviour
     {
 
         VolumeManager.instance.ChengeMaster(value);
-
     }
     private void ChengeVolumeBGM(float value)
     {
 
         VolumeManager.instance.ChengeBGM(value);
-
     }
     private void ChengeVolumeSE(float value)
     {
 
         VolumeManager.instance.ChengeSE(value);
-
     }
-
 }
 

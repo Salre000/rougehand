@@ -127,19 +127,16 @@ public class JokerManager : MonoBehaviour
         joker.Initializ();
         _jokers.Add(joker);
         JokerObjectUtility.AddJoker(joker);
-
     }
     public void AddJoker(JokerBase jokerBase)
     {
         _jokers.Add(jokerBase);
         JokerObjectUtility.AddJoker(jokerBase);
-
     }
 
     public void JokerChenge(int ID)
     {
         JokerObjectUtility.GetIDJokerObject(ID).StartChenge();
-
     }
 
     public void SetMaterial(int ID)
@@ -156,7 +153,6 @@ public class JokerManager : MonoBehaviour
         if (jokerBase.GetCardBuff() != Card.cardBuff.None) materials[0] = BuffUtility.GetCardMaterial((int)jokerBase.GetCardBuff());
 
         meshRenderer.materials = materials;
-
     }
 
     /// <summary>
@@ -172,7 +168,6 @@ public class JokerManager : MonoBehaviour
         JokerBase jokerBase = func();
 
         JokerObjectUtility.AddDomyyJoker(jokerBase);
-
     }
 
     /// <summary>
@@ -221,7 +216,6 @@ public class JokerManager : MonoBehaviour
         _jokers = Extra.ChengeOrder(_jokers, lostID, nextID);
 
         JokerObjectUtility.ChengeOrder(lostID, nextID);
-
     }
 
     /// <summary>
@@ -232,7 +226,6 @@ public class JokerManager : MonoBehaviour
     {
         ScoreManager.instance.MagnificationPlus(magnification);
         GameConfig.AccelerateGameSpeed();
-
     }
     /// <summary>
     /// ジョーカーによって基礎値が上昇する関数
@@ -243,7 +236,6 @@ public class JokerManager : MonoBehaviour
 
         ScoreManager.instance.BasicPlus(baseValue);
         GameConfig.AccelerateGameSpeed();
-
     }
 
     /// <summary>
@@ -281,7 +273,6 @@ public class JokerManager : MonoBehaviour
     public void GrabChange(int id, bool flag)
     {
         JokerObjectUtility.GrabChange(id, flag);
-
     }
 
     public void SetSale(int ID)
@@ -289,17 +280,14 @@ public class JokerManager : MonoBehaviour
         GameObject joker = JokerObjectUtility.GetIDObject(ID);
 
         SaleUtility.SetSale(_jokers[ID], joker, _jokers[ID].GetSaleValue());
-
     }
     public void ShowExplanation(int ID)
     {
         ExplanationManager.instance.AddExplanation(JokerObjectUtility.GetIDObject(ID), _jokers[ID], _jokers[ID].JokerBuffs(), new Vector2(0, 1));
-
     }
     public void ShowExplanation(GameObject gameObject,JokerBase jokerBase,Vector2 offset)
     {
         ExplanationManager.instance.AddExplanation(gameObject, jokerBase, jokerBase.JokerBuffs(), offset);
-
     }
     /// <summary>
     /// 全てのジョーカーに何かする関数
@@ -342,6 +330,5 @@ public class JokerManager : MonoBehaviour
     }
 
     private JokerBase GetRoundomJoker() { return ALLJoker.GetJoker((ALLJoker._allJokerEnum)Random.Range(0, (int)ALLJoker._allJokerEnum.MAX)); }
-
 }
 

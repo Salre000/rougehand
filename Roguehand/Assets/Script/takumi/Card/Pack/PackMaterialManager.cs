@@ -52,7 +52,6 @@ public class PackMaterialManager : MonoBehaviour
         PackMaterialObject pack=packObject.GetComponent<PackMaterialObject>();
 
         pack.SetMaterial(GetMaterial(type,packCount), _silver);
-
     }
 
     private Material GetMaterial(InstantiatePack.PackType type,int packCount)
@@ -65,8 +64,6 @@ public class PackMaterialManager : MonoBehaviour
         if (packSize < 5) return (int)packSizeType.normal;
 
         return (int)packSizeType.mega;
-
     }
-
 }
 

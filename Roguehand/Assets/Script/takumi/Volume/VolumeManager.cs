@@ -49,7 +49,6 @@ public class VolumeManager : MonoBehaviour
             return;
         }
         Initialize();
-
     }
     private void Initialize()
     {
@@ -68,7 +67,6 @@ public class VolumeManager : MonoBehaviour
         BGMsource.clip = TestBGM;
         BGMsource.loop = true;
         BGMsource.Play();
-
     }
 
     public void ChengeMaster(float value)
@@ -76,21 +74,18 @@ public class VolumeManager : MonoBehaviour
         masterVolume = value- MixerRate;
 
         master.SetFloat("MasterVolume", masterVolume);
-
     }
     public void ChengeBGM(float value)
     {
         BGMVolume = value- MixerRate;
 
         master.SetFloat("BGMVolume", BGMVolume);
-
     }
     public void ChengeSE(float value)
     {
         SEVolume = value- MixerRate;
 
         master.SetFloat("SEVolume", SEVolume);
-
     }
 
     public float GetMaster() {  return masterVolume+ MixerRate; }
@@ -105,7 +100,6 @@ public class VolumeManager : MonoBehaviour
     {
         SESource.pitch = 5f;
         SESource.PlayOneShot(moneySE);
-
     }
     public void StartMoneySE()
     {
@@ -117,49 +111,41 @@ public class VolumeManager : MonoBehaviour
     {
         SESource.pitch = 0.5f;
         SESource.PlayOneShot(moneySE);
-
     }
     public void PlayCardMoveSE()
     {
         SESource.pitch = 1f;
         SESource.PlayOneShot(cardMoveSE);
-
     }
     public void PlaySystemSE()
     {
         SESource.pitch = 1f;
         SESource.PlayOneShot(systemSE);
-
     }
     public void PlayrerollSE()
     {
         SESource.pitch = 10f;
         SESource.PlayOneShot(rerollSE);
-
     }
     public void PlayLevelUpSE()
     {
         SESource.pitch = 2f;
         SESource.PlayOneShot(levelUpSE);
-
     }
     public void PlayBreckSE()
     {
         SESource.pitch = 1f;
         SESource.PlayOneShot(breckSE);
-
     }
     public void PlayUseSE()
     {
         SESource.pitch = 1f;
         SESource.PlayOneShot(useSE);
-
     }
     public void EndSE()
     {
 
         SESource.Stop();
-
     }
 
     public void UpBGM()
@@ -185,7 +171,6 @@ public class VolumeManager : MonoBehaviour
         FileStream stream = new FileStream(path, FileMode.OpenOrCreate);
         formatter.Serialize(stream, volume);
         stream.Close();
-
     }
     public void Lood()
     {
@@ -204,7 +189,6 @@ public class VolumeManager : MonoBehaviour
         SEVolume = volume.SEVolume;
 
         Debug.Log(BGMVolume);
-
     }
 
     private void OnApplicationQuit()
@@ -212,6 +196,5 @@ public class VolumeManager : MonoBehaviour
         // ここにセーブ処理を記述します。
         Save();
     }
-
 }
 

@@ -42,7 +42,6 @@ public static class Extra
         for (int i = startPos; i < list.Count; i++) { dummyList.Add(list[i]); }
 
         return dummyList;
-
     }
 
     /// <summary>
@@ -71,7 +70,6 @@ public static class Extra
         }
 
         return name;
-
     }
 
     /// <summary>
@@ -101,7 +99,6 @@ public static class Extra
         }
 
         return color;
-
     }
 
     /// <summary>
@@ -138,7 +135,6 @@ public static class Extra
         }
 
         return color;
-
     }
 
     public static string GetBuffExplanation(this string buff)
@@ -178,7 +174,6 @@ public static class Extra
         stringBuilder.Append("</color>");
 
         return stringBuilder.ToString();
-
     }
     public static string GetBlueString(this string _string)
     {
@@ -189,7 +184,6 @@ public static class Extra
         stringBuilder.Append("</color>");
 
         return stringBuilder.ToString();
-
     }
 
     /// <summary>
@@ -234,14 +228,12 @@ public static class Extra
                 else stringBuilder.Append("</color>");
 
                 continue;
-
             }
 
             if (i % 5 >= count) { stringBuilder.Append(chars[i]); continue; }
 
             byte[] utf8Bytes = Encoding.UTF8.GetBytes(new char[] { chars[i] });
             stringBuilder.Append(Encoding.GetEncoding("shift_jis").GetString(utf8Bytes).ToCharArray()[0]);
-
         }
 
         return stringBuilder.ToString();
@@ -267,7 +259,6 @@ public static class Extra
             default: break;
         }
         return flag;
-
     }
 
     /// <summary>
@@ -289,7 +280,6 @@ public static class Extra
         }
 
         return flag;
-
     }
    // public static List<List<System.Action>> GetTrunpBuffs(Card.Trump trump)
     //{
@@ -330,11 +320,9 @@ public static class Extra
         for(int i = 0; i < values.Count; i++)
         {
             list.Add(func(values[i]));
-
         }
 
         return list;
-
     }
 
     /// <summary>
@@ -359,10 +347,8 @@ public static class Extra
             }
 
             result.Add(dommy[i]);
-
         }
         return result;
-
     }
 
     /// <summary>
@@ -387,7 +373,6 @@ public static class Extra
             }
             // resultの配列番号とtargetの番号を合わせるために埋める
             if ((i + 1) != result.Count) result.Add(-1);
-
         }
         return result;
     }
@@ -419,7 +404,6 @@ public static class Extra
         for (int i = 0; i < values.Count; i++)
         {
             values[i] = action(values[i]);
-
         }
     }
 
@@ -431,11 +415,8 @@ public static class Extra
             case 'R': return "<color=#FF0000>";
             case 'B': return "<color=#0000FF>";
             case 'Y': return "<color=#BFBF00>";
-
         }
 
         return string.Empty;
-
     }
-
 }

@@ -20,8 +20,6 @@ public class TitleDeckUI : MonoBehaviour
     public void SetName(int ID)
     {
         deckName.text = deckNamses._expansion[ID];
-
     }
-
 }
 

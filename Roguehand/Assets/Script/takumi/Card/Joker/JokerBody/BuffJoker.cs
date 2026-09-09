@@ -28,7 +28,6 @@ public class BuffJoker : JokerBase
 
         //アクション状態に変更するコマンド
         JokerObjectUtility.CardAddAction(-1, -2);
-
     }
     private void ChengeCard()
     {
@@ -67,11 +66,9 @@ public class BuffJoker : JokerBase
 
             CardManager.instance.Chenge(index, indexHand, card);
             CardObjectUtility.SetChengeCard(i, card);
-
         }
 
         CardManager.instance.ResetPick();
     }
-
 }
 

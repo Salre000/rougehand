@@ -40,7 +40,5 @@ public static class KeepData
         /// 保存するアイテム
         /// </summary>
         public List<ItemBase> items=new List<ItemBase>();
-
     }
-
 }

@@ -42,7 +42,6 @@ public class ExplanationManager : MonoBehaviour
         CreateObject();
         _uiSize = DEFAULT_SIZE;
         _uiSizeMini = defaultSizeMini;
-
     }
 
     public void Update()
@@ -59,7 +58,6 @@ public class ExplanationManager : MonoBehaviour
             pos.x -= _GameObjectPool[i].GetComponent<RectTransform>().sizeDelta.x * _offsets[i].x;
 
             _GameObjectPool[i].GetComponent<RectTransform>().localPosition = pos;
-
         }
     }
 
@@ -117,7 +115,6 @@ public class ExplanationManager : MonoBehaviour
 
             explanationObject.GetBuffText(i).transform.parent.gameObject.GetComponent<RectTransform>().sizeDelta = _uiSizeMini;
             explanationObject.GetBuffColorIcon(i).gameObject.SetActive(true);
-
         }
 
         //初期値の定数分移動に補正をかける
@@ -136,7 +133,6 @@ public class ExplanationManager : MonoBehaviour
 
         _uiSize = DEFAULT_SIZE;
         _uiSizeMini = defaultSizeMini;
-
     }
 
     public void Remove()
@@ -159,7 +155,6 @@ public class ExplanationManager : MonoBehaviour
                 rectTransform.sizeDelta = defaultSizeMini;
 
                 rectTransform.gameObject.SetActive(false);
-
             }
 
             //_GameObjectPool[i].transform.GetChild(1).transform.GetChild(3).transform.Find("BuffColor1").gameObject.SetActive(false);
@@ -172,9 +167,7 @@ public class ExplanationManager : MonoBehaviour
             //_GameObjectPool[i].transform.GetChild(2).transform.Find("BuffUI2").gameObject.SetActive(false);
             //_GameObjectPool[i].transform.GetChild(2).transform.Find("BuffUI3").gameObject.SetActive(false);
             _GameObjectPool[i].SetActive(false);
-
         }
-
     }
 
     /// <summary>
@@ -209,9 +202,7 @@ public class ExplanationManager : MonoBehaviour
             image.SetActive(false);
 
             _GameObjectPool.Add(image);
-
         }
-
     }
 
     private GameObject GetGameObject()
@@ -223,11 +214,9 @@ public class ExplanationManager : MonoBehaviour
             _GameObjectPool[i].SetActive(true);
 
             return _GameObjectPool[i];
-
         }
 
         return null;
-
     }
 
     private string GetLineString(string _string1, string _string2)
@@ -240,6 +229,5 @@ public class ExplanationManager : MonoBehaviour
 
         return stringBuilder.ToString();
     }
-
 }
 

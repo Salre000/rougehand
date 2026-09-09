@@ -48,7 +48,6 @@ public class DistributeHand : MonoBehaviour
         RoundObserver.Instance.AddRoundStartAction(
             () => { handDrawFlag = false;}
             );
-
     }
 
     // Update is called once per frame
@@ -110,7 +109,6 @@ public class DistributeHand : MonoBehaviour
             dommyHand.Add(deck[dammyDeckArray[index]]);
             // 一度出た場所の数値は出ないようにする
             dammyDeckArray.RemoveAt(index);
-
         }
 
         // デッキの中に使用可能なカードが一枚もない場合
@@ -121,7 +119,6 @@ public class DistributeHand : MonoBehaviour
             // タイトル画面にとばしている
             GameUtility.SetHandCount(0);
             ResultUIManager.Instance.Active("敗北");
-
         }
 
         CardManager.instance.SetHand(hand);
@@ -131,7 +128,6 @@ public class DistributeHand : MonoBehaviour
 
         // ソート
         SortHand.instance.OnSortNumberButton();
-
     }
 
     /// <summary>
@@ -155,7 +151,6 @@ public class DistributeHand : MonoBehaviour
             //else trump.number = Card.number.ace;
             trump.isFeice = true;
             hand.Add(trump);
-
         }
 
         Card.Trump dommy = new Trump();
@@ -172,7 +167,6 @@ public class DistributeHand : MonoBehaviour
         CardObjectUtility.HandToCard(hand);
         CardManager.instance.SetHand(hand);
         CardObjectUtility.StartHandMove();
-
     }
 
     public void SetHandDrawFlag(bool flag) { handDrawFlag=flag; }

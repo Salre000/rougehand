@@ -45,7 +45,6 @@ public class InstantiatePack : MonoBehaviour
         if (!ShopManager.instance.IsShop()) return;
         PackCreateTrump();
         PackCreate();
-
     }
 
     private void CheckNotShop()
@@ -109,7 +108,6 @@ public class InstantiatePack : MonoBehaviour
                         obj.Use(GetRandomTrump(5), GetPos(5));
                         break;
                 }
-
             }
             , true
             );
@@ -170,11 +168,9 @@ public class InstantiatePack : MonoBehaviour
                             obj.Use(GetRandomTrump(5), GetPos(5));
                             break;
                     }
-
                 }
                 , true
                 );
-
         }
         Trans();
         _isInstantiate = true;
@@ -214,7 +210,6 @@ public class InstantiatePack : MonoBehaviour
         if (trumpPack == null) return;
 
         trumpPack.transform.position = _packTrumpTargetPos.position;
-
     }
 
     /// <summary>
@@ -225,7 +220,6 @@ public class InstantiatePack : MonoBehaviour
     {
         _packs[ID] = null;
         Trans();
-
     }
 
     /// <summary>
@@ -241,7 +235,6 @@ public class InstantiatePack : MonoBehaviour
             jokerBases.Add(ALLJoker.GetJoker((ALLJoker._allJokerEnum)UnityEngine.Random.Range(0, (int)ALLJoker._allJokerEnum.MAX)));
 
         return jokerBases;
-
     }
     /// <summary>
     /// アイテムのリストを返す関数
@@ -257,11 +250,9 @@ public class InstantiatePack : MonoBehaviour
             itemBases.Add(ALLItem.GetItem((ALLItem.ALLItemEnum)UnityEngine.Random.Range(0, (int)ALLItem.ALLItemEnum._MAX)));
 
             itemBases[i].Initializ();
-
         }
 
         return itemBases;
-
     }
     /// <summary>
     /// トランプのリストを返す関数
@@ -321,10 +312,8 @@ public class InstantiatePack : MonoBehaviour
             }
 
             trumps.Add(new Card.TrumpClass(trump));
-
         }
         return trumps;
-
     }
 
     /// <summary>
@@ -342,8 +331,6 @@ public class InstantiatePack : MonoBehaviour
             poss.Add(_packItemLeftTargetPos.position + new Vector3(distance * (i + 1), -10, 0));
 
         return poss;
-
     }
-
 }
 

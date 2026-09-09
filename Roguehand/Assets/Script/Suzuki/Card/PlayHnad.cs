@@ -83,6 +83,5 @@ public class PlayHnad : MonoBehaviour
         CardObjectUtility.PlayEnd();
         GameUtility.SetIsDiscard(true);
     }
-
 }
 

@@ -39,7 +39,6 @@ public class TextUIManager : MonoBehaviour
         if (instance == null)
             instance = this;
         Initialize();
-
     }
 
     private void Start()
@@ -143,6 +142,5 @@ public class TextUIManager : MonoBehaviour
     public void SetClearMoneyText(string value) { _clearMoneyText.text = value; }
 
     #endregion
-
 }
 

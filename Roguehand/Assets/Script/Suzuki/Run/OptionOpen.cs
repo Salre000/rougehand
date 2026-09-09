@@ -35,7 +35,6 @@ public class OptionOpen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     void Onclick()
@@ -90,7 +89,6 @@ public class OptionOpen : MonoBehaviour
 
         GameSceneManager.LoadScene(GameSceneManager.titleScene);
         MemoryManager.Keep();
-
     }
     private void OpenEdit()
     {

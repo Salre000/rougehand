@@ -20,5 +20,4 @@ public class ItemUseNeverJoker : JokerBase
     {
         return Trun() < 1 ? string.Empty : MasterData.instance.GetStringMaster(1999) + _magnification.ToString().GetRedString();
     }
-
 }

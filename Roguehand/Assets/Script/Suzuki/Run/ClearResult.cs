@@ -38,7 +38,6 @@ public class ClearResult : MonoBehaviour
         _resetLocalPosition = _clearResult.transform.localPosition;
         _clearResult.SetActive(false);
         _liquidationButton.onClick.AddListener(OnLiquidation);
-
     }
 
     // Update is called once per frame
@@ -65,7 +64,6 @@ public class ClearResult : MonoBehaviour
         {
             _isResultArrival=true;
         }
-
     }
 
     /// <summary>
@@ -79,7 +77,6 @@ public class ClearResult : MonoBehaviour
         _isComp = false;
 
         _isResultArrival = false;
-
     }
 
     private void ResetResultPosition()
@@ -117,7 +114,6 @@ public class ClearResult : MonoBehaviour
             _variableTime = _resetTime;
             _isPush=false;
             _clearResult.SetActive(false);
-
         }
     }
 

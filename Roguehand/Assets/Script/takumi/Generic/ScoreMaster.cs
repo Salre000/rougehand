@@ -25,7 +25,6 @@ public class ScoreMaster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     private void Lood()
@@ -61,7 +60,6 @@ public class ScoreMaster : MonoBehaviour
             _score.AddBasicMagnification = int.Parse(csvDatas[j][5]);
 
             scoreMap.Add(int.Parse(csvDatas[j][0]), _score);
-
         }
     }
 

@@ -28,5 +28,4 @@ public interface ExplanationInterface
     /// </summary>
     /// <returns></returns>
     public string GetTypes();
-
 }

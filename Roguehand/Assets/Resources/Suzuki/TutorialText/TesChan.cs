@@ -23,8 +23,6 @@ public class TesChan : MonoBehaviour
             tutorialText.Add(MasterData.instance.GetStringMaster(id+index));
             index++;
         }
-
     }
-
 }
 

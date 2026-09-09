@@ -84,6 +84,5 @@ public class ShopTextManager:MonoBehaviour
     }
 
     void SetRoleText(string value) { _roleText.text = value; }
-
 }
 

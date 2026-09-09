@@ -16,7 +16,6 @@ public class PackInObject : MonoBehaviour
     public void Awake()
     {
         _startPos = transform.position;
-
     }
     public void Update()
     {
@@ -26,10 +25,8 @@ public class PackInObject : MonoBehaviour
 
         transform.position = Vector3.Lerp(_startPos, _tragetPos, time);
         transform.eulerAngles = Vector3.Lerp(Vector3.zero, ANGLE, time);
-
     }
 
     public void SetTragetPos(Vector3 vector) { _tragetPos = vector; }
-
 }
 

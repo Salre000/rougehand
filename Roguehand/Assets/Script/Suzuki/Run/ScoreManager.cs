@@ -41,7 +41,6 @@ public class ScoreManager : MonoBehaviour
             scoreViewValueMagnification.Add(0);
             scoreViewValueBase.Add(0);
         }
-
     }
     public void SetScoreViewText(int text, bool magnification = false)
     {
@@ -54,7 +53,6 @@ public class ScoreManager : MonoBehaviour
     {
         position.y -= 140f;
         scoreViewTrans[_scoreIndex].position = position;
-
     }
     public void SetViewIndex(int index)
     {
@@ -83,7 +81,6 @@ public class ScoreManager : MonoBehaviour
             sb.Append(MasterData.instance.GetStringMaster(_pulsColor));
             sb.Append("+");
             sb.Append(scoreViewValueBase[_scoreIndex]);
-
         }
         sb.Append(" ");
 
@@ -92,11 +89,9 @@ public class ScoreManager : MonoBehaviour
             sb.Append(MasterData.instance.GetStringMaster(_magColor));
             sb.Append("x");
             sb.Append(scoreViewValueMagnification[_scoreIndex]);
-
         }
 
         return sb.ToString();
-
     }
 
     // 基本スコア
@@ -140,7 +135,6 @@ public class ScoreManager : MonoBehaviour
             scoreViewTrans.Add(score[i].GetComponent<Transform>());
             scoreViewTexts[i].text = "";
         }
-
     }
 
     private void Update()
@@ -197,7 +191,6 @@ public class ScoreManager : MonoBehaviour
         _builder.Append(_magnification);
         TextUIManager.instance.SetMagnificationText(_builder.ToString());
         VolumeManager.instance.PlayScoreSE();
-
     }
 
     /// <summary>
@@ -220,7 +213,6 @@ public class ScoreManager : MonoBehaviour
         else
         {
             _defaultRemit = _RESET_REMIT_SIZE;
-
         }
 
         TextUIManager.instance.SetRoundScoreText(_builder.ToString());
@@ -294,7 +286,6 @@ public class ScoreManager : MonoBehaviour
         //_builder.Append(_roundScore);
         _builder.AppendFormat("{0:#}", _roundScore.ToString("N0"));
         TextUIManager.instance.SetRoundScoreText(_builder.ToString());
-
     }
 
     /// <summary>
@@ -359,7 +350,6 @@ public class ScoreManager : MonoBehaviour
 
         // 最終的にプレイボタンのフラグをリセット
         GameUtility.SetIsPlay(false);
-
     }
 
     public float GetBasicScore() { return _basicScore; }

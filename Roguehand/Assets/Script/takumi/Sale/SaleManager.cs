@@ -31,7 +31,6 @@ public class SaleManager : MonoBehaviour
     public void Awake()
     {
         SaleUtility.instance = this;
-
     }
 
     public void OnGUI()
@@ -42,7 +41,6 @@ public class SaleManager : MonoBehaviour
             style = new GUIStyle(GUI.skin.button);
 
             style.richText = true;
-
         }
 
         for (int i = 0; i < _saleInterfaces.Count; i++)
@@ -70,7 +68,6 @@ public class SaleManager : MonoBehaviour
 
                         i=_saleInterfaces.Count;
                     });
-
             }
             else
             {
@@ -88,7 +85,6 @@ public class SaleManager : MonoBehaviour
                     i = _saleInterfaces.Count;
 
                 });
-
             }
         }
     }
@@ -105,7 +101,6 @@ public class SaleManager : MonoBehaviour
         _saleObject.Add(saleObject);
         _saleValue.Add(saleValue);
         _saletype.Add(type);
-
     }
 
     public GUIStyle GetStyle() { return style; }
@@ -171,7 +166,6 @@ public class SaleManager : MonoBehaviour
         }
 
         return _status;
-
     }
 
     /// <summary>
@@ -180,7 +174,6 @@ public class SaleManager : MonoBehaviour
     /// <param name="gameObject"></param>
     private void Buy(GameObject gameObject)
     {
-
     }
 
     private void Remove(int index)
@@ -189,8 +182,6 @@ public class SaleManager : MonoBehaviour
         _saleObject.RemoveAt(index);
         _saleValue.RemoveAt(index);
         _saletype.RemoveAt(index);
-
     }
-
 }
 

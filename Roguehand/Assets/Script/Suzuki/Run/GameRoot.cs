@@ -47,7 +47,6 @@ public class GameRoot:MonoBehaviour
 
         // リザルト画面を開く
         ResultUIManager.Instance.Active("勝利!");
-
     }
     // ハンドがゼロか
     private void GameOver()
@@ -71,7 +70,6 @@ public class GameRoot:MonoBehaviour
 
         // リザルト画面を開く
         ResultUIManager.Instance.Active("敗北 ");
-
     }
 
     IEnumerator NextRound()
@@ -83,6 +81,5 @@ public class GameRoot:MonoBehaviour
     }
 
     public bool GetGameOver() { return over;}
-
 }
 

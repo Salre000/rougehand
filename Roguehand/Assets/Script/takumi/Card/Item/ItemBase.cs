@@ -49,7 +49,6 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
             GameUtility.SetMyMoney(GameUtility.GetMyMoney() + saleValue);
 
             VolumeManager.instance.PlayMoneySE();
-
         }
 
         if (GUI.Button(new Rect(ButtonPos.x + 75, Screen.height - ButtonPos.y, 60, 90),
@@ -60,7 +59,6 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
             JokerUtility.SetTraget(JokerActionUseEnum.JokerActionTarget.item);
             Use();
             VolumeManager.instance.PlayUseSE();
-
         }
     }
 
@@ -120,10 +118,7 @@ public abstract class ItemBase : SaleInterface,ExplanationInterface
         if (GUI.Button(new Rect(ButtonPos.x - BUY_WIDHT / HALF, Screen.height - ButtonPos.y + 100, BUY_WIDHT, 60),
             ("<size=20><color=#ffffff>" + Extra.ErrorText("アイテムの枠がいっぱい") + "</color></size>"), SaleUtility.GetStyle()))
         {
-
         }
-
     }
-
 }
 

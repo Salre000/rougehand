@@ -24,7 +24,6 @@ public class PackMaterialObject : MonoBehaviour
         _main.materials = materials;
 
         _upObject.material = sbu;
-
     }
 }
 

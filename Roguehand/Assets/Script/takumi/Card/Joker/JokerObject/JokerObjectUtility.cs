@@ -36,5 +36,4 @@ public static class JokerObjectUtility
     public static void JokerObjectALLAction(System.Func<JokerObject, JokerObject> funk) {instance.JokerObjectALLAction(funk);}
 
     public static void PaintJokerObject(JokerBase jokerBase,GameObject gameObject) { instance.GetJokerMaterials(jokerBase, gameObject);}
-
 }

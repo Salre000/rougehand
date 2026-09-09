@@ -54,7 +54,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
         int[] dommyBuff = new int[0];
 
         ExplanationManager.instance.AddExplanation(gameObject, this, dommyBuff, SHOP_UI_OFFSET);
-
     }
 
     public void ShopSale()
@@ -123,7 +122,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
         //saleObjectmanagerに渡す
 
         Debug.Log("パックの使用");
-
     }
 
     public string GetName()
@@ -152,7 +150,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
         else sb.Append(MasterData.instance.GetStringMaster(IDUtility.PACK_ID+ ExplanationRate));
 
         return sb.ToString();
-
     }
 
     public string GetExplanation2()
@@ -174,7 +171,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
     private void PackTime(List<GameObject> cards)
     {
         if (!isPack) return;
-
     }
 
     private void GetTypeMaterial<T>(InstantiatePack.PackType type, T t,GameObject gameObject)
@@ -196,7 +192,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                 Card.TrumpClass trump = t as Card.TrumpClass;
                 CardObjectUtility.CardPaint(trump.trump, gameObject);
                 break;
-
         }
 
         return ;
@@ -242,7 +237,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                     SaleObjectManager.instance.PackSekect(card);
 
                 };
-
         }
 
         return () => { };
@@ -275,7 +269,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
         }
 
         return () => { for (int i = 0; i < actions.Count; i++) actions[i](); };
-
     }
     private System.Action ShopExplamtion<T>(GameObject gameObject, T t)
     {
@@ -304,7 +297,6 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
         }
 
         return () => { for (int i = 0; i < actions.Count; i++) actions[i](); };
-
     }
 
     private int[] GetBuffs<T>(T t)
@@ -315,12 +307,9 @@ public class AssignPack : MonoBehaviour, SaleInterface, ExplanationInterface
                 JokerBase joker = t as JokerBase;
                 return joker.JokerBuffs();
                 //case TesPack.PackType.card:
-
         }
 
         return new int[0];
-
     }
-
 }
 

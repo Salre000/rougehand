@@ -32,6 +32,5 @@ public class TargetScoreChecker : MonoBehaviour
         _builder.Append(_roundCount);
         TextUIManager.instance.SetRoundText(_builder.ToString());
     }
-
 }
 

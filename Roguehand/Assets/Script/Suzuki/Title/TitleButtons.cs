@@ -25,7 +25,6 @@ public class TitleButtons : MonoBehaviour
         TextMeshProUGUI text= _continueButton.GetComponent<TextMeshProUGUI>();
 
         text.color = Color.gray;
-
     }
 
     void OnContinue()
@@ -33,13 +32,11 @@ public class TitleButtons : MonoBehaviour
         VolumeManager.instance.PlaySystemSE();
 
         GameSceneManager.LoadScene(GameSceneManager.mainScene);
-
     }
 
     void OnExit()
     {
         Application.Quit();
-
     }
 }
 

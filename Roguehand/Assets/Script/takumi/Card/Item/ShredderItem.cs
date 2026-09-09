@@ -7,7 +7,6 @@ public class ShredderItem : ItemBase
     int maxBreackCount = 2;
     public override void Initializ()
     {
-
     }
 
     public override void Use()
@@ -20,14 +19,11 @@ public class ShredderItem : ItemBase
             CardObjectUtility.RemoveTrump(indexs[i]);
 
             indexs.RemoveAt(0);
-
         }
 
         RoleManager.Role role = RoleManager.instance.RoleCheck(CardManager.instance.GetPick());
 
         RoleManager.instance.SetRole(role);
-
     }
-
 }
 

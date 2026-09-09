@@ -37,7 +37,6 @@ public class SortHand : MonoBehaviour
 
         // ソート後のオブジェクトの並びに変更
         CardObjectUtility.ObjectSort(nowHand, nextHand);
-
     }
     public void OnSortNumberButton()
     {
@@ -53,8 +52,6 @@ public class SortHand : MonoBehaviour
 
         // ソート後のオブジェクトの並びに変更
         CardObjectUtility.ObjectSort(nowHand, nextHand);
-
     }
-
 }
 

@@ -22,7 +22,6 @@ public class Castle : BossBase
 
     public override void Update()
     {
-
     }
 
     public override void LateUpdate()
@@ -33,6 +32,5 @@ public class Castle : BossBase
     {
         base.End();
     }
-
 }
 

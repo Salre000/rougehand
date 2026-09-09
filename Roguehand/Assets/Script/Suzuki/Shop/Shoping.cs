@@ -43,7 +43,6 @@ public class Shoping : MonoBehaviour
         if (angle - _TARGET_SHOP_CAM_ROTATE < 0.01f)
         {
             _shopCompFlag = true;
-
         }
     }
 
@@ -62,7 +61,6 @@ public class Shoping : MonoBehaviour
 
         // ラン画面へ向く
         _vcam.rotation = Quaternion.Lerp(_vcam.rotation, Quaternion.Euler(_TARGET_RUN_CAM_ROTATE, 0, 0), Time.deltaTime * _camTime);
-
     }
 
     private void OnShopEnd()
@@ -93,7 +91,6 @@ public class Shoping : MonoBehaviour
         {
 
             BossUtility.RandomCreateBoss();
-
         }
 
         // ラウンドのカウント数を増やす
@@ -128,7 +125,6 @@ public class Shoping : MonoBehaviour
         RoundObserver.Instance.RoundStartActions();
         // 購入や売却の表示を全て削除
         SaleUtility.Claer(true);
-
     }
 
     private float _radius = 180f;
@@ -140,6 +136,5 @@ public class Shoping : MonoBehaviour
             angle -= _circumference;
         return angle;
     }
-
 }
 

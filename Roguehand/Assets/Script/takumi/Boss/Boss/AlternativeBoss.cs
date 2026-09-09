@@ -23,12 +23,10 @@ public class AlternativeBoss : BossBase
 
             alternativeIndexs.Add(random);
         }
-
     }
 
     public override void Update()
     {
-
     }
 
     public override void LateUpdate()
@@ -56,15 +54,12 @@ public class AlternativeBoss : BossBase
             TextUIManager.instance.SetRoleText("????");
             TextUIManager.instance.SetBasicScoreText("??");
             TextUIManager.instance.SetMagnificationText("??");
-
         }
-
     }
 
     public override void End()
     {
         base.End();
     }
-
 }
 

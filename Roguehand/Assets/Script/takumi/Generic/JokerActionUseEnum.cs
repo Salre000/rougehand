@@ -30,7 +30,6 @@ public static class JokerActionUseEnum
         role,
 
         max
-
     }
 
     public static readonly string[] JokerActionTargetExplanation = new string[(int)JokerActionTarget.max+1]
@@ -59,7 +58,6 @@ public static class JokerActionUseEnum
         /// </summary>
         Multiplication,
         max
-
     }
 
     /// <summary>
@@ -83,7 +81,6 @@ public static class JokerActionUseEnum
         never,
 
         max
-
     }
     public static readonly string[] JokerActionTimingExplanation = new string[(int)Timing.max + 1]
 {
@@ -104,6 +101,5 @@ public static class JokerActionUseEnum
         Rare,
         Legendary,
     }
-
 }
 

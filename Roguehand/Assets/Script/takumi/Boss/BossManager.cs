@@ -67,7 +67,6 @@ public class BossManager : MonoBehaviour
         SetBossIcon(id);
 
         bossBases.Add(bossBase);
-
     }
 
     public void CreateBoss(BossBase bossBase)
@@ -80,7 +79,6 @@ public class BossManager : MonoBehaviour
     {
         CreateBoss(Random.Range(1, 6))
             ;
-
     }
 
     public BossBase GetBossBase()
@@ -101,6 +99,5 @@ public class BossManager : MonoBehaviour
         bossIcon.sprite = null;
         bossIcon.gameObject.SetActive(false);
     }
-
 }
 

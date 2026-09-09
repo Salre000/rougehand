@@ -8,7 +8,6 @@ public class JokerListObject : ScriptableObject
     public List<string> _className = new List<string>();
 
     public List<string> _explanation=new List<string>();
-
 }
 
 

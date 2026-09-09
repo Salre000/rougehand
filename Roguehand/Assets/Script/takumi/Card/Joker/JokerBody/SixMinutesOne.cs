@@ -17,5 +17,4 @@ public class SixMinutesOne : JokerBase
     {
         return Trun() < 1 ? string.Empty : MasterData.instance.GetStringMaster(1999) + Trun().ToString().GetRedString();
     }
-
 }

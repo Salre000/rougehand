@@ -13,10 +13,8 @@ public class Seraph : JokerBase
         //JokerUtility.AddMagnification(100f);
 
         //ハンドの残り回数をゼロにする
-
     }
 
     public override JokerActionUseEnum.JokerRarity GetRarity() { return JokerActionUseEnum.JokerRarity.Rare;}
-
 }
 

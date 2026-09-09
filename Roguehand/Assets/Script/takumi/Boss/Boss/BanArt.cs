@@ -21,12 +21,10 @@ public class BanArt : BossBase
         TextUIManager.instance.SetRoundNameText(GetBossName());
 
         TextUIManager.instance.SetRoundExceptionText(GetBossException()+MasterData.instance.GetStringMaster((int)suit)+")");
-
     }
 
     public override void Update()
     {
-
     }
 
     public override void LateUpdate()
@@ -47,17 +45,14 @@ public class BanArt : BossBase
             if (indexs.FindIndex(index=>index==i)<0) continue;
 
             indexs.Remove(i);
-
         }
 
         RoleManager.instance.SetIndex(indexs);
-
     }
 
     public override void End()
     {
         base.End();
     }
-
 }
 

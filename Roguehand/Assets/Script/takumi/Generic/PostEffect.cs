@@ -9,6 +9,5 @@ public class PostEffect : MonoBehaviour
     void OnRenderImage(RenderTexture src, RenderTexture dest)
     {
         Graphics.Blit(src, dest, sepia);
-
     }
 }

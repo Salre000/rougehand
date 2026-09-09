@@ -53,7 +53,6 @@ public class RoleObject : MonoBehaviour
 
         // 使用回数
         _playCount.text = RoleManager.instance.GetRolePlayCountList()[(int)_role].ToString();
-
     }
 }
 

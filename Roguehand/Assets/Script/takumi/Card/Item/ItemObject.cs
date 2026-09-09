@@ -32,12 +32,10 @@ public class ItemObject : MonoBehaviour
 
         _time += Time.deltaTime;
         transform.position = Vector3.Lerp(_lostPos, goal, _time);
-
     }
 
     public void ResetTime() {_time = 0; _lostPos = transform.position; }
 
     public void SetGrab(bool flag) {  _isGrab = flag; _lostPos = transform.position; }
-
 }
 

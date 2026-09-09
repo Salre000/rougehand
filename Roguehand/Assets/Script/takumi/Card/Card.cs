@@ -151,8 +151,6 @@ public class Card
         public TrumpClass(Card.Trump trump) { this.trump = trump; }
 
        public Card.Trump trump;
-
     }
-
 }
 

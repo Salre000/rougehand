@@ -30,7 +30,6 @@ public class CardManager : MonoBehaviour
         trumpCard = new TrumpCard();
         // デッキを生成、および代入
         //trumpCard.Test();
-
     }
     private void Start()
     {
@@ -38,7 +37,6 @@ public class CardManager : MonoBehaviour
         if (TitleStatic.GetDeckNumber() != -1)
             MemoryManager.Use(deckLists._enumName[TitleStatic.GetDeckNumber()]);
         else MemoryManager.Use();
-
     }
 
     /// <summary>
@@ -148,7 +146,6 @@ public class CardManager : MonoBehaviour
 
         CardObjectUtility.StopCardObject(ID);
         CardObjectUtility.ChengeStandby(ID, hand[ID].isSelect);
-
     }
 
     /// <summary>
@@ -223,12 +220,9 @@ public class CardManager : MonoBehaviour
 
             // リストにつむ
             result.Add(handIndex);
-
         }
 
         return result;
-
     }
-
 }
 

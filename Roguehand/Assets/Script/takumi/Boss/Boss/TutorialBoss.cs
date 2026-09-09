@@ -15,7 +15,6 @@ public class TutorialBoss : BossBase
     {
         base.Initializ();
         //DistributeHand.instanse.SetHandDrawFlag(true);
-
     }
 
     public override void Update()
@@ -29,7 +28,6 @@ public class TutorialBoss : BossBase
         Distribute(cardIndexs.Length);
 
         oneFlag = true;
-
     }
 
     public override void LateUpdate()
@@ -39,7 +37,6 @@ public class TutorialBoss : BossBase
 
         SaleObjectManager.instance.CreateShop();
         oneShopFlag = true;
-
     }
 
     public override void End()
@@ -87,7 +84,6 @@ public class TutorialBoss : BossBase
 
             hand.Add(deck[dammyDeckArray[index]]);
             dommyHand.Add(deck[dammyDeckArray[index]]);
-
         }
 
         // デッキの中に使用可能なカードが一枚もない場合
@@ -96,7 +92,6 @@ public class TutorialBoss : BossBase
             // リザルト画面に移行する
 
             Application.Quit();
-
         }
 
         CardManager.instance.SetHand(hand);
@@ -106,8 +101,6 @@ public class TutorialBoss : BossBase
 
         // ソート
         SortHand.instance.OnSortNumberButton();
-
     }
-
 }
 

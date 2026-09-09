@@ -28,9 +28,7 @@ public class UIMaterialManager : MonoBehaviour
                 material.color = Color.white;
 
                 _trumpMaterial[i].Add(material);
-
             }
-
         }
 
         // シールのマテリアルを追加
@@ -43,7 +41,6 @@ public class UIMaterialManager : MonoBehaviour
             material.color = Color.white;
 
             _sealBuffMaterial.Add(material);
-
         }
 
         // cardBuffのマテリアルを追加
@@ -56,7 +53,6 @@ public class UIMaterialManager : MonoBehaviour
             material.color = Color.white;
 
             _cardBuffMaterial.Add(material);
-
         }
         // DeckBuffのマテリアルを追加
         for (int i = 0; i < (int)Card.deckBuff.MAX; i++)
@@ -68,16 +64,13 @@ public class UIMaterialManager : MonoBehaviour
             material.color = Color.white;
 
             _deckBuffMaterial.Add(material);
-
         }
-
     }
 
     public Material GetSealBuff(Card.sealBuff sealBuff)
     {
         if (sealBuff != Card.sealBuff.None) return _sealBuffMaterial[(int)sealBuff];
         return null;
-
     }
     public Material GetTrump(int suit,int number)
     {
@@ -90,8 +83,6 @@ public class UIMaterialManager : MonoBehaviour
         if (buff.cardBuff != Card.cardBuff.None) return _cardBuffMaterial[(int)buff.cardBuff];
 
         return null;
-
     }
-
 }
 

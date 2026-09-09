@@ -38,7 +38,6 @@ public class SystemErrorBuff
         return;
         if (Input.GetKeyDown(KeyCode.Y)) CreateErrorBuff();
         if (Input.GetKeyDown(KeyCode.H)) Clear();
-
     }
 
     public void CreateErrorBuff()
@@ -49,7 +48,6 @@ public class SystemErrorBuff
 
         for (int i = 0; i < _errorList.Count; i++)
             _errorList[i].Start();
-
     }
     public void Clear()
     {
@@ -119,7 +117,6 @@ public class SystemErrorBuff
                 return count;
 
             };
-
         }
 
         public override void UpData()
@@ -135,7 +132,6 @@ public class SystemErrorBuff
 
             if (MaxRenge > _renge) return;
             MouseMove();
-
         }
 
         private void MouseMove()
@@ -153,7 +149,6 @@ public class SystemErrorBuff
             SetCursorPos(((int)mousePos.x),((int)mousePos.y));
 
             Start();
-
         }
 
         private Vector2 MousePositionCheck(Vector2 mouse)
@@ -170,9 +165,7 @@ public class SystemErrorBuff
 
             return point;
         }
-
     }
-
 }
 
 

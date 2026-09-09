@@ -24,6 +24,5 @@ public class GameConfig
     public static void AccelerateGameSpeed() { _gameSpeed += _accelerateSpeed; }
 
      public static void ResetGameSpeed() {  _gameSpeed = 1; }
-
 }
 

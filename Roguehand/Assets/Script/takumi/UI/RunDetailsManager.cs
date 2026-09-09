@@ -111,7 +111,6 @@ public class RunDetailsManager : MonoBehaviour
         // 非アクティブ状態に移行
         End();
         instance = this;
-
     }
 
     /// <summary>
@@ -130,7 +129,6 @@ public class RunDetailsManager : MonoBehaviour
         _detailsTypeAction[(int)_nowDetailsType].Show();
 
         VolumeManager.instance.PlaySystemSE();
-
     }
     /// <summary>
     ///  描画を終了する関数
@@ -173,7 +171,6 @@ public class RunDetailsManager : MonoBehaviour
 
             });
         }
-
     }
 
     /// <summary>
@@ -209,7 +206,6 @@ public class RunDetailsManager : MonoBehaviour
             backImageSize.x = _backImageDefaultSizeX;
 
             buttonSize = _typeButtonDefaultSizeX;
-
         }
 
         // 背景の大きさを設定
@@ -235,7 +231,6 @@ public class RunDetailsManager : MonoBehaviour
         {
             _detailsTypeAction.Add( _runDetailsTypeParents[i].GetComponent<DetailsBase>());
             _detailsTypeAction[i].Initializ();
-
         }
     }
 

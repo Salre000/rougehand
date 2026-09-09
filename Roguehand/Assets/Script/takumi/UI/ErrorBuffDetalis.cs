@@ -32,9 +32,7 @@ public class ErrorBuffDetalis : DommyDetalis
 
             _objectPool.Add(Instantiate(prefab, _objectPoolParent.transform));
             _objectPool[i].SetActive(false);
-
         }
-
     }
     private List<GameObject> GetActiveObject(int count,List<Card.Trump> trumps,List<JokerBase> jokers)
     {
@@ -96,9 +94,7 @@ public class ErrorBuffDetalis : DommyDetalis
             }
 
             uIErrorBuffs[i].SetCard(GetActiveObject(count, trumps, jokers));
-
         }
-
     }
 
     public override void Hide()
