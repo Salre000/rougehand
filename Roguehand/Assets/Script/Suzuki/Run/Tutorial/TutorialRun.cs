@@ -36,7 +36,7 @@ public class TutorialRun : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // ƒ`ƒ…[ƒgƒŠƒAƒ‹ƒ‚[ƒh‚ªƒIƒt‚È‚ç‚±‚ÌƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ”ñ•\¦‚É‚µ‚ÄƒXƒNƒŠƒvƒg‚ğ“Ç‚Ü‚¹‚È‚­‚·‚é
+        // ãƒãƒ¥ãƒ¼ãƒˆãƒªã‚¢ãƒ«ãƒ¢ãƒ¼ãƒ‰ãŒã‚ªãƒ•ãªã‚‰ã“ã®ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’éè¡¨ç¤ºã«ã—ã¦ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’èª­ã¾ã›ãªãã™ã‚‹
         if (TitleStatic.GetDeckNumber() != 0/*!MemoryManager.GetTutorialFlag()*/)
         {
             this.gameObject.SetActive(false);
@@ -55,7 +55,7 @@ public class TutorialRun : MonoBehaviour
             opImage[i].SetActive(false);
         }
         _clickCome.SetActive(false);
-        // ƒJ[ƒh‚ÉG‚ê‚È‚­‚³‚¹‚é
+        // ã‚«ãƒ¼ãƒ‰ã«è§¦ã‚Œãªãã•ã›ã‚‹
         GrabManager.instance.SetGrabFlag(false);
     }
 
@@ -100,7 +100,7 @@ public class TutorialRun : MonoBehaviour
         if (fade[1]) return;
         if (_time >= viewTime)
         {
-            // csv‚©‚çƒƒbƒZ[ƒW‚ğo‚·
+            // csvã‹ã‚‰ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡ºã™
             Builder(_textGroup.tutorialText[indexNumber]);
             _clickCome.SetActive(true);
             if (!ClickChack()) return;
@@ -119,47 +119,47 @@ public class TutorialRun : MonoBehaviour
             case 0:
 
                 break;
-            case 2: // ‹­‚¢–ğ
+            case 2: // å¼·ã„å½¹
                 opImage[opIndex].SetActive(true);
                 _fadePanel.SetActive(false);
                 break;
-            case 4: // ƒXƒRƒA‚ğ
+            case 4: // ã‚¹ã‚³ã‚¢ã‚’
                 DefaultCase();
                 break;
-            case 5:// ƒfƒBƒXƒJ[ƒh‚ğ‰Ÿ‚·‚Æ
+            case 5:// ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰ã‚’æŠ¼ã™ã¨
                 DefaultCase();
                 break;
-            case 6:// ‘I‘ğ‚µ‚½ƒJ[ƒh‚ğÌ‚Ä
+            case 6:// é¸æŠã—ãŸã‚«ãƒ¼ãƒ‰ã‚’æ¨ã¦
                 DefaultCase();
                 break;
-            case 7:// Ì‚Ä‚½–‡”•ª‚¾‚¯
+            case 7:// æ¨ã¦ãŸæšæ•°åˆ†ã ã‘
                 DefaultCase();
                 break;
-            case 8:// ƒfƒBƒXƒJ[ƒh‚ÌƒJƒEƒ“ƒg‚ª
+            case 8:// ãƒ‡ã‚£ã‚¹ã‚«ãƒ¼ãƒ‰ã®ã‚«ã‚¦ãƒ³ãƒˆãŒ
                 DefaultCase();
                 break;
-            case 10: // ƒvƒŒƒC‚ğ
+            case 10: // ãƒ—ãƒ¬ã‚¤ã‚’
                 DefaultCase();
                 break;
-            case 11: // ƒnƒ“ƒh‚ª
+            case 11: // ãƒãƒ³ãƒ‰ãŒ
                 DefaultCase();
                 break;
-            case 13: // ƒQ[ƒ€‚Í
+            case 13: // ã‚²ãƒ¼ãƒ ã¯
                 opImage[opIndex].SetActive(false);
                 _fadePanel.SetActive(true);
                 break;
-            case 15: // •ñV•ª
+            case 15: // å ±é…¬åˆ†
                 _fadePanel.SetActive(false);
                 DefaultCase();
                 break;
-            case 16: // ‚æ‚èD‚İ
+            case 16: // ã‚ˆã‚Šå¥½ã¿
                 DefaultCase();
                 break;
-            case 17:// ‚Ü‚¸‚Í
+            case 17:// ã¾ãšã¯
                 _fadePanel.SetActive(true);
                 opImage[opIndex].SetActive(false);
                 break;
-            case 18: // ƒJ[ƒh‚Ì‘€ì‚ğ‰Â”\‚É‚·‚é
+            case 18: // ã‚«ãƒ¼ãƒ‰ã®æ“ä½œã‚’å¯èƒ½ã«ã™ã‚‹
                 opImage[opIndex].SetActive(false);
                 _mesegePanel.SetActive(false);
                 playFlag = true;
@@ -167,31 +167,31 @@ public class TutorialRun : MonoBehaviour
                 _noClickPanel.SetActive(false);
                 GrabManager.instance.SetGrabFlag(playFlag);
                 break;
-            case 23: // ƒWƒ‡[ƒJ[
+            case 23: // ã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼
                 _fadePanel.SetActive(false);
                 opIndex++;
                 opImage[opIndex].SetActive(true);
                 _noClickPanel.SetActive(true);
                 break;
-            case 24: // ¯À
+            case 24: // æ˜Ÿåº§
                 DefaultCase();
                 break;
-            case 25: // ‚»‚ê‚ç‚ª
+            case 25: // ãã‚Œã‚‰ãŒ
                 opImage[opIndex].SetActive(false);
                 _fadePanel.SetActive(true);
                 break;
-            case 26: // ƒpƒbƒN
+            case 26: // ãƒ‘ãƒƒã‚¯
                 _fadePanel.SetActive(false);
                 opIndex++;
                 opImage[opIndex].SetActive(true);
                 break;
-            case 28: // ƒŠƒ[ƒ‹
+            case 28: // ãƒªãƒ­ãƒ¼ãƒ«
                 DefaultCase();
                 break;
-            case 29: // Ÿ‚Ìƒ‰ƒEƒ“ƒh
+            case 29: // æ¬¡ã®ãƒ©ã‚¦ãƒ³ãƒ‰
                 DefaultCase();
                 break;
-            case 30: // ƒ`ƒ…[ƒgƒŠƒAƒ‹‚Í
+            case 30: // ãƒãƒ¥ãƒ¼ãƒˆãƒªã‚¢ãƒ«ã¯
                 opImage[opIndex].SetActive(false);
                 _fadePanel.SetActive(true);
                 break;
@@ -207,10 +207,12 @@ public class TutorialRun : MonoBehaviour
     void ShopTutorial()
     {
         if (oneShopFlag) return;
-        // ƒVƒ‡ƒbƒv‚ÉˆÚs‚µ‚½
+        // ã‚·ãƒ§ãƒƒãƒ—ã«ç§»è¡Œã—ãŸæ™‚
         if (!ShopManager.instance.IsShop()) return;
-        _tutorialCanvas.localPosition = _targetShopMessege.localPosition;
-        _tutorialCanvas.localRotation = _targetShopMessege.localRotation;
+        // Screen Space - Overlay ã® Canvas ã§ã¯ Transform ã®ä½ç½®ãƒ»å›è»¢ã¯æç”»ã«ä½¿ã‚ã‚Œãªã„ãŸã‚ã€
+        // 3Då´ã®ç›®å°(_targetShopMessege)ã®ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã‚’ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã«å¤‰æ›ã—ã¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ‘ãƒãƒ«ã¸åæ˜ ã™ã‚‹
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(_targetShopMessege.position);
+        _mesegePanel.GetComponent<RectTransform>().position = screenPos;
         _mesegePanel.SetActive(true);
         playFlag = false;
         _fadePanel.SetActive(true);
